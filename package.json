@@ -1,24 +1,36 @@
 {
-  "name": "crossbell.io",
-  "version": "0.1.0",
-  "private": true,
-  "scripts": {
-    "dev": "next dev",
-    "build": "next build",
-    "start": "next start",
-    "lint": "next lint"
-  },
-  "dependencies": {
-    "next": "12.1.6",
-    "react": "18.2.0",
-    "react-dom": "18.2.0"
-  },
-  "devDependencies": {
-    "@types/node": "18.0.0",
-    "@types/react": "18.0.14",
-    "@types/react-dom": "18.0.5",
-    "eslint": "8.18.0",
-    "eslint-config-next": "12.1.6",
-    "typescript": "4.7.4"
-  }
+	"name": "crossbell.io",
+	"version": "1.0.0",
+	"private": true,
+	"scripts": {
+		"dev": "next dev",
+		"build": "next build",
+		"start": "next start",
+		"lint": "next lint"
+	},
+	"dependencies": {
+		"@mantine/core": "^4.2.11",
+		"@mantine/hooks": "^4.2.11",
+		"@mantine/next": "^4.2.11",
+		"@rainbow-me/rainbowkit": "^0.3.7",
+		"classnames": "^2.3.1",
+		"crossbell.js": "^0.10.2",
+		"ethers": "^5.6.9",
+		"next": "^12.2.0",
+		"react": "^18.2.0",
+		"react-dom": "^18.2.0",
+		"react-query": "^4.0.0-beta.23",
+		"wagmi": "^0.4.12"
+	},
+	"devDependencies": {
+		"@iconify/utils": "^1.0.33",
+		"@types/node": "^18.0.0",
+		"@types/react": "^18.0.14",
+		"@types/react-dom": "^18.0.5",
+		"@unocss/webpack": "^0.43.0",
+		"eslint": "^8.18.0",
+		"eslint-config-next": "^12.2.0",
+		"typescript": "^4.7.4",
+		"unocss": "^0.43.0"
+	}
 }
