@@ -1,12 +1,15 @@
 import { getLayout } from "@/components/layouts/AppLayout";
 import type { NextPageWithLayout } from "@/pages/_app";
-import { useAccount } from "wagmi";
+import CharacterManagement from "@/components/site/CharacterManagement";
+import { useRouter } from "next/router";
 
 const Page: NextPageWithLayout = () => {
-  const { data: account } = useAccount();
+  const router = useRouter()
+  const { id } = router.query;
 
   return <div>
     <h2>Manage</h2>
+    <CharacterManagement characterId={id?.toString() || ""} />
   </div>;
 };
 

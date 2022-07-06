@@ -2,7 +2,7 @@ import { getLayout } from "@/components/layouts/AppLayout";
 import type { NextPageWithLayout } from "@/pages/_app";
 import { useCharacters } from "@/utils/apis/indexer";
 import { useAccount } from "wagmi";
-import { Avatar } from "@mantine/core";
+import Avatar from "@/components/common/Avatar";
 import styles from "@/styles/Character.module.css";
 import Link from "next/link";
 
