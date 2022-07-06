@@ -31,7 +31,9 @@ const TreasurePart = ({ treasure }: TreasurePartProps) => (
       }url(${treasure.image})`,
     }}>
       {(
-        treasure.text && <span>{ treasure.text }</span>
+        treasure.text && <span className={"font-bold"} style={{
+          fontFamily: 'Product Sans',
+        }}>{ treasure.text }</span>
       )}
     </div>
     <div className={"absolute top-0 w-full"}>

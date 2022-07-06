@@ -12,7 +12,7 @@ for (let i = 0; i < 12; i++) {
     },
     treasure: {
       id: `${i}`,
-      ...(i % 2 === 0 && {text: `Demo ${i} Coding is the love of my life :)`}),
+      ...(i % 2 === 0 && {text: `Demo ${i} "Coding is the love of my life :)"`}),
       image: `https://http.cat/${400+i}`,
       mintCount: i * 9 + 1,
     },
