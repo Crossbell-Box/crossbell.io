@@ -95,6 +95,7 @@ const BaseButton = forwardRef<
 		</Button>
 	);
 });
+BaseButton.displayName = "BaseButton";
 
 const WalletDisplayButton = forwardRef<HTMLButtonElement>((props, ref) => {
 	const { data: account } = useAccount();
@@ -115,7 +116,7 @@ const WalletDisplayButton = forwardRef<HTMLButtonElement>((props, ref) => {
 						<div className="w-full absolute top-0 left-0 right-0 bottom-0 scale-120 bg-white z-0" />
 						<Avatar
 							address={account?.address}
-							characterId={data?.characterId}
+							characterId={data?.username}
 							radius={0}
 							size={100}
 							className="w-full absolute top-0 left-0 right-0 bottom-0 scale-120 blur-12 opacity-70 z-0"
@@ -125,12 +126,12 @@ const WalletDisplayButton = forwardRef<HTMLButtonElement>((props, ref) => {
 					<Avatar
 						size={32}
 						address={account?.address}
-						characterId={data?.characterId}
+						characterId={data?.username}
 					/>
 					<Space w="sm" />
 					<div className="flex flex-col justify-center items-start z-1">
 						<Text className="font-bold leading-1em" color="dark">
-							@{data?.handle}
+							@{data?.username}
 						</Text>
 						<Space h={2} />
 						<Text className="font-bold leading-1em" color="gray">
@@ -142,6 +143,7 @@ const WalletDisplayButton = forwardRef<HTMLButtonElement>((props, ref) => {
 		</BaseButton>
 	);
 });
+WalletDisplayButton.displayName = "WalletDisplayButton";
 
 function WalletButton() {
 	const [menuOpened, menuHandlers] = useDisclosure(false);
@@ -201,27 +203,27 @@ function AccountList() {
 			{charactersData?.list.map((c) => (
 				<MenuItem
 					rightSection={
-						c.characterId === curCid ? (
+						c.username === curCid ? (
 							<Text className="i-csb:tick" color="brand" />
 						) : null
 					}
-					key={c.characterId}
+					key={c.username}
 					onClick={() => {
-						setCurCid(c.characterId);
+						setCurCid(c.username!);
 					}}
 				>
-					<div className="flex items-center" key={c.characterId}>
+					<div className="flex items-center" key={c.username}>
 						<Avatar
 							size={32}
 							address={account?.address}
-							characterId={c?.characterId}
+							characterId={c?.username}
 						/>
 						<Space w="xs" />
 						<div className="flex flex-col">
 							<Text className="text-sm font-bold">
-								{c.metadata?.content.name}
+								{c.name}
 							</Text>
-							<Text className="text-xs">@{c.handle}</Text>
+							<Text className="text-xs">@{c.username}</Text>
 						</div>
 					</div>
 				</MenuItem>

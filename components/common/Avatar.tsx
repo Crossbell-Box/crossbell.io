@@ -12,7 +12,7 @@ export default function Avatar({
 }: PropsWithChildren<
 	{
 		address?: string;
-		characterId?: BigNumberish;
+		characterId?: string;
 		src?: string;
 		alt?: string;
 	} & AvatarProps<any>
@@ -23,7 +23,7 @@ export default function Avatar({
 		src ??
 		(isLoading
 			? getDefaultAvatar(address)
-			: data?.metadata?.content?.avatars?.[0] ?? getDefaultAvatar(address));
+			: data?.avatars?.[0] ?? getDefaultAvatar(address));
 
 	return <Avatar_ src={src_} alt={alt} radius="xl" {...props} />;
 }
