@@ -49,7 +49,7 @@ const TreasurePart = ({ treasure }: TreasurePartProps) => (
       }}>
         <span>{ treasure.mintCount }</span>
         <span className={"flex"}>
-            <IconMint className={"w-4"} />
+            <IconMint className={"w-3.5"} />
           </span>
       </div>
     </div>
