@@ -121,7 +121,7 @@ function NavLinks() {
 		{ href: "/shop", title: "Shop", bgColor: "red", icon: "i-csb:shop" },
 		{ href: "/sync", title: "Sync", bgColor: "blue", icon: "i-csb:sync" },
 		{
-			href: character ? `/@${character.handle}` : "/character",
+			href: "/character",
 			title: "Character",
 			bgColor: "green",
 			icon: "i-csb:character",
