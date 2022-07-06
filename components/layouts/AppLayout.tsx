@@ -127,7 +127,7 @@ function NavLinks() {
 			icon: "i-csb:character",
 		},
 		{
-			href: "/@shop",
+			href: "/treasure",
 			title: "Treasures",
 			bgColor: "colorful",
 			icon: "i-csb:treasures",
