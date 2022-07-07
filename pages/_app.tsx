@@ -5,6 +5,7 @@ import Head from "next/head";
 import WalletProvider from "@/components/providers/WalletProvider";
 import ThemeProvider from "@/components/providers/ThemeProvider";
 import QueryProvider from "@/components/providers/QueryProvider";
+import NotificationsProvider from "@/components/providers/NotificationsProvider";
 import "@/styles/globals.css";
 import "uno.css";
 import { useQuery } from "react-query";
@@ -33,7 +34,9 @@ export default function App({ Component, pageProps }: AppPropsWithLayout) {
       <ThemeProvider>
         <WalletProvider>
           <QueryProvider>
-            {getLayout(<Component {...pageProps} />)}
+            <NotificationsProvider>
+              {getLayout(<Component {...pageProps} />)}
+            </NotificationsProvider>
           </QueryProvider>
         </WalletProvider>
       </ThemeProvider>

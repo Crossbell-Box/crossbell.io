@@ -106,7 +106,6 @@ export default function AppLayout({ children }: PropsWithChildren) {
 			>
 				{children}
 				<div style={{ height: 10000 }}>
-					App contenttttttttttttttttttttttttttttttttt
 				</div>
 			</AppShell>
 		</Center>

@@ -1,6 +1,5 @@
 import { getLayout } from "@/components/layouts/AppLayout";
 import type { NextPageWithLayout } from "@/pages/_app";
-import { useAccount } from "wagmi";
 import CharacterManagement from "@/components/site/CharacterManagement";
 
 const Page: NextPageWithLayout = () => {

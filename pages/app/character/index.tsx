@@ -24,7 +24,7 @@ const Page: NextPageWithLayout = () => {
     <div>
       {characterList}
       <Link href={'/character/new'}>
-        <a className={`${styles.card} inline-flex items-center justify-center px-8 py-4 m-2 border cursor-pointer`}>➕</a>
+        <a className={`${styles.card} inline-flex items-center justify-center px-8 py-4 m-2 border cursor-pointer`}>+</a>
       </Link>
     </div>
   </div>;

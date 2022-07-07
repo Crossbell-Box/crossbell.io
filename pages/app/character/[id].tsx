@@ -8,7 +8,7 @@ const Page: NextPageWithLayout = () => {
   const { id } = router.query;
 
   return <div>
-    <h2>Manage</h2>
+    <h2>Manage character</h2>
     <CharacterManagement characterId={id?.toString() || ""} />
   </div>;
 };
