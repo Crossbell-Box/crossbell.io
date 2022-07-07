@@ -8,6 +8,8 @@ import { useAccount } from "wagmi";
 import { upload } from '@/utils/ipfs';
 import unidata from '@/utils/unidata';
 import { showNotification } from '@mantine/notifications';
+import { useQueryClient, useMutation } from "react-query";
+import { SCOPE_KEYS } from "@/utils/apis/indexer/character";
 
 export default function CharacterManagement({
   characterId,
@@ -21,6 +23,8 @@ export default function CharacterManagement({
 
   const [avatarLoading, setAvatarLoading] = useState(false);
   const [characterLoading, setCharacterLoading] = useState(!!characterId);
+
+  const queryClient = useQueryClient();
 
   const form = useForm({
     initialValues: {
@@ -100,7 +104,7 @@ export default function CharacterManagement({
     }
   };
 
-  const mint = async () => {
+  const mint = useMutation(async () => {
     setCharacterLoading(true);
     try {
       let data = {
@@ -140,7 +144,13 @@ export default function CharacterManagement({
     }
 
     setCharacterLoading(false);
-  };
+  }, {
+    onSuccess: () => {
+      queryClient.invalidateQueries([...SCOPE_KEYS, "list", account?.address]);
+      characterId && queryClient.invalidateQueries([...SCOPE_KEYS, "one", characterId]);
+      queryClient.invalidateQueries([...SCOPE_KEYS, "primary", account?.address]);
+    },
+  });
 
   return (
     <>
@@ -235,7 +245,9 @@ export default function CharacterManagement({
           <Button
             type="submit"
             size="md"
-            onClick={mint}
+            onClick={() => {
+              mint.mutate()
+            }}
           >I’ve decided</Button>
         </Group>
       </form>

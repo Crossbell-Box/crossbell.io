@@ -7,9 +7,9 @@ import { useEffect } from "react";
 import unidata from "@/utils/unidata";
 import type { Profile } from 'unidata.js';
 
-const SCOPE_KEYS = ["indexer", "characters"];
+export const SCOPE_KEYS = ["indexer", "characters"];
 
-export const postProfile = (item: Profile | undefined) => {
+export const handleCharacter = (item: Profile | undefined) => {
   if (!item) {
     return item;
   }
@@ -19,8 +19,8 @@ export const postProfile = (item: Profile | undefined) => {
   return item;
 }
 
-export const postProfiles = (item: Profile[]) => {
-  return (<Profile[]>item).map((i) => <Profile>postProfile(i));
+export const handleCharacters = (item: Profile[]) => {
+  return (<Profile[]>item).map((i) => <Profile>handleCharacter(i));
 }
 
 export function useCharacters(address?: string) {
@@ -34,7 +34,7 @@ export function useCharacters(address?: string) {
           source: 'Crossbell Profile',
           identity: address!,
         });
-        result.list = postProfiles(result.list);
+        result.list = handleCharacters(result.list);
         return result;
       }
     },
@@ -54,7 +54,7 @@ export function useCharacter(characterId?: string) {
           identity: characterId,
           platform: 'Crossbell',
         });
-        return postProfile(result.list[0]);
+        return handleCharacter(result.list[0]);
       }
     },
     { enabled: Boolean(characterId) }
@@ -72,7 +72,7 @@ export function usePrimaryCharacter<T>(address?: string) {
           source: 'Crossbell Profile',
           identity: address!,
         });
-        return postProfile(result.list?.find((item) => item.metadata?.primary));
+        return handleCharacter(result.list?.find((item) => item.metadata?.primary));
       }
     },
     { enabled: Boolean(address) }
