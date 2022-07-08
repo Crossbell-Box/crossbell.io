@@ -2,35 +2,30 @@ import { getLayout } from "@/components/layouts/AppLayout";
 import type { NextPageWithLayout } from "@/pages/_app";
 import { Button } from "@mantine/core";
 
-import IconTwitter from "@/components/images/sync/twitter.png";
-import IconInstagram from "@/components/images/sync/instagram.png";
-import IconYoutube from "@/components/images/sync/youtube.png";
-import IconTiktok from "@/components/images/sync/tiktok.png";
-
 const SNSIcons = () => (
   <div className={"absolute w-full h-full overflow-hidden"}>
-    <img src={IconTwitter.src} alt={"Twitter Icon"} className={"absolute left-0 top-0"} style={{
+    <img src={"/logos/twitter.png"} alt={"Twitter Icon"} className={"absolute left-0 top-0"} style={{
       width: "250.7px",
       height: "250.7px",
       left: "-80px",
       top: "-26px",
       transform: "rotate(15deg)",
     }}/>
-    <img src={IconInstagram.src} alt={"Instagram Icon"} className={"absolute right-0 top-0"} style={{
+    <img src={"/logos/instagram.png"} alt={"Instagram Icon"} className={"absolute right-0 top-0"} style={{
       width: "128px",
       height: "128px",
       right: "-20px",
       top: "65px",
       transform: "matrix(-0.97, 0.26, 0.26, 0.97, 0, 0)",
     }} />
-    <img src={IconYoutube.src} alt={"Youtube Icon"} className={"absolute left-0 bottom-0"} style={{
+    <img src={"/logos/youtube.png"} alt={"Youtube Icon"} className={"absolute left-0 bottom-0"} style={{
       width: "95.95px",
       height: "95.95px",
       left: "-12px",
       bottom: "-8px",
       transform: "rotate(-30deg)",
     }} />
-    <img src={IconTiktok.src} alt={"Tiktok Icon"} className={"absolute right-0 bottom-0"} style={{
+    <img src={"/logos/tiktok.png"} alt={"Tiktok Icon"} className={"absolute right-0 bottom-0"} style={{
       width: "168.28px",
       height: "168.28px",
       right: "-30px",

@@ -1,5 +1,3 @@
-import IconMint from "@/icons/mint.svg";
-
 interface Character {
   avatar: string;
   name: string;
@@ -50,9 +48,7 @@ const TreasurePart = ({ treasure }: TreasurePartProps) => (
         fontFamily: 'Kamerik 105 Cyrillic',
       }}>
         <span>{ treasure.mintCount }</span>
-        <span className={"flex"}>
-            <IconMint className={"w-3.5"} />
-          </span>
+        <span className={"flex i-csb:mint w-3.5 self-center"} />
       </div>
     </div>
   </div>
