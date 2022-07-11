@@ -16,6 +16,7 @@ body:before {
   height: 100vh;
   background: url("/images/body-bg.png") no-repeat center center;
   filter: blur(180px) opacity(0.2);
+  z-index: -1;
 }
 
 a {
