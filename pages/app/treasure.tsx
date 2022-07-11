@@ -1,6 +1,6 @@
 import { getLayout } from "@/components/layouts/AppLayout";
 import type { NextPageWithLayout } from "@/pages/_app";
-import TreasureCard, {TreasureCardProps} from "@/components/card/TreasureCard";
+import TreasureNoteCard, {TreasureCardProps} from "@/components/card/TreasureNoteCard";
 
 const mockCards: TreasureCardProps[] = [];
 for (let i = 0; i < 12; i++) {
@@ -23,7 +23,7 @@ const TreasuresList = () => (
   <div className={"grid grid-cols-3 gap-4 mt-8"}>
     {
       mockCards.map((card) => (
-        <TreasureCard key={card.treasure.id} character={card.character} treasure={card.treasure} />
+        <TreasureNoteCard key={card.treasure.id} character={card.character} treasure={card.treasure} />
       ))
     }
   </div>
