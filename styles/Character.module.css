@@ -1,3 +1,9 @@
 .card {
-    width: 200px;
+    width: 226px;
+    height: 260px;
+    border-color: #E1E8F7;
+}
+
+.add {
+    bottom: 2px;
 }

@@ -23,9 +23,9 @@ export const handleCharacters = (item: Profile[]) => {
   return (<Profile[]>item).map((i) => <Profile>handleCharacter(i));
 }
 
-export function useCharacters(address?: string) {
+export function useCharacters(address?: string, withLinks?: boolean) {
   return useQuery(
-    [...SCOPE_KEYS, "list", address],
+    [...SCOPE_KEYS, "list", address, withLinks],
     async () => {
       if (!address) {
         return null;
@@ -35,6 +35,24 @@ export function useCharacters(address?: string) {
           identity: address!,
         });
         result.list = handleCharacters(result.list);
+        if (withLinks) {
+          await Promise.all(result.list.map(async (c) => {
+            c.metadata!.followings = (await unidata.links.get({
+              source: 'Crossbell Link',
+              identity: c.username!,
+              platform: 'Crossbell',
+              limit: 0,
+            }))?.total;
+            c.metadata!.followers = (await unidata.links.get({
+              source: 'Crossbell Link',
+              identity: c.username!,
+              platform: 'Crossbell',
+              reversed: true,
+              limit: 0,
+            }))?.total;
+            return c;
+          }));
+        }
         return result;
       }
     },
@@ -100,4 +118,24 @@ export function useCurrentCharacter() {
   }, [query.data]);
 
   return query;
+}
+
+export function useLinks(input: {
+  characterId: string;
+  reversed?: boolean;
+  limit?: number;
+}) {
+  return useQuery(
+    [...SCOPE_KEYS, "links", input],
+    async () => {
+      const result = await unidata.links.get({
+        source: 'Crossbell Link',
+        identity: input.characterId,
+        reversed: input.reversed,
+        limit: input.limit,
+      });
+      return result;
+    },
+    { enabled: Boolean(input.characterId) }
+  );
 }
