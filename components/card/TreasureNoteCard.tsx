@@ -47,7 +47,7 @@ const TreasurePart = ({ treasure, character }: TreasureCardProps) => (
       </div>
       </div>
       <div className={`absolute right-0 m-2 flex flex-row justify-center gap-1 ${
-        treasure.text ? 'bg-[#000000] text-[#FFFFFF]' : 'bg-[#F3F7FB] text-[#142C3F]'
+        treasure.text ? 'bg-[#F3F7FB] text-[#142C3F]' : 'bg-[#000000] text-[#FFFFFF]'
       } px-2 py-1 min-w-12 text-center rounded-full text-sm font-bold`} style={{
         fontFamily: 'Kamerik 105 Cyrillic',
       }}>
