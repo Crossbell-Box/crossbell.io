@@ -34,6 +34,10 @@ export function useCharacters(address?: string, withLinks?: boolean) {
           source: 'Crossbell Profile',
           identity: address!,
         });
+        const primaryIndex = result.list.findIndex((i) => i.metadata?.primary);
+        const temp = result.list[primaryIndex];
+        result.list[primaryIndex] = result.list[0];
+        result.list[0] = temp;
         result.list = handleCharacters(result.list);
         if (withLinks) {
           await Promise.all(result.list.map(async (c) => {

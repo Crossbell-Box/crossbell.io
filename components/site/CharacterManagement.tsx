@@ -35,7 +35,7 @@ export default function CharacterManagement({
     },
 
     validate: {
-      handle: (value) => (/^[a-z0-9_\\-]{3,31}$/.test(value) ? null : 'Invalid handle'),
+      handle: (value) => (/^[a-z0-9_\\-]{3,31}$/.test(value) ? null : 'Handle can only be longer than 2 characters and shorter than 32 characters, and can only contain numbers, lowercase letters, underscores, and dashes.'),
     },
   });
 
@@ -64,13 +64,21 @@ export default function CharacterManagement({
   };
 
   const check = async () => {
-    if (form.values.handle) {
+    if (characterId && form.values.handle === characterId) {
       showNotification({
         message: 'This handle is available!',
         color: 'green',
         icon: <div className={"i-csb:check"} />
       });
       return;
+    }
+    if (!(/^[a-z0-9_\\-]{3,31}$/.test(form.values.handle))) {
+      showNotification({
+        message: 'Handle can only be longer than 2 characters and shorter than 32 characters, and can only contain numbers, lowercase letters, underscores, and dashes.',
+        color: 'red',
+        icon: <div className={"i-csb:cross"}></div>
+      });
+      return false;
     }
     try {
       const characters = await unidata.profiles.get({
@@ -106,41 +114,43 @@ export default function CharacterManagement({
 
   const mint = useMutation(async () => {
     setCharacterLoading(true);
-    try {
-      let data = {
-        ...(form.values.handle !== character?.username && { username: form.values.handle, }),
-        ...(form.values.avatar !== character?.avatars?.[0] && { avatars: [form.values.avatar], }),
-        ...(form.values.name !== character?.name && { name: form.values.name, }),
-        ...(form.values.bio !== character?.bio && { bio: form.values.bio, }),
+    if (await check()) {
+      try {
+        let data = {
+          ...(form.values.handle !== character?.username && { username: form.values.handle, }),
+          ...(form.values.avatar !== character?.avatars?.[0] && { avatars: [form.values.avatar], }),
+          ...(form.values.name !== character?.name && { name: form.values.name, }),
+          ...(form.values.bio !== character?.bio && { bio: form.values.bio, }),
+        }
+        if (characterId) {
+          await unidata.profiles.set(
+            {
+              source: 'Crossbell Profile',
+              identity: characterId,
+              platform: 'Crossbell',
+              action: 'update',
+            },
+            data,
+          );
+        } else if (account?.address) {
+          await unidata.profiles.set(
+            {
+              source: 'Crossbell Profile',
+              identity: account.address,
+              platform: 'Ethereum',
+              action: 'add',
+            },
+            data,
+          );
+        }
+      } catch (e) {
+        showNotification({
+          message: 'Failed to mint handle...',
+          color: 'red',
+          icon: <div className={"i-csb:cross"} />
+        });
+        console.log(e);
       }
-      if (characterId) {
-        await unidata.profiles.set(
-          {
-            source: 'Crossbell Profile',
-            identity: characterId,
-            platform: 'Crossbell',
-            action: 'update',
-          },
-          data,
-        );
-      } else if (account?.address) {
-        await unidata.profiles.set(
-          {
-            source: 'Crossbell Profile',
-            identity: account.address,
-            platform: 'Ethereum',
-            action: 'add',
-          },
-          data,
-        );
-      }
-    } catch (e) {
-      showNotification({
-        message: 'Failed to mint handle...',
-        color: 'red',
-        icon: <div className={"i-csb:cross"} />
-      });
-      console.log(e);
     }
 
     setCharacterLoading(false);
@@ -155,7 +165,7 @@ export default function CharacterManagement({
   return (
     <>
       <p className="mb-8 mt-8">You are logged in as <b>{account?.address?.slice(0, 6)}...{account?.address?.slice(-4)}</b></p>
-      <form className="relative" onSubmit={form.onSubmit((values) => console.log(values))}>
+      <form className="relative" onSubmit={form.onSubmit((values) => mint.mutate())}>
         <LoadingOverlay visible={characterLoading} />
         <Group className="mb-8">
           <div className="w-15 text-right">Handle</div>
@@ -174,7 +184,6 @@ export default function CharacterManagement({
         <Group className="mb-8">
           <div className="w-15 text-right">Avatar</div>
           <div className="relative flex items-center flex-1">
-            <LoadingOverlay visible={avatarLoading} />
             <Dropzone
               onDrop={handleUpload}
               accept={IMAGE_MIME_TYPE}
@@ -189,22 +198,11 @@ export default function CharacterManagement({
             >
               {(status) => {
                 return <div className="relative">
+                  <LoadingOverlay visible={avatarLoading} />
                   <Avatar className="h-16 w-16" src={form.values.avatar.replace("ipfs://", "https://gateway.ipfs.io/ipfs/")} />
-                  <span className="absolute left-0 top-0 right-0 bottom-0 bg-black opacity-40 rounded-full"></span>
-                  <span className="absolute left-0 top-0 right-0 bottom-0 text-center leading-16 text-5xl text-white">+</span>
                 </div>
               }}
             </Dropzone>
-            <TextInput
-              className="flex-1"
-              required
-              styles={{
-                input: {
-                  height: '3rem',
-                },
-              }}
-              {...form.getInputProps('avatar')}
-            />
           </div>
         </Group>
 
@@ -245,9 +243,6 @@ export default function CharacterManagement({
           <Button
             type="submit"
             size="md"
-            onClick={() => {
-              mint.mutate()
-            }}
           >I’ve decided</Button>
         </Group>
       </form>
