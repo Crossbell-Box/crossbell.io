@@ -1,6 +1,8 @@
 import { getLayout } from "@/components/layouts/AppLayout";
 import type { NextPageWithLayout } from "@/pages/_app";
 import TreasureNoteCard, {TreasureCardProps} from "@/components/card/TreasureNoteCard";
+import {Tabs} from "@mantine/core";
+import { useState } from "react";
 
 const mockCards: TreasureCardProps[] = [];
 for (let i = 0; i < 12; i++) {
@@ -20,7 +22,7 @@ for (let i = 0; i < 12; i++) {
 }
 
 const TreasuresList = () => (
-  <div className={"grid grid-cols-3 gap-4 mt-8"}>
+  <div className={"grid grid-cols-3 gap-4"}>
     {
       mockCards.map((card) => (
         <TreasureNoteCard key={card.treasure.id} character={card.character} treasure={card.treasure} />
@@ -30,13 +32,34 @@ const TreasuresList = () => (
 );
 
 const Page: NextPageWithLayout = () => {
+  const [activeTab, setActiveTab] = useState(1);
+
   return <div>
-    <h1 className={"ml-8 mt-4 mb-0 mr-0 font-semibold text-size-4xl"} style={{
+    <h1 className={"ml-8 mt-4 mb-8 mr-0 font-semibold text-size-4xl"} style={{
       fontFamily: 'Lexend Deca',
     }}>
       Treasure
     </h1>
-    <TreasuresList />
+  <Tabs active={activeTab} onTabChange={setActiveTab} styles={{
+      tabLabel: {
+        fontFamily: 'Lexend Deca',
+      },
+      tabActive: {
+        color: "black!important",
+        fontWeight: 600,
+        borderBottomColor: "#FFCF55!important",
+      },
+  }}>
+      <Tabs.Tab label="Articles">
+        <div>Articles Treasures</div>
+      </Tabs.Tab>
+      <Tabs.Tab label="Notes">
+        <TreasuresList />
+      </Tabs.Tab>
+      <Tabs.Tab label="Videos">
+        <div>Videos Treasures</div>
+      </Tabs.Tab>
+    </Tabs>
   </div>;
 };
 
