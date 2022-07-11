@@ -37,15 +37,11 @@ const SNSIcons = () => (
 
 const OperatorSyncPending = () => (
   <div className={"text-center pt-40 pb-12 relative"}>
-    <h2 className={"font-bold text-size-[3rem] text-[#2768E3]"} style={{
-      fontFamily: 'Lexend Deca',
-    }}>
+    <h2 className={"font-bold text-size-[3rem] text-[#2768E3]"}>
       Don't just post for Twitter <br />
       Post for yourself
     </h2>
-    <span className={"text-lg text-[#082135] block"} style={{
-      fontFamily: "Roboto",
-    }}>
+    <span className={"text-lg text-[#082135] block"}>
       OperatorSync is a function that
       helps you sync all your web2 social media onto the Crossbell chain
       that belongs to Y
@@ -54,9 +50,7 @@ const OperatorSyncPending = () => (
     </span>
     <div className={"block mt-8"}>
       <Button color={"dark"} size={"md"}>
-        <span className={"text-lg font-medium"} style={{
-          fontFamily: "Roboto",
-        }}>
+        <span className={"text-lg font-medium"}>
           To be continued
         </span>
       </Button>
@@ -66,9 +60,7 @@ const OperatorSyncPending = () => (
 
 const Page: NextPageWithLayout = () => {
   return <div>
-    <h1 className={"ml-8 mt-4 mb-0 mr-0 font-semibold text-size-4xl"} style={{
-      fontFamily: 'Lexend Deca',
-    }}>
+    <h1 className={"ml-8 mt-4 mb-0 mr-0 font-semibold text-size-4xl"}>
       Sync
     </h1>
     <div className={"relative"}>

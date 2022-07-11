@@ -35,15 +35,10 @@ const Page: NextPageWithLayout = () => {
   const [activeTab, setActiveTab] = useState(1);
 
   return <div>
-    <h1 className={"ml-8 mt-4 mb-8 mr-0 font-semibold text-size-4xl"} style={{
-      fontFamily: 'Lexend Deca',
-    }}>
+    <h1 className={"ml-8 mt-4 mb-8 mr-0 font-semibold text-size-4xl"}>
       Treasure
     </h1>
   <Tabs active={activeTab} onTabChange={setActiveTab} styles={{
-      tabLabel: {
-        fontFamily: 'Lexend Deca',
-      },
       tabActive: {
         color: "black!important",
         fontWeight: 600,

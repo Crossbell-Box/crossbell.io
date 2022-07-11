@@ -29,9 +29,7 @@ const TreasurePart = ({ treasure, character }: TreasureCardProps) => (
       }url(${treasure.image})`,
     }}>
       {(
-        treasure.text && <span className={"font-bold mt-6"} style={{
-          fontFamily: 'Product Sans',
-        }}>{ treasure.text }</span>
+        treasure.text && <span className={"font-bold mt-6"}>{ treasure.text }</span>
       )}
     </div>
     <div className={"absolute top-0 w-full"}>
@@ -48,9 +46,7 @@ const TreasurePart = ({ treasure, character }: TreasureCardProps) => (
       </div>
       <div className={`absolute right-0 m-2 flex flex-row justify-center gap-1 ${
         treasure.text ? 'bg-[#F3F7FB] text-[#142C3F]' : 'bg-[#000000] text-[#FFFFFF]'
-      } px-2 py-1 min-w-12 text-center rounded-full text-sm font-bold`} style={{
-        fontFamily: 'Kamerik 105 Cyrillic',
-      }}>
+      } px-2 py-1 min-w-12 text-center rounded-full text-sm font-bold`}>
         <span>#{ treasure.id }</span>
       </div>
     </div>
@@ -60,20 +56,12 @@ const TreasurePart = ({ treasure, character }: TreasureCardProps) => (
 const CharacterPart = ({ treasure, character }: TreasureCardProps) => (
   <div className={"flex flex-row justify-between bg-white p-2 rounded-b-lg"}>
     <div className={"flex flex-col justify-around text-[#687792]"}>
-        <span className={"text-sm font-bold"} style={{
-          fontFamily: 'Product Sans',
-        }}>{ character.name }</span>
-      <span className={"text-xs"} style={{
-        fontFamily: 'Product Sans',
-      }}>@{ character.handle }</span>
+        <span className={"text-sm font-bold"}>{ character.name }</span>
+      <span className={"text-xs"}>@{ character.handle }</span>
     </div>
     <div className={"flex flex-col"}>
-      <span className={"text-xs font-semibold text-[#082135] self-end"} style={{
-          fontFamily: 'Lexend Deca',
-      }}>{ treasure.mintCount }</span>
-      <span className={"text-xs font-light text-[#687792]"} style={{
-          fontFamily: 'Lexend Deca',
-      }}>Mint</span>
+      <span className={"text-xs font-semibold text-[#082135] self-end"}>{ treasure.mintCount }</span>
+      <span className={"text-xs font-light text-[#687792]"}>Mint</span>
     </div>
   </div>
 );
