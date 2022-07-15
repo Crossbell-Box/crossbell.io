@@ -1,3 +1,5 @@
+import type { MintedNoteEntity } from "crossbell.js";
+
 interface Character {
   avatar: string;
   name: string;
@@ -19,7 +21,11 @@ type CharacterPartProps = {
   character: Character;
 }
 
-export type TreasureCardProps = TreasurePartProps & CharacterPartProps;
+type TreasureCardProps = TreasurePartProps & CharacterPartProps;
+
+type MintedNoteProps = {
+  mintedNote: MintedNoteEntity;
+}
 
 const TreasurePart = ({ treasure, character }: TreasureCardProps) => (
   <div className={"relative"}>
@@ -73,4 +79,22 @@ const TreasureNoteCard = ({ character, treasure }: TreasureCardProps) => (
   </div>
 );
 
-export default TreasureNoteCard;
+const MintedNoteCard = ({ mintedNote }: MintedNoteProps) => {
+  const treasureProps: TreasureCardProps = {
+    treasure: {
+      id: mintedNote.tokenId.toString(),
+      text: mintedNote.note?.metadata?.content.title || mintedNote.note?.metadata?.content.content,
+      image: mintedNote.note?.metadata?.content.attachments?.find(attachment => attachment.mime_type?.startsWith("image/"))?.address || '', // TODO: Default fallback image
+      mintCount: -1, // TODO: minted count?
+    },
+    character: {
+      avatar: mintedNote.noteCharacter?.metadata?.content.avatars?.[0] || '', // TODO: Default fallback image; fix IPFS URI
+      name: mintedNote.noteCharacter?.metadata?.content.name || '',
+      handle: mintedNote.noteCharacter?.handle || '',
+    }
+  }
+
+  return (<TreasureNoteCard character={treasureProps.character} treasure={treasureProps.treasure} />)
+}
+
+export default MintedNoteCard;
