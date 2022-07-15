@@ -14,7 +14,7 @@
 		"@mantine/next": "^4.2.11",
 		"@rainbow-me/rainbowkit": "^0.3.7",
 		"classnames": "^2.3.1",
-		"crossbell.js": "^0.10.2",
+		"crossbell.js": "^0.10.7",
 		"ethers": "^5.6.9",
 		"next": "^12.2.0",
 		"react": "^18.2.0",
