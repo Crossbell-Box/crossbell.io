@@ -2,7 +2,6 @@ import { getLayout } from "@/components/layouts/AppLayout";
 import type { NextPageWithLayout } from "@/pages/_app";
 import MintedNoteCard from "@/components/card/MintedNoteCard";
 import { LoadingOverlay } from "@mantine/core";
-import { useState } from "react";
 import { useMintedNotesOfAddress } from "@/utils/apis/indexer";
 import { useAccount } from "wagmi";
 
