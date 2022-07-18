@@ -14,6 +14,7 @@ import Tooltip from "../Tooltip";
 import Link from "next/link";
 import { extractCharacterName } from "@/utils/metadata";
 import LoadingOverlay from "../LoadingOverlay";
+import { NextLink } from "@mantine/next";
 
 function ActionButton({
 	text,
@@ -126,11 +127,15 @@ export function Note({ note }: { note: NoteEntity }) {
 					</Text>
 
 					<Tooltip label={formatDate(note.createdAt)}>
-						<Link href={targetURL} passHref>
-							<Text color="dimmed" size="sm" component="a" variant="link">
-								{formatDateFromNow(note.createdAt)}
-							</Text>
-						</Link>
+						<Text
+							component={NextLink}
+							href={targetURL}
+							color="dimmed"
+							size="sm"
+							variant="link"
+						>
+							{formatDateFromNow(note.createdAt)}
+						</Text>
 					</Tooltip>
 				</div>
 
