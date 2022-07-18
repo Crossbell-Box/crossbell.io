@@ -185,7 +185,7 @@ function WalletButton() {
 					<WalletDisplayButton className="w-full" />
 				</Menu.Target>
 
-				<Menu.Dropdown>
+				<Menu.Dropdown className="w-full">
 					<Menu.Label>Characters</Menu.Label>
 					<AccountList />
 
