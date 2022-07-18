@@ -1,10 +1,11 @@
 import { ipfsLinkToHttpLink } from "@/utils/ipfs";
 import { NoteMetadata } from "crossbell.js";
-import Slider from "react-slick";
+import { Carousel, Embla } from "@mantine/carousel";
 import Image from "../Image";
-import { useEffect, useRef, useState } from "react";
+import { useCallback, useEffect, useRef, useState } from "react";
 import { useWindowEvent } from "@mantine/hooks";
 import { Space } from "@mantine/core";
+import classNames from "classnames";
 
 export type MediaType = "image" | "video" | "audio" | "model" | "pdf" | "html";
 
@@ -36,77 +37,106 @@ export function mimeTypeToMediaType(mimeType: string): MediaType | null {
 	return null;
 }
 
+function notEmpty<TValue>(value: TValue | null | undefined): value is TValue {
+	return value !== null && value !== undefined;
+}
+
 export default function MediaCarousel({
 	attachments,
 }: {
 	attachments: NoteMetadata["attachments"];
 }) {
-	const nodeRef = useRef<HTMLDivElement>(null);
-
-	const [width, setWidth] = useState<number>(0);
-
-	useEffect(() => {
-		if (nodeRef.current) {
-			const { width: w } = nodeRef.current.getBoundingClientRect();
-			setWidth(w);
-		}
-	}, []);
-
-	useWindowEvent("resize", () => {
-		if (nodeRef.current) {
-			const { width: w } = nodeRef.current.getBoundingClientRect();
-			setWidth(w);
-		}
-	});
-
-	const [mainSlider, setMainSlider] = useState<Slider | null>(null);
-	const [thumbSlider, setThumbSlider] = useState<Slider | null>(null);
-
 	if (!attachments || attachments?.length === 0) {
 		return <></>;
 	}
+
+	const validAttachments = attachments
+		.filter((a) => a.mime_type && a.address)
+		.map((a) => {
+			const mediaType = mimeTypeToMediaType(a.mime_type!);
+			if (!mediaType) {
+				return null;
+			}
+
+			if (a.address) {
+				const src = ipfsLinkToHttpLink(a.address);
+				if (mediaType) {
+					return {
+						...a,
+						src,
+						mediaType,
+					};
+				}
+			}
+
+			return null;
+		})
+		.filter(notEmpty);
+
+	const isMultiple = validAttachments.length > 1;
+
+	const [embla, setEmbla] = useState<Embla | null>(null);
+	const [emblaThumbs, setEmblaThumbs] = useState<Embla | null>(null);
+
+	const [selectedIndex, setSelectedIndex] = useState<number>(0);
+
+	const handleSelect = useCallback(() => {
+		if (!embla || !emblaThumbs) return;
+		setSelectedIndex(embla.selectedScrollSnap());
+		emblaThumbs.scrollTo(embla.selectedScrollSnap());
+	}, [embla, emblaThumbs, setSelectedIndex]);
+
+	const handleThumbClick = useCallback(
+		(index: number) => {
+			if (!embla || !emblaThumbs) return;
+			if (emblaThumbs.clickAllowed()) embla.scrollTo(index);
+		},
+		[embla, emblaThumbs]
+	);
+
+	useEffect(() => {
+		if (embla) {
+			handleSelect();
+			embla.on("select", handleSelect);
+		}
+	}, [embla, handleSelect]);
 
 	const renderAttachments = ({
 		isThumbnail = false,
 	}: {
 		isThumbnail?: boolean;
 	} = {}) => {
-		return attachments
-			.filter((a) => a.mime_type && a.address)
-			.map((a, index) => {
-				const mediaType = mimeTypeToMediaType(a.mime_type!);
-				if (a.address) {
-					const src = ipfsLinkToHttpLink(a.address);
-					if (mediaType === "image") {
-						return (
-							<div key={index}>
-								<div
-									data-what="123"
-									style={{
-										width: isThumbnail ? 100 : width,
-										height: isThumbnail ? 50 : 300,
-										position: "relative",
+		return validAttachments.map((a, index) => {
+			const mediaType = mimeTypeToMediaType(a.mime_type!);
+			if (a.address) {
+				const src = ipfsLinkToHttpLink(a.address);
+				if (mediaType === "image") {
+					return (
+						<Carousel.Slide key={index}>
+							<div className="bg-gray">
+								<Image
+									alt="image" // TODO: introduce alt in convention
+									src={src}
+									layout="fill"
+									className={classNames("transition-opacity", {
+										"opacity-20": isThumbnail && index !== selectedIndex,
+									})}
+									onClick={() => {
+										if (!isThumbnail) {
+											window.open(src);
+										} else {
+											handleThumbClick(index);
+										}
 									}}
-								>
-									<Image
-										alt="image" // TODO: introduce alt in convention
-										src={src}
-										width={isThumbnail ? 100 : width}
-										height={isThumbnail ? 50 : 300}
-										onClick={() => {
-											if (!isThumbnail) {
-												window.open(src);
-											}
-										}}
-									/>
-								</div>
+								/>
 							</div>
-						);
-					}
+						</Carousel.Slide>
+					);
 				}
+			}
 
-				return <></>;
-			});
+			return <></>;
+		});
 	};
 
 	return (
@@ -118,40 +148,36 @@ export default function MediaCarousel({
 				e.stopPropagation();
 			}}
 		>
-			<div className="w-full" ref={nodeRef}></div>
-
 			{/* main */}
-			<Slider
-				className="h-300px overflow-hidden relative"
-				// @ts-ignore
-				style={{ width }}
-				slidesToShow={1}
-				slidesToScroll={1}
-				lazyLoad="anticipated"
-				ref={(slider) => setMainSlider(slider)}
-				asNavFor={thumbSlider!}
+
+			<Carousel
+				getEmblaApi={setEmbla}
+				height={300}
+				className="overflow-hidden relative w-full"
+				// loop
+				withIndicators={isMultiple}
+				withControls={isMultiple}
 			>
 				{renderAttachments()}
-			</Slider>
+			</Carousel>
 
 			<Space h={10} />
 
 			{/* thumbnails */}
-			{attachments.length >= 2 && (
-				<Slider
-					className="h-50px overflow-hidden slick-thumb"
-					// @ts-ignore
-					style={{ width }}
-					slidesToShow={5}
-					slidesToScroll={1}
-					ref={(slider) => setThumbSlider(slider)}
-					asNavFor={mainSlider!}
-					focusOnSelect
-					centerMode
-					centerPadding="60px"
+			{attachments.length > 1 && (
+				<Carousel
+					getEmblaApi={setEmblaThumbs}
+					height={100}
+					slideSize="100px"
+					className="overflow-hidden relative w-full"
+					withIndicators={false}
+					withControls={false}
+					slidesToScroll={10}
+					slideGap="md"
+					dragFree
 				>
 					{renderAttachments({ isThumbnail: true })}
-				</Slider>
+				</Carousel>
 			)}
 		</div>
 	);
