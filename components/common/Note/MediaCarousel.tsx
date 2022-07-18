@@ -42,14 +42,10 @@ function notEmpty<TValue>(value: TValue | null | undefined): value is TValue {
 }
 
 export default function MediaCarousel({
-	attachments,
+	attachments = [],
 }: {
 	attachments: NoteMetadata["attachments"];
 }) {
-	if (!attachments || attachments?.length === 0) {
-		return <></>;
-	}
-
 	const validAttachments = attachments
 		.filter((a) => a.mime_type && a.address)
 		.map((a) => {
@@ -139,9 +135,11 @@ export default function MediaCarousel({
 		});
 	};
 
+	if (!attachments || attachments?.length === 0) {
+		return <></>;
+	}
+
 	return (
-		// https://react-slick.neostack.com/
-		// TODO: https://v5.mantine.dev/others/carousel/
 		<div
 			className="w-full overflow-hidden"
 			onClick={(e) => {
