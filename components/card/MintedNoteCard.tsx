@@ -30,7 +30,7 @@ type MintedNoteProps = {
 const TreasurePart = ({ treasure, character }: TreasureCardProps) => (
 	<div className={"relative"}>
 		<div
-			className={"bg-cover h-30 rounded-t-lg text-white flex items-center p-2"}
+			className={"bg-cover aspect-ratio-video rounded-t-lg text-white flex items-center p-2"}
 			style={{
 				backgroundImage: `${
 					treasure.text
@@ -60,7 +60,7 @@ const TreasurePart = ({ treasure, character }: TreasureCardProps) => (
 				className={`absolute right-0 m-2 flex flex-row justify-center gap-1 ${
 					treasure.text
 						? "bg-[#F3F7FB] text-[#142C3F]"
-						: "bg-[#000000] text-[#FFFFFF]"
+						: "bg-[#282C34] text-[#FFFFFF]"
 				} px-2 py-1 min-w-12 text-center rounded-full text-sm font-bold`}
 			>
 				<span>#{treasure.id}</span>
@@ -84,7 +84,7 @@ const CharacterPart = ({ treasure, character }: TreasureCardProps) => (
 	</div>
 );
 
-const TreasureNoteCard = ({ character, treasure }: TreasureCardProps) => (
+export const TreasureNoteCard = ({ character, treasure }: TreasureCardProps) => (
 	<div className={"w-full relative"}>
 		<TreasurePart treasure={treasure} character={character} />
 		<CharacterPart treasure={treasure} character={character} />

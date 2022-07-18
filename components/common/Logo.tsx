@@ -1,7 +1,11 @@
-export default function Logo() {
+type LogoProps = {
+	size?: number;
+}
+
+export default function Logo({ size = 30 }: LogoProps) {
 	return (
 		<img
-			style={{ width: 30, height: 30 }}
+			style={{ width: size, height: size }}
 			src="/images/logo.svg"
 			alt="Crossbell Logo"
 		/>
