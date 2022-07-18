@@ -1,0 +1,135 @@
+import { useContract } from "@/utils/crossbell.js";
+import { showNotification } from "@mantine/notifications";
+import { CharacterMetadata } from "crossbell.js";
+import { useMutation, useQueryClient } from "react-query";
+import { useAccount } from "wagmi";
+import {
+	SCOPE_KEY_CHARACTER,
+	SCOPE_KEY_CHARACTERS,
+	SCOPE_KEY_CHARACTER_BY_HANDLE,
+	SCOPE_KEY_PRIMARY_CHARACTER,
+} from "../indexer";
+
+// create new character
+
+export function useCreateCharacter() {
+	const { data: account } = useAccount();
+	const contract = useContract();
+	const queryClient = useQueryClient();
+
+	return useMutation(
+		async ({
+			handle,
+			metadata,
+		}: {
+			handle: string;
+			metadata: CharacterMetadata;
+		}) => {
+			return contract.createCharacter(account?.address!, handle, metadata);
+		},
+		{
+			onSuccess: (data, { handle }) => {
+				return Promise.all([
+					queryClient.invalidateQueries(SCOPE_KEY_CHARACTER(data.data)),
+					queryClient.invalidateQueries(SCOPE_KEY_CHARACTERS(account?.address)),
+					queryClient.invalidateQueries(
+						SCOPE_KEY_PRIMARY_CHARACTER(account?.address)
+					),
+					queryClient.invalidateQueries(SCOPE_KEY_CHARACTER_BY_HANDLE(handle)),
+				]);
+			},
+			onError: (err: any) => {
+				showNotification({
+					title: "Error while creating character",
+					message: err.message,
+					color: "red",
+				});
+			},
+		}
+	);
+}
+
+// set character metadata
+
+export function useSetCharacterMetadata(characterId: number) {
+	const contract = useContract();
+	const queryClient = useQueryClient();
+
+	return useMutation(
+		async ({ metadata }: { metadata: CharacterMetadata }) => {
+			return contract.setCharacterMetadata(characterId, metadata);
+		},
+		{
+			onSuccess: () => {
+				return queryClient.invalidateQueries(SCOPE_KEY_CHARACTER(characterId));
+			},
+			onError: (err: any) => {
+				showNotification({
+					title: "Error while setting character metadata",
+					message: err.message,
+					color: "red",
+				});
+			},
+		}
+	);
+}
+
+// set handle
+
+export function useSetCharacterHandle(characterId: number) {
+	const contract = useContract();
+	const queryClient = useQueryClient();
+
+	return useMutation(
+		async ({ handle }: { handle: string }) => {
+			return contract.setHandle(characterId, handle);
+		},
+		{
+			onSuccess: (data, { handle }) => {
+				return Promise.all([
+					queryClient.invalidateQueries(SCOPE_KEY_CHARACTER(characterId)),
+					queryClient.invalidateQueries(SCOPE_KEY_CHARACTER_BY_HANDLE(handle)),
+				]);
+			},
+			onError: (err: any) => {
+				showNotification({
+					title: "Error while setting character handle",
+					message: err.message,
+					color: "red",
+				});
+			},
+		}
+	);
+}
+
+// set primary character
+
+export function useSetPrimaryCharacterId(characterId: number) {
+	const { data: account } = useAccount();
+
+	const contract = useContract();
+	const queryClient = useQueryClient();
+
+	return useMutation(
+		async () => {
+			return contract.setPrimaryCharacterId(characterId);
+		},
+		{
+			onSuccess: () => {
+				return Promise.all([
+					queryClient.invalidateQueries(SCOPE_KEY_CHARACTERS(account?.address)),
+					queryClient.invalidateQueries(
+						SCOPE_KEY_PRIMARY_CHARACTER(account?.address)
+					),
+				]);
+			},
+			onError: (err: any) => {
+				showNotification({
+					title: "Error while setting primary character",
+					message: err.message,
+					color: "red",
+				});
+			},
+		}
+	);
+}

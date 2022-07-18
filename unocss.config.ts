@@ -26,6 +26,7 @@ export default defineConfig({
 			brand: {
 				primary: "#FFCF55",
 			},
+			dimmed: "#868e96",
 		},
 	},
 });

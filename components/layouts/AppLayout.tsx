@@ -20,6 +20,7 @@ import {
 	UnstyledButton,
 	Button,
 	createStyles,
+	Title,
 } from "@mantine/core";
 import Logo from "../common/Logo";
 import Link from "next/link";
@@ -36,10 +37,11 @@ export default function AppLayout({ children }: PropsWithChildren) {
 			<AppShell
 				styles={{
 					root: { maxWidth: "min(100vw, 1200px)" },
+					main: { padding: 0 },
 				}}
 				navbarOffsetBreakpoint="sm"
 				asideOffsetBreakpoint="sm"
-				// fixed
+				fixed={false}
 				navbar={
 					<Navbar
 						p="md"
@@ -54,7 +56,9 @@ export default function AppLayout({ children }: PropsWithChildren) {
 								<a className="flex justify-center items-center">
 									<Logo />
 									<Space w={5} />
-									<Text className="inline text-xl font-bold">Crossbell</Text>
+									<Title order={1} className="inline text-xl font-bold">
+										Crossbell
+									</Title>
 								</a>
 							</Link>
 						</Navbar.Section>
@@ -105,9 +109,6 @@ export default function AppLayout({ children }: PropsWithChildren) {
 				// }
 			>
 				{children}
-				<div style={{ height: 10000 }}>
-					App contenttttttttttttttttttttttttttttttttt
-				</div>
 			</AppShell>
 		</Center>
 	);
@@ -157,7 +158,9 @@ function NavLink({ href, title, icon, bgColor }: NavLinkProps) {
 
 	useEffect(() => {
 		setIsCurrentRoute(router.asPath === href);
-	}, [router.asPath]);
+	}, [router.asPath, href]);
+
+	const primaryShade = usePrimaryShade();
 
 	const useStyles = createStyles((theme) => ({
 		button: {
@@ -168,7 +171,7 @@ function NavLink({ href, title, icon, bgColor }: NavLinkProps) {
 		},
 		active: {
 			color: theme.colors.gray[0],
-			background: theme.colors[bgColor]?.[usePrimaryShade()],
+			background: theme.colors[bgColor]?.[primaryShade],
 			position: "relative",
 			"&:before":
 				bgColor === "colorful" && isCurrentRoute
@@ -186,7 +189,7 @@ function NavLink({ href, title, icon, bgColor }: NavLinkProps) {
 							transform: "scale(1.1)",
 					  }
 					: {},
-			"&:hover": { background: theme.colors[bgColor]?.[usePrimaryShade()] },
+			"&:hover": { background: theme.colors[bgColor]?.[primaryShade] },
 		},
 	}));
 
@@ -214,7 +217,9 @@ function NavLink({ href, title, icon, bgColor }: NavLinkProps) {
 						})}
 					/>
 					<Space w="sm" />
-					<Text className="font-bold text-xl">{title}</Text>
+					<Title order={3} className="font-semibold text-xl">
+						{title}
+					</Title>
 				</div>
 			</UnstyledButton>
 		</Link>

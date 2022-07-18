@@ -2,12 +2,13 @@ import { PropsWithChildren, forwardRef } from "react";
 import {
 	Button,
 	ButtonProps,
+	createPolymorphicComponent,
 	Divider,
 	LoadingOverlay,
 	Menu,
+	MenuItemProps,
 	Space,
 	Text,
-	TextProps,
 } from "@mantine/core";
 import { ConnectButton as RainbowConnectButton } from "@rainbow-me/rainbowkit";
 import classNames from "classnames";
@@ -19,10 +20,13 @@ import {
 	useCharacters,
 	useCurrentCharacter,
 	useCurrentCharacterId,
-	usePrimaryCharacter,
 } from "@/utils/apis/indexer";
 import { truncateAddress } from "@/utils/ethers";
 import Modal from "../Modal";
+import { useModals } from "@mantine/modals";
+import { showNotification } from "@mantine/notifications";
+import { WalletCharacterManageHref } from "@/utils/url";
+import { NextLink } from "@mantine/next";
 
 export default function ConnectButton() {
 	return (
@@ -78,70 +82,76 @@ export default function ConnectButton() {
 	);
 }
 
-const BaseButton = forwardRef<
-	HTMLButtonElement,
-	PropsWithChildren<ButtonProps<any>>
->(({ children, className, ...props }, ref) => {
-	return (
-		<Button
-			ref={ref}
-			className={classNames(
-				"h-14 rounded-lg w-full flex items-center justify-center cursor-pointer",
-				className
-			)}
-			{...props}
-		>
-			{children}
-		</Button>
-	);
-});
+const BaseButton_ = forwardRef<HTMLButtonElement, ButtonProps>(
+	({ children, className, ...props }, ref) => {
+		return (
+			<Button
+				ref={ref}
+				className={classNames(
+					"h-14 rounded-lg w-full flex items-center justify-center cursor-pointer",
+					className
+				)}
+				{...props}
+			>
+				{children}
+			</Button>
+		);
+	}
+);
+BaseButton_.displayName = "BaseButton";
+const BaseButton = createPolymorphicComponent<"button", ButtonProps>(
+	BaseButton_
+);
 
-const WalletDisplayButton = forwardRef<HTMLButtonElement>((props, ref) => {
-	const { data: account } = useAccount();
-	const { isLoading, data } = useCurrentCharacter();
+const WalletDisplayButton = forwardRef<HTMLButtonElement, ButtonProps>(
+	(props, ref) => {
+		const { data: account } = useAccount();
+		const { isLoading, data } = useCurrentCharacter();
 
-	return (
-		<BaseButton
-			ref={ref}
-			{...props}
-			className="flex justify-center overflow-hidden"
-		>
-			{isLoading ? (
-				<Text>Loading...</Text>
-			) : (
-				<>
+		return (
+			<BaseButton
+				ref={ref}
+				{...props}
+				className="flex justify-center overflow-hidden"
+			>
+				{isLoading ? (
+					<Text>Loading...</Text>
+				) : (
 					<>
-						{/* blurred avatar bg */}
-						<div className="w-full absolute top-0 left-0 right-0 bottom-0 scale-120 bg-white z-0" />
+						<>
+							{/* blurred avatar bg */}
+							<div className="w-full absolute top-0 left-0 right-0 bottom-0 scale-120 bg-white z-0" />
+							<Avatar
+								address={account?.address}
+								characterId={data?.characterId}
+								radius={0}
+								size={100}
+								className="w-full absolute top-0 left-0 right-0 bottom-0 scale-120 blur-12 opacity-70 z-0"
+							/>
+						</>
+
 						<Avatar
+							size={32}
 							address={account?.address}
 							characterId={data?.characterId}
-							radius={0}
-							size={100}
-							className="w-full absolute top-0 left-0 right-0 bottom-0 scale-120 blur-12 opacity-70 z-0"
 						/>
+						<Space w="sm" />
+						<div className="flex flex-col justify-center items-start z-1">
+							<Text className="font-semnibold leading-1em" color="dark">
+								@{data?.handle}
+							</Text>
+							<Space h={2} />
+							<Text className="font-normal leading-1em" color="gray">
+								{truncateAddress(account?.address)}
+							</Text>
+						</div>
 					</>
-
-					<Avatar
-						size={32}
-						address={account?.address}
-						characterId={data?.characterId}
-					/>
-					<Space w="sm" />
-					<div className="flex flex-col justify-center items-start z-1">
-						<Text className="font-bold leading-1em" color="dark">
-							@{data?.handle}
-						</Text>
-						<Space h={2} />
-						<Text className="font-bold leading-1em" color="gray">
-							{truncateAddress(account?.address)}
-						</Text>
-					</div>
-				</>
-			)}
-		</BaseButton>
-	);
-});
+				)}
+			</BaseButton>
+		);
+	}
+);
+WalletDisplayButton.displayName = "WalletDisplayButton";
 
 function WalletButton() {
 	const [menuOpened, menuHandlers] = useDisclosure(false);
@@ -164,24 +174,28 @@ function WalletButton() {
 			</Modal>
 
 			<Menu
-				className="w-full"
 				opened={menuOpened}
 				onOpen={() => menuHandlers.open()}
 				onClose={() => menuHandlers.close()}
-				control={<WalletDisplayButton />}
-				position="bottom"
-				placement="start"
-				gutter={5}
+				position="bottom-start"
 				radius="md"
 				transition="scale-y"
 			>
-				<Menu.Label>Characters</Menu.Label>
-				<AccountList />
+				<Menu.Target>
+					<WalletDisplayButton className="w-full" />
+				</Menu.Target>
 
-				<Divider />
+				<Menu.Dropdown>
+					<Menu.Label>Characters</Menu.Label>
+					<AccountList />
 
-				<MenuItem>Manage Wallet</MenuItem>
-				<MenuItem onClick={() => disconnHandlers.open()}>Disconnect</MenuItem>
+					<Divider />
+
+					<MenuItem component={NextLink} href={WalletCharacterManageHref}>
+						Manage Characters
+					</MenuItem>
+					<MenuItem onClick={() => disconnHandlers.open()}>Disconnect</MenuItem>
+				</Menu.Dropdown>
 			</Menu>
 		</>
 	);
@@ -195,6 +209,8 @@ function AccountList() {
 
 	const [curCid, setCurCid] = useCurrentCharacterId();
 
+	const modals = useModals();
+
 	return (
 		<>
 			<LoadingOverlay visible={charactersLoading} />
@@ -207,7 +223,15 @@ function AccountList() {
 					}
 					key={c.characterId}
 					onClick={() => {
-						setCurCid(c.characterId);
+						modals.openConfirmModal({
+							title: `Switch to @${c.handle}?`,
+							children: "Are you sure you want to switch to this character?",
+							labels: { confirm: "Switch", cancel: "Cancel" },
+							onConfirm: () => {
+								setCurCid(c.characterId);
+								showNotification({ message: `Switched to @${c.handle}` });
+							},
+						});
 					}}
 				>
 					<div className="flex items-center" key={c.characterId}>
@@ -218,8 +242,8 @@ function AccountList() {
 						/>
 						<Space w="xs" />
 						<div className="flex flex-col">
-							<Text className="text-sm font-bold">
-								{c.metadata?.content.name}
+							<Text className="text-sm font-semibold">
+								{c.metadata?.content?.name}
 							</Text>
 							<Text className="text-xs">@{c.handle}</Text>
 						</div>
@@ -230,10 +254,16 @@ function AccountList() {
 	);
 }
 
-function MenuItem({ children, ...props }: PropsWithChildren<TextProps<any>>) {
+function _MenuItem({
+	children,
+	...props
+}: PropsWithChildren<
+	MenuItemProps & React.ComponentPropsWithoutRef<"button">
+>) {
 	return (
-		<Menu.Item size="md" className="p-3 cursor-pointer bg-hover" {...props}>
+		<Menu.Item className="p-3 cursor-pointer bg-hover" {...props}>
 			{children}
 		</Menu.Item>
 	);
 }
+const MenuItem = createPolymorphicComponent<"button", MenuItemProps>(_MenuItem);

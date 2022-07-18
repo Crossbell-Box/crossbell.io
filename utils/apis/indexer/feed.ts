@@ -1,0 +1,55 @@
+import { indexer } from "@/utils/crossbell.js";
+import { FeedType } from "crossbell.js";
+import { useQuery, useInfiniteQuery } from "react-query";
+
+const SCOPE_KEYS = ["indexer", "feeds"];
+
+const TIMELINE_FEED_TYPES: FeedType[] = [
+	// "CREATE_CHARACTER",
+	"LINK",
+	"POST_NOTE",
+	"POST_NOTE_FOR_ANY_URI",
+	// "TRANSFER_CHARACTER",
+	// "TRANSFER_MINTED_NOTE",
+	// "UPDATE_CHARACTER_HANDLE",
+];
+
+export function useFeedsOfCharacter(characterId: number) {
+	return useInfiniteQuery(
+		[...SCOPE_KEYS, "list", characterId],
+		({ pageParam }) =>
+			indexer.getFeedsOfCharacter(characterId, {
+				type: TIMELINE_FEED_TYPES,
+				cursor: pageParam,
+				limit: 20,
+			}),
+		{
+			enabled: Boolean(characterId),
+			getNextPageParam: (lastPage, allPages) => lastPage.cursor,
+		}
+	);
+}
+
+export function useFollowingFeedsOfCharacter(characterId?: number) {
+	return useInfiniteQuery(
+		[...SCOPE_KEYS, "following", "list", characterId],
+		({ pageParam }) =>
+			indexer.getFollowingFeedsOfCharacter(characterId!, {
+				type: TIMELINE_FEED_TYPES,
+				cursor: pageParam,
+				limit: 20,
+			}),
+		{
+			enabled: Boolean(characterId),
+			getNextPageParam: (lastPage, allPages) => lastPage.cursor,
+		}
+	);
+}
+
+export function useFeed(transactionHash: number, logIndex: number) {
+	return useQuery(
+		[...SCOPE_KEYS, "one", transactionHash, logIndex],
+		() => indexer.getNote(transactionHash, logIndex),
+		{ enabled: Boolean(transactionHash && typeof logIndex === "number") }
+	);
+}

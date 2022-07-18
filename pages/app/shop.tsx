@@ -1,8 +1,13 @@
 import { getLayout } from "@/components/layouts/AppLayout";
+import Header from "@/components/layouts/Header";
 import type { NextPageWithLayout } from "@/pages/_app";
 
 const Page: NextPageWithLayout = () => {
-  return <div>Shop</div>;
+	return (
+		<div>
+			<Header>Shop</Header>
+		</div>
+	);
 };
 
 Page.getLayout = getLayout;
