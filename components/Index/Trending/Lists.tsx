@@ -39,7 +39,7 @@ const AvatarsGroupWithLimit = ({ avatars, limit }: {
           +{avatars.length - limit}
         </div>
       </div>
-    ) : (Array.from({ length: limit - avatars.length + 1 }).map(_ => (<div className={"w-18 h-18 rounded-full -ml-2rem"} />)))}
+    ) : (Array.from({ length: limit - avatars.length + 1 }).map((_, index) => (<div key={index} className={"w-18 h-18 rounded-full -ml-2rem"} />)))}
   </div>
 )
 
