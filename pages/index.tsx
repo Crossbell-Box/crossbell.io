@@ -4,7 +4,7 @@ import Head from "next/head";
 import IndexNav from "@/components/Index/Nav";
 import IndexHero from "@/components/Index/Hero";
 import IndexTrending from "@/components/Index/Trending";
-import IndexFooter from "@/components/layouts/IndexFooter";
+import IndexFooter from "@/components/Index/Footer";
 
 const Home: NextPage = () => (
   // Use RootLayout directly would cause hydrogen error
