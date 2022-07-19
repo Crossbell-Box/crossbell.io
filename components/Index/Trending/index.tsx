@@ -22,6 +22,16 @@ const getTrendingData = (): TrendingData => {
 
   // Generate mock data
   for (let i = 0; i < 8; i++) {
+    trendingData.character.push({
+      crossbell_id: i * 9,
+      handle: `demo_${i}`,
+      avatar: `https://http.cat/40${i}`,
+      name: `Demo ${i}`,
+      bio: i % 2 === 0 ? '' : `Demo ${i} Boris Johnson suffered a fresh ministerial resignation this morning as the Prime Minister struggles to stabil...`,
+      banner: `https://http.cat/40${i}`,
+    });
+  }
+  for (let i = 0; i < 8; i++) {
     trendingData.treasure.push({
       character_name: `Demo ${i}`,
       character_handle: `demo_${i}`,
@@ -29,7 +39,7 @@ const getTrendingData = (): TrendingData => {
 
       crossbell_id: `${i}`,
       media: `https://http.cat/40${i}`,
-      text: i % 2 === 0 ? '' : '',
+      text: i % 2 === 0 ? '' : '“Coding is the love of my life :)”',
       mint_count: i * 9,
     });
   }

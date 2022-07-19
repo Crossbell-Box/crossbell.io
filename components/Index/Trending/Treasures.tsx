@@ -1,5 +1,5 @@
 import TrendingBase from "@/components/Index/Trending/_base";
-import { TreasureNoteCard } from "@/components/card/MintedNoteCard";
+import { MintedNoteRawCard } from "@/components/card/MintedNoteCard";
 import type { TrendingTreasure } from "@/components/Index/Trending/_types";
 
 interface TrendingTreasuresProps {
@@ -11,13 +11,14 @@ const TrendingTreasures = ({ mintedNotes }: TrendingTreasuresProps) => (
     <div className={"grid grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-3"}>
       {mintedNotes.map(mintedNote => (
         <div key={mintedNote.crossbell_id} className={"aspect-ratio-video"}>
-          <TreasureNoteCard character={{
+          <MintedNoteRawCard character={{
             handle: mintedNote.character_handle,
             avatar: mintedNote.character_avatar,
             name: mintedNote.character_name,
           }} treasure={{
             id: mintedNote.crossbell_id,
             image: mintedNote.media,
+            text: mintedNote.text,
             mintCount: mintedNote.mint_count,
           }} />
         </div>

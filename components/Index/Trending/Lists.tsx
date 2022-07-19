@@ -22,7 +22,7 @@ const AvatarsGroupWithLimit = ({ avatars, limit }: {
     <div className={"w-24 h-24 rounded-full -mt-6"} style={{
       zIndex: limit + 1
     }}>
-      <img className={"w-full h-full rounded-full object-cover border border-white border-.3rem"} src={avatars[0]} />
+      <img className={"w-full h-full rounded-full object-cover border border-white border-.2rem"} src={avatars[0]} />
     </div>
     {avatars.slice(1, limit).map((avatar, index) => (
       <div className={"w-18 h-18 rounded-full -ml-2rem"} key={index} style={{
