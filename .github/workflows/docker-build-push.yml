@@ -65,8 +65,10 @@ jobs:
       - run: |
           wget https://github.com/mikefarah/yq/releases/download/v4.25.1/yq_linux_amd64.tar.gz -O - | tar xz && mv yq_linux_amd64 /usr/local/bin/yq
           curl -LO https://storage.googleapis.com/kubernetes-release/release/v1.22.10/bin/linux/amd64/kubectl && chmod +x kubectl && mv kubectl /usr/local/bin/kubectl
-      - run: |
-          kubectl apply -f deploy/dev
+      - env:
+          IMAGE_TAG_RELEASE: ${{ env.IMAGE_NAME }}:${{ needs.build.outputs.version }}
+        run: |
+          sh apply.sh deploy/dev/*
   deploy-prod:
     if: startsWith(github.ref, 'refs/tags/v')
     runs-on: ubuntu-latest
@@ -83,5 +85,7 @@ jobs:
       - run: |
           wget https://github.com/mikefarah/yq/releases/download/v4.25.1/yq_linux_amd64.tar.gz -O - | tar xz && mv yq_linux_amd64 /usr/local/bin/yq
           curl -LO https://storage.googleapis.com/kubernetes-release/release/v1.22.10/bin/linux/amd64/kubectl && chmod +x kubectl && mv kubectl /usr/local/bin/kubectl
-      - run: |
-          kubectl apply -f deploy/prod
+      - env:
+          IMAGE_TAG_RELEASE: ${{ env.IMAGE_NAME }}:${{ needs.build.outputs.version }}
+        run: |
+          sh apply.sh deploy/prod/*
