@@ -4,7 +4,7 @@ import type { TrendingRawData } from "@/components/Index/Trending/_types";
 const SCOPE_KEYS = ["trending"];
 
 type AvailableTypes = "character" | "note" | "feed";
-const baseUrl = "https://test-recommend.crossbell.io/recommends";
+const baseUrl = process.env.NODE_ENV == "production" ? "https://recommend.crossbell.io/recommends" : "https://test-recommend.crossbell.io/recommends";
 
 export function useTrending(reqTypes: AvailableTypes[] = []) {
   return useQuery(
