@@ -11,7 +11,7 @@ const IndexFooter = () => (
       </p>
       <div className={"flex flex-row text-white gap-8 font-bold text-lg mt-32"}>
         <a>Blog</a>
-        <a href={"https://twitter.com/messages/compose?recipient_id=1526291070623023111"} target={"_blank"}>Twitter Help</a>
+        <a href={"https://twitter.com/messages/compose?recipient_id=1526291070623023111"} target={"_blank"} rel={"noreferrer"}>Twitter Help</a>
         <a>Terms of Service</a>
         <a>Privacy Policy</a>
         <a>Feedback</a>
