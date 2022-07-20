@@ -60,7 +60,7 @@ const TrendingListCard = ({ list }: { list: TrendingListWithCharacter }) => (
 const TrendingLists = ({ lists }: TrendingListsProps) => (
   <TrendingBase title={"Trending Lists"} intro={"Lists of characters that you may find interesting"} viewMoreLink={"/"}>
     <div className={"flex flex-col gap-8"}>
-      {lists.map((list, index) => <TrendingListCard key={index} list={list} />)}
+      {lists.map(list => <TrendingListCard key={list.id} list={list} />)}
     </div>
   </TrendingBase>
 );

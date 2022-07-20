@@ -41,7 +41,13 @@ const TreasurePart = ({ treasure, character }: MintedNoteRawProps) => (
 			}}
 		>
 			{treasure.text && (
-				<span className={"font-bold mt-6"}>{treasure.text}</span>
+				<span className={"font-bold mt-6"} style={{
+					overflow: "hidden",
+					display: "-webkit-box",
+					// @ts-ignore: Custom CSS Styles for components to work properly
+					"-webkit-box-orient": "vertical",
+					"-webkit-line-clamp": "3",
+				}}>{treasure.text}</span>
 			)}
 		</div>
 		<div className={"absolute top-0 w-full"}>
@@ -64,7 +70,7 @@ const TreasurePart = ({ treasure, character }: MintedNoteRawProps) => (
 						: "bg-[#282C34] text-[#FFFFFF]"
 				} px-2 py-1 min-w-12 text-center rounded-full text-sm font-bold`}
 			>
-				<span>#{treasure.id}</span>
+				<span>#{treasure.id.length >= 8 ? `${treasure.id.slice(0, 2)}...${treasure.id.slice(-2)}` : treasure.id}</span>
 			</div>
 		</div>
 	</div>
@@ -72,12 +78,12 @@ const TreasurePart = ({ treasure, character }: MintedNoteRawProps) => (
 
 const CharacterPart = ({ treasure, character }: MintedNoteRawProps) => (
 	<div className={"flex flex-row justify-between bg-white p-2 rounded-b-lg"}>
-		<div className={"flex flex-col justify-around text-[#687792]"}>
+		<div className={"flex flex-col justify-around text-[#687792] text-left"}>
 			<span className={"text-sm font-bold"}>{character.name}</span>
 			<span className={"text-xs"}>@{character.handle}</span>
 		</div>
-		<div className={"flex flex-col"}>
-			<span className={"text-xs font-semibold text-[#082135] self-end"}>
+		<div className={"flex flex-col text-right"}>
+			<span className={"text-xs font-semibold text-[#082135]"}>
 				{treasure.mintCount}
 			</span>
 			<span className={"text-xs font-light text-[#687792]"}>Mint</span>

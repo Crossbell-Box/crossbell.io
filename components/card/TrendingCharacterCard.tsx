@@ -19,12 +19,18 @@ type TrendingCharacterProps = {
 }
 
 export const TrendingCharacterRawCard = ({ character }: TrendingCharacterRawProps) => (
-  <div className={"flex flex-col rounded-lg text-white p-4 h-full justify-between bg-cover bg-center"} style={{
+  <div className={"flex flex-col rounded-lg text-white p-4 w-full h-full justify-between bg-cover bg-center"} style={{
     backgroundImage: `linear-gradient( rgba(0, 0, 0, 0.5), rgba(0, 0, 0, 0.5) ), url(${character.banner})`,
     aspectRatio: "203/264",
   }}>
     <div className={"text-left text-sm"}>
-      <span>{ character.bio }</span>
+      <span style={{
+        overflow: "hidden",
+        display: "-webkit-box",
+        // @ts-ignore: Custom CSS Styles for components to work properly
+        "-webkit-box-orient": "vertical",
+        "-webkit-line-clamp": "3",
+      }}>{ character.bio }</span>
     </div>
     <div className={"flex flex-col"}>
       <div className={"flex flex-col gap-5"}>

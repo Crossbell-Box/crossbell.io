@@ -5,6 +5,8 @@ export type TrendingCharacter = {
   name: string;
   bio: string;
   banner: string;
+
+  list_id: number;
 }
 
 export type TrendingTreasure = {
@@ -19,6 +21,13 @@ export type TrendingTreasure = {
 }
 
 export type TrendingList = {
+  id: number;
   intro: string;
   start_icon: string;
+}
+
+export type TrendingRawData = {
+  character: TrendingCharacter[];
+  treasure: TrendingTreasure[];
+  list: TrendingList[];
 }

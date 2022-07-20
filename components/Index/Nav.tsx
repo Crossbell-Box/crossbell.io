@@ -27,7 +27,7 @@ const NavLinks = () => {
 }
 
 const IndexNav = () => (
-  <div className={"flex fixed top-0 bg-white w-full px-8 z-1 py-2"}>
+  <div className={"flex fixed top-0 bg-white w-full px-8 z-36 py-2"}>
     <div className={"flex flex-row justify-between items-center w-full max-w-340 m-auto"}>
       <div className={"flex flex-row items-center gap-6"}>
         <div>
