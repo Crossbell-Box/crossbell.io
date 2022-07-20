@@ -35,37 +35,39 @@ const Page: NextPageWithLayout<PageProps> = (props) => {
 		<div>
 			<Header hasBackButton>Note</Header>
 
-			{/* main note */}
-			<div>{note ? <Note note={note} /> : <NoteSkeleton />}</div>
+			<div className="z-1 relative">
+				{/* main note */}
+				<div>{note ? <Note note={note} /> : <NoteSkeleton />}</div>
 
-			{/* comment textarea */}
-			<div>{note && <CommentTextarea note={note} />}</div>
+				{/* comment textarea */}
+				<div>{note && <CommentTextarea note={note} />}</div>
 
-			<Divider />
+				<Divider />
 
-			{/* comments */}
-			<div>
-				{comments?.pages.map((page, i) => (
-					<Fragment key={i}>
-						{page.list.map((comment, i) => (
-							<Note
-								key={`${comment.transactionHash}-${comment.logIndex}`}
-								note={comment}
-							/>
-						))}
-					</Fragment>
-				))}
+				{/* comments */}
+				<div>
+					{comments?.pages.map((page, i) => (
+						<Fragment key={i}>
+							{page.list.map((comment, i) => (
+								<Note
+									key={`${comment.transactionHash}-${comment.logIndex}`}
+									note={comment}
+								/>
+							))}
+						</Fragment>
+					))}
 
-				{/* load more */}
-				<LoadMore
-					hasNextPage={Boolean(hasNextPage)}
-					isLoading={isFetchingNextPage}
-					onLoadMore={() => fetchNextPage()}
-				>
-					<NoteSkeleton />
-					<NoteSkeleton />
-					<NoteSkeleton />
-				</LoadMore>
+					{/* load more */}
+					<LoadMore
+						hasNextPage={Boolean(hasNextPage)}
+						isLoading={isFetchingNextPage}
+						onLoadMore={() => fetchNextPage()}
+					>
+						<NoteSkeleton />
+						<NoteSkeleton />
+						<NoteSkeleton />
+					</LoadMore>
+				</div>
 			</div>
 		</div>
 	);
