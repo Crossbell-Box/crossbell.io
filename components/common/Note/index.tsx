@@ -15,6 +15,7 @@ import Link from "next/link";
 import { extractCharacterName } from "@/utils/metadata";
 import LoadingOverlay from "../LoadingOverlay";
 import { NextLink } from "@mantine/next";
+import { MarkdownRenderer } from "./MarkdownRenderer";
 
 function ActionButton({
 	text,
@@ -62,7 +63,13 @@ function ActionButton({
 	);
 }
 
-export function Note({ note }: { note: NoteEntity }) {
+export function Note({
+	note,
+	collapsible,
+}: {
+	collapsible?: boolean;
+	note: NoteEntity;
+}) {
 	const { data: character } = useCharacter(note.characterId);
 
 	const { data: status } = useNoteStatus(note.characterId, note.noteId);
@@ -141,11 +148,14 @@ export function Note({ note }: { note: NoteEntity }) {
 
 				{/* content */}
 				<div>
-					{note.metadata?.content?.content?.split?.("\n").map((line, i) => (
+					<MarkdownRenderer collapsible={collapsible}>
+						{note.metadata?.content?.content ?? ""}
+					</MarkdownRenderer>
+					{/* {note.metadata?.content?.content?.split?.("\n").map((line, i) => (
 						<Text key={i} className="leading-1.25em">
 							{line}
 						</Text>
-					))}
+					))} */}
 				</div>
 
 				<Space h={10} />

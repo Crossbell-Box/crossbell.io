@@ -6,10 +6,11 @@ import Header from "@/components/layouts/Header";
 import { CommentTextarea } from "@/components/ui/CommentTextarea";
 import type { NextPageWithLayout } from "@/pages/_app";
 import { fetchNote, useNote, useNotesForNote } from "@/utils/apis/indexer";
-import { useNoteRouterQuery } from "@/utils/url";
+import { decomposeNoteId, useNoteRouterQuery } from "@/utils/url";
 import { NoteEntity } from "crossbell.js";
 import type { GetServerSideProps } from "next";
 import { Divider } from "@mantine/core";
+import { NextSeo } from "next-seo";
 
 // noteid format: {characterId}-{noteId}
 
@@ -33,6 +34,18 @@ const Page: NextPageWithLayout<PageProps> = (props) => {
 
 	return (
 		<div>
+			<NextSeo
+				openGraph={{
+					type: "article",
+					title:
+						note?.metadata?.content?.title ??
+						note?.metadata?.content?.content?.slice(0, 50),
+					description: note?.metadata?.content?.content,
+
+					// TODO: more https://github.com/garmeeh/next-seo#article
+				}}
+			/>
+
 			<Header hasBackButton>Note</Header>
 
 			<div className="z-1 relative">
@@ -52,6 +65,7 @@ const Page: NextPageWithLayout<PageProps> = (props) => {
 								<Note
 									key={`${comment.transactionHash}-${comment.logIndex}`}
 									note={comment}
+									collapsible
 								/>
 							))}
 						</Fragment>

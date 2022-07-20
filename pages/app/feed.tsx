@@ -52,6 +52,7 @@ function FeedList() {
 						<Feed
 							feed={feed}
 							key={`${feed.transactionHash}-${feed.logIndex}`}
+							collapsible
 						/>
 					))}
 				</Fragment>

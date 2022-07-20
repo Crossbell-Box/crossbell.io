@@ -1,4 +1,5 @@
 import { ReactElement, ReactNode } from "react";
+import { DefaultSeo } from "next-seo";
 import { AppProps } from "next/app";
 import { NextPage } from "next/types";
 import Head from "next/head";
@@ -30,6 +31,21 @@ export default function App({ Component, pageProps }: AppPropsWithLayout) {
 					content="minimum-scale=1, initial-scale=1, width=device-width"
 				/>
 			</Head>
+
+			<DefaultSeo
+				title="Crossbell.io"
+				description="Own Your Social Activities!"
+				openGraph={{
+					type: "website",
+					locale: "en_US",
+					url: "https://crossbell.io",
+					site_name: "Crossbell",
+				}}
+				twitter={{
+					site: "@_Crossbell",
+					cardType: "summary_large_image",
+				}}
+			/>
 
 			<ThemeProvider>
 				<ModalsProvider>

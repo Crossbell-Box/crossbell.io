@@ -7,8 +7,9 @@ import Document, {
 	NextScript,
 } from "next/document";
 import { ServerStyles, createStylesServer } from "@mantine/next";
+import { emotionCache } from "@/components/providers/ThemeProvider";
 
-const stylesServer = createStylesServer();
+const stylesServer = createStylesServer(emotionCache);
 
 export default class _Document extends Document {
 	static async getInitialProps(ctx: DocumentContext) {

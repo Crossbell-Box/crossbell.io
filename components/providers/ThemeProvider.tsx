@@ -1,11 +1,19 @@
 import { MantineProvider } from "@mantine/core";
 import { PropsWithChildren } from "react";
 
+import { createEmotionCache } from "@mantine/core";
+
+export const emotionCache = createEmotionCache({
+	key: "mantine",
+	prepend: true, // https://github.com/mantinedev/mantine/issues/823#issuecomment-1065833889
+});
+
 export default function ThemeProvider({ children }: PropsWithChildren) {
 	return (
 		<MantineProvider
 			// withGlobalStyles
 			withNormalizeCSS
+			emotionCache={emotionCache}
 			theme={{
 				/** Put your mantine theme override here */
 				colorScheme: "light",
