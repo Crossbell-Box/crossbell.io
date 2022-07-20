@@ -9,7 +9,7 @@ const IndexFooter = () => (
         crypto collectibles and non-fungible tokens (NFTs). <br />
         Buy, sell, and discover exclusive digital items.
       </p>
-      <div className={"flex flex-row text-white gap-8 font-bold text-lg mt-32"}>
+      <div className={"flex flex-col md:flex-row text-white gap-8 font-bold text-lg mt-32"}>
         <a>Blog</a>
         <a href={"https://twitter.com/messages/compose?recipient_id=1526291070623023111"} target={"_blank"} rel={"noreferrer"}>Twitter Help</a>
         <a>Terms of Service</a>

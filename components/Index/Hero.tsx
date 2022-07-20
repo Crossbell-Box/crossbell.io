@@ -1,7 +1,7 @@
 import {Button, Title} from "@mantine/core";
 
 const SNSIcons = () => (
-  <div className={"absolute w-full h-full overflow-hidden"}>
+  <div className={"absolute w-full h-full overflow-hidden hidden md:block"}>
     <img
       src={"/logos/twitter.png"}
       alt={"Twitter Icon"}

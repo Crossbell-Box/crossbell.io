@@ -44,7 +44,7 @@ const AvatarsGroupWithLimit = ({ avatars, limit }: {
 )
 
 const TrendingListCard = ({ list }: { list: TrendingListWithCharacter }) => (
-  <div className={"flex flex-row gap-3 bg-white py-8 pl-8 rounded-2xl"}>
+  <div className={"flex flex-col md:flex-row gap-3 bg-white py-8 pl-8 rounded-2xl"}>
     <div className={"flex"}>
       <AvatarsGroupWithLimit avatars={[
         list.start_icon,

@@ -1,6 +1,6 @@
 import Link from "next/link";
 import Logo from "@/components/common/Logo";
-import { Space, Title } from "@mantine/core";
+import { Menu, Button, Space, Title } from "@mantine/core";
 import ConnectButton from "@/components/common/ConnectButton";
 import React from "react";
 import { useCurrentCharacter } from "@/utils/apis/indexer";
@@ -41,11 +41,11 @@ const IndexNav = () => (
             </a>
           </Link>
         </div>
-        <div className={"flex flex-row items-center gap-4"}>
+        <div className={"flex-row items-center gap-4 hidden md:flex"}>
           <NavLinks/>
         </div>
       </div>
-      <div className={"flex flex-row items-center gap-6"}>
+      <div className={"flex-row items-center gap-6 hidden md:flex"}>
         <div>
           SearchBar
           {/*TODO: SearchBar*/}
@@ -53,6 +53,50 @@ const IndexNav = () => (
         <div className={"flex relative"}>
           <ConnectButton/>
         </div>
+      </div>
+      <div className={"flex md:hidden"}>
+        {/*Mobile Menu*/}
+        <Menu shadow={"md"}>
+          <Menu.Target>
+            <Button size={"xs"}>
+              <i className={"i-csb:more"} />
+            </Button>
+          </Menu.Target>
+          <Menu.Dropdown>
+            <Menu.Item icon={<i className={"i-csb:feed"} />}>
+              <Link href={"/feed"}>
+                Feed
+              </Link>
+            </Menu.Item>
+            <Menu.Item icon={<i className={"i-csb:shop"} />}>
+              <Link href={"/shop"}>
+                Shop
+              </Link>
+            </Menu.Item>
+            <Menu.Item icon={<i className={"i-csb:sync"} />}>
+              <Link href={"/sync"}>
+                Sync
+              </Link>
+            </Menu.Item>
+            <Menu.Item icon={<i className={"i-csb:character"} />}>
+              <Link href={"/character"}>
+                Character
+              </Link>
+            </Menu.Item>
+            <Menu.Divider />
+            <Menu.Item>
+              <div>
+                SearchBar
+                {/*TODO: SearchBar*/}
+              </div>
+            </Menu.Item>
+            <Menu.Item>
+              <div className={"flex relative"}>
+                <ConnectButton/>
+              </div>
+            </Menu.Item>
+          </Menu.Dropdown>
+        </Menu>
       </div>
     </div>
   </div>
