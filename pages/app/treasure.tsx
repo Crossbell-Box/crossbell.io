@@ -7,19 +7,16 @@ import { useAccount } from "wagmi";
 import Header from "@/components/layouts/Header";
 
 const TreasuresList = () => {
-	const { data: account } = useAccount();
+	const { address } = useAccount();
 	const { isLoading: mintedNotesLoading, data: mintedNotesArray } =
-		useMintedNotesOfAddress(account?.address);
+		useMintedNotesOfAddress(address);
 
 	return (
 		<>
 			<div className="grid grid-cols-3 gap-4 relative min-h-300px">
 				<LoadingOverlay visible={mintedNotesLoading} />
 				{mintedNotesArray?.list.map((mintedNote) => (
-					<MintedNoteCard
-						key={mintedNote.noteId}
-						mintedNote={mintedNote}
-					/>
+					<MintedNoteCard key={mintedNote.noteId} mintedNote={mintedNote} />
 				))}
 			</div>
 		</>

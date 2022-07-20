@@ -88,7 +88,7 @@ const BaseButton_ = forwardRef<HTMLButtonElement, ButtonProps>(
 			<Button
 				ref={ref}
 				className={classNames(
-					"h-14 rounded-lg w-full flex items-center justify-center cursor-pointer",
+					"h-14 rounded-lg w-full flex items-center justify-center cursor-pointer border-none",
 					className
 				)}
 				{...props}
@@ -105,7 +105,7 @@ const BaseButton = createPolymorphicComponent<"button", ButtonProps>(
 
 const WalletDisplayButton = forwardRef<HTMLButtonElement, ButtonProps>(
 	(props, ref) => {
-		const { data: account } = useAccount();
+		const { address } = useAccount();
 		const { isLoading, data } = useCurrentCharacter();
 
 		return (
@@ -122,7 +122,7 @@ const WalletDisplayButton = forwardRef<HTMLButtonElement, ButtonProps>(
 							{/* blurred avatar bg */}
 							<div className="w-full absolute top-0 left-0 right-0 bottom-0 scale-120 bg-white z-0" />
 							<Avatar
-								address={account?.address}
+								address={address}
 								characterId={data?.characterId}
 								radius={0}
 								size={100}
@@ -132,7 +132,7 @@ const WalletDisplayButton = forwardRef<HTMLButtonElement, ButtonProps>(
 
 						<Avatar
 							size={32}
-							address={account?.address}
+							address={address}
 							characterId={data?.characterId}
 						/>
 						<Space w="sm" />
@@ -142,7 +142,7 @@ const WalletDisplayButton = forwardRef<HTMLButtonElement, ButtonProps>(
 							</Text>
 							<Space h={2} />
 							<Text className="font-normal leading-1em" color="gray">
-								{truncateAddress(account?.address)}
+								{truncateAddress(address)}
 							</Text>
 						</div>
 					</>
@@ -202,10 +202,9 @@ function WalletButton() {
 }
 
 function AccountList() {
-	const { data: account } = useAccount();
-	const { isLoading: charactersLoading, data: charactersData } = useCharacters(
-		account?.address
-	);
+	const { address } = useAccount();
+	const { isLoading: charactersLoading, data: charactersData } =
+		useCharacters(address);
 
 	const [curCid, setCurCid] = useCurrentCharacterId();
 
@@ -235,11 +234,7 @@ function AccountList() {
 					}}
 				>
 					<div className="flex items-center" key={c.characterId}>
-						<Avatar
-							size={32}
-							address={account?.address}
-							characterId={c?.characterId}
-						/>
+						<Avatar size={32} address={address} characterId={c?.characterId} />
 						<Space w="xs" />
 						<div className="flex flex-col">
 							<Text className="text-sm font-semibold">

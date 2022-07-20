@@ -1,3 +1,4 @@
+import { Text } from "@mantine/core";
 import type { MintedNoteEntity } from "crossbell.js";
 import { ipfsLinkToHttpLink } from "@/utils/ipfs";
 
@@ -29,9 +30,9 @@ type MintedNoteProps = {
 };
 
 const TreasurePart = ({ treasure, character }: MintedNoteRawProps) => (
-	<div className={"relative"}>
+	<div className="relative">
 		<div
-			className={"bg-cover bg-center aspect-ratio-video rounded-t-lg text-white flex items-center p-2"}
+			className="bg-cover bg-center aspect-ratio-video rounded-t-lg text-white flex items-center p-2"
 			style={{
 				backgroundImage: `${
 					treasure.text
@@ -41,20 +42,16 @@ const TreasurePart = ({ treasure, character }: MintedNoteRawProps) => (
 			}}
 		>
 			{treasure.text && (
-				<span className={"font-bold mt-6"} style={{
-					overflow: "hidden",
-					display: "-webkit-box",
-					// @ts-ignore: Custom CSS Styles for components to work properly
-					"-webkit-box-orient": "vertical",
-					"-webkit-line-clamp": "3",
-				}}>{treasure.text}</span>
+				<Text className="font-bold mt-6" lineClamp={3}>
+					{treasure.text}
+				</Text>
 			)}
 		</div>
-		<div className={"absolute top-0 w-full"}>
-			<div className={"absolute left-0 m-2"}>
-				<div className={"w-9 h-9 rounded-full"}>
+		<div className="absolute top-0 w-full">
+			<div className="absolute left-0 m-2">
+				<div className="w-9 h-9 rounded-full">
 					<img
-						className={"w-full h-full rounded-full object-cover"}
+						className="w-full h-full rounded-full object-cover"
 						style={{
 							border: "2px solid white",
 						}}
@@ -70,29 +67,38 @@ const TreasurePart = ({ treasure, character }: MintedNoteRawProps) => (
 						: "bg-[#282C34] text-[#FFFFFF]"
 				} px-2 py-1 min-w-12 text-center rounded-full text-sm font-bold`}
 			>
-				<span>#{treasure.id.length >= 8 ? `${treasure.id.slice(0, 2)}...${treasure.id.slice(-2)}` : treasure.id}</span>
+				<span>
+					#
+					{treasure.id.length >= 8
+						? `${treasure.id.slice(0, 2)}...${treasure.id.slice(-2)}`
+						: treasure.id}
+				</span>
 			</div>
 		</div>
 	</div>
 );
 
 const CharacterPart = ({ treasure, character }: MintedNoteRawProps) => (
-	<div className={"flex flex-row justify-between bg-white p-2 rounded-b-lg"}>
-		<div className={"flex flex-col justify-around text-[#687792] text-left"}>
-			<span className={"text-sm font-bold"}>{character.name}</span>
-			<span className={"text-xs"}>@{character.handle}</span>
+	<div className="flex flex-row justify-between bg-white p-2 rounded-b-lg">
+		<div className="flex flex-col justify-around text-[#687792] text-left">
+			<Text className="text-sm font-bold">{character.name}</Text>
+			<Text className="text-xs">@{character.handle}</Text>
 		</div>
-		<div className={"flex flex-col text-right"}>
-			<span className={"text-xs font-semibold text-[#082135]"}>
+
+		<div className="flex flex-col text-right">
+			<Text className="text-xs font-semibold text-[#082135]">
 				{treasure.mintCount}
-			</span>
-			<span className={"text-xs font-light text-[#687792]"}>Mint</span>
+			</Text>
+			<Text className="text-xs font-light text-[#687792]">Mint</Text>
 		</div>
 	</div>
 );
 
-export const MintedNoteRawCard = ({ character, treasure }: MintedNoteRawProps) => (
-	<div className={"w-full relative"}>
+export const MintedNoteRawCard = ({
+	character,
+	treasure,
+}: MintedNoteRawProps) => (
+	<div className="w-full relative">
 		<TreasurePart treasure={treasure} character={character} />
 		<CharacterPart treasure={treasure} character={character} />
 	</div>
@@ -101,7 +107,9 @@ export const MintedNoteRawCard = ({ character, treasure }: MintedNoteRawProps) =
 const MintedNoteCard = ({ mintedNote }: MintedNoteProps) => (
 	<MintedNoteRawCard
 		character={{
-			avatar: ipfsLinkToHttpLink(mintedNote.noteCharacter?.metadata?.content?.avatars?.[0] || ""), // TODO: Default fallback image
+			avatar: ipfsLinkToHttpLink(
+				mintedNote.noteCharacter?.metadata?.content?.avatars?.[0] || ""
+			),
 			name: mintedNote.noteCharacter?.metadata?.content?.name || "",
 			handle: mintedNote.noteCharacter?.handle || "",
 		}}

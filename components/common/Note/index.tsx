@@ -89,8 +89,8 @@ export function Note({ note }: { note: NoteEntity }) {
 		>
 			<LoadingOverlay
 				visible={likeNote.isLoading || unlikeNote.isLoading}
-				className="z-10"
 				description="Loading..."
+				global
 			/>
 
 			{/* avatar */}

@@ -19,8 +19,8 @@ import Link from "next/link";
 import { useAccount } from "wagmi";
 
 const Page: NextPageWithLayout = () => {
-	const { data: account } = useAccount();
-	const { data: characters } = useCharacters(account?.address);
+	const { address } = useAccount();
+	const { data: characters } = useCharacters(address);
 
 	return (
 		<div>
@@ -145,7 +145,7 @@ function CharacterCard({ character }: { character: CharacterEntity }) {
 						</ActionIcon>
 					</Menu.Target>
 
-					<Menu.Dropdown>
+					<Menu.Dropdown className="w-fit shadow-md">
 						<Menu.Item
 							component={NextLink}
 							href={composeWalletCharacterEditHref(character.characterId)}

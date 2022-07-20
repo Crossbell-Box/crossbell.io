@@ -1,6 +1,6 @@
 import { useContract } from "@/utils/crossbell.js";
 import { showNotification } from "@mantine/notifications";
-import { useMutation, useQueryClient } from "react-query";
+import { useMutation, useQueryClient } from "@tanstack/react-query";
 import {
 	SCOPE_KEY_CHARACTER_FOLLOW_RELATION,
 	SCOPE_KEY_CHARACTER_FOLLOW_STATS,

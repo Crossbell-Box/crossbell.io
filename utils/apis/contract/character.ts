@@ -1,7 +1,7 @@
 import { useContract } from "@/utils/crossbell.js";
 import { showNotification } from "@mantine/notifications";
 import { CharacterMetadata } from "crossbell.js";
-import { useMutation, useQueryClient } from "react-query";
+import { useMutation, useQueryClient } from "@tanstack/react-query";
 import { useAccount } from "wagmi";
 import {
 	SCOPE_KEY_CHARACTER,
@@ -13,7 +13,7 @@ import {
 // create new character
 
 export function useCreateCharacter() {
-	const { data: account } = useAccount();
+	const { address } = useAccount();
 	const contract = useContract();
 	const queryClient = useQueryClient();
 
@@ -25,16 +25,14 @@ export function useCreateCharacter() {
 			handle: string;
 			metadata: CharacterMetadata;
 		}) => {
-			return contract.createCharacter(account?.address!, handle, metadata);
+			return contract.createCharacter(address!, handle, metadata);
 		},
 		{
 			onSuccess: (data, { handle }) => {
 				return Promise.all([
 					queryClient.invalidateQueries(SCOPE_KEY_CHARACTER(data.data)),
-					queryClient.invalidateQueries(SCOPE_KEY_CHARACTERS(account?.address)),
-					queryClient.invalidateQueries(
-						SCOPE_KEY_PRIMARY_CHARACTER(account?.address)
-					),
+					queryClient.invalidateQueries(SCOPE_KEY_CHARACTERS(address)),
+					queryClient.invalidateQueries(SCOPE_KEY_PRIMARY_CHARACTER(address)),
 					queryClient.invalidateQueries(SCOPE_KEY_CHARACTER_BY_HANDLE(handle)),
 				]);
 			},
@@ -105,7 +103,7 @@ export function useSetCharacterHandle(characterId: number) {
 // set primary character
 
 export function useSetPrimaryCharacterId(characterId: number) {
-	const { data: account } = useAccount();
+	const { address } = useAccount();
 
 	const contract = useContract();
 	const queryClient = useQueryClient();
@@ -117,10 +115,8 @@ export function useSetPrimaryCharacterId(characterId: number) {
 		{
 			onSuccess: () => {
 				return Promise.all([
-					queryClient.invalidateQueries(SCOPE_KEY_CHARACTERS(account?.address)),
-					queryClient.invalidateQueries(
-						SCOPE_KEY_PRIMARY_CHARACTER(account?.address)
-					),
+					queryClient.invalidateQueries(SCOPE_KEY_CHARACTERS(address)),
+					queryClient.invalidateQueries(SCOPE_KEY_PRIMARY_CHARACTER(address)),
 				]);
 			},
 			onError: (err: any) => {

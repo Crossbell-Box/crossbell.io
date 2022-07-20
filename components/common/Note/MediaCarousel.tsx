@@ -3,7 +3,6 @@ import { NoteMetadata } from "crossbell.js";
 import { Carousel, Embla } from "@mantine/carousel";
 import Image from "../Image";
 import { useCallback, useEffect, useRef, useState } from "react";
-import { useWindowEvent } from "@mantine/hooks";
 import { Space } from "@mantine/core";
 import classNames from "classnames";
 

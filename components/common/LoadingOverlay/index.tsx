@@ -6,14 +6,17 @@ import {
 	Text,
 } from "@mantine/core";
 import { useScrollLock } from "@mantine/hooks";
+import classNames from "classnames";
 import { type PropsWithChildren, useEffect } from "react";
 
 export default function LoadingOverlay({
 	description,
+	global = false,
 	...props
 }: PropsWithChildren<
 	{
 		description?: string;
+		global?: boolean;
 	} & LoadingOverlayProps
 >) {
 	const { colors } = useMantineTheme();
@@ -63,5 +66,13 @@ export default function LoadingOverlay({
 		</div>
 	);
 
-	return <LoadingOverlay_ loader={customLoader} className="z-402" {...props} />;
+	return (
+		<LoadingOverlay_
+			loader={customLoader}
+			className={classNames({
+				"fixed top-0 left-0 right-0 bottom-0": global,
+			})}
+			{...props}
+		/>
+	);
 }

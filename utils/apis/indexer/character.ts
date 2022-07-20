@@ -1,4 +1,4 @@
-import { useQuery } from "react-query";
+import { useQuery } from "@tanstack/react-query";
 import { indexer } from "@/utils/crossbell.js";
 import { useLocalStorage } from "@mantine/hooks";
 import { useEffect } from "react";
@@ -69,10 +69,10 @@ export function useCurrentCharacterId() {
 }
 
 export function useCurrentCharacter() {
-	const { data: account } = useAccount();
+	const { address } = useAccount();
 	const [cid, setCid] = useCurrentCharacterId();
 
-	const query = cid ? useCharacter(cid) : usePrimaryCharacter(account?.address);
+	const query = cid ? useCharacter(cid) : usePrimaryCharacter(address);
 
 	useEffect(() => {
 		if (!cid) {
