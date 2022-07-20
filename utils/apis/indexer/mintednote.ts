@@ -1,11 +1,8 @@
 import type { BigNumberish } from "ethers";
 import { useQuery } from "react-query";
 import { indexer } from "@/utils/crossbell.js";
-import { useLocalStorage } from "@mantine/hooks";
-import { useAccount } from "wagmi";
-import { useEffect } from "react";
 
-const SCOPE_KEYS = ["indexer"];
+const SCOPE_KEYS = ["indexer", "mintedNotes"];
 
 export function useMintedNote(contractId?: BigNumberish, tokenId?: BigNumberish) {
   return useQuery(

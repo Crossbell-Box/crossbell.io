@@ -17,7 +17,7 @@ const TreasuresList = () => {
 				<LoadingOverlay visible={mintedNotesLoading} />
 				{mintedNotesArray?.list.map((mintedNote) => (
 					<MintedNoteCard
-						key={mintedNote.contractAddress + mintedNote.tokenId.toString()}
+						key={mintedNote.noteId}
 						mintedNote={mintedNote}
 					/>
 				))}
