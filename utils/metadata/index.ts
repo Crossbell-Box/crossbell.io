@@ -6,7 +6,7 @@ import { CharacterEntity, NoteMetadata } from "crossbell.js";
 export const composeNoteMetadata = (metadata: NoteMetadata): NoteMetadata => {
 	if (!metadata.tags) {
 		metadata.tags = ["crossbell.io"];
-		metadata.sources = ['"crossbell.io"'];
+		metadata.sources = ["crossbell.io"];
 	}
 
 	return metadata;

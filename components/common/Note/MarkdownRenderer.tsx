@@ -50,7 +50,13 @@ export function MarkdownRenderer({
 							h5: ({ node, ...props }) => <Title order={5} {...props} />,
 							h6: ({ node, ...props }) => <Title order={6} {...props} />,
 							p: ({ node, ...props }) => (
-								<Text className="leading-1.25em my-2" {...props} />
+								<Text
+									className="leading-1.25em my-2 break-words"
+									style={{
+										wordBreak: "break-word",
+									}}
+									{...props}
+								/>
 							),
 							img: ({ node, ...props }) => {
 								const src = ipfsLinkToHttpLink(props.src!);

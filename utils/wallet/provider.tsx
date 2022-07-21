@@ -1,5 +1,9 @@
 import React from "react";
-import { getDefaultWallets } from "@rainbow-me/rainbowkit";
+import {
+	getDefaultWallets,
+	connectorsForWallets,
+	wallet,
+} from "@rainbow-me/rainbowkit";
 import { type Chain, configureChains, createClient } from "wagmi";
 import { jsonRpcProvider } from "wagmi/providers/jsonRpc";
 import { RainbowKitProviderProps } from "@rainbow-me/rainbowkit/dist/components/RainbowKitProvider/RainbowKitProvider";
@@ -31,10 +35,32 @@ const { chains, provider } = configureChains(
 	[jsonRpcProvider({ rpc: (chain) => ({ http: chain.rpcUrls.default }) })]
 );
 
-const { connectors } = getDefaultWallets({
-	appName: "Crossbell.io",
-	chains,
-});
+// const { connectors } = getDefaultWallets({
+// 	appName: "Crossbell.io",
+// 	chains,
+// });
+
+const needsInjectedWalletFallback =
+	typeof window !== "undefined" &&
+	window.ethereum &&
+	!isMetaMask(window.ethereum) &&
+	!window.ethereum.isCoinbaseWallet &&
+	!window.ethereum.isBraveWallet;
+
+const connectors = connectorsForWallets([
+	{
+		groupName: "Popular",
+		wallets: [
+			wallet.metaMask({ chains, shimDisconnect: true }),
+			wallet.walletConnect({ chains }),
+			wallet.brave({ chains, shimDisconnect: true }),
+			wallet.coinbase({ appName: "Crossbell.io", chains }),
+			...(needsInjectedWalletFallback
+				? [wallet.injected({ chains, shimDisconnect: true })]
+				: []),
+		],
+	},
+]);
 
 const wagmiClient = createClient({
 	autoConnect: true,
@@ -56,3 +82,25 @@ const appInfo: RainbowKitProviderProps["appInfo"] = {
 };
 
 export { chains, wagmiClient, appInfo };
+
+function isMetaMask(ethereum: NonNullable<typeof window["ethereum"]>) {
+	// Logic borrowed from wagmi's MetaMaskConnector
+	// https://github.com/tmm/wagmi/blob/main/packages/core/src/connectors/metaMask.ts
+	const isMetaMask = Boolean(ethereum.isMetaMask);
+
+	if (!isMetaMask) {
+		return false;
+	}
+
+	// Brave tries to make itself look like MetaMask
+	// Could also try RPC `web3_clientVersion` if following is unreliable
+	if (ethereum.isBraveWallet && !ethereum._events && !ethereum._state) {
+		return false;
+	}
+
+	if (ethereum.isTokenary) {
+		return false;
+	}
+
+	return true;
+}
