@@ -70,8 +70,18 @@ const HeroTexts = () => (
   </div>
 );
 
+const BGImage = () => (
+  <div className={"absolute w-full h-full opacity-15"} style={{
+    backgroundImage: 'url("/images/body-bg.png")',
+    backgroundSize: "1000px 2048px",
+    filter: "blur(169px)",
+    transform: "rotate(90deg)",
+  }} />
+)
+
 const IndexHero = () => (
   <div className={"relative h-100vh flex flex-col justify-center"}>
+    <BGImage />
     <SNSIcons />
     <HeroTexts />
     <i className={"i-csb:dropdown flex self-center absolute bottom-0 w-14 h-8"} />
