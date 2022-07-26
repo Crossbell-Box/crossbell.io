@@ -7,7 +7,7 @@ import classNames from "classnames";
 import MediaCarousel from "./MediaCarousel";
 import { useRouter } from "next/router";
 import { composeCharacterHref, composeNoteHref } from "@/utils/url";
-import { useLikeNote, useUnlikeNote } from "@/utils/apis/contract";
+import { useLikeNote, useMintNote, useUnlikeNote } from "@/utils/apis/contract";
 import { copyToClipboard } from "@/utils/other";
 import { showNotification } from "@mantine/notifications";
 import Tooltip from "../Tooltip";
@@ -16,6 +16,7 @@ import { extractCharacterName } from "@/utils/metadata";
 import LoadingOverlay from "../LoadingOverlay";
 import { NextLink } from "@mantine/next";
 import { MarkdownRenderer } from "./MarkdownRenderer";
+import { useAccount } from "wagmi";
 
 function ActionButton({
 	text,
@@ -75,9 +76,7 @@ export function Note({
 	const { data: status } = useNoteStatus(note.characterId, note.noteId);
 
 	const router = useRouter();
-
 	const targetURL = composeNoteHref(note.characterId, note.noteId);
-
 	const handleClickNote = () => {
 		if (router.asPath === targetURL) return;
 
@@ -86,6 +85,9 @@ export function Note({
 
 	const likeNote = useLikeNote(note.characterId, note.noteId);
 	const unlikeNote = useUnlikeNote(note.characterId, note.noteId);
+
+	const { address } = useAccount();
+	const mintNote = useMintNote(note.characterId, note.noteId, address!);
 
 	const authorName = extractCharacterName(character);
 
@@ -151,11 +153,6 @@ export function Note({
 					<MarkdownRenderer collapsible={collapsible}>
 						{note.metadata?.content?.content ?? ""}
 					</MarkdownRenderer>
-					{/* {note.metadata?.content?.content?.split?.("\n").map((line, i) => (
-						<Text key={i} className="leading-1.25em">
-							{line}
-						</Text>
-					))} */}
 				</div>
 
 				<Space h={10} />
@@ -206,7 +203,9 @@ export function Note({
 						icon="i-csb:mint"
 						bgHoverColor="group-hover:bg-yellow/10"
 						textHoverColor="group-hover:text-yellow"
-						onClick={() => {}}
+						onClick={() => {
+							mintNote.mutate();
+						}}
 					/>
 
 					{/* share */}

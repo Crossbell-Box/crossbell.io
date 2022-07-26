@@ -1,34 +1,42 @@
-import type { BigNumberish } from "ethers";
 import { useQuery } from "@tanstack/react-query";
 import { indexer } from "@/utils/crossbell.js";
 
-const SCOPE_KEYS = ["indexer", "mintedNotes"];
+const SCOPE_KEY = ["indexer", "mintedNotes"];
 
-export function useMintedNote(
-	contractId?: BigNumberish,
-	tokenId?: BigNumberish
-) {
+export const SCOPE_KEY_MINTED_NOTE = (
+	contractAddress: string,
+	tokenId: number
+) => {
+	return [...SCOPE_KEY, "one", contractAddress, tokenId];
+};
+export function useMintedNote(contractAddress: string, tokenId: number) {
 	return useQuery(
-		[...SCOPE_KEYS, "one", contractId, tokenId],
-		() => indexer.getMintedNote(contractId!, tokenId!),
-		{ enabled: Boolean(contractId) && Boolean(tokenId) }
+		SCOPE_KEY_MINTED_NOTE(contractAddress, tokenId),
+		() => indexer.getMintedNote(contractAddress!, tokenId!),
+		{ enabled: Boolean(contractAddress) && Boolean(tokenId) }
 	);
 }
 
+export const SCOPE_KEY_MINTED_NOTE_OF_ADDRESS = (address: string) => {
+	return [...SCOPE_KEY, "address", address];
+};
 export function useMintedNotesOfAddress(address?: string) {
 	return useQuery(
-		[...SCOPE_KEYS, "list", address],
+		SCOPE_KEY_MINTED_NOTE_OF_ADDRESS(address!),
 		() => indexer.getMintedNotesOfAddress(address!),
 		{ enabled: Boolean(address) }
 	);
 }
 
-export function useMintedNotesOfNote(
-	characterId?: BigNumberish,
-	noteId?: BigNumberish
-) {
+export const SCOPE_KEY_MINTED_NOTE_OF_NOTE = (
+	characterId: number,
+	noteId: number
+) => {
+	return [...SCOPE_KEY, "list", characterId, noteId];
+};
+export function useMintedNotesOfNote(characterId?: number, noteId?: number) {
 	return useQuery(
-		[...SCOPE_KEYS, "list", characterId, noteId],
+		SCOPE_KEY_MINTED_NOTE_OF_NOTE(characterId!, noteId!),
 		() => indexer.getMintedNotesOfNote(characterId!, noteId!),
 		{ enabled: Boolean(characterId) && Boolean(noteId) }
 	);

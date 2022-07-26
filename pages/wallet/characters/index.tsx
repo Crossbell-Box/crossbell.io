@@ -3,7 +3,7 @@ import LoadingOverlay from "@/components/common/LoadingOverlay";
 import { getLayout } from "@/components/layouts/AppLayout";
 import Header from "@/components/layouts/Header";
 import { NextPageWithLayout } from "@/pages/_app";
-import { useSetPrimaryCharacterId } from "@/utils/apis/contract/character";
+import { useSetPrimaryCharacterId } from "@/utils/apis/contract";
 import { useCharacterFollowStats, useCharacters } from "@/utils/apis/indexer";
 import { extractCharacterName } from "@/utils/metadata";
 import {
