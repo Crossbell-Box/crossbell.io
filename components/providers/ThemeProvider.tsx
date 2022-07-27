@@ -4,7 +4,7 @@ import { createEmotionCache } from "@mantine/core";
 
 export const emotionCache = createEmotionCache({
 	key: "mantine",
-	// prepend: true, // https://github.com/mantinedev/mantine/issues/823#issuecomment-1065833889
+	prepend: true, // https://github.com/mantinedev/mantine/issues/823#issuecomment-1065833889
 });
 
 export default function ThemeProvider({ children }: PropsWithChildren) {

@@ -4,7 +4,7 @@ import Image from "./../Image";
 import ReactMarkdown from "react-markdown";
 import { ReactMarkdownOptions } from "react-markdown/lib/react-markdown";
 import { ipfsLinkToHttpLink } from "@/utils/ipfs";
-import { useDisclosure, useElementSize } from "@mantine/hooks";
+import { useElementSize } from "@mantine/hooks";
 import classNames from "classnames";
 
 export function MarkdownRenderer({
@@ -23,6 +23,9 @@ export function MarkdownRenderer({
 	const [collapsed, setCollapsed] = useState(collapsible);
 
 	const showReadMoreButton = collapsed && isExceeded;
+
+	const source =
+		typeof children === "string" ? children.replace(/\n/g, "  \n") : children;
 
 	return (
 		<div className="relative">
@@ -76,7 +79,7 @@ export function MarkdownRenderer({
 						}}
 						{...props}
 					>
-						{children}
+						{source}
 					</ReactMarkdown>
 				</div>
 			</div>
