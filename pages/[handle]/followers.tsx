@@ -18,9 +18,11 @@ interface FollowCharacterCardFromIdProps {
   characterId: number;
 }
 const FollowCharacterCardFromId = ({ characterId }: FollowCharacterCardFromIdProps) => {
-  const { data: targetCharacter } = useCharacter(characterId);
+  const { data: targetCharacter, isLoading } = useCharacter(characterId);
 
-  return (
+  return isLoading ? (
+    <FollowCharacterSkeleton />
+  ) : (
     <FollowCharacterCard
       character={targetCharacter!}
     />
@@ -39,8 +41,8 @@ const Followers = () => {
         <Fragment key={i}>
           {page.list.map((link, i) =>
             <FollowCharacterCardFromId
-              key={link.toCharacterId}
-              characterId={link.toCharacterId!}
+              key={link.fromCharacterId}
+              characterId={link.fromCharacterId!}
             />
           )}
         </Fragment>

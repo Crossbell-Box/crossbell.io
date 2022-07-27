@@ -71,13 +71,15 @@ const FollowCharacterRawCard = ({ character }: FollowCharacterRawCardProps) => {
       </div>
       <div className={"flex w-24"}>
         {isLoadingFollowRelation ? (
-          <Button radius={"md"} className={"w-full"} color={"dark"} loading={true} />
+          <Button radius={"md"} fullWidth p={0} color={"dark"} loading>
+            Checking
+          </Button>
         ) : followRelation?.isFollowing ? (
-          <Button radius={"md"} className={"w-full"} variant={"outline"} color={"dark"} onClick={handleUnfollow}>
+          <Button radius={"md"} fullWidth p={0} variant={"outline"} color={"dark"} loading={unfollow.isLoading} onClick={handleUnfollow}>
             Following
           </Button>
         ) : (
-          <Button radius={"md"} className={"w-full"} color={"dark"} onClick={handleFollow}>
+          <Button radius={"md"} fullWidth p={0} color={"dark"} loading={follow.isLoading} onClick={handleFollow}>
             Follow
           </Button>
         )}

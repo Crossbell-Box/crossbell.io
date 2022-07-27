@@ -79,7 +79,6 @@ const Page: NextPageWithLayout = () => {
     <div>
       <Header hasBackButton>{headerText}</Header>
 
-
       <div className={"flex flex-col mt-6 mb-4"}>
         <div className={"flex flex-row border-bottom border-b-1px border-[#E1E8F7] w-full justify-around z-1"}>
           <div className={"p-2 cursor-pointer"} onClick={() => router.push(`${router.asPath}/../followers`)}>
