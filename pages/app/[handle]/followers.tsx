@@ -10,8 +10,7 @@ import { extractCharacterName } from "@/utils/metadata";
 import { useCharacterRouterQuery } from "@/utils/url";
 import { Fragment } from "react";
 import { useRouter } from "next/router";
-import FollowCharacterCard from "@/components/card/FollowCharacterCard";
-import { FeedSkeleton } from "@/components/common/Feed";
+import FollowCharacterCard, { FollowCharacterSkeleton } from "@/components/card/FollowCharacterCard";
 import { useFollowerCharactersOfCharacter } from "@/utils/apis/indexer/follow";
 import { Text } from "@mantine/core";
 
@@ -49,7 +48,7 @@ const Followers = () => {
       {isLoading &&
         Array(10)
           .fill(0)
-          .map((_, i) => <FeedSkeleton key={i}/>)}
+          .map((_, i) => <FollowCharacterSkeleton key={i}/>)}
 
       {/* load more */}
       <LoadMore
@@ -60,7 +59,7 @@ const Followers = () => {
         {Array(3)
           .fill(0)
           .map((_, i) => (
-            <FeedSkeleton key={i}/>
+            <FollowCharacterSkeleton key={i}/>
           ))}
       </LoadMore>
     </>

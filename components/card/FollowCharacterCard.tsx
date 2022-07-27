@@ -1,4 +1,4 @@
-import { Button, Text } from "@mantine/core";
+import { Button, Skeleton, Text } from "@mantine/core";
 import type { CharacterEntity } from "crossbell.js";
 import { useFollowCharacter, useUnfollowCharacter } from "@/utils/apis/contract";
 import { useModals } from "@mantine/modals";
@@ -64,7 +64,7 @@ const FollowCharacterRawCard = ({ character }: FollowCharacterRawCardProps) => {
           </Text>
         </div>
         <div>
-          <Text>
+          <Text lineClamp={2}>
             {character.bio}
           </Text>
         </div>
@@ -98,6 +98,19 @@ const FollowCharacterCard = ({ character }: FollowCharacterCardProps) => (
     name: character.metadata?.content?.name || '',
     bio: character.metadata?.content?.bio || '',
   }} />
-)
+);
+
+export const FollowCharacterSkeleton = () => (
+  <div className={"flex flex-row w-full items-center gap-4 p-4"}>
+    <Skeleton circle height={60} width={60} />
+    <div className={"flex flex-col flex-1"}>
+      <Skeleton height={16} width={60} />
+      <Skeleton height={14} width={72} mt={4} />
+      <Skeleton height={12} mt={4} />
+      <Skeleton height={12} mt={2} />
+    </div>
+    <Skeleton height={30} width={96} />
+  </div>
+);
 
 export default FollowCharacterCard;

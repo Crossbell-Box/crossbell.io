@@ -10,10 +10,8 @@ import { extractCharacterName } from "@/utils/metadata";
 import { useCharacterRouterQuery } from "@/utils/url";
 import { Fragment } from "react";
 import { useRouter } from "next/router";
-import Tabs from "@/components/common/Tabs";
-import FollowCharacterCard from "@/components/card/FollowCharacterCard";
-import {FeedSkeleton} from "@/components/common/Feed";
-import {useFollowerCharactersOfCharacter, useFollowingCharactersOfCharacter} from "@/utils/apis/indexer/follow";
+import FollowCharacterCard, { FollowCharacterSkeleton } from "@/components/card/FollowCharacterCard";
+import { useFollowingCharactersOfCharacter } from "@/utils/apis/indexer/follow";
 import {Text} from "@mantine/core";
 
 interface FollowCharacterCardFromIdProps {
@@ -50,7 +48,7 @@ const Followings = () => {
       {isLoading &&
         Array(10)
           .fill(0)
-          .map((_, i) => <FeedSkeleton key={i}/>)}
+          .map((_, i) => <FollowCharacterSkeleton key={i}/>)}
 
       {/* load more */}
       <LoadMore
@@ -61,7 +59,7 @@ const Followings = () => {
         {Array(3)
           .fill(0)
           .map((_, i) => (
-            <FeedSkeleton key={i}/>
+            <FollowCharacterSkeleton key={i}/>
           ))}
       </LoadMore>
     </>
