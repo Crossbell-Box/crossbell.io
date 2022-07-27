@@ -3,7 +3,6 @@ import {
 	Button,
 	ButtonProps,
 	createPolymorphicComponent,
-	Divider,
 	LoadingOverlay,
 	Menu,
 	MenuItemProps,
@@ -15,7 +14,7 @@ import classNames from "classnames";
 import styles from "./styles.module.css";
 import Avatar from "../Avatar";
 import { useDisclosure } from "@mantine/hooks";
-import { useAccount, useDisconnect } from "wagmi";
+import { useAccount, useBalance, useDisconnect } from "wagmi";
 import {
 	useCharacters,
 	useCurrentCharacter,
@@ -160,6 +159,11 @@ function WalletButton() {
 
 	const { disconnect } = useDisconnect();
 
+	const { address } = useAccount();
+	const { data, isLoading: isLoadingBalance } = useBalance({
+		addressOrName: address,
+	});
+
 	return (
 		<>
 			<Modal
@@ -186,10 +190,23 @@ function WalletButton() {
 				</Menu.Target>
 
 				<Menu.Dropdown className="w-full">
+					<Menu.Label>$CSB Balance</Menu.Label>
+					<MenuItem>
+						<div className="flex items-center">
+							<Text className="i-csb:logo text-lg" color="black" />
+							<Space w={5} />
+							<Text className="font-600">
+								{isLoadingBalance ? "..." : data?.formatted}
+							</Text>
+						</div>
+					</MenuItem>
+
+					<Menu.Divider />
+
 					<Menu.Label>Characters</Menu.Label>
 					<AccountList />
 
-					<Divider />
+					<Menu.Divider />
 
 					<MenuItem component={NextLink} href={WalletCharacterManageHref}>
 						Manage Characters

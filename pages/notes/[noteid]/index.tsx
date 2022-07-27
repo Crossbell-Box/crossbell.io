@@ -22,7 +22,7 @@ const Page: NextPageWithLayout<PageProps> = (props) => {
 	const { characterId, noteId } = useNoteRouterQuery();
 
 	const { data: note } = useNote(characterId, noteId, {
-		// initialData: props.note,
+		initialData: props.note,
 	});
 
 	const {
@@ -89,19 +89,19 @@ const Page: NextPageWithLayout<PageProps> = (props) => {
 
 Page.getLayout = getLayout;
 
-// export const getServerSideProps: GetServerSideProps<PageProps> = async (
-// 	ctx
-// ) => {
-// 	const { noteid } = ctx.query;
-// 	const { characterId, noteId } = decomposeNoteId(noteid as string);
+export const getServerSideProps: GetServerSideProps<PageProps> = async (
+	ctx
+) => {
+	const { noteid } = ctx.query;
+	const { characterId, noteId } = decomposeNoteId(noteid as string);
 
-// 	const note = await fetchNote(characterId, noteId);
+	const note = await fetchNote(characterId, noteId);
 
-// 	return {
-// 		props: {
-// 			note,
-// 		},
-// 	};
-// };
+	return {
+		props: {
+			note,
+		},
+	};
+};
 
 export default Page;

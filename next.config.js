@@ -7,17 +7,6 @@ const nextConfig = {
 		dangerouslyAllowSVG: true,
 		contentSecurityPolicy: "default-src 'self'; script-src 'none'; sandbox;",
 	},
-	async rewrites() {
-		return [
-			// { source: "/feed", destination: "/app/feed" },
-			// { source: "/sync", destination: "/app/sync" },
-			// { source: "/shop", destination: "/app/shop" },
-			// { source: "/:handle*", destination: "/app/:handle*" },
-			// { source: "/notes/:id*", destination: "/app/notes/:id*" },
-			// { source: "/wallet/:slug*", destination: "/app/wallet/:slug*" },
-			{ source: "/:slug*", destination: "/app/:slug*" },
-		];
-	},
 	webpack: (config) => {
 		config.plugins.push(UnoCSS());
 		// config.cache = false;

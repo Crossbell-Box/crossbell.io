@@ -20,7 +20,7 @@ import {
 	useCreateCharacter,
 	useSetCharacterHandle,
 	useSetCharacterMetadata,
-} from "@/utils/apis/contract/character";
+} from "@/utils/apis/contract";
 import LoadingOverlay from "../common/LoadingOverlay";
 import { useRouter } from "next/router";
 import { composeCharacterHref } from "@/utils/url";
