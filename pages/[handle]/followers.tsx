@@ -80,7 +80,7 @@ const Page: NextPageWithLayout = () => {
       <Header hasBackButton>{headerText}</Header>
 
       <div className={"flex flex-col mt-6 mb-4"}>
-        <div className={"flex flex-row border-bottom border-b-1px border-[#E1E8F7] w-full justify-around"}>
+        <div className={"flex flex-row border-bottom border-b-1px border-[#E1E8F7] w-full justify-around z-1"}>
           <div className={"p-2 border-b-2px border-[#FFCF55]"}>
             <Text size={"lg"} weight={600}>
               Followers
