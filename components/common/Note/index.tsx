@@ -97,7 +97,9 @@ export function Note({
 			onClick={handleClickNote}
 		>
 			<LoadingOverlay
-				visible={likeNote.isLoading || unlikeNote.isLoading}
+				visible={
+					likeNote.isLoading || unlikeNote.isLoading || mintNote.isLoading
+				}
 				description="Loading..."
 				global
 			/>
@@ -201,10 +203,13 @@ export function Note({
 						text={status?.mintCount}
 						label="Mint"
 						icon="i-csb:mint"
+						color={status?.isMinted ? "text-yellow" : "text-dimmed"}
 						bgHoverColor="group-hover:bg-yellow/10"
 						textHoverColor="group-hover:text-yellow"
 						onClick={() => {
-							mintNote.mutate();
+							if (!status?.isMinted) {
+								mintNote.mutate();
+							}
 						}}
 					/>
 

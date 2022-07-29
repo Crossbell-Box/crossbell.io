@@ -87,42 +87,52 @@ export function useNoteStatus(characterId: number, noteId: number) {
 	return useQuery(
 		SCOPE_KEY_NOTE_STATUS(characterId, noteId),
 		async () => {
-			const [commentCount, likeCount, mintCount, isLiked] = await Promise.all([
-				// comment count
-				indexer.getNotes({
-					toCharacterId: characterId,
-					toNoteId: noteId,
-					limit: 0,
-				}),
-				// like count
-				indexer.getBacklinksOfNote(characterId, noteId, {
-					linkType: LinkTypes.like,
-					limit: 0,
-				}),
-				// mint count
-				indexer.getMintedNotesOfNote(characterId, noteId, {
-					limit: 0,
-				}),
-				// liked by me
-				currentCharacter?.characterId
-					? indexer
-							.getLinks(currentCharacter?.characterId, {
-								linkType: LinkTypes.like,
-								toCharacterId: characterId,
-								toNoteId: noteId,
-								limit: 0,
-							})
-							.then((res) => res.count > 0)
-					: false,
-				// minted by me
-				// address ? indexer.getMintedNotesOfNote(address, { limit: 0 }) : false,
-			]);
+			const [commentCount, likeCount, mintCount, isLiked, isMinted] =
+				await Promise.all([
+					// comment count
+					indexer.getNotes({
+						toCharacterId: characterId,
+						toNoteId: noteId,
+						limit: 0,
+					}),
+					// like count
+					indexer.getBacklinksOfNote(characterId, noteId, {
+						linkType: LinkTypes.like,
+						limit: 0,
+					}),
+					// mint count
+					indexer.getMintedNotesOfNote(characterId, noteId, {
+						limit: 0,
+					}),
+					// liked by me
+					currentCharacter?.characterId
+						? indexer
+								.getLinks(currentCharacter?.characterId, {
+									linkType: LinkTypes.like,
+									toCharacterId: characterId,
+									toNoteId: noteId,
+									limit: 0,
+								})
+								.then((res) => res.count > 0)
+						: false,
+					// minted by me
+					address
+						? indexer
+								.getMintedNotesOfAddress(address, {
+									limit: 0,
+									noteCharacterId: characterId,
+									noteId: noteId,
+								})
+								.then((res) => res.count > 0)
+						: false,
+				]);
 
 			return {
 				commentCount: commentCount.count,
 				likeCount: likeCount.count,
 				mintCount: mintCount.count,
 				isLiked,
+				isMinted,
 			};
 		},
 		{ enabled: Boolean(characterId && noteId && currentCharacter?.characterId) }
