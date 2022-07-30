@@ -6,17 +6,16 @@ import { useCharacter, useNoteStatus } from "@/utils/apis/indexer";
 import classNames from "classnames";
 import MediaCarousel from "./MediaCarousel";
 import { useRouter } from "next/router";
-import { composeCharacterHref, composeNoteHref } from "@/utils/url";
+import { composeNoteHref } from "@/utils/url";
 import { useLikeNote, useMintNote, useUnlikeNote } from "@/utils/apis/contract";
 import { copyToClipboard } from "@/utils/other";
 import { showNotification } from "@mantine/notifications";
 import Tooltip from "../Tooltip";
-import Link from "next/link";
-import { extractCharacterName } from "@/utils/metadata";
 import LoadingOverlay from "../LoadingOverlay";
 import { NextLink } from "@mantine/next";
 import { MarkdownRenderer } from "./MarkdownRenderer";
 import { useAccount } from "wagmi";
+import { CharacterName } from "../Character";
 
 function ActionButton({
 	text,
@@ -89,8 +88,6 @@ export function Note({
 	const { address } = useAccount();
 	const mintNote = useMintNote(note.characterId, note.noteId, address!);
 
-	const authorName = extractCharacterName(character);
-
 	return (
 		<div
 			className="flex flex-row w-full py-3 px-3 border-b border-gray/20 bg-hover cursor-pointer"
@@ -115,17 +112,7 @@ export function Note({
 			<div className="flex-grow">
 				{/* username */}
 				<div className="flex items-baseline">
-					<Link href={composeCharacterHref(character?.handle!)} passHref>
-						<Text
-							color="dark"
-							weight="bolder"
-							component="a"
-							variant="link"
-							onClick={(e: any) => e.stopPropagation()}
-						>
-							{authorName}
-						</Text>
-					</Link>
+					<CharacterName characterId={character?.characterId} />
 
 					<Space w={3} />
 

@@ -13,13 +13,13 @@ import { useRouter } from "next/router";
 import FollowCharacterCard, {
 	FollowCharacterSkeleton,
 } from "@/components/card/FollowCharacterCard";
-import { useFollowerCharactersOfCharacter } from "@/utils/apis/indexer/follow";
+import { useFollowingCharactersOfCharacter } from "@/utils/apis/indexer/follow";
 import { Text } from "@mantine/core";
 
-const Followers = () => {
+const Followings = () => {
 	const { data: character } = useCurrentCharacter();
 	const { data, hasNextPage, fetchNextPage, isFetchingNextPage, isLoading } =
-		useFollowerCharactersOfCharacter(character?.characterId);
+		useFollowingCharactersOfCharacter(character?.characterId);
 
 	return (
 		<>
@@ -28,8 +28,8 @@ const Followers = () => {
 				<Fragment key={i}>
 					{page.list.map((link, i) => (
 						<FollowCharacterCard
-							key={link.fromCharacterId}
-							character={link.fromCharacter!}
+							key={link.toCharacterId}
+							character={link.toCharacter!}
 						/>
 					))}
 				</Fragment>
@@ -70,19 +70,19 @@ const Page: NextPageWithLayout = () => {
 
 			<div className="flex flex-col mt-6 mb-4">
 				<div className="flex flex-row border-bottom border-b-1px border-[#E1E8F7] w-full justify-around z-1">
-					<div className="p-2 border-b-2px border-[#FFCF55]">
-						<Text size="lg" weight={600}>
-							Followers
-						</Text>
-					</div>
 					<div
 						className="p-2 cursor-pointer"
-						onClick={() => router.push(`${router.asPath}/../following`)}
+						onClick={() => router.push(`${router.asPath}/../followers`)}
 					>
-						<Text size="lg">Following</Text>
+						<Text size={"lg"}>Followers</Text>
+					</div>
+					<div className="p-2 border-b-2px border-[#FFCF55]">
+						<Text size="lg" weight={600}>
+							Following
+						</Text>
 					</div>
 				</div>
-				<Followers />
+				<Followings />
 			</div>
 		</div>
 	);

@@ -23,7 +23,7 @@ import {
 } from "@/utils/apis/contract";
 import { NextLink } from "@mantine/next";
 import { composeWalletCharacterEditHref } from "@/utils/url";
-import {useRouter} from "next/router";
+import { useRouter } from "next/router";
 
 // used in character page to display the profile
 export default function CharacterProfile({
@@ -98,8 +98,16 @@ export default function CharacterProfile({
 				{/* following and followers */}
 				<div className="flex flex-row">
 					{[
-						{ count: followStatus?.followingCount, label: "Following", to: "/followings" },
-						{ count: followStatus?.followersCount, label: "Followers", to: "/followers"  },
+						{
+							count: followStatus?.followingCount,
+							label: "Following",
+							to: "/following",
+						},
+						{
+							count: followStatus?.followersCount,
+							label: "Followers",
+							to: "/followers",
+						},
 					].map((el) => (
 						<div
 							className="mr-10 bg-hover cursor-pointer px-1 py-1"
