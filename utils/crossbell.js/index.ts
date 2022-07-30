@@ -5,7 +5,7 @@ const isProductionServer =
 	typeof window === "undefined" && process.env.NODE_ENV === "production";
 
 export const indexer = new Indexer(
-	isProductionServer ? "https://indexer.crossbell.io" : undefined
+	isProductionServer ? "http://indexer-v1-api.crossbell:3000/v1" : undefined
 );
 
 let contract: Contract;
