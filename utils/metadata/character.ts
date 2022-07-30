@@ -1,3 +1,5 @@
+import { CharacterEntity } from "crossbell.js";
+
 export function extractCharacterName(
 	character: CharacterEntity | null | undefined,
 	{ fallbackToHandle }?: { fallbackToHandle: true }
