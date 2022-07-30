@@ -10,6 +10,7 @@ import {
 } from "@/utils/apis/indexer";
 import { extractCharacterName } from "@/utils/metadata";
 import { useCharacterRouterQuery } from "@/utils/url";
+import { GetServerSideProps } from "next";
 import { Fragment } from "react";
 
 const Page: NextPageWithLayout = () => {
@@ -72,5 +73,19 @@ function NotesList() {
 }
 
 Page.getLayout = getLayout;
+
+export const getServerSideProps: GetServerSideProps = async (ctx) => {
+	const isValidHandleUrl =
+		typeof ctx.query.handle === "string" && ctx.query.handle.startsWith("@");
+	if (!isValidHandleUrl) {
+		return {
+			notFound: true,
+		};
+	}
+
+	return {
+		props: {},
+	};
+};
 
 export default Page;

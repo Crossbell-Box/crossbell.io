@@ -19,9 +19,14 @@ const Page: NextPageWithLayout = () => {
 			<Header>Feed</Header>
 
 			<Tabs
-				tabs={[{ label: "Home", content: <Home /> }, { label: "Explore" }]}
+				tabs={[
+					{ label: "Home", route: "/feed" },
+					{ label: "Explore", route: "/explore" },
+				]}
 				defaultValue="Home"
 			/>
+
+			<Home />
 		</div>
 	);
 };
