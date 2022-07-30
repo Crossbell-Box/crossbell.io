@@ -5,17 +5,67 @@ import { getLayout } from "@/components/layouts/AppLayout";
 import Header from "@/components/layouts/Header";
 import { CommentTextarea } from "@/components/ui/CommentTextarea";
 import type { NextPageWithLayout } from "@/pages/_app";
-import { fetchNote, useNote, useNotesForNote } from "@/utils/apis/indexer";
-import { decomposeNoteId, useNoteRouterQuery } from "@/utils/url";
-import { NoteEntity } from "crossbell.js";
+import {
+	fetchCharacter,
+	fetchNote,
+	useNote,
+	useNotesForNote,
+} from "@/utils/apis/indexer";
+import {
+	composeCharacterHref,
+	composeNoteHref,
+	decomposeNoteId,
+	getOrigin,
+	useNoteRouterQuery,
+} from "@/utils/url";
+import { CharacterEntity, NoteEntity } from "crossbell.js";
 import type { GetServerSideProps } from "next";
 import { Divider } from "@mantine/core";
 import { NextSeo } from "next-seo";
+import { getValidAttachments } from "@/utils/metadata";
+
+const SEO = ({
+	note,
+	character,
+}: {
+	note?: NoteEntity | null;
+	character?: CharacterEntity | null;
+}) => {
+	const origin = getOrigin();
+	const images = getValidAttachments(note?.metadata?.content?.attachments, {
+		allowedMediaTypes: ["image"],
+		withAddressOnly: true,
+	});
+
+	return (
+		<NextSeo
+			openGraph={{
+				type: "article",
+				title:
+					note?.metadata?.content?.title ??
+					note?.metadata?.content?.content?.slice(0, 50),
+				description: note?.metadata?.content?.content,
+				url: origin + composeNoteHref(note?.characterId!, note?.noteId!),
+				article: {
+					publishedTime: note?.createdAt,
+					modifiedTime: note?.updatedAt,
+					authors: [origin + composeCharacterHref(character?.handle!)],
+					tags: note?.metadata?.content?.tags,
+				},
+				images: images.map((i) => ({
+					url: i.address!,
+					type: i.mime_type,
+				})),
+			}}
+		/>
+	);
+};
 
 // noteid format: {characterId}-{noteId}
 
 type PageProps = {
 	note: NoteEntity | null;
+	character: CharacterEntity | null;
 };
 
 const Page: NextPageWithLayout<PageProps> = (props) => {
@@ -34,17 +84,7 @@ const Page: NextPageWithLayout<PageProps> = (props) => {
 
 	return (
 		<div>
-			<NextSeo
-				openGraph={{
-					type: "article",
-					title:
-						note?.metadata?.content?.title ??
-						note?.metadata?.content?.content?.slice(0, 50),
-					description: note?.metadata?.content?.content,
-
-					// TODO: more https://github.com/garmeeh/next-seo#article
-				}}
-			/>
+			<SEO note={note} character={props.character} />
 
 			<Header hasBackButton>Note</Header>
 
@@ -95,11 +135,23 @@ export const getServerSideProps: GetServerSideProps<PageProps> = async (
 	const { noteid } = ctx.query;
 	const { characterId, noteId } = decomposeNoteId(noteid as string);
 
-	const note = await fetchNote(characterId, noteId);
+	const [note, character] = (
+		await Promise.allSettled([
+			fetchNote(characterId, noteId),
+			fetchCharacter(characterId),
+		])
+	).map((res) => {
+		if (res.status === "fulfilled") {
+			return res.value;
+		} else {
+			return null;
+		}
+	}) as [NoteEntity | null, CharacterEntity | null];
 
 	return {
 		props: {
 			note,
+			character,
 		},
 	};
 };

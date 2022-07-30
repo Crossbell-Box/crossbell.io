@@ -1,9 +1,27 @@
 import { composeNoteId } from "./param";
 
+/**
+ * The origin of the current page.
+ * @returns "https://indexer.crossbell.io" or "http://localhost:3000"
+ */
+export const getOrigin = () => {
+	if (process.env.NODE_ENV === "production") {
+		return "https://indexer.crossbell.io";
+	} else {
+		return "http://localhost:3000";
+	}
+};
+
+/**
+ * @example "/note/10-38"
+ */
 export const composeNoteHref = (characterId: number, noteId: number) => {
 	return `/notes/${composeNoteId(characterId, noteId)}`;
 };
 
+/**
+ * @example "@song"
+ */
 export const composeCharacterHref = (handle: string) => {
 	if (handle) {
 		if (!handle.startsWith("@")) {
@@ -18,6 +36,10 @@ export const composeCharacterHref = (handle: string) => {
 
 export const WalletCharacterManageHref = `/wallet/characters`;
 export const WalletCharacterNewHref = `/wallet/characters/new`;
+
+/**
+ * @example "/wallet/characters/10"
+ */
 export const composeWalletCharacterEditHref = (characterId: number) => {
 	return `/wallet/characters/${characterId}`;
 };

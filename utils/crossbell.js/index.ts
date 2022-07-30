@@ -1,7 +1,12 @@
 import { Indexer, Contract } from "crossbell.js";
 import { useAccount, useProvider } from "wagmi";
 
-export const indexer = new Indexer();
+const isProductionServer =
+	typeof window === "undefined" && process.env.NODE_ENV === "production";
+
+export const indexer = new Indexer(
+	isProductionServer ? "https://indexer.crossbell.io" : undefined
+);
 
 let contract: Contract;
 export const useContract = () => {

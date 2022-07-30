@@ -5,68 +5,16 @@ import Image from "../Image";
 import { useCallback, useEffect, useRef, useState } from "react";
 import { Space } from "@mantine/core";
 import classNames from "classnames";
-
-export type MediaType = "image" | "video" | "audio" | "model" | "pdf" | "html";
-
-export function mimeTypeToMediaType(mimeType: string): MediaType | null {
-	if (mimeType.startsWith("image")) {
-		return "image";
-	}
-
-	if (mimeType.startsWith("video")) {
-		return "video";
-	}
-
-	if (mimeType.startsWith("audio") || mimeType.endsWith("ogg")) {
-		return "audio";
-	}
-
-	if (mimeType.startsWith("model")) {
-		return "model";
-	}
-
-	if (mimeType.startsWith("application/pdf")) {
-		return "pdf";
-	}
-
-	if (mimeType.startsWith("text/html")) {
-		return "html";
-	}
-
-	return null;
-}
-
-function notEmpty<TValue>(value: TValue | null | undefined): value is TValue {
-	return value !== null && value !== undefined;
-}
+import { getValidAttachments, mimeTypeToMediaType } from "@/utils/metadata";
 
 export default function MediaCarousel({
 	attachments = [],
 }: {
 	attachments: NoteMetadata["attachments"];
 }) {
-	const validAttachments = attachments
-		.filter((a) => a.mime_type && a.address)
-		.map((a) => {
-			const mediaType = mimeTypeToMediaType(a.mime_type!);
-			if (!mediaType) {
-				return null;
-			}
-
-			if (a.address) {
-				const src = ipfsLinkToHttpLink(a.address);
-				if (mediaType) {
-					return {
-						...a,
-						src,
-						mediaType,
-					};
-				}
-			}
-
-			return null;
-		})
-		.filter(notEmpty);
+	const validAttachments = getValidAttachments(attachments, {
+		withAddressOnly: true,
+	});
 
 	const isMultiple = validAttachments.length > 1;
 

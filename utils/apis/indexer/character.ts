@@ -21,15 +21,19 @@ export function useCharacters(address?: string) {
 }
 
 // get a single character by id
-
 export const SCOPE_KEY_CHARACTER = (characterId?: number | null) => {
 	return [...SCOPE_KEY, "one", characterId];
+};
+export const fetchCharacter = async (characterId: number) => {
+	return indexer.getCharacter(characterId);
 };
 export function useCharacter(characterId?: number | null) {
 	return useQuery(
 		SCOPE_KEY_CHARACTER(characterId),
-		() => indexer.getCharacter(characterId!),
-		{ enabled: Boolean(characterId) }
+		() => fetchCharacter(characterId!),
+		{
+			enabled: Boolean(characterId),
+		}
 	);
 }
 
