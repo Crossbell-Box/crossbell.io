@@ -1,5 +1,5 @@
 import { ActionIcon, Space, Text, Title } from "@mantine/core";
-import { PropsWithChildren } from "react";
+import React, { PropsWithChildren } from "react";
 import { useRouter } from "next/router";
 import classNames from "classnames";
 import { useWindowScroll } from "@mantine/hooks";
@@ -7,8 +7,10 @@ import { useWindowScroll } from "@mantine/hooks";
 export default function Header({
 	children,
 	hasBackButton = false,
+	renderBottom,
 }: PropsWithChildren<{
 	hasBackButton?: boolean;
+	renderBottom?: () => React.ReactNode;
 }>) {
 	const router = useRouter();
 
@@ -37,7 +39,7 @@ export default function Header({
 
 			<header
 				className={classNames(
-					"sticky top-0 my-0 z-100 flex items-center relative transition-all duration-200",
+					"sticky top-0 my-0 z-100 flex items-center relative transition-all duration-200 min-h-50px px-3",
 					{
 						"bg-white/96 backdrop-blur": scrolled,
 					}
@@ -53,10 +55,16 @@ export default function Header({
 					</ActionIcon>
 				)}
 				<Space w={8} />
-				<Title order={2} className="py-3 font-semibold text-size-4xl">
-					{children}
-				</Title>
+				{typeof children === "string" ? (
+					<Title order={2} className="py-3 font-semibold text-size-4xl">
+						{children}
+					</Title>
+				) : (
+					children
+				)}
 			</header>
+
+			{renderBottom && renderBottom()}
 		</>
 	);
 }

@@ -1,4 +1,5 @@
 import { useRouter } from "next/router";
+import { composeSearchHref } from "./href";
 import { decomposeNoteId } from "./param";
 
 export function useCharacterRouterQuery() {
@@ -31,5 +32,17 @@ export function useEditCharacterRouterQuery() {
 
 	return {
 		characterId,
+	};
+}
+
+export function useSearchRouterQuery() {
+	const router = useRouter();
+	const q = router.query.q as string;
+	const type =
+		(router.query.f as Parameters<typeof composeSearchHref>[1]) ?? "all";
+
+	return {
+		q,
+		type,
 	};
 }

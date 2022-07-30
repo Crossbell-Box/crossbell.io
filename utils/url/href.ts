@@ -43,3 +43,13 @@ export const WalletCharacterNewHref = `/wallet/characters/new`;
 export const composeWalletCharacterEditHref = (characterId: number) => {
 	return `/wallet/characters/${characterId}`;
 };
+
+/**
+ * @example "/search?q=something&f=all"
+ */
+export const composeSearchHref = (
+	q: string,
+	type: "all" | "characters" | "treasures" | "notes" = "all"
+) => {
+	return `/search?q=${encodeURIComponent(q)}&f=${type}`;
+};
