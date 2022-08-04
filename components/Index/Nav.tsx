@@ -4,6 +4,7 @@ import { Menu, Button, Space, Title } from "@mantine/core";
 import ConnectButton from "@/components/common/ConnectButton";
 import React from "react";
 import { useCurrentCharacter } from "@/utils/apis/indexer";
+import SearchInput from "@/components/common/Input/SearchInput";
 
 const NavLinks = () => {
   const {data: character} = useCurrentCharacter();
@@ -47,8 +48,7 @@ const IndexNav = () => (
       </div>
       <div className={"flex-row items-center gap-6 hidden md:flex"}>
         <div>
-          SearchBar
-          {/*TODO: SearchBar*/}
+          <SearchInput />
         </div>
         <div className={"flex relative"}>
           <ConnectButton/>
