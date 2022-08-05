@@ -2,7 +2,7 @@ import Link from "next/link";
 import Logo from "@/components/common/Logo";
 import { Menu, Button, Space, Title } from "@mantine/core";
 import ConnectButton from "@/components/common/ConnectButton";
-import React from "react";
+import React, { useState } from "react";
 import { useCurrentCharacter } from "@/utils/apis/indexer";
 import SearchInput from "@/components/common/Input/SearchInput";
 
@@ -26,6 +26,47 @@ const NavLinks = () => {
     </>
   );
 }
+
+const MobileMenu = () => (
+  <Menu shadow={"md"}>
+    <Menu.Target>
+      <Button size={"xs"}>
+        <i className={"i-csb:more"} />
+      </Button>
+    </Menu.Target>
+    <Menu.Dropdown>
+      <Menu.Item icon={<i className={"i-csb:feed"} />}>
+        <Link href={"/feed"}>
+          Feed
+        </Link>
+      </Menu.Item>
+      <Menu.Item icon={<i className={"i-csb:shop"} />}>
+        <Link href={"/shop"}>
+          Shop
+        </Link>
+      </Menu.Item>
+      <Menu.Item icon={<i className={"i-csb:sync"} />}>
+        <Link href={"/sync"}>
+          Sync
+        </Link>
+      </Menu.Item>
+      <Menu.Item icon={<i className={"i-csb:character"} />}>
+        <Link href={"/character"}>
+          Character
+        </Link>
+      </Menu.Item>
+      <Menu.Divider />
+      <Menu.Item>
+        <SearchInput />
+      </Menu.Item>
+      <Menu.Item>
+        <div className={"flex relative"}>
+          <ConnectButton />
+        </div>
+      </Menu.Item>
+    </Menu.Dropdown>
+  </Menu>
+);
 
 const IndexNav = () => (
   <div className={"flex fixed top-0 bg-white w-full px-8 z-36 py-2"}>
@@ -56,47 +97,7 @@ const IndexNav = () => (
       </div>
       <div className={"flex md:hidden"}>
         {/*Mobile Menu*/}
-        <Menu shadow={"md"}>
-          <Menu.Target>
-            <Button size={"xs"}>
-              <i className={"i-csb:more"} />
-            </Button>
-          </Menu.Target>
-          <Menu.Dropdown>
-            <Menu.Item icon={<i className={"i-csb:feed"} />}>
-              <Link href={"/feed"}>
-                Feed
-              </Link>
-            </Menu.Item>
-            <Menu.Item icon={<i className={"i-csb:shop"} />}>
-              <Link href={"/shop"}>
-                Shop
-              </Link>
-            </Menu.Item>
-            <Menu.Item icon={<i className={"i-csb:sync"} />}>
-              <Link href={"/sync"}>
-                Sync
-              </Link>
-            </Menu.Item>
-            <Menu.Item icon={<i className={"i-csb:character"} />}>
-              <Link href={"/character"}>
-                Character
-              </Link>
-            </Menu.Item>
-            <Menu.Divider />
-            <Menu.Item>
-              <div>
-                SearchBar
-                {/*TODO: SearchBar*/}
-              </div>
-            </Menu.Item>
-            <Menu.Item>
-              <div className={"flex relative"}>
-                <ConnectButton/>
-              </div>
-            </Menu.Item>
-          </Menu.Dropdown>
-        </Menu>
+        <MobileMenu />
       </div>
     </div>
   </div>
