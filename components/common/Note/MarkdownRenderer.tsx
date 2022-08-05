@@ -6,6 +6,7 @@ import { ReactMarkdownOptions } from "react-markdown/lib/react-markdown";
 import { ipfsLinkToHttpLink } from "@/utils/ipfs";
 import { useElementSize } from "@mantine/hooks";
 import classNames from "classnames";
+import rehypeRaw from "rehype-raw";
 
 export function MarkdownRenderer({
 	children,
@@ -31,7 +32,7 @@ export function MarkdownRenderer({
 		<div className="relative">
 			<div
 				className={classNames(
-					"markdown-renderer overflow-hidden transition-all-200",
+					"markdown-renderer overflow-hidden transition-all-200 break-all",
 					{
 						"max-h-500px": collapsed,
 						"max-h-none": !collapsed,
@@ -77,6 +78,7 @@ export function MarkdownRenderer({
 								);
 							},
 						}}
+						rehypePlugins={[rehypeRaw]}
 						{...props}
 					>
 						{source}
