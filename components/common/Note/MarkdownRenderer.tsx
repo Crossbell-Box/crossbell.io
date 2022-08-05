@@ -7,6 +7,9 @@ import { ipfsLinkToHttpLink } from "@/utils/ipfs";
 import { useElementSize } from "@mantine/hooks";
 import classNames from "classnames";
 import rehypeRaw from "rehype-raw";
+import remarkGfm from "remark-gfm";
+import { useLinkPreview } from "@/utils/apis/utils/link-preview";
+import LinkPreviewCard, {LinkPreviewSkeleton} from "@/components/card/LinkPreviewCard";
 
 export function MarkdownRenderer({
 	children,
@@ -77,8 +80,23 @@ export function MarkdownRenderer({
 									</div>
 								);
 							},
+							a: ({node, ...props}) => {
+								// eslint-disable-next-line react-hooks/rules-of-hooks
+								const { data, isLoading } = useLinkPreview(props.href);
+								return isLoading ?
+									(
+										<LinkPreviewSkeleton />
+									) : data ? (
+										<LinkPreviewCard data={data} />
+									) : (
+										<a href={props.href} target={"_blank"} rel={"noreferrer"}>
+											{props.children}
+										</a>
+									)
+							},
 						}}
 						rehypePlugins={[rehypeRaw]}
+						remarkPlugins={[remarkGfm]}
 						{...props}
 					>
 						{source}
