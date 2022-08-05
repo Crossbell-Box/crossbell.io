@@ -1,7 +1,7 @@
 import { useQuery } from "react-query";
 import type { getLinkPreview } from "link-preview-js";
 
-const SCOPE_KEYS = ["link-preview"];
+const SCOPE_KEYS = ["utils", "link-preview"];
 
 export function useLinkPreview(link: string | undefined) {
   return useQuery(

@@ -8,7 +8,7 @@ import { useElementSize } from "@mantine/hooks";
 import classNames from "classnames";
 import rehypeRaw from "rehype-raw";
 import remarkGfm from "remark-gfm";
-import { useLinkPreview } from "@/utils/apis/utils/link-preview";
+import { useLinkPreview } from "@/utils/apis/link-preview";
 import LinkPreviewCard, {LinkPreviewSkeleton} from "@/components/card/LinkPreviewCard";
 import { Button } from "@mantine/core";
 
@@ -83,11 +83,11 @@ export function MarkdownRenderer({
 							},
 							a: ({node, ...props}) => {
 								// eslint-disable-next-line react-hooks/rules-of-hooks
-								const { data, isLoading } = useLinkPreview(props.href);
+								const { data, isLoading, isSuccess } = useLinkPreview(props.href);
 								return isLoading ?
 									(
 										<LinkPreviewSkeleton />
-									) : data ? (
+									) : isSuccess && data && ("siteName" in data && data.siteName || "title" in data && data.title || "description" in data && data.description) ? (
 										<LinkPreviewCard data={data} />
 									) : (
 										<a href={props.href} target={"_blank"} rel={"noreferrer"}>
