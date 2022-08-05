@@ -10,6 +10,7 @@ import rehypeRaw from "rehype-raw";
 import remarkGfm from "remark-gfm";
 import { useLinkPreview } from "@/utils/apis/utils/link-preview";
 import LinkPreviewCard, {LinkPreviewSkeleton} from "@/components/card/LinkPreviewCard";
+import { Button } from "@mantine/core";
 
 export function MarkdownRenderer({
 	children,
@@ -106,7 +107,9 @@ export function MarkdownRenderer({
 
 			{showReadMoreButton && (
 				<div className="absolute left-0 right-0 bottom-0 z-10 flex items-center justify-center py-3">
-					<Text>Read More</Text>
+					<Button radius={"xl"}>
+						Read More
+					</Button>
 				</div>
 			)}
 		</div>
