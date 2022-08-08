@@ -64,6 +64,8 @@ export default function MediaCarousel({
 									className={classNames("transition-opacity", {
 										"opacity-20": isThumbnail && index !== selectedIndex,
 									})}
+									height={isThumbnail ? 100 : undefined}
+									width={isThumbnail ? 100 : undefined}
 									onClick={() => {
 										if (!isThumbnail) {
 											window.open(src);

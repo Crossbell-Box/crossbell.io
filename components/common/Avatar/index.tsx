@@ -22,18 +22,19 @@ export default function Avatar({
 	let src_ =
 		src ??
 		(isLoading
-			? getDefaultAvatar(address)
-			: data?.metadata?.content?.avatars?.[0] ?? getDefaultAvatar(address));
+			? getDefaultAvatar()
+			: data?.metadata?.content?.avatars?.[0] ??
+			  getDefaultAvatar(data?.handle));
 
 	src_ = ipfsLinkToHttpLink(src_);
 
 	return <Avatar_ src={src_} alt={alt} radius="xl" {...props} />;
 }
 
-function getDefaultAvatar(addr: string = "0x0") {
-	if (addr === "0x0") {
+function getDefaultAvatar(handle?: string) {
+	if (!handle || handle.startsWith("0x")) {
 		return "/images/avatar-default.png";
 	}
 
-	return `https://cdn.stamp.fyi/avatar/${addr}?s=64`;
+	return `https://avatars.dicebear.com/api/big-smile/${handle}.svg?background=%23ffffff`;
 }

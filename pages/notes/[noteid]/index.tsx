@@ -23,6 +23,7 @@ import type { GetServerSideProps } from "next";
 import { Divider } from "@mantine/core";
 import { NextSeo } from "next-seo";
 import { getValidAttachments } from "@/utils/metadata";
+import { ipfsLinkToHttpLink } from "@/utils/ipfs";
 
 const SEO = ({
 	note,
@@ -53,7 +54,7 @@ const SEO = ({
 					tags: note?.metadata?.content?.tags,
 				},
 				images: images.map((i) => ({
-					url: i.address!,
+					url: ipfsLinkToHttpLink(i.address!),
 					type: i.mime_type,
 				})),
 			}}
@@ -74,6 +75,8 @@ const Page: NextPageWithLayout<PageProps> = (props) => {
 	const { data: note } = useNote(characterId, noteId, {
 		initialData: props.note,
 	});
+
+	// useNote(note?.toNote?.characterId, note?.toNote.)
 
 	const {
 		data: comments,

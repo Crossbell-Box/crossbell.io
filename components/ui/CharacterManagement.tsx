@@ -99,11 +99,11 @@ export default function CharacterManagement({
 
 	// inject existing character data into form
 	useEffect(() => {
-		if (character) {
+		if (character?.metadata?.content) {
 			form.setValues({
 				handle: character.handle ?? "",
 				avatar:
-					character.metadata?.content?.avatars?.[0].replace(
+					character.metadata?.content?.avatars?.[0]?.replace?.(
 						"https://gateway.ipfs.io/ipfs/",
 						"ipfs://"
 					) ?? "",
@@ -111,7 +111,7 @@ export default function CharacterManagement({
 				bio: character.metadata?.content?.bio ?? "",
 			});
 		}
-	}, [character]);
+	}, [character?.metadata?.content]);
 
 	// upload avatar
 	const handleUpload = async (files: File[]) => {
