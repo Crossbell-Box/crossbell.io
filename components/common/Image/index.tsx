@@ -46,14 +46,16 @@ const toBase64 = (str: string) =>
 		? Buffer.from(str).toString("base64")
 		: window.btoa(str);
 
-const thumborLoader: ImageLoader = ({ src, width, quality }) => {
-	return `https://thumbor.rss3.dev/unsafe/${width}x0/smart/${src}`;
-};
-
 export default function Image({
 	src,
 	...props
 }: PropsWithChildren<ImageProps>) {
+	const thumborLoader: ImageLoader = ({ src, width, quality }) => {
+		const w = props.width ?? width;
+		const h = props.height ?? "0";
+		return `https://thumbor.rss3.dev/unsafe/${w}x${h}/smart/${src}`;
+	};
+
 	return (
 		<NextImage
 			src={src}
