@@ -134,6 +134,7 @@ export function Note({
 		if (displayMode === "main") {
 			return (
 				<div>
+					<Space h={10} />
 					<Time href={href} date={note.createdAt} mode="accurate" />
 				</div>
 			);
@@ -177,8 +178,6 @@ export function Note({
 				)}
 
 				{/* media */}
-
-				<Space h={10} />
 
 				{renderBottomInfo()}
 
