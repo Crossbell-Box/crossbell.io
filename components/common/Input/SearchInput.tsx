@@ -2,15 +2,15 @@ import { usePrimaryShade } from "@/components/providers/ThemeProvider";
 import { composeSearchHref, useSearchRouterQuery } from "@/utils/url";
 import {
 	createPolymorphicComponent,
-	Input,
-	InputProps,
 	Text,
+	TextInput,
+	TextInputProps,
 	useMantineTheme,
 } from "@mantine/core";
 import { useInputState } from "@mantine/hooks";
 import { useRouter } from "next/router";
 
-function SearchInput_({ ...props }: InputProps) {
+function SearchInput_({ ...props }: TextInputProps) {
 	const { primaryColor } = useMantineTheme();
 	const primaryShade = usePrimaryShade();
 	const [value, setValue] = useInputState("");
@@ -18,7 +18,7 @@ function SearchInput_({ ...props }: InputProps) {
 	const { type } = useSearchRouterQuery();
 
 	return (
-		<Input
+		<TextInput
 			type="text"
 			icon={<Text className="i-csb:search" />}
 			placeholder="Search"
@@ -47,11 +47,14 @@ function SearchInput_({ ...props }: InputProps) {
 					router.push(composeSearchHref(value, type));
 				}
 			}}
+			onFocus={() => {
+				router.prefetch(composeSearchHref(value, type));
+			}}
 			{...props}
 		/>
 	);
 }
-const SearchInput = createPolymorphicComponent<"input", InputProps>(
+const SearchInput = createPolymorphicComponent<"input", TextInputProps>(
 	SearchInput_
 );
 

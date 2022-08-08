@@ -5,17 +5,25 @@ import Header from "@/components/layouts/Header";
 import CharacterProfile from "@/components/ui/CharacterProfile";
 import type { NextPageWithLayout } from "@/pages/_app";
 import {
+	fetchCharacterByHandle,
 	useCharacterByHandle,
 	useNotesOfCharacter,
 } from "@/utils/apis/indexer";
 import { extractCharacterName } from "@/utils/metadata";
 import { useCharacterRouterQuery } from "@/utils/url";
+import { CharacterEntity } from "crossbell.js";
 import { GetServerSideProps } from "next";
 import { Fragment } from "react";
 
-const Page: NextPageWithLayout = () => {
+type PageProps = {
+	character: CharacterEntity | null;
+};
+
+const Page: NextPageWithLayout<PageProps> = (props) => {
 	const { handle, name } = useCharacterRouterQuery();
-	const { data: character } = useCharacterByHandle(handle);
+	const { data: character } = useCharacterByHandle(handle, {
+		initialData: props.character,
+	});
 
 	const headerText =
 		name ?? extractCharacterName(character) ?? handle ?? "Character";
@@ -46,7 +54,11 @@ function NotesList() {
 			{data?.pages.map((page, i) => (
 				<Fragment key={i}>
 					{page.list.map((note, i) => (
-						<Note note={note} key={`${note.characterId}-${note.noteId}`} />
+						<Note
+							note={note}
+							key={`${note.characterId}-${note.noteId}`}
+							collapsible
+						/>
 					))}
 				</Fragment>
 			))}
@@ -74,17 +86,31 @@ function NotesList() {
 
 Page.getLayout = getLayout;
 
-export const getServerSideProps: GetServerSideProps = async (ctx) => {
-	const isValidHandleUrl =
-		typeof ctx.query.handle === "string" && ctx.query.handle.startsWith("@");
+export const getServerSideProps: GetServerSideProps<PageProps> = async (
+	ctx
+) => {
+	const { handle } = ctx.query;
+	const isValidHandleUrl = typeof handle === "string" && handle.startsWith("@");
 	if (!isValidHandleUrl) {
 		return {
 			notFound: true,
 		};
 	}
 
+	const handleWithoutAtPrefix = handle.replace("@", "");
+
+	const character = await fetchCharacterByHandle(handleWithoutAtPrefix);
+
+	if (!character) {
+		return {
+			notFound: true,
+		};
+	}
+
 	return {
-		props: {},
+		props: {
+			character,
+		},
 	};
 };
 
