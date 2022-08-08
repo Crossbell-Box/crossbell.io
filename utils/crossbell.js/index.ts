@@ -1,16 +1,16 @@
+import config from "config";
 import { Indexer, Contract } from "crossbell.js";
-import { useAccount, useProvider } from "wagmi";
+import { useAccount } from "wagmi";
 
 const isProductionServer =
 	typeof window === "undefined" && process.env.NODE_ENV === "production";
 
 export const indexer = new Indexer(
-	isProductionServer ? "http://indexer-v1-api.crossbell:3000/v1" : undefined
+	isProductionServer ? config.indexer.endpoint : undefined
 );
 
 let contract: Contract;
 export const useContract = () => {
-	// const provider = (globalThis as any).ethereum; // TODO: other wallet?
 	const { connector } = useAccount();
 
 	if (!contract) {

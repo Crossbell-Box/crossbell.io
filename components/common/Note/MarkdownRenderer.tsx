@@ -31,6 +31,10 @@ export function MarkdownRenderer({
 
 	const showReadMoreButton = collapsed && isExceeded;
 
+	if (collapsible && typeof children === "string") {
+		children = children.slice(0, 1000); // FIXME: should i do this?
+	}
+
 	const source =
 		typeof children === "string" ? children.replace(/\n/g, "  \n") : children;
 

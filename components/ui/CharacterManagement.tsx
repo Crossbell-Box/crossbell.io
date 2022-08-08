@@ -190,7 +190,7 @@ export default function CharacterManagement({
 			setLoadingDescription("Creating character...");
 
 			// create new character
-			createCharacter.mutate({
+			await createCharacter.mutateAsync({
 				handle: form.values.handle,
 				metadata: {
 					name: form.values.name,
@@ -200,6 +200,7 @@ export default function CharacterManagement({
 			});
 		}
 
+		// navigate to the character page
 		router.push(composeCharacterHref(form.values.handle));
 	};
 

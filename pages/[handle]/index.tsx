@@ -54,7 +54,11 @@ function NotesList() {
 			{data?.pages.map((page, i) => (
 				<Fragment key={i}>
 					{page.list.map((note, i) => (
-						<Note note={note} key={`${note.characterId}-${note.noteId}`} />
+						<Note
+							note={note}
+							key={`${note.characterId}-${note.noteId}`}
+							collapsible
+						/>
 					))}
 				</Fragment>
 			))}
