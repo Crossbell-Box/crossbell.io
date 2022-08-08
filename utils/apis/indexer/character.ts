@@ -42,11 +42,14 @@ export function useCharacter(characterId?: number | null) {
 export const SCOPE_KEY_CHARACTER_BY_HANDLE = (handle?: string) => {
 	return [...SCOPE_KEY, "one", "@handle", handle];
 };
-export function useCharacterByHandle(handle?: string) {
+export const fetchCharacterByHandle = (handle: string) => {
+	return indexer.getCharacterByHandle(handle);
+};
+export function useCharacterByHandle(handle?: string, options?: any) {
 	return useQuery(
 		SCOPE_KEY_CHARACTER_BY_HANDLE(handle),
-		() => indexer.getCharacterByHandle(handle!),
-		{ enabled: Boolean(handle) }
+		() => fetchCharacterByHandle(handle!),
+		{ enabled: Boolean(handle), ...options }
 	);
 }
 
