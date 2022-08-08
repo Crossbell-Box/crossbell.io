@@ -6,7 +6,7 @@ import { useCharacter, useNoteStatus } from "@/utils/apis/indexer";
 import classNames from "classnames";
 import MediaCarousel from "./MediaCarousel";
 import { useRouter } from "next/router";
-import { composeNoteHref } from "@/utils/url";
+import { composeNoteHref, useNoteRouterQuery } from "@/utils/url";
 import { useLikeNote, useMintNote, useUnlikeNote } from "@/utils/apis/contract";
 import { copyToClipboard } from "@/utils/other";
 import { showNotification } from "@mantine/notifications";
@@ -16,6 +16,7 @@ import { NextLink } from "@mantine/next";
 import { MarkdownRenderer } from "./MarkdownRenderer";
 import { useAccount } from "wagmi";
 import { CharacterName } from "../Character";
+import Time from "../Time";
 
 function ActionButton({
 	text,
@@ -66,52 +67,35 @@ function ActionButton({
 export function Note({
 	note,
 	collapsible,
+	displayMode,
 }: {
 	collapsible?: boolean;
 	note: NoteEntity;
+	/**
+	 * - `normal`: normal view
+	 * - `main`: emphasizing the main note in a single page
+	 * This is smartly calculated from url unless specified.
+	 */
+	displayMode?: "normal" | "main";
 }) {
 	const { data: character } = useCharacter(note.characterId);
 
-	const { data: status } = useNoteStatus(note.characterId, note.noteId);
+	const { navigate, href } = useNavigateToNote(note.characterId, note.noteId);
 
-	const router = useRouter();
-	const targetURL = composeNoteHref(note.characterId, note.noteId);
-	const handleClickNote = () => {
-		if (router.asPath === targetURL) return;
+	const { characterId, noteId } = useNoteRouterQuery();
 
-		router.push(targetURL);
-	};
+	// calculate displayMode smartly
+	if (!displayMode) {
+		const isMainNote =
+			characterId === note.characterId && noteId === note.noteId;
+		displayMode = isMainNote ? "main" : "normal";
+	}
 
-	const likeNote = useLikeNote(note.characterId, note.noteId);
-	const unlikeNote = useUnlikeNote(note.characterId, note.noteId);
-
-	const { address } = useAccount();
-	const mintNote = useMintNote(note.characterId, note.noteId, address!);
-
-	return (
-		<div
-			className="flex flex-row w-full py-3 px-3 border-b border-gray/20 bg-hover cursor-pointer"
-			onClick={handleClickNote}
-		>
-			<LoadingOverlay
-				visible={
-					likeNote.isLoading || unlikeNote.isLoading || mintNote.isLoading
-				}
-				description="Loading..."
-				global
-			/>
-
-			{/* avatar */}
-			<div>
-				<Avatar address={note.owner} characterId={note.characterId} size={48} />
-			</div>
-
-			<Space w={10} />
-
-			{/* right side */}
-			<div className="flex-grow">
-				{/* username */}
+	const renderUsername = () => {
+		if (displayMode === "normal") {
+			return (
 				<div className="flex items-baseline">
+					{/* username */}
 					<CharacterName characterId={character?.characterId} />
 
 					<Space w={3} />
@@ -124,25 +108,69 @@ export function Note({
 						·
 					</Text>
 
-					<Tooltip label={formatDate(note.createdAt)}>
-						<Text
-							component={NextLink}
-							href={targetURL}
-							color="dimmed"
-							size="sm"
-							variant="link"
-						>
-							{formatDateFromNow(note.createdAt)}
-						</Text>
-					</Tooltip>
+					{/* time */}
+					<Time href={href} date={note.createdAt} mode="fromNow" />
 				</div>
+			);
+		}
+
+		if (displayMode === "main") {
+			return (
+				<div>
+					{/* username */}
+					<CharacterName characterId={character?.characterId} />
+
+					<Text color="dimmed" size="sm" className="leading-1em">
+						@{character?.handle}
+					</Text>
+				</div>
+			);
+		}
+	};
+
+	const renderBottomInfo = () => {
+		if (displayMode === "normal") {
+			return <></>;
+		}
+
+		if (displayMode === "main") {
+			return (
+				<div>
+					<Time href={href} date={note.createdAt} mode="accurate" />
+				</div>
+			);
+		}
+	};
+
+	const renderContent = () => {
+		const clxs = displayMode === "main" ? "text-1.25em" : "text-1em";
+		return (
+			<div className={clxs}>
+				<MarkdownRenderer collapsible={collapsible}>
+					{note.metadata?.content?.content ?? ""}
+				</MarkdownRenderer>
+			</div>
+		);
+	};
+
+	return (
+		<div
+			className="flex flex-row w-full py-3 px-3 border-b border-gray/20 bg-hover cursor-pointer"
+			onClick={() => navigate()}
+		>
+			{/* avatar */}
+			<div>
+				<Avatar address={note.owner} characterId={note.characterId} size={48} />
+			</div>
+
+			<Space w={10} />
+
+			{/* right side */}
+			<div className="flex-grow">
+				{renderUsername()}
 
 				{/* content */}
-				<div>
-					<MarkdownRenderer collapsible={collapsible}>
-						{note.metadata?.content?.content ?? ""}
-					</MarkdownRenderer>
-				</div>
+				{renderContent()}
 
 				<Space h={10} />
 
@@ -154,71 +182,105 @@ export function Note({
 
 				<Space h={10} />
 
+				{renderBottomInfo()}
+
+				<Space h={10} />
+
 				{/* actions */}
-				<div className="flex items-center justify-between">
-					{/* comment */}
-					<ActionButton
-						text={status?.commentCount}
-						label="Comment"
-						icon="i-csb:comment"
-						bgHoverColor="group-hover:bg-blue/10"
-						textHoverColor="group-hover:text-blue"
-						onClick={() => {
-							handleClickNote();
-						}}
-					/>
-
-					{/* like */}
-					<ActionButton
-						text={status?.likeCount}
-						label="Like"
-						icon={status?.isLiked ? "i-csb:like-filled" : "i-csb:like"}
-						color={status?.isLiked ? "text-red" : "text-dimmed"}
-						bgHoverColor="group-hover:bg-red/10"
-						textHoverColor="group-hover:text-red"
-						onClick={() => {
-							if (status?.isLiked) {
-								unlikeNote.mutate();
-							} else {
-								likeNote.mutate();
-							}
-						}}
-					/>
-
-					{/* mint */}
-					<ActionButton
-						text={status?.mintCount}
-						label="Mint"
-						icon="i-csb:mint"
-						color={status?.isMinted ? "text-yellow" : "text-dimmed"}
-						bgHoverColor="group-hover:bg-yellow/10"
-						textHoverColor="group-hover:text-yellow"
-						onClick={() => {
-							if (!status?.isMinted) {
-								mintNote.mutate();
-							}
-						}}
-					/>
-
-					{/* share */}
-					<ActionButton
-						label="Share"
-						icon="i-csb:share"
-						bgHoverColor="group-hover:bg-green/10"
-						textHoverColor="group-hover:text-green"
-						onClick={async () => {
-							await copyToClipboard(location.href);
-							showNotification({
-								message: "Copied to Clipboard!",
-								disallowClose: true,
-							});
-						}}
-					/>
-
-					{/* used for ui placeholder */}
-					<div className="flex items-center"></div>
-				</div>
+				<NoteActions characterId={note.characterId} noteId={note.noteId} />
 			</div>
+		</div>
+	);
+}
+
+function NoteActions({
+	characterId,
+	noteId,
+}: {
+	characterId: number;
+	noteId: number;
+}) {
+	const { data: status } = useNoteStatus(characterId, noteId);
+
+	const likeNote = useLikeNote(characterId, noteId);
+	const unlikeNote = useUnlikeNote(characterId, noteId);
+
+	const { address } = useAccount();
+	const mintNote = useMintNote(characterId, noteId, address!);
+
+	const { navigate } = useNavigateToNote(characterId, noteId);
+
+	return (
+		<div className="flex items-center justify-between">
+			<LoadingOverlay
+				visible={
+					likeNote.isLoading || unlikeNote.isLoading || mintNote.isLoading
+				}
+				description="Loading..."
+				global
+			/>
+
+			{/* comment */}
+			<ActionButton
+				text={status?.commentCount}
+				label="Comment"
+				icon="i-csb:comment"
+				bgHoverColor="group-hover:bg-blue/10"
+				textHoverColor="group-hover:text-blue"
+				onClick={() => {
+					navigate();
+				}}
+			/>
+
+			{/* like */}
+			<ActionButton
+				text={status?.likeCount}
+				label="Like"
+				icon={status?.isLiked ? "i-csb:like-filled" : "i-csb:like"}
+				color={status?.isLiked ? "text-red" : "text-dimmed"}
+				bgHoverColor="group-hover:bg-red/10"
+				textHoverColor="group-hover:text-red"
+				onClick={() => {
+					if (status?.isLiked) {
+						unlikeNote.mutate();
+					} else {
+						likeNote.mutate();
+					}
+				}}
+			/>
+
+			{/* mint */}
+			<ActionButton
+				text={status?.mintCount}
+				label="Mint"
+				icon="i-csb:mint"
+				color={status?.isMinted ? "text-yellow" : "text-dimmed"}
+				bgHoverColor="group-hover:bg-yellow/10"
+				textHoverColor="group-hover:text-yellow"
+				onClick={() => {
+					if (!status?.isMinted) {
+						mintNote.mutate();
+					}
+				}}
+			/>
+
+			{/* share */}
+			<ActionButton
+				label="Share"
+				icon="i-csb:share"
+				bgHoverColor="group-hover:bg-green/10"
+				textHoverColor="group-hover:text-green"
+				onClick={async () => {
+					await copyToClipboard(location.href);
+					showNotification({
+						message: "Copied to Clipboard!",
+						disallowClose: true,
+					});
+				}}
+			/>
+
+			{/* used for ui placeholder */}
+			<div className="flex items-center"></div>
 		</div>
 	);
 }
@@ -247,10 +309,6 @@ export function NoteSkeleton() {
 						<Skeleton height="1em" radius="xl" width={50} />
 					</Text>
 
-					<Text color="dimmed" size="sm" className="mx-1">
-						·
-					</Text>
-
 					<Text color="dimmed" size="sm">
 						<Skeleton height="1em" radius="xl" width={50} />
 					</Text>
@@ -275,4 +333,18 @@ export function NoteSkeleton() {
 			</div>
 		</div>
 	);
+}
+
+// hooks
+
+function useNavigateToNote(characterId: number, noteId: number) {
+	const router = useRouter();
+	const targetURL = composeNoteHref(characterId, noteId);
+	const navigate = () => {
+		if (router.asPath === targetURL) return;
+
+		router.push(targetURL);
+	};
+
+	return { navigate, href: targetURL };
 }
