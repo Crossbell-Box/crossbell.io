@@ -9,7 +9,9 @@ import classNames from "classnames";
 import rehypeRaw from "rehype-raw";
 import remarkGfm from "remark-gfm";
 import { useLinkPreview } from "@/utils/apis/link-preview";
-import LinkPreviewCard, {LinkPreviewSkeleton} from "@/components/card/LinkPreviewCard";
+import LinkPreviewCard, {
+	LinkPreviewSkeleton,
+} from "@/components/card/LinkPreviewCard";
 import { Button } from "@mantine/core";
 
 export function MarkdownRenderer({
@@ -81,19 +83,23 @@ export function MarkdownRenderer({
 									</div>
 								);
 							},
-							a: ({node, ...props}) => {
-								// eslint-disable-next-line react-hooks/rules-of-hooks
-								const { data, isLoading, isSuccess } = useLinkPreview(props.href);
-								return isLoading ?
-									(
-										<LinkPreviewSkeleton />
-									) : isSuccess && data && ("siteName" in data && data.siteName || "title" in data && data.title || "description" in data && data.description) ? (
-										<LinkPreviewCard data={data} />
-									) : (
-										<a href={props.href} target={"_blank"} rel={"noreferrer"}>
-											{props.children}
-										</a>
-									)
+							a: function Link({ node, ...props }) {
+								const { data, isLoading, isSuccess } = useLinkPreview(
+									props.href
+								);
+								return isLoading ? (
+									<LinkPreviewSkeleton />
+								) : isSuccess &&
+								  data &&
+								  (("siteName" in data && data.siteName) ||
+										("title" in data && data.title) ||
+										("description" in data && data.description)) ? (
+									<LinkPreviewCard data={data} />
+								) : (
+									<a href={props.href} target={"_blank"} rel={"noreferrer"}>
+										{props.children}
+									</a>
+								);
 							},
 						}}
 						rehypePlugins={[rehypeRaw]}
@@ -107,9 +113,7 @@ export function MarkdownRenderer({
 
 			{showReadMoreButton && (
 				<div className="absolute left-0 right-0 bottom-0 z-10 flex items-center justify-center py-3">
-					<Button radius={"xl"}>
-						Read More
-					</Button>
+					<Button radius={"xl"}>Read More</Button>
 				</div>
 			)}
 		</div>
