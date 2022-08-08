@@ -1,5 +1,4 @@
 import Avatar from "@/components/common/Avatar";
-import { formatDate, formatDateFromNow } from "@/utils/time";
 import { Skeleton, Space, Text } from "@mantine/core";
 import { NoteEntity } from "crossbell.js";
 import { useCharacter, useNoteStatus } from "@/utils/apis/indexer";
@@ -12,7 +11,6 @@ import { copyToClipboard } from "@/utils/other";
 import { showNotification } from "@mantine/notifications";
 import Tooltip from "../Tooltip";
 import LoadingOverlay from "../LoadingOverlay";
-import { NextLink } from "@mantine/next";
 import { MarkdownRenderer } from "./MarkdownRenderer";
 import { useAccount } from "wagmi";
 import { CharacterName } from "../Character";
