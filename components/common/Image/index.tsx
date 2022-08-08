@@ -1,4 +1,8 @@
-import { default as NextImage, type ImageProps } from "next/image";
+import {
+	default as NextImage,
+	type ImageLoader,
+	type ImageProps,
+} from "next/image";
 import { PropsWithChildren } from "react";
 
 // Pixel GIF code adapted from https://stackoverflow.com/a/33919020/266535
@@ -42,6 +46,10 @@ const toBase64 = (str: string) =>
 		? Buffer.from(str).toString("base64")
 		: window.btoa(str);
 
+const thumborLoader: ImageLoader = ({ src, width, quality }) => {
+	return `https://thumbor.rss3.dev/unsafe/${width}x0/smart/${src}`;
+};
+
 export default function Image({
 	src,
 	...props
@@ -49,6 +57,7 @@ export default function Image({
 	return (
 		<NextImage
 			src={src}
+			loader={thumborLoader}
 			layout="responsive"
 			objectFit="cover"
 			placeholder="blur"
