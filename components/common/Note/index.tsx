@@ -13,7 +13,7 @@ import Tooltip from "../Tooltip";
 import LoadingOverlay from "../LoadingOverlay";
 import { MarkdownRenderer } from "./MarkdownRenderer";
 import { useAccount } from "wagmi";
-import { CharacterName } from "../Character";
+import { CharacterHandle, CharacterName } from "../Character";
 import Time from "../Time";
 import { getValidAttachments } from "@/utils/metadata";
 
@@ -85,21 +85,46 @@ export function Note({
 
 	const { navigate, href } = useNavigateToNote(note.characterId, note.noteId);
 
-	const { characterId, noteId } = useNoteRouterQuery();
-
 	// calculate displayMode smartly
+	const { characterId, noteId } = useNoteRouterQuery();
 	if (!displayMode) {
 		const isMainNote =
 			characterId === note.characterId && noteId === note.noteId;
 		displayMode = isMainNote ? "main" : "normal";
 	}
 
+	const renderAvatar = () => {
+		if (displayMode === "normal") {
+			return (
+				<div>
+					<Avatar
+						size={48}
+						characterId={note.characterId}
+						character={character}
+					/>
+				</div>
+			);
+		}
+
+		if (displayMode === "main") {
+			return (
+				<div>
+					<Avatar
+						size={64}
+						characterId={note.characterId}
+						character={character}
+					/>
+				</div>
+			);
+		}
+	};
+
 	const renderUsername = () => {
 		if (displayMode === "normal") {
 			return (
 				<div className="flex flex-wrap items-baseline">
 					{/* username */}
-					<CharacterName character={character} characterId={characterId} />
+					<CharacterName character={character} characterId={note.characterId} />
 
 					<Space w={3} />
 
@@ -121,14 +146,37 @@ export function Note({
 			return (
 				<div>
 					{/* username */}
-					<CharacterName character={character} characterId={characterId} />
+					<CharacterName
+						size="lg"
+						character={character}
+						characterId={note.characterId}
+					/>
 
-					<Text color="dimmed" size="sm" className="leading-1em">
+					<Text color="dimmed" size="md" className="leading-1em">
 						@{character?.handle}
 					</Text>
 				</div>
 			);
 		}
+	};
+
+	const renderReplyingInfo = () => {
+		return (
+			note.toNote && (
+				<div>
+					<Space h={10} />
+					<Text size="sm" color="dimmed">
+						Replying to{" "}
+						<CharacterHandle
+							character={note.toCharacter}
+							characterId={note.toCharacterId!}
+							color="brand"
+							weight="bold"
+						/>
+					</Text>
+				</div>
+			)
+		);
 	};
 
 	const renderBottomInfo = () => {
@@ -163,13 +211,16 @@ export function Note({
 
 	return (
 		<div
-			className="flex flex-row w-full py-3 px-3 border-b border-gray/20 bg-hover cursor-pointer"
+			className={classNames(
+				"flex flex-row w-full py-3 px-3 border-b border-gray/20",
+				{
+					"bg-hover cursor-pointer": displayMode === "normal",
+				}
+			)}
 			onClick={() => navigate()}
 		>
 			{/* avatar */}
-			<div>
-				<Avatar characterId={note.characterId} character={character} />
-			</div>
+			{renderAvatar()}
 
 			<Space w={10} />
 
@@ -177,13 +228,17 @@ export function Note({
 			<div className="flex-grow">
 				{renderUsername()}
 
+				{/* replying info */}
+				{renderReplyingInfo()}
+
 				{/* content */}
 				{renderContent()}
 
-				<Space h={10} />
-
 				{Boolean(validAttachments?.length) && (
-					<MediaCarousel attachments={validAttachments} />
+					<>
+						<Space h={10} />
+						<MediaCarousel attachments={validAttachments} />
+					</>
 				)}
 
 				{/* media */}

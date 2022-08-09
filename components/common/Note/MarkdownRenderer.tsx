@@ -1,5 +1,5 @@
 import { PropsWithChildren, useEffect, useState } from "react";
-import { Text, Title } from "@mantine/core";
+import { Table, Text, Title } from "@mantine/core";
 import Image from "./../Image";
 import ReactMarkdown from "react-markdown";
 import { ReactMarkdownOptions } from "react-markdown/lib/react-markdown";
@@ -13,6 +13,8 @@ import LinkPreviewCard, {
 	LinkPreviewSkeleton,
 } from "@/components/card/LinkPreviewCard";
 import { Button } from "@mantine/core";
+import { useRouter } from "next/router";
+import { isExternalUrl } from "@/utils/url";
 
 export function MarkdownRenderer({
 	children,
@@ -77,6 +79,7 @@ export function MarkdownRenderer({
 								return (
 									<div className="relative h-300px my-2">
 										<Image
+											className="cursor-pointer"
 											src={src}
 											layout="fill"
 											onClick={(e) => {
@@ -100,11 +103,26 @@ export function MarkdownRenderer({
 										("description" in data && data.description)) ? (
 									<LinkPreviewCard data={data} />
 								) : (
-									<a href={props.href} target={"_blank"} rel={"noreferrer"}>
+									<Text
+										variant="link"
+										component="a"
+										href={props.href}
+										target={
+											props.href && isExternalUrl(props.href)
+												? "_blank"
+												: undefined
+										}
+										rel="noreferrer"
+									>
 										{props.children}
-									</a>
+									</Text>
 								);
 							},
+							table: ({ node, ...props }) => (
+								<Table striped highlightOnHover>
+									{props.children}
+								</Table>
+							),
 						}}
 						rehypePlugins={[rehypeRaw]}
 						remarkPlugins={[remarkGfm]}

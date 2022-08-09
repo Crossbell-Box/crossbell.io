@@ -1,8 +1,14 @@
 import { ActionIcon, Space, Text, Title } from "@mantine/core";
-import React, { PropsWithChildren } from "react";
+import React, { PropsWithChildren, useEffect } from "react";
 import { useRouter } from "next/router";
 import classNames from "classnames";
-import { useWindowScroll } from "@mantine/hooks";
+import { useElementSize, useWindowScroll } from "@mantine/hooks";
+
+let height = 0;
+
+export function useHeaderSize() {
+	return { height };
+}
 
 export default function Header({
 	children,
@@ -12,6 +18,12 @@ export default function Header({
 	hasBackButton?: boolean;
 	renderBottom?: () => React.ReactNode;
 }>) {
+	const { ref, height: h } = useElementSize();
+
+	useEffect(() => {
+		height = h;
+	}, [h]);
+
 	const router = useRouter();
 
 	const handleCLickBack = () => {
@@ -24,7 +36,6 @@ export default function Header({
 	};
 
 	const [scroll] = useWindowScroll();
-
 	const scrolled = scroll.y > 0;
 
 	return (
@@ -38,6 +49,7 @@ export default function Header({
 			/>
 
 			<header
+				ref={ref}
 				className={classNames(
 					"sticky top-0 my-0 z-100 flex items-center relative transition-all duration-200 min-h-50px px-3",
 					{
