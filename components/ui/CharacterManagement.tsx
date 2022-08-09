@@ -24,6 +24,7 @@ import {
 import LoadingOverlay from "../common/LoadingOverlay";
 import { useRouter } from "next/router";
 import { composeCharacterHref } from "@/utils/url";
+import { showNotification } from "@mantine/notifications";
 
 export default function CharacterManagement({
 	characterId,
@@ -122,7 +123,13 @@ export default function CharacterManagement({
 			setTimeout(() => {
 				form.setFieldValue("avatar", ipfsUri);
 			});
-		} catch (e: any) {}
+		} catch (err: any) {
+			showNotification({
+				title: "Error while uploading avatar",
+				message: err.message,
+				color: "red",
+			});
+		}
 		setAvatarLoading(false);
 	};
 
@@ -305,7 +312,12 @@ export default function CharacterManagement({
 
 				{/* actions */}
 				<Group position="right" mt="md">
-					<Button type="submit" size="md" className="text-dark">
+					<Button
+						type="submit"
+						size="md"
+						className="text-dark"
+						disabled={avatarLoading}
+					>
 						I’ve decided
 					</Button>
 				</Group>
