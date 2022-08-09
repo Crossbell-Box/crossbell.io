@@ -25,7 +25,11 @@ const PlatformCard = ({ platform, user }: PlatformCardProps) => (
     <div className={"flex flex-row justify-between"}>
       <div className={"flex items-center gap-2"}>
         <div className={"flex w-10 h-10 rounded-full"}>
-          {platform.icon}
+          <div className={"w-full h-full flex bg-black rounded-full"}>
+            <div className={"w-2/3 h-2/3 m-auto flex fill-white justify-center"}>
+              {platform.icon}
+            </div>
+          </div>
         </div>
         <div className={"flex"}>
           <Text weight={"bold"}>

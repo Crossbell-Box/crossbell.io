@@ -5,4 +5,4 @@ const MediumLogo = () => (
   </svg>
 );
 
-export default MediumLogo
+export default MediumLogo;

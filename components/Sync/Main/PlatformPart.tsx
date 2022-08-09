@@ -5,20 +5,14 @@ import TikTokLogo from "@/components/Sync/Main/PlatformLogos/TikTok";
 
 const SUPPORTED_PLATFORMS = [
   {
+    id: "medium",
     name: "Medium",
-    icon: (<div className={"w-full h-full flex bg-black rounded-full"}>
-      <div className={"w-2/3 h-2/3 m-auto flex fill-white"}>
-        <MediumLogo />
-      </div>
-    </div>)
+    icon: <MediumLogo />,
   },
   {
+    id: "tiktok",
     name: "TikTok",
-    icon: (<div className={"w-full h-full flex bg-black rounded-full"}>
-      <div className={"w-2/3 h-2/3 m-auto flex fill-white"}>
-        <TikTokLogo />
-      </div>
-    </div>)
+    icon: <TikTokLogo />,
   },
 ];
 
@@ -34,7 +28,7 @@ const PlatformPart = () => (
     </div>
     <div className={"grid grid-cols-2 gap-4"}>
       {SUPPORTED_PLATFORMS.map(platform =>
-        <PlatformCard key={platform.name} platform={platform} user={{
+        <PlatformCard key={platform.id} platform={platform} user={{
           isSyncing: true,
           username: "User",
           syncedCount: 114,

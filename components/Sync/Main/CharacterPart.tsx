@@ -1,7 +1,55 @@
-import {Text, Button, Progress} from "@mantine/core";
+import {Text, Button, Progress, Skeleton} from "@mantine/core";
 import { useCurrentCharacter } from "@/utils/apis/indexer";
 import Image from "@/components/common/Image";
 import { ipfsLinkToHttpLink } from "@/utils/ipfs";
+
+interface CharacterCardProps {
+  avatar: string;
+  name: string
+  handle: string;
+}
+
+const CharacterCard = ({ avatar, name, handle }: CharacterCardProps) => (
+  <div className={"flex flex-row gap-7"}>
+    <div className={"flex w-13 h-13 relative"}>
+      <Image
+        className={"rounded-full"}
+        width={52} height={52}
+        layout={"fill"}
+        src={avatar}
+        alt={handle}
+      />
+    </div>
+    <div className={"flex flex-col justify-around"}>
+      <div className={"flex"}>
+        <Text weight={"bold"}>
+          {name}
+        </Text>
+      </div>
+      <div className={"flex"}>
+        <Text size={"sm"}>
+          @{handle}
+        </Text>
+      </div>
+    </div>
+  </div>
+);
+
+const CharacterSkeleton = () => (
+  <div className={"flex flex-row gap-7"}>
+    <div className={"flex w-13 h-13 relative"}>
+      <Skeleton circle width={52} height={52} />
+    </div>
+    <div className={"flex flex-col justify-around"}>
+      <div className={"flex"}>
+        <Skeleton height={18} width={120} />
+      </div>
+      <div className={"flex"}>
+        <Skeleton height={14} width={120} />
+      </div>
+    </div>
+  </div>
+);
 
 interface CharacterPartProps {
   mediaTotalBytes: number;
@@ -20,29 +68,17 @@ const CharacterPart = ({ mediaTotalBytes }: CharacterPartProps) => {
           Change
         </Button>
       </div>
-      <div className={"flex flex-row gap-7"}>
-        <div className={"flex w-13 h-13 relative"}>
-          <Image
-            className={"rounded-full"}
-            width={52} height={52}
-            layout={"fill"}
-            src={ipfsLinkToHttpLink(character?.metadata?.content?.avatars?.[0] || '')}
-            alt={character?.handle}
+      {
+        isLoading ? (
+          <CharacterSkeleton />
+          ) : (
+          <CharacterCard
+            avatar={ipfsLinkToHttpLink(character?.metadata?.content?.avatars?.[0] || '')}
+            name={character?.metadata?.content?.name || ''}
+            handle={character?.handle || ''}
           />
-        </div>
-        <div className={"flex flex-col"}>
-          <div className={"flex"}>
-            <Text weight={"bold"}>
-              {character?.metadata?.content?.name}
-            </Text>
-          </div>
-          <div className={"flex"}>
-            <Text size={"sm"}>
-              @{character?.handle}
-            </Text>
-          </div>
-        </div>
-      </div>
+        )
+      }
       <div className={"flex flex-col"}>
         <div className={"flex justify-end"}>
           <Text size={"lg"} weight={"bold"}>
