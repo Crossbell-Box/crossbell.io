@@ -43,7 +43,7 @@ export default function Nav() {
 			<Navbar.Section grow mt="md">
 				<NavLinks />
 			</Navbar.Section>
-			<Navbar.Section>footer</Navbar.Section>
+			<Navbar.Section>Crossbell.io</Navbar.Section>
 		</Navbar>
 	);
 }

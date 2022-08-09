@@ -120,21 +120,20 @@ const WalletDisplayButton = forwardRef<HTMLButtonElement, ButtonProps>(
 						<>
 							{/* blurred avatar bg */}
 							<div className="w-full absolute top-0 left-0 right-0 bottom-0 scale-120 bg-white z-0" />
-							<Avatar
-								address={address}
-								characterId={data?.characterId}
-								radius={0}
-								size={100}
-								className="w-full absolute top-0 left-0 right-0 bottom-0 scale-120 blur-12 opacity-70 z-0"
-							/>
+							{data && (
+								<Avatar
+									character={data}
+									radius={0}
+									size={100}
+									className="w-full absolute top-0 left-0 right-0 bottom-0 scale-120 blur-12 opacity-70 z-0"
+								/>
+							)}
 						</>
 
-						<Avatar
-							size={32}
-							address={address}
-							characterId={data?.characterId}
-						/>
+						{data && <Avatar character={data} />}
+
 						<Space w="sm" />
+
 						<div className="flex flex-col justify-center items-start z-1">
 							<Text className="font-semnibold leading-1em" color="dark">
 								@{data?.handle}
@@ -251,7 +250,7 @@ function AccountList() {
 					}}
 				>
 					<div className="flex items-center" key={c.characterId}>
-						<Avatar size={32} address={address} characterId={c?.characterId} />
+						{c && <Avatar size={32} character={c} />}
 						<Space w="xs" />
 						<div className="flex flex-col">
 							<Text className="text-sm font-semibold">

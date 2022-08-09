@@ -37,11 +37,17 @@ export default function CharacterProfile({
 	const { data: currentCharacter } = useCurrentCharacter();
 	const { data: followStatus, isLoading: isLoadingFollowStatus } =
 		useCharacterFollowStats(character?.characterId);
-	const { data: followRelation, isLoading: isLoadingFollowRelation } =
-		useCharacterFollowRelation(
-			currentCharacter?.characterId,
-			character?.characterId
-		);
+	const {
+		data: followRelation,
+		status: followRelationStatus,
+		fetchStatus: followRelationFetchStatus,
+	} = useCharacterFollowRelation(
+		currentCharacter?.characterId,
+		character?.characterId
+	);
+
+	const isLoadingFollowRelation =
+		followRelationStatus === "loading" && followRelationFetchStatus !== "idle";
 
 	const follow = useFollowCharacter(character?.characterId!);
 	const unfollow = useUnfollowCharacter(character?.characterId!);
@@ -134,7 +140,7 @@ export default function CharacterProfile({
 			<div className="flex flex-col items-center">
 				<Avatar
 					characterId={character?.characterId}
-					address={character?.owner}
+					character={character}
 					size={128}
 					className="rounded-128px hover:rounded-20px transition-border-radius duration-300ms"
 				/>

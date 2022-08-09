@@ -1,34 +1,54 @@
-import { useCharacter, usePrimaryCharacter } from "@/utils/apis/indexer";
+import { useCharacter } from "@/utils/apis/indexer";
 import { ipfsLinkToHttpLink } from "@/utils/ipfs";
+import { extractCharacterAvatar } from "@/utils/metadata";
 import { Avatar as Avatar_, AvatarProps } from "@mantine/core";
+import { CharacterEntity } from "crossbell.js";
 import { PropsWithChildren } from "react";
 
 export default function Avatar({
-	address,
 	characterId,
-	src,
+	character: initialCharacter,
 	alt = "Avatar",
 	...props
 }: PropsWithChildren<
-	{
-		address?: string;
-		characterId?: number | null;
-		src?: string;
-		alt?: string;
-	} & AvatarProps
+	(
+		| {
+				characterId?: number | null;
+				character?: CharacterEntity | null;
+		  }
+		| {
+				characterId?: never;
+				character: CharacterEntity;
+		  }
+	) &
+		AvatarProps
 >) {
-	const { isLoading, data } = useCharacter(characterId);
+	const { isLoading, data: character } = useCharacter(
+		characterId ?? initialCharacter?.characterId,
+		{
+			enabled: Boolean(characterId) && !Boolean(initialCharacter),
+			initialData: initialCharacter,
+		}
+	);
 
 	let src_ =
-		src ??
+		extractCharacterAvatar(character) ??
 		(isLoading
 			? getDefaultAvatar()
-			: data?.metadata?.content?.avatars?.[0] ??
-			  getDefaultAvatar(data?.handle));
+			: extractCharacterAvatar(character) ??
+			  getDefaultAvatar(character?.handle));
 
 	src_ = ipfsLinkToHttpLink(src_);
 
-	return <Avatar_ src={src_} alt={alt} radius="xl" {...props} />;
+	return (
+		<Avatar_
+			className="bg-coolgray-100"
+			src={src_}
+			alt={alt}
+			radius="xl"
+			{...props}
+		/>
+	);
 }
 
 function getDefaultAvatar(handle?: string) {

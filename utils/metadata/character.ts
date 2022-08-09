@@ -2,7 +2,7 @@ import { CharacterEntity } from "crossbell.js";
 
 export function extractCharacterName(
 	character: CharacterEntity | null | undefined,
-	{ fallbackToHandle }?: { fallbackToHandle: true }
+	{ fallbackToHandle }?: { fallbackToHandle?: true }
 ): string;
 export function extractCharacterName(
 	character: CharacterEntity | null | undefined,
@@ -22,4 +22,19 @@ export function extractCharacterName(
 	}
 
 	return undefined;
+}
+
+export function extractCharacterAvatars(
+	character: CharacterEntity | null | undefined
+): string[] {
+	const avatars = character?.metadata?.content?.avatars;
+
+	return avatars ?? [];
+}
+export function extractCharacterAvatar(
+	character: CharacterEntity | null | undefined
+): string | undefined {
+	const avatars = extractCharacterAvatars(character);
+
+	return avatars[0];
 }

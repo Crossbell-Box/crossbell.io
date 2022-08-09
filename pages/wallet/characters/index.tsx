@@ -84,8 +84,8 @@ function CharacterCard({ character }: { character: CharacterEntity }) {
 				{/* blurred bg */}
 				{character.primary && (
 					<Avatar
-						address={character.owner}
 						characterId={character.characterId}
+						character={character}
 						radius={0}
 						size={100}
 						className="w-full h-full absolute top-0 left-0 right-0 bottom-0 scale-120 blur-32 opacity-70 z-0"
@@ -103,8 +103,8 @@ function CharacterCard({ character }: { character: CharacterEntity }) {
 				{/* avatar */}
 				<Avatar
 					className="border-4 border-slate-200 w-20 h-20 rounded-full my-5"
-					address={character.owner}
 					characterId={character.characterId}
+					character={character}
 					alt={extractCharacterName(character)}
 				/>
 

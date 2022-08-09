@@ -1,6 +1,6 @@
 import Avatar from "@/components/common/Avatar";
 import { Skeleton, Space, Text } from "@mantine/core";
-import { NoteEntity } from "crossbell.js";
+import { CharacterEntity, NoteEntity } from "crossbell.js";
 import { useCharacter, useNoteStatus } from "@/utils/apis/indexer";
 import classNames from "classnames";
 import MediaCarousel from "./MediaCarousel";
@@ -15,6 +15,7 @@ import { MarkdownRenderer } from "./MarkdownRenderer";
 import { useAccount } from "wagmi";
 import { CharacterName } from "../Character";
 import Time from "../Time";
+import { getValidAttachments } from "@/utils/metadata";
 
 function ActionButton({
 	text,
@@ -64,11 +65,13 @@ function ActionButton({
 
 export function Note({
 	note,
+	character: initialCharacter,
 	collapsible,
 	displayMode,
 }: {
 	collapsible?: boolean;
 	note: NoteEntity;
+	character?: CharacterEntity | null;
 	/**
 	 * - `normal`: normal view
 	 * - `main`: emphasizing the main note in a single page
@@ -76,7 +79,9 @@ export function Note({
 	 */
 	displayMode?: "normal" | "main";
 }) {
-	const { data: character } = useCharacter(note.characterId);
+	const { data: character } = useCharacter(note.characterId, {
+		initialData: initialCharacter,
+	});
 
 	const { navigate, href } = useNavigateToNote(note.characterId, note.noteId);
 
@@ -94,7 +99,7 @@ export function Note({
 			return (
 				<div className="flex items-baseline">
 					{/* username */}
-					<CharacterName characterId={character?.characterId} />
+					<CharacterName character={character} characterId={characterId} />
 
 					<Space w={3} />
 
@@ -116,7 +121,7 @@ export function Note({
 			return (
 				<div>
 					{/* username */}
-					<CharacterName characterId={character?.characterId} />
+					<CharacterName character={character} characterId={characterId} />
 
 					<Text color="dimmed" size="sm" className="leading-1em">
 						@{character?.handle}
@@ -152,6 +157,10 @@ export function Note({
 		);
 	};
 
+	const validAttachments = getValidAttachments(
+		note.metadata?.content?.attachments
+	);
+
 	return (
 		<div
 			className="flex flex-row w-full py-3 px-3 border-b border-gray/20 bg-hover cursor-pointer"
@@ -159,7 +168,7 @@ export function Note({
 		>
 			{/* avatar */}
 			<div>
-				<Avatar address={note.owner} characterId={note.characterId} size={48} />
+				<Avatar characterId={note.characterId} character={character} />
 			</div>
 
 			<Space w={10} />
@@ -173,8 +182,8 @@ export function Note({
 
 				<Space h={10} />
 
-				{note.metadata?.content?.attachments && (
-					<MediaCarousel attachments={note.metadata?.content.attachments} />
+				{Boolean(validAttachments?.length) && (
+					<MediaCarousel attachments={validAttachments} />
 				)}
 
 				{/* media */}

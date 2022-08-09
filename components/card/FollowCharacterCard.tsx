@@ -5,19 +5,21 @@ import {
 	useUnfollowCharacter,
 } from "@/utils/apis/contract";
 import { useModals } from "@mantine/modals";
-import { ipfsLinkToHttpLink } from "@/utils/ipfs";
 import {
 	useCharacterFollowRelation,
 	useCurrentCharacter,
 } from "@/utils/apis/indexer";
 import Avatar from "../common/Avatar";
-import { extractCharacterName } from "@/utils/metadata";
 import { CharacterName } from "../common/Character";
+import { composeCharacterHref } from "@/utils/url";
+import { useRouter } from "next/router";
 
 const FollowCharacterCard = ({ character }: { character: CharacterEntity }) => {
 	const { data: currentCharacter } = useCurrentCharacter();
 
-	const { data: followRelation, isLoading: isLoadingFollowRelation } =
+	const isSelf = currentCharacter?.characterId === character.characterId;
+
+	const { data: followRelation, isLoadingFollowRelation } =
 		useCharacterFollowRelation(
 			currentCharacter?.characterId,
 			character?.characterId
@@ -43,18 +45,18 @@ const FollowCharacterCard = ({ character }: { character: CharacterEntity }) => {
 		});
 	};
 
-	const characterName = extractCharacterName(character);
+	const router = useRouter();
 
 	return (
-		<div className="flex flex-row w-full items-start gap-4 p-4">
+		<div
+			className="flex flex-row w-full items-start gap-4 p-4 bg-hover cursor-pointer"
+			onClick={() => {
+				router.push(composeCharacterHref(character.handle));
+			}}
+		>
 			{/* left - avatar */}
 			<div>
-				<Avatar
-					size={64}
-					characterId={character.characterId}
-					address={character.owner}
-					alt={characterName}
-				/>
+				<Avatar size={64} character={character} />
 			</div>
 
 			{/* right */}
@@ -64,47 +66,51 @@ const FollowCharacterCard = ({ character }: { character: CharacterEntity }) => {
 					{/* top-left - name & handle */}
 					<div>
 						<div>
-							<CharacterName characterId={character.characterId} />
+							<CharacterName character={character} />
 						</div>
 						<div>
-							<Text className="text-gray">@{character.handle}</Text>
+							<Text size="sm" color="dimmed">
+								@{character.handle}
+							</Text>
 						</div>
 					</div>
 
 					{/* top-right - follow button */}
-					<div className="flex w-24">
-						{isLoadingFollowRelation ? (
-							<Button radius={"md"} fullWidth p={0} color="dark" loading>
-								Follow
-							</Button>
-						) : followRelation?.isFollowing ? (
-							<Button
-								radius="md"
-								fullWidth
-								p={0}
-								variant="outline"
-								color="dark"
-								loading={unfollow.isLoading}
-								onClick={handleUnfollow}
-							>
-								Following
-							</Button>
-						) : (
-							<Button
-								radius="md"
-								fullWidth
-								p={0}
-								color="dark"
-								loading={follow.isLoading}
-								onClick={handleFollow}
-							>
-								Follow
-							</Button>
-						)}
-					</div>
+					{!isSelf && (
+						<div className="flex w-24" onClick={(e) => e.stopPropagation()}>
+							{isLoadingFollowRelation ? (
+								<Button radius={"md"} fullWidth p={0} color="dark" loading>
+									Follow
+								</Button>
+							) : followRelation?.isFollowing ? (
+								<Button
+									radius="md"
+									fullWidth
+									p={0}
+									variant="outline"
+									color="dark"
+									loading={unfollow.isLoading}
+									onClick={handleUnfollow}
+								>
+									Following
+								</Button>
+							) : (
+								<Button
+									radius="md"
+									fullWidth
+									p={0}
+									color="dark"
+									loading={follow.isLoading}
+									onClick={handleFollow}
+								>
+									Follow
+								</Button>
+							)}
+						</div>
+					)}
 				</div>
 
-				{/* bottom - biio */}
+				{/* bottom - bio */}
 				<div>
 					<Text lineClamp={2}>{character.metadata?.content?.bio}</Text>
 				</div>

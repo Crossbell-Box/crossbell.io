@@ -19,7 +19,7 @@ export function CommentTextarea({ note }: { note: NoteEntity }) {
 			<div className="flex w-full">
 				<Avatar
 					characterId={character?.characterId}
-					address={character?.owner}
+					character={character}
 					size={48}
 				/>
 

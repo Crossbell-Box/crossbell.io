@@ -9,7 +9,13 @@ export function Feed({
 	feed: FeedEntity;
 }) {
 	if (feed.note) {
-		return <Note note={feed.note} collapsible={collapsible} />;
+		return (
+			<Note
+				note={feed.note}
+				character={feed.character}
+				collapsible={collapsible}
+			/>
+		);
 	} else {
 		return <div>{feed.type}</div>;
 	}

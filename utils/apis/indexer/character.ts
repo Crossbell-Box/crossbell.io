@@ -27,12 +27,13 @@ export const SCOPE_KEY_CHARACTER = (characterId?: number | null) => {
 export const fetchCharacter = async (characterId: number) => {
 	return indexer.getCharacter(characterId);
 };
-export function useCharacter(characterId?: number | null) {
+export function useCharacter(characterId?: number | null, options?: any) {
 	return useQuery(
 		SCOPE_KEY_CHARACTER(characterId),
 		() => fetchCharacter(characterId!),
 		{
 			enabled: Boolean(characterId),
+			...options,
 		}
 	);
 }
@@ -135,7 +136,7 @@ export function useCharacterFollowRelation(
 	fromCharacterId?: number,
 	toCharacterID?: number
 ) {
-	return useQuery(
+	const data = useQuery(
 		SCOPE_KEY_CHARACTER_FOLLOW_RELATION(fromCharacterId, toCharacterID),
 		async () => {
 			const [isFollowing, isFollowed] = await Promise.all([
@@ -162,4 +163,13 @@ export function useCharacterFollowRelation(
 		},
 		{ enabled: Boolean(fromCharacterId && toCharacterID) }
 	);
+
+	const isLoadingFollowRelation =
+		data.status === "loading" && data.fetchStatus !== "idle";
+
+	return {
+		...data,
+		/** isLoading */
+		isLoadingFollowRelation,
+	};
 }
