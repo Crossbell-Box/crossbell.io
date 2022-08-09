@@ -15,7 +15,7 @@ const LinkPreviewCard = ({ data }: LinkPreviewCardProps) => (
 	>
 		<div className="flex flex-row my-4 p-4 border-solid border-1px border-#CCC rounded gap-4 bg-hover">
 			{"images" in data && data.images[0] && (
-				<div className="flex w-20 h-20 rounded-xl flex-shrink-0">
+				<div className="w-20 h-20 rounded-xl flex-shrink-0">
 					<Image
 						width={160}
 						height={160}
@@ -28,7 +28,7 @@ const LinkPreviewCard = ({ data }: LinkPreviewCardProps) => (
 			<div className="flex flex-col flex-grow">
 				<div className="flex flex-row gap-2 items-center">
 					{"favicons" in data && data.favicons[0] && (
-						<div className="flex w-4 h-4 rounded-full flex-shrink-0">
+						<div className="w-4 h-4 rounded-full flex-shrink-0">
 							<Image
 								width={16}
 								height={16}
