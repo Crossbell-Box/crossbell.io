@@ -13,7 +13,8 @@ import {
 	useSearchingNotes,
 } from "@/utils/apis/indexer";
 import { composeSearchHref, useSearchRouterQuery } from "@/utils/url";
-import { Title } from "@mantine/core";
+import { Title, Text, Container } from "@mantine/core";
+import { useElementSize } from "@mantine/hooks";
 
 import { Fragment } from "react";
 
@@ -64,11 +65,37 @@ function SearchResult() {
 		searchType === "all" || searchType === "characters";
 	const shouldShowNoteList = searchType === "all" || searchType === "notes";
 
+	// check if empty by size
+	const { ref: characterListRef, height: characterListHeight } =
+		useElementSize();
+	const { ref: noteListRef, height: noteListHeight } = useElementSize();
+
+	const resultHeight = characterListHeight + noteListHeight;
+	const shouldShow404 = resultHeight === 0;
+
 	return (
 		<div className="py-2">
-			{shouldShowCharacterList && <CharacterList />}
+			{shouldShowCharacterList && (
+				<div ref={characterListRef}>
+					<CharacterList />
+				</div>
+			)}
 
-			{shouldShowNoteList && <NoteList />}
+			{shouldShowNoteList && (
+				<div ref={noteListRef}>
+					<NoteList />
+				</div>
+			)}
+
+			{shouldShow404 && (
+				<Container className="flex flex-col items-center justify-center px-10">
+					<img src="/illustrations/search-empty.svg" alt="404" />
+					<Text weight={600} size="lg">
+						No results for "{q}"
+					</Text>
+					<Text color="dimmed">Try searching for something else?</Text>
+				</Container>
+			)}
 		</div>
 	);
 }
@@ -94,9 +121,11 @@ function CharacterList() {
 		}
 	);
 
+	const hasResult = characters?.pages.some((page) => page.count > 0);
+
 	return (
 		<div>
-			{shouldShowTitle && (
+			{shouldShowTitle && (isLoading || (!isLoading && hasResult)) && (
 				<Title order={3} className="m-2">
 					Characters
 				</Title>
@@ -151,9 +180,11 @@ function NoteList() {
 
 	const shouldShowTitle = searchType === "all";
 
+	const hasResult = notes?.pages.some((page) => page.count > 0);
+
 	return (
 		<div>
-			{shouldShowTitle && (
+			{shouldShowTitle && (isLoading || (!isLoading && hasResult)) && (
 				<Title order={3} className="m-2">
 					Notes
 				</Title>
