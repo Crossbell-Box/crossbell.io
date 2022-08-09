@@ -15,6 +15,7 @@ import { MarkdownRenderer } from "./MarkdownRenderer";
 import { useAccount } from "wagmi";
 import { CharacterName } from "../Character";
 import Time from "../Time";
+import { getValidAttachments } from "@/utils/metadata";
 
 function ActionButton({
 	text,
@@ -156,6 +157,10 @@ export function Note({
 		);
 	};
 
+	const validAttachments = getValidAttachments(
+		note.metadata?.content?.attachments
+	);
+
 	return (
 		<div
 			className="flex flex-row w-full py-3 px-3 border-b border-gray/20 bg-hover cursor-pointer"
@@ -177,8 +182,8 @@ export function Note({
 
 				<Space h={10} />
 
-				{note.metadata?.content?.attachments && (
-					<MediaCarousel attachments={note.metadata?.content.attachments} />
+				{Boolean(validAttachments?.length) && (
+					<MediaCarousel attachments={validAttachments} />
 				)}
 
 				{/* media */}

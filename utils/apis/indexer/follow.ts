@@ -2,11 +2,11 @@ import { useInfiniteQuery } from "@tanstack/react-query";
 import { indexer } from "@/utils/crossbell.js";
 import { LinkTypes } from "@/utils/apis/contract";
 
-const SCOPE_KEYS = ["indexer", "characters"];
+const SCOPE_KEY = ["indexer", "characters"];
 
 export function useFollowingCharactersOfCharacter(characterId?: number) {
 	return useInfiniteQuery(
-		[...SCOPE_KEYS, "following", "list", characterId],
+		[...SCOPE_KEY, "following", "list", characterId],
 		({ pageParam }) =>
 			indexer.getLinks(characterId!, {
 				linkType: LinkTypes.follow,
@@ -22,7 +22,7 @@ export function useFollowingCharactersOfCharacter(characterId?: number) {
 
 export function useFollowerCharactersOfCharacter(characterId?: number) {
 	return useInfiniteQuery(
-		[...SCOPE_KEYS, "follower", "list", characterId],
+		[...SCOPE_KEY, "follower", "list", characterId],
 		({ pageParam }) =>
 			indexer.getBacklinksOfCharacter(characterId!, {
 				linkType: LinkTypes.follow,

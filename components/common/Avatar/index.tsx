@@ -26,7 +26,7 @@ export default function Avatar({
 	const { isLoading, data: character } = useCharacter(
 		characterId ?? initialCharacter?.characterId,
 		{
-			enabled: Boolean(characterId),
+			enabled: Boolean(characterId) && !Boolean(initialCharacter),
 			initialData: initialCharacter,
 		}
 	);

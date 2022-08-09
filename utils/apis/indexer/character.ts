@@ -136,7 +136,7 @@ export function useCharacterFollowRelation(
 	fromCharacterId?: number,
 	toCharacterID?: number
 ) {
-	return useQuery(
+	const data = useQuery(
 		SCOPE_KEY_CHARACTER_FOLLOW_RELATION(fromCharacterId, toCharacterID),
 		async () => {
 			const [isFollowing, isFollowed] = await Promise.all([
@@ -163,4 +163,13 @@ export function useCharacterFollowRelation(
 		},
 		{ enabled: Boolean(fromCharacterId && toCharacterID) }
 	);
+
+	const isLoadingFollowRelation =
+		data.status === "loading" && data.fetchStatus !== "idle";
+
+	return {
+		...data,
+		/** isLoading */
+		isLoadingFollowRelation,
+	};
 }
