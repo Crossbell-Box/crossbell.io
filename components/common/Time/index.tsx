@@ -1,6 +1,7 @@
 import { formatDate, formatDateFromNow } from "@/utils/time";
 import { Tooltip, Text, TextProps } from "@mantine/core";
 import { NextLink } from "@mantine/next";
+import { useEffect, useState } from "react";
 
 export default function Time({
 	href,
@@ -12,7 +13,14 @@ export default function Time({
 	date: string;
 	mode?: "fromNow" | "accurate";
 } & TextProps) {
-	return (
+	// TODO: need a better way to handle this
+	const [isMounted, setIsMounted] = useState(false);
+
+	useEffect(() => {
+		setIsMounted(true);
+	}, []);
+
+	return isMounted ? (
 		<Tooltip label={formatDate(date)}>
 			<Text
 				component={NextLink}
@@ -26,5 +34,5 @@ export default function Time({
 				{mode === "fromNow" && formatDateFromNow(date)}
 			</Text>
 		</Tooltip>
-	);
+	) : null;
 }

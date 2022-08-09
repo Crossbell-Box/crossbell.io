@@ -91,7 +91,7 @@ function SearchResult() {
 				<Container className="flex flex-col items-center justify-center px-10">
 					<img src="/illustrations/search-empty.svg" alt="404" />
 					<Text weight={600} size="lg">
-						No results for "{q}"
+						No results for &quot;{q}&quot;
 					</Text>
 					<Text color="dimmed">Try searching for something else?</Text>
 				</Container>
