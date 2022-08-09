@@ -36,7 +36,7 @@ const SEO = ({
 	const origin = getOrigin();
 	const images = getValidAttachments(note?.metadata?.content?.attachments, {
 		allowedMediaTypes: ["image"],
-		withAddressOnly: true,
+		allowedContentTypes: ["address"],
 	});
 
 	return (

@@ -44,14 +44,17 @@ export function mimeTypeToMediaType(mimeType: string): MediaType | null {
 	return null;
 }
 
+const ContentTypes = ["address", "content"] as const;
+export type ContentType = typeof ContentTypes[number];
+
 export function getValidAttachments(
 	attachments: NoteMetadata["attachments"],
 	{
 		allowedMediaTypes = MediaTypes,
-		withAddressOnly = false,
+		allowedContentTypes = ContentTypes,
 	}: {
 		allowedMediaTypes?: readonly MediaType[];
-		withAddressOnly?: boolean;
+		allowedContentTypes?: readonly ContentType[];
 	} = {}
 ) {
 	if (!attachments) {
@@ -66,26 +69,24 @@ export function getValidAttachments(
 				return null;
 			}
 
-			if (withAddressOnly) {
-				if (a.address) {
-					const src = ipfsLinkToHttpLink(a.address);
-					if (allowedMediaTypes.includes(mediaType)) {
-						return {
-							...a,
-							src,
-							mediaType,
-						};
-					}
+			if (a.address && allowedContentTypes.includes("address")) {
+				const src = ipfsLinkToHttpLink(a.address);
+				if (allowedMediaTypes.includes(mediaType)) {
+					return {
+						...a,
+						src,
+						mediaType,
+					};
 				}
-			} else {
-				if (a.content) {
-					if (allowedMediaTypes.includes(mediaType)) {
-						return {
-							...a,
-							content: a.content,
-							mediaType,
-						};
-					}
+			}
+
+			if (a.content && allowedContentTypes.includes("content")) {
+				if (allowedMediaTypes.includes(mediaType)) {
+					return {
+						...a,
+						content: a.content,
+						mediaType,
+					};
 				}
 			}
 
