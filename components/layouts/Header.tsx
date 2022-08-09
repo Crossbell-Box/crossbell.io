@@ -1,12 +1,18 @@
 import { ActionIcon, Space, Text, Title } from "@mantine/core";
-import React, { PropsWithChildren, useEffect } from "react";
+import React, { PropsWithChildren, useEffect, useState } from "react";
 import { useRouter } from "next/router";
 import classNames from "classnames";
 import { useElementSize, useWindowScroll } from "@mantine/hooks";
 
-let height = 0;
+let _height = 72;
 
 export function useHeaderSize() {
+	const [height, setHeight] = useState(_height);
+
+	useEffect(() => {
+		setHeight(_height);
+	}, [_height]);
+
 	return { height };
 }
 
@@ -20,9 +26,7 @@ export default function Header({
 }>) {
 	const { ref, height: h } = useElementSize();
 
-	useEffect(() => {
-		height = h;
-	}, [h]);
+	_height = h;
 
 	const router = useRouter();
 

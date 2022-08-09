@@ -283,7 +283,7 @@ function NoteActions({
 
 			{/* comment */}
 			<ActionButton
-				text={status?.commentCount}
+				text={status?.commentCount ?? "..."}
 				label="Comment"
 				icon="i-csb:comment"
 				bgHoverColor="group-hover:bg-blue/10"
@@ -295,7 +295,7 @@ function NoteActions({
 
 			{/* like */}
 			<ActionButton
-				text={status?.likeCount}
+				text={status?.likeCount ?? "..."}
 				label="Like"
 				icon={status?.isLiked ? "i-csb:like-filled" : "i-csb:like"}
 				color={status?.isLiked ? "text-red" : "text-dimmed"}
@@ -312,7 +312,7 @@ function NoteActions({
 
 			{/* mint */}
 			<ActionButton
-				text={status?.mintCount}
+				text={status?.mintCount ?? "..."}
 				label="Mint"
 				icon="i-csb:mint"
 				color={status?.isMinted ? "text-yellow" : "text-dimmed"}

@@ -21,7 +21,7 @@ import {
 } from "@/utils/url";
 import { CharacterEntity, NoteEntity } from "crossbell.js";
 import type { GetServerSideProps } from "next";
-import { Divider, Space } from "@mantine/core";
+import { Divider } from "@mantine/core";
 import { NextSeo } from "next-seo";
 import { getValidAttachments } from "@/utils/metadata";
 import { ipfsLinkToHttpLink } from "@/utils/ipfs";
@@ -91,14 +91,24 @@ const Page: NextPageWithLayout<PageProps> = (props) => {
 
 	// scroll into the main note
 	const { height: headerHeight } = useHeaderSize();
-	const { scrollIntoView: scrollToMainNote, targetRef: mainNoteRef } =
-		useScrollIntoView<HTMLDivElement>({ offset: headerHeight, duration: 500 });
+	const {
+		scrollIntoView: scrollToMainNote,
+		targetRef: mainNoteRef,
+		cancel: cancelScrollToMainNote,
+	} = useScrollIntoView<HTMLDivElement>({
+		offset: headerHeight,
+		duration: 200,
+	});
 
 	useEffect(() => {
 		if (mainNoteRef.current && note?.toNote) {
-			scrollToMainNote();
+			setTimeout(() => {
+				scrollToMainNote();
+			}, 50);
 		}
-	}, [mainNoteRef, note?.toNote]);
+
+		return () => cancelScrollToMainNote();
+	}, [mainNoteRef, note?.toNote, headerHeight]);
 
 	return (
 		<div>
