@@ -97,7 +97,7 @@ export function Note({
 	const renderUsername = () => {
 		if (displayMode === "normal") {
 			return (
-				<div className="flex items-baseline">
+				<div className="flex flex-wrap items-baseline">
 					{/* username */}
 					<CharacterName character={character} characterId={characterId} />
 

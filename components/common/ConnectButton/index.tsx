@@ -1,7 +1,8 @@
-import { PropsWithChildren, forwardRef } from "react";
+import { PropsWithChildren, forwardRef, useState } from "react";
 import {
 	Button,
 	ButtonProps,
+	Checkbox,
 	createPolymorphicComponent,
 	LoadingOverlay,
 	Menu,
@@ -24,8 +25,9 @@ import { truncateAddress } from "@/utils/ethers";
 import Modal from "../Modal";
 import { useModals } from "@mantine/modals";
 import { showNotification } from "@mantine/notifications";
-import { WalletCharacterManageHref } from "@/utils/url";
+import { composeCharacterHref, WalletCharacterManageHref } from "@/utils/url";
 import { NextLink } from "@mantine/next";
+import { useRouter } from "next/router";
 
 export default function ConnectButton() {
 	return (
@@ -226,6 +228,9 @@ function AccountList() {
 
 	const modals = useModals();
 
+	const [shouldNavigate, setShouldNavigate] = useState(true);
+	const router = useRouter();
+
 	return (
 		<>
 			<LoadingOverlay visible={charactersLoading} />
@@ -240,11 +245,31 @@ function AccountList() {
 					onClick={() => {
 						modals.openConfirmModal({
 							title: `Switch to @${c.handle}?`,
-							children: "Are you sure you want to switch to this character?",
+							children: (
+								<div>
+									Are you sure you want to switch to this character?
+									<Checkbox
+										label={
+											<Text color="dimmed">
+												Navigate to the character page after switching
+											</Text>
+										}
+										size="xs"
+										className="my-2"
+										checked={shouldNavigate}
+										onChange={(event) =>
+											setShouldNavigate(event.currentTarget.checked)
+										}
+									/>
+								</div>
+							),
 							labels: { confirm: "Switch", cancel: "Cancel" },
 							onConfirm: () => {
 								setCurCid(c.characterId);
 								showNotification({ message: `Switched to @${c.handle}` });
+								if (shouldNavigate) {
+									router.push(composeCharacterHref(c.handle));
+								}
 							},
 						});
 					}}

@@ -161,7 +161,7 @@ function NoteList() {
 
 			{notes?.pages.map((page, i) => (
 				<Fragment key={i}>
-					{page.list.slice(0, 3).map((n, i) => (
+					{page.list.map((n, i) => (
 						<Note key={`${n.characterId}-${n.noteId}`} note={n} collapsible />
 					))}
 				</Fragment>

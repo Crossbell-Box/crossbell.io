@@ -33,7 +33,7 @@ export function useSearchingNotes(
 	options?: { enabled: boolean }
 ) {
 	return useInfiniteQuery(
-		[...SCOPE_KEY, "notes", "list", query],
+		[...SCOPE_KEY, "notes", "list", query, { limit }],
 		({ pageParam }) =>
 			indexer.searchNotes(query, {
 				cursor: pageParam,
