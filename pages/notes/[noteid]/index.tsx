@@ -8,6 +8,7 @@ import type { NextPageWithLayout } from "@/pages/_app";
 import {
 	fetchCharacter,
 	fetchNote,
+	useCharacter,
 	useNote,
 	useNotesForNote,
 } from "@/utils/apis/indexer";
@@ -76,6 +77,10 @@ const Page: NextPageWithLayout<PageProps> = (props) => {
 		initialData: props.note,
 	});
 
+	const { data: character } = useCharacter(characterId, {
+		initialData: props.character,
+	});
+
 	// useNote(note?.toNote?.characterId, note?.toNote.)
 
 	const {
@@ -93,7 +98,9 @@ const Page: NextPageWithLayout<PageProps> = (props) => {
 
 			<div className="z-1 relative">
 				{/* main note */}
-				<div>{note ? <Note note={note} /> : <NoteSkeleton />}</div>
+				<div>
+					{note ? <Note note={note} character={character} /> : <NoteSkeleton />}
+				</div>
 
 				{/* comment textarea */}
 				<div>{note && <CommentTextarea note={note} />}</div>

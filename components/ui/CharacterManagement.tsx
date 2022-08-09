@@ -9,10 +9,10 @@ import {
 	Text,
 	Space,
 	Loader,
+	Avatar,
 } from "@mantine/core";
 import { useForm } from "@mantine/form";
 import { Dropzone, IMAGE_MIME_TYPE } from "@mantine/dropzone";
-import Avatar from "@/components/common/Avatar";
 import { uploadToIpfs } from "@/utils/ipfs";
 import { extractCharacterName } from "@/utils/metadata";
 import { useDebouncedValue } from "@mantine/hooks";

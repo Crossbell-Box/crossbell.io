@@ -5,13 +5,11 @@ import {
 	useUnfollowCharacter,
 } from "@/utils/apis/contract";
 import { useModals } from "@mantine/modals";
-import { ipfsLinkToHttpLink } from "@/utils/ipfs";
 import {
 	useCharacterFollowRelation,
 	useCurrentCharacter,
 } from "@/utils/apis/indexer";
 import Avatar from "../common/Avatar";
-import { extractCharacterName } from "@/utils/metadata";
 import { CharacterName } from "../common/Character";
 
 const FollowCharacterCard = ({ character }: { character: CharacterEntity }) => {
@@ -43,18 +41,11 @@ const FollowCharacterCard = ({ character }: { character: CharacterEntity }) => {
 		});
 	};
 
-	const characterName = extractCharacterName(character);
-
 	return (
 		<div className="flex flex-row w-full items-start gap-4 p-4">
 			{/* left - avatar */}
 			<div>
-				<Avatar
-					size={64}
-					characterId={character.characterId}
-					address={character.owner}
-					alt={characterName}
-				/>
+				<Avatar size={64} character={character} />
 			</div>
 
 			{/* right */}
@@ -64,7 +55,7 @@ const FollowCharacterCard = ({ character }: { character: CharacterEntity }) => {
 					{/* top-left - name & handle */}
 					<div>
 						<div>
-							<CharacterName characterId={character.characterId} />
+							<CharacterName character={character} />
 						</div>
 						<div>
 							<Text className="text-gray">@{character.handle}</Text>
@@ -104,7 +95,7 @@ const FollowCharacterCard = ({ character }: { character: CharacterEntity }) => {
 					</div>
 				</div>
 
-				{/* bottom - biio */}
+				{/* bottom - bio */}
 				<div>
 					<Text lineClamp={2}>{character.metadata?.content?.bio}</Text>
 				</div>

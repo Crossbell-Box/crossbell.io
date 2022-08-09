@@ -134,7 +134,7 @@ export default function CharacterProfile({
 			<div className="flex flex-col items-center">
 				<Avatar
 					characterId={character?.characterId}
-					address={character?.owner}
+					character={character}
 					size={128}
 					className="rounded-128px hover:rounded-20px transition-border-radius duration-300ms"
 				/>

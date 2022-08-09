@@ -27,12 +27,13 @@ export const SCOPE_KEY_CHARACTER = (characterId?: number | null) => {
 export const fetchCharacter = async (characterId: number) => {
 	return indexer.getCharacter(characterId);
 };
-export function useCharacter(characterId?: number | null) {
+export function useCharacter(characterId?: number | null, options?: any) {
 	return useQuery(
 		SCOPE_KEY_CHARACTER(characterId),
 		() => fetchCharacter(characterId!),
 		{
 			enabled: Boolean(characterId),
+			...options,
 		}
 	);
 }
