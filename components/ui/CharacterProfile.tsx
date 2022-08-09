@@ -37,11 +37,17 @@ export default function CharacterProfile({
 	const { data: currentCharacter } = useCurrentCharacter();
 	const { data: followStatus, isLoading: isLoadingFollowStatus } =
 		useCharacterFollowStats(character?.characterId);
-	const { data: followRelation, isLoading: isLoadingFollowRelation } =
-		useCharacterFollowRelation(
-			currentCharacter?.characterId,
-			character?.characterId
-		);
+	const {
+		data: followRelation,
+		status: followRelationStatus,
+		fetchStatus: followRelationFetchStatus,
+	} = useCharacterFollowRelation(
+		currentCharacter?.characterId,
+		character?.characterId
+	);
+
+	const isLoadingFollowRelation =
+		followRelationStatus === "loading" && followRelationFetchStatus !== "idle";
 
 	const follow = useFollowCharacter(character?.characterId!);
 	const unfollow = useUnfollowCharacter(character?.characterId!);

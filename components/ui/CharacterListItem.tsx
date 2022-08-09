@@ -14,7 +14,7 @@ export default function CharacterListItem({
 		<Box className="flex">
 			{/* left - avatar */}
 			<Avatar
-				src={extractCharacterAvatar(character)}
+				size={64}
 				characterId={character.characterId}
 				character={character}
 				alt={name}
