@@ -49,7 +49,7 @@ export default function MediaCarousel({
 				setSelectedIndex(index);
 			}
 		},
-		[embla, emblaThumbs]
+		[emblaThumbs]
 	);
 
 	useEffect(() => {

@@ -108,7 +108,7 @@ const Page: NextPageWithLayout<PageProps> = (props) => {
 		}
 
 		return () => cancelScrollToMainNote();
-	}, [mainNoteRef, note?.toNote, headerHeight]);
+	}, [mainNoteRef, note?.toNote, headerHeight, cancelScrollToMainNote]);
 
 	return (
 		<div>
