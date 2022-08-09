@@ -8,11 +8,13 @@ const SUPPORTED_PLATFORMS = [
     id: "medium",
     name: "Medium",
     icon: <MediumLogo />,
+    bg: "black",
   },
   {
     id: "tiktok",
     name: "TikTok",
     icon: <TikTokLogo />,
+    bg: "black",
   },
 ];
 

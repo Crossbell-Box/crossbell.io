@@ -29,7 +29,7 @@ const allTypeArray = [
 
 const CountCardPart = () => (
   <div className={"grid grid-cols-3 gap-4"}>
-    {allTypeArray.map(t => <TypedNoteCard key={t.id} icon={t.icon} color={t.color} label={t.label} count={t.count}/>)}
+    {allTypeArray.map(t => <TypedNoteCard key={t.id} icon={t.icon} bg={t.color} label={t.label} count={t.count}/>)}
   </div>
 );
 
