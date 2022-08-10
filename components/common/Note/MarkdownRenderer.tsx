@@ -1,5 +1,14 @@
 import { PropsWithChildren, useEffect, useState } from "react";
-import { Table, Text, Title } from "@mantine/core";
+import {
+	Blockquote,
+	Code,
+	Divider,
+	List,
+	Mark,
+	Table,
+	Text,
+	Title,
+} from "@mantine/core";
 import Image from "./../Image";
 import ReactMarkdown from "react-markdown";
 import { ReactMarkdownOptions } from "react-markdown/lib/react-markdown";
@@ -37,6 +46,7 @@ export function MarkdownRenderer({
 		children = children.slice(0, 1000); // TODO: should i do this?
 	}
 
+	// force break lines
 	const source =
 		typeof children === "string" ? children.replace(/\n/g, "  \n") : children;
 
@@ -123,6 +133,30 @@ export function MarkdownRenderer({
 									{props.children}
 								</Table>
 							),
+							blockquote: ({ node, ...props }) => {
+								return <Blockquote>{props.children}</Blockquote>;
+							},
+							code: ({ node, ...props }) => {
+								return <Code>{props.children}</Code>;
+							},
+							pre: ({ node, ...props }) => {
+								return <Code block>{props.children}</Code>;
+							},
+							ol: ({ node, ...props }) => {
+								return <List type="ordered">{props.children}</List>;
+							},
+							ul: ({ node, ...props }) => {
+								return <List type="unordered">{props.children}</List>;
+							},
+							li: ({ node, ...props }) => {
+								return <List.Item>{props.children}</List.Item>;
+							},
+							mark: ({ node, ...props }) => {
+								return <Mark>{props.children}</Mark>;
+							},
+							hr: ({ node, ...props }) => {
+								return <Divider />;
+							},
 						}}
 						rehypePlugins={[rehypeRaw]}
 						remarkPlugins={[remarkGfm]}

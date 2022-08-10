@@ -7,7 +7,7 @@ const queryClient = new QueryClient();
 export default function QueryProvider({ children }: PropsWithChildren) {
 	return (
 		<QueryClientProvider client={queryClient}>
-			<ReactQueryDevtools />
+			<ReactQueryDevtools position="bottom-right" />
 			{children}
 		</QueryClientProvider>
 	);

@@ -1,5 +1,5 @@
 import Avatar from "@/components/common/Avatar";
-import { Skeleton, Space, Text } from "@mantine/core";
+import { Skeleton, Space, Text, Title } from "@mantine/core";
 import { CharacterEntity, NoteEntity } from "crossbell.js";
 import { useCharacter, useNoteStatus } from "@/utils/apis/indexer";
 import classNames from "classnames";
@@ -196,8 +196,15 @@ export function Note({
 
 	const renderContent = () => {
 		const clxs = displayMode === "main" ? "text-1.25em" : "text-1em";
+		const titleOrder = displayMode === "main" ? 2 : 3;
 		return (
 			<div className={clxs}>
+				{note.metadata?.content?.title && (
+					<Title order={titleOrder} className="my-2">
+						{note.metadata.content.title}
+					</Title>
+				)}
+
 				<MarkdownRenderer collapsible={collapsible}>
 					{note.metadata?.content?.content ?? ""}
 				</MarkdownRenderer>

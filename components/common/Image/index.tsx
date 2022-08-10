@@ -51,8 +51,8 @@ export default function Image({
 	...props
 }: PropsWithChildren<ImageProps>) {
 	const thumborLoader: ImageLoader = ({ src, width, quality }) => {
-		const w = props.width ?? width;
-		const h = props.height ?? "0";
+		const w = typeof props.width === "number" ? props.width : width;
+		const h = typeof props.height === "number" ? props.height : 0;
 		return `https://thumbor.rss3.dev/unsafe/${w}x${h}/smart/${src}`;
 	};
 
