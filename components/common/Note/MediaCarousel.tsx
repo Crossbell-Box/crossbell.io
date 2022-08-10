@@ -163,7 +163,7 @@ export default function MediaCarousel({
 			<Carousel
 				getEmblaApi={setEmbla}
 				height={isOverlay ? "70vh" : 300}
-				className="overflow-hidden w-full"
+				className="overflow-hidden w-full rounded-md"
 				loop
 				withIndicators={isMultiple}
 				withControls={isMultiple}
