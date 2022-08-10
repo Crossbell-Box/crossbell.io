@@ -215,7 +215,7 @@ export default function CharacterManagement({
 		<Box>
 			<LoadingOverlay
 				visible={
-					isLoadingCharacter ||
+					(characterId && isLoadingCharacter) ||
 					createCharacter.isLoading ||
 					setHandle.isLoading ||
 					setMetadata.isLoading

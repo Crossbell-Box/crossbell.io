@@ -2,18 +2,25 @@ import { ipfsLinkToHttpLink } from "@/utils/ipfs";
 import { NoteMetadata } from "crossbell.js";
 import { Carousel, Embla } from "@mantine/carousel";
 import Image from "../Image";
-import { useCallback, useEffect, useRef, useState } from "react";
-import { Space } from "@mantine/core";
+import { useCallback, useEffect, useState } from "react";
+import { Modal, Space } from "@mantine/core";
 import classNames from "classnames";
 import { getValidAttachments, mimeTypeToMediaType } from "@/utils/metadata";
+import { useHotkeys, useMediaQuery } from "@mantine/hooks";
 
 export default function MediaCarousel({
 	attachments = [],
+	defaultSelectedIndex = 0,
+	isOverlay = false,
 }: {
 	attachments: NoteMetadata["attachments"];
+	defaultSelectedIndex?: number;
+	isOverlay?: boolean;
 }) {
+	const [overlayOpened, setOverlayOpened] = useState(false);
+
 	const validAttachments = getValidAttachments(attachments, {
-		withAddressOnly: true,
+		allowedContentTypes: ["address"],
 	});
 
 	const isMultiple = validAttachments.length > 1;
@@ -21,20 +28,28 @@ export default function MediaCarousel({
 	const [embla, setEmbla] = useState<Embla | null>(null);
 	const [emblaThumbs, setEmblaThumbs] = useState<Embla | null>(null);
 
-	const [selectedIndex, setSelectedIndex] = useState<number>(0);
+	const [selectedIndex, setSelectedIndex] =
+		useState<number>(defaultSelectedIndex);
 
 	const handleSelect = useCallback(() => {
 		if (!embla || !emblaThumbs) return;
 		setSelectedIndex(embla.selectedScrollSnap());
-		emblaThumbs.scrollTo(embla.selectedScrollSnap());
 	}, [embla, emblaThumbs, setSelectedIndex]);
+
+	// scroll to selected index
+	useEffect(() => {
+		if (!embla || !emblaThumbs) return;
+		emblaThumbs.scrollTo(selectedIndex);
+		embla.scrollTo(selectedIndex);
+	}, [embla, emblaThumbs, selectedIndex]);
 
 	const handleThumbClick = useCallback(
 		(index: number) => {
-			if (!embla || !emblaThumbs) return;
-			if (emblaThumbs.clickAllowed()) embla.scrollTo(index);
+			if (emblaThumbs?.clickAllowed()) {
+				setSelectedIndex(index);
+			}
 		},
-		[embla, emblaThumbs]
+		[emblaThumbs]
 	);
 
 	useEffect(() => {
@@ -43,6 +58,40 @@ export default function MediaCarousel({
 			embla.on("select", handleSelect);
 		}
 	}, [embla, handleSelect]);
+
+	// reinit to prevent position shifting
+	const [reInited, setReInited] = useState(false);
+	if (isOverlay && embla && emblaThumbs && !reInited) {
+		setTimeout(() => {
+			embla.reInit(); // to keep the scroll position correctly calculated
+			// emblaThumbs.reInit(); // will cause shifting. need a better way to do this
+			setReInited(true);
+		}, 250);
+	}
+
+	const mediaSm = useMediaQuery("(max-width: 900px)", false);
+
+	// switching keys
+	useHotkeys([
+		[
+			"ArrowLeft",
+			() => {
+				if (isOverlay) {
+					const length = validAttachments.length;
+					setSelectedIndex((selectedIndex + length - 1) % length);
+				}
+			},
+		],
+		[
+			"ArrowRight",
+			() => {
+				if (isOverlay) {
+					const length = validAttachments.length;
+					setSelectedIndex((selectedIndex + 1) % length);
+				}
+			},
+		],
+	]);
 
 	const renderAttachments = ({
 		isThumbnail = false,
@@ -67,8 +116,8 @@ export default function MediaCarousel({
 									height={isThumbnail ? 100 : undefined}
 									width={isThumbnail ? 100 : undefined}
 									onClick={() => {
-										if (!isThumbnail) {
-											window.open(src);
+										if (!isThumbnail && !isOverlay) {
+											setOverlayOpened(true);
 										} else {
 											handleThumbClick(index);
 										}
@@ -90,18 +139,32 @@ export default function MediaCarousel({
 
 	return (
 		<div
-			className="w-full overflow-hidden"
+			className="overflow-hidden"
 			onClick={(e) => {
 				e.stopPropagation();
 			}}
 		>
-			{/* main */}
+			<Modal
+				size="100vw"
+				fullScreen={mediaSm}
+				centered
+				opened={overlayOpened}
+				onClose={() => setOverlayOpened(false)}
+				// withCloseButton={false}
+			>
+				<MediaCarousel
+					attachments={attachments}
+					isOverlay
+					defaultSelectedIndex={selectedIndex}
+				/>
+			</Modal>
 
+			{/* main */}
 			<Carousel
 				getEmblaApi={setEmbla}
-				height={300}
-				className="overflow-hidden relative w-full"
-				// loop
+				height={isOverlay ? "70vh" : 300}
+				className="overflow-hidden w-full"
+				loop
 				withIndicators={isMultiple}
 				withControls={isMultiple}
 			>
@@ -111,7 +174,7 @@ export default function MediaCarousel({
 			<Space h={10} />
 
 			{/* thumbnails */}
-			{attachments.length > 1 && (
+			{isMultiple && (
 				<Carousel
 					getEmblaApi={setEmblaThumbs}
 					height={100}

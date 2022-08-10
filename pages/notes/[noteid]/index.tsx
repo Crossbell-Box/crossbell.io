@@ -1,8 +1,8 @@
-import { Fragment } from "react";
+import { Fragment, useEffect } from "react";
 import LoadMore from "@/components/common/LoadMore";
 import { Note, NoteSkeleton } from "@/components/common/Note";
 import { getLayout } from "@/components/layouts/AppLayout";
-import Header from "@/components/layouts/Header";
+import Header, { useHeaderSize } from "@/components/layouts/Header";
 import { CommentTextarea } from "@/components/ui/CommentTextarea";
 import type { NextPageWithLayout } from "@/pages/_app";
 import {
@@ -25,6 +25,7 @@ import { Divider } from "@mantine/core";
 import { NextSeo } from "next-seo";
 import { getValidAttachments } from "@/utils/metadata";
 import { ipfsLinkToHttpLink } from "@/utils/ipfs";
+import { useScrollIntoView } from "@mantine/hooks";
 
 const SEO = ({
 	note,
@@ -36,7 +37,7 @@ const SEO = ({
 	const origin = getOrigin();
 	const images = getValidAttachments(note?.metadata?.content?.attachments, {
 		allowedMediaTypes: ["image"],
-		withAddressOnly: true,
+		allowedContentTypes: ["address"],
 	});
 
 	return (
@@ -81,14 +82,33 @@ const Page: NextPageWithLayout<PageProps> = (props) => {
 		initialData: props.character,
 	});
 
-	// useNote(note?.toNote?.characterId, note?.toNote.)
-
 	const {
 		data: comments,
 		isFetchingNextPage,
 		hasNextPage,
 		fetchNextPage,
 	} = useNotesForNote(characterId, noteId);
+
+	// scroll into the main note
+	const { height: headerHeight } = useHeaderSize();
+	const {
+		scrollIntoView: scrollToMainNote,
+		targetRef: mainNoteRef,
+		cancel: cancelScrollToMainNote,
+	} = useScrollIntoView<HTMLDivElement>({
+		offset: headerHeight,
+		duration: 200,
+	});
+
+	useEffect(() => {
+		if (mainNoteRef.current && note?.toNote) {
+			setTimeout(() => {
+				scrollToMainNote();
+			}, 50);
+		}
+
+		return () => cancelScrollToMainNote();
+	}, [mainNoteRef, note?.toNote, headerHeight, cancelScrollToMainNote]);
 
 	return (
 		<div>
@@ -97,8 +117,15 @@ const Page: NextPageWithLayout<PageProps> = (props) => {
 			<Header hasBackButton>Note</Header>
 
 			<div className="z-1 relative">
-				{/* main note */}
+				{/* to note */}
 				<div>
+					{note?.toNote && (
+						<Note note={note.toNote} character={note.toCharacter} />
+					)}
+				</div>
+
+				{/* main note */}
+				<div ref={mainNoteRef}>
 					{note ? <Note note={note} character={character} /> : <NoteSkeleton />}
 				</div>
 
@@ -132,6 +159,9 @@ const Page: NextPageWithLayout<PageProps> = (props) => {
 						<NoteSkeleton />
 					</LoadMore>
 				</div>
+
+				{/* margin bottom */}
+				{!isFetchingNextPage && <div className="h-80vh" />}
 			</div>
 		</div>
 	);

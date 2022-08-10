@@ -20,6 +20,7 @@ const LinkPreviewCard = ({ data }: LinkPreviewCardProps) => (
 						width={160}
 						height={160}
 						src={data.images[0]}
+						alt={data.title}
 						objectFit="cover"
 						className="flex rounded-xl aspect-ratio-1"
 					/>
@@ -33,8 +34,8 @@ const LinkPreviewCard = ({ data }: LinkPreviewCardProps) => (
 								width={16}
 								height={16}
 								src={data.favicons[0]}
+								alt="favicon"
 								className="rounded-full"
-								alt=""
 							/>
 						</div>
 					)}

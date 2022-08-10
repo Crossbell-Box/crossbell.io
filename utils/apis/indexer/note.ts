@@ -135,6 +135,6 @@ export function useNoteStatus(characterId: number, noteId: number) {
 				isMinted,
 			};
 		},
-		{ enabled: Boolean(characterId && noteId && currentCharacter?.characterId) }
+		{ enabled: Boolean(characterId && noteId) }
 	);
 }
