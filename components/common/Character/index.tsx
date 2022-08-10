@@ -14,10 +14,13 @@ export function CharacterName({
 	| { characterId?: never; character: CharacterEntity }
 ) &
 	TextProps) {
-	const { data, isLoading } = useCharacter(characterId, {
-		enabled: Boolean(characterId) && !Boolean(initialCharacter),
-		initialData: initialCharacter,
-	});
+	const { data, isLoading } = useCharacter(
+		characterId ?? initialCharacter.characterId,
+		{
+			enabled: Boolean(characterId) && !Boolean(initialCharacter),
+			initialData: initialCharacter,
+		}
+	);
 
 	const characterName = extractCharacterName(data);
 
