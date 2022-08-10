@@ -110,7 +110,7 @@ export function Note({
 			return (
 				<div>
 					<Avatar
-						size={64}
+						size={54}
 						characterId={note.characterId}
 						character={character}
 					/>
@@ -218,22 +218,29 @@ export function Note({
 
 	return (
 		<div
-			className={classNames(
-				"flex flex-row w-full py-3 px-3 border-b border-gray/20",
-				{
-					"bg-hover cursor-pointer": displayMode === "normal",
-				}
-			)}
+			className={classNames("flex w-full py-3 px-3 border-b border-gray/20", {
+				"bg-hover cursor-pointer flex-row": displayMode === "normal",
+				"flex-col": displayMode === "main",
+			})}
 			onClick={() => navigate()}
 		>
-			{/* avatar */}
-			{renderAvatar()}
+			<div className="flex">
+				{/* avatar */}
+				{renderAvatar()}
+
+				{displayMode === "main" && (
+					<>
+						<Space w={10} />
+						{renderUsername()}
+					</>
+				)}
+			</div>
 
 			<Space w={10} />
 
 			{/* right side */}
 			<div className="flex-grow">
-				{renderUsername()}
+				{displayMode === "normal" && renderUsername()}
 
 				{/* replying info */}
 				{renderReplyingInfo()}
