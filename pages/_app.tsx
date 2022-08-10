@@ -8,6 +8,7 @@ import ThemeProvider from "@/components/providers/ThemeProvider";
 import QueryProvider from "@/components/providers/QueryProvider";
 import NotificationsProvider from "@/components/providers/NotificationsProvider";
 import ModalsProvider from "@/components/providers/ModalsProvider";
+import { RouterTransition } from "@/components/providers/RouterTransition";
 import "@/styles/globals.css";
 import "uno.css";
 
@@ -52,6 +53,7 @@ export default function App({ Component, pageProps }: AppPropsWithLayout) {
 					<NotificationsProvider>
 						<WalletProvider>
 							<QueryProvider>
+								<RouterTransition />
 								{getLayout(<Component {...pageProps} />)}
 							</QueryProvider>
 						</WalletProvider>
