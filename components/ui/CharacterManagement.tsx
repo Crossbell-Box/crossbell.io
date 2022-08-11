@@ -316,7 +316,7 @@ export default function CharacterManagement({
 						type="submit"
 						size="md"
 						className="text-dark"
-						disabled={avatarLoading}
+						disabled={(Boolean(characterId) && isLoadingCharacter) || avatarLoading}
 					>
 						I’ve decided
 					</Button>
