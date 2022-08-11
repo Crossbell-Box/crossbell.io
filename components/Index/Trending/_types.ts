@@ -10,11 +10,12 @@ export type TrendingCharacter = {
 }
 
 export type TrendingTreasure = {
+  character_id: number;
   character_name: string;
   character_handle: string;
   character_avatar: string;
 
-  crossbell_id: string;
+  crossbell_id: number;
   media: string;
   text: string;
   mint_count: number;
