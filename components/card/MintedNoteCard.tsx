@@ -38,7 +38,7 @@ const TreasurePart = ({ treasure, character }: MintedNoteRawProps) => (
 					treasure.text
 						? `linear-gradient( rgba(0, 0, 0, 0.5), rgba(0, 0, 0, 0.5) ), `
 						: ""
-				}url(${ipfsLinkToHttpLink(treasure.image)})`,
+				}url(${ipfsLinkToHttpLink(treasure.image || character.avatar)})`,
 			}}
 		>
 			{treasure.text && (

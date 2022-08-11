@@ -24,7 +24,7 @@ export const TrendingCharacterRawCard = ({
 	<div
 		className="flex flex-col rounded-lg text-white p-4 w-full h-full justify-between bg-cover bg-center"
 		style={{
-			backgroundImage: `linear-gradient( rgba(0, 0, 0, 0.5), rgba(0, 0, 0, 0.5) ), url(${ipfsLinkToHttpLink(character.banner)})`,
+			backgroundImage: `linear-gradient( rgba(0, 0, 0, 0.5), rgba(0, 0, 0, 0.5) ), url(${ipfsLinkToHttpLink(character.banner || character.avatar)})`,
 			aspectRatio: "203/264",
 		}}
 	>
