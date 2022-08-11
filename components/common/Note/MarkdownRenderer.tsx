@@ -147,7 +147,7 @@ export function MarkdownRenderer({
 							code: ({ node, ...props }) => {
 								return <Code>{props.children}</Code>;
 							},
-							pre: ({ node, ...props }) => {
+							pre: function Pre({ node, ...props }) {
 								const { ref, width } = useElementSize();
 								return (
 									<div>
