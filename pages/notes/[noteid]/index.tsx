@@ -23,9 +23,10 @@ import { CharacterEntity, NoteEntity } from "crossbell.js";
 import type { GetServerSideProps } from "next";
 import { Divider } from "@mantine/core";
 import { NextSeo } from "next-seo";
-import { getValidAttachments } from "@/utils/metadata";
+import { extractCharacterName, getValidAttachments } from "@/utils/metadata";
 import { ipfsLinkToHttpLink } from "@/utils/ipfs";
 import { useScrollIntoView } from "@mantine/hooks";
+import Head from "next/head";
 
 const SEO = ({
 	note,
@@ -112,6 +113,17 @@ const Page: NextPageWithLayout<PageProps> = (props) => {
 
 	return (
 		<div>
+			<Head>
+				<title>
+					{extractCharacterName(character)}: &quot;
+					{note?.metadata?.content?.content
+						?.toString()
+						.slice(0, 100)
+						.replace(/\n/g, "")}
+					&quot;
+				</title>
+			</Head>
+
 			<SEO note={note} character={props.character} />
 
 			<Header hasBackButton>Note</Header>

@@ -2,6 +2,7 @@ import { getLayout } from "@/components/layouts/AppLayout";
 import Header from "@/components/layouts/Header";
 import type { NextPageWithLayout } from "@/pages/_app";
 import { Button, Title } from "@mantine/core";
+import Head from "next/head";
 
 const SNSIcons = () => (
 	<div className={"absolute w-full h-full overflow-hidden"}>
@@ -79,6 +80,10 @@ const OperatorSyncPending = () => (
 const Page: NextPageWithLayout = () => {
 	return (
 		<div>
+			<Head>
+				<title>Sync</title>
+			</Head>
+
 			<Header>Sync</Header>
 
 			<div className={"relative"}>
