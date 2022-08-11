@@ -18,7 +18,7 @@ export default function NoteSources({
 	noteMetadata?: NoteMetadata | null;
 }) {
 	return (
-		<>
+		<div>
 			{noteMetadata?.sources?.map((s) => {
 				const color = getColorFromSource(s);
 				const lighterColor = new TinyColor(color).lighten(10).toHexString();
@@ -30,6 +30,7 @@ export default function NoteSources({
 				return (
 					<div className="max-w-10em inline mr-2" key={s}>
 						<Badge
+							className="transition-shadow hover:shadow-sm active:scale-95 transition"
 							variant="gradient"
 							gradient={color ? { from: color, to: lighterColor } : undefined}
 							style={{ color: textColor }}
@@ -39,7 +40,7 @@ export default function NoteSources({
 					</div>
 				);
 			})}
-		</>
+		</div>
 	);
 }
 

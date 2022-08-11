@@ -16,7 +16,8 @@ import { useAccount } from "wagmi";
 import { CharacterHandle, CharacterName } from "../Character";
 import Time from "../Time";
 import { getValidAttachments } from "@/utils/metadata";
-import NoteSources from "./NoteSources";
+import NoteSourceBadges from "./NoteSourceBadges";
+import NoteIdBadge from "./NoteIdBadge";
 
 function ActionButton({
 	text,
@@ -179,11 +180,19 @@ export function Note({
 	};
 
 	const renderBottomInfo = () => {
+		const Info = () => (
+			<div className="flex flex-row justify-between items-center">
+				{/* source */}
+				<NoteSourceBadges noteMetadata={note.metadata?.content} />
+
+				{/* id */}
+				<NoteIdBadge note={note} />
+			</div>
+		);
 		if (displayMode === "normal") {
 			return (
 				<div>
-					{/* source */}
-					<NoteSources noteMetadata={note.metadata?.content} />
+					<Info />
 				</div>
 			);
 		}
@@ -191,8 +200,7 @@ export function Note({
 		if (displayMode === "main") {
 			return (
 				<div>
-					{/* source */}
-					<NoteSources noteMetadata={note.metadata?.content} />
+					<Info />
 
 					<Space h={10} />
 
