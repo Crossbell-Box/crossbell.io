@@ -69,7 +69,10 @@ export function CharacterHandle({
 	const data = data1 ?? data2;
 	const isLoading = isLoading1 || isLoading2;
 
-	const characterHandle = "@" + data?.handle;
+	const passedHandle = "@" + handle;
+	const dataHandle = "@" + data?.handle;
+
+	const characterHandle = passedHandle ?? dataHandle;
 
 	return (
 		<Text
