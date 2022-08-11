@@ -3,7 +3,7 @@ import {
 	type ImageLoader,
 	type ImageProps,
 } from "next/image";
-import { PropsWithChildren } from "react";
+import { PropsWithChildren, useState } from "react";
 
 // Pixel GIF code adapted from https://stackoverflow.com/a/33919020/266535
 const keyStr =
@@ -51,20 +51,26 @@ export default function Image({
 	...props
 }: PropsWithChildren<ImageProps>) {
 	const thumborLoader: ImageLoader = ({ src, width, quality }) => {
+		if (src.startsWith("/")) {
+			return src;
+		}
 		const w = typeof props.width === "number" ? props.width : width;
 		const h = typeof props.height === "number" ? props.height : 0;
 		return `https://thumbor.rss3.dev/unsafe/${w}x${h}/smart/${src}`;
 	};
 
+	const [_src, _setSrc] = useState(src);
+
 	return (
 		<NextImage
-			src={src}
+			src={_src}
 			loader={thumborLoader}
 			layout="responsive"
 			objectFit="cover"
 			placeholder="blur"
 			// blurDataURL={randomColor()}
 			blurDataURL={`data:image/svg+xml;base64,${toBase64(shimmer())}`}
+			onError={() => _setSrc("/images/image-error.png")}
 			{...props}
 		/>
 	);
