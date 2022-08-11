@@ -88,16 +88,17 @@ export function MarkdownRenderer({
 							},
 							img: ({ node, ...props }) => {
 								const src = ipfsLinkToHttpLink(props.src!);
+								const { ref: imgRef, width } = useElementSize();
 								return (
-									<div className="relative h-300px my-2">
+									<div ref={imgRef} className="relative my-2 h-300px">
 										<Image
-											className="cursor-pointer"
-											width={props.width}
-											height={props.height}
+											className="cursor-pointer rounded-md"
+											// width={props.width ?? width}
+											// height={props.height ?? 300}
 											alt={props.alt}
 											title={props.title}
+											fill
 											src={src}
-											layout="fill"
 											onClick={(e) => {
 												e.stopPropagation();
 												window.open(src);
@@ -148,18 +149,10 @@ export function MarkdownRenderer({
 								return <Code>{props.children}</Code>;
 							},
 							pre: function Pre({ node, ...props }) {
-								const { ref, width } = useElementSize();
 								return (
-									<div>
-										<div ref={ref}></div>
-										<Code
-											block
-											className="overflow-auto"
-											style={{ maxWidth: width }}
-										>
-											{props.children}
-										</Code>
-									</div>
+									<Code block className="overflow-auto">
+										{props.children}
+									</Code>
 								);
 							},
 							ol: ({ node, ...props }) => {

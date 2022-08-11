@@ -241,6 +241,7 @@ export function Note({
 			})}
 			onClick={() => navigate()}
 		>
+			{/* avatar & username */}
 			<div className="flex">
 				{/* avatar */}
 				{renderAvatar()}
@@ -256,7 +257,7 @@ export function Note({
 			<Space w={10} />
 
 			{/* right side */}
-			<div className="flex-grow">
+			<div className="flex-grow overflow-hidden">
 				{displayMode === "normal" && renderUsername()}
 
 				{/* replying info */}
@@ -266,11 +267,11 @@ export function Note({
 				{renderContent()}
 
 				{Boolean(validAttachments?.length) && (
-					<>
+					<div>
 						<Space h={10} />
 						<MediaCarousel attachments={validAttachments} />
 						<Space h={10} />
-					</>
+					</div>
 				)}
 
 				{/* media */}

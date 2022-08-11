@@ -15,14 +15,13 @@ const LinkPreviewCard = ({ data }: LinkPreviewCardProps) => (
 	>
 		<div className="flex flex-row my-4 p-4 border-solid border-1px border-#CCC rounded gap-4 bg-hover">
 			{"images" in data && data.images[0] && (
-				<div className="w-20 h-20 rounded-xl flex-shrink-0">
+				<div className="relative w-20 h-20 rounded-xl flex-shrink-0 overflow-hidden">
 					<Image
-						width={160}
-						height={160}
+						className="flex rounded-xl aspect-ratio-1 object-cover"
+						sizes="160px"
+						fill
 						src={data.images[0]}
 						alt={data.title}
-						objectFit="cover"
-						className="flex rounded-xl aspect-ratio-1"
 					/>
 				</div>
 			)}
