@@ -16,6 +16,7 @@ import { useAccount } from "wagmi";
 import { CharacterHandle, CharacterName } from "../Character";
 import Time from "../Time";
 import { getValidAttachments } from "@/utils/metadata";
+import NoteSources from "./NoteSources";
 
 function ActionButton({
 	text,
@@ -181,13 +182,23 @@ export function Note({
 
 	const renderBottomInfo = () => {
 		if (displayMode === "normal") {
-			return <></>;
+			return (
+				<div>
+					{/* source */}
+					<NoteSources noteMetadata={note.metadata?.content} />
+				</div>
+			);
 		}
 
 		if (displayMode === "main") {
 			return (
 				<div>
+					{/* source */}
+					<NoteSources noteMetadata={note.metadata?.content} />
+
 					<Space h={10} />
+
+					{/* time */}
 					<Time href={href} date={note.createdAt} mode="accurate" />
 				</div>
 			);
@@ -252,6 +263,7 @@ export function Note({
 					<>
 						<Space h={10} />
 						<MediaCarousel attachments={validAttachments} />
+						<Space h={10} />
 					</>
 				)}
 

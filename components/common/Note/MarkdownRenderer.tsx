@@ -90,6 +90,10 @@ export function MarkdownRenderer({
 									<div className="relative h-300px my-2">
 										<Image
 											className="cursor-pointer"
+											width={props.width}
+											height={props.height}
+											alt={props.alt}
+											title={props.title}
 											src={src}
 											layout="fill"
 											onClick={(e) => {
