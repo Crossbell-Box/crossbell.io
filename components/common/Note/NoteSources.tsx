@@ -30,7 +30,6 @@ export default function NoteSources({
 				return (
 					<div className="max-w-10em inline mr-2" key={s}>
 						<Badge
-							className="mr-2"
 							variant="gradient"
 							gradient={color ? { from: color, to: lighterColor } : undefined}
 							style={{ color: textColor }}
