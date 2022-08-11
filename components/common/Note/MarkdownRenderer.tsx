@@ -97,6 +97,7 @@ export function MarkdownRenderer({
 											alt={props.alt}
 											title={props.title}
 											fill
+											sizes="(min-width: 75em) 33vw, (min-width: 48em) 50vw, 100vw"
 											src={src}
 											onClick={(e) => {
 												e.stopPropagation();
