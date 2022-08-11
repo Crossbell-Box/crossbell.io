@@ -171,8 +171,6 @@ export function Note({
 						<CharacterHandle
 							character={note.toCharacter}
 							characterId={note.toCharacterId!}
-							color="brand"
-							weight="bold"
 						/>
 					</Text>
 				</div>

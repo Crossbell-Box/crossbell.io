@@ -1,4 +1,4 @@
-import { useCharacter } from "@/utils/apis/indexer";
+import { useCharacter, useCharacterByHandle } from "@/utils/apis/indexer";
 import { extractCharacterName } from "@/utils/metadata";
 import { composeCharacterHref } from "@/utils/url";
 import { NextLink } from "@mantine/next";
@@ -41,23 +41,38 @@ export function CharacterName({
 
 export function CharacterHandle({
 	characterId,
+	handle,
 	character: initialCharacter,
 	...props
 }: (
-	| { characterId: number; character?: CharacterEntity | null }
-	| { characterId?: never; character: CharacterEntity }
+	| { characterId: number; handle?: never; character?: CharacterEntity | null }
+	| { characterId?: never; handle: string; character?: CharacterEntity | null }
+	| { characterId?: never; handle?: never; character: CharacterEntity }
 ) &
 	TextProps) {
-	const { data, isLoading } = useCharacter(characterId, {
-		enabled: Boolean(characterId) && !Boolean(initialCharacter),
-		initialData: initialCharacter,
-	});
+	const { data: data1, isLoading: isLoading1 } = useCharacter(
+		characterId ?? initialCharacter?.characterId,
+		{
+			enabled: Boolean(characterId) && !Boolean(initialCharacter),
+			initialData: initialCharacter,
+		}
+	);
+
+	const { data: data2, isLoading: isLoading2 } = useCharacterByHandle(
+		handle ?? initialCharacter?.handle,
+		{
+			enabled: Boolean(handle) && !Boolean(initialCharacter),
+			initialData: initialCharacter,
+		}
+	);
+
+	const data = data1 ?? data2;
+	const isLoading = isLoading1 || isLoading2;
 
 	const characterHandle = "@" + data?.handle;
 
 	return (
 		<Text
-			color="dimmed"
 			component={NextLink}
 			href={composeCharacterHref(characterHandle)}
 			variant="link"
