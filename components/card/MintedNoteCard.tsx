@@ -38,7 +38,7 @@ const TreasurePart = ({ treasure, character }: MintedNoteRawProps) => (
 					treasure.text
 						? `linear-gradient( rgba(0, 0, 0, 0.5), rgba(0, 0, 0, 0.5) ), `
 						: ""
-				}url(${treasure.image})`,
+				}url(${ipfsLinkToHttpLink(treasure.image)})`,
 			}}
 		>
 			{treasure.text && (
@@ -55,7 +55,7 @@ const TreasurePart = ({ treasure, character }: MintedNoteRawProps) => (
 						style={{
 							border: "2px solid white",
 						}}
-						src={character.avatar}
+						src={ipfsLinkToHttpLink(character.avatar)}
 						alt={character.name}
 					/>
 				</div>
