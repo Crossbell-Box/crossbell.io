@@ -88,11 +88,10 @@ export function MarkdownRenderer({
 							},
 							img: ({ node, ...props }) => {
 								const src = ipfsLinkToHttpLink(props.src!);
-								const { ref: imgRef, width } = useElementSize();
 								return (
-									<div ref={imgRef} className="relative my-2 h-300px">
+									<div className="relative my-2 h-300px w-full">
 										<Image
-											className="cursor-pointer rounded-md"
+											className="cursor-pointer rounded-md object-contain"
 											// width={props.width ?? width}
 											// height={props.height ?? 300}
 											alt={props.alt}

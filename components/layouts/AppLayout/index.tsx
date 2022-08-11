@@ -3,6 +3,7 @@ import { AppShell, Center } from "@mantine/core";
 import Nav from "./Nav";
 import Aside from "./Aside";
 import { useElementSize } from "@mantine/hooks";
+import ScrollToTop from "@/components/common/ScrollToTopButton";
 
 export default function AppLayout({ children }: PropsWithChildren) {
 	const { ref: rootRef, width: rootWidth } = useElementSize();
@@ -12,6 +13,7 @@ export default function AppLayout({ children }: PropsWithChildren) {
 
 	return (
 		<Center>
+			<ScrollToTop />
 			<AppShell
 				ref={rootRef}
 				styles={{
