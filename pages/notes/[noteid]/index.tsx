@@ -116,7 +116,7 @@ const Page: NextPageWithLayout<PageProps> = (props) => {
 
 			<Header hasBackButton>Note</Header>
 
-			<div className="z-1 relative">
+			<div className="relative">
 				{/* to note */}
 				<div>
 					{note?.toNote && (

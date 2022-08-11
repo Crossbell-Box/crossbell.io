@@ -23,14 +23,16 @@ export const useContract = () => {
 			});
 		} else {
 			// user is not logged in
-			contract = new Contract();
-			contract = new Proxy(contract, {
-				get: (target, prop) => {
-					return async () => {
-						throw new Error("Not connected. Please connect your wallet.");
-					};
-				},
-			});
+			contract = contract ?? new Contract();
+			contract =
+				contract ??
+				new Proxy(contract, {
+					get: (target, prop) => {
+						return async () => {
+							throw new Error("Not connected. Please connect your wallet.");
+						};
+					},
+				});
 		}
 	}
 
