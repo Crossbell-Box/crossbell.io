@@ -93,10 +93,10 @@ function CharacterCard({ character }: { character: CharacterEntity }) {
 				)}
 
 				{/* name */}
-				<Text className="font-bold truncate w-full">
+				<Text className="font-bold truncate w-full overflow-hidden text-ellipsis max-w-10em">
 					{extractCharacterName(character)}
 				</Text>
-				<Text className="truncate w-full text-sm mt-1">
+				<Text className="truncate w-full text-sm mt-1 overflow-hidden text-ellipsis max-w-10em">
 					@{character.handle}
 				</Text>
 
