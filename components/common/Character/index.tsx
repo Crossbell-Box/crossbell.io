@@ -32,6 +32,7 @@ export function CharacterName({
 			href={composeCharacterHref(data?.handle!)}
 			variant="link"
 			onClick={(e: any) => e.stopPropagation()}
+			inline
 			{...props}
 		>
 			{characterName ?? (isLoading ? "..." : characterName)}
@@ -67,12 +68,13 @@ export function CharacterHandle({
 	);
 
 	const data = data1 ?? data2;
+
 	const isLoading = isLoading1 || isLoading2;
 
-	const passedHandle = "@" + handle;
-	const dataHandle = "@" + data?.handle;
+	const passedHandle = handle ? "@" + handle : undefined;
+	const dataHandle = data?.handle ? "@" + data?.handle : undefined;
 
-	const characterHandle = passedHandle ?? dataHandle;
+	const characterHandle = passedHandle ?? dataHandle ?? "UNKNOWN";
 
 	return (
 		<Text
@@ -80,6 +82,7 @@ export function CharacterHandle({
 			href={composeCharacterHref(characterHandle)}
 			variant="link"
 			onClick={(e: any) => e.stopPropagation()}
+			inline
 			{...props}
 		>
 			{characterHandle ?? (isLoading ? "..." : characterHandle)}
