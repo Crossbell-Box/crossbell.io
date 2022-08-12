@@ -48,6 +48,9 @@ const SEO = ({
 				title:
 					note?.metadata?.content?.title ??
 					note?.metadata?.content?.content?.slice(0, 50),
+				profile: {
+					username: extractCharacterName(character),
+				},
 				description: note?.metadata?.content?.content,
 				url: origin + composeNoteHref(note?.characterId!, note?.noteId!),
 				article: {

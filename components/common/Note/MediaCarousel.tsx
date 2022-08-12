@@ -133,7 +133,7 @@ export default function MediaCarousel({
 									<img src={src} className="max-h-80vh max-w-full" />
 								) : (
 									<Image
-										alt="image" // TODO: introduce alt in convention
+										alt={a.alt ?? "image"}
 										src={src}
 										className={classNames("transition-opacity object-cover", {
 											"opacity-20": isThumbnail && index !== selectedIndex,
