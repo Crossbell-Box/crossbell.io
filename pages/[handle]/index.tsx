@@ -13,6 +13,7 @@ import { extractCharacterName } from "@/utils/metadata";
 import { useCharacterRouterQuery } from "@/utils/url";
 import { CharacterEntity } from "crossbell.js";
 import { GetServerSideProps } from "next";
+import Head from "next/head";
 import { Fragment } from "react";
 
 type PageProps = {
@@ -30,6 +31,12 @@ const Page: NextPageWithLayout<PageProps> = (props) => {
 
 	return (
 		<div>
+			<Head>
+				<title>
+					{extractCharacterName(character)} (@{handle})
+				</title>
+			</Head>
+
 			<Header hasBackButton>{headerText}</Header>
 
 			{/* profile */}

@@ -2,21 +2,38 @@ import React, { type PropsWithChildren, ReactElement } from "react";
 import { AppShell, Center } from "@mantine/core";
 import Nav from "./Nav";
 import Aside from "./Aside";
+import { useElementSize } from "@mantine/hooks";
+import ScrollToTop from "@/components/common/ScrollToTopButton";
 
 export default function AppLayout({ children }: PropsWithChildren) {
+	const { ref: rootRef, width: rootWidth } = useElementSize();
+	const { ref: navRef, width: navWidth } = useElementSize();
+	const { ref: asideRef, width: asideWidth } = useElementSize();
+	const mainWidth = rootWidth - navWidth - asideWidth;
+
 	return (
 		<Center>
+			<ScrollToTop />
 			<AppShell
+				ref={rootRef}
 				styles={{
 					root: { maxWidth: "min(100vw, 1200px)" },
-					main: { padding: 0 },
+					main: { padding: 0, width: mainWidth },
 				}}
 				className={"w-full"}
 				navbarOffsetBreakpoint="sm"
 				asideOffsetBreakpoint="sm"
 				fixed={false}
-				navbar={<Nav />}
-				aside={<Aside />}
+				navbar={
+					<div ref={navRef}>
+						<Nav />
+					</div>
+				}
+				aside={
+					<div ref={asideRef}>
+						<Aside />
+					</div>
+				}
 				// footer={
 				//   <Footer height={60} p="md">
 				//     Application footer

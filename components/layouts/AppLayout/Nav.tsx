@@ -14,6 +14,7 @@ import { NextLink } from "@mantine/next";
 import Link from "next/link";
 import { useRouter } from "next/router";
 import { useEffect, useState } from "react";
+import MoreMenu from "./MoreMenu";
 
 export default function Nav() {
 	const [opened, setOpened] = useState(false);
@@ -43,7 +44,9 @@ export default function Nav() {
 			<Navbar.Section grow mt="md">
 				<NavLinks />
 			</Navbar.Section>
-			<Navbar.Section>Crossbell.io</Navbar.Section>
+			<Navbar.Section className="flex justify-center items-center">
+				<MoreMenu />
+			</Navbar.Section>
 		</Navbar>
 	);
 }

@@ -12,6 +12,13 @@ import FollowCharacterCard, {
 } from "@/components/card/FollowCharacterCard";
 import { useFollowerCharactersOfCharacter } from "@/utils/apis/indexer/follow";
 import { Text } from "@mantine/core";
+import { getServerSideProps as getServerSideProps_ } from "./index";
+import Head from "next/head";
+import { CharacterEntity } from "crossbell.js";
+
+type PageProps = {
+	character: CharacterEntity | null;
+};
 
 const Followers = () => {
 	const { handle } = useCharacterRouterQuery();
@@ -53,9 +60,11 @@ const Followers = () => {
 	);
 };
 
-const Page: NextPageWithLayout = () => {
+const Page: NextPageWithLayout<PageProps> = (props) => {
 	const { handle, name } = useCharacterRouterQuery();
-	const { data: character } = useCharacterByHandle(handle);
+	const { data: character } = useCharacterByHandle(handle, {
+		initialData: props.character,
+	});
 
 	const router = useRouter();
 
@@ -64,6 +73,12 @@ const Page: NextPageWithLayout = () => {
 
 	return (
 		<div>
+			<Head>
+				<title>
+					Characters following {extractCharacterName(character)} (@{handle})
+				</title>
+			</Head>
+
 			<Header hasBackButton>{headerText}</Header>
 
 			<div className="flex flex-col mt-6 mb-4">
@@ -87,5 +102,7 @@ const Page: NextPageWithLayout = () => {
 };
 
 Page.getLayout = getLayout;
+
+export const getServerSideProps = getServerSideProps_;
 
 export default Page;

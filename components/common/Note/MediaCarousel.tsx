@@ -6,7 +6,7 @@ import { useCallback, useEffect, useState } from "react";
 import { Modal, Space } from "@mantine/core";
 import classNames from "classnames";
 import { getValidAttachments, mimeTypeToMediaType } from "@/utils/metadata";
-import { useHotkeys, useMediaQuery } from "@mantine/hooks";
+import { useElementSize, useHotkeys, useMediaQuery } from "@mantine/hooks";
 
 export default function MediaCarousel({
 	attachments = [],
@@ -69,7 +69,7 @@ export default function MediaCarousel({
 		}, 250);
 	}
 
-	const mediaSm = useMediaQuery("(max-width: 900px)", false);
+	// const mediaSm = useMediaQuery("(max-width: 900px)", false);
 
 	// switching keys
 	useHotkeys([
@@ -91,7 +91,21 @@ export default function MediaCarousel({
 				}
 			},
 		],
+		[
+			"Escape",
+			() => {
+				if (isOverlay) {
+					setOverlayOpened(false);
+				}
+			},
+		],
 	]);
+
+	const {
+		ref: mainRef,
+		width: mainWidth,
+		height: mainHeight,
+	} = useElementSize();
 
 	const renderAttachments = ({
 		isThumbnail = false,
@@ -105,24 +119,42 @@ export default function MediaCarousel({
 				if (mediaType === "image") {
 					return (
 						<Carousel.Slide key={index}>
-							<div className="bg-gray">
-								<Image
-									alt="image" // TODO: introduce alt in convention
-									src={src}
-									layout="fill"
-									className={classNames("transition-opacity", {
-										"opacity-20": isThumbnail && index !== selectedIndex,
-									})}
-									height={isThumbnail ? 100 : undefined}
-									width={isThumbnail ? 100 : undefined}
-									onClick={() => {
-										if (!isThumbnail && !isOverlay) {
-											setOverlayOpened(true);
-										} else {
-											handleThumbClick(index);
+							<div
+								className={classNames(
+									"relative overflow-hidden flex justify-center items-center",
+									{
+										"h-300px": !isThumbnail && !isOverlay,
+										"h-80vh": !isThumbnail && isOverlay,
+										"h-100px rounded-md": isThumbnail,
+									}
+								)}
+							>
+								{!isThumbnail && isOverlay ? (
+									<img src={src} className="max-h-80vh max-w-full" />
+								) : (
+									<Image
+										alt={a.alt ?? "image"}
+										src={src}
+										className={classNames("transition-opacity object-cover", {
+											"opacity-20": isThumbnail && index !== selectedIndex,
+										})}
+										fill={!isThumbnail}
+										sizes={
+											!isThumbnail
+												? "(min-width: 75em) 33vw, (min-width: 48em) 50vw, 100vw"
+												: undefined
 										}
-									}}
-								/>
+										width={isThumbnail ? 100 : undefined}
+										height={isThumbnail ? 100 : undefined}
+										onClick={() => {
+											if (!isThumbnail && !isOverlay) {
+												setOverlayOpened(true);
+											} else {
+												handleThumbClick(index);
+											}
+										}}
+									/>
+								)}
 							</div>
 						</Carousel.Slide>
 					);
@@ -145,11 +177,17 @@ export default function MediaCarousel({
 			}}
 		>
 			<Modal
+				classNames={{
+					modal: "backdrop-blur-lg bg-white/20",
+				}}
 				size="100vw"
-				fullScreen={mediaSm}
+				fullScreen
 				centered
 				opened={overlayOpened}
 				onClose={() => setOverlayOpened(false)}
+				onClick={(e) => {
+					setOverlayOpened(false);
+				}}
 				// withCloseButton={false}
 			>
 				<MediaCarousel
@@ -159,17 +197,21 @@ export default function MediaCarousel({
 				/>
 			</Modal>
 
+			<div ref={mainRef}></div>
+
 			{/* main */}
-			<Carousel
-				getEmblaApi={setEmbla}
-				height={isOverlay ? "70vh" : 300}
-				className="overflow-hidden w-full"
-				loop
-				withIndicators={isMultiple}
-				withControls={isMultiple}
-			>
-				{renderAttachments()}
-			</Carousel>
+			<div>
+				<Carousel
+					getEmblaApi={setEmbla}
+					height={isOverlay ? "80vh" : 300}
+					className="overflow-hidden w-full rounded-md"
+					loop
+					withIndicators={isMultiple}
+					withControls={isMultiple}
+				>
+					{renderAttachments()}
+				</Carousel>
+			</div>
 
 			<Space h={10} />
 

@@ -1,5 +1,14 @@
-import { PropsWithChildren, useEffect, useState } from "react";
-import { Table, Text, Title } from "@mantine/core";
+import { PropsWithChildren, useState } from "react";
+import {
+	Blockquote,
+	Code,
+	Divider,
+	List,
+	Mark,
+	Table,
+	Text,
+	Title,
+} from "@mantine/core";
 import Image from "./../Image";
 import ReactMarkdown from "react-markdown";
 import { ReactMarkdownOptions } from "react-markdown/lib/react-markdown";
@@ -8,13 +17,14 @@ import { useElementSize } from "@mantine/hooks";
 import classNames from "classnames";
 import rehypeRaw from "rehype-raw";
 import remarkGfm from "remark-gfm";
+import remarkEmoji from "remark-emoji";
 import { useLinkPreview } from "@/utils/apis/link-preview";
 import LinkPreviewCard, {
 	LinkPreviewSkeleton,
 } from "@/components/card/LinkPreviewCard";
 import { Button } from "@mantine/core";
-import { useRouter } from "next/router";
 import { isExternalUrl } from "@/utils/url";
+import { CharacterHandle } from "../Character";
 
 export function MarkdownRenderer({
 	children,
@@ -33,12 +43,14 @@ export function MarkdownRenderer({
 
 	const showReadMoreButton = collapsed && isExceeded;
 
-	if (collapsible && typeof children === "string") {
-		children = children.slice(0, 1000); // TODO: should i do this?
+	let source = children;
+	if (typeof children === "string") {
+		if (collapsible) {
+			source = collapseText(children);
+		}
+		source = forceBreakNewlines(source);
+		source = transformMentions(source);
 	}
-
-	const source =
-		typeof children === "string" ? children.replace(/\n/g, "  \n") : children;
 
 	return (
 		<div className="relative">
@@ -65,23 +77,32 @@ export function MarkdownRenderer({
 							h4: ({ node, ...props }) => <Title order={4} {...props} />,
 							h5: ({ node, ...props }) => <Title order={5} {...props} />,
 							h6: ({ node, ...props }) => <Title order={6} {...props} />,
-							p: ({ node, ...props }) => (
-								<Text
-									className="leading-1.25em my-2 break-words"
-									style={{
-										wordBreak: "break-word",
-									}}
-									{...props}
-								/>
-							),
+							p: ({ node, ...props }) => {
+								return (
+									<Text
+										className="leading-1.25em my-2 break-words"
+										style={{ wordBreak: "break-word" }}
+										{...props}
+									/>
+								);
+							},
 							img: ({ node, ...props }) => {
 								const src = ipfsLinkToHttpLink(props.src!);
 								return (
-									<div className="relative h-300px my-2">
+									<div
+										className="relative my-2 w-full"
+										style={{
+											height: props.height ?? 300,
+											width: props.width,
+										}}
+									>
 										<Image
-											className="cursor-pointer"
+											className="cursor-pointer rounded-md object-contain"
+											alt={props.alt}
+											title={props.title}
+											fill
+											sizes="(min-width: 75em) 33vw, (min-width: 48em) 50vw, 100vw"
 											src={src}
-											layout="fill"
 											onClick={(e) => {
 												e.stopPropagation();
 												window.open(src);
@@ -118,14 +139,48 @@ export function MarkdownRenderer({
 									</Text>
 								);
 							},
-							table: ({ node, ...props }) => (
-								<Table striped highlightOnHover>
-									{props.children}
-								</Table>
-							),
+							table: ({ node, ...props }) => {
+								return (
+									<Table striped highlightOnHover>
+										{props.children}
+									</Table>
+								);
+							},
+							blockquote: ({ node, ...props }) => {
+								return <Blockquote>{props.children}</Blockquote>;
+							},
+							code: ({ node, ...props }) => {
+								return <Code>{props.children}</Code>;
+							},
+							pre: function Pre({ node, ...props }) {
+								return (
+									<Code block className="overflow-auto">
+										{props.children}
+									</Code>
+								);
+							},
+							ol: ({ node, ...props }) => {
+								return <List type="ordered">{props.children}</List>;
+							},
+							ul: ({ node, ...props }) => {
+								return <List type="unordered">{props.children}</List>;
+							},
+							li: ({ node, ...props }) => {
+								return <List.Item>{props.children}</List.Item>;
+							},
+							mark: ({ node, ...props }) => {
+								return <Mark>{props.children}</Mark>;
+							},
+							hr: ({ node, ...props }) => {
+								return <Divider />;
+							},
+							// @ts-ignore
+							"at-mention": ({ node, ...props }) => {
+								return <CharacterHandle handle={props.handle} />;
+							},
 						}}
 						rehypePlugins={[rehypeRaw]}
-						remarkPlugins={[remarkGfm]}
+						remarkPlugins={[remarkGfm, remarkEmoji]}
 						{...props}
 					>
 						{source}
@@ -140,4 +195,23 @@ export function MarkdownRenderer({
 			)}
 		</div>
 	);
+}
+
+function collapseText(text: string, maxLength: number = 1000) {
+	if (text.length <= maxLength) {
+		return text;
+	}
+	return text.slice(0, maxLength) + "...";
+}
+
+function forceBreakNewlines(text: string) {
+	return text.replace(/\n/g, "  \n");
+}
+
+function transformMentions(text: string) {
+	const mentionRegex = /@([a-zA-Z0-9_\-]+)/g;
+	const mentionReplacer = (match: string, handle: string) => {
+		return `<at-mention handle="${handle}">${match}</at-mention>`;
+	};
+	return text.replace(mentionRegex, mentionReplacer);
 }

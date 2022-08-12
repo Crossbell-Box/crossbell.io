@@ -23,9 +23,10 @@ import { CharacterEntity, NoteEntity } from "crossbell.js";
 import type { GetServerSideProps } from "next";
 import { Divider } from "@mantine/core";
 import { NextSeo } from "next-seo";
-import { getValidAttachments } from "@/utils/metadata";
+import { extractCharacterName, getValidAttachments } from "@/utils/metadata";
 import { ipfsLinkToHttpLink } from "@/utils/ipfs";
-import { useScrollIntoView } from "@mantine/hooks";
+import { useScrollIntoView, useWindowScroll } from "@mantine/hooks";
+import Head from "next/head";
 
 const SEO = ({
 	note,
@@ -47,6 +48,9 @@ const SEO = ({
 				title:
 					note?.metadata?.content?.title ??
 					note?.metadata?.content?.content?.slice(0, 50),
+				profile: {
+					username: extractCharacterName(character),
+				},
 				description: note?.metadata?.content?.content,
 				url: origin + composeNoteHref(note?.characterId!, note?.noteId!),
 				article: {
@@ -100,10 +104,14 @@ const Page: NextPageWithLayout<PageProps> = (props) => {
 		duration: 200,
 	});
 
+	const [windowScroll] = useWindowScroll();
+
 	useEffect(() => {
 		if (mainNoteRef.current && note?.toNote) {
 			setTimeout(() => {
-				scrollToMainNote();
+				if (windowScroll.y === 0) {
+					scrollToMainNote();
+				}
 			}, 50);
 		}
 
@@ -112,11 +120,22 @@ const Page: NextPageWithLayout<PageProps> = (props) => {
 
 	return (
 		<div>
+			<Head>
+				<title>
+					{extractCharacterName(character)}: &quot;
+					{note?.metadata?.content?.content
+						?.toString()
+						.slice(0, 100)
+						.replace(/\n/g, "")}
+					&quot;
+				</title>
+			</Head>
+
 			<SEO note={note} character={props.character} />
 
 			<Header hasBackButton>Note</Header>
 
-			<div className="z-1 relative">
+			<div className="relative">
 				{/* to note */}
 				<div>
 					{note?.toNote && (

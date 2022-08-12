@@ -15,6 +15,7 @@ import {
 import { composeSearchHref, useSearchRouterQuery } from "@/utils/url";
 import { Title, Text, Container } from "@mantine/core";
 import { useElementSize } from "@mantine/hooks";
+import Head from "next/head";
 
 import { Fragment } from "react";
 
@@ -25,6 +26,10 @@ const Page: NextPageWithLayout = () => {
 
 	return (
 		<div>
+			<Head>
+				<title>{q} - Crossbell Search</title>
+			</Head>
+
 			<Header
 				hasBackButton
 				renderBottom={() => (

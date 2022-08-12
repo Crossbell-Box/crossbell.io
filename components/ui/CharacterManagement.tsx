@@ -268,7 +268,7 @@ export default function CharacterManagement({
 								<div className="relative">
 									<LoadingOverlay visible={avatarLoading} />
 									<Avatar
-										className="h-16 w-16"
+										className="h-16 w-16 rounded-full"
 										src={form.values.avatar.replace(
 											"ipfs://",
 											"https://gateway.ipfs.io/ipfs/"
@@ -316,7 +316,7 @@ export default function CharacterManagement({
 						type="submit"
 						size="md"
 						className="text-dark"
-						disabled={avatarLoading}
+						disabled={(Boolean(characterId) && isLoadingCharacter) || avatarLoading}
 					>
 						I’ve decided
 					</Button>

@@ -10,8 +10,9 @@ const TrendingTreasures = ({ mintedNotes }: TrendingTreasuresProps) => (
   <TrendingBase title={"Trending Treasures"} intro={"Here are the trending treasures of Crossbell"} viewMoreLink={"/"}>
     <div className={"grid grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-3"}>
       {mintedNotes.map(mintedNote => (
-        <div key={mintedNote.crossbell_id} className={"aspect-ratio-video"}>
+        <div key={`${mintedNote.crossbell_id}-${mintedNote.crossbell_id}`} className={"aspect-ratio-video"}>
           <MintedNoteRawCard character={{
+            id: mintedNote.character_id,
             handle: mintedNote.character_handle,
             avatar: mintedNote.character_avatar,
             name: mintedNote.character_name,

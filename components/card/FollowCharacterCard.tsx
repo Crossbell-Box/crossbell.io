@@ -62,13 +62,13 @@ const FollowCharacterCard = ({ character }: { character: CharacterEntity }) => {
 			{/* right */}
 			<div className="flex-1">
 				{/* top */}
-				<div className="flex flex-row justify-between">
+				<div className="flex flex-row flex-wrap justify-between">
 					{/* top-left - name & handle */}
 					<div>
-						<div>
+						<div className="max-w-30vw overflow-hidden text-ellipsis">
 							<CharacterName character={character} />
 						</div>
-						<div>
+						<div className="max-w-30vw overflow-hidden text-ellipsis">
 							<Text size="sm" color="dimmed">
 								@{character.handle}
 							</Text>

@@ -1,15 +1,17 @@
 import { Text } from "@mantine/core";
 import type { MintedNoteEntity } from "crossbell.js";
 import { ipfsLinkToHttpLink } from "@/utils/ipfs";
+import { useRouter } from "next/router";
 
 interface Character {
+	id: number;
 	avatar: string;
 	name: string;
 	handle: string;
 }
 
 interface Treasure {
-	id: string;
+	id: number;
 	text?: string;
 	image: string;
 	mintCount: number;
@@ -38,7 +40,7 @@ const TreasurePart = ({ treasure, character }: MintedNoteRawProps) => (
 					treasure.text
 						? `linear-gradient( rgba(0, 0, 0, 0.5), rgba(0, 0, 0, 0.5) ), `
 						: ""
-				}url(${treasure.image})`,
+				}url(${ipfsLinkToHttpLink(treasure.image || character.avatar)})`,
 			}}
 		>
 			{treasure.text && (
@@ -55,7 +57,7 @@ const TreasurePart = ({ treasure, character }: MintedNoteRawProps) => (
 						style={{
 							border: "2px solid white",
 						}}
-						src={character.avatar}
+						src={ipfsLinkToHttpLink(character.avatar)}
 						alt={character.name}
 					/>
 				</div>
@@ -69,8 +71,8 @@ const TreasurePart = ({ treasure, character }: MintedNoteRawProps) => (
 			>
 				<span>
 					#
-					{treasure.id.length >= 8
-						? `${treasure.id.slice(0, 2)}...${treasure.id.slice(-2)}`
+					{treasure.id.toString().length >= 8
+						? `${treasure.id.toString().slice(0, 2)}...${treasure.id.toString().slice(-2)}`
 						: treasure.id}
 				</span>
 			</div>
@@ -97,16 +99,23 @@ const CharacterPart = ({ treasure, character }: MintedNoteRawProps) => (
 export const MintedNoteRawCard = ({
 	character,
 	treasure,
-}: MintedNoteRawProps) => (
-	<div className="w-full relative">
-		<TreasurePart treasure={treasure} character={character} />
-		<CharacterPart treasure={treasure} character={character} />
-	</div>
-);
+}: MintedNoteRawProps) => {
+	const router = useRouter();
+
+	return (
+		<div className="w-full relative cursor-pointer transition ease-in-out hover:-translate-y-1" onClick={() => {
+			router.push(`/notes/${character.id}-${treasure.id}`)
+		}}>
+			<TreasurePart treasure={treasure} character={character} />
+			<CharacterPart treasure={treasure} character={character} />
+		</div>
+	)
+};
 
 const MintedNoteCard = ({ mintedNote }: MintedNoteProps) => (
 	<MintedNoteRawCard
 		character={{
+			id: mintedNote.noteCharacterId,
 			avatar: ipfsLinkToHttpLink(
 				mintedNote.noteCharacter?.metadata?.content?.avatars?.[0] || ""
 			),
@@ -114,7 +123,7 @@ const MintedNoteCard = ({ mintedNote }: MintedNoteProps) => (
 			handle: mintedNote.noteCharacter?.handle || "",
 		}}
 		treasure={{
-			id: mintedNote.tokenId.toString(),
+			id: mintedNote.tokenId,
 			text:
 				mintedNote.note?.metadata?.content?.title ||
 				mintedNote.note?.metadata?.content?.content,

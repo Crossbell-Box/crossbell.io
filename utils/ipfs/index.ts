@@ -1,4 +1,4 @@
-export const DEFAULT_GATEWAY = "https://ipfs.infura.io/ipfs/";
+export const DEFAULT_GATEWAY = "https://cf-ipfs.com/ipfs/";
 
 export const ipfsLinkToHttpLink = (link: string) => {
 	if (link.startsWith("ipfs://")) {

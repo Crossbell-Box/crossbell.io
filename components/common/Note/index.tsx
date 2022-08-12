@@ -1,5 +1,5 @@
 import Avatar from "@/components/common/Avatar";
-import { Skeleton, Space, Text } from "@mantine/core";
+import { Skeleton, Space, Text, Title } from "@mantine/core";
 import { CharacterEntity, NoteEntity } from "crossbell.js";
 import { useCharacter, useNoteStatus } from "@/utils/apis/indexer";
 import classNames from "classnames";
@@ -16,6 +16,8 @@ import { useAccount } from "wagmi";
 import { CharacterHandle, CharacterName } from "../Character";
 import Time from "../Time";
 import { getValidAttachments } from "@/utils/metadata";
+import NoteSourceBadges from "./NoteSourceBadges";
+import NoteIdBadge from "./NoteIdBadge";
 
 function ActionButton({
 	text,
@@ -110,7 +112,7 @@ export function Note({
 			return (
 				<div>
 					<Avatar
-						size={64}
+						size={54}
 						characterId={note.characterId}
 						character={character}
 					/>
@@ -170,8 +172,6 @@ export function Note({
 						<CharacterHandle
 							character={note.toCharacter}
 							characterId={note.toCharacterId!}
-							color="brand"
-							weight="bold"
 						/>
 					</Text>
 				</div>
@@ -180,14 +180,31 @@ export function Note({
 	};
 
 	const renderBottomInfo = () => {
+		const Info = () => (
+			<div className="flex flex-row justify-between items-center">
+				{/* source */}
+				<NoteSourceBadges noteMetadata={note.metadata?.content} />
+
+				{/* id */}
+				<NoteIdBadge note={note} />
+			</div>
+		);
 		if (displayMode === "normal") {
-			return <></>;
+			return (
+				<div>
+					<Info />
+				</div>
+			);
 		}
 
 		if (displayMode === "main") {
 			return (
 				<div>
+					<Info />
+
 					<Space h={10} />
+
+					{/* time */}
 					<Time href={href} date={note.createdAt} mode="accurate" />
 				</div>
 			);
@@ -196,8 +213,15 @@ export function Note({
 
 	const renderContent = () => {
 		const clxs = displayMode === "main" ? "text-1.25em" : "text-1em";
+		const titleOrder = displayMode === "main" ? 2 : 3;
 		return (
 			<div className={clxs}>
+				{note.metadata?.content?.title && (
+					<Title order={titleOrder} className="my-2">
+						{note.metadata.content.title}
+					</Title>
+				)}
+
 				<MarkdownRenderer collapsible={collapsible}>
 					{note.metadata?.content?.content ?? ""}
 				</MarkdownRenderer>
@@ -211,22 +235,30 @@ export function Note({
 
 	return (
 		<div
-			className={classNames(
-				"flex flex-row w-full py-3 px-3 border-b border-gray/20",
-				{
-					"bg-hover cursor-pointer": displayMode === "normal",
-				}
-			)}
+			className={classNames("flex w-full py-3 px-3 border-b border-gray/20", {
+				"bg-hover cursor-pointer flex-row": displayMode === "normal",
+				"flex-col": displayMode === "main",
+			})}
 			onClick={() => navigate()}
 		>
-			{/* avatar */}
-			{renderAvatar()}
+			{/* avatar & username */}
+			<div className="flex">
+				{/* avatar */}
+				{renderAvatar()}
+
+				{displayMode === "main" && (
+					<>
+						<Space w={10} />
+						{renderUsername()}
+					</>
+				)}
+			</div>
 
 			<Space w={10} />
 
 			{/* right side */}
-			<div className="flex-grow">
-				{renderUsername()}
+			<div className="flex-grow overflow-hidden">
+				{displayMode === "normal" && renderUsername()}
 
 				{/* replying info */}
 				{renderReplyingInfo()}
@@ -235,10 +267,11 @@ export function Note({
 				{renderContent()}
 
 				{Boolean(validAttachments?.length) && (
-					<>
+					<div>
 						<Space h={10} />
 						<MediaCarousel attachments={validAttachments} />
-					</>
+						<Space h={10} />
+					</div>
 				)}
 
 				{/* media */}

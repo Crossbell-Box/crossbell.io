@@ -28,6 +28,7 @@ import { showNotification } from "@mantine/notifications";
 import { composeCharacterHref, WalletCharacterManageHref } from "@/utils/url";
 import { NextLink } from "@mantine/next";
 import { useRouter } from "next/router";
+import { extractCharacterName } from "@/utils/metadata";
 
 export default function ConnectButton() {
 	return (
@@ -132,16 +133,27 @@ const WalletDisplayButton = forwardRef<HTMLButtonElement, ButtonProps>(
 							)}
 						</>
 
-						{data && <Avatar character={data} />}
+						{/* avatar */}
+						<Avatar character={data} />
 
 						<Space w="sm" />
 
-						<div className="flex flex-col justify-center items-start z-1">
-							<Text className="font-semnibold leading-1em" color="dark">
+						<div className="z-1">
+							{/* handle */}
+							<Text
+								className="font-semnibold leading-1em overflow-hidden text-ellipsis max-w-8em"
+								color="dark"
+							>
 								@{data?.handle}
 							</Text>
+
 							<Space h={2} />
-							<Text className="font-normal leading-1em" color="gray">
+
+							{/* addr */}
+							<Text
+								className="font-normal leading-1em drop-shadow-lg shadow-black"
+								color="dark.3"
+							>
 								{truncateAddress(address)}
 							</Text>
 						</div>
@@ -275,13 +287,21 @@ function AccountList() {
 					}}
 				>
 					<div className="flex items-center" key={c.characterId}>
+						{/* avatar */}
 						{c && <Avatar size={32} character={c} />}
+
 						<Space w="xs" />
+
 						<div className="flex flex-col">
-							<Text className="text-sm font-semibold">
-								{c.metadata?.content?.name}
+							{/* name */}
+							<Text className="text-sm font-semibold overflow-hidden text-ellipsis max-w-8em">
+								{extractCharacterName(c, { fallbackToHandle: false })}
 							</Text>
-							<Text className="text-xs">@{c.handle}</Text>
+
+							{/* handle */}
+							<Text className="text-xs overflow-hidden text-ellipsis max-w-8em">
+								@{c.handle}
+							</Text>
 						</div>
 					</div>
 				</MenuItem>
