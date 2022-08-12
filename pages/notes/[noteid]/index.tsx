@@ -25,7 +25,7 @@ import { Divider } from "@mantine/core";
 import { NextSeo } from "next-seo";
 import { extractCharacterName, getValidAttachments } from "@/utils/metadata";
 import { ipfsLinkToHttpLink } from "@/utils/ipfs";
-import { useScrollIntoView, useWindowScroll } from "@mantine/hooks";
+import { useScrollIntoView } from "@mantine/hooks";
 import Head from "next/head";
 
 const SEO = ({
@@ -104,19 +104,15 @@ const Page: NextPageWithLayout<PageProps> = (props) => {
 		duration: 200,
 	});
 
-	const [windowScroll] = useWindowScroll();
-
 	useEffect(() => {
 		if (mainNoteRef.current && note?.toNote) {
 			setTimeout(() => {
-				if (windowScroll.y === 0) {
-					scrollToMainNote();
-				}
+				scrollToMainNote();
 			}, 50);
 		}
 
 		return () => cancelScrollToMainNote();
-	}, [mainNoteRef, note?.toNote, headerHeight, cancelScrollToMainNote]);
+	}, [mainNoteRef, note?.toNote, headerHeight]);
 
 	return (
 		<div>
