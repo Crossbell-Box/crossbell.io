@@ -1,10 +1,10 @@
 import { Button, Text } from "@mantine/core";
 import type { Character } from "crossbell.js";
 import { ipfsLinkToHttpLink } from "@/utils/ipfs";
-import {useCharacterFollowRelation, useCurrentCharacter} from "@/utils/apis/indexer";
-import {useFollowCharacter, useUnfollowCharacter} from "@/utils/apis/contract";
-import {useRouter} from "next/router";
-import {MouseEventHandler} from "react";
+import { useCharacterFollowRelation, useCurrentCharacter } from "@/utils/apis/indexer";
+import { useFollowCharacter } from "@/utils/apis/contract";
+import { useRouter } from "next/router";
+import { MouseEventHandler } from "react";
 
 type TrendingCharacter = {
 	crossbell_id: number;

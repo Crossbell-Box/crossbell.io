@@ -1,7 +1,7 @@
 import { Text } from "@mantine/core";
 import type { MintedNoteEntity } from "crossbell.js";
 import { ipfsLinkToHttpLink } from "@/utils/ipfs";
-import {useRouter} from "next/router";
+import { useRouter } from "next/router";
 
 interface Character {
 	id: number;
