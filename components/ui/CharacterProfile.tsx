@@ -88,16 +88,16 @@ export default function CharacterProfile({
 				<Space h={20} />
 
 				{/* bio */}
-				<Skeleton width={loading ? "5em" : "auto"} visible={loading}>
-					<Tooltip label={character?.metadata?.content?.bio}>
+				<Tooltip label={character?.metadata?.content?.bio}>
+					<Skeleton width={loading ? "5em" : "auto"} visible={loading}>
 						<Text
-							className="text-normal font-light leading-1em text-dark"
+							className="text-normal font-light leading-1.25em text-dark"
 							lineClamp={3}
 						>
 							{character?.metadata?.content?.bio}
 						</Text>
-					</Tooltip>
-				</Skeleton>
+					</Skeleton>
+				</Tooltip>
 
 				<Space h={20} />
 
@@ -125,7 +125,7 @@ export default function CharacterProfile({
 								visible={isLoadingFollowStatus}
 							>
 								<Text className="font-semibold leading-1.25em text-dark">
-									{el.count}
+									{el.count ?? "..."}
 								</Text>
 							</Skeleton>
 							<Text className="font-normal text-xs leading-1.25em text-dimmed">
