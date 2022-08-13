@@ -41,7 +41,7 @@
 		"remark-emoji": "3.0.2",
 		"remark-gfm": "3.0.1",
 		"sharp": "0.30.7",
-		"wagmi": "0.6.2"
+		"wagmi": "0.6.3"
 	},
 	"devDependencies": {
 		"@iconify/utils": "1.0.33",
