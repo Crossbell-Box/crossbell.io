@@ -78,7 +78,7 @@ export function useCurrentCharacterId() {
 }
 export function useDisconnectCurrentCharacter() {
 	const disconnect = () => {
-		localStorage.clear("currentCharacterId");
+		localStorage.removeItem("currentCharacterId");
 	};
 	return { disconnect };
 }
