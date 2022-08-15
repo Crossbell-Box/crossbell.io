@@ -11,7 +11,7 @@ const FollowCharacterCard = ({ character }: { character: CharacterEntity }) => {
 
 	return (
 		<div
-			className="flex flex-row w-full items-start gap-4 p-4 bg-hover cursor-pointer"
+			className="flex flex-row w-full items-start gap-4 p-4 bg-hover cursor-pointer overflow-hidden"
 			onClick={() => {
 				router.push(composeCharacterHref(character.handle));
 			}}
@@ -22,7 +22,7 @@ const FollowCharacterCard = ({ character }: { character: CharacterEntity }) => {
 			</div>
 
 			{/* right */}
-			<div className="flex-1">
+			<div className="overflow-hidden flex-1">
 				{/* top */}
 				<div className="flex flex-row flex-wrap justify-between">
 					{/* top-left - name & handle */}
@@ -42,7 +42,7 @@ const FollowCharacterCard = ({ character }: { character: CharacterEntity }) => {
 				</div>
 
 				{/* bottom - bio */}
-				<div>
+				<div className="overflow-hidden break-words">
 					<Text lineClamp={2}>{character.metadata?.content?.bio}</Text>
 				</div>
 			</div>
