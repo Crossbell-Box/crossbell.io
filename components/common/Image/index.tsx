@@ -47,6 +47,9 @@ const toBase64 = (str: string) =>
 		? Buffer.from(str).toString("base64")
 		: window.btoa(str);
 
+const isLocalImage = (s: ImageProps["src"]) =>
+	typeof s === "string" && (s.startsWith("data:image/") || s.startsWith("/"));
+
 export default function Image({
 	src,
 	fill,
@@ -56,12 +59,8 @@ export default function Image({
 		src = ipfsLinkToHttpLink(src);
 	}
 
-	const isLocalImage =
-		typeof src === "string" &&
-		(src.startsWith("data:image/") || src.startsWith("/"));
-
 	const thumborLoader: ImageLoader = ({ src, width, quality }) => {
-		if (isLocalImage) {
+		if (isLocalImage(src)) {
 			return src;
 		}
 		// const w = typeof props.width === "number" ? props.width : width;
@@ -85,7 +84,7 @@ export default function Image({
 			{...(fill
 				? { sizes: "(min-width: 75em) 33vw, (min-width: 48em) 50vw, 100vw" }
 				: {})}
-			{...(isLocalImage ? { unoptimized: true } : {})}
+			{...(isLocalImage(_src) ? { unoptimized: true } : {})}
 			{...props}
 		/>
 	);
