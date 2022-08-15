@@ -1,5 +1,6 @@
 import { Button, Title } from "@mantine/core";
 import { NextLink } from "@mantine/next";
+// @ts-ignore
 import TypeIt from "typeit-react";
 
 export default function IndexHero() {
@@ -110,7 +111,7 @@ function Typer() {
 	return (
 		<TypeIt
 			options={{ loop: true }}
-			getBeforeInit={(instance) => {
+			getBeforeInit={(instance: any) => {
 				instance
 					.type(
 						"Own Your <strong class='text-brand-primary'>Social Activities!</strong>"
