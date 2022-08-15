@@ -84,7 +84,7 @@ function HeroTexts() {
 			</span>
 
 			<span>
-				<Button color="#FFDA48" size="xl" component={NextLink} href="/feed">
+				<Button color="#FFDA48" size="xl" component={NextLink} href="/explore">
 					<span className="text-lg text-black font-lg mx-11">Explore</span>
 				</Button>
 			</span>
