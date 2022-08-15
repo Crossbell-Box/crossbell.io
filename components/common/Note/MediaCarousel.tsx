@@ -6,7 +6,8 @@ import { useCallback, useEffect, useState } from "react";
 import { Modal, Space } from "@mantine/core";
 import classNames from "classnames";
 import { getValidAttachments, mimeTypeToMediaType } from "@/utils/metadata";
-import { useElementSize, useHotkeys, useMediaQuery } from "@mantine/hooks";
+import { useElementSize, useHotkeys } from "@mantine/hooks";
+import VideoPlayer from "./VideoPlayer";
 
 export default function MediaCarousel({
 	attachments = [],
@@ -21,6 +22,7 @@ export default function MediaCarousel({
 
 	const validAttachments = getValidAttachments(attachments, {
 		allowedContentTypes: ["address"],
+		allowedMediaTypes: ["image", "video"],
 	});
 
 	const isMultiple = validAttachments.length > 1;
@@ -69,6 +71,8 @@ export default function MediaCarousel({
 		}, 250);
 	}
 
+	const { ref: mainRef, width: mainWidth } = useElementSize();
+
 	// const mediaSm = useMediaQuery("(max-width: 900px)", false);
 
 	// switching keys
@@ -100,12 +104,6 @@ export default function MediaCarousel({
 			},
 		],
 	]);
-
-	const {
-		ref: mainRef,
-		width: mainWidth,
-		height: mainHeight,
-	} = useElementSize();
 
 	const renderAttachments = ({
 		isThumbnail = false,
@@ -159,13 +157,45 @@ export default function MediaCarousel({
 						</Carousel.Slide>
 					);
 				}
+
+				if (mediaType === "video") {
+					return (
+						<Carousel.Slide key={index}>
+							<div
+								className={classNames("flex justify-center items-center", {
+									"h-300px": !isThumbnail && !isOverlay,
+									"h-80vh": !isThumbnail && isOverlay,
+									"h-100px rounded-md": isThumbnail,
+								})}
+							>
+								{/* TODO: should not be in thumbnail */}
+								<VideoPlayer
+									source={{
+										type: "video",
+										sources: [
+											{
+												src: ipfsLinkToHttpLink(a.address),
+												size: a.size_in_bytes,
+												type: a.mime_type,
+											},
+										],
+									}}
+									options={{ fullscreen: { enabled: true } }}
+									width={mainWidth}
+									height={isOverlay ? "80vh" : "300px"}
+									controls
+								/>
+							</div>
+						</Carousel.Slide>
+					);
+				}
 			}
 
-			return <></>;
+			return <Carousel.Slide key={index}></Carousel.Slide>;
 		});
 	};
 
-	if (!attachments || attachments?.length === 0) {
+	if (!validAttachments || validAttachments?.length === 0) {
 		return <></>;
 	}
 
