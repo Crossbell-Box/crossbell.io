@@ -66,7 +66,7 @@ export default function Image({
 		// const w = typeof props.width === "number" ? props.width : width;
 		// const h = typeof props.height === "number" ? props.height : 0;
 		const w = width;
-		const h = typeof props.height === "number" ? props.height : 0;
+		const h = 0;
 		return `https://thumbor.rss3.dev/unsafe/${w}x${h}/smart/${src}`;
 	};
 

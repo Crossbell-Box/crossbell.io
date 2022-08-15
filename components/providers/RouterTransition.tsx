@@ -25,5 +25,5 @@ export function RouterTransition() {
 		};
 	}, [router.asPath]);
 
-	return <NavigationProgress />;
+	return <NavigationProgress size={5} />;
 }

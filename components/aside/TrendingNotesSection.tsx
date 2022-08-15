@@ -60,8 +60,13 @@ function NoteListItem({ note }: { note: NoteEntity }) {
 					</Text>
 
 					{image && (
-						<div className="relative h-50px w-50px ml-2 rounded-sm">
-							<Image src={image} className="object-cover" fill />
+						<div className="h-50px w-50px ml-2 rounded-md overflow-hidden">
+							<Image
+								src={image}
+								className="object-cover"
+								height={50}
+								width={50}
+							/>
 						</div>
 					)}
 				</div>

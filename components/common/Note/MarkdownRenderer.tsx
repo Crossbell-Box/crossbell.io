@@ -1,4 +1,4 @@
-import { PropsWithChildren, useState } from "react";
+import { PropsWithChildren, useEffect, useMemo, useState } from "react";
 import {
 	Blockquote,
 	Code,
@@ -41,160 +41,176 @@ export function MarkdownRenderer({
 
 	const [collapsed, setCollapsed] = useState(collapsible);
 
-	const showReadMoreButton = collapsed && isExceeded;
+	const Memoed = useMemo(() => {
+		const showReadMoreButton = collapsed && isExceeded;
 
-	let source = children;
-	if (typeof children === "string") {
-		if (collapsible) {
-			source = collapseText(children);
+		let source = children;
+		if (typeof children === "string") {
+			if (collapsible) {
+				source = collapseText(children);
+			}
+			source = forceBreakNewlines(source);
+			source = transformMentions(source);
 		}
-		source = forceBreakNewlines(source);
-		source = transformMentions(source);
-	}
 
-	return (
-		<div className="relative">
-			<div
-				className={classNames(
-					"markdown-renderer overflow-hidden transition-all-200 break-all",
-					{
-						"max-h-500px": collapsed,
-						"max-h-none": !collapsed,
-					}
-				)}
-				style={{
-					WebkitMaskImage: showReadMoreButton
-						? "linear-gradient(to bottom, rgba(0, 0, 0, 1) 0%, rgba(0, 0, 0, 0.9) 70%, rgba(0, 0, 0, 0) 95%, rgba(0, 0, 0, 0) 100%)"
-						: undefined,
-				}}
-			>
-				<div ref={ref}>
-					<ReactMarkdown
-						components={{
-							h1: ({ node, ...props }) => <Title order={1} {...props} />,
-							h2: ({ node, ...props }) => <Title order={2} {...props} />,
-							h3: ({ node, ...props }) => <Title order={3} {...props} />,
-							h4: ({ node, ...props }) => <Title order={4} {...props} />,
-							h5: ({ node, ...props }) => <Title order={5} {...props} />,
-							h6: ({ node, ...props }) => <Title order={6} {...props} />,
-							p: ({ node, ...props }) => {
-								return (
-									<Text
-										className="leading-1.25em my-2 break-words"
-										style={{ wordBreak: "break-word" }}
-										{...props}
-									/>
-								);
-							},
-							img: ({ node, ...props }) => {
-								const src = ipfsLinkToHttpLink(props.src!);
-								return (
-									<div
-										className="relative my-2 w-full"
-										style={{
-											height: props.height ?? 300,
-											width: props.width,
-										}}
-									>
-										<Image
-											className="cursor-pointer rounded-md object-contain"
-											alt={props.alt}
-											title={props.title}
-											fill
-											sizes="(min-width: 75em) 33vw, (min-width: 48em) 50vw, 100vw"
-											src={src}
-											onClick={(e) => {
-												e.stopPropagation();
-												window.open(src);
-											}}
+		return (
+			<div className="relative">
+				<div
+					className={classNames(
+						"markdown-renderer overflow-hidden transition-all-200 break-all",
+						{
+							"max-h-500px": collapsed,
+							"max-h-none": !collapsed,
+						}
+					)}
+					style={{
+						WebkitMaskImage: showReadMoreButton
+							? "linear-gradient(to bottom, rgba(0, 0, 0, 1) 0%, rgba(0, 0, 0, 0.9) 70%, rgba(0, 0, 0, 0) 95%, rgba(0, 0, 0, 0) 100%)"
+							: undefined,
+					}}
+				>
+					<div ref={ref}>
+						<ReactMarkdown
+							components={{
+								h1: ({ node, ...props }) => <Title order={1} {...props} />,
+								h2: ({ node, ...props }) => <Title order={2} {...props} />,
+								h3: ({ node, ...props }) => <Title order={3} {...props} />,
+								h4: ({ node, ...props }) => <Title order={4} {...props} />,
+								h5: ({ node, ...props }) => <Title order={5} {...props} />,
+								h6: ({ node, ...props }) => <Title order={6} {...props} />,
+								p: ({ node, ...props }) => {
+									return (
+										<Text
+											className="leading-1.25em my-2 break-words"
+											style={{ wordBreak: "break-word" }}
+											{...props}
 										/>
-									</div>
-								);
-							},
-							a: function Link({ node, ...props }) {
-								const { data, isLoading, isSuccess } = useLinkPreview(
-									props.href
-								);
-								return isLoading ? (
-									<LinkPreviewSkeleton />
-								) : isSuccess &&
-								  data &&
-								  (("siteName" in data && data.siteName) ||
-										("title" in data && data.title) ||
-										("description" in data && data.description)) ? (
-									<LinkPreviewCard data={data} />
-								) : (
-									<Text
-										variant="link"
-										component="a"
-										href={props.href}
-										target={
-											props.href && isExternalUrl(props.href)
-												? "_blank"
-												: undefined
-										}
-										rel="noreferrer"
-									>
-										{props.children}
-									</Text>
-								);
-							},
-							table: ({ node, ...props }) => {
-								return (
-									<Table striped highlightOnHover>
-										{props.children}
-									</Table>
-								);
-							},
-							blockquote: ({ node, ...props }) => {
-								return <Blockquote>{props.children}</Blockquote>;
-							},
-							code: ({ node, ...props }) => {
-								return <Code>{props.children}</Code>;
-							},
-							pre: function Pre({ node, ...props }) {
-								return (
-									<Code block className="overflow-auto">
-										{props.children}
-									</Code>
-								);
-							},
-							ol: ({ node, ...props }) => {
-								return <List type="ordered">{props.children}</List>;
-							},
-							ul: ({ node, ...props }) => {
-								return <List type="unordered">{props.children}</List>;
-							},
-							li: ({ node, ...props }) => {
-								return <List.Item>{props.children}</List.Item>;
-							},
-							mark: ({ node, ...props }) => {
-								return <Mark>{props.children}</Mark>;
-							},
-							hr: ({ node, ...props }) => {
-								return <Divider />;
-							},
-							// @ts-ignore
-							"at-mention": ({ node, ...props }) => {
-								return <CharacterHandle handle={props.handle} />;
-							},
-						}}
-						rehypePlugins={[rehypeRaw]}
-						remarkPlugins={[remarkGfm, remarkEmoji]}
-						{...props}
-					>
-						{source}
-					</ReactMarkdown>
-				</div>
-			</div>
+									);
+								},
+								img: function Img({ node, ...props }) {
+									const src = ipfsLinkToHttpLink(props.src!);
+									// const [paddingTop, setPaddingTop] = useState<string>("0");
 
-			{showReadMoreButton && (
-				<div className="absolute left-0 right-0 bottom-0 z-10 flex items-center justify-center py-3">
-					<Button radius={"xl"}>Read More</Button>
+									return (
+										<div
+											className="relative my-2 w-full"
+											style={{
+												height: props.height ?? 300,
+												width: props.width,
+												// paddingTop,
+											}}
+										>
+											<Image
+												className="cursor-pointer rounded-md object-contain"
+												alt={props.alt}
+												title={props.title}
+												fill
+												sizes="(min-width: 75em) 33vw, (min-width: 48em) 50vw, 100vw"
+												src={src}
+												onClick={(e) => {
+													e.stopPropagation();
+													window.open(src);
+												}}
+												// onLoadingComplete={(e) => {
+												// 	if (paddingTop === "0") {
+												// 		const { naturalWidth, naturalHeight } = e;
+												// 		setPaddingTop(
+												// 			`calc(100% / (${naturalWidth} / ${naturalHeight}))`
+												// 		);
+												// 		console.log({ paddingTop });
+												// 	}
+												// }}
+											/>
+										</div>
+									);
+								},
+								a: function Link({ node, ...props }) {
+									const { data, isLoading, isSuccess } = useLinkPreview(
+										props.href
+									);
+									return isLoading ? (
+										<LinkPreviewSkeleton />
+									) : isSuccess &&
+									  data &&
+									  (("siteName" in data && data.siteName) ||
+											("title" in data && data.title) ||
+											("description" in data && data.description)) ? (
+										<LinkPreviewCard data={data} />
+									) : (
+										<Text
+											variant="link"
+											component="a"
+											href={props.href}
+											target={
+												props.href && isExternalUrl(props.href)
+													? "_blank"
+													: undefined
+											}
+											rel="noreferrer"
+										>
+											{props.children}
+										</Text>
+									);
+								},
+								table: ({ node, ...props }) => {
+									return (
+										<Table striped highlightOnHover>
+											{props.children}
+										</Table>
+									);
+								},
+								blockquote: ({ node, ...props }) => {
+									return <Blockquote>{props.children}</Blockquote>;
+								},
+								code: ({ node, ...props }) => {
+									return <Code>{props.children}</Code>;
+								},
+								pre: function Pre({ node, ...props }) {
+									return (
+										<Code block className="overflow-auto">
+											{props.children}
+										</Code>
+									);
+								},
+								ol: ({ node, ...props }) => {
+									return <List type="ordered">{props.children}</List>;
+								},
+								ul: ({ node, ...props }) => {
+									return <List type="unordered">{props.children}</List>;
+								},
+								li: ({ node, ...props }) => {
+									return <List.Item>{props.children}</List.Item>;
+								},
+								mark: ({ node, ...props }) => {
+									return <Mark>{props.children}</Mark>;
+								},
+								hr: ({ node, ...props }) => {
+									return <Divider />;
+								},
+								// @ts-ignore
+								"at-mention": ({ node, ...props }) => {
+									return <CharacterHandle handle={props.handle} />;
+								},
+							}}
+							rehypePlugins={[rehypeRaw]}
+							remarkPlugins={[remarkGfm, remarkEmoji]}
+							{...props}
+						>
+							{source}
+						</ReactMarkdown>
+					</div>
 				</div>
-			)}
-		</div>
-	);
+
+				{showReadMoreButton && (
+					<div className="absolute left-0 right-0 bottom-0 z-10 flex items-center justify-center py-3">
+						<Button radius={"xl"}>Read More</Button>
+					</div>
+				)}
+			</div>
+		);
+	}, [children, collapsible, props]);
+
+	return Memoed;
 }
 
 function collapseText(text: string, maxLength: number = 1000) {

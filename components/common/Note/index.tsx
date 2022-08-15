@@ -39,7 +39,7 @@ function ActionButton({
 	return (
 		<Tooltip label={label}>
 			<div
-				className="flex items-center group"
+				className="flex items-center group cursor-pointer"
 				onClick={(e) => {
 					e.stopPropagation();
 					onClick?.();
@@ -85,7 +85,10 @@ export function Note({
 		initialData: initialCharacter,
 	});
 
-	const { navigate, href } = useNavigateToNote(note.characterId, note.noteId);
+	const { navigate, href, prefetch } = useNavigateToNote(
+		note.characterId,
+		note.noteId
+	);
 
 	// calculate displayMode smartly
 	const { characterId, noteId } = useNoteRouterQuery();
@@ -240,6 +243,9 @@ export function Note({
 				"flex-col": displayMode === "main",
 			})}
 			onClick={() => navigate()}
+			onMouseEnter={() => {
+				prefetch();
+			}}
 		>
 			{/* avatar & username */}
 			<div className="flex">
@@ -439,6 +445,11 @@ function useNavigateToNote(characterId: number, noteId: number) {
 
 		router.push(targetURL);
 	};
+	const prefetch = () => {
+		if (router.asPath === targetURL) return;
 
-	return { navigate, href: targetURL };
+		router.prefetch(targetURL);
+	};
+
+	return { navigate, href: targetURL, prefetch };
 }

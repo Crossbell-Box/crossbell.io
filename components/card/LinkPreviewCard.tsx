@@ -18,8 +18,9 @@ const LinkPreviewCard = ({ data }: LinkPreviewCardProps) => (
 				<div className="relative w-100px h-100px rounded-xl flex-shrink-0 overflow-hidden">
 					<Image
 						className="flex rounded-xl aspect-ratio-1 object-cover"
+						width={100}
+						height={100}
 						sizes="100px"
-						fill
 						src={data.images[0]}
 						alt={data.title}
 					/>
@@ -29,12 +30,14 @@ const LinkPreviewCard = ({ data }: LinkPreviewCardProps) => (
 				<div className="flex flex-row items-center">
 					{"favicons" in data && data.favicons[0] && (
 						<div className="flex">
-							<div className="relative w-1em h-1em rounded-full overflow-hidden">
+							<div className="relative w-16px h-16px overflow-hidden">
 								<Image
-									fill
+									width={16}
+									height={16}
+									sizes="16px"
 									src={data.favicons[0]}
 									alt="favicon"
-									className="object-cover"
+									className="object-cover vertical-super"
 									placeholder={undefined}
 								/>
 							</div>
