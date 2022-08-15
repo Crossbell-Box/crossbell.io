@@ -29,12 +29,11 @@ const Page: NextPageWithLayout<PageProps> = (props) => {
 	const headerText =
 		name ?? extractCharacterName(character) ?? handle ?? "Character";
 
+	const title = `${extractCharacterName(character)} (@${handle})`;
 	return (
 		<div>
 			<Head>
-				<title>
-					{extractCharacterName(character)} (@{handle})
-				</title>
+				<title>{title}</title>
 			</Head>
 
 			<Header hasBackButton>{headerText}</Header>

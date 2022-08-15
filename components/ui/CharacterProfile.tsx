@@ -72,17 +72,21 @@ export default function CharacterProfile({
 	return (
 		<div className="py-5 px-5 flex flex-row justify-between">
 			{/* left */}
-			<div className="flex flex-col justify-between">
+			<div className="flex flex-col justify-between overflow-hidden">
 				{/* name and handle */}
 				<Skeleton width={loading ? "5em" : "auto"} visible={loading}>
-					<Text className="text-2em font-bold leading-1.25em text-dark">
-						{extractCharacterName(character)}
-					</Text>
+					<div className="break-words">
+						<Text className="text-2em font-bold leading-1.25em text-dark">
+							{extractCharacterName(character)}
+						</Text>
+					</div>
 				</Skeleton>
 				<Skeleton width={loading ? "5em" : "auto"} visible={loading}>
-					<Text className="text-normal font-light leading-1.25em text-dimmed">
-						{character?.handle ? `@${character.handle}` : ""}
-					</Text>
+					<div className="break-words">
+						<Text className="text-normal font-light leading-1.25em text-dimmed">
+							{character?.handle ? `@${character.handle}` : ""}
+						</Text>
+					</div>
 				</Skeleton>
 
 				<Space h={20} />

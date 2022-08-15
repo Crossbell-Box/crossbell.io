@@ -119,7 +119,7 @@ function Typer() {
 					.pause(2000);
 
 				const altTexts = [
-					"Profiles",
+					"Characters",
 					"Follow Lists",
 					"Notes",
 					"Articles",

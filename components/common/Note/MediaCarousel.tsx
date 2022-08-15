@@ -167,6 +167,7 @@ export default function MediaCarousel({
 									"h-80vh": !isThumbnail && isOverlay,
 									"h-100px rounded-md": isThumbnail,
 								})}
+								style={{ width: mainWidth }}
 							>
 								{/* TODO: should not be in thumbnail */}
 								<VideoPlayer
@@ -180,9 +181,6 @@ export default function MediaCarousel({
 											},
 										],
 									}}
-									options={{ fullscreen: { enabled: true } }}
-									width={mainWidth}
-									height={isOverlay ? "80vh" : "300px"}
 									controls
 								/>
 							</div>
