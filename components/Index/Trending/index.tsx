@@ -11,8 +11,10 @@ const IndexTrending = () => {
 			<div className={"m-auto max-w-340 px-8"}>
 				{data && (
 					<>
-						<TrendingCharacters characters={data.character} />
-						<TrendingTreasures notes={data.note} />
+						{data.character && (
+							<TrendingCharacters characters={data.character} />
+						)}
+						{data.note && <TrendingTreasures notes={data.note} />}
 						<TrendingLists list={data.list} />
 					</>
 				)}

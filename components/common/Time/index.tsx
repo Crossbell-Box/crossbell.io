@@ -9,7 +9,7 @@ export default function Time({
 	mode = "accurate",
 	...props
 }: {
-	href: string;
+	href?: string;
 	date: string;
 	mode?: "fromNow" | "accurate";
 } & TextProps) {
@@ -22,12 +22,14 @@ export default function Time({
 
 	return isMounted ? (
 		<Tooltip label={formatDate(date)}>
+			{/* @ts-ignore */}
 			<Text
-				component={NextLink}
-				href={href}
+				{...(href ? { component: NextLink, href, variant: "link" } : {})}
+				// component={NextLink}
+				// href={href}
+				// variant="link"
 				color="dimmed"
 				size="sm"
-				variant="link"
 				{...props}
 			>
 				{mode === "accurate" && formatDate(date)}

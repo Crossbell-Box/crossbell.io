@@ -4,16 +4,18 @@ import { composeCharacterHref } from "@/utils/url";
 import { NextLink } from "@mantine/next";
 import { Text, TextProps } from "@mantine/core";
 import { CharacterEntity } from "crossbell.js";
+import classNames from "classnames";
 
 export function CharacterName({
 	characterId,
 	character: initialCharacter,
+	ellipsis,
+	className,
 	...props
 }: (
 	| { characterId: number; character?: CharacterEntity | null }
 	| { characterId?: never; character: CharacterEntity }
-) &
-	TextProps) {
+) & { ellipsis?: boolean } & TextProps) {
 	const { data, isLoading } = useCharacter(
 		characterId ?? initialCharacter.characterId,
 		{
@@ -26,6 +28,9 @@ export function CharacterName({
 
 	return (
 		<Text
+			className={classNames(className, {
+				"overflow-hidden text-ellipsis max-w-8em": ellipsis === true,
+			})}
 			color="dark"
 			weight="bolder"
 			component={NextLink}
@@ -44,13 +49,14 @@ export function CharacterHandle({
 	characterId,
 	handle,
 	character: initialCharacter,
+	ellipsis,
+	className,
 	...props
 }: (
 	| { characterId: number; handle?: never; character?: CharacterEntity | null }
 	| { characterId?: never; handle: string; character?: CharacterEntity | null }
 	| { characterId?: never; handle?: never; character: CharacterEntity }
-) &
-	TextProps) {
+) & { ellipsis?: boolean } & TextProps) {
 	const { data: data1, isLoading: isLoading1 } = useCharacter(
 		characterId ?? initialCharacter?.characterId,
 		{
@@ -78,6 +84,9 @@ export function CharacterHandle({
 
 	return (
 		<Text
+			className={classNames(className, {
+				"overflow-hidden text-ellipsis max-w-8em": ellipsis === true,
+			})}
 			component={NextLink}
 			href={composeCharacterHref(characterHandle)}
 			variant="link"

@@ -14,10 +14,11 @@ export default function AppLayout({ children }: PropsWithChildren) {
 	return (
 		<Center>
 			<ScrollToTop />
+
 			<AppShell
 				ref={rootRef}
 				styles={{
-					root: { maxWidth: "min(100vw, 1200px)" },
+					root: { maxWidth: "min(100vw, 1400px)" },
 					main: { padding: 0, width: mainWidth },
 				}}
 				className={"w-full"}
@@ -59,7 +60,7 @@ export default function AppLayout({ children }: PropsWithChildren) {
 				//   </Header>
 				// }
 			>
-				<div className="relative">{children}</div>
+				<div className="main-content relative">{children}</div>
 			</AppShell>
 		</Center>
 	);

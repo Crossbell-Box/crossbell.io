@@ -63,7 +63,7 @@ const TrendingLists = ({ list }: { list: TrendingRawResponse["list"] }) => (
 		viewMoreLink="/feed"
 	>
 		<div className="flex flex-col gap-8">
-			{list.map((el) => (
+			{list?.map((el) => (
 				<div
 					key={el.id}
 					className="flex flex-col md:flex-row gap-3 bg-white py-8 pl-8 rounded-2xl"

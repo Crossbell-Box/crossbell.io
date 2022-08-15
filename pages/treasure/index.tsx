@@ -16,7 +16,8 @@ const TreasuresList = () => {
 			<div className="grid grid-cols-3 gap-4 relative min-h-300px">
 				<LoadingOverlay visible={mintedNotesLoading} />
 				{mintedNotesArray?.list.map((mintedNote) => (
-					<MintedNoteCard key={mintedNote.noteId} mintedNote={mintedNote} />
+					// TODO:
+					<MintedNoteCard key={mintedNote.noteId} note={mintedNote.note!} />
 				))}
 			</div>
 		</>
