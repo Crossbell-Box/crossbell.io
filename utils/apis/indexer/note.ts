@@ -138,3 +138,27 @@ export function useNoteStatus(characterId: number, noteId: number) {
 		{ enabled: Boolean(characterId && noteId) }
 	);
 }
+
+// fetch a note's minted count
+
+export const SCOPE_KEY_NOTE_MINTED_COUNT = (
+	characterId: number,
+	noteId: number
+) => {
+	return [...SCOPE_KEY, "minted_count", characterId, noteId];
+};
+export function useNoteMintedCount(characterId: number, noteId: number) {
+	return useQuery(
+		SCOPE_KEY_NOTE_MINTED_COUNT(characterId, noteId),
+		async () => {
+			const { count } = await indexer.getMintedNotesOfNote(
+				characterId,
+				noteId,
+				{
+					limit: 0,
+				}
+			);
+			return count;
+		}
+	);
+}

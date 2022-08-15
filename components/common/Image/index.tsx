@@ -1,3 +1,4 @@
+import { ipfsLinkToHttpLink } from "@/utils/ipfs";
 import {
 	default as NextImage,
 	type ImageLoader,
@@ -48,10 +49,19 @@ const toBase64 = (str: string) =>
 
 export default function Image({
 	src,
+	fill,
 	...props
 }: PropsWithChildren<ImageProps>) {
+	if (typeof src === "string") {
+		src = ipfsLinkToHttpLink(src);
+	}
+
+	const isLocalImage =
+		typeof src === "string" &&
+		(src.startsWith("data:image/") || src.startsWith("/"));
+
 	const thumborLoader: ImageLoader = ({ src, width, quality }) => {
-		if (src.startsWith("/")) {
+		if (isLocalImage) {
 			return src;
 		}
 		// const w = typeof props.width === "number" ? props.width : width;
@@ -71,6 +81,11 @@ export default function Image({
 			// blurDataURL={randomColor()}
 			blurDataURL={`data:image/svg+xml;base64,${toBase64(shimmer())}`}
 			onError={() => _setSrc("/images/image-error.png")}
+			fill={fill}
+			{...(fill
+				? { sizes: "(min-width: 75em) 33vw, (min-width: 48em) 50vw, 100vw" }
+				: {})}
+			{...(isLocalImage ? { unoptimized: true } : {})}
 			{...props}
 		/>
 	);

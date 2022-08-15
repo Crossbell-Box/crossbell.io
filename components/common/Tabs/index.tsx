@@ -1,4 +1,4 @@
-import { TabsProps, Tabs as Tabs_, Text } from "@mantine/core";
+import { TabsProps, Tabs as Tabs_, Text, TabsValue } from "@mantine/core";
 import { useRouter } from "next/router";
 
 type MyTabsProps = {
@@ -8,10 +8,12 @@ type MyTabsProps = {
 		/** Example: i-csb:back */
 		icon?: string;
 	}[];
+	beforeTabChange?: (value: TabsValue) => boolean | void;
 };
 
 export default function Tabs({
 	tabs,
+	beforeTabChange,
 	...props
 }: MyTabsProps & Omit<TabsProps, "children">) {
 	const router = useRouter();
@@ -19,6 +21,9 @@ export default function Tabs({
 	return (
 		<Tabs_
 			onTabChange={(value) => {
+				if (beforeTabChange?.(value)) {
+					return;
+				}
 				router.push(`${value}`);
 			}}
 			value={router.asPath}

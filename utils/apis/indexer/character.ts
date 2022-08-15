@@ -21,6 +21,7 @@ export function useCharacters(address?: string) {
 }
 
 // get a single character by id
+
 export const SCOPE_KEY_CHARACTER = (characterId?: number | null) => {
 	return [...SCOPE_KEY, "one", characterId];
 };
@@ -91,6 +92,19 @@ export function useCurrentCharacter() {
 	}, [query.data]);
 
 	return query;
+}
+
+// check if the current user has a character
+export function useHasCharacter() {
+	const { data, status, fetchStatus } = useCurrentCharacter();
+	const isLoadingCharacter = status === "loading" && fetchStatus !== "idle";
+	const hasCharacter = Boolean(data);
+
+	return {
+		hasCharacter,
+		isLoadingCharacter,
+		currentCharacter: data,
+	};
 }
 
 // get the following status of a character

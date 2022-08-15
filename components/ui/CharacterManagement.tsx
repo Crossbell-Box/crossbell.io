@@ -5,11 +5,11 @@ import {
 	Button,
 	Group,
 	Textarea,
-	Box,
 	Text,
 	Space,
 	Loader,
 	Avatar,
+	Container,
 } from "@mantine/core";
 import { useForm } from "@mantine/form";
 import { Dropzone, IMAGE_MIME_TYPE } from "@mantine/dropzone";
@@ -25,6 +25,7 @@ import LoadingOverlay from "../common/LoadingOverlay";
 import { useRouter } from "next/router";
 import { composeCharacterHref } from "@/utils/url";
 import { showNotification } from "@mantine/notifications";
+import { NextLink } from "@mantine/next";
 
 export default function CharacterManagement({
 	characterId,
@@ -141,7 +142,7 @@ export default function CharacterManagement({
 		"Loading character..."
 	);
 
-	const router = useRouter();
+	const [status, setStatus] = useState<"form" | "done">("form");
 
 	// submit
 	const handleSubmit = async () => {
@@ -207,12 +208,145 @@ export default function CharacterManagement({
 			});
 		}
 
-		// navigate to the character page
-		router.push(composeCharacterHref(form.values.handle));
+		// done
+		setStatus("done");
+	};
+
+	const renderForm = () => {
+		return (
+			<div>
+				<form
+					className="relative"
+					onSubmit={form.onSubmit((values) => {
+						console.log({ values });
+						handleSubmit();
+					})}
+				>
+					<Space h={15} />
+
+					{/* handle */}
+					<Group>
+						<Text className="w-15 text-right">Handle</Text>
+						<TextInput
+							className="flex-1"
+							placeholder="A globally unique handle (ID) for your character"
+							required
+							size="md"
+							maxLength={31}
+							rightSection={
+								isFetchingExistingHandle ? <Loader size="xs" /> : null
+							}
+							{...form.getInputProps("handle")}
+						/>
+					</Group>
+
+					<Space h={15} />
+
+					{/* avatar */}
+					<Group>
+						<Text className="w-15 text-right">Avatar</Text>
+						<div className="relative flex items-center flex-1">
+							<Dropzone
+								onDrop={handleUpload}
+								accept={IMAGE_MIME_TYPE}
+								radius={9999}
+								padding={0}
+								className="mr-4"
+								styles={{
+									root: { border: "none" },
+								}}
+							>
+								<Group>
+									<div className="relative">
+										<LoadingOverlay visible={avatarLoading} />
+										<Avatar
+											className="h-16 w-16 rounded-full"
+											src={form.values.avatar.replace(
+												"ipfs://",
+												"https://gateway.ipfs.io/ipfs/"
+											)}
+										/>
+									</div>
+								</Group>
+							</Dropzone>
+						</div>
+					</Group>
+
+					<Space h={15} />
+
+					{/* name */}
+					<Group>
+						<Text className="w-15 text-right">Name</Text>
+						<TextInput
+							className="flex-1"
+							placeholder="Your character's name"
+							size="md"
+							maxLength={50}
+							{...form.getInputProps("name")}
+						/>
+					</Group>
+
+					<Space h={15} />
+
+					{/* bio */}
+					<Group>
+						<Text className="w-15 text-right">Bio</Text>
+						<Textarea
+							className="flex-1"
+							placeholder="A short bio about your character"
+							size="md"
+							maxLength={200}
+							{...form.getInputProps("bio")}
+						/>
+					</Group>
+
+					<Space h={20} />
+
+					{/* actions */}
+					<Group position="right" mt="md">
+						<Button
+							type="submit"
+							size="md"
+							className="text-dark"
+							disabled={
+								(Boolean(characterId) && isLoadingCharacter) || avatarLoading
+							}
+						>
+							I’ve decided
+						</Button>
+					</Group>
+				</form>
+			</div>
+		);
+	};
+
+	const renderCompleted = () => {
+		return (
+			<div className="flex flex-col items-center justify-center">
+				<img
+					src="/illustrations/completed.svg"
+					alt="Congratulations"
+					className="w-full"
+				/>
+
+				<Text className="my-5" weight={500}>
+					Congrats! You have minted your own character now!
+				</Text>
+
+				<Button
+					className="text-dark"
+					size="lg"
+					component={NextLink}
+					href={composeCharacterHref(form.values.handle)}
+				>
+					My Character Page
+				</Button>
+			</div>
+		);
 	};
 
 	return (
-		<Box>
+		<Container>
 			<LoadingOverlay
 				visible={
 					(characterId && isLoadingCharacter) ||
@@ -223,105 +357,9 @@ export default function CharacterManagement({
 				description={loadingDescription ?? "Loading character"}
 			/>
 
-			<form
-				className="relative"
-				onSubmit={form.onSubmit((values) => {
-					console.log({ values });
-					handleSubmit();
-				})}
-			>
-				<Space h={15} />
+			{status === "form" && renderForm()}
 
-				{/* handle */}
-				<Group>
-					<Text className="w-15 text-right">Handle</Text>
-					<TextInput
-						className="flex-1"
-						placeholder="A globally unique handle (ID) for your character"
-						required
-						size="md"
-						maxLength={31}
-						rightSection={
-							isFetchingExistingHandle ? <Loader size="xs" /> : null
-						}
-						{...form.getInputProps("handle")}
-					/>
-				</Group>
-
-				<Space h={15} />
-
-				{/* avatar */}
-				<Group>
-					<Text className="w-15 text-right">Avatar</Text>
-					<div className="relative flex items-center flex-1">
-						<Dropzone
-							onDrop={handleUpload}
-							accept={IMAGE_MIME_TYPE}
-							radius={9999}
-							padding={0}
-							className="mr-4"
-							styles={{
-								root: { border: "none" },
-							}}
-						>
-							<Group>
-								<div className="relative">
-									<LoadingOverlay visible={avatarLoading} />
-									<Avatar
-										className="h-16 w-16 rounded-full"
-										src={form.values.avatar.replace(
-											"ipfs://",
-											"https://gateway.ipfs.io/ipfs/"
-										)}
-									/>
-								</div>
-							</Group>
-						</Dropzone>
-					</div>
-				</Group>
-
-				<Space h={15} />
-
-				{/* name */}
-				<Group>
-					<Text className="w-15 text-right">Name</Text>
-					<TextInput
-						className="flex-1"
-						placeholder="Your character's name"
-						size="md"
-						maxLength={50}
-						{...form.getInputProps("name")}
-					/>
-				</Group>
-
-				<Space h={15} />
-
-				{/* bio */}
-				<Group>
-					<Text className="w-15 text-right">Bio</Text>
-					<Textarea
-						className="flex-1"
-						placeholder="A short bio about your character"
-						size="md"
-						maxLength={200}
-						{...form.getInputProps("bio")}
-					/>
-				</Group>
-
-				<Space h={20} />
-
-				{/* actions */}
-				<Group position="right" mt="md">
-					<Button
-						type="submit"
-						size="md"
-						className="text-dark"
-						disabled={(Boolean(characterId) && isLoadingCharacter) || avatarLoading}
-					>
-						I’ve decided
-					</Button>
-				</Group>
-			</form>
-		</Box>
+			{status === "done" && renderCompleted()}
+		</Container>
 	);
 }

@@ -20,7 +20,7 @@ export const composeNoteHref = (characterId: number, noteId: number) => {
 };
 
 /**
- * @example "@song"
+ * @example "song" -> "/@song"
  */
 export const composeCharacterHref = (handle: string) => {
 	if (handle) {
