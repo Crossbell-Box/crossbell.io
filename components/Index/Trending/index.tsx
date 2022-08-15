@@ -15,7 +15,7 @@ const IndexTrending = () => {
 							<TrendingCharacters characters={data.character} />
 						)}
 						{data.note && <TrendingTreasures notes={data.note} />}
-						<TrendingLists list={data.list} />
+						{/* <TrendingLists list={data.list} /> */}
 					</>
 				)}
 			</div>

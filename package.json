@@ -42,6 +42,7 @@
 		"remark-gfm": "3.0.1",
 		"sharp": "0.30.7",
 		"sticky-sidebar-v2": "^1.1.1",
+		"typeit-react": "^2.6.0",
 		"wagmi": "0.6.3"
 	},
 	"devDependencies": {
