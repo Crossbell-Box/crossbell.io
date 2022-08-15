@@ -76,6 +76,12 @@ export function useCurrentCharacterId() {
 		serialize: (cid) => cid.toString(),
 	});
 }
+export function useDisconnectCurrentCharacter() {
+	const disconnect = () => {
+		localStorage.clear("currentCharacterId");
+	};
+	return { disconnect };
+}
 
 export function useCurrentCharacter() {
 	const { address } = useAccount();

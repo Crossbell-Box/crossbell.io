@@ -23,8 +23,6 @@ export default function Aside() {
 					innerWrapperSelector: ".sidebar__inner",
 					scrollContainer: "#main-viewport",
 				});
-
-				console.log({ StickySidebar });
 			}
 		};
 
@@ -45,25 +43,27 @@ export default function Aside() {
 					hiddenBreakpoint="sm"
 					width={{ sm: 300, lg: 400 }}
 				>
-					<div className="sidebar__inner p-4">
-						{!isSearchPage && (
-							<div>
-								<SearchInput />
-							</div>
-						)}
+					<MediaQuery smallerThan="sm" styles={{ display: "none" }}>
+						<div className="sidebar__inner p-4">
+							{!isSearchPage && (
+								<div>
+									<SearchInput />
+								</div>
+							)}
 
-						<Space h={10} />
+							<Space h={10} />
 
-						<Title order={5}>Widgets</Title>
+							<Title order={5}>Widgets</Title>
 
-						<Space h={10} />
-						<TrendingNotesSection />
-						<Space h={10} />
+							<Space h={10} />
+							<TrendingNotesSection />
+							<Space h={10} />
 
-						<Space h={10} />
-						<TrendingCharactersSection />
-						<Space h={10} />
-					</div>
+							<Space h={10} />
+							<TrendingCharactersSection />
+							<Space h={10} />
+						</div>
+					</MediaQuery>
 				</Aside_>
 			</>
 		</MediaQuery>

@@ -20,6 +20,7 @@ import {
 	useCharacters,
 	useCurrentCharacter,
 	useCurrentCharacterId,
+	useDisconnectCurrentCharacter,
 } from "@/utils/apis/indexer";
 import { truncateAddress } from "@/utils/ethers";
 import Modal from "../Modal";
@@ -177,13 +178,18 @@ function WalletButton() {
 		addressOrName: address,
 	});
 
+	const { disconnect: disconnCharacter } = useDisconnectCurrentCharacter();
+
 	return (
 		<>
 			<Modal
 				opened={disconnOpened}
 				onClose={() => disconnHandlers.close()}
 				title="Disconnect Wallet?"
-				onConfirm={() => disconnect()}
+				onConfirm={() => {
+					disconnCharacter();
+					disconnect();
+				}}
 				confirmText="Disconnect"
 				confirmType="danger"
 			>
