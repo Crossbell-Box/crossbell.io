@@ -66,7 +66,7 @@ const socialMedias: {
 	{
 		text: "YouTube",
 		icon: "i-csb:youtube",
-		link: "",
+		link: "https://youtube.com/channel/UCs_f32UpeFk2CM8hzF7Q61Q",
 	},
 	{
 		text: "Telegram",

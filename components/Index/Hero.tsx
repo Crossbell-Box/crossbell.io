@@ -1,7 +1,8 @@
-import { Button, Title } from "@mantine/core";
+import { Button, Title, Text, Space } from "@mantine/core";
 import { NextLink } from "@mantine/next";
 // @ts-ignore
 import TypeIt from "typeit-react";
+import VideoPlayer from "../common/Note/VideoPlayer";
 
 export default function IndexHero() {
 	return (
@@ -71,18 +72,41 @@ function SNSIcons() {
 
 function HeroTexts() {
 	return (
-		<div className="text-center relative flex flex-col justify-center">
+		<div className="text-center relative flex flex-col justify-center items-center">
+			<Space h={50} />
+
 			<Title
 				order={2}
-				className="font-bold text-size-[3rem] md:text-size-[4rem] xl:text-size-[6rem]"
+				className="font-bold text-size-[2rem] md:text-size-[4rem] xl:text-size-[6rem]"
 			>
 				<Typer />
 			</Title>
 
-			<span className="text-lg text-[#082135] block my-12">
+			<Space h={20} />
+
+			<div className="max-w-100vw">
+				<VideoPlayer
+					className="max-w-100vw"
+					style={{ maxWidth: "80vw", maxHeight: "40vh" }}
+					url="https://www.youtube.com/watch?v=Txq26_SI6XE"
+					config={{
+						youtube: {
+							playerVars: {
+								modestbranding: 1,
+							},
+						},
+					}}
+				/>
+			</div>
+
+			<Space h={20} />
+
+			<Text className="text-lg text-[#082135]">
 				Crossbell is a platform for owning your social activities, <br />
 				composed of an EVM-compatible blockchain and a set of smart contracts.
-			</span>
+			</Text>
+
+			<Space h={20} />
 
 			<span>
 				<Button color="#FFDA48" size="xl" component={NextLink} href="/explore">

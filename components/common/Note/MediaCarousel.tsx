@@ -170,19 +170,7 @@ export default function MediaCarousel({
 								style={{ width: mainWidth }}
 							>
 								{/* TODO: should not be in thumbnail */}
-								<VideoPlayer
-									source={{
-										type: "video",
-										sources: [
-											{
-												src: ipfsLinkToHttpLink(a.address),
-												size: a.size_in_bytes,
-												type: a.mime_type,
-											},
-										],
-									}}
-									controls
-								/>
+								<VideoPlayer url={src} controls />
 							</div>
 						</Carousel.Slide>
 					);
