@@ -240,7 +240,7 @@ function forceBreakNewlines(text: string) {
 }
 
 function transformMentions(text: string) {
-	const mentionRegex = /@([a-zA-Z0-9_\-]+)/g;
+	const mentionRegex = /@([a-zA-Z0-9_\-]+)\s/g;
 	const mentionReplacer = (match: string, handle: string) => {
 		return `<at-mention handle="${handle}">${match}</at-mention>`;
 	};
