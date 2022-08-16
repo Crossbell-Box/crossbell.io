@@ -22,6 +22,10 @@ const nextConfig = {
 			remotePatterns: [{ hostname: "**" }],
 		},
 	},
+	compiler: {
+		// removeConsole: { exclude: ["error"] },
+	},
+	// swcMinify: true,
 };
 
 module.exports = withBundleAnalyzer(nextConfig);

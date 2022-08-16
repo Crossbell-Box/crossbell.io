@@ -5,7 +5,6 @@ import {
 	type LoadingOverlayProps,
 	Text,
 } from "@mantine/core";
-import { useScrollLock } from "@mantine/hooks";
 import classNames from "classnames";
 import { type PropsWithChildren, useEffect } from "react";
 
