@@ -131,7 +131,7 @@ function FeedList() {
 	const { data, hasNextPage, fetchNextPage, isFetchingNextPage, isLoading } =
 		useFollowingFeedsOfCharacter(character?.characterId);
 
-	const hasResult = data?.pages.some((p) => p.count > 0);
+	const hasResult = !isLoading && data?.pages.some((p) => p.count > 0);
 
 	return (
 		<>

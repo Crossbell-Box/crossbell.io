@@ -286,7 +286,9 @@ function AccountList() {
 								setCurCid(c.characterId);
 								showNotification({ message: `Switched to @${c.handle}` });
 								if (shouldNavigate) {
-									router.push(composeCharacterHref(c.handle));
+									setTimeout(() => {
+										router.push(composeCharacterHref(c.handle));
+									}, 500);
 								}
 							},
 						});

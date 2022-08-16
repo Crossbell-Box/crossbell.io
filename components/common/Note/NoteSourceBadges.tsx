@@ -1,8 +1,9 @@
 import { Badge } from "@mantine/core";
-import { CharacterEntity, NoteMetadata } from "crossbell.js";
+import { NoteMetadata } from "crossbell.js";
 import { TinyColor, random, mostReadable } from "@ctrl/tinycolor";
 
 const builtInColorMap = {
+	["crossbell.io"]: "#E1BE60",
 	xlog: "#6466e9",
 	operatorsync: "#5298e9",
 	crosssync: "#5d87f7",

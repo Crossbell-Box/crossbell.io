@@ -41,6 +41,7 @@ export function useTrending(reqTypes: AvailableTypes[] = []) {
 		{
 			enabled: true,
 			refetchOnWindowFocus: false, // to prevent random refresh
+			refetchOnMount: false, // to prevent random refresh
 		}
 	);
 }
