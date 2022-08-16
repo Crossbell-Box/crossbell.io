@@ -261,6 +261,9 @@ function AccountList() {
 					}
 					key={c.characterId}
 					onClick={() => {
+						if (c.characterId === curCid) {
+							return;
+						}
 						modals.openConfirmModal({
 							title: `Switch to @${c.handle}?`,
 							children: (

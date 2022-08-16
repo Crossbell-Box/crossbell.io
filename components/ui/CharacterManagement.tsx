@@ -13,7 +13,7 @@ import {
 } from "@mantine/core";
 import { useForm } from "@mantine/form";
 import { Dropzone, IMAGE_MIME_TYPE } from "@mantine/dropzone";
-import { uploadToIpfs } from "@/utils/ipfs";
+import { ipfsLinkToHttpLink, uploadToIpfs } from "@/utils/ipfs";
 import { extractCharacterName } from "@/utils/metadata";
 import { useDebouncedValue } from "@mantine/hooks";
 import {
@@ -261,10 +261,7 @@ export default function CharacterManagement({
 										<LoadingOverlay visible={avatarLoading} />
 										<Avatar
 											className="h-16 w-16 rounded-full"
-											src={form.values.avatar.replace(
-												"ipfs://",
-												"https://gateway.ipfs.io/ipfs/"
-											)}
+											src={ipfsLinkToHttpLink(form.values.avatar)}
 										/>
 									</div>
 								</Group>

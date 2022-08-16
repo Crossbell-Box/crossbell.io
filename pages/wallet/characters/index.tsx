@@ -116,7 +116,7 @@ function CharacterCard({ character }: { character: CharacterEntity }) {
 							visible={isLoadingFollowingStats}
 						>
 							<Text className="font-bold">
-								{followingStats?.followingCount}
+								{followingStats?.followersCount ?? "..."}
 							</Text>
 						</Skeleton>
 						<Text className="text-xs text-slate-500">Followers</Text>
@@ -127,7 +127,7 @@ function CharacterCard({ character }: { character: CharacterEntity }) {
 							visible={isLoadingFollowingStats}
 						>
 							<Text className="font-bold">
-								{followingStats?.followingCount}
+								{followingStats?.followingCount ?? "..."}
 							</Text>
 						</Skeleton>
 						<Text className="text-xs text-slate-500">Following</Text>
