@@ -240,7 +240,6 @@ export default function MediaCarousel({
 					className="overflow-hidden relative w-full"
 					withIndicators={false}
 					withControls={false}
-					slidesToScroll={10}
 					slideGap="md"
 					dragFree
 				>
