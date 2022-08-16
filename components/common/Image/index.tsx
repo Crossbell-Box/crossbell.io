@@ -48,7 +48,9 @@ const toBase64 = (str: string) =>
 		: window.btoa(str);
 
 const isLocalImage = (s: ImageProps["src"]) =>
-	typeof s === "string" && (s.startsWith("data:image/") || s.startsWith("/"));
+	(typeof s === "string" &&
+		(s.startsWith("data:image/") || s.startsWith("/"))) ||
+	typeof s === "object"; // StaticImport
 
 export default function Image({
 	src,
