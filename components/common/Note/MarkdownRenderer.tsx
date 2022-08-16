@@ -25,6 +25,7 @@ import LinkPreviewCard, {
 import { Button } from "@mantine/core";
 import { isExternalUrl } from "@/utils/url";
 import { CharacterHandle } from "../Character";
+import { useCharacterHandleExists } from "@/utils/apis/indexer";
 
 export function MarkdownRenderer({
 	children,
@@ -188,8 +189,16 @@ export function MarkdownRenderer({
 									return <Divider />;
 								},
 								// @ts-ignore
-								"at-mention": ({ node, ...props }) => {
-									return <CharacterHandle handle={props.handle} />;
+								"at-mention": function AtMention({ node, ...props }) {
+									const { data, isLoading } = useCharacterHandleExists(
+										props.handle
+									);
+									const noHandle = !isLoading && !data;
+									return isLoading || noHandle ? (
+										<span>@{props.handle}</span>
+									) : (
+										<CharacterHandle handle={props.handle} />
+									);
 								},
 							}}
 							rehypePlugins={[rehypeRaw]}

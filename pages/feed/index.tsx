@@ -131,7 +131,7 @@ function FeedList() {
 	const { data, hasNextPage, fetchNextPage, isFetchingNextPage, isLoading } =
 		useFollowingFeedsOfCharacter(character?.characterId);
 
-	const hasResult = !isLoading && data?.pages.some((p) => p.count > 0);
+	const hasNoResult = !isLoading && !data?.pages.some((p) => p.count > 0);
 
 	return (
 		<>
@@ -165,7 +165,7 @@ function FeedList() {
 					))}
 			</LoadMore>
 
-			{!hasResult && (
+			{hasNoResult && (
 				<div className="flex flex-col items-center justify-center">
 					<img
 						src="/illustrations/alone.svg"

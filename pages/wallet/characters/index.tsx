@@ -111,25 +111,16 @@ function CharacterCard({ character }: { character: CharacterEntity }) {
 				{/* following stats */}
 				<div className="flex w-full">
 					<div className="flex-1 border-r border-slate-200 text-sm">
-						<Skeleton
-							width={isLoadingFollowingStats ? "2em" : "auto"}
-							visible={isLoadingFollowingStats}
-						>
-							<Text className="font-bold">
-								{followingStats?.followersCount ?? "..."}
-							</Text>
-						</Skeleton>
+						<Text className="font-bold">
+							{followingStats?.followersCount ?? "..."}
+						</Text>
+
 						<Text className="text-xs text-slate-500">Followers</Text>
 					</div>
 					<div className="flex-1 text-sm">
-						<Skeleton
-							width={isLoadingFollowingStats ? "2em" : "auto"}
-							visible={isLoadingFollowingStats}
-						>
-							<Text className="font-bold">
-								{followingStats?.followingCount ?? "..."}
-							</Text>
-						</Skeleton>
+						<Text className="font-bold">
+							{followingStats?.followingCount ?? "..."}
+						</Text>
 						<Text className="text-xs text-slate-500">Following</Text>
 					</div>
 				</div>

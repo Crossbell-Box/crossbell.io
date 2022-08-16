@@ -55,6 +55,35 @@ export function useCharacterByHandle(handle?: string, options?: any) {
 	);
 }
 
+// check if a handle exists
+
+export const SCOPE_KEY_CHARACTER_HANDLE_EXISTS = (handle?: string) => {
+	return [...SCOPE_KEY, "one", "handleExists", handle];
+};
+export const fetchCharacterHandleExists = (handle: string) => {
+	handle = handle?.toLowerCase();
+	const endpoint = indexer.endpoint;
+	return fetch(endpoint + "/graphql", {
+		headers: {
+			accept: "application/json",
+			"content-type": "application/json",
+		},
+		referrer: "https://indexer.crossbell.io/altair",
+		referrerPolicy: "strict-origin-when-cross-origin",
+		body: `{"query":"{characters(where:{handle:{equals:\\"${handle}\\"}},take:1){characterId}}"}`,
+		method: "POST",
+	})
+		.then((res) => res.json())
+		.then((res) => res.data.characters.length > 0);
+};
+export function useCharacterHandleExists(handle?: string) {
+	return useQuery(
+		SCOPE_KEY_CHARACTER_HANDLE_EXISTS(handle),
+		() => fetchCharacterHandleExists(handle!),
+		{ enabled: Boolean(handle) }
+	);
+}
+
 // get the primary character of an address
 
 export const SCOPE_KEY_PRIMARY_CHARACTER = (address?: string) => {
