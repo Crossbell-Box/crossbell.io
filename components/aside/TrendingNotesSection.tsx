@@ -55,7 +55,7 @@ function NoteListItem({ note }: { note: NoteEntity }) {
 				<Space h={5} />
 
 				<div className="flex flex-row">
-					<Text lineClamp={3} className="leading-1.25em flex-1">
+					<Text size={13} lineClamp={3} className="leading-1.25em flex-1">
 						{note.metadata?.content?.content}
 					</Text>
 

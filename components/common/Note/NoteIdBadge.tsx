@@ -19,6 +19,7 @@ export default function NoteIdBadge({ note }: { note: NoteEntity }) {
 				variant="gradient"
 				gradient={{ from: theme.colors.brand[6], to: theme.colors.brand[4] }}
 				onClick={(e: any) => e.stopPropagation()}
+				size="sm"
 			>
 				{noteId}
 			</Badge>

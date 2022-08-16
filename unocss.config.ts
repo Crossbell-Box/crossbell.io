@@ -22,8 +22,7 @@ export default defineConfig({
 		["font-deca", { "font-family": "Lexend Deca" }],
 	],
 	shortcuts: {
-		"bg-hover":
-			"hover:bg-gray/15 active:bg-gray/20 transition-background-color",
+		"bg-hover": "hover:bg-gray/5 active:bg-gray/10 transition-background-color",
 	},
 	theme: {
 		colors: {

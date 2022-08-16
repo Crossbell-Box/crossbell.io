@@ -1,6 +1,10 @@
-import { MantineProvider } from "@mantine/core";
+import {
+	MantineProvider,
+	createEmotionCache,
+	Tuple,
+	DefaultMantineColor,
+} from "@mantine/core";
 import { PropsWithChildren } from "react";
-import { createEmotionCache } from "@mantine/core";
 
 export const emotionCache = createEmotionCache({
 	key: "mantine",
@@ -10,7 +14,7 @@ export const emotionCache = createEmotionCache({
 export default function ThemeProvider({ children }: PropsWithChildren) {
 	return (
 		<MantineProvider
-			// withGlobalStyles
+			withGlobalStyles
 			withNormalizeCSS
 			emotionCache={emotionCache}
 			theme={{
@@ -19,6 +23,8 @@ export default function ThemeProvider({ children }: PropsWithChildren) {
 				fontFamily: "Roboto",
 				fontFamilyMonospace: "Monaco, Courier, monospace",
 				headings: { fontFamily: "Lexend Deca" },
+				white: "#fff",
+				black: "#0f1419", // "#082135",
 				colors: {
 					brand: [
 						"#FFF9E9",
@@ -32,7 +38,7 @@ export default function ThemeProvider({ children }: PropsWithChildren) {
 						"#A67E18",
 						"#7C5D0C",
 					],
-					["csb-blue"]: [
+					csbBlue: [
 						"#5B89F7",
 						"#5B89F7",
 						"#5B89F7",
@@ -44,7 +50,7 @@ export default function ThemeProvider({ children }: PropsWithChildren) {
 						"#5B89F7",
 						"#5B89F7",
 					],
-					["csb-red"]: [
+					csbRed: [
 						"#EB5F5F",
 						"#EB5F5F",
 						"#EB5F5F",
@@ -56,7 +62,7 @@ export default function ThemeProvider({ children }: PropsWithChildren) {
 						"#EB5F5F",
 						"#EB5F5F",
 					],
-					["csb-yellow"]: [
+					csbYellow: [
 						"#46CEAF",
 						"#46CEAF",
 						"#46CEAF",
@@ -80,4 +86,17 @@ export default function ThemeProvider({ children }: PropsWithChildren) {
 
 export function usePrimaryShade() {
 	return 5;
+}
+
+type ExtendedCustomColors =
+	| "brand"
+	| "csbBlue"
+	| "csbRed"
+	| "csbYellow"
+	| DefaultMantineColor;
+
+declare module "@mantine/core" {
+	export interface MantineThemeColorsOverride {
+		colors: Record<ExtendedCustomColors, Tuple<string, 10>>;
+	}
 }

@@ -215,17 +215,16 @@ export function Note({
 	};
 
 	const renderContent = () => {
-		const clxs = displayMode === "main" ? "text-1.25em" : "text-1em";
 		const titleOrder = displayMode === "main" ? 2 : 3;
 		return (
-			<div className={clxs}>
+			<div>
 				{note.metadata?.content?.title && (
 					<Title order={titleOrder} className="my-2">
 						{note.metadata.content.title}
 					</Title>
 				)}
 
-				<MarkdownRenderer collapsible={collapsible}>
+				<MarkdownRenderer collapsible={collapsible} displayMode={displayMode}>
 					{note.metadata?.content?.content ?? ""}
 				</MarkdownRenderer>
 			</div>

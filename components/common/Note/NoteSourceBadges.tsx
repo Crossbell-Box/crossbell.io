@@ -35,6 +35,7 @@ export default function NoteSources({
 							variant="gradient"
 							gradient={color ? { from: color, to: lighterColor } : undefined}
 							style={{ color: textColor }}
+							size="sm"
 						>
 							{s}
 						</Badge>

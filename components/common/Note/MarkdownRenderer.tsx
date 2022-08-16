@@ -1,4 +1,4 @@
-import { PropsWithChildren, useEffect, useMemo, useState } from "react";
+import { PropsWithChildren, useMemo, useState } from "react";
 import {
 	Blockquote,
 	Code,
@@ -30,10 +30,12 @@ import { useCharacterHandleExists } from "@/utils/apis/indexer";
 export function MarkdownRenderer({
 	children,
 	collapsible = false,
+	displayMode = "normal",
 	...props
 }: PropsWithChildren<
 	{
 		collapsible?: boolean;
+		displayMode?: "normal" | "main";
 	} & ReactMarkdownOptions
 >) {
 	const { ref, width, height } = useElementSize();
@@ -41,6 +43,8 @@ export function MarkdownRenderer({
 	const isExceeded = height > 500;
 
 	const [collapsed, setCollapsed] = useState(collapsible);
+
+	const fontSize = displayMode === "main" ? 17 : 15;
 
 	const Memoed = useMemo(() => {
 		const showReadMoreButton = collapsed && isExceeded;
@@ -82,13 +86,14 @@ export function MarkdownRenderer({
 								p: ({ node, ...props }) => {
 									return (
 										<Text
+											size={fontSize}
 											className="leading-1.25em my-2 break-words"
 											style={{ wordBreak: "break-word" }}
 											{...props}
 										/>
 									);
 								},
-								img: function Img({ node, ...props }) {
+								img: function MarkdownImg({ node, ...props }) {
 									const src = ipfsLinkToHttpLink(props.src!);
 									// const [paddingTop, setPaddingTop] = useState<string>("0");
 
@@ -139,6 +144,7 @@ export function MarkdownRenderer({
 										<LinkPreviewCard data={data} />
 									) : (
 										<Text
+											size={fontSize}
 											variant="link"
 											component="a"
 											href={props.href}
