@@ -371,7 +371,9 @@ function NoteActions({
 				bgHoverColor="group-hover:bg-green/10"
 				textHoverColor="group-hover:text-green"
 				onClick={async () => {
-					await copyToClipboard(location.href);
+					await copyToClipboard(
+						location.origin + composeNoteHref(characterId, noteId)
+					);
 					showNotification({
 						message: "Copied to Clipboard!",
 						disallowClose: true,
