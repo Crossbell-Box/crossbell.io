@@ -51,5 +51,13 @@ export default defineConfig({
 				primary: "#9688F2",
 			},
 		},
+		breakpoints: {
+			// https://mantine.dev/styles/responsive/#configure-breakpoints
+			xs: "576px",
+			sm: "768px",
+			md: "992px",
+			lg: "1200px",
+			xl: "1400px",
+		},
 	},
 });

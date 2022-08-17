@@ -1,14 +1,7 @@
 import ConnectButton from "@/components/common/ConnectButton";
 import Logo from "@/components/common/Logo";
 import { useCurrentCharacter } from "@/utils/apis/indexer";
-import {
-	UnstyledButton,
-	Text,
-	Space,
-	Title,
-	Navbar,
-	createStyles,
-} from "@mantine/core";
+import { UnstyledButton, Text, Space, Title, Navbar } from "@mantine/core";
 import { NextLink } from "@mantine/next";
 import classNames from "classnames";
 import Link from "next/link";
@@ -55,7 +48,7 @@ type NavLinkProps = {
 	href: string;
 	title: string;
 	icon: string;
-	iconColor?: string;
+	iconColor: string;
 	className: string;
 	activeClassName: string;
 };
@@ -154,7 +147,7 @@ function NavLink({
 				{/* icon */}
 				<Text
 					className={classNames(icon, "text-2xl", {
-						iconColor: isCurrentRoute,
+						// [iconColor]: isCurrentRoute, // TODO: icon color
 						"text-black": !isCurrentRoute,
 					})}
 				/>

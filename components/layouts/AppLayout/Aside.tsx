@@ -30,21 +30,21 @@ export default function Aside() {
 	}, []);
 
 	return (
-		<MediaQuery smallerThan="sm" styles={{ display: "none" }}>
-			<>
-				{/* {!isSearchPage && (
-					<div className="sticky top-0">
-						<SearchInput />
-					</div>
-				)} */}
+		<>
+			{/* {!isSearchPage && (
+				<div className="sticky top-0">
+				<SearchInput />
+				</div>
+			)} */}
 
-				<Aside_
-					className="sidebar bg-transparent"
-					hiddenBreakpoint="sm"
-					width={{ sm: 300, lg: 400 }}
-				>
-					<MediaQuery smallerThan="sm" styles={{ display: "none" }}>
-						<div className="sidebar__inner p-4">
+			<div className="sidebar w-300px lg:w-400px hidden sm:block">
+				<div className="sidebar__inner">
+					<Aside_
+						className="bg-transparent"
+						hiddenBreakpoint="sm"
+						// width={{ sm: 300, lg: 400 }}
+					>
+						<div className="p-4">
 							{!isSearchPage && (
 								<div>
 									<SearchInput />
@@ -63,9 +63,9 @@ export default function Aside() {
 							<TrendingCharactersSection />
 							<Space h={10} />
 						</div>
-					</MediaQuery>
-				</Aside_>
-			</>
-		</MediaQuery>
+					</Aside_>
+				</div>
+			</div>
+		</>
 	);
 }
