@@ -38,7 +38,19 @@ export default function ThemeProvider({ children }: PropsWithChildren) {
 						"#A67E18",
 						"#7C5D0C",
 					],
-					csbBlue: [
+					blue: [
+						"#E65040",
+						"#E65040",
+						"#E65040",
+						"#E65040",
+						"#E65040",
+						"#E65040", // <-
+						"#E65040",
+						"#E65040",
+						"#E65040",
+						"#E65040",
+					],
+					red: [
 						"#5B89F7",
 						"#5B89F7",
 						"#5B89F7",
@@ -50,29 +62,41 @@ export default function ThemeProvider({ children }: PropsWithChildren) {
 						"#5B89F7",
 						"#5B89F7",
 					],
-					csbRed: [
-						"#EB5F5F",
-						"#EB5F5F",
-						"#EB5F5F",
-						"#EB5F5F",
-						"#EB5F5F",
-						"#EB5F5F", // <-
-						"#EB5F5F",
-						"#EB5F5F",
-						"#EB5F5F",
-						"#EB5F5F",
+					yellow: [
+						"#F6C549",
+						"#F6C549",
+						"#F6C549",
+						"#F6C549",
+						"#F6C549",
+						"#F6C549", // <-
+						"#F6C549",
+						"#F6C549",
+						"#F6C549",
+						"#F6C549",
 					],
-					csbYellow: [
-						"#46CEAF",
-						"#46CEAF",
-						"#46CEAF",
-						"#46CEAF",
-						"#46CEAF",
-						"#46CEAF", // <-
-						"#46CEAF",
-						"#46CEAF",
-						"#46CEAF",
-						"#46CEAF",
+					green: [
+						"#6AD991",
+						"#6AD991",
+						"#6AD991",
+						"#6AD991",
+						"#6AD991",
+						"#6AD991", // <-
+						"#6AD991",
+						"#6AD991",
+						"#6AD991",
+						"#6AD991",
+					],
+					purple: [
+						"#9688F2",
+						"#9688F2",
+						"#9688F2",
+						"#9688F2",
+						"#9688F2",
+						"#9688F2", // <-
+						"#9688F2",
+						"#9688F2",
+						"#9688F2",
+						"#9688F2",
 					],
 				},
 				primaryColor: "brand",
@@ -88,12 +112,7 @@ export function usePrimaryShade() {
 	return 5;
 }
 
-type ExtendedCustomColors =
-	| "brand"
-	| "csbBlue"
-	| "csbRed"
-	| "csbYellow"
-	| DefaultMantineColor;
+type ExtendedCustomColors = "brand" | "purple" | DefaultMantineColor;
 
 declare module "@mantine/core" {
 	export interface MantineThemeColorsOverride {

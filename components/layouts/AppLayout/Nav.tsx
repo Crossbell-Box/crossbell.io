@@ -1,16 +1,16 @@
 import ConnectButton from "@/components/common/ConnectButton";
 import Logo from "@/components/common/Logo";
-import { usePrimaryShade } from "@/components/providers/ThemeProvider";
 import { useCurrentCharacter } from "@/utils/apis/indexer";
 import {
-	createStyles,
 	UnstyledButton,
 	Text,
 	Space,
 	Title,
 	Navbar,
+	createStyles,
 } from "@mantine/core";
 import { NextLink } from "@mantine/next";
+import classNames from "classnames";
 import Link from "next/link";
 import { useRouter } from "next/router";
 import { useEffect, useState } from "react";
@@ -51,6 +51,15 @@ export default function Nav() {
 	);
 }
 
+type NavLinkProps = {
+	href: string;
+	title: string;
+	icon: string;
+	iconColor?: string;
+	className: string;
+	activeClassName: string;
+};
+
 function NavLinks() {
 	const { data: character } = useCurrentCharacter();
 
@@ -58,37 +67,42 @@ function NavLinks() {
 		{
 			href: "/feed",
 			title: "Feed",
-			color: "brand",
 			icon: "i-csb:feed",
-			iconColor: "text-brand",
+			iconColor: "text-yellow-primary/20",
+			className: "hover:bg-yellow-primary/50",
+			activeClassName: "bg-yellow-primary",
 		},
 		{
 			href: "/shop",
 			title: "Shop",
-			color: "red",
 			icon: "i-csb:shop",
-			iconColor: "text-red",
+			iconColor: "text-red-primary/20",
+			className: "hover:bg-red-primary/50",
+			activeClassName: "bg-red-primary",
 		},
 		{
 			href: "/sync",
 			title: "Sync",
-			color: "blue",
 			icon: "i-csb:sync",
-			iconColor: "text-blue",
+			iconColor: "text-blue-primary/20",
+			className: "hover:bg-blue-primary/50",
+			activeClassName: "bg-blue-primary",
 		},
 		{
 			href: character ? `/@${character.handle}` : "/character",
 			title: "Character",
-			color: "green",
 			icon: "i-csb:character",
-			iconColor: "text-green",
+			iconColor: "text-green-primary/20",
+			className: "hover:bg-green-primary/50",
+			activeClassName: "bg-green-primary",
 		},
 		{
 			href: "/treasure",
 			title: "Treasures",
-			color: "grape",
 			icon: "i-csb:treasures",
-			iconColor: "text-purple",
+			iconColor: "text-purple-primary/20",
+			className: "hover:bg-purple-primary/50",
+			activeClassName: "bg-purple-primary",
 		},
 	];
 
@@ -101,15 +115,14 @@ function NavLinks() {
 	);
 }
 
-type NavLinkProps = {
-	href: string;
-	title: string;
-	icon: string;
-	color: string;
-	iconColor: string;
-};
-
-function NavLink({ href, title, icon, color, iconColor }: NavLinkProps) {
+function NavLink({
+	href,
+	title,
+	icon,
+	iconColor,
+	className,
+	activeClassName,
+}: NavLinkProps) {
 	const router = useRouter();
 
 	const [isCurrentRoute, setIsCurrentRoute] = useState(false);
@@ -118,41 +131,29 @@ function NavLink({ href, title, icon, color, iconColor }: NavLinkProps) {
 		setIsCurrentRoute(router.asPath === href);
 	}, [router.asPath, href]);
 
-	const primaryShade = usePrimaryShade();
-
-	const useStyles = createStyles((theme) => ({
-		button: {
-			color: theme.colors.dark[9],
-			"&:hover": { background: theme.colors.gray[1] },
-		},
-		active: {
-			// color: theme.colors[color][primaryShade],
-			background: "white",
-			color: theme.colors[color][primaryShade],
-			"&:hover": { background: theme.colors.gray[0] },
-			boxShadow: "0px 0px 15px rgba(38, 108, 158, 0.1)",
-		},
-	}));
-
-	const { classes, cx } = useStyles();
-
 	return (
 		<UnstyledButton
 			component={NextLink}
 			href={href}
-			className={cx(
-				"block py-2 px-4 my-2 rounded-md overflow-hidden",
+			className={classNames(
+				"relative block py-2 px-4 my-4 rounded-lg",
 				"transition-colors",
 				{
-					[classes.active]: isCurrentRoute,
-					[classes.button]: !isCurrentRoute,
+					[className]: !isCurrentRoute,
+					[activeClassName]: isCurrentRoute,
+					// "border-2": isCurrentRoute,
 				}
 			)}
 		>
+			{/* border */}
+			{isCurrentRoute && (
+				<div className="absolute top--1 left--1 right--1 bottom--1 rounded-lg border-2"></div>
+			)}
+
 			<div className="flex items-center">
 				{/* icon */}
 				<Text
-					className={cx(icon, "text-2xl", {
+					className={classNames(icon, "text-2xl", {
 						iconColor: isCurrentRoute,
 						"text-black": !isCurrentRoute,
 					})}

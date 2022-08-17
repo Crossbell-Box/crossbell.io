@@ -249,6 +249,7 @@ export default function CharacterManagement({
 							<Dropzone
 								onDrop={handleUpload}
 								accept={IMAGE_MIME_TYPE}
+								maxSize={2 * 1024 ** 2} // 2MB
 								radius={9999}
 								padding={0}
 								className="mr-4"
