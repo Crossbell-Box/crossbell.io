@@ -17,7 +17,7 @@
 		"@mantine/carousel": "5.1.6",
 		"@mantine/core": "5.1.6",
 		"@mantine/dropzone": "5.1.6",
-		"@mantine/form": "5.1.6",
+		"@mantine/form": "5.2.0",
 		"@mantine/hooks": "5.1.6",
 		"@mantine/modals": "5.1.6",
 		"@mantine/next": "5.1.6",
