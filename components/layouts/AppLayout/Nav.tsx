@@ -2,6 +2,7 @@ import ConnectButton from "@/components/common/ConnectButton";
 import Logo from "@/components/common/Logo";
 import { useCurrentCharacter } from "@/utils/apis/indexer";
 import { UnstyledButton, Text, Space, Title, Navbar } from "@mantine/core";
+import { useFocusWithin } from "@mantine/hooks";
 import { NextLink } from "@mantine/next";
 import classNames from "classnames";
 import Link from "next/link";
@@ -62,40 +63,40 @@ function NavLinks() {
 			title: "Feed",
 			icon: "i-csb:feed",
 			iconColor: "text-yellow-primary/20",
-			className: "hover:bg-yellow-primary/50",
-			activeClassName: "bg-yellow-primary",
+			className: "focus:bg-yellow-primary",
+			activeClassName: "bg-yellow-primary/50",
 		},
 		{
 			href: "/shop",
 			title: "Shop",
 			icon: "i-csb:shop",
 			iconColor: "text-red-primary/20",
-			className: "hover:bg-red-primary/50",
-			activeClassName: "bg-red-primary",
+			className: "focus:bg-red-primary",
+			activeClassName: "bg-red-primary/50",
 		},
 		{
 			href: "/sync",
 			title: "Sync",
 			icon: "i-csb:sync",
 			iconColor: "text-blue-primary/20",
-			className: "hover:bg-blue-primary/50",
-			activeClassName: "bg-blue-primary",
+			className: "focus:bg-blue-primary",
+			activeClassName: "bg-blue-primary/50",
 		},
 		{
 			href: character ? `/@${character.handle}` : "/character",
 			title: "Character",
 			icon: "i-csb:character",
 			iconColor: "text-green-primary/20",
-			className: "hover:bg-green-primary/50",
-			activeClassName: "bg-green-primary",
+			className: "focus:bg-green-primary",
+			activeClassName: "bg-green-primary/50",
 		},
 		{
 			href: "/treasure",
 			title: "Treasures",
 			icon: "i-csb:treasures",
 			iconColor: "text-purple-primary/20",
-			className: "hover:bg-purple-primary/50",
-			activeClassName: "bg-purple-primary",
+			className: "focus:bg-purple-primary",
+			activeClassName: "bg-purple-primary/50",
 		},
 	];
 
@@ -124,24 +125,37 @@ function NavLink({
 		setIsCurrentRoute(router.asPath === href);
 	}, [router.asPath, href]);
 
+	const { ref, focused } = useFocusWithin();
+
+	const showBorder = isCurrentRoute && focused;
+
 	return (
 		<UnstyledButton
+			ref={ref}
 			component={NextLink}
 			href={href}
 			className={classNames(
 				"relative block py-2 px-4 my-4 rounded-lg",
 				"transition-colors",
+				className,
 				{
-					[className]: !isCurrentRoute,
+					["hover:bg-gray/8"]: !isCurrentRoute,
 					[activeClassName]: isCurrentRoute,
-					// "border-2": isCurrentRoute,
 				}
 			)}
 		>
 			{/* border */}
-			{isCurrentRoute && (
-				<div className="absolute top--1 left--1 right--1 bottom--1 rounded-lg border-2"></div>
-			)}
+
+			<div
+				className={classNames(
+					"absolute top--1 left--1 right--1 bottom--1 rounded-xl",
+					"transition-border-width transition-border-color",
+					{
+						["border-2 border-black"]: showBorder,
+						["border-0 border-black/0"]: !showBorder,
+					}
+				)}
+			></div>
 
 			<div className="flex items-center">
 				{/* icon */}

@@ -21,7 +21,7 @@ export default function AppLayout({ children }: PropsWithChildren) {
 					root: { maxWidth: "min(100vw, 1400px)" },
 					main: { padding: 0, width: mainWidth },
 				}}
-				className={"w-full"}
+				className="main-content w-full"
 				navbarOffsetBreakpoint="sm"
 				asideOffsetBreakpoint="sm"
 				fixed={false}
@@ -60,7 +60,7 @@ export default function AppLayout({ children }: PropsWithChildren) {
 				//   </Header>
 				// }
 			>
-				<div className="main-content relative">{children}</div>
+				<div className="relative">{children}</div>
 			</AppShell>
 		</Center>
 	);
