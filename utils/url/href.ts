@@ -34,6 +34,17 @@ export const composeCharacterHref = (handle: string) => {
 	return "/character";
 };
 
+export const composeCharacterFollowHref = (
+	handle: string,
+	type: "following" | "followers"
+) => {
+	if (!handle.startsWith("@")) {
+		handle = `@${handle}`;
+	}
+
+	return `/${handle}/${type}`;
+};
+
 export const WalletCharacterManageHref = `/wallet/characters`;
 export const WalletCharacterNewHref = `/wallet/characters/new`;
 
@@ -52,4 +63,11 @@ export const composeSearchHref = (
 	type: "all" | "characters" | "treasures" | "notes" = "all"
 ) => {
 	return `/search?q=${encodeURIComponent(q)}&f=${type}`;
+};
+
+/**
+ * @example /treasures/wallets/0x...
+ */
+export const composeTreasuresWalletsHref = (address: string) => {
+	return `/treasures/wallets/${address}`;
 };

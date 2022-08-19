@@ -1,6 +1,7 @@
 import ConnectButton from "@/components/common/ConnectButton";
 import Logo from "@/components/common/Logo";
 import { useCurrentCharacter } from "@/utils/apis/indexer";
+import { composeTreasuresWalletsHref } from "@/utils/url";
 import { UnstyledButton, Text, Space, Title, Navbar } from "@mantine/core";
 import { useFocusWithin } from "@mantine/hooks";
 import { NextLink } from "@mantine/next";
@@ -8,6 +9,7 @@ import classNames from "classnames";
 import Link from "next/link";
 import { useRouter } from "next/router";
 import { useEffect, useState } from "react";
+import { useAccount } from "wagmi";
 import MoreMenu from "./MoreMenu";
 
 export default function Nav() {
@@ -46,6 +48,7 @@ export default function Nav() {
 }
 
 type NavLinkProps = {
+	index: number;
 	href: string;
 	title: string;
 	icon: string;
@@ -56,9 +59,11 @@ type NavLinkProps = {
 
 function NavLinks() {
 	const { data: character } = useCurrentCharacter();
+	const { address } = useAccount();
 
-	const navLinks: NavLinkProps[] = [
-		{
+	const [navLinks, setNavLinks] = useState<Record<string, NavLinkProps>>({
+		feed: {
+			index: 0,
 			href: "/feed",
 			title: "Feed",
 			icon: "i-csb:feed",
@@ -66,7 +71,8 @@ function NavLinks() {
 			className: "focus:bg-yellow-primary",
 			activeClassName: "bg-yellow-primary/50",
 		},
-		{
+		shop: {
+			index: 1,
 			href: "/shop",
 			title: "Shop",
 			icon: "i-csb:shop",
@@ -74,7 +80,8 @@ function NavLinks() {
 			className: "focus:bg-red-primary",
 			activeClassName: "bg-red-primary/50",
 		},
-		{
+		sync: {
+			index: 2,
 			href: "/sync",
 			title: "Sync",
 			icon: "i-csb:sync",
@@ -82,27 +89,46 @@ function NavLinks() {
 			className: "focus:bg-blue-primary",
 			activeClassName: "bg-blue-primary/50",
 		},
-		{
-			href: character ? `/@${character.handle}` : "/character",
-			title: "Character",
-			icon: "i-csb:character",
-			iconColor: "text-green-primary/20",
-			className: "focus:bg-green-primary",
-			activeClassName: "bg-green-primary/50",
-		},
-		{
-			href: "/treasure",
-			title: "Treasures",
-			icon: "i-csb:treasures",
-			iconColor: "text-purple-primary/20",
-			className: "focus:bg-purple-primary",
-			activeClassName: "bg-purple-primary/50",
-		},
-	];
+	});
+
+	useEffect(() => {
+		const oldNavLinks = navLinks;
+		if (character) {
+			oldNavLinks.character = {
+				index: 3,
+				href: character ? `/@${character.handle}` : "#",
+				title: "Character",
+				icon: "i-csb:character",
+				iconColor: "text-green-primary/20",
+				className: "focus:bg-green-primary",
+				activeClassName: "bg-green-primary/50",
+			};
+		} else {
+			delete oldNavLinks.character;
+		}
+
+		if (address) {
+			oldNavLinks.treasures = {
+				index: 4,
+				href: address ? composeTreasuresWalletsHref(address) : "#",
+				title: "Treasures",
+				icon: "i-csb:treasures",
+				iconColor: "text-purple-primary/20",
+				className: "focus:bg-purple-primary",
+				activeClassName: "bg-purple-primary/50",
+			};
+		} else {
+			delete navLinks.treasures;
+		}
+
+		setNavLinks({ ...navLinks });
+	}, [character, address]);
+
+	const arr = Object.values(navLinks).sort((a, b) => a.index - b.index);
 
 	return (
 		<>
-			{navLinks.map((link) => (
+			{arr.map((link) => (
 				<NavLink key={link.title} {...link} />
 			))}
 		</>
