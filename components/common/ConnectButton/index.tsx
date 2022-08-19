@@ -145,7 +145,7 @@ const WalletDisplayButton = forwardRef<HTMLButtonElement, ButtonProps>(
 								className="font-semnibold leading-1em overflow-hidden text-ellipsis max-w-8em"
 								color="dark"
 							>
-								@{data?.handle}
+								{data?.handle ? "@" + data.handle : ""}
 							</Text>
 
 							<Space h={2} />
@@ -317,6 +317,12 @@ function AccountList() {
 					</div>
 				</MenuItem>
 			))}
+
+			{!charactersLoading && charactersData?.list.length === 0 && (
+				<MenuItem>
+					<Text color="dimmed">No characters</Text>
+				</MenuItem>
+			)}
 		</>
 	);
 }

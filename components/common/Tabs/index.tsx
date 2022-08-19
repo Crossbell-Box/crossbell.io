@@ -8,6 +8,7 @@ type MyTabsProps = {
 		/** Example: i-csb:back */
 		icon?: string;
 	}[];
+	/** returns `true` in callback if you want to prevent the tabs changing */
 	beforeTabChange?: (value: TabsValue) => boolean | void;
 };
 

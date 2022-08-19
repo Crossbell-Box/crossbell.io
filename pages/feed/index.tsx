@@ -10,14 +10,14 @@ import {
 	useHasCharacter,
 } from "@/utils/apis/indexer";
 import { Fragment, useEffect } from "react";
-import { Button, Space, Text } from "@mantine/core";
+import { Button, Text } from "@mantine/core";
 import { NextLink } from "@mantine/next";
 import { useAccount } from "wagmi";
-import { useModals } from "@mantine/modals";
-import Image from "@/components/common/Image";
-import Link from "next/link";
-import { WalletCharacterNewHref } from "@/utils/url";
 import { useRouter } from "next/router";
+import {
+	openConnectWalletHintModel,
+	openMintNewCharacterModel,
+} from "@/components/common/NewUserGuide";
 
 const Page: NextPageWithLayout = () => {
 	return (
@@ -41,8 +41,6 @@ export function FeedTabs() {
 		{ label: "Explore", route: "/explore" },
 	];
 
-	const modals = useModals();
-
 	const { isConnected } = useAccount();
 	const { data: character } = useCurrentCharacter();
 
@@ -63,52 +61,14 @@ export function FeedTabs() {
 				if (value === "/feed") {
 					// not connected
 					if (!isConnected) {
-						const id = modals.openModal({
-							title: "Please Connect Wallet",
-							children: (
-								<div>
-									<Text>You need to be connected to see your feed.</Text>
-									<Space h={5} />
-									<Button
-										onClick={() => modals.closeModal(id)}
-										fullWidth
-										size="lg"
-									>
-										OK
-									</Button>
-								</div>
-							),
-						});
+						openConnectWalletHintModel();
 
 						return true;
 					}
 
 					// not minted character yet
 					if (!character) {
-						const id = modals.openModal({
-							styles: {
-								modal: { background: "transparent" },
-							},
-							padding: 0,
-							children: (
-								<div
-									className="relative flex justify-center items-center"
-									onClick={() => modals.closeModal(id)}
-								>
-									{/* close btn */}
-									<div className="absolute top-0 right-0 w-100px h-100px cursor-pointer"></div>
-									{/* mint btn */}
-									<Link href={WalletCharacterNewHref}>
-										<div className="absolute bottom-0 left-0 right-0 h-100px cursor-pointer"></div>
-									</Link>
-									<Image
-										src="/images/mint-character-guide-card.png"
-										width={400}
-										height={600}
-									/>
-								</div>
-							),
-						});
+						openMintNewCharacterModel();
 
 						return true;
 					}

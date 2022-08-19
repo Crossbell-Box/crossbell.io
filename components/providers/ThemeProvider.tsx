@@ -39,7 +39,7 @@ export default function ThemeProvider({ children }: PropsWithChildren) {
 						"#7C5D0C",
 					],
 					blue: [
-						"#E65040",
+						"#FBFCFF",
 						"#E65040",
 						"#E65040",
 						"#E65040",

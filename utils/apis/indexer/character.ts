@@ -99,15 +99,19 @@ export function usePrimaryCharacter<T>(address?: string) {
 
 // get the current character of the user
 
+const CurrentCharacterIdKey = "currentCharacterId";
+export function getCurrentCharacterId() {
+	return localStorage.getItem(CurrentCharacterIdKey);
+}
 export function useCurrentCharacterId() {
 	return useLocalStorage<number>({
-		key: "currentCharacterId",
+		key: CurrentCharacterIdKey,
 		serialize: (cid) => cid.toString(),
 	});
 }
 export function useDisconnectCurrentCharacter() {
 	const disconnect = () => {
-		localStorage.removeItem("currentCharacterId");
+		localStorage.removeItem(CurrentCharacterIdKey);
 	};
 	return { disconnect };
 }
