@@ -1,4 +1,4 @@
-import { Button, Text } from "@mantine/core";
+import { Button, Space, Text } from "@mantine/core";
 import type { CharacterEntity } from "crossbell.js";
 import { ipfsLinkToHttpLink } from "@/utils/ipfs";
 import {
@@ -11,6 +11,7 @@ import { extractCharacterAvatar, extractCharacterName } from "@/utils/metadata";
 import Link from "next/link";
 import { composeCharacterHref } from "@/utils/url";
 import Avatar from "../common/Avatar";
+import CharacterIdBadge from "../common/Character/CharacterIdBadge";
 
 // TODO: extract this compose
 const FollowButton = ({ characterId }: { characterId: number }) => {
@@ -71,6 +72,12 @@ export const TrendingCharacterCard = ({
 				</div>
 
 				<div className="flex flex-col">
+					<div>
+						<CharacterIdBadge character={character} size="lg" />
+					</div>
+
+					<Space h={20} />
+
 					<div className="flex flex-col gap-5 items-center">
 						{/* avatar */}
 						<Avatar
