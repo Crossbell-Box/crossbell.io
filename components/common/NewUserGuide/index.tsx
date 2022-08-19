@@ -39,8 +39,8 @@ export function openFaucetHintModel() {
 							$CSB
 						</Text>
 					</Tooltip>{" "}
-					balance is not enough to send this transaction. Let's get some from
-					the{" "}
+					balance is not enough to send this transaction. How about get some
+					from the{" "}
 					<Tooltip label="A place where you can claim $CSB for free">
 						<Text className="inline border-b-1 border-b-dashed border-b-black/20 hover:border-b-black cursor-help transition-border-color">
 							faucet
