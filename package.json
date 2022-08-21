@@ -30,7 +30,7 @@
 		"crossbell.js": "0.10.18",
 		"dayjs": "1.11.5",
 		"embla-carousel-react": "7.0.1",
-		"ethers": "5.6.9",
+		"ethers": "5.7.0",
 		"link-preview-js": "3.0.3",
 		"lru-cache": "7.14.0",
 		"next": "12.2.5",
@@ -50,7 +50,7 @@
 	},
 	"devDependencies": {
 		"@iconify/utils": "1.0.33",
-		"@types/node": "18.7.6",
+		"@types/node": "18.7.8",
 		"@types/react": "18.0.17",
 		"@types/react-dom": "18.0.6",
 		"@unocss/webpack": "0.45.8",

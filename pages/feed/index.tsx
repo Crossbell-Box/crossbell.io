@@ -51,7 +51,7 @@ export function FeedTabs() {
 		if (!isLoadingCharacter && !hasCharacter) {
 			router.replace("/explore");
 		}
-	}, [isLoadingCharacter, hasCharacter, router]);
+	}, [isLoadingCharacter, hasCharacter]);
 
 	return (
 		<Tabs
