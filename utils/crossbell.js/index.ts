@@ -20,10 +20,10 @@ export const indexer = new Indexer(
 
 let contract: Contract;
 export const useContract = () => {
-	const { connector } = useAccount();
+	const { connector, isConnected } = useAccount();
 
 	if (!contract) {
-		if (connector) {
+		if (isConnected && connector) {
 			// connect the contract with the provider
 			connector.getProvider().then(async (res) => {
 				contract = new Contract(res as any);
@@ -33,16 +33,8 @@ export const useContract = () => {
 			});
 		} else {
 			// user is not logged in
-			// contract = contract ?? new Contract();
-			// contract =
-			// 	contract ??
-			// 	new Proxy(contract, {
-			// 		get: (target, prop) => {
-			// 			return async () => {
-			// 				throw new Error("Not connected. Please connect your wallet.");
-			// 			};
-			// 		},
-			// 	});
+			contract = new Contract();
+			contract = injectContractChecker(contract);
 		}
 	}
 
@@ -53,9 +45,9 @@ function injectContractChecker(contract: Contract) {
 	return new Proxy(contract, {
 		get: (target, prop) => {
 			return async (...args: any[]) => {
-				const { address } = getAccount();
+				const { address, isConnected } = getAccount();
 				// check if the user is logged in
-				if (!address) {
+				if (!isConnected || !address) {
 					throw new BizError(
 						"Not connected. Please connect your wallet.",
 						ERROR_CODES.NOT_CONNECTED

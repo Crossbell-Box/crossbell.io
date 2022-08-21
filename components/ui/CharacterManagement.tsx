@@ -92,7 +92,7 @@ export default function CharacterManagement({
 				form.setFieldValue("handle", "");
 			}
 		}
-	}, [form.values.name]);
+	}, [form, form.values.name, mode]);
 
 	// check if handle is taken
 	const [debouncedHandle] = useDebouncedValue(form.values.handle, 200);
@@ -130,7 +130,7 @@ export default function CharacterManagement({
 				bio: character.metadata?.content?.bio ?? "",
 			});
 		}
-	}, [character?.metadata?.content]);
+	}, [form, character, character?.metadata?.content]);
 
 	// upload avatar
 	const handleUpload = async (files: File[]) => {

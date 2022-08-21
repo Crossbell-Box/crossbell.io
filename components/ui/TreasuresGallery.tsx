@@ -69,7 +69,7 @@ export default function TreasuresGallery({ address }: { address?: string }) {
 
 function NoteCover({ note }: { note?: NoteEntity | null }) {
 	const cover = extractCoverImageFromNote(note?.metadata?.content);
-	const content = note?.metadata?.content?.content?.slice(0, 100);
+	const content = note?.metadata?.content?.content?.slice(0, 50);
 
 	return (
 		<div className="relative flex justify-center items-center ml--20px first:ml-0 w-100px h-100px overflow-hidden rounded-md hover:translate-y--10px transition-transform">
@@ -80,6 +80,7 @@ function NoteCover({ note }: { note?: NoteEntity | null }) {
 						src={cover}
 						width={100}
 						height={100}
+						alt={content}
 					/>
 				)}
 			</div>
