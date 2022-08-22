@@ -1,6 +1,7 @@
 import { Badge } from "@mantine/core";
 import { NoteMetadata } from "crossbell.js";
 import { TinyColor, random, mostReadable } from "@ctrl/tinycolor";
+import { stringToInteger } from "@/utils/helpers";
 
 const builtInColorMap = {
 	["crossbell.io"]: "#E1BE60",
@@ -57,15 +58,6 @@ function getColorFromSource(source: string) {
 	return isBuiltInSource(s)
 		? builtInColorMap[s]
 		: random({ seed: stringToInteger(s) }).toHexString();
-}
-
-function stringToInteger(string: string) {
-	var total = 0;
-	for (var i = 0; i !== string.length; i++) {
-		if (total >= Number.MAX_SAFE_INTEGER) break;
-		total += string.charCodeAt(i);
-	}
-	return total;
 }
 
 //TODO: ...

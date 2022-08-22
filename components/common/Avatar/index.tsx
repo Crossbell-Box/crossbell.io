@@ -1,4 +1,5 @@
 import { useCharacter } from "@/utils/apis/indexer";
+import { stringToInteger } from "@/utils/helpers";
 import { ipfsLinkToHttpLink } from "@/utils/ipfs";
 import { extractCharacterAvatar } from "@/utils/metadata";
 import { Avatar as Avatar_, AvatarProps } from "@mantine/core";
@@ -53,10 +54,24 @@ export default function Avatar({
 	);
 }
 
+const defaultAvatars = [
+	"/images/avatars/bell-black.jpg",
+	"/images/avatars/bell-blue.jpg",
+	"/images/avatars/bell-green.jpg",
+	"/images/avatars/bell-purple.jpg",
+	"/images/avatars/bell-red.jpg",
+	"/images/avatars/bell-white.jpg",
+	"/images/avatars/bell-yellow.jpg",
+];
+
 function getDefaultAvatar(handle?: string) {
 	if (!handle || handle.startsWith("0x")) {
 		return "/images/avatar-default.png";
 	}
 
-	return `https://avatars.dicebear.com/api/big-smile/${handle}.svg?background=%23ffffff`;
+	const seededRandomIndex = stringToInteger(handle, {
+		min: 0,
+		max: defaultAvatars.length - 1,
+	});
+	return defaultAvatars[seededRandomIndex];
 }
