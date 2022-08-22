@@ -1,7 +1,7 @@
 import Avatar from "@/components/common/Avatar";
 import { Skeleton, Space, Text, Title } from "@mantine/core";
 import { CharacterEntity, NoteEntity } from "crossbell.js";
-import { useCharacter, useNoteStatus } from "@/utils/apis/indexer";
+import { useCharacter, useNote, useNoteStatus } from "@/utils/apis/indexer";
 import classNames from "classnames";
 import MediaCarousel from "./MediaCarousel";
 import { useRouter } from "next/router";
@@ -19,6 +19,7 @@ import { getValidAttachments } from "@/utils/metadata";
 import NoteSourceBadges from "./NoteSourceBadges";
 import NoteIdBadge from "./NoteIdBadge";
 import { useCallback } from "react";
+import MetadataContentUpdater from "../MetadataContentUpdater";
 
 function ActionButton({
 	text,
@@ -67,7 +68,7 @@ function ActionButton({
 }
 
 export function Note({
-	note,
+	note: initialNote,
 	character: initialCharacter,
 	collapsible,
 	displayMode,
@@ -82,20 +83,28 @@ export function Note({
 	 */
 	displayMode?: "normal" | "main";
 }) {
-	const { data: character } = useCharacter(note.characterId, {
+	const { data: note, refetch } = useNote(
+		initialNote.characterId,
+		initialNote.noteId,
+		{
+			initialData: initialNote,
+		}
+	);
+
+	const { data: character } = useCharacter(note?.characterId, {
 		initialData: initialCharacter,
 	});
 
 	const { navigate, href, prefetch } = useNavigateToNote(
-		note.characterId,
-		note.noteId
+		note?.characterId!,
+		note?.noteId!
 	);
 
 	// calculate displayMode smartly
 	const { characterId, noteId } = useNoteRouterQuery();
 	if (!displayMode) {
 		const isMainNote =
-			characterId === note.characterId && noteId === note.noteId;
+			characterId === note?.characterId && noteId === note?.noteId;
 		displayMode = isMainNote ? "main" : "normal";
 	}
 
@@ -215,7 +224,24 @@ export function Note({
 		}
 	}, [displayMode, note]);
 
-	const renderContent = () => {
+	const renderContent = useCallback(() => {
+		if (!note?.metadata?.content) {
+			return (
+				<div>
+					<Space h={10} />
+					<MetadataContentUpdater
+						uri={note?.metadata?.uri}
+						characterId={note?.characterId}
+						noteId={note?.noteId}
+						onUpdated={() => {
+							refetch();
+						}}
+					/>
+					<Space h={10} />
+				</div>
+			);
+		}
+
 		const titleOrder = displayMode === "main" ? 2 : 3;
 		return (
 			<div>
@@ -230,10 +256,10 @@ export function Note({
 				</MarkdownRenderer>
 			</div>
 		);
-	};
+	}, [collapsible, displayMode, note]);
 
 	const validAttachments = getValidAttachments(
-		note.metadata?.content?.attachments
+		note?.metadata?.content?.attachments
 	);
 
 	return (
@@ -287,7 +313,7 @@ export function Note({
 				<Space h={10} />
 
 				{/* actions */}
-				<NoteActions characterId={note.characterId} noteId={note.noteId} />
+				<NoteActions characterId={note?.characterId!} noteId={note?.noteId!} />
 			</div>
 		</div>
 	);
