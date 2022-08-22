@@ -18,6 +18,7 @@ import Time from "../Time";
 import { getValidAttachments } from "@/utils/metadata";
 import NoteSourceBadges from "./NoteSourceBadges";
 import NoteIdBadge from "./NoteIdBadge";
+import { useCallback } from "react";
 
 function ActionButton({
 	text,
@@ -98,7 +99,7 @@ export function Note({
 		displayMode = isMainNote ? "main" : "normal";
 	}
 
-	const renderAvatar = () => {
+	const renderAvatar = useCallback(() => {
 		if (displayMode === "normal") {
 			return (
 				<div>
@@ -122,9 +123,9 @@ export function Note({
 				</div>
 			);
 		}
-	};
+	}, [character, displayMode, note]);
 
-	const renderUsername = () => {
+	const renderUsername = useCallback(() => {
 		if (displayMode === "normal") {
 			return (
 				<div className="flex flex-wrap items-baseline">
@@ -163,9 +164,9 @@ export function Note({
 				</div>
 			);
 		}
-	};
+	}, [character, displayMode, note]);
 
-	const renderReplyingInfo = () => {
+	const renderReplyingInfo = useCallback(() => {
 		return (
 			note.toNote && (
 				<div>
@@ -180,9 +181,9 @@ export function Note({
 				</div>
 			)
 		);
-	};
+	}, [note]);
 
-	const renderBottomInfo = () => {
+	const renderBottomInfo = useCallback(() => {
 		const Info = () => (
 			<div className="flex flex-row justify-between items-center">
 				{/* source */}
@@ -212,7 +213,7 @@ export function Note({
 				</div>
 			);
 		}
-	};
+	}, [displayMode, note]);
 
 	const renderContent = () => {
 		const titleOrder = displayMode === "main" ? 2 : 3;
