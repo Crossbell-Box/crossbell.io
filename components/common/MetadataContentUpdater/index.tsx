@@ -92,6 +92,9 @@ export default function MetadataContentUpdater({
 								<Menu.Item
 									onClick={() => {
 										copyToClipboard(uri);
+										showNotification({
+											message: "Copied to clipboard",
+										});
 									}}
 								>
 									Copy URI
