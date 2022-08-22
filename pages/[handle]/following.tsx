@@ -75,7 +75,9 @@ const Page: NextPageWithLayout<PageProps> = (props) => {
 		<div>
 			<Head>
 				<title>
-					Characters followed by {extractCharacterName(character)} (@{handle})
+					{`Characters followed by ${extractCharacterName(
+						character
+					)} (@${handle})`}
 				</title>
 			</Head>
 
