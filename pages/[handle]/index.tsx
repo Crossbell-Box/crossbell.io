@@ -3,6 +3,7 @@ import { Note, NoteSkeleton } from "@/components/common/Note";
 import { getLayout } from "@/components/layouts/AppLayout";
 import Header from "@/components/layouts/Header";
 import CharacterProfile from "@/components/ui/CharacterProfile";
+import TreasuresGallery from "@/components/ui/TreasuresGallery";
 import type { NextPageWithLayout } from "@/pages/_app";
 import {
 	fetchCharacterByHandle,
@@ -11,6 +12,7 @@ import {
 } from "@/utils/apis/indexer";
 import { extractCharacterName } from "@/utils/metadata";
 import { useCharacterRouterQuery } from "@/utils/url";
+import { Space } from "@mantine/core";
 import { CharacterEntity } from "crossbell.js";
 import { GetServerSideProps } from "next";
 import Head from "next/head";
@@ -29,12 +31,11 @@ const Page: NextPageWithLayout<PageProps> = (props) => {
 	const headerText =
 		name ?? extractCharacterName(character) ?? handle ?? "Character";
 
+	const title = `${extractCharacterName(character)} (@${handle})`;
 	return (
 		<div>
 			<Head>
-				<title>
-					{extractCharacterName(character)} (@{handle})
-				</title>
+				<title>{title}</title>
 			</Head>
 
 			<Header hasBackButton>{headerText}</Header>
@@ -42,7 +43,12 @@ const Page: NextPageWithLayout<PageProps> = (props) => {
 			{/* profile */}
 			<CharacterProfile character={character} />
 
+			{/* treasures */}
+			<TreasuresGallery address={character?.owner} />
+
 			{/* TODO: tabs */}
+
+			<Space h={20} />
 
 			<NotesList />
 		</div>

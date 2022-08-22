@@ -38,3 +38,11 @@ export function extractCharacterAvatar(
 
 	return avatars[0];
 }
+
+// export function extractCharacterBanners(
+// 	character: CharacterEntity | null | undefined
+// ): string[] {
+// 	const banners = character?.metadata?.content?.banners;
+
+// 	return banners ?? [];
+// }

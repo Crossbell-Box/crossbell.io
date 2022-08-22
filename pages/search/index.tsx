@@ -27,7 +27,7 @@ const Page: NextPageWithLayout = () => {
 	return (
 		<div>
 			<Head>
-				<title>{q} - Crossbell Search</title>
+				<title>{`${q} - Crossbell Search`}</title>
 			</Head>
 
 			<Header

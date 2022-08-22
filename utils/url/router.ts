@@ -46,3 +46,12 @@ export function useSearchRouterQuery() {
 		type,
 	};
 }
+
+export function useAddressRouterQuery() {
+	const router = useRouter();
+	const address = router.query.address as string;
+
+	return {
+		address,
+	};
+}

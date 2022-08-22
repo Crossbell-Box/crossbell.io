@@ -1,19 +1,15 @@
 import ConnectButton from "@/components/common/ConnectButton";
 import Logo from "@/components/common/Logo";
-import { usePrimaryShade } from "@/components/providers/ThemeProvider";
 import { useCurrentCharacter } from "@/utils/apis/indexer";
-import {
-	createStyles,
-	UnstyledButton,
-	Text,
-	Space,
-	Title,
-	Navbar,
-} from "@mantine/core";
+import { composeTreasuresWalletsHref } from "@/utils/url";
+import { UnstyledButton, Text, Space, Title, Navbar } from "@mantine/core";
+import { useFocusWithin } from "@mantine/hooks";
 import { NextLink } from "@mantine/next";
+import classNames from "classnames";
 import Link from "next/link";
 import { useRouter } from "next/router";
 import { useEffect, useState } from "react";
+import { useAccount } from "wagmi";
 import MoreMenu from "./MoreMenu";
 
 export default function Nav() {
@@ -51,65 +47,102 @@ export default function Nav() {
 	);
 }
 
+type NavLinkProps = {
+	index: number;
+	href: string;
+	title: string;
+	icon: string;
+	iconColor: string;
+	className: string;
+	activeClassName: string;
+};
+
 function NavLinks() {
 	const { data: character } = useCurrentCharacter();
+	const { address } = useAccount();
 
-	const navLinks: NavLinkProps[] = [
-		{
+	const [navLinks, setNavLinks] = useState<Record<string, NavLinkProps>>({
+		feed: {
+			index: 0,
 			href: "/feed",
 			title: "Feed",
-			color: "brand",
 			icon: "i-csb:feed",
-			iconColor: "text-brand",
+			iconColor: "text-yellow-primary/20",
+			className: "focus:bg-yellow-primary",
+			activeClassName: "bg-yellow-primary/50",
 		},
-		{
+		shop: {
+			index: 1,
 			href: "/shop",
 			title: "Shop",
-			color: "red",
 			icon: "i-csb:shop",
-			iconColor: "text-red",
+			iconColor: "text-red-primary/20",
+			className: "focus:bg-red-primary",
+			activeClassName: "bg-red-primary/50",
 		},
-		{
+		sync: {
+			index: 2,
 			href: "/sync",
 			title: "Sync",
-			color: "blue",
 			icon: "i-csb:sync",
-			iconColor: "text-blue",
+			iconColor: "text-blue-primary/20",
+			className: "focus:bg-blue-primary",
+			activeClassName: "bg-blue-primary/50",
 		},
-		{
-			href: character ? `/@${character.handle}` : "/character",
-			title: "Character",
-			color: "green",
-			icon: "i-csb:character",
-			iconColor: "text-green",
-		},
-		{
-			href: "/treasure",
-			title: "Treasures",
-			color: "grape",
-			icon: "i-csb:treasures",
-			iconColor: "text-purple",
-		},
-	];
+	});
+
+	useEffect(() => {
+		const oldNavLinks = navLinks;
+		if (character) {
+			oldNavLinks.character = {
+				index: 3,
+				href: character ? `/@${character.handle}` : "#",
+				title: "Character",
+				icon: "i-csb:character",
+				iconColor: "text-green-primary/20",
+				className: "focus:bg-green-primary",
+				activeClassName: "bg-green-primary/50",
+			};
+		} else {
+			delete oldNavLinks.character;
+		}
+
+		if (address) {
+			oldNavLinks.treasures = {
+				index: 4,
+				href: address ? composeTreasuresWalletsHref(address) : "#",
+				title: "Treasures",
+				icon: "i-csb:treasures",
+				iconColor: "text-purple-primary/20",
+				className: "focus:bg-purple-primary",
+				activeClassName: "bg-purple-primary/50",
+			};
+		} else {
+			delete navLinks.treasures;
+		}
+
+		setNavLinks({ ...navLinks });
+	}, [character, address]);
+
+	const arr = Object.values(navLinks).sort((a, b) => a.index - b.index);
 
 	return (
 		<>
-			{navLinks.map((link) => (
+			{arr.map((link) => (
 				<NavLink key={link.title} {...link} />
 			))}
 		</>
 	);
 }
 
-type NavLinkProps = {
-	href: string;
-	title: string;
-	icon: string;
-	color: string;
-	iconColor: string;
-};
-
-function NavLink({ href, title, icon, color, iconColor }: NavLinkProps) {
+function NavLink({
+	href,
+	title,
+	icon,
+	iconColor,
+	className,
+	activeClassName,
+}: NavLinkProps) {
 	const router = useRouter();
 
 	const [isCurrentRoute, setIsCurrentRoute] = useState(false);
@@ -118,42 +151,43 @@ function NavLink({ href, title, icon, color, iconColor }: NavLinkProps) {
 		setIsCurrentRoute(router.asPath === href);
 	}, [router.asPath, href]);
 
-	const primaryShade = usePrimaryShade();
+	const { ref, focused } = useFocusWithin();
 
-	const useStyles = createStyles((theme) => ({
-		button: {
-			color: theme.colors.dark[9],
-			"&:hover": { background: theme.colors.gray[1] },
-		},
-		active: {
-			// color: theme.colors[color][primaryShade],
-			background: "white",
-			color: theme.colors[color][primaryShade],
-			"&:hover": { background: theme.colors.gray[0] },
-			boxShadow: "0px 0px 15px rgba(38, 108, 158, 0.1)",
-		},
-	}));
-
-	const { classes, cx } = useStyles();
+	const showBorder = isCurrentRoute && focused;
 
 	return (
 		<UnstyledButton
+			ref={ref}
 			component={NextLink}
 			href={href}
-			className={cx(
-				"block py-2 px-4 my-2 rounded-md overflow-hidden",
+			className={classNames(
+				"relative block py-2 px-4 my-4 rounded-lg",
 				"transition-colors",
+				className,
 				{
-					[classes.active]: isCurrentRoute,
-					[classes.button]: !isCurrentRoute,
+					["hover:bg-gray/8"]: !isCurrentRoute,
+					[activeClassName]: isCurrentRoute,
 				}
 			)}
 		>
+			{/* border */}
+
+			<div
+				className={classNames(
+					"absolute top--1 left--1 right--1 bottom--1 rounded-xl",
+					"transition-border-width transition-border-color",
+					{
+						["border-2 border-black"]: showBorder,
+						["border-0 border-black/0"]: !showBorder,
+					}
+				)}
+			></div>
+
 			<div className="flex items-center">
 				{/* icon */}
 				<Text
-					className={cx(icon, "text-2xl", {
-						iconColor: isCurrentRoute,
+					className={classNames(icon, "text-2xl", {
+						// [iconColor]: isCurrentRoute, // TODO: icon color
 						"text-black": !isCurrentRoute,
 					})}
 				/>

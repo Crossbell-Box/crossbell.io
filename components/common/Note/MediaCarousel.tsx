@@ -2,25 +2,29 @@ import { ipfsLinkToHttpLink } from "@/utils/ipfs";
 import { NoteMetadata } from "crossbell.js";
 import { Carousel, Embla } from "@mantine/carousel";
 import Image from "../Image";
-import { useCallback, useEffect, useState } from "react";
+import { MouseEvent, useCallback, useEffect, useState } from "react";
 import { Modal, Space } from "@mantine/core";
 import classNames from "classnames";
 import { getValidAttachments, mimeTypeToMediaType } from "@/utils/metadata";
-import { useElementSize, useHotkeys, useMediaQuery } from "@mantine/hooks";
+import { useElementSize, useHotkeys } from "@mantine/hooks";
+import VideoPlayer from "./VideoPlayer";
 
 export default function MediaCarousel({
 	attachments = [],
 	defaultSelectedIndex = 0,
 	isOverlay = false,
+	onTap,
 }: {
 	attachments: NoteMetadata["attachments"];
 	defaultSelectedIndex?: number;
 	isOverlay?: boolean;
+	onTap?: (e: MouseEvent<HTMLDivElement, globalThis.MouseEvent>) => void;
 }) {
 	const [overlayOpened, setOverlayOpened] = useState(false);
 
 	const validAttachments = getValidAttachments(attachments, {
 		allowedContentTypes: ["address"],
+		allowedMediaTypes: ["image", "video"],
 	});
 
 	const isMultiple = validAttachments.length > 1;
@@ -69,6 +73,8 @@ export default function MediaCarousel({
 		}, 250);
 	}
 
+	const { ref: mainRef, width: mainWidth } = useElementSize();
+
 	// const mediaSm = useMediaQuery("(max-width: 900px)", false);
 
 	// switching keys
@@ -101,11 +107,23 @@ export default function MediaCarousel({
 		],
 	]);
 
-	const {
-		ref: mainRef,
-		width: mainWidth,
-		height: mainHeight,
-	} = useElementSize();
+	// check clicking event
+	const [dragStartPos, setDragStartPos] = useState({ x: 0, y: 0 });
+	const onMouseDown = (
+		e: MouseEvent<HTMLDivElement, globalThis.MouseEvent>
+	) => {
+		setDragStartPos({ x: e.screenX, y: e.screenY });
+	};
+	const onMouseUp = (e: MouseEvent<HTMLDivElement, globalThis.MouseEvent>) => {
+		const dragX = Math.abs(dragStartPos.x - e.screenX);
+		const dragY = Math.abs(dragStartPos.y - e.screenY);
+		if (dragX < 5 && dragY < 5) {
+			// console.log(`click with drag of ${dragX}, ${dragY}`);
+			onTap?.(e);
+		} else {
+			// console.log(`click cancelled with drag of ${dragX}, ${dragY}`);
+		}
+	};
 
 	const renderAttachments = ({
 		isThumbnail = false,
@@ -128,6 +146,7 @@ export default function MediaCarousel({
 										"h-100px rounded-md": isThumbnail,
 									}
 								)}
+								data-overlay-tap-area="1"
 							>
 								{!isThumbnail && isOverlay ? (
 									<img src={src} className="max-h-80vh max-w-full" />
@@ -159,13 +178,31 @@ export default function MediaCarousel({
 						</Carousel.Slide>
 					);
 				}
+
+				if (mediaType === "video") {
+					return (
+						<Carousel.Slide key={index}>
+							<div
+								className={classNames("flex justify-center items-center", {
+									"h-300px": !isThumbnail && !isOverlay,
+									"h-80vh": !isThumbnail && isOverlay,
+									"h-100px rounded-md": isThumbnail,
+								})}
+								style={{ width: mainWidth }}
+							>
+								{/* TODO: should not be in thumbnail */}
+								<VideoPlayer url={src} controls />
+							</div>
+						</Carousel.Slide>
+					);
+				}
 			}
 
-			return <></>;
+			return <Carousel.Slide key={index}></Carousel.Slide>;
 		});
 	};
 
-	if (!attachments || attachments?.length === 0) {
+	if (!validAttachments || validAttachments?.length === 0) {
 		return <></>;
 	}
 
@@ -175,6 +212,8 @@ export default function MediaCarousel({
 			onClick={(e) => {
 				e.stopPropagation();
 			}}
+			onMouseDown={onMouseDown}
+			onMouseUp={onMouseUp}
 		>
 			<Modal
 				classNames={{
@@ -194,6 +233,12 @@ export default function MediaCarousel({
 					attachments={attachments}
 					isOverlay
 					defaultSelectedIndex={selectedIndex}
+					onTap={(e) => {
+						// @ts-ignore
+						if (e.target.dataset.overlayTapArea) {
+							setOverlayOpened(false);
+						}
+					}}
 				/>
 			</Modal>
 
@@ -224,7 +269,6 @@ export default function MediaCarousel({
 					className="overflow-hidden relative w-full"
 					withIndicators={false}
 					withControls={false}
-					slidesToScroll={10}
 					slideGap="md"
 					dragFree
 				>

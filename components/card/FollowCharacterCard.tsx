@@ -1,55 +1,17 @@
-import { Button, Skeleton, Text } from "@mantine/core";
+import { Skeleton, Text } from "@mantine/core";
 import type { CharacterEntity } from "crossbell.js";
-import {
-	useFollowCharacter,
-	useUnfollowCharacter,
-} from "@/utils/apis/contract";
-import { useModals } from "@mantine/modals";
-import {
-	useCharacterFollowRelation,
-	useCurrentCharacter,
-} from "@/utils/apis/indexer";
 import Avatar from "../common/Avatar";
 import { CharacterName } from "../common/Character";
 import { composeCharacterHref } from "@/utils/url";
 import { useRouter } from "next/router";
+import FollowButton from "../common/FollowButton";
 
 const FollowCharacterCard = ({ character }: { character: CharacterEntity }) => {
-	const { data: currentCharacter } = useCurrentCharacter();
-
-	const isSelf = currentCharacter?.characterId === character.characterId;
-
-	const { data: followRelation, isLoadingFollowRelation } =
-		useCharacterFollowRelation(
-			currentCharacter?.characterId,
-			character?.characterId
-		);
-
-	const follow = useFollowCharacter(character.characterId!);
-	const unfollow = useUnfollowCharacter(character.characterId!);
-
-	const modals = useModals();
-	const handleFollow = () => {
-		follow.mutate();
-	};
-	const handleUnfollow = () => {
-		modals.openConfirmModal({
-			title: `Unfollow @${character.handle}?`,
-			children:
-				"Their activities will no longer show up in your home timeline. You can still view their profile. ",
-			labels: { confirm: "Unfollow", cancel: "Cancel" },
-			confirmProps: { color: "red" },
-			onConfirm: () => {
-				unfollow.mutate();
-			},
-		});
-	};
-
 	const router = useRouter();
 
 	return (
 		<div
-			className="flex flex-row w-full items-start gap-4 p-4 bg-hover cursor-pointer"
+			className="flex flex-row w-full items-start gap-4 p-4 bg-hover cursor-pointer overflow-hidden"
 			onClick={() => {
 				router.push(composeCharacterHref(character.handle));
 			}}
@@ -60,7 +22,7 @@ const FollowCharacterCard = ({ character }: { character: CharacterEntity }) => {
 			</div>
 
 			{/* right */}
-			<div className="flex-1">
+			<div className="overflow-hidden flex-1">
 				{/* top */}
 				<div className="flex flex-row flex-wrap justify-between">
 					{/* top-left - name & handle */}
@@ -76,42 +38,11 @@ const FollowCharacterCard = ({ character }: { character: CharacterEntity }) => {
 					</div>
 
 					{/* top-right - follow button */}
-					{!isSelf && (
-						<div className="flex w-24" onClick={(e) => e.stopPropagation()}>
-							{isLoadingFollowRelation ? (
-								<Button radius={"md"} fullWidth p={0} color="dark" loading>
-									Follow
-								</Button>
-							) : followRelation?.isFollowing ? (
-								<Button
-									radius="md"
-									fullWidth
-									p={0}
-									variant="outline"
-									color="dark"
-									loading={unfollow.isLoading}
-									onClick={handleUnfollow}
-								>
-									Following
-								</Button>
-							) : (
-								<Button
-									radius="md"
-									fullWidth
-									p={0}
-									color="dark"
-									loading={follow.isLoading}
-									onClick={handleFollow}
-								>
-									Follow
-								</Button>
-							)}
-						</div>
-					)}
+					<FollowButton character={character} />
 				</div>
 
 				{/* bottom - bio */}
-				<div>
+				<div className="overflow-hidden break-words">
 					<Text lineClamp={2}>{character.metadata?.content?.bio}</Text>
 				</div>
 			</div>

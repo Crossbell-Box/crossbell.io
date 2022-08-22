@@ -6,7 +6,7 @@ import {
 } from "@rainbow-me/rainbowkit";
 import { type Chain, configureChains, createClient } from "wagmi";
 import { jsonRpcProvider } from "wagmi/providers/jsonRpc";
-import { RainbowKitProviderProps } from "@rainbow-me/rainbowkit/dist/components/RainbowKitProvider/RainbowKitProvider";
+import { type RainbowKitProviderProps } from "@rainbow-me/rainbowkit/dist/components/RainbowKitProvider/RainbowKitProvider";
 import "@rainbow-me/rainbowkit/styles.css";
 
 const crossbellChain: Chain = {

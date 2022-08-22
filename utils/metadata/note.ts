@@ -1,4 +1,4 @@
-import { CharacterEntity, NoteMetadata } from "crossbell.js";
+import { NoteMetadata } from "crossbell.js";
 import { ipfsLinkToHttpLink } from "../ipfs";
 
 /**
@@ -97,4 +97,26 @@ export function getValidAttachments(
 
 function notEmpty<TValue>(value: TValue | null | undefined): value is TValue {
 	return value !== null && value !== undefined;
+}
+
+export function extractCoverImageFromNote(
+	note?: NoteMetadata | null
+): string | undefined {
+	if (!note) {
+		return undefined;
+	}
+
+	const attachments = getValidAttachments(note.attachments, {
+		allowedContentTypes: ["address"],
+	});
+	if (attachments.length === 0) {
+		return undefined;
+	}
+
+	const coverImage = attachments.find((a) => a.mediaType === "image");
+	if (!coverImage) {
+		return undefined;
+	}
+
+	return coverImage.address;
 }

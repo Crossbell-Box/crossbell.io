@@ -1,3 +1,4 @@
+import { ipfsLinkToHttpLink } from "@/utils/ipfs";
 import {
 	default as NextImage,
 	type ImageLoader,
@@ -46,18 +47,28 @@ const toBase64 = (str: string) =>
 		? Buffer.from(str).toString("base64")
 		: window.btoa(str);
 
+const isLocalImage = (s: ImageProps["src"]) =>
+	(typeof s === "string" &&
+		(s.startsWith("data:image/") || s.startsWith("/"))) ||
+	typeof s === "object"; // StaticImport
+
 export default function Image({
 	src,
+	fill,
 	...props
 }: PropsWithChildren<ImageProps>) {
+	if (typeof src === "string") {
+		src = ipfsLinkToHttpLink(src);
+	}
+
 	const thumborLoader: ImageLoader = ({ src, width, quality }) => {
-		if (src.startsWith("/")) {
+		if (isLocalImage(src)) {
 			return src;
 		}
 		// const w = typeof props.width === "number" ? props.width : width;
 		// const h = typeof props.height === "number" ? props.height : 0;
 		const w = width;
-		const h = typeof props.height === "number" ? props.height : 0;
+		const h = 0;
 		return `https://thumbor.rss3.dev/unsafe/${w}x${h}/smart/${src}`;
 	};
 
@@ -71,6 +82,11 @@ export default function Image({
 			// blurDataURL={randomColor()}
 			blurDataURL={`data:image/svg+xml;base64,${toBase64(shimmer())}`}
 			onError={() => _setSrc("/images/image-error.png")}
+			fill={fill}
+			{...(fill
+				? { sizes: "(min-width: 75em) 33vw, (min-width: 48em) 50vw, 100vw" }
+				: {})}
+			{...(isLocalImage(_src) ? { unoptimized: true } : {})}
 			{...props}
 		/>
 	);

@@ -20,6 +20,7 @@ import {
 	useCharacters,
 	useCurrentCharacter,
 	useCurrentCharacterId,
+	useDisconnectCurrentCharacter,
 } from "@/utils/apis/indexer";
 import { truncateAddress } from "@/utils/ethers";
 import Modal from "../Modal";
@@ -144,7 +145,7 @@ const WalletDisplayButton = forwardRef<HTMLButtonElement, ButtonProps>(
 								className="font-semnibold leading-1em overflow-hidden text-ellipsis max-w-8em"
 								color="dark"
 							>
-								@{data?.handle}
+								{data?.handle ? "@" + data.handle : ""}
 							</Text>
 
 							<Space h={2} />
@@ -177,13 +178,18 @@ function WalletButton() {
 		addressOrName: address,
 	});
 
+	const { disconnect: disconnCharacter } = useDisconnectCurrentCharacter();
+
 	return (
 		<>
 			<Modal
 				opened={disconnOpened}
 				onClose={() => disconnHandlers.close()}
 				title="Disconnect Wallet?"
-				onConfirm={() => disconnect()}
+				onConfirm={() => {
+					disconnCharacter();
+					disconnect();
+				}}
 				confirmText="Disconnect"
 				confirmType="danger"
 			>
@@ -255,6 +261,9 @@ function AccountList() {
 					}
 					key={c.characterId}
 					onClick={() => {
+						if (c.characterId === curCid) {
+							return;
+						}
 						modals.openConfirmModal({
 							title: `Switch to @${c.handle}?`,
 							children: (
@@ -280,7 +289,9 @@ function AccountList() {
 								setCurCid(c.characterId);
 								showNotification({ message: `Switched to @${c.handle}` });
 								if (shouldNavigate) {
-									router.push(composeCharacterHref(c.handle));
+									setTimeout(() => {
+										router.push(composeCharacterHref(c.handle));
+									}, 500);
 								}
 							},
 						});
@@ -306,6 +317,12 @@ function AccountList() {
 					</div>
 				</MenuItem>
 			))}
+
+			{!charactersLoading && charactersData?.list.length === 0 && (
+				<MenuItem>
+					<Text color="dimmed">No characters</Text>
+				</MenuItem>
+			)}
 		</>
 	);
 }

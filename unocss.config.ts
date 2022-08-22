@@ -22,8 +22,7 @@ export default defineConfig({
 		["font-deca", { "font-family": "Lexend Deca" }],
 	],
 	shortcuts: {
-		"bg-hover":
-			"hover:bg-gray/15 active:bg-gray/20 transition-background-color",
+		"bg-hover": "hover:bg-gray/5 active:bg-gray/10 transition-background-color",
 	},
 	theme: {
 		colors: {
@@ -51,6 +50,14 @@ export default defineConfig({
 				light: "#C8C3F4",
 				primary: "#9688F2",
 			},
+		},
+		breakpoints: {
+			// https://mantine.dev/styles/responsive/#configure-breakpoints
+			xs: "576px",
+			sm: "768px",
+			md: "992px",
+			lg: "1200px",
+			xl: "1400px",
 		},
 	},
 });

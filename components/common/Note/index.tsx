@@ -39,7 +39,7 @@ function ActionButton({
 	return (
 		<Tooltip label={label}>
 			<div
-				className="flex items-center group"
+				className="flex items-center group cursor-pointer"
 				onClick={(e) => {
 					e.stopPropagation();
 					onClick?.();
@@ -85,7 +85,10 @@ export function Note({
 		initialData: initialCharacter,
 	});
 
-	const { navigate, href } = useNavigateToNote(note.characterId, note.noteId);
+	const { navigate, href, prefetch } = useNavigateToNote(
+		note.characterId,
+		note.noteId
+	);
 
 	// calculate displayMode smartly
 	const { characterId, noteId } = useNoteRouterQuery();
@@ -212,17 +215,16 @@ export function Note({
 	};
 
 	const renderContent = () => {
-		const clxs = displayMode === "main" ? "text-1.25em" : "text-1em";
 		const titleOrder = displayMode === "main" ? 2 : 3;
 		return (
-			<div className={clxs}>
+			<div>
 				{note.metadata?.content?.title && (
 					<Title order={titleOrder} className="my-2">
 						{note.metadata.content.title}
 					</Title>
 				)}
 
-				<MarkdownRenderer collapsible={collapsible}>
+				<MarkdownRenderer collapsible={collapsible} displayMode={displayMode}>
 					{note.metadata?.content?.content ?? ""}
 				</MarkdownRenderer>
 			</div>
@@ -240,6 +242,9 @@ export function Note({
 				"flex-col": displayMode === "main",
 			})}
 			onClick={() => navigate()}
+			onMouseEnter={() => {
+				prefetch();
+			}}
 		>
 			{/* avatar & username */}
 			<div className="flex">
@@ -365,7 +370,9 @@ function NoteActions({
 				bgHoverColor="group-hover:bg-green/10"
 				textHoverColor="group-hover:text-green"
 				onClick={async () => {
-					await copyToClipboard(location.href);
+					await copyToClipboard(
+						location.origin + composeNoteHref(characterId, noteId)
+					);
 					showNotification({
 						message: "Copied to Clipboard!",
 						disallowClose: true,
@@ -439,6 +446,11 @@ function useNavigateToNote(characterId: number, noteId: number) {
 
 		router.push(targetURL);
 	};
+	const prefetch = () => {
+		if (router.asPath === targetURL) return;
 
-	return { navigate, href: targetURL };
+		router.prefetch(targetURL);
+	};
+
+	return { navigate, href: targetURL, prefetch };
 }

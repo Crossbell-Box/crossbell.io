@@ -74,9 +74,8 @@ const MobileMenu = () => (
 				<SearchInput />
 			</Menu.Item>
 			<Menu.Item>
-				<div className="flex relative">
-					<ConnectButton />
-				</div>
+				{/* FIXME: button cannot be inside another button */}
+				<div className="flex relative">{/* <ConnectButton /> */}</div>
 			</Menu.Item>
 		</Menu.Dropdown>
 	</Menu>

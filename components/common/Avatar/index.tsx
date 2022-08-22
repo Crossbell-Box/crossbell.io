@@ -9,6 +9,7 @@ export default function Avatar({
 	characterId,
 	character: initialCharacter,
 	alt = "Avatar",
+	src,
 	...props
 }: PropsWithChildren<
 	(
@@ -26,12 +27,13 @@ export default function Avatar({
 	const { isLoading, data: character } = useCharacter(
 		characterId ?? initialCharacter?.characterId,
 		{
-			enabled: Boolean(characterId) && !Boolean(initialCharacter),
+			enabled: Boolean(characterId) && !Boolean(initialCharacter) && !src,
 			initialData: initialCharacter,
 		}
 	);
 
 	let src_ =
+		src ??
 		extractCharacterAvatar(character) ??
 		(isLoading
 			? getDefaultAvatar()

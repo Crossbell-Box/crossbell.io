@@ -1,5 +1,5 @@
 import type { getLinkPreview } from "link-preview-js";
-import { Skeleton, Text } from "@mantine/core";
+import { Skeleton, Space, Text } from "@mantine/core";
 import Image from "@/components/common/Image";
 
 interface LinkPreviewCardProps {
@@ -15,37 +15,44 @@ const LinkPreviewCard = ({ data }: LinkPreviewCardProps) => (
 	>
 		<div className="flex flex-row my-4 p-4 border-solid border-1px border-#CCC rounded gap-4 bg-hover">
 			{"images" in data && data.images[0] && (
-				<div className="relative w-20 h-20 rounded-xl flex-shrink-0 overflow-hidden">
+				<div className="relative w-100px h-100px rounded-xl flex-shrink-0 overflow-hidden">
 					<Image
 						className="flex rounded-xl aspect-ratio-1 object-cover"
-						sizes="160px"
-						fill
+						width={100}
+						height={100}
+						sizes="100px"
 						src={data.images[0]}
 						alt={data.title}
 					/>
 				</div>
 			)}
 			<div className="flex flex-col flex-grow">
-				<div className="flex flex-row gap-2 items-center">
+				<div className="flex flex-row items-center">
 					{"favicons" in data && data.favicons[0] && (
-						<div className="w-4 h-4 rounded-full flex-shrink-0">
-							<Image
-								width={16}
-								height={16}
-								src={data.favicons[0]}
-								alt="favicon"
-								className="rounded-full"
-							/>
+						<div className="flex">
+							<div className="relative w-16px h-16px overflow-hidden">
+								<Image
+									width={16}
+									height={16}
+									sizes="16px"
+									src={data.favicons[0]}
+									alt="favicon"
+									className="object-cover vertical-super"
+									placeholder={undefined}
+								/>
+							</div>
+							<Space w={5} />
 						</div>
 					)}
 					{("siteName" in data || "title" in data) && (
-						<div className="flex">
+						<div>
 							<Text color="dark" size="lg" lineClamp={1}>
 								{data.siteName || data.title}
 							</Text>
 						</div>
 					)}
 				</div>
+				<Space h={5} />
 				{"description" in data && (
 					<Text color="gray" size="xs" lineClamp={3}>
 						{data.description}
