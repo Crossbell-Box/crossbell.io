@@ -201,9 +201,13 @@ export function MarkdownRenderer({
 									);
 									const noHandle = !isLoading && !data;
 									return isLoading || noHandle ? (
-										<span>@{props.handle}</span>
+										<>
+											<span>@{props.handle}</span>{" "}
+										</>
 									) : (
-										<CharacterHandle handle={props.handle} />
+										<>
+											<CharacterHandle handle={props.handle} />{" "}
+										</>
 									);
 								},
 							}}
