@@ -1,5 +1,6 @@
 import Avatar from "@/components/common/Avatar";
 import LoadingOverlay from "@/components/common/LoadingOverlay";
+import LoadMore from "@/components/common/LoadMore";
 import { getLayout } from "@/components/layouts/AppLayout";
 import Header from "@/components/layouts/Header";
 import { NextPageWithLayout } from "@/pages/_app";
@@ -16,11 +17,13 @@ import { NextLink } from "@mantine/next";
 import { showNotification } from "@mantine/notifications";
 import { CharacterEntity } from "crossbell.js";
 import Link from "next/link";
+import { Fragment } from "react";
 import { useAccount } from "wagmi";
 
 const Page: NextPageWithLayout = () => {
 	const { address } = useAccount();
-	const { data: characters } = useCharacters(address);
+	const { isLoading, data, hasNextPage, fetchNextPage, isFetchingNextPage } =
+		useCharacters(address);
 
 	return (
 		<div>
@@ -28,9 +31,28 @@ const Page: NextPageWithLayout = () => {
 
 			<div>
 				<Grid justify="space-around" gutter="xs">
-					{characters?.list?.map((character) => (
-						<CharacterCard key={character.characterId} character={character} />
+					{data?.pages.map((page, i) => (
+						<Fragment key={i}>
+							{page?.list.map((character) => (
+								<CharacterCard
+									key={character.characterId}
+									character={character}
+								/>
+							))}
+						</Fragment>
 					))}
+
+					<LoadMore
+						onLoadMore={() => fetchNextPage()}
+						hasNextPage={Boolean(hasNextPage)}
+						isLoading={isFetchingNextPage}
+					>
+						{/* {Array(3)
+					.fill(0)
+					.map((_, i) => (
+						<Skeleton key={i} />
+					))} */}
+					</LoadMore>
 
 					{/* mint new */}
 					<Link href={WalletCharacterNewHref}>

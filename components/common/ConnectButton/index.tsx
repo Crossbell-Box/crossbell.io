@@ -1,4 +1,4 @@
-import { PropsWithChildren, forwardRef, useState } from "react";
+import { PropsWithChildren, forwardRef, useState, Fragment } from "react";
 import {
 	Button,
 	ButtonProps,
@@ -30,6 +30,7 @@ import { composeCharacterHref, WalletCharacterManageHref } from "@/utils/url";
 import { NextLink } from "@mantine/next";
 import { useRouter } from "next/router";
 import { extractCharacterName } from "@/utils/metadata";
+import LoadMore from "../LoadMore";
 
 export default function ConnectButton() {
 	return (
@@ -239,7 +240,7 @@ function WalletButton() {
 
 function AccountList() {
 	const { address } = useAccount();
-	const { isLoading: charactersLoading, data: charactersData } =
+	const { isLoading, data, hasNextPage, fetchNextPage, isFetchingNextPage } =
 		useCharacters(address);
 
 	const [curCid, setCurCid] = useCurrentCharacterId();
@@ -249,76 +250,94 @@ function AccountList() {
 	const [shouldNavigate, setShouldNavigate] = useState(true);
 	const router = useRouter();
 
+	const hasNoResult = !isLoading && !data?.pages.some((page) => page.count > 0);
+
 	return (
 		<>
-			<LoadingOverlay visible={charactersLoading} />
-			{charactersData?.list.map((c) => (
-				<MenuItem
-					rightSection={
-						c.characterId === curCid ? (
-							<Text className="i-csb:tick" color="brand" />
-						) : null
-					}
-					key={c.characterId}
-					onClick={() => {
-						if (c.characterId === curCid) {
-							return;
-						}
-						modals.openConfirmModal({
-							title: `Switch to @${c.handle}?`,
-							children: (
-								<div>
-									Are you sure you want to switch to this character?
-									<Checkbox
-										label={
-											<Text color="dimmed">
-												Navigate to the character page after switching
-											</Text>
-										}
-										size="xs"
-										className="my-2"
-										checked={shouldNavigate}
-										onChange={(event) =>
-											setShouldNavigate(event.currentTarget.checked)
-										}
-									/>
-								</div>
-							),
-							labels: { confirm: "Switch", cancel: "Cancel" },
-							onConfirm: () => {
-								setCurCid(c.characterId);
-								showNotification({ message: `Switched to @${c.handle}` });
-								if (shouldNavigate) {
-									setTimeout(() => {
-										router.push(composeCharacterHref(c.handle));
-									}, 500);
+			<LoadingOverlay visible={isLoading} />
+			{data?.pages.map((page, i) => (
+				<Fragment key={i}>
+					{page?.list.map((c) => (
+						<MenuItem
+							rightSection={
+								c.characterId === curCid ? (
+									<Text className="i-csb:tick" color="brand" />
+								) : null
+							}
+							key={c.characterId}
+							onClick={() => {
+								if (c.characterId === curCid) {
+									return;
 								}
-							},
-						});
-					}}
-				>
-					<div className="flex items-center" key={c.characterId}>
-						{/* avatar */}
-						{c && <Avatar size={32} character={c} />}
+								modals.openConfirmModal({
+									title: `Switch to @${c.handle}?`,
+									children: (
+										<div>
+											Are you sure you want to switch to this character?
+											<Checkbox
+												label={
+													<Text color="dimmed">
+														Navigate to the character page after switching
+													</Text>
+												}
+												size="xs"
+												className="my-2"
+												checked={shouldNavigate}
+												onChange={(event) =>
+													setShouldNavigate(event.currentTarget.checked)
+												}
+											/>
+										</div>
+									),
+									labels: { confirm: "Switch", cancel: "Cancel" },
+									onConfirm: () => {
+										setCurCid(c.characterId);
+										showNotification({ message: `Switched to @${c.handle}` });
+										if (shouldNavigate) {
+											setTimeout(() => {
+												router.push(composeCharacterHref(c.handle));
+											}, 500);
+										}
+									},
+								});
+							}}
+						>
+							<div className="flex items-center" key={c.characterId}>
+								{/* avatar */}
+								{c && <Avatar size={32} character={c} />}
 
-						<Space w="xs" />
+								<Space w="xs" />
 
-						<div className="flex flex-col">
-							{/* name */}
-							<Text className="text-sm font-semibold overflow-hidden text-ellipsis max-w-8em">
-								{extractCharacterName(c, { fallbackToHandle: false })}
-							</Text>
+								<div className="flex flex-col">
+									{/* name */}
+									<Text className="text-sm font-semibold overflow-hidden text-ellipsis max-w-8em">
+										{extractCharacterName(c, { fallbackToHandle: false })}
+									</Text>
 
-							{/* handle */}
-							<Text className="text-xs overflow-hidden text-ellipsis max-w-8em">
-								@{c.handle}
-							</Text>
-						</div>
-					</div>
-				</MenuItem>
+									{/* handle */}
+									<Text className="text-xs overflow-hidden text-ellipsis max-w-8em">
+										@{c.handle}
+									</Text>
+								</div>
+							</div>
+						</MenuItem>
+					))}
+				</Fragment>
 			))}
 
-			{!charactersLoading && charactersData?.list.length === 0 && (
+			<LoadMore
+				onLoadMore={() => fetchNextPage()}
+				hasNextPage={Boolean(hasNextPage)}
+				isLoading={isFetchingNextPage}
+			>
+				{/* {Array(3)
+					.fill(0)
+					.map((_, i) => (
+						<Skeleton key={i} />
+					))} */}
+			</LoadMore>
+
+			{hasNoResult && (
 				<MenuItem>
 					<Text color="dimmed">No characters</Text>
 				</MenuItem>

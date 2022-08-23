@@ -1,4 +1,4 @@
-import { useQuery } from "@tanstack/react-query";
+import { useInfiniteQuery, useQuery } from "@tanstack/react-query";
 import { indexer } from "@/utils/crossbell.js";
 import { useLocalStorage } from "@mantine/hooks";
 import { useEffect } from "react";
@@ -13,10 +13,17 @@ export const SCOPE_KEY_CHARACTERS = (address?: string) => {
 	return [...SCOPE_KEY, "list", address];
 };
 export function useCharacters(address?: string) {
-	return useQuery(
+	return useInfiniteQuery(
 		SCOPE_KEY_CHARACTERS(address),
-		() => indexer.getCharacters(address!),
-		{ enabled: Boolean(address) }
+		({ pageParam }) =>
+			indexer.getCharacters(address!, {
+				cursor: pageParam,
+				limit: 20,
+			}),
+		{
+			enabled: Boolean(address),
+			getNextPageParam: (lastPage, allPages) => lastPage.cursor,
+		}
 	);
 }
 
