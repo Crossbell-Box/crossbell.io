@@ -15,7 +15,7 @@ const CharacterCard = ({ avatar, name, handle }: CharacterCardProps) => (
       <Image
         className={"rounded-full"}
         width={52} height={52}
-        layout={"fill"}
+        // layout={"fill"}
         src={avatar}
         alt={handle}
       />

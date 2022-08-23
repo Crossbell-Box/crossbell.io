@@ -1,5 +1,6 @@
 import { baseUrl, SCOPE_KEY } from "./consts"
 import { useMutation, useQuery } from "@tanstack/react-query";
+import type { Account, OperatorSyncServerResponse } from "@/utils/apis/operator-sync/types";
 
 export function useOperatorListSyncAccounts(characterId?: number, options?: any) {
   return useQuery(
