@@ -11,18 +11,18 @@ interface FailResponse extends BaseResponse {
   // ok is false
 }
 
-type OperatorSyncServerResponse<T> = SucceedResponse<T> | FailResponse;
+export type OperatorSyncServerResponse<T> = SucceedResponse<T> | FailResponse;
 
-interface Character {
+export interface Character {
   crossbell_character_id: string;
 }
 
-interface MediaUsage {
+export interface MediaUsage {
   content_type: string;
   usage: number; // In Bytes
 }
 
-interface Account {
+export interface Account {
   // Metadata
   crossbell_character_id: string;
   platform: string;
