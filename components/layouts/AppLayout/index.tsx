@@ -4,6 +4,7 @@ import Nav from "./Nav";
 import Aside from "./Aside";
 import { useElementSize } from "@mantine/hooks";
 import ScrollToTop from "@/components/common/ScrollToTopButton";
+import { MigrationNotification } from "@/components/biz/migrate";
 
 export default function AppLayout({ children }: PropsWithChildren) {
 	const { ref: rootRef, width: rootWidth } = useElementSize();
@@ -14,6 +15,8 @@ export default function AppLayout({ children }: PropsWithChildren) {
 	return (
 		<Center>
 			<ScrollToTop />
+
+			<MigrationNotification />
 
 			<AppShell
 				ref={rootRef}
@@ -35,30 +38,6 @@ export default function AppLayout({ children }: PropsWithChildren) {
 						<Aside />
 					</div>
 				}
-				// footer={
-				//   <Footer height={60} p="md">
-				//     Application footer
-				//   </Footer>
-				// }
-				// header={
-				//   <Header height={70} p="md">
-				//     <div
-				//       style={{ display: "flex", alignItems: "center", height: "100%" }}
-				//     >
-				//       <MediaQuery largerThan="sm" styles={{ display: "none" }}>
-				//         <Burger
-				//           opened={opened}
-				//           onClick={() => setOpened((o) => !o)}
-				//           size="sm"
-				//           color={theme.colors.gray[6]}
-				//           mr="xl"
-				//         />
-				//       </MediaQuery>
-
-				//       <Text>Application header</Text>
-				//     </div>
-				//   </Header>
-				// }
 			>
 				<div className="relative">{children}</div>
 			</AppShell>
