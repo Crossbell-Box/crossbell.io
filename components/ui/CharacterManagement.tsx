@@ -130,7 +130,7 @@ export default function CharacterManagement({
 				bio: character.metadata?.content?.bio ?? "",
 			});
 		}
-	}, [form, character, character?.metadata?.content]);
+	}, [character, character?.metadata?.content]);
 
 	// upload avatar
 	const handleUpload = async (files: File[]) => {
