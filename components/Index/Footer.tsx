@@ -71,7 +71,7 @@ const socialMedias: {
 	{
 		text: "Telegram",
 		icon: "i-csb:telegram",
-		link: "",
+		link: "https://t.me/+RBF2McON3z81YzFh",
 	},
 	{
 		text: "GitHub",
