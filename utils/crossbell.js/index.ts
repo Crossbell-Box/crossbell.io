@@ -22,20 +22,19 @@ let contract: Contract;
 export const useContract = () => {
 	const { connector, isConnected } = useAccount();
 
-	if (!contract) {
-		if (isConnected && connector) {
-			// connect the contract with the provider
-			connector.getProvider().then(async (res) => {
-				contract = new Contract(res as any);
-				await contract.connect();
-				contract = injectContractChecker(contract);
-				return contract;
-			});
-		} else {
-			// user is not logged in
-			contract = new Contract();
+	if (isConnected && connector) {
+		// connect the contract with the provider
+		connector.getProvider().then(async (res) => {
+			contract = new Contract(res as any);
+			await contract.connect();
 			contract = injectContractChecker(contract);
-		}
+			return contract;
+		});
+	} else {
+		// user is not logged in
+		contract = new Contract();
+		contract.connect();
+		contract = injectContractChecker(contract);
 	}
 
 	return contract;
