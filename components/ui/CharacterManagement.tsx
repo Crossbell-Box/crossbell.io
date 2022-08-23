@@ -92,7 +92,7 @@ export default function CharacterManagement({
 				form.setFieldValue("handle", "");
 			}
 		}
-	}, [form, form.values.name, mode]);
+	}, [form.values.name, mode]);
 
 	// check if handle is taken
 	const [debouncedHandle] = useDebouncedValue(form.values.handle, 200);

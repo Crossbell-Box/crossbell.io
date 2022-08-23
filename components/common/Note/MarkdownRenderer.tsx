@@ -131,18 +131,7 @@ export function MarkdownRenderer({
 									);
 								},
 								a: function Link({ node, ...props }) {
-									const { data, isLoading, isSuccess } = useLinkPreview(
-										props.href
-									);
-									return isLoading ? (
-										<LinkPreviewSkeleton />
-									) : isSuccess &&
-									  data &&
-									  (("siteName" in data && data.siteName) ||
-											("title" in data && data.title) ||
-											("description" in data && data.description)) ? (
-										<LinkPreviewCard data={data} />
-									) : (
+									return (
 										<Text
 											size={fontSize}
 											variant="link"
@@ -158,6 +147,34 @@ export function MarkdownRenderer({
 											{props.children}
 										</Text>
 									);
+									// TODO: better UI
+									// const { data, isLoading, isSuccess } = useLinkPreview(
+									// 	props.href
+									// );
+									// return isLoading ? (
+									// 	<LinkPreviewSkeleton />
+									// ) : isSuccess &&
+									//   data &&
+									//   (("siteName" in data && data.siteName) ||
+									// 		("title" in data && data.title) ||
+									// 		("description" in data && data.description)) ? (
+									// 	<LinkPreviewCard data={data} />
+									// ) : (
+									// 	<Text
+									// 		size={fontSize}
+									// 		variant="link"
+									// 		component="a"
+									// 		href={props.href}
+									// 		target={
+									// 			props.href && isExternalUrl(props.href)
+									// 				? "_blank"
+									// 				: undefined
+									// 		}
+									// 		rel="noreferrer"
+									// 	>
+									// 		{props.children}
+									// 	</Text>
+									// );
 								},
 								table: ({ node, ...props }) => {
 									return (

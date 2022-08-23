@@ -26,7 +26,6 @@ import {
 	composeCharacterFollowHref,
 	composeWalletCharacterEditHref,
 } from "@/utils/url";
-import { useRouter } from "next/router";
 import Link from "next/link";
 
 // used in character page to display the profile
