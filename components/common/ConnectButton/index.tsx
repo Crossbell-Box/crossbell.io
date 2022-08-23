@@ -253,7 +253,7 @@ function AccountList() {
 	const hasNoResult = !isLoading && !data?.pages.some((page) => page.count > 0);
 
 	return (
-		<>
+		<div className="max-h-50vh overflow-scroll">
 			<LoadingOverlay visible={isLoading} />
 			{data?.pages.map((page, i) => (
 				<Fragment key={i}>
@@ -342,7 +342,7 @@ function AccountList() {
 					<Text color="dimmed">No characters</Text>
 				</MenuItem>
 			)}
-		</>
+		</div>
 	);
 }
 

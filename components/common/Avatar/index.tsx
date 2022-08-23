@@ -65,7 +65,7 @@ const defaultAvatars = [
 ];
 
 function getDefaultAvatar(handle?: string) {
-	if (!handle || handle.startsWith("0x")) {
+	if (!handle || (handle.startsWith("0x") && handle.length === 42)) {
 		return "/images/avatar-default.png";
 	}
 
