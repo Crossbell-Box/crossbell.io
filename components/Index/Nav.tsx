@@ -12,7 +12,7 @@ const NavLinks = () => {
 
 	const navLinks = [
 		{ href: "/feed", title: "Feed" },
-		{ href: "/shop", title: "Shop" },
+		// { href: "/shop", title: "Shop" },
 		{ href: "/sync", title: "Sync" },
 		{
 			href: character ? `/@${character.handle}` : "/character",

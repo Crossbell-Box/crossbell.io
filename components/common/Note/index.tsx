@@ -1,7 +1,7 @@
 import Avatar from "@/components/common/Avatar";
 import { Skeleton, Space, Text, Title } from "@mantine/core";
 import { CharacterEntity, NoteEntity } from "crossbell.js";
-import { useCharacter, useNoteStatus } from "@/utils/apis/indexer";
+import { useCharacter, useNote, useNoteStatus } from "@/utils/apis/indexer";
 import classNames from "classnames";
 import MediaCarousel from "./MediaCarousel";
 import { useRouter } from "next/router";
@@ -18,6 +18,8 @@ import Time from "../Time";
 import { getValidAttachments } from "@/utils/metadata";
 import NoteSourceBadges from "./NoteSourceBadges";
 import NoteIdBadge from "./NoteIdBadge";
+import { useCallback } from "react";
+import MetadataContentUpdater from "../MetadataContentUpdater";
 
 function ActionButton({
 	text,
@@ -66,7 +68,7 @@ function ActionButton({
 }
 
 export function Note({
-	note,
+	note: initialNote,
 	character: initialCharacter,
 	collapsible,
 	displayMode,
@@ -81,13 +83,23 @@ export function Note({
 	 */
 	displayMode?: "normal" | "main";
 }) {
+	const { data: fetchedNote, refetch } = useNote(
+		initialNote.characterId,
+		initialNote.noteId,
+		{
+			initialData: initialNote,
+		}
+	);
+
+	const note = fetchedNote!;
+
 	const { data: character } = useCharacter(note.characterId, {
 		initialData: initialCharacter,
 	});
 
 	const { navigate, href, prefetch } = useNavigateToNote(
-		note.characterId,
-		note.noteId
+		note.characterId!,
+		note.noteId!
 	);
 
 	// calculate displayMode smartly
@@ -98,7 +110,7 @@ export function Note({
 		displayMode = isMainNote ? "main" : "normal";
 	}
 
-	const renderAvatar = () => {
+	const renderAvatar = useCallback(() => {
 		if (displayMode === "normal") {
 			return (
 				<div>
@@ -122,14 +134,17 @@ export function Note({
 				</div>
 			);
 		}
-	};
+	}, [character, displayMode, note]);
 
-	const renderUsername = () => {
+	const renderUsername = useCallback(() => {
 		if (displayMode === "normal") {
 			return (
 				<div className="flex flex-wrap items-baseline">
 					{/* username */}
-					<CharacterName character={character} characterId={note.characterId} />
+					<CharacterName
+						character={character}
+						characterId={note.characterId!}
+					/>
 
 					<Space w={3} />
 
@@ -142,7 +157,7 @@ export function Note({
 					</Text>
 
 					{/* time */}
-					<Time href={href} date={note.createdAt} mode="fromNow" />
+					<Time href={href} date={note.createdAt!} mode="fromNow" />
 				</div>
 			);
 		}
@@ -154,7 +169,7 @@ export function Note({
 					<CharacterName
 						size="lg"
 						character={character}
-						characterId={note.characterId}
+						characterId={note.characterId!}
 					/>
 
 					<Text color="dimmed" size="md" className="leading-1em">
@@ -163,9 +178,9 @@ export function Note({
 				</div>
 			);
 		}
-	};
+	}, [character, displayMode, note]);
 
-	const renderReplyingInfo = () => {
+	const renderReplyingInfo = useCallback(() => {
 		return (
 			note.toNote && (
 				<div>
@@ -180,16 +195,16 @@ export function Note({
 				</div>
 			)
 		);
-	};
+	}, [note]);
 
-	const renderBottomInfo = () => {
+	const renderBottomInfo = useCallback(() => {
 		const Info = () => (
 			<div className="flex flex-row justify-between items-center">
 				{/* source */}
 				<NoteSourceBadges noteMetadata={note.metadata?.content} />
 
 				{/* id */}
-				<NoteIdBadge note={note} />
+				<NoteIdBadge note={note!} />
 			</div>
 		);
 		if (displayMode === "normal") {
@@ -208,13 +223,30 @@ export function Note({
 					<Space h={10} />
 
 					{/* time */}
-					<Time href={href} date={note.createdAt} mode="accurate" />
+					<Time href={href} date={note.createdAt!} mode="accurate" />
 				</div>
 			);
 		}
-	};
+	}, [displayMode, note]);
 
-	const renderContent = () => {
+	const renderContent = useCallback(() => {
+		if (!note.metadata?.content) {
+			return (
+				<div>
+					<Space h={10} />
+					<MetadataContentUpdater
+						uri={note.metadata?.uri}
+						characterId={note.characterId}
+						noteId={note.noteId}
+						onUpdated={() => {
+							refetch();
+						}}
+					/>
+					<Space h={10} />
+				</div>
+			);
+		}
+
 		const titleOrder = displayMode === "main" ? 2 : 3;
 		return (
 			<div>
@@ -229,7 +261,7 @@ export function Note({
 				</MarkdownRenderer>
 			</div>
 		);
-	};
+	}, [collapsible, displayMode, note]);
 
 	const validAttachments = getValidAttachments(
 		note.metadata?.content?.attachments
@@ -286,7 +318,7 @@ export function Note({
 				<Space h={10} />
 
 				{/* actions */}
-				<NoteActions characterId={note.characterId} noteId={note.noteId} />
+				<NoteActions characterId={note.characterId!} noteId={note.noteId!} />
 			</div>
 		</div>
 	);

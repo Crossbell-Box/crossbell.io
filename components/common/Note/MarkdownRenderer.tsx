@@ -201,9 +201,13 @@ export function MarkdownRenderer({
 									);
 									const noHandle = !isLoading && !data;
 									return isLoading || noHandle ? (
-										<span>@{props.handle}</span>
+										<>
+											<span>@{props.handle}</span>{" "}
+										</>
 									) : (
-										<CharacterHandle handle={props.handle} />
+										<>
+											<CharacterHandle handle={props.handle} />{" "}
+										</>
 									);
 								},
 							}}
@@ -232,7 +236,17 @@ function collapseText(text: string, maxLength: number = 1000) {
 	if (text.length <= maxLength) {
 		return text;
 	}
-	return text.slice(0, maxLength) + "...";
+
+	const ellipsis = "&hellip;";
+
+	const startingText = text.substring(0, maxLength);
+	const endingText = text.substring(maxLength);
+	const separatorIndex = maxLength + endingText.indexOf(" ");
+	const appendingText = text.substring(maxLength, separatorIndex);
+
+	const collapsedText = startingText + appendingText + ellipsis;
+
+	return collapsedText;
 }
 
 function forceBreakNewlines(text: string) {

@@ -88,6 +88,7 @@ export default function Image({
 				: {})}
 			{...(isLocalImage(_src) ? { unoptimized: true } : {})}
 			{...props}
+			data-original-url={src}
 		/>
 	);
 }
