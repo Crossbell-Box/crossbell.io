@@ -7,6 +7,7 @@ import {
 	LoadingOverlay,
 	Menu,
 	MenuItemProps,
+	ScrollArea,
 	Space,
 	Text,
 } from "@mantine/core";
@@ -253,8 +254,12 @@ function AccountList() {
 	const hasNoResult = !isLoading && !data?.pages.some((page) => page.count > 0);
 
 	return (
-		<div className="max-h-50vh overflow-scroll">
-			<LoadingOverlay visible={isLoading} />
+		<ScrollArea.Autosize maxHeight="50vh">
+			{isLoading && (
+				<div className="h-100px">
+					<LoadingOverlay visible={isLoading} />
+				</div>
+			)}
 			{data?.pages.map((page, i) => (
 				<Fragment key={i}>
 					{page?.list.map((c) => (
@@ -342,7 +347,7 @@ function AccountList() {
 					<Text color="dimmed">No characters</Text>
 				</MenuItem>
 			)}
-		</div>
+		</ScrollArea.Autosize>
 	);
 }
 
