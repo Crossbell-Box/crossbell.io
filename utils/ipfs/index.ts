@@ -1,6 +1,9 @@
 export const DEFAULT_GATEWAY = "https://cf-ipfs.com/ipfs/";
 
 export const ipfsLinkToHttpLink = (link: string) => {
+	if (!link) {
+		return "";
+	}
 	if (link.startsWith("ipfs://")) {
 		const ipfsHash = link.substring("ipfs://".length);
 		return `${DEFAULT_GATEWAY}${ipfsHash}`;

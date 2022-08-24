@@ -26,6 +26,7 @@ import { Button } from "@mantine/core";
 import { isExternalUrl } from "@/utils/url";
 import { CharacterHandle } from "../Character";
 import { useCharacterHandleExists } from "@/utils/apis/indexer";
+import Zoom from "./Zoom";
 
 export function MarkdownRenderer({
 	children,
@@ -93,43 +94,55 @@ export function MarkdownRenderer({
 										/>
 									);
 								},
-								img: function MarkdownImg({ node, ...props }) {
-									const src = ipfsLinkToHttpLink(props.src!);
-									// const [paddingTop, setPaddingTop] = useState<string>("0");
-
+								img: ({ node, src, ...props }) => {
 									return (
-										<div
-											className="relative my-2 w-full"
-											style={{
-												height: props.height ?? 300,
-												width: props.width,
-												// paddingTop,
-											}}
-										>
-											<Image
-												className="cursor-pointer rounded-md object-contain"
-												alt={props.alt}
-												title={props.title}
-												fill
-												sizes="(min-width: 75em) 33vw, (min-width: 48em) 50vw, 100vw"
-												src={src}
-												onClick={(e) => {
-													e.stopPropagation();
-													window.open(src);
-												}}
-												// onLoadingComplete={(e) => {
-												// 	if (paddingTop === "0") {
-												// 		const { naturalWidth, naturalHeight } = e;
-												// 		setPaddingTop(
-												// 			`calc(100% / (${naturalWidth} / ${naturalHeight}))`
-												// 		);
-												// 		console.log({ paddingTop });
-												// 	}
-												// }}
+										<Zoom>
+											<img
+												className="w-full"
+												src={ipfsLinkToHttpLink(src!)}
+												{...props}
 											/>
-										</div>
+										</Zoom>
 									);
 								},
+								// TODO: need a better way to handle this
+								// img: function MarkdownImg({ node, ...props }) {
+								// 	const src = ipfsLinkToHttpLink(props.src!);
+								// 	// const [paddingTop, setPaddingTop] = useState<string>("0");
+
+								// 	return (
+								// 		<div
+								// 			className="relative my-2 w-full"
+								// 			style={{
+								// 				height: props.height ?? 300,
+								// 				width: props.width,
+								// 				// paddingTop,
+								// 			}}
+								// 		>
+								// 			<Image
+								// 				className="cursor-pointer rounded-md object-contain"
+								// 				alt={props.alt}
+								// 				title={props.title}
+								// 				fill
+								// 				sizes="(min-width: 75em) 33vw, (min-width: 48em) 50vw, 100vw"
+								// 				src={src}
+								// 				onClick={(e) => {
+								// 					e.stopPropagation();
+								// 					window.open(src);
+								// 				}}
+								// 				// onLoadingComplete={(e) => {
+								// 				// 	if (paddingTop === "0") {
+								// 				// 		const { naturalWidth, naturalHeight } = e;
+								// 				// 		setPaddingTop(
+								// 				// 			`calc(100% / (${naturalWidth} / ${naturalHeight}))`
+								// 				// 		);
+								// 				// 		console.log({ paddingTop });
+								// 				// 	}
+								// 				// }}
+								// 			/>
+								// 		</div>
+								// 	);
+								// },
 								a: function Link({ node, ...props }) {
 									return (
 										<Text
