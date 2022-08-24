@@ -114,7 +114,7 @@ export function useCurrentCharacterId() {
 	return useLocalStorage<number>({
 		key: CurrentCharacterIdKey,
 		serialize: (cid) => cid.toString(),
-		getInitialValueInEffect: false,
+		getInitialValueInEffect: true, // must be true otherwise hydrate will not work
 	});
 }
 export function useDisconnectCurrentCharacter() {
@@ -131,7 +131,7 @@ export function useCurrentCharacter() {
 	const query = cid ? useCharacter(cid) : usePrimaryCharacter(address);
 
 	useEffect(() => {
-		if (!cid) {
+		if (!localStorage.getItem(CurrentCharacterIdKey)) {
 			if (query.data?.characterId) {
 				setCid(query.data?.characterId);
 			}

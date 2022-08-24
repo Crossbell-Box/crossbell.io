@@ -248,7 +248,7 @@ function AccountList() {
 
 	const modals = useModals();
 
-	const [shouldNavigate, shouldNavigateHandles] = useDisclosure(false); // FIXME: a closure bug?
+	const [shouldNavigate, shouldNavigateHandles] = useDisclosure(true); // FIXME: a closure bug?
 	const router = useRouter();
 
 	const hasNoResult = !isLoading && !data?.pages.some((page) => page.count > 0);

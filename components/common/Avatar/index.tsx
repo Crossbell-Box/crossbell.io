@@ -43,8 +43,6 @@ export default function Avatar({
 
 	src_ = ipfsLinkToHttpLink(src_);
 
-	// console.log({ isLoading, initialCharacter, character, src_ });
-
 	return (
 		<Avatar_
 			className="bg-coolgray-100"
