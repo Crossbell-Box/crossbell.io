@@ -114,6 +114,7 @@ export function useCurrentCharacterId() {
 	return useLocalStorage<number>({
 		key: CurrentCharacterIdKey,
 		serialize: (cid) => cid.toString(),
+		getInitialValueInEffect: false,
 	});
 }
 export function useDisconnectCurrentCharacter() {

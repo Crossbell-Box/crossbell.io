@@ -28,7 +28,7 @@ export default function Avatar({
 	const { isLoading, data: character } = useCharacter(
 		characterId ?? initialCharacter?.characterId,
 		{
-			enabled: Boolean(characterId) && !Boolean(initialCharacter) && !src,
+			enabled: Boolean(characterId) && !src,
 			initialData: initialCharacter,
 		}
 	);
@@ -42,6 +42,8 @@ export default function Avatar({
 			  getDefaultAvatar(character?.handle));
 
 	src_ = ipfsLinkToHttpLink(src_);
+
+	// console.log({ isLoading, initialCharacter, character, src_ });
 
 	return (
 		<Avatar_

@@ -248,7 +248,7 @@ function AccountList() {
 
 	const modals = useModals();
 
-	const [shouldNavigate, setShouldNavigate] = useState(true);
+	const [shouldNavigate, shouldNavigateHandles] = useDisclosure(false); // FIXME: a closure bug?
 	const router = useRouter();
 
 	const hasNoResult = !isLoading && !data?.pages.some((page) => page.count > 0);
@@ -288,9 +288,13 @@ function AccountList() {
 												size="xs"
 												className="my-2"
 												checked={shouldNavigate}
-												onChange={(event) =>
-													setShouldNavigate(event.currentTarget.checked)
-												}
+												onChange={(event) => {
+													if (event.currentTarget.checked) {
+														shouldNavigateHandles.open();
+													} else {
+														shouldNavigateHandles.close();
+													}
+												}}
 											/>
 										</div>
 									),
@@ -301,7 +305,7 @@ function AccountList() {
 										if (shouldNavigate) {
 											setTimeout(() => {
 												router.push(composeCharacterHref(c.handle));
-											}, 500);
+											}, 1000);
 										}
 									},
 								});

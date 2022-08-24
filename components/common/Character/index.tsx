@@ -19,7 +19,6 @@ export function CharacterName({
 	const { data, isLoading } = useCharacter(
 		characterId ?? initialCharacter.characterId,
 		{
-			enabled: Boolean(characterId) && !Boolean(initialCharacter),
 			initialData: initialCharacter,
 		}
 	);
@@ -60,7 +59,6 @@ export function CharacterHandle({
 	const { data: data1, isLoading: isLoading1 } = useCharacter(
 		characterId ?? initialCharacter?.characterId,
 		{
-			enabled: Boolean(characterId) && !Boolean(initialCharacter),
 			initialData: initialCharacter,
 		}
 	);
@@ -68,7 +66,6 @@ export function CharacterHandle({
 	const { data: data2, isLoading: isLoading2 } = useCharacterByHandle(
 		handle ?? initialCharacter?.handle,
 		{
-			enabled: Boolean(handle) && !Boolean(initialCharacter),
 			initialData: initialCharacter,
 		}
 	);
