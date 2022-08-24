@@ -4,7 +4,6 @@ WORKDIR /app
 
 COPY . .
 
-RUN apk add --no-cache curl
-RUN curl -fsSL https://get.pnpm.io/install.sh | sh -
+RUN npm i pnpm -g
 RUN pnpm install
 RUN pnpm run build
