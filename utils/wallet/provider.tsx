@@ -106,7 +106,7 @@ export function getCurrentAddress() {
 		try {
 			data = JSON.parse(data);
 		} catch {
-			return null;
+			return undefined;
 		}
 	}
 
