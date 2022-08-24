@@ -1,8 +1,9 @@
-FROM node:16
+FROM node:18-alpine
 
 WORKDIR /app
 
 COPY . .
 
-RUN npm install -g npm@v8.0.0 && npm install
-RUN npm run build
+RUN wget -qO- https://get.pnpm.io/install.sh | sh -
+RUN pnpm install
+RUN pnpm run build

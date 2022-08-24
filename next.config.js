@@ -25,7 +25,7 @@ const nextConfig = {
 	compiler: {
 		// removeConsole: { exclude: ["error"] },
 	},
-	// swcMinify: true,
+	swcMinify: true,
 };
 
 module.exports = withBundleAnalyzer(nextConfig);
