@@ -100,7 +100,16 @@ const appInfo: RainbowKitProviderProps["appInfo"] = {
 };
 
 export function getCurrentAddress() {
-	const data = storage.getItem("store") as any;
+	let data = storage.getItem("store") as any;
+
+	if (typeof data === "string") {
+		try {
+			data = JSON.parse(data);
+		} catch {
+			return null;
+		}
+	}
+
 	return data?.state?.data?.account;
 }
 
