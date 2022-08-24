@@ -4,7 +4,12 @@ import {
 	connectorsForWallets,
 	wallet,
 } from "@rainbow-me/rainbowkit";
-import { type Chain, configureChains, createClient } from "wagmi";
+import {
+	type Chain,
+	configureChains,
+	createClient,
+	createStorage,
+} from "wagmi";
 import { jsonRpcProvider } from "wagmi/providers/jsonRpc";
 import { type RainbowKitProviderProps } from "@rainbow-me/rainbowkit/dist/components/RainbowKitProvider/RainbowKitProvider";
 import "@rainbow-me/rainbowkit/styles.css";
@@ -63,10 +68,22 @@ const connectors = connectorsForWallets([
 	},
 ]);
 
+const noopStorage: Storage = {
+	getItem: (_) => "",
+	setItem: (_, __) => null,
+	removeItem: (_) => null,
+	length: 0,
+	key: (_) => null,
+	clear: () => null,
+};
+const storage = createStorage({
+	storage: typeof window !== "undefined" ? window.localStorage : noopStorage,
+}); // https://wagmi.sh/docs/client#storage-optional
 const wagmiClient = createClient({
 	autoConnect: true,
 	connectors,
 	provider,
+	storage,
 });
 
 const appInfo: RainbowKitProviderProps["appInfo"] = {
@@ -81,6 +98,11 @@ const appInfo: RainbowKitProviderProps["appInfo"] = {
 		</Text>
 	),
 };
+
+export function getCurrentAddress() {
+	const data = storage.getItem("store") as any;
+	return data?.state?.data?.account;
+}
 
 export { chains, wagmiClient, appInfo };
 

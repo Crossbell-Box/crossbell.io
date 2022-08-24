@@ -6,10 +6,10 @@ import config from "config";
 import { Indexer, Contract } from "crossbell.js";
 import { useAccount } from "wagmi";
 import { getCsbBalance, getCurrentCharacterId } from "../apis/indexer";
-import { getAccount } from "@wagmi/core";
 import { BigNumber } from "ethers";
 import { parseEther } from "ethers/lib/utils";
 import { BizError, ERROR_CODES } from "../errors";
+import { getCurrentAddress } from "../wallet/provider";
 
 const isProductionServer =
 	typeof window === "undefined" && process.env.NODE_ENV === "production";
@@ -44,13 +44,17 @@ function injectContractChecker(contract: Contract) {
 	return new Proxy(contract, {
 		get: (target, prop) => {
 			return async (...args: any[]) => {
-				const { address, isConnected } = getAccount();
+				const noNeedTxMethods: (string | symbol)[] = ["then"];
+
 				// check if the user is logged in
-				if (!isConnected || !address) {
-					throw new BizError(
-						"Not connected. Please connect your wallet.",
-						ERROR_CODES.NOT_CONNECTED
-					);
+				const address = getCurrentAddress();
+				if (!noNeedTxMethods.includes(prop)) {
+					if (!address) {
+						throw new BizError(
+							"Not connected. Please connect your wallet.",
+							ERROR_CODES.NOT_CONNECTED
+						);
+					}
 				}
 
 				// check if the wallet has any character
@@ -71,8 +75,8 @@ function injectContractChecker(contract: Contract) {
 				}
 
 				// check if $CSB is enough to pay for the transaction
-				const noNeedCsbMethods: (string | symbol)[] = ["then"];
-				if (!noNeedCsbMethods.includes(prop)) {
+
+				if (!noNeedTxMethods.includes(prop)) {
 					const balance = await getCsbBalance(address);
 					if (!hasEnoughCsb(balance)) {
 						openFaucetHintModel();

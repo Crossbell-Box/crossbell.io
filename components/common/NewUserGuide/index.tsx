@@ -1,7 +1,7 @@
 import { WalletCharacterNewHref } from "@/utils/url";
+import { getCurrentAddress } from "@/utils/wallet/provider";
 import { Space, Text, Button } from "@mantine/core";
 import { closeModal, openModal } from "@mantine/modals";
-import { getAccount } from "@wagmi/core";
 import Link from "next/link";
 import Image from "../Image";
 import Tooltip from "../Tooltip";
@@ -26,7 +26,7 @@ export function openConnectWalletHintModel() {
 export function openFaucetHintModel() {
 	const id = "faucet-hint-hint";
 
-	const { address } = getAccount();
+	const address = getCurrentAddress();
 
 	openModal({
 		title: "Not enough $CSB balance",
