@@ -10,6 +10,7 @@ import {
 	useCharacterByHandle,
 	useNotesOfCharacter,
 } from "@/utils/apis/indexer";
+import { ipfsLinkToHttpLink } from "@/utils/ipfs";
 import {
 	extractCharacterAvatars,
 	extractCharacterName,
@@ -152,7 +153,7 @@ function Seo({ character }: { character?: CharacterEntity | null }) {
 					username: character?.handle,
 				},
 				images: extractCharacterAvatars(character).map((url) => ({
-					url,
+					url: ipfsLinkToHttpLink(url),
 					alt: "Avatar",
 				})),
 			}}
