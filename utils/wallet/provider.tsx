@@ -32,7 +32,8 @@ const crossbellChain: Chain = {
 
 const { chains, provider } = configureChains(
 	[crossbellChain],
-	[jsonRpcProvider({ rpc: (chain) => ({ http: chain.rpcUrls.default }) })]
+	[jsonRpcProvider({ rpc: (chain) => ({ http: chain.rpcUrls.default }) })],
+	{ pollingInterval: 1_000 }
 );
 
 // const { connectors } = getDefaultWallets({

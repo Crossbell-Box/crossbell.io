@@ -109,98 +109,105 @@ export default function MediaCarousel({
 
 	// check clicking event
 	const [dragStartPos, setDragStartPos] = useState({ x: 0, y: 0 });
-	const onMouseDown = (
-		e: MouseEvent<HTMLDivElement, globalThis.MouseEvent>
-	) => {
-		setDragStartPos({ x: e.screenX, y: e.screenY });
-	};
-	const onMouseUp = (e: MouseEvent<HTMLDivElement, globalThis.MouseEvent>) => {
-		const dragX = Math.abs(dragStartPos.x - e.screenX);
-		const dragY = Math.abs(dragStartPos.y - e.screenY);
-		if (dragX < 5 && dragY < 5) {
-			// console.log(`click with drag of ${dragX}, ${dragY}`);
-			onTap?.(e);
-		} else {
-			// console.log(`click cancelled with drag of ${dragX}, ${dragY}`);
-		}
-	};
+	const onMouseDown = useCallback(
+		(e: MouseEvent<HTMLDivElement, globalThis.MouseEvent>) => {
+			setDragStartPos({ x: e.screenX, y: e.screenY });
+		},
+		[]
+	);
+	const onMouseUp = useCallback(
+		(e: MouseEvent<HTMLDivElement, globalThis.MouseEvent>) => {
+			const dragX = Math.abs(dragStartPos.x - e.screenX);
+			const dragY = Math.abs(dragStartPos.y - e.screenY);
+			if (dragX < 5 && dragY < 5) {
+				// console.log(`click with drag of ${dragX}, ${dragY}`);
+				onTap?.(e);
+			} else {
+				// console.log(`click cancelled with drag of ${dragX}, ${dragY}`);
+			}
+		},
+		[dragStartPos, onTap]
+	);
 
-	const renderAttachments = ({
-		isThumbnail = false,
-	}: {
-		isThumbnail?: boolean;
-	} = {}) => {
-		return validAttachments.map((a, index) => {
-			const mediaType = mimeTypeToMediaType(a.mime_type!);
-			if (a.address) {
-				const src = ipfsLinkToHttpLink(a.address);
-				if (mediaType === "image") {
-					return (
-						<Carousel.Slide key={index}>
-							<div
-								className={classNames(
-									"relative overflow-hidden flex justify-center items-center",
-									{
+	const renderAttachments = useCallback(
+		({
+			isThumbnail = false,
+		}: {
+			isThumbnail?: boolean;
+		} = {}) => {
+			return validAttachments.map((a, index) => {
+				const mediaType = mimeTypeToMediaType(a.mime_type!);
+				if (a.address) {
+					const src = ipfsLinkToHttpLink(a.address);
+					if (mediaType === "image") {
+						return (
+							<Carousel.Slide key={index}>
+								<div
+									className={classNames(
+										"relative overflow-hidden flex justify-center items-center",
+										{
+											"h-300px": !isThumbnail && !isOverlay,
+											"h-80vh": !isThumbnail && isOverlay,
+											"h-100px rounded-md": isThumbnail,
+										}
+									)}
+									data-overlay-tap-area="1"
+								>
+									{!isThumbnail && isOverlay ? (
+										<img src={src} className="max-h-80vh max-w-full" />
+									) : (
+										<Image
+											alt={a.alt ?? "image"}
+											src={src}
+											className={classNames("transition-opacity object-cover", {
+												"opacity-20": isThumbnail && index !== selectedIndex,
+											})}
+											fill={!isThumbnail}
+											sizes={
+												!isThumbnail
+													? "(min-width: 75em) 33vw, (min-width: 48em) 50vw, 100vw"
+													: undefined
+											}
+											width={isThumbnail ? 100 : undefined}
+											height={isThumbnail ? 100 : undefined}
+											onClick={() => {
+												if (!isThumbnail && !isOverlay) {
+													setOverlayOpened(true);
+												} else {
+													handleThumbClick(index);
+												}
+											}}
+										/>
+									)}
+								</div>
+							</Carousel.Slide>
+						);
+					}
+
+					if (mediaType === "video") {
+						return (
+							<Carousel.Slide key={index}>
+								<div
+									className={classNames("flex justify-center items-center", {
 										"h-300px": !isThumbnail && !isOverlay,
 										"h-80vh": !isThumbnail && isOverlay,
 										"h-100px rounded-md": isThumbnail,
-									}
-								)}
-								data-overlay-tap-area="1"
-							>
-								{!isThumbnail && isOverlay ? (
-									<img src={src} className="max-h-80vh max-w-full" />
-								) : (
-									<Image
-										alt={a.alt ?? "image"}
-										src={src}
-										className={classNames("transition-opacity object-cover", {
-											"opacity-20": isThumbnail && index !== selectedIndex,
-										})}
-										fill={!isThumbnail}
-										sizes={
-											!isThumbnail
-												? "(min-width: 75em) 33vw, (min-width: 48em) 50vw, 100vw"
-												: undefined
-										}
-										width={isThumbnail ? 100 : undefined}
-										height={isThumbnail ? 100 : undefined}
-										onClick={() => {
-											if (!isThumbnail && !isOverlay) {
-												setOverlayOpened(true);
-											} else {
-												handleThumbClick(index);
-											}
-										}}
-									/>
-								)}
-							</div>
-						</Carousel.Slide>
-					);
+									})}
+									style={{ width: mainWidth }}
+								>
+									{/* TODO: should not be in thumbnail */}
+									<VideoPlayer url={src} controls />
+								</div>
+							</Carousel.Slide>
+						);
+					}
 				}
 
-				if (mediaType === "video") {
-					return (
-						<Carousel.Slide key={index}>
-							<div
-								className={classNames("flex justify-center items-center", {
-									"h-300px": !isThumbnail && !isOverlay,
-									"h-80vh": !isThumbnail && isOverlay,
-									"h-100px rounded-md": isThumbnail,
-								})}
-								style={{ width: mainWidth }}
-							>
-								{/* TODO: should not be in thumbnail */}
-								<VideoPlayer url={src} controls />
-							</div>
-						</Carousel.Slide>
-					);
-				}
-			}
-
-			return <Carousel.Slide key={index}></Carousel.Slide>;
-		});
-	};
+				return <Carousel.Slide key={index}></Carousel.Slide>;
+			});
+		},
+		[validAttachments, isOverlay, mainWidth]
+	);
 
 	if (!validAttachments || validAttachments?.length === 0) {
 		return <></>;

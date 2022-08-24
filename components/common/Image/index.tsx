@@ -4,7 +4,7 @@ import {
 	type ImageLoader,
 	type ImageProps,
 } from "next/future/image";
-import { PropsWithChildren, useState } from "react";
+import { PropsWithChildren, useEffect, useState } from "react";
 
 // Pixel GIF code adapted from https://stackoverflow.com/a/33919020/266535
 const keyStr =
@@ -73,6 +73,10 @@ export default function Image({
 	};
 
 	const [_src, _setSrc] = useState(src);
+
+	useEffect(() => {
+		_setSrc(src);
+	}, [src]);
 
 	return (
 		<NextImage

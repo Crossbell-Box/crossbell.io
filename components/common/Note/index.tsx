@@ -267,16 +267,18 @@ export function Note({
 		note.metadata?.content?.attachments
 	);
 
+	const handlePrefetchNotePage = useCallback(() => {
+		prefetch();
+	}, []);
+
 	return (
 		<div
 			className={classNames("flex w-full py-3 px-3 border-b border-gray/20", {
 				"bg-hover cursor-pointer flex-row": displayMode === "normal",
 				"flex-col": displayMode === "main",
 			})}
-			onClick={() => navigate()}
-			onMouseEnter={() => {
-				prefetch();
-			}}
+			onClick={navigate}
+			onMouseEnter={handlePrefetchNotePage}
 		>
 			{/* avatar & username */}
 			<div className="flex">
@@ -341,6 +343,30 @@ function NoteActions({
 
 	const { navigate } = useNavigateToNote(characterId, noteId);
 
+	const handleLike = useCallback(() => {
+		if (status?.isLiked) {
+			unlikeNote.mutate();
+		} else {
+			likeNote.mutate();
+		}
+	}, [status?.isLiked]);
+
+	const handleMint = useCallback(() => {
+		if (!status?.isMinted) {
+			mintNote.mutate();
+		}
+	}, [status?.isMinted]);
+
+	const handleCopyToClipboard = useCallback(async () => {
+		await copyToClipboard(
+			location.origin + composeNoteHref(characterId, noteId)
+		);
+		showNotification({
+			message: "Copied to Clipboard!",
+			disallowClose: true,
+		});
+	}, [characterId, noteId]);
+
 	return (
 		<div className="flex items-center justify-between">
 			<LoadingOverlay
@@ -358,9 +384,7 @@ function NoteActions({
 				icon="i-csb:comment"
 				bgHoverColor="group-hover:bg-blue/10"
 				textHoverColor="group-hover:text-blue"
-				onClick={() => {
-					navigate();
-				}}
+				onClick={navigate}
 			/>
 
 			{/* like */}
@@ -371,13 +395,7 @@ function NoteActions({
 				color={status?.isLiked ? "text-red" : "text-dimmed"}
 				bgHoverColor="group-hover:bg-red/10"
 				textHoverColor="group-hover:text-red"
-				onClick={() => {
-					if (status?.isLiked) {
-						unlikeNote.mutate();
-					} else {
-						likeNote.mutate();
-					}
-				}}
+				onClick={handleLike}
 			/>
 
 			{/* mint */}
@@ -388,11 +406,7 @@ function NoteActions({
 				color={status?.isMinted ? "text-yellow" : "text-dimmed"}
 				bgHoverColor="group-hover:bg-yellow/10"
 				textHoverColor="group-hover:text-yellow"
-				onClick={() => {
-					if (!status?.isMinted) {
-						mintNote.mutate();
-					}
-				}}
+				onClick={handleMint}
 			/>
 
 			{/* share */}
@@ -401,15 +415,7 @@ function NoteActions({
 				icon="i-csb:share"
 				bgHoverColor="group-hover:bg-green/10"
 				textHoverColor="group-hover:text-green"
-				onClick={async () => {
-					await copyToClipboard(
-						location.origin + composeNoteHref(characterId, noteId)
-					);
-					showNotification({
-						message: "Copied to Clipboard!",
-						disallowClose: true,
-					});
-				}}
+				onClick={handleCopyToClipboard}
 			/>
 
 			{/* used for ui placeholder */}
@@ -473,11 +479,13 @@ export function NoteSkeleton() {
 function useNavigateToNote(characterId: number, noteId: number) {
 	const router = useRouter();
 	const targetURL = composeNoteHref(characterId, noteId);
-	const navigate = () => {
+
+	const navigate = useCallback(() => {
 		if (router.asPath === targetURL) return;
 
 		router.push(targetURL);
-	};
+	}, [router.asPath, targetURL]);
+
 	const prefetch = () => {
 		if (router.asPath === targetURL) return;
 
