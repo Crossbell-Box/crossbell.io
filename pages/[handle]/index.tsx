@@ -10,12 +10,19 @@ import {
 	useCharacterByHandle,
 	useNotesOfCharacter,
 } from "@/utils/apis/indexer";
-import { extractCharacterName } from "@/utils/metadata";
-import { useCharacterRouterQuery } from "@/utils/url";
+import {
+	extractCharacterAvatars,
+	extractCharacterName,
+} from "@/utils/metadata";
+import {
+	composeCharacterHref,
+	getOrigin,
+	useCharacterRouterQuery,
+} from "@/utils/url";
 import { Space } from "@mantine/core";
 import { CharacterEntity } from "crossbell.js";
 import { GetServerSideProps } from "next";
-import Head from "next/head";
+import { NextSeo } from "next-seo";
 import { Fragment } from "react";
 
 type PageProps = {
@@ -34,9 +41,7 @@ const Page: NextPageWithLayout<PageProps> = (props) => {
 	const title = `${extractCharacterName(character)} (@${handle})`;
 	return (
 		<div>
-			<Head>
-				<title>{title}</title>
-			</Head>
+			<Seo character={character} />
 
 			<Header hasBackButton>{headerText}</Header>
 
@@ -126,5 +131,33 @@ export const getServerSideProps: GetServerSideProps<PageProps> = async (
 		},
 	};
 };
+
+function Seo({ character }: { character?: CharacterEntity | null }) {
+	const title = `${extractCharacterName(character)} (@${character?.handle})`;
+	const description = character?.metadata?.content?.bio;
+
+	const { handle } = useCharacterRouterQuery();
+
+	return (
+		<NextSeo
+			title={title}
+			description={description}
+			openGraph={{
+				type: "profile",
+				title,
+				description,
+				url: getOrigin() + composeCharacterHref(character?.handle ?? handle),
+				profile: {
+					firstName: extractCharacterName(character),
+					username: character?.handle,
+				},
+				images: extractCharacterAvatars(character).map((url) => ({
+					url,
+					alt: "Avatar",
+				})),
+			}}
+		/>
+	);
+}
 
 export default Page;
