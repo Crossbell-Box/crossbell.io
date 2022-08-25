@@ -24,7 +24,7 @@ specifiers:
   '@types/react-dom': 18.0.6
   '@unocss/webpack': 0.45.12
   classnames: 2.3.1
-  crossbell.js: 0.10.20
+  crossbell.js: 0.10.21
   dayjs: 1.11.5
   embla-carousel-react: 7.0.1
   eslint: 8.22.0
@@ -69,7 +69,7 @@ dependencies:
   '@tanstack/react-query': 4.2.1_biqbaboplfbrettd7655fr4n2y
   '@tanstack/react-query-devtools': 4.2.1_32b63s5o6uo6n4n6pi5xgs6jfq
   classnames: 2.3.1
-  crossbell.js: 0.10.20
+  crossbell.js: 0.10.21
   dayjs: 1.11.5
   embla-carousel-react: 7.0.1_react@18.2.0
   ethers: 5.7.0
@@ -2721,8 +2721,8 @@ packages:
       which: 2.0.2
     dev: true
 
-  /crossbell.js/0.10.20:
-    resolution: {integrity: sha512-OdXWPA2kAETDnKzola8n1aZnwQjvu/3gIMXp4cGD7YnMTTYWALwJyvWVaTya4JnDWhX6xgAtx/ZTExKD6rlUXQ==}
+  /crossbell.js/0.10.21:
+    resolution: {integrity: sha512-LtNI4W+WNcdH9ELzQxo1stN3DTGmCOCzfAt6HdZBp/tqXEk0YreIKl4ZUEuwlcu011GN6mglUNqzS/4m6Z2oww==}
     dependencies:
       async-retry: 1.3.3
       ethers: 5.7.0
@@ -6620,7 +6620,7 @@ packages:
     dev: true
 
   /strip-hex-prefix/1.0.0:
-    resolution: {integrity: sha1-DF8VX+8RUTczd96du1iNoFUA428=}
+    resolution: {integrity: sha512-q8d4ue7JGEiVcypji1bALTos+0pWtyGlivAWyPuTkHzuTCJqrK9sWxYQZUq6Nq3cuyv3bm734IhHvHtGGURU6A==}
     engines: {node: '>=6.5.0', npm: '>=3'}
     dependencies:
       is-hex-prefixed: 1.0.0
