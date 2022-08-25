@@ -4,6 +4,6 @@ WORKDIR /app
 
 COPY . .
 
-RUN npm i pnpm -g
-RUN pnpm install
+RUN npm i pnpm@latest -g
+# RUN pnpm install -r --offline
 RUN pnpm run build

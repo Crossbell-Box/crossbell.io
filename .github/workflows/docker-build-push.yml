@@ -39,12 +39,12 @@ jobs:
           password: ${{ secrets.DOCKERHUB_TOKEN }}
       - uses: pnpm/action-setup@v2
         with:
-          version: 7.9.5
+          version: latest
       - uses: actions/setup-node@v3
         with:
           node-version: '18'
           cache: 'pnpm'
-      - run: pnpm install --frozen-lockfile
+      - run: pnpm fetch && pnpm install -r --offline
       - name: Build and push
         uses: docker/build-push-action@v2
         with:
