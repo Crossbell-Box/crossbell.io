@@ -30,7 +30,7 @@ export default function NoteSources({
 
 				const Wrapper = ({ children }: { children: ReactNode }) =>
 					href ? (
-						<NextLink href={href} passHref>
+						<NextLink href={href} target="_blank" passHref>
 							{children}
 						</NextLink>
 					) : (
