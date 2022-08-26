@@ -17,7 +17,7 @@ specifiers:
   '@mantine/nprogress': 5.2.3
   '@next/bundle-analyzer': 12.2.5
   '@rainbow-me/rainbowkit': 0.5.0
-  '@tanstack/react-query': 4.2.1
+  '@tanstack/react-query': 4.2.3
   '@tanstack/react-query-devtools': 4.2.1
   '@types/node': 18.7.12
   '@types/react': 18.0.17
@@ -66,8 +66,8 @@ dependencies:
   '@mantine/nprogress': 5.2.3_gtpyizsqksopg24uajf25sqkj4
   '@next/bundle-analyzer': 12.2.5
   '@rainbow-me/rainbowkit': 0.5.0_6yglkyilzvbheaykffoq7in74y
-  '@tanstack/react-query': 4.2.1_biqbaboplfbrettd7655fr4n2y
-  '@tanstack/react-query-devtools': 4.2.1_32b63s5o6uo6n4n6pi5xgs6jfq
+  '@tanstack/react-query': 4.2.3_biqbaboplfbrettd7655fr4n2y
+  '@tanstack/react-query-devtools': 4.2.1_7jugwuuqrrr4f74u7dtzjsintq
   classnames: 2.3.1
   crossbell.js: 0.10.20
   dayjs: 1.11.5
@@ -1393,15 +1393,15 @@ packages:
       remove-accents: 0.4.2
     dev: false
 
-  /@tanstack/query-core/4.2.1:
-    resolution: {integrity: sha512-UOyOhHKLS/5i9qG2iUnZNVV3R9riJJmG9eG+hnMFIPT/oRh5UzAfjxCtBneNgPQZLDuP8y6YtRYs/n4qVAD5Ng==}
+  /@tanstack/query-core/4.2.3:
+    resolution: {integrity: sha512-zdt5lYWs1dZaA3IxJbCgtAfHZJScRZONpiLL7YkeOkrme5MfjQqTpjq7LYbzpyuwPOh2Jx68le0PLl57JFv5hQ==}
     dev: false
 
   /@tanstack/query-sync-storage-persister/4.2.1:
     resolution: {integrity: sha512-exjzMdQ00CfGD/FTPgzxciC57Uvs2SbltEumPpVENvWs2L/Bf7Lxy9rTMVqzgCORHINd1RVPBhN8Lx5fnzPIKQ==}
     dev: false
 
-  /@tanstack/react-query-devtools/4.2.1_32b63s5o6uo6n4n6pi5xgs6jfq:
+  /@tanstack/react-query-devtools/4.2.1_7jugwuuqrrr4f74u7dtzjsintq:
     resolution: {integrity: sha512-k7Ch3qvs8U74aRMMRvNisxcxZFTzk8FDdvpQKXxSZ8fsD4ZwpM0MoUSqKsCXbfTvUI7MJiGxavy1YlvImPNO+Q==}
     peerDependencies:
       '@tanstack/react-query': ^4.0.0
@@ -1409,7 +1409,7 @@ packages:
       react-dom: ^16.8.0 || ^17.0.0 || ^18.0.0
     dependencies:
       '@tanstack/match-sorter-utils': 8.1.1
-      '@tanstack/react-query': 4.2.1_biqbaboplfbrettd7655fr4n2y
+      '@tanstack/react-query': 4.2.3_biqbaboplfbrettd7655fr4n2y
       '@types/use-sync-external-store': 0.0.3
       react: 18.2.0
       react-dom: 18.2.0_react@18.2.0
@@ -1420,8 +1420,8 @@ packages:
     resolution: {integrity: sha512-5z3oo6S8stiPTFK7hmv4O04ZTMgdCrhgV+cq+z0t2NJwd5eeKPLrAUSBM+ah9eEhUlzs5ZEhaYeSwtPopOjYdg==}
     dev: false
 
-  /@tanstack/react-query/4.2.1_biqbaboplfbrettd7655fr4n2y:
-    resolution: {integrity: sha512-w02oTOYpoxoBzD/onAGRQNeLAvggLn7WZjS811cT05WAE/4Q3br0PTp388M7tnmyYGbgOOhFq0MkhH0wIfAKqA==}
+  /@tanstack/react-query/4.2.3_biqbaboplfbrettd7655fr4n2y:
+    resolution: {integrity: sha512-JLaMOxoJTkiAu7QpevRCt2uI/0vd3E8K/rSlCuRgWlcW5DeJDFpDS5kfzmLO5MOcD97fgsJRrDbxDORxR1FdJA==}
     peerDependencies:
       react: ^16.8.0 || ^17.0.0 || ^18.0.0
       react-dom: ^16.8.0 || ^17.0.0 || ^18.0.0
@@ -1432,7 +1432,7 @@ packages:
       react-native:
         optional: true
     dependencies:
-      '@tanstack/query-core': 4.2.1
+      '@tanstack/query-core': 4.2.3
       '@types/use-sync-external-store': 0.0.3
       react: 18.2.0
       react-dom: 18.2.0_react@18.2.0
@@ -7199,7 +7199,7 @@ packages:
     dependencies:
       '@coinbase/wallet-sdk': 3.5.0
       '@tanstack/query-sync-storage-persister': 4.2.1
-      '@tanstack/react-query': 4.2.1_biqbaboplfbrettd7655fr4n2y
+      '@tanstack/react-query': 4.2.3_biqbaboplfbrettd7655fr4n2y
       '@tanstack/react-query-persist-client': 4.2.1
       '@wagmi/core': 0.5.4_js5jleoirjfiwm3pzarnyr4mj4
       '@walletconnect/ethereum-provider': 1.8.0
