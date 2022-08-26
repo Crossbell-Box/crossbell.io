@@ -11,7 +11,7 @@ export default function NoteIdBadge({ note }: { note: NoteEntity }) {
 	return (
 		<Tooltip position="top" label={note.transactionHash}>
 			<Badge
-				className="cursor-pointer hover:shadow-sm active:scale-95 transition"
+				className="cursor-pointer hover:shadow-sm active:scale-95 transition text-black"
 				component={NextLink}
 				href={composeScanTxHref(note.transactionHash)}
 				target="_blank"

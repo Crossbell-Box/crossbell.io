@@ -16,7 +16,7 @@ export default function CharacterIdBadge({
 	return (
 		<Tooltip position="top" label={character.transactionHash}>
 			<Badge
-				className="cursor-pointer hover:shadow-sm active:scale-95 transition"
+				className="cursor-pointer hover:shadow-sm active:scale-95 transition text-black"
 				component={NextLink}
 				href={composeScanTxHref(character.transactionHash)}
 				target="_blank"

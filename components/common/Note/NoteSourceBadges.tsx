@@ -2,16 +2,18 @@ import { Badge } from "@mantine/core";
 import { NoteMetadata } from "crossbell.js";
 import { TinyColor, random, mostReadable } from "@ctrl/tinycolor";
 import { stringToInteger } from "@/utils/helpers";
+import { NextLink } from "@mantine/next";
+import { ReactNode } from "react";
 
 const builtInColorMap = {
-	["crossbell.io"]: "#E1BE60",
-	xlog: "#6466e9",
-	operatorsync: "#5298e9",
-	crosssync: "#5d87f7",
-	medium: "#000000",
-	twitter: "#4691dd",
-	tiktok: "#000000",
-	youtube: "#ea3323",
+	["crossbell.io"]: ["#E1BE60", "#000"],
+	xlog: ["#6466e9", "#fff"],
+	operatorsync: ["#5298e9", "#fff"],
+	crosssync: ["#5d87f7", "#fff"],
+	medium: ["#000000", "#fff"],
+	twitter: ["#4691dd", "#fff"],
+	tiktok: ["#000000", "#fff"],
+	youtube: ["#ea3323", "#fff"],
 } as const;
 
 export default function NoteSources({
@@ -22,24 +24,38 @@ export default function NoteSources({
 	return (
 		<div>
 			{noteMetadata?.sources?.map((s) => {
-				const color = getColorFromSource(s);
-				const lighterColor = new TinyColor(color).lighten(10).toHexString();
-				const textColor = mostReadable(color, ["#000", "#fff"], {
-					includeFallbackColors: true,
-					size: "small",
-				})?.toHexString();
+				const [bgColor, textColor] = getColorFromSource(s);
+				const lighterBgColor = new TinyColor(bgColor).lighten(10).toHexString();
+				const href = getLinkForSource(s, noteMetadata);
+
+				const Wrapper = ({ children }: { children: ReactNode }) =>
+					href ? (
+						<NextLink href={href} passHref>
+							{children}
+						</NextLink>
+					) : (
+						<>{children}</>
+					);
 
 				return (
-					<div className="max-w-10em inline mr-2" key={s}>
-						<Badge
-							className="transition-shadow hover:shadow-sm active:scale-95 transition"
-							variant="gradient"
-							gradient={color ? { from: color, to: lighterColor } : undefined}
-							style={{ color: textColor }}
-							size="sm"
-						>
-							{s}
-						</Badge>
+					<div
+						className="max-w-10em inline mr-2"
+						key={s}
+						onClick={(e) => e.stopPropagation()}
+					>
+						<Wrapper>
+							<Badge
+								className="transition-shadow hover:shadow-sm active:scale-95 transition cursor-pointer"
+								variant="gradient"
+								gradient={
+									bgColor ? { from: bgColor, to: lighterBgColor } : undefined
+								}
+								style={{ color: textColor }}
+								size="sm"
+							>
+								{s}
+							</Badge>
+						</Wrapper>
 					</div>
 				);
 			})}
@@ -55,22 +71,35 @@ function isBuiltInSource(
 
 function getColorFromSource(source: string) {
 	const s = source.toLowerCase();
-	return isBuiltInSource(s)
-		? builtInColorMap[s]
-		: random({ seed: stringToInteger(s) }).toHexString();
+	if (isBuiltInSource(s)) {
+		return builtInColorMap[s];
+	}
+	const bgColor = random({ seed: stringToInteger(s) }).toHexString();
+	const textColor = mostReadable(bgColor, ["#000", "#fff"], {
+		includeFallbackColors: true,
+		size: "small",
+	})?.toHexString();
+	return [bgColor, textColor];
 }
 
-//TODO: ...
-// function getLinkForSource(source: string, noteMetadata: NoteMetadata, ) {
-// 	const s = source.toLowerCase();
-// 	if (isBuiltInSource(s)) {
-//     if (s === "xlog") {
+function getLinkForSource(source: string, noteMetadata: NoteMetadata) {
+	const s = source.toLowerCase();
+	if (isBuiltInSource(s)) {
+		if (s === "xlog") {
+			const url = noteMetadata.external_urls?.[0];
+			return url;
+		}
 
-//       // TODO: ...
-// 		}
+		if (s === "crosssync") {
+			return "https://crosssync.app/";
+		}
 
-// 		return undefined;
-// 	}
+		if (s === "twitter") {
+			return noteMetadata.external_urls?.[0];
+		}
 
-// 	return undefined;
-// }
+		return undefined;
+	}
+
+	return undefined;
+}
