@@ -19,12 +19,12 @@ specifiers:
   '@rainbow-me/rainbowkit': 0.5.0
   '@tanstack/react-query': 4.2.1
   '@tanstack/react-query-devtools': 4.2.1
-  '@types/node': 18.7.12
+  '@types/node': 18.7.13
   '@types/react': 18.0.17
   '@types/react-dom': 18.0.6
   '@unocss/webpack': 0.45.12
   classnames: 2.3.1
-  crossbell.js: 0.10.20
+  crossbell.js: 0.10.21
   dayjs: 1.11.5
   embla-carousel-react: 7.0.1
   eslint: 8.22.0
@@ -41,6 +41,7 @@ specifiers:
   react-medium-image-zoom: 5.0.2
   react-player: 2.10.1
   rehype-raw: 6.1.1
+  rehype-sanitize: 5.0.1
   remark-emoji: 3.0.2
   remark-gfm: 3.0.1
   sharp: 0.30.7
@@ -69,7 +70,7 @@ dependencies:
   '@tanstack/react-query': 4.2.1_biqbaboplfbrettd7655fr4n2y
   '@tanstack/react-query-devtools': 4.2.1_32b63s5o6uo6n4n6pi5xgs6jfq
   classnames: 2.3.1
-  crossbell.js: 0.10.20
+  crossbell.js: 0.10.21
   dayjs: 1.11.5
   embla-carousel-react: 7.0.1_react@18.2.0
   ethers: 5.7.0
@@ -84,6 +85,7 @@ dependencies:
   react-medium-image-zoom: 5.0.2_biqbaboplfbrettd7655fr4n2y
   react-player: 2.10.1_react@18.2.0
   rehype-raw: 6.1.1
+  rehype-sanitize: 5.0.1
   remark-emoji: 3.0.2
   remark-gfm: 3.0.1
   sharp: 0.30.7
@@ -93,7 +95,7 @@ dependencies:
 
 devDependencies:
   '@iconify/utils': 1.0.33
-  '@types/node': 18.7.12
+  '@types/node': 18.7.13
   '@types/react': 18.0.17
   '@types/react-dom': 18.0.6
   '@unocss/webpack': 0.45.12
@@ -1442,19 +1444,19 @@ packages:
   /@types/bn.js/4.11.6:
     resolution: {integrity: sha512-pqr857jrp2kPuO9uRjZ3PwnJTjoQy+fcdxvBTvHm6dkmEL9q+hDD/2j/0ELOBPtPnS8LjCX0gI9nbl8lVkadpg==}
     dependencies:
-      '@types/node': 18.7.12
+      '@types/node': 18.7.13
     dev: false
 
   /@types/bn.js/5.1.0:
     resolution: {integrity: sha512-QSSVYj7pYFN49kW77o2s9xTCwZ8F2xLbjLLSEVh8D2F4JUhZtPAGOFLTD+ffqksBx/u4cE/KImFjyhqCjn/LIA==}
     dependencies:
-      '@types/node': 18.7.12
+      '@types/node': 18.7.13
     dev: false
 
   /@types/connect/3.4.35:
     resolution: {integrity: sha512-cdeYyv4KWoEgpBISTxWvqYsVy444DOqehiF3fM3ne10AmJ62RSyNkUnxMJXHQWRQQX2eR94m5y1IZyDwBjV9FQ==}
     dependencies:
-      '@types/node': 18.7.12
+      '@types/node': 18.7.13
     dev: false
 
   /@types/debug/4.1.7:
@@ -1491,8 +1493,8 @@ packages:
     resolution: {integrity: sha512-J8xLz7q2OFulZ2cyGTLE1TbbZcjpno7FaN6zdJNrgAdrJ+DZzh/uFR6YrTb4C+nXakvud8Q4+rbhoIWlYQbUFQ==}
     dev: false
 
-  /@types/node/18.7.12:
-    resolution: {integrity: sha512-caqFX7GwvZ4KLnhpI9CfiMkgHKp6kvFAIgpkha0cjO7bAQvB6dWe+q3fTHmm7fQvv59pd4tPj77nriq2M6U2dw==}
+  /@types/node/18.7.13:
+    resolution: {integrity: sha512-46yIhxSe5xEaJZXWdIBP7GU4HDTG8/eo0qd9atdiL+lFpA03y8KS+lkTN834TWJj5767GbWv4n/P6efyTFt1Dw==}
 
   /@types/parse-json/4.0.0:
     resolution: {integrity: sha512-//oorEZjL6sbPcKUaCdIGlIUeH26mgzimjBB77G6XRgnDl/L5wOnpyBGRe/Mmf5CVW3PwEBE1NjiMZ/ssFh4wA==}
@@ -1505,7 +1507,7 @@ packages:
   /@types/pbkdf2/3.1.0:
     resolution: {integrity: sha512-Cf63Rv7jCQ0LaL8tNXmEyqTHuIJxRdlS5vMh1mj5voN4+QFhVZnlZruezqpWYDiJ8UTzhP0VmeLXCmBk66YrMQ==}
     dependencies:
-      '@types/node': 18.7.12
+      '@types/node': 18.7.13
     dev: false
 
   /@types/prop-types/15.7.5:
@@ -1530,7 +1532,7 @@ packages:
   /@types/secp256k1/4.0.3:
     resolution: {integrity: sha512-Da66lEIFeIz9ltsdMZcpQvmrmmoqrfju8pm1BH8WbYjZSwUgCwXLb9C+9XYogwBITnbsSaMdVPb2ekf7TV+03w==}
     dependencies:
-      '@types/node': 18.7.12
+      '@types/node': 18.7.13
     dev: false
 
   /@types/unist/2.0.6:
@@ -1544,7 +1546,7 @@ packages:
   /@types/ws/7.4.7:
     resolution: {integrity: sha512-JQbbmxZTZehdc2iszGKs5oC3NFnjeay7mtAWrdt7qNtAVK0g19muApzAy4bm9byz79xa2ZnO/BOBC2R8RC5Lww==}
     dependencies:
-      '@types/node': 18.7.12
+      '@types/node': 18.7.13
     dev: false
 
   /@typescript-eslint/parser/5.34.0_4rv7y5c6xz3vfxwhbrcxxi73bq:
@@ -2721,8 +2723,8 @@ packages:
       which: 2.0.2
     dev: true
 
-  /crossbell.js/0.10.20:
-    resolution: {integrity: sha512-OdXWPA2kAETDnKzola8n1aZnwQjvu/3gIMXp4cGD7YnMTTYWALwJyvWVaTya4JnDWhX6xgAtx/ZTExKD6rlUXQ==}
+  /crossbell.js/0.10.21:
+    resolution: {integrity: sha512-LtNI4W+WNcdH9ELzQxo1stN3DTGmCOCzfAt6HdZBp/tqXEk0YreIKl4ZUEuwlcu011GN6mglUNqzS/4m6Z2oww==}
     dependencies:
       async-retry: 1.3.3
       ethers: 5.7.0
@@ -4291,6 +4293,12 @@ packages:
       vfile: 5.3.4
       web-namespaces: 2.0.1
       zwitch: 2.0.2
+    dev: false
+
+  /hast-util-sanitize/4.0.0:
+    resolution: {integrity: sha512-pw56+69jq+QSr/coADNvWTmBPDy+XsmwaF5KnUys4/wM1jt/fZdl7GPxhXXXYdXnz3Gj3qMkbUCH2uKjvX0MgQ==}
+    dependencies:
+      '@types/hast': 2.3.4
     dev: false
 
   /hast-util-to-parse5/7.0.0:
@@ -6200,6 +6208,14 @@ packages:
     dependencies:
       '@types/hast': 2.3.4
       hast-util-raw: 7.2.2
+      unified: 10.1.2
+    dev: false
+
+  /rehype-sanitize/5.0.1:
+    resolution: {integrity: sha512-da/jIOjq8eYt/1r9GN6GwxIR3gde7OZ+WV8pheu1tL8K0D9KxM2AyMh+UEfke+FfdM3PvGHeYJU0Td5OWa7L5A==}
+    dependencies:
+      '@types/hast': 2.3.4
+      hast-util-sanitize: 4.0.0
       unified: 10.1.2
     dev: false
 

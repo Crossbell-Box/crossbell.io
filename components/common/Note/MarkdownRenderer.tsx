@@ -18,6 +18,7 @@ import classNames from "classnames";
 import rehypeRaw from "rehype-raw";
 import remarkGfm from "remark-gfm";
 import remarkEmoji from "remark-emoji";
+import rehypeSanitize, { defaultSchema } from "rehype-sanitize";
 import { useLinkPreview } from "@/utils/apis/link-preview";
 import LinkPreviewCard, {
 	LinkPreviewSkeleton,
@@ -27,6 +28,7 @@ import { isExternalUrl } from "@/utils/url";
 import { CharacterHandle } from "../Character";
 import { useCharacterHandleExists } from "@/utils/apis/indexer";
 import Zoom from "./Zoom";
+import VideoPlayer from "./VideoPlayer";
 
 export function MarkdownRenderer({
 	children,
@@ -101,6 +103,7 @@ export function MarkdownRenderer({
 												className="w-full"
 												src={ipfsLinkToHttpLink(src!)}
 												{...props}
+												onClick={(e) => e.stopPropagation()}
 											/>
 										</Zoom>
 									);
@@ -156,6 +159,7 @@ export function MarkdownRenderer({
 													: undefined
 											}
 											rel="noreferrer"
+											onClick={(e: any) => e.stopPropagation()}
 										>
 											{props.children}
 										</Text>
@@ -188,6 +192,16 @@ export function MarkdownRenderer({
 									// 		{props.children}
 									// 	</Text>
 									// );
+								},
+								video: ({ node, src, ...props }) => {
+									return (
+										<div
+											className={"flex justify-center items-center w-full"}
+											onClick={(e) => e.stopPropagation()}
+										>
+											<VideoPlayer url={src} controls />
+										</div>
+									);
 								},
 								table: ({ node, ...props }) => {
 									return (
@@ -241,7 +255,45 @@ export function MarkdownRenderer({
 									);
 								},
 							}}
-							rehypePlugins={[rehypeRaw]}
+							rehypePlugins={[
+								rehypeRaw,
+								[
+									rehypeSanitize,
+									{
+										...defaultSchema,
+										tagNames: [
+											...(defaultSchema.tagNames || []),
+											"video",
+											"iframe",
+										],
+										attributes: {
+											...defaultSchema.attributes,
+											div: [
+												...(defaultSchema.attributes?.div || []),
+												["className"],
+											],
+											code: [["className"]],
+											video: [
+												["className"],
+												["src"],
+												["controls"],
+												["loop"],
+												["muted"],
+												["playsinline"],
+											],
+											iframe: [
+												["className"],
+												["src"],
+												["allowfullscreen"],
+												["frameborder"],
+												["width"],
+												["height"],
+												["allow"],
+											],
+										},
+									},
+								],
+							]}
 							remarkPlugins={[remarkGfm, remarkEmoji]}
 							{...props}
 						>
