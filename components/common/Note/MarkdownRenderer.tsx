@@ -11,7 +11,6 @@ import {
 } from "@mantine/core";
 import Image from "./../Image";
 import ReactMarkdown from "react-markdown";
-import { ReactMarkdownOptions } from "react-markdown/lib/react-markdown";
 import { ipfsLinkToHttpLink } from "@/utils/ipfs";
 import { useElementSize } from "@mantine/hooks";
 import classNames from "classnames";
@@ -34,13 +33,11 @@ export function MarkdownRenderer({
 	children,
 	collapsible = false,
 	displayMode = "normal",
-	...props
-}: PropsWithChildren<
-	{
-		collapsible?: boolean;
-		displayMode?: "normal" | "main";
-	} & ReactMarkdownOptions
->) {
+}: PropsWithChildren<{
+	children: string;
+	collapsible?: boolean;
+	displayMode?: "normal" | "main";
+}>) {
 	const { ref, width, height } = useElementSize();
 
 	const isExceeded = height > 500;
@@ -53,9 +50,9 @@ export function MarkdownRenderer({
 		const showReadMoreButton = collapsed && isExceeded;
 
 		let source = children;
-		if (typeof children === "string") {
+		if (typeof source === "string") {
 			if (collapsible) {
-				source = collapseText(children);
+				source = collapseText(source);
 			}
 			source = forceBreakNewlines(source);
 			source = transformMentions(source);
@@ -317,7 +314,6 @@ export function MarkdownRenderer({
 								],
 							]}
 							remarkPlugins={[remarkGfm, remarkEmoji]}
-							{...props}
 						>
 							{source}
 						</ReactMarkdown>
@@ -331,7 +327,7 @@ export function MarkdownRenderer({
 				)}
 			</div>
 		);
-	}, [children, collapsible, props]);
+	}, [children, collapsible]);
 
 	return Memoed;
 }
