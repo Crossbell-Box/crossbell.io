@@ -196,7 +196,7 @@ export function MarkdownRenderer({
 								video: ({ node, src, ...props }) => {
 									return (
 										<div
-											className={"flex justify-center items-center w-full"}
+											className="flex justify-center items-center w-full"
 											onClick={(e) => e.stopPropagation()}
 										>
 											<VideoPlayer url={src} controls />
@@ -237,6 +237,28 @@ export function MarkdownRenderer({
 								},
 								hr: ({ node, ...props }) => {
 									return <Divider />;
+								},
+								iframe: ({ node, src, ...props }) => {
+									if (
+										src?.startsWith("https://www.youtube.com") ||
+										src?.startsWith("https://youtu.be")
+									) {
+										return (
+											<div
+												className="flex justify-center items-center w-full"
+												onClick={(e) => e.stopPropagation()}
+											>
+												<VideoPlayer url={src} controls />
+											</div>
+										);
+									}
+									return (
+										<iframe
+											src={src}
+											{...props}
+											onClick={(e) => e.stopPropagation()}
+										/>
+									);
 								},
 								// @ts-ignore
 								"at-mention": function AtMention({ node, ...props }) {
