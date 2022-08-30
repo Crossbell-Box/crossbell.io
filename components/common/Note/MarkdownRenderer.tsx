@@ -101,6 +101,7 @@ export function MarkdownRenderer({
 												src={ipfsLinkToHttpLink(src!)}
 												{...props}
 												onClick={(e) => e.stopPropagation()}
+												data-original-src={src}
 											/>
 										</Zoom>
 									);
@@ -280,6 +281,10 @@ export function MarkdownRenderer({
 									rehypeSanitize,
 									{
 										...defaultSchema,
+										protocols: {
+											...defaultSchema.protocols,
+											src: ["http", "https", "ipfs"],
+										},
 										tagNames: [
 											...(defaultSchema.tagNames || []),
 											"video",
@@ -319,7 +324,6 @@ export function MarkdownRenderer({
 						</ReactMarkdown>
 					</div>
 				</div>
-
 				{showReadMoreButton && (
 					<div className="absolute left-0 right-0 bottom-0 z-10 flex items-center justify-center py-3">
 						<Button radius={"xl"}>Read More</Button>
