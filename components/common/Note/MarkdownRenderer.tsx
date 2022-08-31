@@ -97,7 +97,7 @@ export function MarkdownRenderer({
 									return (
 										<Zoom>
 											<img
-												className="w-full"
+												className="max-w-full"
 												src={ipfsLinkToHttpLink(src!)}
 												{...props}
 												onClick={(e) => e.stopPropagation()}

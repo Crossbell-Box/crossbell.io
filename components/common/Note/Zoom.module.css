@@ -1,0 +1,5 @@
+.zoom,
+.zoom [data-rmiz],
+.zoom [data-rmiz-content="found"] {
+	display: inline;
+}
