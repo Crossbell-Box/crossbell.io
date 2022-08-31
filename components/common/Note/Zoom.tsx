@@ -5,7 +5,7 @@ import styles from "./Zoom.module.css";
 export default function Zoom({ children }: { children: React.ReactNode }) {
 	return (
 		<div className={styles.zoom}>
-			<Zoom_ children={children} />
+			<Zoom_>{children}</Zoom_>
 		</div>
 	);
 }
