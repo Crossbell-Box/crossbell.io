@@ -18,6 +18,7 @@ import {
 	openConnectWalletHintModel,
 	openMintNewCharacterModel,
 } from "@/components/common/NewUserGuide";
+import { useLoginChecker } from "@/utils/wallet/hooks";
 
 const Page: NextPageWithLayout = () => {
 	return (
@@ -41,8 +42,7 @@ export function FeedTabs() {
 		{ label: "Explore", route: "/explore" },
 	];
 
-	const { isConnected } = useAccount();
-	const { data: character } = useCurrentCharacter();
+	const { validate } = useLoginChecker();
 
 	// if no character, redirect to explore page
 	const { hasCharacter, isLoadingCharacter } = useHasCharacter();
@@ -59,19 +59,7 @@ export function FeedTabs() {
 			defaultValue="/feed"
 			beforeTabChange={(value) => {
 				if (value === "/feed") {
-					// not connected
-					if (!isConnected) {
-						openConnectWalletHintModel();
-
-						return true;
-					}
-
-					// not minted character yet
-					if (!character) {
-						openMintNewCharacterModel();
-
-						return true;
-					}
+					return validate();
 				}
 			}}
 		/>

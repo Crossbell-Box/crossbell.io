@@ -1,10 +1,20 @@
 import { useCurrentCharacter } from "@/utils/apis/indexer";
 import { useActivateCharacter } from "@/utils/apis/operator-sync";
+import { useLoginChecker } from "@/utils/wallet/hooks";
 import { Button, Text } from "@mantine/core";
 
 export default function OperatorSyncWelcome() {
 	const { data: character } = useCurrentCharacter();
 	const activate = useActivateCharacter(character?.characterId);
+
+	const { validate } = useLoginChecker();
+
+	const handleStart = () => {
+		// check login status
+		if (validate()) {
+			activate.mutate();
+		}
+	};
 
 	return (
 		<div>
@@ -45,7 +55,7 @@ export default function OperatorSyncWelcome() {
 					<Button
 						color="blue"
 						size="md"
-						onClick={() => activate.mutate()}
+						onClick={() => handleStart()}
 						loading={activate.isLoading}
 					>
 						<Text className="text-lg font-medium">Get Started</Text>

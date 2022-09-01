@@ -7,9 +7,12 @@ import OperatorSyncWelcome from "./OperatorSyncWelcome";
 import PlatformsSection from "./PlatformsSection";
 
 export default function OperatorSyncMain() {
-	const { data: character } = useCurrentCharacter();
+	const { data: character, characterId } = useCurrentCharacter();
 	const { data: activation, isLoading: isLoadingActivation } =
 		useCharacterActivation(character?.characterId);
+
+	const isNoCharacter = !characterId;
+	const isNoActivation = !isLoadingActivation && !activation;
 
 	return (
 		<div>
@@ -22,7 +25,7 @@ export default function OperatorSyncMain() {
 				</div>
 			)}
 
-			{!isLoadingActivation && !activation && <OperatorSyncWelcome />}
+			{(isNoCharacter || isNoActivation) && <OperatorSyncWelcome />}
 		</div>
 	);
 }

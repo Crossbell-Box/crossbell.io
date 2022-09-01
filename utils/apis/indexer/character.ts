@@ -138,7 +138,10 @@ export function useCurrentCharacter() {
 		}
 	}, [query.data]);
 
-	return query;
+	return {
+		...query,
+		characterId: cid,
+	};
 }
 
 // check if the current user has a character
