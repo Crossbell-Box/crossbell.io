@@ -3,8 +3,9 @@ import { getCurrentAddress } from "@/utils/wallet/provider";
 import { Space, Text, Button } from "@mantine/core";
 import { closeModal, openModal } from "@mantine/modals";
 import Link from "next/link";
-import Image from "../Image";
-import Tooltip from "../Tooltip";
+import Image from "@/components/common/Image";
+import Tooltip from "@/components/common/Tooltip";
+import { openBorderlessModal } from "../Modal";
 
 export function openConnectWalletHintModel() {
 	const id = "connect-wallet-hint";
@@ -34,17 +35,13 @@ export function openFaucetHintModel() {
 			<div>
 				<Text>
 					Your current{" "}
-					<Tooltip label="Tokens used to interact with the network">
-						<Text className="inline border-b-1 border-b-dashed border-b-black/20 hover:border-b-black cursor-help transition-border-color">
-							$CSB
-						</Text>
+					<Tooltip label="Tokens used to interact with the network" helpText>
+						$CSB
 					</Tooltip>{" "}
 					balance is not enough to send this transaction. How about get some
 					from the{" "}
-					<Tooltip label="A place where you can claim $CSB for free">
-						<Text className="inline border-b-1 border-b-dashed border-b-black/20 hover:border-b-black cursor-help transition-border-color">
-							faucet
-						</Text>
+					<Tooltip label="A place where you can claim $CSB for free" helpText>
+						faucet
 					</Tooltip>
 					.
 				</Text>
@@ -69,9 +66,7 @@ export function openFaucetHintModel() {
 export function openMintNewCharacterModel() {
 	const id = "mint-character";
 
-	openModal({
-		styles: { modal: { background: "transparent" } },
-		padding: 0,
+	openBorderlessModal({
 		children: (
 			<div
 				className="relative flex justify-center items-center"

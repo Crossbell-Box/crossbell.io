@@ -1,7 +1,6 @@
 import Avatar from "@/components/common/Avatar";
-import TrendingBase from "@/components/Index/Trending/_base";
+import TrendingBase from "@/components/pages/Index/Trending/_base";
 import { TrendingRawResponse } from "@/utils/apis/trending";
-import { ipfsLinkToHttpLink } from "@/utils/ipfs";
 
 // Mantine v5.0.0-alpha.19 doesn't have AvatarsGroup element
 // like in previous versions (v4.2.12), and the new AvatarGroup

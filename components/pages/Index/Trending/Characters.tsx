@@ -1,4 +1,4 @@
-import TrendingBase from "@/components/Index/Trending/_base";
+import TrendingBase from "@/components/pages/Index/Trending/_base";
 import { TrendingCharacterCard } from "@/components/card/TrendingCharacterCard";
 import { CharacterEntity } from "crossbell.js";
 

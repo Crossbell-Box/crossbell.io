@@ -49,16 +49,16 @@ export default function App({ Component, pageProps }: AppPropsWithLayout) {
 			/>
 
 			<ThemeProvider>
-				<ModalsProvider>
-					<NotificationsProvider>
-						<WalletProvider>
-							<QueryProvider>
+				<WalletProvider>
+					<QueryProvider>
+						<ModalsProvider>
+							<NotificationsProvider>
 								<RouterTransition />
 								{getLayout(<Component {...pageProps} />)}
-							</QueryProvider>
-						</WalletProvider>
-					</NotificationsProvider>
-				</ModalsProvider>
+							</NotificationsProvider>
+						</ModalsProvider>
+					</QueryProvider>
+				</WalletProvider>
 			</ThemeProvider>
 		</>
 	);

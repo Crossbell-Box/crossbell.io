@@ -40,15 +40,15 @@ export default function ThemeProvider({ children }: PropsWithChildren) {
 					],
 					blue: [
 						"#FBFCFF",
-						"#E65040",
-						"#E65040",
-						"#E65040",
-						"#E65040",
-						"#E65040", // <-
-						"#E65040",
-						"#E65040",
-						"#E65040",
-						"#E65040",
+						"#5B89F7",
+						"#5B89F7",
+						"#5B89F7",
+						"#5B89F7",
+						"#5B89F7", // <-
+						"#5B89F7",
+						"#5B89F7",
+						"#5B89F7",
+						"#5B89F7",
 					],
 					red: [
 						"#FFFBFB",

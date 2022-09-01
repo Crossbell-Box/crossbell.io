@@ -1,4 +1,4 @@
-import TrendingBase from "@/components/Index/Trending/_base";
+import TrendingBase from "@/components/pages/Index/Trending/_base";
 import MintedNoteCard from "@/components/card/MintedNoteCard";
 import { NoteEntity } from "crossbell.js";
 

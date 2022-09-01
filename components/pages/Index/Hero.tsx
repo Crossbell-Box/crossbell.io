@@ -2,7 +2,7 @@ import { Button, Title, Text, Space } from "@mantine/core";
 import { NextLink } from "@mantine/next";
 // @ts-ignore
 import TypeIt from "typeit-react";
-import VideoPlayer from "../common/Note/VideoPlayer";
+import VideoPlayer from "@/components/common/Note/VideoPlayer";
 
 export default function IndexHero() {
 	return (

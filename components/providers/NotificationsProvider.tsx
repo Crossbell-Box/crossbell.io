@@ -3,7 +3,7 @@ import { NotificationsProvider as MantineNotificationsProvider } from "@mantine/
 
 export default function NotificationsProvider({ children }: PropsWithChildren) {
 	return (
-		<MantineNotificationsProvider position="bottom-center">
+		<MantineNotificationsProvider position="bottom-center" zIndex={99999}>
 			{children}
 		</MantineNotificationsProvider>
 	);

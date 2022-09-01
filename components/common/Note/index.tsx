@@ -8,7 +8,6 @@ import { useRouter } from "next/router";
 import { composeNoteHref, useNoteRouterQuery } from "@/utils/url";
 import { useLikeNote, useMintNote, useUnlikeNote } from "@/utils/apis/contract";
 import { copyToClipboard } from "@/utils/other";
-import { showNotification } from "@mantine/notifications";
 import Tooltip from "../Tooltip";
 import LoadingOverlay from "../LoadingOverlay";
 import { MarkdownRenderer } from "./MarkdownRenderer";
@@ -359,12 +358,9 @@ function NoteActions({
 
 	const handleCopyToClipboard = useCallback(async () => {
 		await copyToClipboard(
-			location.origin + composeNoteHref(characterId, noteId)
+			location.origin + composeNoteHref(characterId, noteId),
+			{ showNotification: true }
 		);
-		showNotification({
-			message: "Copied to Clipboard!",
-			disallowClose: true,
-		});
 	}, [characterId, noteId]);
 
 	return (

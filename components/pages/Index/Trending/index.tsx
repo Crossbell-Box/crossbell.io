@@ -1,6 +1,6 @@
-import TrendingCharacters from "@/components/Index/Trending/Characters";
-import TrendingTreasures from "@/components/Index/Trending/Treasures";
-import TrendingLists from "@/components/Index/Trending/Lists";
+import TrendingCharacters from "@/components/pages/Index/Trending/Characters";
+import TrendingTreasures from "@/components/pages/Index/Trending/Treasures";
+import TrendingLists from "@/components/pages/Index/Trending/Lists";
 import { useTrending } from "@/utils/apis/trending";
 
 const IndexTrending = () => {

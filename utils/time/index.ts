@@ -9,3 +9,9 @@ export function formatDate(date: Date | number | string) {
 export function formatDateFromNow(date: Date | number | string) {
 	return dayjs(date).fromNow();
 }
+
+export function formatToRFC3339(date: Date | number | string) {
+	return dayjs(date).format("YYYY-MM-DDTHH:mm:ss[Z]");
+}
+
+export { dayjs };
