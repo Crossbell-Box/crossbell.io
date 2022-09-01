@@ -161,6 +161,7 @@ export default function MediaCarousel({
 											src={src}
 											className={classNames("transition-opacity object-cover", {
 												"opacity-20": isThumbnail && index !== selectedIndex,
+												"cursor-zoom-in": !isThumbnail && !isOverlay,
 											})}
 											fill={!isThumbnail}
 											sizes={

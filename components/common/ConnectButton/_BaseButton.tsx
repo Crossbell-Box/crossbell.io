@@ -12,7 +12,7 @@ const BaseButton_ = forwardRef<HTMLButtonElement, ButtonProps>(
 			<Button
 				ref={ref}
 				className={classNames(
-					"h-80px rounded-lg w-full cursor-pointer border-none p-0",
+					"h-80px rounded-lg w-full cursor-pointer border-none px-2",
 					className
 				)}
 				{...props}

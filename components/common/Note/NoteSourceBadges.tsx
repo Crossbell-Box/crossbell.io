@@ -84,7 +84,12 @@ function getColorFromSource(source: string) {
 
 function getLinkForSource(source: string, noteMetadata: NoteMetadata) {
 	const s = source.toLowerCase();
+
 	if (isBuiltInSource(s)) {
+		if (s === "operatorsync") {
+			return "/sync";
+		}
+
 		if (s === "xlog") {
 			const url = noteMetadata.external_urls?.[0];
 			return url;
@@ -95,11 +100,25 @@ function getLinkForSource(source: string, noteMetadata: NoteMetadata) {
 		}
 
 		if (s === "twitter") {
-			return noteMetadata.external_urls?.[0];
+			return findUrlIncludes(noteMetadata.external_urls, "twitter.com");
+		}
+
+		if (s === "medium") {
+			return findUrlIncludes(noteMetadata.external_urls, "medium.com");
+		}
+
+		if (s === "tiktok") {
+			return findUrlIncludes(noteMetadata.external_urls, "tiktok.com");
 		}
 
 		return undefined;
 	}
 
 	return undefined;
+}
+
+function findUrlIncludes(urls: string[] | undefined, pattern: string) {
+	if (!urls) return undefined;
+	const url = urls.find((u) => u.includes(pattern));
+	return url ? url : urls[0];
 }
