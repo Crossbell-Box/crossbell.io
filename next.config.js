@@ -38,6 +38,11 @@ const nextConfig = {
 				destination:
 					"https://raw.githubusercontent.com/Crossbell-Box/io-sitemap/main/sitemaps/:match*",
 			},
+			{
+				source: "/robots.txt",
+				destination:
+					"https://raw.githubusercontent.com/Crossbell-Box/io-sitemap/main/sitemaps/robots.txt",
+			},
 		];
 	},
 };
