@@ -10,22 +10,58 @@ import ArrowIcon from "./arrow-icon.svg";
 import Logo from "@/components/common/Logo";
 import Image from "../Image";
 import classNames from "classnames";
+import { ConnectButtonProps } from "./index";
 
-type WalletDisplayButtonProps = ButtonProps & { menuOpened: boolean };
+type WalletDisplayButtonProps = ButtonProps &
+	Pick<ConnectButtonProps, "mode"> & { menuOpened: boolean };
 const WalletDisplayButton = forwardRef<
 	HTMLButtonElement,
 	WalletDisplayButtonProps
->(({ menuOpened, ...props }, ref) => {
+>(({ menuOpened, mode, ...props }, ref) => {
 	const { address } = useAccount();
-	const { isLoading, data: character } = useCurrentCharacter();
+	const { data: character, isLoading: isLoadingCharacter } =
+		useCurrentCharacter();
 
-	const { data: balance } = useBalance({ addressOrName: address });
+	const { data: balance, isLoading: isLoadingBalance } = useBalance({
+		addressOrName: address,
+	});
+
+	const isLoading = isLoadingCharacter || isLoadingBalance;
+
+	if (mode === "minimal") {
+		return (
+			<BaseButton
+				mode={mode}
+				ref={ref}
+				{...props}
+				variant="outline"
+				color="dark"
+				styles={{
+					root: {
+						borderColor: "#D1D9F0",
+					},
+				}}
+			>
+				{isLoading ? (
+					<Text>Loading...</Text>
+				) : (
+					<Group spacing="sm">
+						<Text className="font-600" size="sm">
+							{truncateAddress(address)}
+						</Text>
+
+						<Avatar character={character} size={28} />
+					</Group>
+				)}
+			</BaseButton>
+		);
+	}
 
 	return (
 		<BaseButton
+			mode={mode}
 			ref={ref}
 			{...props}
-			className="overflow-hidden"
 			styles={{
 				root: {
 					background:
@@ -51,7 +87,7 @@ const WalletDisplayButton = forwardRef<
 							<Logo size={12} />
 							<Space w={2} />
 							<Text size="xs" className="font-400 text-[#F2F2F2]">
-								{balance?.formatted}
+								{balance?.formatted ?? "0.00"}
 							</Text>
 						</div>
 					</div>

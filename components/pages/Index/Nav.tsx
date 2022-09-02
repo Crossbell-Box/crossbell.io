@@ -109,7 +109,7 @@ const IndexNav = () => (
 					<SearchInput />
 				</div>
 				<div className="flex relative">
-					<ConnectButton />
+					<ConnectButton mode="minimal" />
 				</div>
 			</div>
 			<div className="flex md:hidden">

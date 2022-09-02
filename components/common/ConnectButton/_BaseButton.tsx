@@ -5,14 +5,20 @@ import {
 } from "@mantine/core";
 import classNames from "classnames";
 import { forwardRef } from "react";
+import { ConnectButtonProps } from ".";
 
-const BaseButton_ = forwardRef<HTMLButtonElement, ButtonProps>(
-	({ children, className, ...props }, ref) => {
+type BaseButtonProps = ButtonProps & Pick<ConnectButtonProps, "mode">;
+const BaseButton_ = forwardRef<HTMLButtonElement, BaseButtonProps>(
+	({ children, mode, className, ...props }, ref) => {
 		return (
 			<Button
 				ref={ref}
 				className={classNames(
-					"h-80px rounded-lg w-full cursor-pointer border-none px-2",
+					"overflow-hidden rounded-lg w-full cursor-pointer px-2",
+					{
+						"h-80px": mode === "default",
+						// "h-auto": mode === "minimal",
+					},
 					className
 				)}
 				{...props}
@@ -23,7 +29,7 @@ const BaseButton_ = forwardRef<HTMLButtonElement, ButtonProps>(
 	}
 );
 BaseButton_.displayName = "BaseButton";
-const BaseButton = createPolymorphicComponent<"button", ButtonProps>(
+const BaseButton = createPolymorphicComponent<"button", BaseButtonProps>(
 	BaseButton_
 );
 

@@ -8,8 +8,11 @@ import Modal from "@/components/common/Modal";
 import AccountList from "./_AccountList";
 import MenuItem from "./_MenuItem";
 import WalletDisplayButton from "./_WalletDisplayButton";
+import { ConnectButtonProps } from "./index";
 
-export default function WalletButtonWithMenu() {
+export default function WalletButtonWithMenu({
+	mode,
+}: Pick<ConnectButtonProps, "mode">) {
 	const [menuOpened, menuHandlers] = useDisclosure(false);
 
 	const [disconnOpened, disconnHandlers] = useDisclosure(false);
@@ -48,7 +51,11 @@ export default function WalletButtonWithMenu() {
 				transition="scale-y"
 			>
 				<Menu.Target>
-					<WalletDisplayButton className="w-full" menuOpened={menuOpened} />
+					<WalletDisplayButton
+						className="w-full"
+						menuOpened={menuOpened}
+						mode={mode}
+					/>
 				</Menu.Target>
 
 				<Menu.Dropdown className="w-full">

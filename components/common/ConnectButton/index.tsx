@@ -3,7 +3,13 @@ import styles from "./styles.module.css";
 import BaseButton from "./_BaseButton";
 import WalletButtonWithMenu from "./_WalletButtonWithMenu";
 
-export default function ConnectButton() {
+export type ConnectButtonProps = {
+	mode?: "default" | "minimal";
+};
+
+export default function ConnectButton({
+	mode = "default",
+}: ConnectButtonProps) {
 	return (
 		<RainbowConnectButton.Custom>
 			{({
@@ -29,16 +35,17 @@ export default function ConnectButton() {
 							if (!mounted || !account || !chain) {
 								return (
 									<BaseButton
+										mode={mode}
 										className={styles["gradient-background"]}
 										onClick={openConnectModal}
 									>
-										Connect Wallet
+										Connect
 									</BaseButton>
 								);
 							}
 							if (chain.unsupported) {
 								return (
-									<BaseButton onClick={openChainModal} color="red">
+									<BaseButton mode={mode} onClick={openChainModal} color="red">
 										Wrong network
 									</BaseButton>
 								);
@@ -46,7 +53,7 @@ export default function ConnectButton() {
 
 							return (
 								<div style={{ display: "flex", gap: 12 }}>
-									<WalletButtonWithMenu />
+									<WalletButtonWithMenu mode={mode} />
 								</div>
 							);
 						})()}
