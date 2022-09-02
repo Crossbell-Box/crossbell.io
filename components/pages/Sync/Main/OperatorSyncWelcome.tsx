@@ -52,14 +52,20 @@ export default function OperatorSyncWelcome() {
 				</Text>
 
 				<div className="mt-8">
-					<Button
-						color="blue"
-						size="md"
-						onClick={() => handleStart()}
-						loading={activate.isLoading}
-					>
-						<Text className="text-lg font-medium">Get Started</Text>
-					</Button>
+					{globalThis.location.hostname !== "crossbell.io" ? (
+						<Button
+							color="blue"
+							size="md"
+							onClick={() => handleStart()}
+							loading={activate.isLoading}
+						>
+							<Text className="text-lg font-medium">Get Started</Text>
+						</Button>
+					) : (
+						<Button color="dark" size="md" loading={activate.isLoading}>
+							<Text className="text-lg font-medium">Coming Soon</Text>
+						</Button>
+					)}
 				</div>
 			</div>
 		</div>
