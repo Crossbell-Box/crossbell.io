@@ -158,6 +158,7 @@ export function MarkdownRenderer({
 											}
 											rel="noreferrer"
 											onClick={(e: any) => e.stopPropagation()}
+											inline
 										>
 											{props.children}
 										</Text>
