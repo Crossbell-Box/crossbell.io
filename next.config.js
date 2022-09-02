@@ -26,6 +26,20 @@ const nextConfig = {
 		// removeConsole: { exclude: ["error"] },
 	},
 	// swcMinify: true,
+	rewrites: async () => {
+		return [
+			{
+				source: "/sitemap.xml",
+				destination:
+					"https://raw.githubusercontent.com/Crossbell-Box/io-sitemap/main/sitemaps/sitemap-index.xml",
+			},
+			{
+				source: "/sitemaps/:match*",
+				destination:
+					"https://raw.githubusercontent.com/Crossbell-Box/io-sitemap/main/sitemaps/:match*",
+			},
+		];
+	},
 };
 
 module.exports = withBundleAnalyzer(nextConfig);
