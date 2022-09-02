@@ -8,7 +8,7 @@ type MyTabsProps = {
 		/** Example: i-csb:back */
 		icon?: string;
 	}[];
-	/** returns `true` in callback if you want to prevent the tabs changing */
+	/** returns `false` in callback if you want to prevent the tabs changing */
 	beforeTabChange?: (value: TabsValue) => boolean | void;
 };
 
@@ -22,7 +22,7 @@ export default function Tabs({
 	return (
 		<Tabs_
 			onTabChange={(value) => {
-				if (beforeTabChange?.(value)) {
+				if (beforeTabChange?.(value) === false) {
 					return;
 				}
 				router.push(`${value}`);

@@ -1,4 +1,5 @@
 import { CharacterEntity } from "crossbell.js";
+import { truncateAddress } from "../ethers";
 
 export function extractCharacterName(
 	character: CharacterEntity | null | undefined,
@@ -17,8 +18,13 @@ export function extractCharacterName(
 		return name;
 	}
 
-	if (fallbackToHandle) {
-		return character?.handle;
+	if (fallbackToHandle && character?.handle) {
+		if (character.handle.length > 31) {
+			// is address
+			return truncateAddress(character.handle);
+		} else {
+			return character.handle;
+		}
 	}
 
 	return undefined;

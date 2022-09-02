@@ -71,19 +71,26 @@ export default function CharacterProfile({
 		});
 	};
 
+	const characterName = extractCharacterName(character);
+
 	return (
 		<div className="py-5 px-5">
 			<div className="flex flex-row justify-between">
 				{/* left */}
 				<div className="flex flex-col justify-between overflow-hidden">
 					{/* name and handle */}
-					<Skeleton width={loading ? "5em" : "auto"} visible={loading}>
-						<div className="break-words">
-							<Text className="text-2em font-bold leading-1.25em text-dark">
-								{extractCharacterName(character)}
-							</Text>
-						</div>
-					</Skeleton>
+					<Tooltip label={characterName}>
+						<Skeleton width={loading ? "5em" : "auto"} visible={loading}>
+							<div className="break-words">
+								<Text
+									className="text-2em font-bold leading-1.25em text-dark"
+									lineClamp={1}
+								>
+									{characterName}
+								</Text>
+							</div>
+						</Skeleton>
+					</Tooltip>
 					<Skeleton width={loading ? "5em" : "auto"} visible={loading}>
 						<div className="break-words">
 							<Text className="text-normal font-light leading-1.25em text-dimmed">
