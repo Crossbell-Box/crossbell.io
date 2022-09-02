@@ -12,6 +12,10 @@ export default function Tooltip({
 }) {
 	return (
 		<Tooltip_
+			multiline
+			classNames={{
+				tooltip: "max-w-80vw",
+			}}
 			position="bottom"
 			openDelay={500}
 			transition="fade"
