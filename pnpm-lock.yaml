@@ -2,7 +2,7 @@ lockfileVersion: 5.4
 
 specifiers:
   '@crossbell/ipfs-gateway': 0.0.6
-  '@crossbell/ipfs-gateway-next': 0.0.6
+  '@crossbell/ipfs-gateway-next': 0.0.8
   '@ctrl/tinycolor': 3.4.1
   '@emotion/core': 11.0.0
   '@emotion/react': 11.10.4
@@ -97,7 +97,7 @@ dependencies:
   wagmi: 0.6.4_2iwq3bmdfa3kr5zxt7xazrj424
 
 devDependencies:
-  '@crossbell/ipfs-gateway-next': 0.0.6_next@12.2.5
+  '@crossbell/ipfs-gateway-next': 0.0.8_next@12.2.5
   '@iconify/utils': 1.0.33
   '@types/node': 18.7.15
   '@types/react': 18.0.18
@@ -284,14 +284,19 @@ packages:
 
   /@crossbell/ipfs-fetch/0.0.6:
     resolution: {integrity: sha512-BnnK/DM9f6Mx8YrhbPP0mklHKedC+1Q9Ph+tU3q0UZain7ZugcYiIEcH7i7Ai4ZkvK8Pl+Ok2xzWwtBELa8aHA==}
+    dev: false
 
-  /@crossbell/ipfs-gateway-next/0.0.6_next@12.2.5:
-    resolution: {integrity: sha512-5nEqNeHmS7JvO/WCuywhRGbWpglxT534SYPURy611S7DXlw/GNMHaA5YrveRuHD6ZRZhyiR/QNiY/Vq9BtKeZg==}
+  /@crossbell/ipfs-fetch/0.0.8:
+    resolution: {integrity: sha512-Ekv+C2+0JiGmEKa+ICtZjwAbLiPUKJuuKn/ws8c7jSMaomiJu5sI0KfaU1Jna3Qa+KYtgnCAixkZ5Bebud9wuQ==}
+    dev: true
+
+  /@crossbell/ipfs-gateway-next/0.0.8_next@12.2.5:
+    resolution: {integrity: sha512-e1GXSKR/Gw8CBZBbNIPIHqZjlOiGPJ1HVD1jpw1VmHPUQHh2b+VCwLX/+f38RmDgTo2vJunsLr7VpcwLqHXKsA==}
     peerDependencies:
       next: ^12
     dependencies:
-      '@crossbell/ipfs-fetch': 0.0.6
-      '@crossbell/ipfs-gateway-sw': 0.0.6
+      '@crossbell/ipfs-fetch': 0.0.8
+      '@crossbell/ipfs-gateway-sw': 0.0.8
       copy-webpack-plugin: 11.0.0_webpack@5.74.0
       next: 12.2.5_biqbaboplfbrettd7655fr4n2y
       webpack: 5.74.0
@@ -306,6 +311,13 @@ packages:
     resolution: {integrity: sha512-JdWmRSMMCniq79x7fQOpfRt8tmXuFJ8R9jpcCkiynOd4qFJGql0IWUJNLN9/zbfkD2dW9nl3QraJlwvoaq4F/A==}
     dependencies:
       '@crossbell/ipfs-fetch': 0.0.6
+    dev: false
+
+  /@crossbell/ipfs-gateway-sw/0.0.8:
+    resolution: {integrity: sha512-1/zIYLjnBAyYA9CcOADpQIWfcZGBtz/V8R8i17smptRfeeQo0vE42hl02rxAS3fvciK2kqu7WPUHWfE/0FT0+A==}
+    dependencies:
+      '@crossbell/ipfs-fetch': 0.0.8
+    dev: true
 
   /@crossbell/ipfs-gateway/0.0.6:
     resolution: {integrity: sha512-ujCPXdRpOwa8g0CC86lVbYpFbipugj69YThM65sMvFcWwWd9ViG0CxWAsi9R0AZfbI40Zq7YK0Y7H0GzUqC0OA==}
