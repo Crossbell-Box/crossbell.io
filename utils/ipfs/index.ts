@@ -1,12 +1,14 @@
-export const DEFAULT_GATEWAY = "https://cf-ipfs.com/ipfs/";
+import { IpfsGateway, isIpfsUrl } from "@crossbell/ipfs-gateway"
 
-export const ipfsLinkToHttpLink = (link: string) => {
+export const ipfsGateway = new IpfsGateway()
+
+export const ipfsLinkToHttpLink = (link: string): string => {
 	if (!link) {
 		return "";
 	}
-	if (link.startsWith("ipfs://")) {
-		const ipfsHash = link.substring("ipfs://".length);
-		return `${DEFAULT_GATEWAY}${ipfsHash}`;
+
+	if (isIpfsUrl(link)) {
+		return ipfsGateway.getSwWeb2Url(link);
 	}
 
 	return link;
