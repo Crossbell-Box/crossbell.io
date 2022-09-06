@@ -22,6 +22,7 @@ const nextConfig = {
 			allowFutureImage: true,
 			remotePatterns: [{ hostname: "**" }],
 		},
+		newNextLinkBehavior: true,
 	},
 	compiler: {
 		// removeConsole: { exclude: ["error"] },

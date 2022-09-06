@@ -26,6 +26,7 @@ const linksGroup: { title: string; list: { text: string; href: string }[] }[] =
 				},
 				{ text: "Blog", href: "https://crossbell-blog.xlog.app/" },
 				{ text: "Scan", href: "https://scan.crossbell.io/" },
+				{ text: "Status", href: "https://status.crossbell.io/" },
 			],
 		},
 		{
