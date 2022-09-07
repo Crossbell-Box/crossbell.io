@@ -1,5 +1,5 @@
 const UnoCSS = require("@unocss/webpack").default;
-const { withIpfsGateway } = require('@crossbell/ipfs-gateway-next')
+const { withIpfsGateway } = require("@crossbell/ipfs-gateway-next");
 const withBundleAnalyzer = require("@next/bundle-analyzer")({
 	enabled: process.env.ANALYZE === "true",
 });
@@ -22,7 +22,7 @@ const nextConfig = {
 			allowFutureImage: true,
 			remotePatterns: [{ hostname: "**" }],
 		},
-		newNextLinkBehavior: true,
+		// newNextLinkBehavior: true,
 	},
 	compiler: {
 		// removeConsole: { exclude: ["error"] },
