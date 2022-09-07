@@ -9,7 +9,7 @@
 		"lint": "next lint"
 	},
 	"dependencies": {
-		"@crossbell/ipfs-gateway": "0.0.6",
+		"@crossbell/ipfs-gateway": "0.0.8",
 		"@ctrl/tinycolor": "3.4.1",
 		"@emotion/core": "11.0.0",
 		"@emotion/react": "11.10.4",
@@ -52,7 +52,7 @@
 		"wagmi": "0.6.4"
 	},
 	"devDependencies": {
-		"@crossbell/ipfs-gateway-next": "0.0.6",
+		"@crossbell/ipfs-gateway-next": "0.0.8",
 		"@iconify/utils": "1.0.33",
 		"@types/node": "18.7.15",
 		"@types/react": "18.0.18",
