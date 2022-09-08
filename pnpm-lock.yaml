@@ -7,7 +7,7 @@ specifiers:
   '@emotion/core': 11.0.0
   '@emotion/react': 11.10.4
   '@emotion/server': 11.10.0
-  '@iconify/utils': 1.0.33
+  '@iconify/utils': 2.0.0
   '@mantine/carousel': 5.2.6
   '@mantine/core': 5.2.6
   '@mantine/dropzone': 5.2.6
@@ -98,7 +98,7 @@ dependencies:
 
 devDependencies:
   '@crossbell/ipfs-gateway-next': 0.0.8_next@12.2.5
-  '@iconify/utils': 1.0.33
+  '@iconify/utils': 2.0.0
   '@types/node': 18.7.15
   '@types/react': 18.0.18
   '@types/react-dom': 18.0.6
@@ -845,12 +845,29 @@ packages:
     resolution: {integrity: sha512-Jh0llaK2LRXQoYsorIH8maClebsnzTcve+7U3rQUSnC11X4jtPnFuyatqFLvMxZ8MLG8dB4zfHsbPfuvxluONw==}
     dev: true
 
+  /@iconify/types/2.0.0:
+    resolution: {integrity: sha512-+wluvCrRhXrhyOmRDJ3q8mux9JkKy5SJ/v8ol2tu4FVjyYvtEzkc/3pK15ET6RKg4b4w4BmTk1+gsCUhf21Ykg==}
+    dev: true
+
   /@iconify/utils/1.0.33:
     resolution: {integrity: sha512-vGeAqo7aGPxOQmGdVoXFUOuyN+0V7Lcrx2EvaiRjxUD1x6Om0Tvq2bdm7E24l2Pz++4S0mWMCVFXe/17EtKImQ==}
     dependencies:
       '@antfu/install-pkg': 0.1.0
       '@antfu/utils': 0.5.2
       '@iconify/types': 1.1.0
+      debug: 4.3.4
+      kolorist: 1.5.1
+      local-pkg: 0.4.2
+    transitivePeerDependencies:
+      - supports-color
+    dev: true
+
+  /@iconify/utils/2.0.0:
+    resolution: {integrity: sha512-thvwZ6m3frWJiOYwRdHPSPGC25rmyvDl0vXdQ8ocRJZx31m8Pn4y7V1mTc5UReR6MiAj+hrV2UPZQjx7zI960g==}
+    dependencies:
+      '@antfu/install-pkg': 0.1.0
+      '@antfu/utils': 0.5.2
+      '@iconify/types': 2.0.0
       debug: 4.3.4
       kolorist: 1.5.1
       local-pkg: 0.4.2
