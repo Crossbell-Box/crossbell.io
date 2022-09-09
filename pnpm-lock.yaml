@@ -1,8 +1,8 @@
 lockfileVersion: 5.4
 
 specifiers:
-  '@crossbell/ipfs-gateway': 0.0.8
-  '@crossbell/ipfs-gateway-next': 0.0.8
+  '@crossbell/ipfs-gateway': 0.0.10
+  '@crossbell/ipfs-gateway-next': 0.0.10
   '@ctrl/tinycolor': 3.4.1
   '@emotion/core': 11.0.0
   '@emotion/react': 11.10.4
@@ -54,7 +54,7 @@ specifiers:
   wagmi: 0.6.5
 
 dependencies:
-  '@crossbell/ipfs-gateway': 0.0.8
+  '@crossbell/ipfs-gateway': 0.0.10
   '@ctrl/tinycolor': 3.4.1
   '@emotion/core': 11.0.0
   '@emotion/react': 11.10.4_7v64pk2mkrohwh22gx7lrz5ive
@@ -97,7 +97,7 @@ dependencies:
   wagmi: 0.6.5_2iwq3bmdfa3kr5zxt7xazrj424
 
 devDependencies:
-  '@crossbell/ipfs-gateway-next': 0.0.8_next@12.3.0
+  '@crossbell/ipfs-gateway-next': 0.0.10_next@12.3.0
   '@iconify/utils': 2.0.0
   '@types/node': 18.7.16
   '@types/react': 18.0.18
@@ -282,16 +282,16 @@ packages:
       - utf-8-validate
     dev: false
 
-  /@crossbell/ipfs-fetch/0.0.8:
-    resolution: {integrity: sha512-Ekv+C2+0JiGmEKa+ICtZjwAbLiPUKJuuKn/ws8c7jSMaomiJu5sI0KfaU1Jna3Qa+KYtgnCAixkZ5Bebud9wuQ==}
+  /@crossbell/ipfs-fetch/0.0.10:
+    resolution: {integrity: sha512-frwzt8FlqmPuCe9N2JV4iY14sdEkXPqnbeL7Lmw/hkfOatM1X3E5VScPm50oVxVU6gn2EOEXdpLkU37adfTeTA==}
 
-  /@crossbell/ipfs-gateway-next/0.0.8_next@12.3.0:
-    resolution: {integrity: sha512-e1GXSKR/Gw8CBZBbNIPIHqZjlOiGPJ1HVD1jpw1VmHPUQHh2b+VCwLX/+f38RmDgTo2vJunsLr7VpcwLqHXKsA==}
+  /@crossbell/ipfs-gateway-next/0.0.10_next@12.3.0:
+    resolution: {integrity: sha512-fI0YyXsP+oEneKRKodIn0k7e7o2MpZCEwI08FtbDxZx+t5EQwCxnaYy2AWJSrgHi6qahi4TDQlysgMAgwzqHjw==}
     peerDependencies:
       next: ^12
     dependencies:
-      '@crossbell/ipfs-fetch': 0.0.8
-      '@crossbell/ipfs-gateway-sw': 0.0.8
+      '@crossbell/ipfs-fetch': 0.0.10
+      '@crossbell/ipfs-gateway-sw': 0.0.10
       copy-webpack-plugin: 11.0.0_webpack@5.74.0
       next: 12.3.0_biqbaboplfbrettd7655fr4n2y
       webpack: 5.74.0
@@ -302,16 +302,16 @@ packages:
       - webpack-cli
     dev: true
 
-  /@crossbell/ipfs-gateway-sw/0.0.8:
-    resolution: {integrity: sha512-1/zIYLjnBAyYA9CcOADpQIWfcZGBtz/V8R8i17smptRfeeQo0vE42hl02rxAS3fvciK2kqu7WPUHWfE/0FT0+A==}
+  /@crossbell/ipfs-gateway-sw/0.0.10:
+    resolution: {integrity: sha512-1vOcygdrQqeajPkbhk7E6dpIAcr/YwXSYjR7VfTOStGxNbp/jjUS1jPFPkViFeAfF46+pMueV4oR9HJzVqYC2A==}
     dependencies:
-      '@crossbell/ipfs-fetch': 0.0.8
+      '@crossbell/ipfs-fetch': 0.0.10
 
-  /@crossbell/ipfs-gateway/0.0.8:
-    resolution: {integrity: sha512-/I4R+bXtsk8OaY9z86bDeW3U22YbR2QcL9VFSS5tJukDY8L9ijUBppTCsrOXZ+8zW6hqpH3RKzh5YoRuZOpBNQ==}
+  /@crossbell/ipfs-gateway/0.0.10:
+    resolution: {integrity: sha512-KNlu8UGH+J4dC4f3gatyj0Coiq+aVYnSG7zCJF3aSxDWGE+0LyvtHQITlnm84kfi8+Cf5LnPsvLvUrThOKZuog==}
     dependencies:
-      '@crossbell/ipfs-fetch': 0.0.8
-      '@crossbell/ipfs-gateway-sw': 0.0.8
+      '@crossbell/ipfs-fetch': 0.0.10
+      '@crossbell/ipfs-gateway-sw': 0.0.10
       query-string: 7.1.1
     dev: false
 
