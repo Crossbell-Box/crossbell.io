@@ -57,7 +57,9 @@ export default function Image({
 	alt,
 	fill,
 	...props
-}: PropsWithChildren<ImageProps>) {
+}: PropsWithChildren<Omit<ImageProps, "alt">> & {
+	alt?: string;
+}) {
 	const originalSrc = src;
 	if (typeof src === "string") {
 		src = ipfsLinkToHttpLink(src);
@@ -83,7 +85,11 @@ export default function Image({
 	return (
 		<NextImage
 			src={_src}
-			alt={alt ?? src}
+			alt={
+				alt ?? typeof originalSrc === "string"
+					? (originalSrc as string)
+					: "image"
+			}
 			loader={thumborLoader}
 			placeholder="blur"
 			// blurDataURL={randomColor()}
