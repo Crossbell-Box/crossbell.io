@@ -54,9 +54,11 @@ const isLocalImage = (s: ImageProps["src"]) =>
 
 export default function Image({
 	src,
+	alt,
 	fill,
 	...props
 }: PropsWithChildren<ImageProps>) {
+	const originalSrc = src;
 	if (typeof src === "string") {
 		src = ipfsLinkToHttpLink(src);
 	}
@@ -81,6 +83,7 @@ export default function Image({
 	return (
 		<NextImage
 			src={_src}
+			alt={alt ?? src}
 			loader={thumborLoader}
 			placeholder="blur"
 			// blurDataURL={randomColor()}
@@ -92,7 +95,9 @@ export default function Image({
 				: {})}
 			{...(isLocalImage(_src) ? { unoptimized: true } : {})}
 			{...props}
-			data-original-url={typeof src === "string" ? src : undefined}
+			data-original-url={
+				typeof originalSrc === "string" ? originalSrc : undefined
+			}
 		/>
 	);
 }

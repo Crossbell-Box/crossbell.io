@@ -10,6 +10,7 @@ const nextConfig = {
 	images: {
 		dangerouslyAllowSVG: true,
 		contentSecurityPolicy: "default-src 'self'; script-src 'none'; sandbox;",
+		remotePatterns: [{ hostname: "**" }],
 	},
 	webpack: (config) => {
 		config.plugins.push(UnoCSS());
@@ -18,10 +19,6 @@ const nextConfig = {
 	},
 	experimental: {
 		scrollRestoration: true,
-		images: {
-			allowFutureImage: true,
-			remotePatterns: [{ hostname: "**" }],
-		},
 		// newNextLinkBehavior: true,
 	},
 	compiler: {
