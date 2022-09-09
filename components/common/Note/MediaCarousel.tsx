@@ -1,4 +1,3 @@
-import { ipfsLinkToHttpLink } from "@/utils/ipfs";
 import { NoteMetadata } from "crossbell.js";
 import { Carousel, Embla } from "@mantine/carousel";
 import Image from "../Image";
@@ -138,7 +137,7 @@ export default function MediaCarousel({
 			return validAttachments.map((a, index) => {
 				const mediaType = mimeTypeToMediaType(a.mime_type!);
 				if (a.address) {
-					const src = ipfsLinkToHttpLink(a.address);
+					const src = a.address;
 					if (mediaType === "image") {
 						return (
 							<Carousel.Slide key={index}>
