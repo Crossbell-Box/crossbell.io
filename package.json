@@ -55,7 +55,7 @@
 		"@crossbell/ipfs-gateway-next": "0.0.10",
 		"@iconify/utils": "2.0.0",
 		"@types/node": "18.7.16",
-		"@types/react": "18.0.18",
+		"@types/react": "18.0.20",
 		"@types/react-dom": "18.0.6",
 		"@unocss/webpack": "0.45.18",
 		"eslint": "8.23.0",
