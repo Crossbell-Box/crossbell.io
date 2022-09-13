@@ -1,0 +1,9 @@
+.spinning {
+	animation: spinning 10s infinite linear;
+}
+
+@keyframes spinning {
+	to {
+		transform: rotate(360deg);
+	}
+}
