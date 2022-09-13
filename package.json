@@ -49,7 +49,7 @@
 		"sharp": "0.31.0",
 		"sticky-sidebar-v2": "1.1.1",
 		"typeit-react": "2.6.0",
-		"wagmi": "0.6.5"
+		"wagmi": "0.6.6"
 	},
 	"devDependencies": {
 		"@crossbell/ipfs-gateway-next": "0.0.10",

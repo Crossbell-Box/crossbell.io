@@ -51,7 +51,7 @@ specifiers:
   typeit-react: 2.6.0
   typescript: 4.8.3
   unocss: 0.45.18
-  wagmi: 0.6.5
+  wagmi: 0.6.6
 
 dependencies:
   '@crossbell/ipfs-gateway': 0.0.10
@@ -69,7 +69,7 @@ dependencies:
   '@mantine/notifications': 5.3.0_6blp46xt7iaxtjhzvv24eh6u6a
   '@mantine/nprogress': 5.3.0_6blp46xt7iaxtjhzvv24eh6u6a
   '@next/bundle-analyzer': 12.3.0
-  '@rainbow-me/rainbowkit': 0.5.1_7iutmhxfutwxunchwffby57niu
+  '@rainbow-me/rainbowkit': 0.5.1_drc7kck52rzkokherm2mvwn46u
   '@tanstack/react-query': 4.2.3_biqbaboplfbrettd7655fr4n2y
   '@tanstack/react-query-devtools': 4.2.3_7jugwuuqrrr4f74u7dtzjsintq
   classnames: 2.3.1
@@ -94,7 +94,7 @@ dependencies:
   sharp: 0.31.0
   sticky-sidebar-v2: 1.1.1
   typeit-react: 2.6.0
-  wagmi: 0.6.5_2iwq3bmdfa3kr5zxt7xazrj424
+  wagmi: 0.6.6_2iwq3bmdfa3kr5zxt7xazrj424
 
 devDependencies:
   '@crossbell/ipfs-gateway-next': 0.0.10_next@12.3.0
@@ -1382,7 +1382,7 @@ packages:
       react: 18.2.0
     dev: false
 
-  /@rainbow-me/rainbowkit/0.5.1_7iutmhxfutwxunchwffby57niu:
+  /@rainbow-me/rainbowkit/0.5.1_drc7kck52rzkokherm2mvwn46u:
     resolution: {integrity: sha512-N+Y46Q14w0u2J2b/i/cjJMZvpwueD3FYn3YSXie1Tj/y8irQlOQt/eCZ96Kr9JAwykb7sl8Afkisl6tU9k9jCg==}
     engines: {node: '>=12.4'}
     peerDependencies:
@@ -1400,7 +1400,7 @@ packages:
       react: 18.2.0
       react-dom: 18.2.0_react@18.2.0
       react-remove-scroll: 2.5.4_7v64pk2mkrohwh22gx7lrz5ive
-      wagmi: 0.6.5_2iwq3bmdfa3kr5zxt7xazrj424
+      wagmi: 0.6.6_2iwq3bmdfa3kr5zxt7xazrj424
     transitivePeerDependencies:
       - '@types/react'
     dev: false
@@ -1904,8 +1904,8 @@ packages:
       '@vanilla-extract/css': 1.7.0
     dev: false
 
-  /@wagmi/core/0.5.5_js5jleoirjfiwm3pzarnyr4mj4:
-    resolution: {integrity: sha512-AZsO9IK+Gu5S+s48ZARmyOo59JfV4l2w3P8XtAPOSKnr8aRYK9t71V+bAgfkMxz5xArmkx4qEpnhlAWFCax+KA==}
+  /@wagmi/core/0.5.6_js5jleoirjfiwm3pzarnyr4mj4:
+    resolution: {integrity: sha512-ZGvMVpcl5iN/fXqYxh+lngs980I4R/bMEMVcYjXw5PA67PB1I53paapsPUBt+0ID2QIShyyxZ/qKmhg7FstNWA==}
     peerDependencies:
       '@coinbase/wallet-sdk': '>=3.3.0'
       '@walletconnect/ethereum-provider': '>=1.7.5'
@@ -7621,8 +7621,8 @@ packages:
       fsevents: 2.3.2
     dev: false
 
-  /wagmi/0.6.5_2iwq3bmdfa3kr5zxt7xazrj424:
-    resolution: {integrity: sha512-qHSGSnevlOr+DzOytrTeEYRaBb+3k1trvSuKakrOtiIodHvigGaGWulq0ioX++q3BC3Tf2dGtwMMzIZeGlmJ4Q==}
+  /wagmi/0.6.6_2iwq3bmdfa3kr5zxt7xazrj424:
+    resolution: {integrity: sha512-bLocnHhqmhzbkx5kSbMSIx2Y61NxylQfV+aM7HCtFKV9S+F3+hrGB4QrkD6/fjTCQVsBqdddLHjlrIYmYfCvYg==}
     peerDependencies:
       ethers: '>=5.5.1'
       react: '>=17.0.0'
@@ -7631,7 +7631,7 @@ packages:
       '@tanstack/query-sync-storage-persister': 4.2.1
       '@tanstack/react-query': 4.2.3_biqbaboplfbrettd7655fr4n2y
       '@tanstack/react-query-persist-client': 4.2.1
-      '@wagmi/core': 0.5.5_js5jleoirjfiwm3pzarnyr4mj4
+      '@wagmi/core': 0.5.6_js5jleoirjfiwm3pzarnyr4mj4
       '@walletconnect/ethereum-provider': 1.8.0
       ethers: 5.7.0
       react: 18.2.0
