@@ -52,20 +52,15 @@ export default function OperatorSyncWelcome() {
 				</Text>
 
 				<div className="my-8">
-					<Button color="dark" size="md" loading={activate.isLoading}>
-						<Text className="text-lg font-medium">Coming Soon</Text>
+					<Button
+						color="blue"
+						size="md"
+						onClick={() => handleStart()}
+						loading={activate.isLoading}
+					>
+						<Text className="text-lg font-medium">Get Started</Text>
 					</Button>
 				</div>
-
-				<Button
-					className="opacity-0"
-					color="blue"
-					size="md"
-					onClick={() => handleStart()}
-					loading={activate.isLoading}
-				>
-					<Text className="text-lg font-medium">Get Started</Text>
-				</Button>
 			</div>
 		</div>
 	);

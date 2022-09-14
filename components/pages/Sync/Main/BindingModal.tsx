@@ -38,10 +38,15 @@ import { NextLink } from "@mantine/next";
 
 // unbind success image
 import SeeYouImage from "@/public/illustrations/see-you.svg";
+import { showNotification } from "@mantine/notifications";
 
 const modelId = "binding-modal";
 
 export function openBindingModal(platform: SupportedPlatform) {
+	if (platform === "tiktok") {
+		showNotification({ message: "Coming soon" });
+		return;
+	}
 	openBorderlessModal({
 		// id: modelId,
 		zIndex: 10000,
