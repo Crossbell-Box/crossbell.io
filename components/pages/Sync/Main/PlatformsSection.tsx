@@ -47,15 +47,18 @@ export default function PlatformsSection() {
 			};
 		}) ?? [];
 
-	const unboundPlatforms = SUPPORTED_PLATFORMS.filter(
-		(platform) => !boundPlatforms?.some((bound) => bound.platform === platform)
-	).map<PlatformCardProps>((platform) => {
-		return {
-			isBound: false,
-			platform,
-			icon: ICON_MAP[platform],
-		};
-	});
+	const unboundPlatforms = SUPPORTED_PLATFORMS.filter((v) => v === "medium") // TODO: remove this when tiktok is ready
+		.filter(
+			(v) =>
+				!boundPlatforms?.some((bound) => bound.platform === v)
+		) 
+		.map<PlatformCardProps>((platform) => {
+			return {
+				isBound: false,
+				platform,
+				icon: ICON_MAP[platform],
+			};
+		});
 
 	const platforms = [...boundPlatforms, ...unboundPlatforms];
 

@@ -38,15 +38,10 @@ import { NextLink } from "@mantine/next";
 
 // unbind success image
 import SeeYouImage from "@/public/illustrations/see-you.svg";
-import { showNotification } from "@mantine/notifications";
 
 const modelId = "binding-modal";
 
 export function openBindingModal(platform: SupportedPlatform) {
-	if (platform === "tiktok") {
-		showNotification({ message: "Coming soon" });
-		return;
-	}
 	openBorderlessModal({
 		// id: modelId,
 		zIndex: 10000,
@@ -238,7 +233,9 @@ function BindingModal({ platform }: { platform: SupportedPlatform }) {
 							size="lg"
 							onClick={() => {
 								copyHandle();
-								openWindowToChangeBio();
+								setTimeout(() => {
+									openWindowToChangeBio();
+								}, 50);
 							}}
 							radius={100}
 							fullWidth
@@ -411,7 +408,9 @@ function UnbindingModal({
 							radius={100}
 							onClick={() => {
 								unbindAccount.mutate(undefined, {
-									onSuccess: () => {},
+									onSuccess: () => {
+										setStep((v) => v + 1);
+									},
 								});
 							}}
 							loading={unbindAccount.isLoading}
