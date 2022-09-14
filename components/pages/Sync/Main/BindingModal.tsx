@@ -70,6 +70,17 @@ export function openUnbindingModal(
 	});
 }
 
+const openWindowToChangeBio = (
+	platform: SupportedPlatform,
+	identity: string
+) => {
+	if (platform === "medium") {
+		window.open("https://medium.com/me/settings", "_blank");
+	} else if (platform === "tiktok") {
+		window.open(`https://www.tiktok.com/@${identity}`, "_blank");
+	}
+};
+
 function BindingModal({ platform }: { platform: SupportedPlatform }) {
 	// 0. input username
 	// 1. set address in bio
@@ -125,14 +136,6 @@ function BindingModal({ platform }: { platform: SupportedPlatform }) {
 	const veriHandle = getVeriHandle(character?.handle!);
 	const copyHandle = () => {
 		copyToClipboard(veriHandle, { showNotification: true });
-	};
-
-	const openWindowToChangeBio = () => {
-		if (platform === "medium") {
-			window.open("https://medium.com/me/settings", "_blank");
-		} else if (platform === "tiktok") {
-			window.open(`https://www.tiktok.com/@${username}`, "_blank");
-		}
 	};
 
 	const handleNext = async () => {
@@ -234,7 +237,7 @@ function BindingModal({ platform }: { platform: SupportedPlatform }) {
 							onClick={() => {
 								copyHandle();
 								setTimeout(() => {
-									openWindowToChangeBio();
+									openWindowToChangeBio(platform, username);
 								}, 50);
 							}}
 							radius={100}
@@ -371,6 +374,19 @@ function UnbindingModal({
 							To make sure it is you who is asking to unbind, please remove your
 							handle (<Code>{veriHandle}</Code>) from your account bio.
 						</Text>
+
+						<Button
+							color="blue"
+							size="lg"
+							onClick={() => {
+								openWindowToChangeBio(platform, identity);
+							}}
+							radius={100}
+							fullWidth
+							my="md"
+						>
+							Copy and Go to Change
+						</Button>
 					</div>
 				</Card.Section>
 			)}
