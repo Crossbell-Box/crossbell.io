@@ -1,7 +1,12 @@
-import { useMintedNotesOfAddress } from "@/utils/apis/indexer";
-import { extractCoverImageFromNote } from "@/utils/metadata";
-import { composeTreasuresWalletsHref } from "@/utils/url";
+import { useCharacter, useMintedNotesOfAddress } from "@/utils/apis/indexer";
+import { ipfsLinkToHttpLink } from "@/utils/ipfs";
+import {
+	extractCharacterAvatar,
+	extractCoverImageFromNote,
+} from "@/utils/metadata";
+import { composeNoteHref, composeTreasuresWalletsHref } from "@/utils/url";
 import { Space, Text } from "@mantine/core";
+import { NextLink } from "@mantine/next";
 import { NoteEntity } from "crossbell.js";
 import Link from "next/link";
 import { Fragment } from "react";
@@ -68,30 +73,36 @@ export default function TreasuresGallery({ address }: { address?: string }) {
 }
 
 function NoteCover({ note }: { note?: NoteEntity | null }) {
-	const cover = extractCoverImageFromNote(note?.metadata?.content);
+	let cover = extractCoverImageFromNote(note?.metadata?.content);
+	const { data: character } = useCharacter(note?.characterId, {
+		enabled: !cover,
+	});
+	cover = cover ?? extractCharacterAvatar(character);
 	const content = note?.metadata?.content?.content?.slice(0, 50);
 
 	return (
-		<div className="relative flex justify-center items-center ml--20px first:ml-0 w-100px h-100px overflow-hidden rounded-md hover:translate-y--10px transition-transform">
-			<div className="absolute top-0 left-0 bottom-0 right-0 z-0">
-				{cover && (
-					<Image
-						className="object-cover"
-						src={cover}
-						width={100}
-						height={100}
-						alt={content}
-					/>
-				)}
+		<NextLink
+			href={composeNoteHref(note?.characterId!, note?.noteId!)}
+			className="aspect-ratio-square relative flex justify-center items-center ml--20px first:ml-0 w-100px h-100px overflow-hidden rounded-md hover:translate-y--10px transition-transform cursor-pointer"
+			style={{
+				background: cover
+					? `linear-gradient(rgba(0, 0, 0, 0.3), rgba(0, 0, 0, 0.5)), url(${ipfsLinkToHttpLink(
+							cover
+					  )}) center center/cover no-repeat, gray`
+					: "gray",
+			}}
+		>
+			{/* {!cover && ( */}
+			<div className="h-100px w-100px flex justify-center items-center p-2">
+				<Text
+					size="sm"
+					className="leading-1em w-100px text-white"
+					lineClamp={3}
+				>
+					{content}
+				</Text>
 			</div>
-
-			{!cover && (
-				<div className="bg-gray h-100px w-100px flex justify-center items-center p-2">
-					<Text size="sm" className="leading-1em w-100px" lineClamp={3}>
-						{content}
-					</Text>
-				</div>
-			)}
-		</div>
+			{/* )} */}
+		</NextLink>
 	);
 }
