@@ -284,10 +284,15 @@ function BindingModal({ platform }: { platform: SupportedPlatform }) {
 				<div className="flex flex-col items-center">
 					<Image src={DoneImage} className="w-80% h-auto" />
 
+					<Space h={20} />
+
 					<Text size="sm">Congratulation!</Text>
+					<Space h={10} />
 					<Text size="sm" className="font-500">
 						Account bound. You own your data, since now.
 					</Text>
+
+					<Space h={20} />
 				</div>
 			)}
 
@@ -385,7 +390,7 @@ function UnbindingModal({
 							fullWidth
 							my="md"
 						>
-							Copy and Go to Change
+							Go to Change
 						</Button>
 					</div>
 				</Card.Section>
@@ -393,13 +398,18 @@ function UnbindingModal({
 
 			{/* step 1 */}
 			{step === 1 && (
-				<div>
+				<div className="flex flex-col justify-center">
 					<Image src={SeeYouImage} className="w-80% h-auto" />
 
+					<Space h={20} />
+
 					<Text size="sm">See You Later!</Text>
+					<Space h={10} />
 					<Text size="sm" className="font-500">
 						Account unbound.
 					</Text>
+
+					<Space h={20} />
 				</div>
 			)}
 

@@ -21,7 +21,7 @@ export default function Aside() {
 					bottomSpacing: 50,
 					containerSelector: ".main-content",
 					innerWrapperSelector: ".sidebar__inner",
-					scrollContainer: "#main-viewport",
+					// scrollContainer: "#main-viewport",
 				});
 			}
 		};
@@ -37,11 +37,12 @@ export default function Aside() {
 				</div>
 			)} */}
 
-			<div className="sidebar w-300px lg:w-400px hidden sm:block">
+			<div className="sidebar w-300px lg:w-400px">
 				<div className="sidebar__inner">
 					<Aside_
 						className="bg-transparent"
 						hiddenBreakpoint="sm"
+						height="auto"
 						// width={{ sm: 300, lg: 400 }}
 					>
 						<div className="p-4">

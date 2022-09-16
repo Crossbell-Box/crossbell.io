@@ -24,7 +24,10 @@ export default function AppLayout({ children }: PropsWithChildren) {
 					root: { maxWidth: "min(100vw, 1400px)" },
 					main: { padding: 0, width: mainWidth },
 				}}
-				className="main-content w-full"
+				classNames={{
+					root: "w-full",
+					body: "main-content",
+				}}
 				navbarOffsetBreakpoint="sm"
 				asideOffsetBreakpoint="sm"
 				fixed={false}

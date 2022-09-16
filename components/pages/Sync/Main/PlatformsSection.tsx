@@ -48,10 +48,7 @@ export default function PlatformsSection() {
 		}) ?? [];
 
 	const unboundPlatforms = SUPPORTED_PLATFORMS.filter((v) => v === "medium") // TODO: remove this when tiktok is ready
-		.filter(
-			(v) =>
-				!boundPlatforms?.some((bound) => bound.platform === v)
-		) 
+		.filter((v) => !boundPlatforms?.some((bound) => bound.platform === v))
 		.map<PlatformCardProps>((platform) => {
 			return {
 				isBound: false,
@@ -176,7 +173,9 @@ function PlatformCard({
 					<div>
 						{stats.map((stat) => (
 							<div key={stat.label} className="my-2">
-								<Text className="leading-1em font-500">{stat.value}</Text>
+								<Text className="leading-1em font-500 font-deca">
+									{stat.value}
+								</Text>
 								<Text size="xs" color="dimmed" className="leading-1em">
 									{stat.label}
 								</Text>
@@ -188,6 +187,7 @@ function PlatformCard({
 
 			<Space h={10} />
 
+			{/* actions */}
 			<div className="flex flex-row justify-between items-center flex-wrap">
 				{/* button */}
 				{!isBound ? (
