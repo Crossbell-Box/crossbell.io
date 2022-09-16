@@ -13,10 +13,10 @@ export function isSupportedPlatform(
 
 /**
  * This returns a handle text to verify on web2 platform's bio section.
- * @example "song" => "Crossbell@song"
+ * @example "song" => "song@crossbell"
  */
 export function getVeriHandle(handle: string) {
-	return `Crossbell@${handle}`;
+	return `${handle}@crossbell`;
 }
 
 /**
