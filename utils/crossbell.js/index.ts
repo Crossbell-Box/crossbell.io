@@ -12,6 +12,12 @@ import { BizError, ERROR_CODES } from "../errors";
 import { getCurrentAddress } from "../wallet/provider";
 import { useConnectModal } from "@rainbow-me/rainbowkit";
 
+export * from "./types";
+export * from "./format-sources";
+export * from "./get-source-type";
+export * from "./get-source-link";
+export * from "./get-known-source";
+
 const isProductionServer =
 	typeof window === "undefined" && process.env.NODE_ENV === "production";
 
