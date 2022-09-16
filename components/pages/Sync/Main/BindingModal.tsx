@@ -150,7 +150,7 @@ function BindingModal({ platform }: { platform: SupportedPlatform }) {
 	const renderStepper = () => {
 		return (
 			<>
-				<Text>Step {step + 1}/3</Text>
+				<Text>Step {step + 1}/2</Text>
 				<Text className="font-700">{stepNames[step]}</Text>
 				<Space h={20} />
 			</>
@@ -258,8 +258,8 @@ function BindingModal({ platform }: { platform: SupportedPlatform }) {
 				</Card.Section>
 			)}
 
-			{/* step 2 */}
-			{step === 2 && (
+			{/* step 2 - temporally removed */}
+			{/* {step === 2 && (
 				<div>
 					{renderStepper()}
 
@@ -277,10 +277,10 @@ function BindingModal({ platform }: { platform: SupportedPlatform }) {
 						))}
 					</Radio.Group>
 				</div>
-			)}
+			)} */}
 
-			{/* step 3 */}
-			{step === 3 && (
+			{/* step 2 */}
+			{step === 2 && (
 				<div className="flex flex-col items-center">
 					<Image src={DoneImage} className="w-80% h-auto" />
 
@@ -298,7 +298,7 @@ function BindingModal({ platform }: { platform: SupportedPlatform }) {
 
 			{/* action button */}
 			<div className="flex flex-row justify-end">
-				{step > 0 && step <= 2 && (
+				{step > 0 && step <= 1 && (
 					<Button
 						color="blue"
 						size="md"
@@ -312,7 +312,7 @@ function BindingModal({ platform }: { platform: SupportedPlatform }) {
 					</Button>
 				)}
 				<Space w={5} />
-				{step <= 2 && (
+				{step <= 1 && (
 					<Button
 						color="blue"
 						size="md"
@@ -323,7 +323,7 @@ function BindingModal({ platform }: { platform: SupportedPlatform }) {
 						Next
 					</Button>
 				)}
-				{step === 3 && (
+				{step === 2 && (
 					<Button
 						color="blue"
 						size="md"
