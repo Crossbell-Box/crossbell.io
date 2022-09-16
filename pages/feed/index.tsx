@@ -40,6 +40,7 @@ export function FeedTabs() {
 	const tabs = [
 		{ label: "Home", route: "/feed" },
 		{ label: "Explore", route: "/explore" },
+		{ label: "Latest", route: "/feed/latest" },
 	];
 
 	const { validate } = useLoginChecker();

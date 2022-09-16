@@ -23,6 +23,21 @@ export function useNotesOfCharacter(characterId?: number) {
 	);
 }
 
+// fetch notes
+
+export const SCOPE_KEY_NOTES = () => {
+	return [...SCOPE_KEY, "list", "all"];
+};
+export function useNotes() {
+	return useInfiniteQuery(
+		SCOPE_KEY_NOTES(),
+		({ pageParam }) => indexer.getNotes({ cursor: pageParam, limit: 20 }),
+		{
+			getNextPageParam: (lastPage, allPages) => lastPage.cursor,
+		}
+	);
+}
+
 // fetch notes for a note - used for comments
 
 export function fetchNotesForNote(
