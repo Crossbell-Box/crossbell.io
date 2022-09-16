@@ -46,13 +46,6 @@ const { chains, provider } = configureChains(
 // 	chains,
 // });
 
-const needsInjectedWalletFallback =
-	typeof window !== "undefined" &&
-	window.ethereum &&
-	!isMetaMask(window.ethereum) &&
-	!window.ethereum.isCoinbaseWallet &&
-	!window.ethereum.isBraveWallet;
-
 const connectors = connectorsForWallets([
 	{
 		groupName: "Popular",
@@ -61,9 +54,7 @@ const connectors = connectorsForWallets([
 			wallet.walletConnect({ chains }),
 			wallet.brave({ chains, shimDisconnect: true }),
 			wallet.coinbase({ appName: "Crossbell.io", chains }),
-			...(needsInjectedWalletFallback
-				? [wallet.injected({ chains, shimDisconnect: true })]
-				: []),
+			wallet.injected({ chains, shimDisconnect: true }),
 		],
 	},
 ]);

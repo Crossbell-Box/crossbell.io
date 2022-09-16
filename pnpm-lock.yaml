@@ -18,7 +18,7 @@ specifiers:
   '@mantine/notifications': 5.3.2
   '@mantine/nprogress': 5.3.2
   '@next/bundle-analyzer': 12.3.0
-  '@rainbow-me/rainbowkit': 0.5.3
+  '@rainbow-me/rainbowkit': 0.6.0
   '@tanstack/react-query': 4.3.4
   '@tanstack/react-query-devtools': 4.3.5
   '@types/node': 18.7.18
@@ -69,7 +69,7 @@ dependencies:
   '@mantine/notifications': 5.3.2_tzdsmqfuqma2yjgutjd3j35ljm
   '@mantine/nprogress': 5.3.2_tzdsmqfuqma2yjgutjd3j35ljm
   '@next/bundle-analyzer': 12.3.0
-  '@rainbow-me/rainbowkit': 0.5.3_77hisva6i3lzqozyotowjactue
+  '@rainbow-me/rainbowkit': 0.6.0_77hisva6i3lzqozyotowjactue
   '@tanstack/react-query': 4.3.4_biqbaboplfbrettd7655fr4n2y
   '@tanstack/react-query-devtools': 4.3.5_hbsvmtv74eglyqgnta4rgheflu
   classnames: 2.3.2
@@ -1382,8 +1382,8 @@ packages:
       react: 18.2.0
     dev: false
 
-  /@rainbow-me/rainbowkit/0.5.3_77hisva6i3lzqozyotowjactue:
-    resolution: {integrity: sha512-y5mJowaecrooUQRi39BiQ5B9s1gdiJjvtDWCgBsE6p9Ab8QKdB4UD7piPLYB3loy+nEF9Y1KPMBYq6NqJ3rTNQ==}
+  /@rainbow-me/rainbowkit/0.6.0_77hisva6i3lzqozyotowjactue:
+    resolution: {integrity: sha512-eeyn0dvb/p7CI7/GFR9KNcFeCqzSb0WsZKGHWIrzumGvNx7yyVwHsUNXVjnB3VmyXYkwJzm82856VlzulRDlGw==}
     engines: {node: '>=12.4'}
     peerDependencies:
       ethers: '>=5.5.1'
