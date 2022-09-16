@@ -10,6 +10,7 @@ import { BigNumber } from "ethers";
 import { parseEther } from "ethers/lib/utils";
 import { BizError, ERROR_CODES } from "../errors";
 import { getCurrentAddress } from "../wallet/provider";
+import { useConnectModal } from "@rainbow-me/rainbowkit";
 
 const isProductionServer =
 	typeof window === "undefined" && process.env.NODE_ENV === "production";
@@ -21,26 +22,30 @@ export const indexer = new Indexer(
 let contract: Contract;
 export const useContract = () => {
 	const { connector, isConnected } = useAccount();
+	const { openConnectModal } = useConnectModal();
 
 	if (isConnected && connector) {
 		// connect the contract with the provider
 		connector.getProvider().then(async (res) => {
 			contract = new Contract(res as any);
 			await contract.connect();
-			contract = injectContractChecker(contract);
+			contract = injectContractChecker(contract, openConnectModal);
 			return contract;
 		});
 	} else {
 		// user is not logged in
 		contract = new Contract();
 		contract.connect();
-		contract = injectContractChecker(contract);
+		contract = injectContractChecker(contract, openConnectModal);
 	}
 
 	return contract;
 };
 
-function injectContractChecker(contract: Contract) {
+function injectContractChecker(
+	contract: Contract,
+	openConnectModal?: () => void
+) {
 	return new Proxy(contract, {
 		get: (target, prop) => {
 			return async (...args: any[]) => {
@@ -50,6 +55,7 @@ function injectContractChecker(contract: Contract) {
 				const address = getCurrentAddress();
 				if (!noNeedTxMethods.includes(prop)) {
 					if (!address) {
+						openConnectModal?.();
 						throw new BizError(
 							"Not connected. Please connect your wallet.",
 							ERROR_CODES.NOT_CONNECTED
