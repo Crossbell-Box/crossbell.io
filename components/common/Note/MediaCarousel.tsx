@@ -7,6 +7,7 @@ import classNames from "classnames";
 import { getValidAttachments, mimeTypeToMediaType } from "@/utils/metadata";
 import { useElementSize, useHotkeys } from "@mantine/hooks";
 import VideoPlayer from "./VideoPlayer";
+import { ipfsLinkToHttpLink } from "@/utils/ipfs";
 
 export default function MediaCarousel({
 	attachments = [],
@@ -153,7 +154,10 @@ export default function MediaCarousel({
 									data-overlay-tap-area="1"
 								>
 									{!isThumbnail && isOverlay ? (
-										<img src={src} className="max-h-80vh max-w-full" />
+										<img
+											src={ipfsLinkToHttpLink(src)}
+											className="max-h-80vh max-w-full"
+										/>
 									) : (
 										<Image
 											alt={a.alt ?? "image"}
