@@ -40,7 +40,7 @@ export function FeedTabs() {
 	const tabs = [
 		{ label: "Home", route: "/feed" },
 		{ label: "Explore", route: "/explore" },
-		{ label: "Latest", route: "/feed/latest" },
+		{ label: "Latest", route: "/latest" },
 	];
 
 	const { validate } = useLoginChecker();
@@ -49,7 +49,7 @@ export function FeedTabs() {
 	const { hasCharacter, isLoadingCharacter } = useHasCharacter();
 	const router = useRouter();
 	useEffect(() => {
-		if (!isLoadingCharacter && !hasCharacter) {
+		if (router.asPath === "/feed" && !isLoadingCharacter && !hasCharacter) {
 			router.replace("/explore");
 		}
 	}, [isLoadingCharacter, hasCharacter]);

@@ -40,10 +40,10 @@ function NoteList() {
 			{/* feeds */}
 			{data?.pages.map((page, i) => (
 				<Fragment key={i}>
-					{page.list.map((feed, i) => (
+					{page.list.map((note, i) => (
 						<Note
-							note={feed}
-							key={`${feed.transactionHash}-${feed.logIndex}`}
+							note={note}
+							key={`${note.characterId}-${note.noteId}`}
 							collapsible
 						/>
 					))}
