@@ -46,6 +46,7 @@ export function BlockSection({
 						href={link}
 						onClick={openLink}
 						target="_blank"
+						rel="noreferrer"
 					>
 						<Text className="i-csb:arrow-forward" />
 					</a>
