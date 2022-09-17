@@ -88,6 +88,7 @@ export function useBlocks(props: NoteOnChainSectionProps): BlockProps[] {
 						title: `Sync from ${source.name}`,
 						link: source.link,
 						detail: source.link,
+						multiline: true,
 					},
 				],
 			};

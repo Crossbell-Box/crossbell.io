@@ -53,3 +53,7 @@
 	white-space: nowrap;
 	margin: 0;
 }
+
+.detail.multiline {
+	white-space: pre-wrap;
+}
