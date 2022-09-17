@@ -1,7 +1,6 @@
 import { useHandleLinkClick } from "@crossbell/ipfs-react";
 import { Text } from "@mantine/core";
 import React from "react";
-import classNames from "classnames";
 
 import { copyToClipboard } from "@/utils/other";
 
@@ -9,13 +8,13 @@ import styles from "./block-section.module.css";
 
 export type BlockSectionProps = {
 	title: string;
-	link: string;
-	detail: string;
+	link: string | null;
+	detail: string | null;
 };
 
 export function BlockSection({ title, link, detail }: BlockSectionProps) {
 	const copy = React.useCallback(
-		() => copyToClipboard(detail, { showNotification: true }),
+		() => detail && copyToClipboard(detail, { showNotification: true }),
 		[detail]
 	);
 
@@ -45,9 +44,12 @@ export function BlockSection({ title, link, detail }: BlockSectionProps) {
 					</a>
 				)}
 			</div>
-			<p className={styles.detail} title={detail}>
-				{detail}
-			</p>
+
+			{detail && (
+				<p className={styles.detail} title={detail}>
+					{detail}
+				</p>
+			)}
 		</div>
 	);
 }

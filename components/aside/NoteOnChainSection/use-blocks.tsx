@@ -14,19 +14,23 @@ export function useBlocks(props: NoteOnChainSectionProps): BlockProps[] {
 	const { note, status } = useNoteInfo(props);
 
 	return React.useMemo(() => {
-		const crossbellChain: BlockProps = {
-			status,
-			title: "Crossbell Chain",
-			icon: <CrossbellLogo />,
-			sections: (() => {
-				const transactionHash = note?.transactionHash ?? null;
-				const owner = note?.owner ?? null;
-				const contractAddress =
-					note?.contractAddress && note.contractAddress !== NIL_ADDRESS
-						? note.contractAddress
-						: null;
+		const crossbellChain = ((): BlockProps => {
+			const transactionHash = note?.transactionHash ?? null;
+			const owner = note?.owner ?? null;
+			const contractAddress =
+				note?.contractAddress && note.contractAddress !== NIL_ADDRESS
+					? note.contractAddress
+					: null;
 
-				return compact([
+			return {
+				status,
+				title: "Crossbell Chain",
+				icon: <CrossbellLogo />,
+				tips: compact([
+					"This note is posted on Crossbell by the author.",
+					contractAddress && "The note is an NFT.",
+				]).join(" "),
+				sections: compact([
 					transactionHash && {
 						title: "Transaction details",
 						link: composeScanTxHref(transactionHash),
@@ -44,51 +48,53 @@ export function useBlocks(props: NoteOnChainSectionProps): BlockProps[] {
 						link: `https://rss3.io/result?search=${owner}`,
 						detail: owner,
 					},
-				]);
-			})(),
-		};
+				]),
+			};
+		})();
 
-		const ipfs: BlockProps = {
-			status,
-			title: "IPFS",
-			icon: <IPFSLogo />,
-			sections: (() => {
-				const uri = note?.uri ?? null;
+		const ipfs = ((): BlockProps => {
+			const uri = note?.uri ?? null;
 
-				return compact([
+			return {
+				status,
+				tips: "The content of this note is on IPFS.",
+				title: "IPFS",
+				icon: <IPFSLogo />,
+				sections: compact([
 					uri && {
 						title: "IPFS address",
 						link: uri,
 						detail: uri,
 					},
-				]);
-			})(),
-		};
+				]),
+			};
+		})();
 
-		const source: BlockProps = {
-			status,
-			title: "Source",
-			icon: <SourceLogo />,
-			sections: (() => {
-				const formattedSources = note ? formatSources(note) : [];
+		const source = ((): BlockProps | null => {
+			const formattedSources = note ? formatSources(note) : [];
+			const source = formattedSources.find(
+				(source) => source.type === SourceType.platform
+			);
 
-				return compact(
-					formattedSources
-						.filter((source) => source.type === SourceType.platform)
-						.map(
-							(source) =>
-								source.link && {
-									title: `Sync from ${source.name}`,
-									link: source.link,
-									detail: source.link,
-								}
-						)
-				);
-			})(),
-		};
+			if (!source) return null;
+
+			return {
+				status,
+				tips: `The note is synced from ${source.name}.`,
+				title: "Source",
+				icon: <SourceLogo />,
+				sections: [
+					{
+						title: `Sync from ${source.name}`,
+						link: source.link,
+						detail: source.link,
+					},
+				],
+			};
+		})();
 
 		return [crossbellChain, ipfs, source].filter(
-			(block) => block.sections.length > 0
+			(block): block is BlockProps => !!block && block.sections.length > 0
 		);
 	}, [note, status]);
 }

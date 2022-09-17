@@ -1,5 +1,5 @@
 import type { QueryStatus } from "@tanstack/react-query";
-import { Text, Loader, Center } from "@mantine/core";
+import { Text, Loader, Center, Tooltip } from "@mantine/core";
 import { useToggle } from "react-use";
 import classNames from "classnames";
 import React from "react";
@@ -11,21 +11,39 @@ import { BlockSection, BlockSectionProps } from "./block-section";
 
 export type BlockProps = {
 	title: string;
+	tips: React.ReactNode;
 	icon: React.ReactNode;
 	sections: BlockSectionProps[];
 	status: QueryStatus;
 };
 
-export function Block({ title, icon, sections, status }: BlockProps) {
+export function Block({ title, tips, icon, sections, status }: BlockProps) {
 	const [isCollapsed, toggleIsCollapsed] = useToggle(true);
 
 	return (
 		<div className={styles.container}>
 			<div className={styles.header} onClick={toggleIsCollapsed}>
 				<div className={styles.icon}>{icon}</div>
+
 				<span className={styles.title} title={title}>
 					{title}
 				</span>
+
+				{tips && (
+					<Tooltip
+						offset={4}
+						label={tips}
+						openDelay={200}
+						multiline={true}
+						transition="pop-bottom-left"
+						classNames={{ tooltip: styles.tooltip }}
+					>
+						<button className={styles.tipsBtn}>
+							<Text className="i-csb:circle-help" />
+						</button>
+					</Tooltip>
+				)}
+
 				<Text
 					className={classNames(
 						isCollapsed ? "i-csb:circle-plus" : "i-csb:circle-minus",
