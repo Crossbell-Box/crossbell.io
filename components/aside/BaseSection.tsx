@@ -1,12 +1,20 @@
-import { Card, Title } from "@mantine/core";
-import { PropsWithChildren } from "react";
+import { Card, Title, CardProps } from "@mantine/core";
+
+export type BaseSectionProps = CardProps & {
+	title: string;
+};
 
 export default function BaseSection({
 	title,
+	style,
 	children,
-}: PropsWithChildren<{ title: string }>) {
+	...props
+}: BaseSectionProps) {
 	return (
-		<Card style={{ boxShadow: "0px 0px 10px rgba(38, 108, 158, 0.1)" }}>
+		<Card
+			{...props}
+			style={{ boxShadow: "0px 0px 10px rgba(38, 108, 158, 0.1)", ...style }}
+		>
 			<Title order={6} className="text-[#687792]">
 				{title}
 			</Title>
