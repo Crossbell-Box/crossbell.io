@@ -41,7 +41,7 @@ specifiers:
   react-intersection-observer: 9.4.0
   react-markdown: 8.0.3
   react-medium-image-zoom: 5.0.2
-  react-player: 2.10.1
+  react-player: 2.11.0
   rehype-raw: 6.1.1
   rehype-sanitize: 5.0.1
   remark-emoji: 3.0.2
@@ -86,7 +86,7 @@ dependencies:
   react-intersection-observer: 9.4.0_react@18.2.0
   react-markdown: 8.0.3_w5j4k42lgipnm43s3brx6h3c34
   react-medium-image-zoom: 5.0.2_biqbaboplfbrettd7655fr4n2y
-  react-player: 2.10.1_react@18.2.0
+  react-player: 2.11.0_react@18.2.0
   rehype-raw: 6.1.1
   rehype-sanitize: 5.0.1
   remark-emoji: 3.0.2
@@ -6365,8 +6365,8 @@ packages:
       whatwg-url-without-unicode: 8.0.0-3
     dev: false
 
-  /react-player/2.10.1_react@18.2.0:
-    resolution: {integrity: sha512-ova0jY1Y1lqLYxOehkzbNEju4rFXYVkr5rdGD71nsiG4UKPzRXQPTd3xjoDssheoMNjZ51mjT5ysTrdQ2tEvsg==}
+  /react-player/2.11.0_react@18.2.0:
+    resolution: {integrity: sha512-fIrwpuXOBXdEg1FiyV9isKevZOaaIsAAtZy5fcjkQK9Nhmk1I2NXzY/hkPos8V0zb/ZX416LFy8gv7l/1k3a5w==}
     peerDependencies:
       react: '>=16.6.0'
     dependencies:
