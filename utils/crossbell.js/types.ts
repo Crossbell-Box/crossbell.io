@@ -8,7 +8,12 @@ export enum KnownSource {
 }
 
 export enum SourceType {
-	platform = "platform",
+	internalPlatform = "internal-platform",
+	externalPlatform = "external-platform",
 	syncTool = "sync-tool",
 	unknown = "unknown",
 }
+
+export type PlatformSourceType =
+	| SourceType.internalPlatform
+	| SourceType.externalPlatform;

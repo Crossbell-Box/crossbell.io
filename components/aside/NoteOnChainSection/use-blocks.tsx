@@ -3,7 +3,12 @@ import compact from "lodash.compact";
 
 import { NIL_ADDRESS } from "@/utils/ethers";
 import { composeScanTxHref, decomposeNoteId } from "@/utils/url";
-import { formatSources, SourceType } from "@/utils/crossbell.js";
+import {
+	SourceType,
+	formatSources,
+	isPlatformSource,
+	PlatformSourceType,
+} from "@/utils/crossbell.js";
 import { useNote } from "@/utils/apis/indexer";
 
 import type { NoteOnChainSectionProps } from "./index";
@@ -72,20 +77,36 @@ export function useBlocks(props: NoteOnChainSectionProps): BlockProps[] {
 
 		const source = ((): BlockProps | null => {
 			const formattedSources = note ? formatSources(note) : [];
-			const source = formattedSources.find(
-				(source) => source.type === SourceType.platform
+			const source = formattedSources.find((source) =>
+				isPlatformSource(source.type)
 			);
 
 			if (!source) return null;
 
+			const sourceType = source.type as PlatformSourceType;
+
 			return {
 				status,
-				tips: `The note is synced from ${source.name}.`,
+				tips: ((): string => {
+					switch (sourceType) {
+						case SourceType.externalPlatform:
+							return `The note is synced from ${source.name}.`;
+						case SourceType.internalPlatform:
+							return `The note is posted on ${source.name}.`;
+					}
+				})(),
 				title: "Source",
 				icon: <SourceLogo />,
 				sections: [
 					{
-						title: `Sync from ${source.name}`,
+						title: (() => {
+							switch (sourceType) {
+								case SourceType.externalPlatform:
+									return `Sync from ${source.name}`;
+								case SourceType.internalPlatform:
+									return `Post on ${source.name}`;
+							}
+						})(),
 						link: source.link,
 						detail: source.link,
 						multiline: true,

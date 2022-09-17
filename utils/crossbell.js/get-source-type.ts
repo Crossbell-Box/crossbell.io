@@ -2,10 +2,10 @@ import { KnownSource, SourceType } from "./types";
 import { getKnownSource } from "./get-known-source";
 
 const map: Record<KnownSource, SourceType> = {
-	[KnownSource.xlog]: SourceType.platform,
-	[KnownSource.twitter]: SourceType.platform,
-	[KnownSource.medium]: SourceType.platform,
-	[KnownSource.tiktok]: SourceType.platform,
+	[KnownSource.xlog]: SourceType.internalPlatform,
+	[KnownSource.twitter]: SourceType.externalPlatform,
+	[KnownSource.medium]: SourceType.externalPlatform,
+	[KnownSource.tiktok]: SourceType.externalPlatform,
 
 	[KnownSource.operatorSync]: SourceType.syncTool,
 	[KnownSource.crossSync]: SourceType.syncTool,

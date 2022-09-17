@@ -17,6 +17,7 @@ export * from "./format-sources";
 export * from "./get-source-type";
 export * from "./get-source-link";
 export * from "./get-known-source";
+export * from "./is-platform-source-type";
 
 const isProductionServer =
 	typeof window === "undefined" && process.env.NODE_ENV === "production";
