@@ -1,3 +1,24 @@
+.baseSection {
+	position: relative;
+	z-index: 0;
+}
+
+.baseSection::after {
+	content: "";
+	position: absolute;
+	top: 0;
+	left: 0;
+	width: 100%;
+	height: 100%;
+	background-image: url("/images/note-on-chain-bg.png");
+	background-size: 100% auto;
+	background-repeat: no-repeat;
+	background-position: top center;
+	pointer-events: none;
+	z-index: -1;
+	opacity: 0.5;
+}
+
 .container {
 	padding: 16px;
 }

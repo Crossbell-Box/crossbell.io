@@ -14,7 +14,7 @@ export const NoteOnChainSection = (props: NoteOnChainSectionProps) => {
 	const blocks = useBlocks(props);
 
 	return (
-		<BaseSection title="Note On-chain">
+		<BaseSection title="Note On-chain" className={styles.baseSection}>
 			<div className={styles.container}>
 				{blocks.map((block) => (
 					<Block {...block} key={block.title} />
