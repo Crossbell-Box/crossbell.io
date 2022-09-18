@@ -17,6 +17,7 @@ export default function WalletProvider({ children }: PropsWithChildren) {
 				theme={lightTheme({
 					accentColor: mantineTheme.colors.brand[primaryShade],
 					accentColorForeground: "black",
+					borderRadius: "small",
 				})}
 			>
 				{children}
