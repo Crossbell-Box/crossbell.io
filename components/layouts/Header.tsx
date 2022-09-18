@@ -1,4 +1,4 @@
-import { ActionIcon, Space, Text, Title } from "@mantine/core";
+import { ActionIcon, Space, Text } from "@mantine/core";
 import React, { PropsWithChildren, useEffect, useState } from "react";
 import { useRouter } from "next/router";
 import classNames from "classnames";
@@ -72,12 +72,9 @@ export default function Header({
 				)}
 				<Space w={8} />
 				{typeof children === "string" ? (
-					<Title
-						order={2}
-						className="py-3 font-semibold text-size-4xl overflow-hidden text-ellipsis"
-					>
+					<Text className="py-3 font-semibold text-size-4xl overflow-hidden text-ellipsis">
 						{children}
-					</Title>
+					</Text>
 				) : (
 					children
 				)}

@@ -18,10 +18,6 @@ import rehypeRaw from "rehype-raw";
 import remarkGfm from "remark-gfm";
 import remarkEmoji from "remark-emoji";
 import rehypeSanitize, { defaultSchema } from "rehype-sanitize";
-import { useLinkPreview } from "@/utils/apis/link-preview";
-import LinkPreviewCard, {
-	LinkPreviewSkeleton,
-} from "@/components/card/LinkPreviewCard";
 import { Button } from "@mantine/core";
 import { isExternalUrl } from "@/utils/url";
 import { CharacterHandle } from "../Character";
@@ -38,9 +34,9 @@ export function MarkdownRenderer({
 	collapsible?: boolean;
 	displayMode?: "normal" | "main";
 }>) {
-	const { ref, width, height } = useElementSize();
+	const { ref, height } = useElementSize();
 
-	const isExceeded = height > 500;
+	const isExceeded = height >= 500;
 
 	const [collapsed, setCollapsed] = useState(collapsible);
 
@@ -60,7 +56,8 @@ export function MarkdownRenderer({
 
 		return (
 			<div className="relative">
-				<div
+				<article
+					ref={ref}
 					className={classNames(
 						"markdown-renderer overflow-hidden transition-all-200 break-all",
 						{
@@ -74,125 +71,173 @@ export function MarkdownRenderer({
 							: undefined,
 					}}
 				>
-					<div ref={ref}>
-						<ReactMarkdown
-							components={{
-								h1: ({ node, ...props }) => <Title order={1} {...props} />,
-								h2: ({ node, ...props }) => <Title order={2} {...props} />,
-								h3: ({ node, ...props }) => <Title order={3} {...props} />,
-								h4: ({ node, ...props }) => <Title order={4} {...props} />,
-								h5: ({ node, ...props }) => <Title order={5} {...props} />,
-								h6: ({ node, ...props }) => <Title order={6} {...props} />,
-								p: ({ node, ...props }) => {
-									return (
-										<Text
-											size={fontSize}
-											className="leading-1.25em my-2 break-words"
-											style={{ wordBreak: "break-word" }}
+					<ReactMarkdown
+						components={{
+							h1: ({ node, ...props }) => <Title order={1} {...props} />,
+							h2: ({ node, ...props }) => <Title order={2} {...props} />,
+							h3: ({ node, ...props }) => <Title order={3} {...props} />,
+							h4: ({ node, ...props }) => <Title order={4} {...props} />,
+							h5: ({ node, ...props }) => <Title order={5} {...props} />,
+							h6: ({ node, ...props }) => <Title order={6} {...props} />,
+							p: ({ node, ...props }) => {
+								return (
+									<Text
+										size={fontSize}
+										className="leading-1.25em my-2 break-words"
+										style={{ wordBreak: "break-word" }}
+										{...props}
+									/>
+								);
+							},
+							img: ({ node, src, ...props }) => {
+								return (
+									<Zoom>
+										<img
+											className="max-w-full"
+											src={ipfsLinkToHttpLink(src!)}
 											{...props}
+											onClick={(e) => e.stopPropagation()}
+											data-original-src={src}
 										/>
-									);
-								},
-								img: ({ node, src, ...props }) => {
-									return (
-										<Zoom>
-											<img
-												className="max-w-full"
-												src={ipfsLinkToHttpLink(src!)}
-												{...props}
-												onClick={(e) => e.stopPropagation()}
-												data-original-src={src}
-											/>
-										</Zoom>
-									);
-								},
-								// TODO: need a better way to handle this
-								// img: function MarkdownImg({ node, ...props }) {
-								// 	const src = ipfsLinkToHttpLink(props.src!);
-								// 	// const [paddingTop, setPaddingTop] = useState<string>("0");
+									</Zoom>
+								);
+							},
+							// TODO: need a better way to handle this
+							// img: function MarkdownImg({ node, ...props }) {
+							// 	const src = ipfsLinkToHttpLink(props.src!);
+							// 	// const [paddingTop, setPaddingTop] = useState<string>("0");
 
-								// 	return (
-								// 		<div
-								// 			className="relative my-2 w-full"
-								// 			style={{
-								// 				height: props.height ?? 300,
-								// 				width: props.width,
-								// 				// paddingTop,
-								// 			}}
-								// 		>
-								// 			<Image
-								// 				className="cursor-pointer rounded-md object-contain"
-								// 				alt={props.alt}
-								// 				title={props.title}
-								// 				fill
-								// 				sizes="(min-width: 75em) 33vw, (min-width: 48em) 50vw, 100vw"
-								// 				src={src}
-								// 				onClick={(e) => {
-								// 					e.stopPropagation();
-								// 					window.open(src);
-								// 				}}
-								// 				// onLoadingComplete={(e) => {
-								// 				// 	if (paddingTop === "0") {
-								// 				// 		const { naturalWidth, naturalHeight } = e;
-								// 				// 		setPaddingTop(
-								// 				// 			`calc(100% / (${naturalWidth} / ${naturalHeight}))`
-								// 				// 		);
-								// 				// 		console.log({ paddingTop });
-								// 				// 	}
-								// 				// }}
-								// 			/>
-								// 		</div>
-								// 	);
-								// },
-								a: function Link({ node, ...props }) {
-									return (
-										<Text
-											size={fontSize}
-											variant="link"
-											component="a"
-											href={props.href}
-											target={
-												props.href && isExternalUrl(props.href)
-													? "_blank"
-													: undefined
-											}
-											rel="noreferrer"
-											onClick={(e: any) => e.stopPropagation()}
-											inline
-										>
-											{props.children}
-										</Text>
-									);
-									// TODO: better UI
-									// const { data, isLoading, isSuccess } = useLinkPreview(
-									// 	props.href
-									// );
-									// return isLoading ? (
-									// 	<LinkPreviewSkeleton />
-									// ) : isSuccess &&
-									//   data &&
-									//   (("siteName" in data && data.siteName) ||
-									// 		("title" in data && data.title) ||
-									// 		("description" in data && data.description)) ? (
-									// 	<LinkPreviewCard data={data} />
-									// ) : (
-									// 	<Text
-									// 		size={fontSize}
-									// 		variant="link"
-									// 		component="a"
-									// 		href={props.href}
-									// 		target={
-									// 			props.href && isExternalUrl(props.href)
-									// 				? "_blank"
-									// 				: undefined
-									// 		}
-									// 		rel="noreferrer"
-									// 	>
-									// 		{props.children}
-									// 	</Text>
-									// );
-								},
-								video: ({ node, src, ...props }) => {
+							// 	return (
+							// 		<div
+							// 			className="relative my-2 w-full"
+							// 			style={{
+							// 				height: props.height ?? 300,
+							// 				width: props.width,
+							// 				// paddingTop,
+							// 			}}
+							// 		>
+							// 			<Image
+							// 				className="cursor-pointer rounded-md object-contain"
+							// 				alt={props.alt}
+							// 				title={props.title}
+							// 				fill
+							// 				sizes="(min-width: 75em) 33vw, (min-width: 48em) 50vw, 100vw"
+							// 				src={src}
+							// 				onClick={(e) => {
+							// 					e.stopPropagation();
+							// 					window.open(src);
+							// 				}}
+							// 				// onLoadingComplete={(e) => {
+							// 				// 	if (paddingTop === "0") {
+							// 				// 		const { naturalWidth, naturalHeight } = e;
+							// 				// 		setPaddingTop(
+							// 				// 			`calc(100% / (${naturalWidth} / ${naturalHeight}))`
+							// 				// 		);
+							// 				// 		console.log({ paddingTop });
+							// 				// 	}
+							// 				// }}
+							// 			/>
+							// 		</div>
+							// 	);
+							// },
+							a: function Link({ node, ...props }) {
+								return (
+									<Text
+										size={fontSize}
+										variant="link"
+										component="a"
+										href={props.href}
+										target={
+											props.href && isExternalUrl(props.href)
+												? "_blank"
+												: undefined
+										}
+										rel="noreferrer"
+										onClick={(e: any) => e.stopPropagation()}
+										inline
+									>
+										{props.children}
+									</Text>
+								);
+								// TODO: better UI
+								// const { data, isLoading, isSuccess } = useLinkPreview(
+								// 	props.href
+								// );
+								// return isLoading ? (
+								// 	<LinkPreviewSkeleton />
+								// ) : isSuccess &&
+								//   data &&
+								//   (("siteName" in data && data.siteName) ||
+								// 		("title" in data && data.title) ||
+								// 		("description" in data && data.description)) ? (
+								// 	<LinkPreviewCard data={data} />
+								// ) : (
+								// 	<Text
+								// 		size={fontSize}
+								// 		variant="link"
+								// 		component="a"
+								// 		href={props.href}
+								// 		target={
+								// 			props.href && isExternalUrl(props.href)
+								// 				? "_blank"
+								// 				: undefined
+								// 		}
+								// 		rel="noreferrer"
+								// 	>
+								// 		{props.children}
+								// 	</Text>
+								// );
+							},
+							video: ({ node, src, ...props }) => {
+								return (
+									<div
+										className="flex justify-center items-center w-full"
+										onClick={(e) => e.stopPropagation()}
+									>
+										<VideoPlayer url={src} controls />
+									</div>
+								);
+							},
+							table: ({ node, ...props }) => {
+								return (
+									<Table striped highlightOnHover>
+										{props.children}
+									</Table>
+								);
+							},
+							blockquote: ({ node, ...props }) => {
+								return <Blockquote>{props.children}</Blockquote>;
+							},
+							code: ({ node, ...props }) => {
+								return <Code>{props.children}</Code>;
+							},
+							pre: function Pre({ node, ...props }) {
+								return (
+									<Code block className="overflow-auto">
+										{props.children}
+									</Code>
+								);
+							},
+							ol: ({ node, ...props }) => {
+								return <List type="ordered">{props.children}</List>;
+							},
+							ul: ({ node, ...props }) => {
+								return <List type="unordered">{props.children}</List>;
+							},
+							li: ({ node, ...props }) => {
+								return <List.Item>{props.children}</List.Item>;
+							},
+							mark: ({ node, ...props }) => {
+								return <Mark>{props.children}</Mark>;
+							},
+							hr: ({ node, ...props }) => {
+								return <Divider />;
+							},
+							iframe: ({ node, src, ...props }) => {
+								if (
+									src?.startsWith("https://www.youtube.com") ||
+									src?.startsWith("https://youtu.be")
+								) {
 									return (
 										<div
 											className="flex justify-center items-center w-full"
@@ -201,138 +246,91 @@ export function MarkdownRenderer({
 											<VideoPlayer url={src} controls />
 										</div>
 									);
-								},
-								table: ({ node, ...props }) => {
-									return (
-										<Table striped highlightOnHover>
-											{props.children}
-										</Table>
-									);
-								},
-								blockquote: ({ node, ...props }) => {
-									return <Blockquote>{props.children}</Blockquote>;
-								},
-								code: ({ node, ...props }) => {
-									return <Code>{props.children}</Code>;
-								},
-								pre: function Pre({ node, ...props }) {
-									return (
-										<Code block className="overflow-auto">
-											{props.children}
-										</Code>
-									);
-								},
-								ol: ({ node, ...props }) => {
-									return <List type="ordered">{props.children}</List>;
-								},
-								ul: ({ node, ...props }) => {
-									return <List type="unordered">{props.children}</List>;
-								},
-								li: ({ node, ...props }) => {
-									return <List.Item>{props.children}</List.Item>;
-								},
-								mark: ({ node, ...props }) => {
-									return <Mark>{props.children}</Mark>;
-								},
-								hr: ({ node, ...props }) => {
-									return <Divider />;
-								},
-								iframe: ({ node, src, ...props }) => {
-									if (
-										src?.startsWith("https://www.youtube.com") ||
-										src?.startsWith("https://youtu.be")
-									) {
-										return (
-											<div
-												className="flex justify-center items-center w-full"
-												onClick={(e) => e.stopPropagation()}
-											>
-												<VideoPlayer url={src} controls />
-											</div>
-										);
-									}
-									return (
-										<iframe
-											src={src}
-											{...props}
-											onClick={(e) => e.stopPropagation()}
-										/>
-									);
-								},
-								// @ts-ignore
-								"at-mention": function AtMention({ node, ...props }) {
-									const { data, isLoading } = useCharacterHandleExists(
-										props.handle
-									);
-									const noHandle = !isLoading && !data;
-									return isLoading || noHandle ? (
-										<>
-											<span>@{props.handle}</span>{" "}
-										</>
-									) : (
-										<>
-											<CharacterHandle handle={props.handle} />{" "}
-										</>
-									);
-								},
-							}}
-							rehypePlugins={[
-								rehypeRaw,
-								[
-									rehypeSanitize,
-									{
-										...defaultSchema,
-										protocols: {
-											...defaultSchema.protocols,
-											src: ["http", "https", "ipfs"],
-										},
-										tagNames: [
-											...(defaultSchema.tagNames || []),
-											"video",
-											"iframe",
-										],
-										attributes: {
-											...defaultSchema.attributes,
-											div: [
-												...(defaultSchema.attributes?.div || []),
-												["className"],
-											],
-											code: [["className"]],
-											video: [
-												["className"],
-												["src"],
-												["controls"],
-												["loop"],
-												["muted"],
-												["playsinline"],
-											],
-											iframe: [
-												["className"],
-												["src"],
-												["allowfullscreen"],
-												["frameborder"],
-												["width"],
-												["height"],
-												["allow"],
-											],
-										},
+								}
+								return (
+									<iframe
+										src={src}
+										{...props}
+										onClick={(e) => e.stopPropagation()}
+									/>
+								);
+							},
+							// @ts-ignore
+							"at-mention": function AtMention({ node, ...props }) {
+								const { data, isLoading } = useCharacterHandleExists(
+									props.handle
+								);
+								const noHandle = !isLoading && !data;
+								return isLoading || noHandle ? (
+									<>
+										<span>@{props.handle}</span>{" "}
+									</>
+								) : (
+									<>
+										<CharacterHandle handle={props.handle} />{" "}
+									</>
+								);
+							},
+						}}
+						rehypePlugins={[
+							rehypeRaw,
+							[
+								rehypeSanitize,
+								{
+									...defaultSchema,
+									protocols: {
+										...defaultSchema.protocols,
+										src: ["http", "https", "ipfs"],
 									},
-								],
-							]}
-							remarkPlugins={[remarkGfm, remarkEmoji]}
-						>
-							{source}
-						</ReactMarkdown>
-					</div>
-				</div>
+									tagNames: [
+										...(defaultSchema.tagNames || []),
+										"video",
+										"iframe",
+										"at-mention",
+									],
+									attributes: {
+										...defaultSchema.attributes,
+										div: [
+											...(defaultSchema.attributes?.div || []),
+											["className"],
+										],
+										code: [["className"]],
+										video: [
+											["className"],
+											["src"],
+											["controls"],
+											["loop"],
+											["muted"],
+											["playsinline"],
+										],
+										iframe: [
+											["className"],
+											["src"],
+											["allowfullscreen"],
+											["frameborder"],
+											["width"],
+											["height"],
+											["allow"],
+										],
+										"at-mention": [["handle"]],
+									},
+								},
+							],
+						]}
+						remarkPlugins={[remarkGfm, remarkEmoji]}
+					>
+						{source}
+					</ReactMarkdown>
+				</article>
+
 				{showReadMoreButton && (
 					<div className="absolute left-0 right-0 bottom-0 z-10 flex items-center justify-center py-3">
-						<Button radius={"xl"}>Read More</Button>
+						<Button radius="xl">Read More</Button>
 					</div>
 				)}
 			</div>
 		);
-	}, [children, collapsible]);
+	}, [children, collapsible, height]);
 
 	return Memoed;
 }
