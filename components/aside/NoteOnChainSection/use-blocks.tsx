@@ -37,7 +37,7 @@ export function useBlocks(props: NoteOnChainSectionProps): BlockProps[] {
 				icon: <CrossbellLogo />,
 				tips: compact([
 					"This note is posted on Crossbell by the author.",
-					contractAddress && "The note is an NFT.",
+					contractAddress && "This note is an NFT.",
 				]).join(" "),
 				sections: compact([
 					transactionHash && {
@@ -94,9 +94,9 @@ export function useBlocks(props: NoteOnChainSectionProps): BlockProps[] {
 				tips: ((): string => {
 					switch (sourceType) {
 						case SourceType.externalPlatform:
-							return `The note is synced from ${source.name}.`;
+							return `This note is synced from ${source.name}.`;
 						case SourceType.internalPlatform:
-							return `The note is posted on ${source.name}.`;
+							return `This note is posted on ${source.name}.`;
 					}
 				})(),
 				title: "Source",
