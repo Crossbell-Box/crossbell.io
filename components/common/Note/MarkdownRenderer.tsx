@@ -82,6 +82,7 @@ export function MarkdownRenderer({
 							p: ({ node, ...props }) => {
 								return (
 									<Text
+										component="p"
 										size={fontSize}
 										className="leading-1.25em my-2 break-words"
 										style={{ wordBreak: "break-word" }}
@@ -143,9 +144,9 @@ export function MarkdownRenderer({
 							a: function Link({ node, ...props }) {
 								return (
 									<Text
+										component="a"
 										size={fontSize}
 										variant="link"
-										component="a"
 										href={props.href}
 										target={
 											props.href && isExternalUrl(props.href)

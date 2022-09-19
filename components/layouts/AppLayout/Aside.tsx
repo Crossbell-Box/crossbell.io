@@ -39,7 +39,7 @@ export default function Aside() {
 				</div>
 			)} */}
 
-			<div className="sidebar w-300px lg:w-400px">
+			<div className="sidebar w-300px lg:w-400px hidden sm:block">
 				<div className="sidebar__inner">
 					<Aside_
 						className="bg-transparent"
