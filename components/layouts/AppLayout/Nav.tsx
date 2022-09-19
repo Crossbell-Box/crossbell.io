@@ -21,7 +21,7 @@ export default function Nav() {
 			className="sticky top-0 bg-transparent"
 			hiddenBreakpoint="sm"
 			hidden={!opened}
-			width={{ sm: 220, lg: 220 }}
+			width={{ sm: 250, lg: 250 }}
 		>
 			<Navbar.Section>
 				<Link href="/">
@@ -161,7 +161,7 @@ function NavLink({
 			component={NextLink}
 			href={href}
 			className={classNames(
-				"relative block py-2 px-4 my-4 rounded-lg",
+				"relative block py-3 px-4 my-4 rounded-lg",
 				"transition-colors",
 				className,
 				{

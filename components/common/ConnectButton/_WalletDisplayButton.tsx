@@ -62,6 +62,9 @@ const WalletDisplayButton = forwardRef<
 			mode={mode}
 			ref={ref}
 			{...props}
+			classNames={{
+				label: "w-full",
+			}}
 			styles={{
 				root: {
 					background:
@@ -72,7 +75,7 @@ const WalletDisplayButton = forwardRef<
 			{isLoading ? (
 				<Text>Loading...</Text>
 			) : (
-				<div className="flex flex-col justify-between">
+				<div className="flex flex-col justify-between w-full">
 					{/* addr and csb */}
 					<div className="flex flex-row justify-between items-center">
 						{/* addr */}
@@ -101,15 +104,17 @@ const WalletDisplayButton = forwardRef<
 
 							<div className="z-1 flex flex-col justify-between">
 								{/* name */}
-								{/* <Text
+								<Text
 									className="font-500 leading-1em overflow-hidden text-ellipsis max-w-8em"
 									color="light"
 								>
 									{extractCharacterName(character)}
-								</Text> */}
+								</Text>
+
+								<Space h={2} />
 
 								{/* handle */}
-								<Text className="font-500 leading-1em overflow-hidden text-ellipsis max-w-8em text-[#F2F2F2]">
+								<Text className="font-400 leading-1em overflow-hidden text-ellipsis max-w-8em text-[#F2F2F2]">
 									{character?.handle ? "@" + character.handle : ""}
 								</Text>
 							</div>
