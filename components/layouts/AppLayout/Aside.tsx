@@ -42,7 +42,7 @@ export default function Aside() {
 			<div className="sidebar w-300px lg:w-400px hidden sm:block">
 				<div className="sidebar__inner">
 					<Aside_
-						className="bg-transparent"
+						className="bg-transparent min-h-100vh"
 						hiddenBreakpoint="sm"
 						height="auto"
 						// width={{ sm: 300, lg: 400 }}
@@ -58,21 +58,32 @@ export default function Aside() {
 
 							<Title order={5}>Widgets</Title>
 
-							{isNoteDetailPage && typeof router.query.noteid === "string" && (
-								<>
-									<Space h={10} />
-									<NoteOnChainSection noteId={router.query.noteid} />
-									<Space h={10} />
-								</>
-							)}
+							{(() => {
+								if (
+									isNoteDetailPage &&
+									typeof router.query.noteid === "string"
+								) {
+									return (
+										<>
+											<Space h={10} />
+											<NoteOnChainSection noteId={router.query.noteid} />
+											<Space h={10} />
+										</>
+									);
+								}
 
-							<Space h={10} />
-							<TrendingNotesSection />
-							<Space h={10} />
+								return (
+									<>
+										<Space h={10} />
+										<TrendingNotesSection />
+										<Space h={10} />
 
-							<Space h={10} />
-							<TrendingCharactersSection />
-							<Space h={10} />
+										<Space h={10} />
+										<TrendingCharactersSection />
+										<Space h={10} />
+									</>
+								);
+							})()}
 						</div>
 					</Aside_>
 				</div>
