@@ -2,7 +2,11 @@ import React from "react";
 import compact from "lodash.compact";
 
 import { NIL_ADDRESS } from "@/utils/ethers";
-import { composeScanTxHref, decomposeNoteId } from "@/utils/url";
+import {
+	composeScanTxHref,
+	decomposeNoteId,
+	composeScanAddressHref,
+} from "@/utils/url";
 import {
 	SourceType,
 	formatSources,
@@ -44,13 +48,13 @@ export function useBlocks(props: NoteOnChainSectionProps): BlockProps[] {
 
 					contractAddress && {
 						title: "NFT contract address",
-						link: composeScanTxHref(contractAddress),
+						link: composeScanAddressHref(contractAddress),
 						detail: contractAddress,
 					},
 
 					owner && {
 						title: "Author address",
-						link: `https://rss3.io/result?search=${owner}`,
+						link: composeScanAddressHref(owner),
 						detail: owner,
 					},
 				]),
