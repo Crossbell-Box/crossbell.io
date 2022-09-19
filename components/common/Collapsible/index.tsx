@@ -1,5 +1,5 @@
 import React from "react";
-import { useIsomorphicLayoutEffect } from "react-use";
+import { useIsomorphicEffect } from "@mantine/hooks";
 import classNames from "classnames";
 
 import { disposableFastdom } from "@/utils/fastdom";
@@ -24,7 +24,7 @@ export function useCollapsible({
 	isCollapsed = false,
 	refreshDeps = [],
 }: UseCollapsibleParams) {
-	useIsomorphicLayoutEffect(() => {
+	useIsomorphicEffect(() => {
 		const container = containerRef?.current;
 		const content = contentRef?.current;
 		const fastdom = disposableFastdom();

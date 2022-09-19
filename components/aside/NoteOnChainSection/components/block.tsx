@@ -1,6 +1,6 @@
 import type { QueryStatus } from "@tanstack/react-query";
 import { Text, Loader, Center, Tooltip } from "@mantine/core";
-import { useToggle } from "react-use";
+import { useDisclosure } from "@mantine/hooks";
 import classNames from "classnames";
 import React from "react";
 
@@ -18,7 +18,7 @@ export type BlockProps = {
 };
 
 export function Block({ title, tips, icon, sections, status }: BlockProps) {
-	const [isCollapsed, toggleIsCollapsed] = useToggle(true);
+	const [isCollapsed, { toggle: toggleIsCollapsed }] = useDisclosure(true);
 
 	return (
 		<div className={styles.container}>
