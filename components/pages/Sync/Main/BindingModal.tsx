@@ -84,7 +84,7 @@ const openWindowToChangeBio = (
 function BindingModal({ platform }: { platform: SupportedPlatform }) {
 	// 0. input username
 	// 1. set address in bio
-	// 2. set date to sync
+	// ~~2. set date to sync~~
 
 	// steps
 	const [step, setStep] = useState(0);
@@ -121,7 +121,7 @@ function BindingModal({ platform }: { platform: SupportedPlatform }) {
 			}
 		}
 
-		if (step === 2) {
+		if (step === 1) {
 			// bind
 			try {
 				await bindAccount.mutateAsync();
