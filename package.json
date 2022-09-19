@@ -9,8 +9,8 @@
 		"lint": "next lint"
 	},
 	"dependencies": {
-		"@crossbell/ipfs-gateway": "0.0.11",
-		"@crossbell/ipfs-react": "0.0.11",
+		"@crossbell/ipfs-gateway": "0.0.12",
+		"@crossbell/ipfs-react": "0.0.12",
 		"@ctrl/tinycolor": "3.4.1",
 		"@emotion/core": "11.0.0",
 		"@emotion/react": "11.10.4",
@@ -56,7 +56,7 @@
 		"wagmi": "0.6.6"
 	},
 	"devDependencies": {
-		"@crossbell/ipfs-gateway-next": "0.0.11",
+		"@crossbell/ipfs-gateway-next": "0.0.12",
 		"@iconify/utils": "2.0.0",
 		"@types/lodash.compact": "3.0.7",
 		"@types/node": "18.7.18",

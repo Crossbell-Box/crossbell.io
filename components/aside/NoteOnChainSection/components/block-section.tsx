@@ -1,4 +1,4 @@
-import { useHandleLinkClick } from "@crossbell/ipfs-react";
+import { IpfsLink } from "@crossbell/ipfs-react";
 import { Text } from "@mantine/core";
 import React from "react";
 import classNames from "classnames";
@@ -25,8 +25,6 @@ export function BlockSection({
 		[detail]
 	);
 
-	const openLink = useHandleLinkClick();
-
 	return (
 		<div className={styles.container}>
 			<div className={styles.header}>
@@ -41,15 +39,14 @@ export function BlockSection({
 				)}
 
 				{link && (
-					<a
+					<IpfsLink
 						className={styles.headerBtn}
 						href={link}
-						onClick={openLink}
 						target="_blank"
 						rel="noreferrer"
 					>
 						<Text className="i-csb:arrow-forward" />
-					</a>
+					</IpfsLink>
 				)}
 			</div>
 
