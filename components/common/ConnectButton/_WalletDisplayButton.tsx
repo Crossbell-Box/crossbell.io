@@ -73,7 +73,9 @@ const WalletDisplayButton = forwardRef<
 			}}
 		>
 			{isLoading ? (
-				<Text>Loading...</Text>
+				<div className="flex flex-col justify-between items-center w-full">
+					<Text>Loading...</Text>
+				</div>
 			) : (
 				<div className="flex flex-col justify-between w-full">
 					{/* addr and csb */}

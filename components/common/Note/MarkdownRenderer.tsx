@@ -42,18 +42,18 @@ export function MarkdownRenderer({
 
 	const fontSize = displayMode === "main" ? 17 : 15;
 
-	const Memoed = useMemo(() => {
-		const showReadMoreButton = collapsed && isExceeded;
+	const showReadMoreButton = collapsed && isExceeded;
 
-		let source = children;
-		if (typeof source === "string") {
-			if (collapsible) {
-				source = collapseText(source);
-			}
-			source = forceBreakNewlines(source);
-			source = transformMentions(source);
+	let source = children;
+	if (typeof source === "string") {
+		if (collapsible) {
+			source = collapseText(source);
 		}
+		source = forceBreakNewlines(source);
+		source = transformMentions(source);
+	}
 
+	const Memoed = useMemo(() => {
 		return (
 			<div className="relative">
 				<article
@@ -82,7 +82,6 @@ export function MarkdownRenderer({
 							p: ({ node, ...props }) => {
 								return (
 									<Text
-										component="p"
 										size={fontSize}
 										className="leading-1.25em my-2 break-words"
 										style={{ wordBreak: "break-word" }}
