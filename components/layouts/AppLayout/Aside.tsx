@@ -9,6 +9,7 @@ import { useEffect } from "react";
 export default function Aside() {
 	const router = useRouter();
 	const isSearchPage = router.pathname === "/search";
+	const isNoteDetailPage = router.pathname.startsWith("/notes");
 
 	useEffect(() => {
 		const f = async () => {
@@ -57,7 +58,7 @@ export default function Aside() {
 
 							<Title order={5}>Widgets</Title>
 
-							{typeof router.query.noteid === "string" && (
+							{isNoteDetailPage && typeof router.query.noteid === "string" && (
 								<>
 									<Space h={10} />
 									<NoteOnChainSection noteId={router.query.noteid} />
