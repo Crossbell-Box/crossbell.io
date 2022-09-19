@@ -1,3 +1,4 @@
+import { IpfsGatewayContext } from "@crossbell/ipfs-react";
 import { ReactElement, ReactNode } from "react";
 import { DefaultSeo } from "next-seo";
 import { AppProps } from "next/app";
@@ -9,6 +10,7 @@ import QueryProvider from "@/components/providers/QueryProvider";
 import NotificationsProvider from "@/components/providers/NotificationsProvider";
 import ModalsProvider from "@/components/providers/ModalsProvider";
 import { RouterTransition } from "@/components/providers/RouterTransition";
+import { ipfsGateway } from "@/utils/ipfs";
 import "@/styles/globals.css";
 import "uno.css";
 
@@ -54,7 +56,9 @@ export default function App({ Component, pageProps }: AppPropsWithLayout) {
 						<ModalsProvider>
 							<NotificationsProvider>
 								<RouterTransition />
-								{getLayout(<Component {...pageProps} />)}
+								<IpfsGatewayContext.Provider value={ipfsGateway}>
+									{getLayout(<Component {...pageProps} />)}
+								</IpfsGatewayContext.Provider>
 							</NotificationsProvider>
 						</ModalsProvider>
 					</QueryProvider>

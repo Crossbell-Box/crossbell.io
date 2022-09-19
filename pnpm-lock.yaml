@@ -1,8 +1,9 @@
 lockfileVersion: 5.4
 
 specifiers:
-  '@crossbell/ipfs-gateway': 0.0.11
-  '@crossbell/ipfs-gateway-next': 0.0.11
+  '@crossbell/ipfs-gateway': 0.0.12
+  '@crossbell/ipfs-gateway-next': 0.0.12
+  '@crossbell/ipfs-react': 0.0.12
   '@ctrl/tinycolor': 3.4.1
   '@emotion/core': 11.0.0
   '@emotion/react': 11.10.4
@@ -21,6 +22,7 @@ specifiers:
   '@rainbow-me/rainbowkit': 0.6.0
   '@tanstack/react-query': 4.3.7
   '@tanstack/react-query-devtools': 4.3.7
+  '@types/lodash.compact': 3.0.7
   '@types/node': 18.7.18
   '@types/react': 18.0.20
   '@types/react-dom': 18.0.6
@@ -33,6 +35,7 @@ specifiers:
   eslint-config-next: 12.3.0
   ethers: 5.7.1
   link-preview-js: 3.0.4
+  lodash.compact: 3.0.1
   lru-cache: 7.14.0
   next: 12.3.0
   next-seo: 5.5.0
@@ -54,7 +57,8 @@ specifiers:
   wagmi: 0.6.6
 
 dependencies:
-  '@crossbell/ipfs-gateway': 0.0.11
+  '@crossbell/ipfs-gateway': 0.0.12
+  '@crossbell/ipfs-react': 0.0.12_mpg5vjb67ckxkvteayykp4iqta
   '@ctrl/tinycolor': 3.4.1
   '@emotion/core': 11.0.0
   '@emotion/react': 11.10.4_w5j4k42lgipnm43s3brx6h3c34
@@ -78,6 +82,7 @@ dependencies:
   embla-carousel-react: 7.0.3_react@18.2.0
   ethers: 5.7.1
   link-preview-js: 3.0.4
+  lodash.compact: 3.0.1
   lru-cache: 7.14.0
   next: 12.3.0_biqbaboplfbrettd7655fr4n2y
   next-seo: 5.5.0_c3hne4hwj64hb7tofigd3bvkji
@@ -97,8 +102,9 @@ dependencies:
   wagmi: 0.6.6_nznuxirfauibn2fjde2ghjonky
 
 devDependencies:
-  '@crossbell/ipfs-gateway-next': 0.0.11_next@12.3.0
+  '@crossbell/ipfs-gateway-next': 0.0.12_next@12.3.0
   '@iconify/utils': 2.0.0
+  '@types/lodash.compact': 3.0.7
   '@types/node': 18.7.18
   '@types/react': 18.0.20
   '@types/react-dom': 18.0.6
@@ -282,16 +288,16 @@ packages:
       - utf-8-validate
     dev: false
 
-  /@crossbell/ipfs-fetch/0.0.11:
-    resolution: {integrity: sha512-RiAwk5YdesxOUXWffUKCQv/WKRLeZpAFcJMPq7wfhmNIQhykBblUqq70nKcb2H92ZEmfB2TmYH/wi3HIfKU06w==}
+  /@crossbell/ipfs-fetch/0.0.12:
+    resolution: {integrity: sha512-C4n0nInWQc0oXJ/mNHgqbwUHQpVPYNyT9PrxK3JbhW995ctMiyTLD1dASws/1uoANRXqucp4VmYmC/oNTNH4fw==}
 
-  /@crossbell/ipfs-gateway-next/0.0.11_next@12.3.0:
-    resolution: {integrity: sha512-TdkLZKVI1kc/d7XHBEISWuoLDOWNJ9OIs7EIWe8WZWms3VzWqSqkFBOy7DQq7nMkPkxnBjShfGx99IfEHzBpwA==}
+  /@crossbell/ipfs-gateway-next/0.0.12_next@12.3.0:
+    resolution: {integrity: sha512-0ZeyKoBdkZLbJojUjJ7r6LrXIrxIWPPEpBrS4oT2n+Rxf4loUEP81jC7iVCnmNeb2sUw5OwWqaE+tSY42ByMFA==}
     peerDependencies:
       next: ^12
     dependencies:
-      '@crossbell/ipfs-fetch': 0.0.11
-      '@crossbell/ipfs-gateway-sw': 0.0.11
+      '@crossbell/ipfs-fetch': 0.0.12
+      '@crossbell/ipfs-gateway-sw': 0.0.12
       copy-webpack-plugin: 11.0.0_webpack@5.74.0
       next: 12.3.0_biqbaboplfbrettd7655fr4n2y
       webpack: 5.74.0
@@ -302,18 +308,28 @@ packages:
       - webpack-cli
     dev: true
 
-  /@crossbell/ipfs-gateway-sw/0.0.11:
-    resolution: {integrity: sha512-j1nLzu3as+07zvuWpMuVO0p2HrV1uU5UAdaWkXaVLvMLhJynDb5HUo/IXtdUXWBuMawmdOpiGvlxCl+cu64CMQ==}
+  /@crossbell/ipfs-gateway-sw/0.0.12:
+    resolution: {integrity: sha512-X/9s8dFdCIACLlC1qz+unpVTvaFXoFhz2UjgQbmkJKYQGhRbRccOwWy/pbPObBKse/VYtkUjvy5kFOU3/p/49w==}
     dependencies:
-      '@crossbell/ipfs-fetch': 0.0.11
+      '@crossbell/ipfs-fetch': 0.0.12
       escape-string-regexp: 4.0.0
 
-  /@crossbell/ipfs-gateway/0.0.11:
-    resolution: {integrity: sha512-GSFm2D4VTIy8jCDeVb+J4X3ye3nGsgDc7zEFdw5ubPUdMEBjkHuIs8F9woSHhkBsC56SwryoYS42f8FBbZn3GA==}
+  /@crossbell/ipfs-gateway/0.0.12:
+    resolution: {integrity: sha512-cBRGe7LxD120Qae7PNQFYGMUMYpdLl/6zORFQ+bwvWQxFoRqZnBzQm4XctcN0DLPspufpdsHpFgZaLXBpvLfKA==}
     dependencies:
-      '@crossbell/ipfs-fetch': 0.0.11
-      '@crossbell/ipfs-gateway-sw': 0.0.11
+      '@crossbell/ipfs-fetch': 0.0.12
+      '@crossbell/ipfs-gateway-sw': 0.0.12
       query-string: 7.1.1
+    dev: false
+
+  /@crossbell/ipfs-react/0.0.12_mpg5vjb67ckxkvteayykp4iqta:
+    resolution: {integrity: sha512-ghl8QbrqB1HtE1AW+gN0KVzjDAa22VT0GxZ0YGhczOdV5tcclgjgMMIpAwqWoHJ/ZACYWPfxexo0bf75d3Rlyw==}
+    peerDependencies:
+      '@crossbell/ipfs-gateway': 0.0.12
+      react: ^17 || ^18
+    dependencies:
+      '@crossbell/ipfs-gateway': 0.0.12
+      react: 18.2.0
     dev: false
 
   /@ctrl/tinycolor/3.4.1:
@@ -1563,6 +1579,16 @@ packages:
 
   /@types/json5/0.0.29:
     resolution: {integrity: sha512-dRLjCWHYg4oaA77cxO64oO+7JwCwnIzkZPdrrC71jQmQtlhM556pwKo5bUzqvZndkVbeFLIIi+9TC40JNF5hNQ==}
+    dev: true
+
+  /@types/lodash.compact/3.0.7:
+    resolution: {integrity: sha512-yHP+S4QY9C/OLWc+Ei7A1rdwGcBgwFOaW20eZU8qA42dNRwUWnGltDAmKg5ICVGrgJKTokv0gsz1dsQl1gKA2w==}
+    dependencies:
+      '@types/lodash': 4.14.185
+    dev: true
+
+  /@types/lodash/4.14.185:
+    resolution: {integrity: sha512-evMDG1bC4rgQg4ku9tKpuMh5iBNEwNa3tf9zRHdP1qlv+1WUg44xat4IxCE14gIpZRGUUWAx2VhItCZc25NfMA==}
     dev: true
 
   /@types/mdast/3.0.10:
@@ -5178,6 +5204,10 @@ packages:
     dependencies:
       p-locate: 5.0.0
     dev: true
+
+  /lodash.compact/3.0.1:
+    resolution: {integrity: sha512-2ozeiPi+5eBXW1CLtzjk8XQFhQOEMwwfxblqeq6EGyTxZJ1bPATqilY0e6g2SLQpP4KuMeuioBhEnWz5Pr7ICQ==}
+    dev: false
 
   /lodash.debounce/4.0.8:
     resolution: {integrity: sha512-FT1yDzDYEoYWhnSGnpE/4Kj1fLZkDFyqRb7fNt6FdYOSxlUWAtp42Eh6Wb0rGIv/m9Bgo7x4GhQbm5Ys4SG5ow==}

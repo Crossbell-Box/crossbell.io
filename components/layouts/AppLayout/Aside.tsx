@@ -1,13 +1,15 @@
 import TrendingCharactersSection from "@/components/aside/TrendingCharactersSection";
 import TrendingNotesSection from "@/components/aside/TrendingNotesSection";
+import { NoteOnChainSection } from "@/components/aside/NoteOnChainSection";
 import SearchInput from "@/components/common/Input/SearchInput";
-import { MediaQuery, Aside as Aside_, Text, Title, Space } from "@mantine/core";
+import { Aside as Aside_, Title, Space } from "@mantine/core";
 import { useRouter } from "next/router";
 import { useEffect } from "react";
 
 export default function Aside() {
 	const router = useRouter();
 	const isSearchPage = router.pathname === "/search";
+	const isNoteDetailPage = router.pathname.startsWith("/notes");
 
 	useEffect(() => {
 		const f = async () => {
@@ -55,6 +57,14 @@ export default function Aside() {
 							<Space h={10} />
 
 							<Title order={5}>Widgets</Title>
+
+							{isNoteDetailPage && typeof router.query.noteid === "string" && (
+								<>
+									<Space h={10} />
+									<NoteOnChainSection noteId={router.query.noteid} />
+									<Space h={10} />
+								</>
+							)}
 
 							<Space h={10} />
 							<TrendingNotesSection />
