@@ -3,6 +3,7 @@ lockfileVersion: 5.4
 specifiers:
   '@crossbell/ipfs-gateway': 0.0.11
   '@crossbell/ipfs-gateway-next': 0.0.11
+  '@crossbell/ipfs-react': 0.0.11
   '@ctrl/tinycolor': 3.4.1
   '@emotion/core': 11.0.0
   '@emotion/react': 11.10.4
@@ -57,6 +58,7 @@ specifiers:
 
 dependencies:
   '@crossbell/ipfs-gateway': 0.0.11
+  '@crossbell/ipfs-react': 0.0.11_5c7g7pbuwkxfbt2fxqgzvb5waq
   '@ctrl/tinycolor': 3.4.1
   '@emotion/core': 11.0.0
   '@emotion/react': 11.10.4_w5j4k42lgipnm43s3brx6h3c34
@@ -318,6 +320,16 @@ packages:
       '@crossbell/ipfs-fetch': 0.0.11
       '@crossbell/ipfs-gateway-sw': 0.0.11
       query-string: 7.1.1
+    dev: false
+
+  /@crossbell/ipfs-react/0.0.11_5c7g7pbuwkxfbt2fxqgzvb5waq:
+    resolution: {integrity: sha512-QTRgH0dQLJ5Cedjq6lkA6vRUPvo9Wrbt+95SdBQ1WJ3wjq64ZqZh3zltV2gGpO8CWa4w9YGWZOYbh8upOsEGVw==}
+    peerDependencies:
+      '@crossbell/ipfs-gateway': 0.0.11
+      react: ^17 || ^18
+    dependencies:
+      '@crossbell/ipfs-gateway': 0.0.11
+      react: 18.2.0
     dev: false
 
   /@ctrl/tinycolor/3.4.1:
