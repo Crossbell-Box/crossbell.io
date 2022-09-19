@@ -19,7 +19,6 @@ import remarkGfm from "remark-gfm";
 import remarkEmoji from "remark-emoji";
 import rehypeSanitize, { defaultSchema } from "rehype-sanitize";
 import { Button } from "@mantine/core";
-import { isExternalUrl } from "@/utils/url";
 import { CharacterHandle } from "../Character";
 import { useCharacterHandleExists } from "@/utils/apis/indexer";
 import Zoom from "./Zoom";
@@ -41,6 +40,8 @@ export function MarkdownRenderer({
 	const [collapsed, setCollapsed] = useState(collapsible);
 
 	const fontSize = displayMode === "main" ? 17 : 15;
+	const lineHeight =
+		displayMode === "main" ? "leading-1.5rem" : "leading-1.25rem";
 
 	const showReadMoreButton = collapsed && isExceeded;
 
@@ -49,7 +50,6 @@ export function MarkdownRenderer({
 		if (collapsible) {
 			source = collapseText(source);
 		}
-		source = forceBreakNewlines(source);
 		source = transformMentions(source);
 	}
 
@@ -83,7 +83,7 @@ export function MarkdownRenderer({
 								return (
 									<Text
 										size={fontSize}
-										className="leading-1.25em my-2 break-words"
+										className={classNames("my-2 break-words", lineHeight)}
 										style={{ wordBreak: "break-word" }}
 										{...props}
 									/>
@@ -146,12 +146,8 @@ export function MarkdownRenderer({
 										component="a"
 										size={fontSize}
 										variant="link"
-										href={props.href}
-										target={
-											props.href && isExternalUrl(props.href)
-												? "_blank"
-												: undefined
-										}
+										href={props.href!}
+										target="_blank"
 										rel="noreferrer"
 										onClick={(e: any) => e.stopPropagation()}
 										inline
@@ -159,6 +155,7 @@ export function MarkdownRenderer({
 										{props.children}
 									</Text>
 								);
+
 								// TODO: better UI
 								// const { data, isLoading, isSuccess } = useLinkPreview(
 								// 	props.href
@@ -219,10 +216,18 @@ export function MarkdownRenderer({
 								);
 							},
 							ol: ({ node, ...props }) => {
-								return <List type="ordered">{props.children}</List>;
+								return (
+									<List type="ordered" withPadding>
+										{props.children}
+									</List>
+								);
 							},
 							ul: ({ node, ...props }) => {
-								return <List type="unordered">{props.children}</List>;
+								return (
+									<List type="unordered" withPadding>
+										{props.children}
+									</List>
+								);
 							},
 							li: ({ node, ...props }) => {
 								return <List.Item>{props.children}</List.Item>;
@@ -350,10 +355,6 @@ function collapseText(text: string, maxLength: number = 1000) {
 	const collapsedText = startingText + appendingText + ellipsis;
 
 	return collapsedText;
-}
-
-function forceBreakNewlines(text: string) {
-	return text.replace(/\n/g, "  \n");
 }
 
 function transformMentions(text: string) {
