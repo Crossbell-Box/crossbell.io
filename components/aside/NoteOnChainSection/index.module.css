@@ -1,0 +1,7 @@
+.container {
+	padding: 16px;
+}
+
+.container > *:not(:first-child) {
+	margin-top: 16px;
+}

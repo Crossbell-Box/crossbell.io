@@ -1,0 +1,57 @@
+.container {
+	background: #262626;
+	border-radius: 12px;
+	padding: 16px 0;
+}
+
+.header {
+	display: flex;
+	align-items: center;
+	justify-content: space-between;
+	padding: 0 16px;
+	color: #fff;
+	cursor: pointer;
+}
+
+.icon {
+	width: 24px;
+	height: 24px;
+	display: flex;
+	align-items: center;
+	justify-content: center;
+	flex: 0 0 auto;
+}
+
+.title {
+	font-weight: 500;
+	font-size: 16px;
+	line-height: 24px;
+	letter-spacing: 0.15px;
+	overflow: hidden;
+	text-overflow: ellipsis;
+	white-space: nowrap;
+	flex: 1 1 0px;
+	margin: 0 4px;
+}
+
+.toggleIndicator {
+	font-size: 24px;
+	flex: 0 0 auto;
+	transform: rotate(0deg);
+	transition: transform 0.2s, color 0.2s;
+	color: #ccd1da;
+}
+
+.header:hover .toggleIndicator {
+	color: #fff;
+}
+
+.toggleIndicator.isCollapsed {
+	transform: rotate(-90deg);
+}
+
+.hr {
+	height: 1px;
+	background: #e1e8f7;
+	margin: 8px;
+}

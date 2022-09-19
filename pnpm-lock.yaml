@@ -22,6 +22,7 @@ specifiers:
   '@rainbow-me/rainbowkit': 0.6.0
   '@tanstack/react-query': 4.3.7
   '@tanstack/react-query-devtools': 4.3.7
+  '@types/lodash.compact': 3.0.7
   '@types/node': 18.7.18
   '@types/react': 18.0.20
   '@types/react-dom': 18.0.6
@@ -35,6 +36,7 @@ specifiers:
   ethers: 5.7.1
   fastdom: 1.0.11
   link-preview-js: 3.0.4
+  lodash.compact: 3.0.1
   lru-cache: 7.14.0
   next: 12.3.0
   next-seo: 5.5.0
@@ -83,6 +85,7 @@ dependencies:
   ethers: 5.7.1
   fastdom: 1.0.11
   link-preview-js: 3.0.4
+  lodash.compact: 3.0.1
   lru-cache: 7.14.0
   next: 12.3.0_biqbaboplfbrettd7655fr4n2y
   next-seo: 5.5.0_c3hne4hwj64hb7tofigd3bvkji
@@ -105,6 +108,7 @@ dependencies:
 devDependencies:
   '@crossbell/ipfs-gateway-next': 0.0.11_next@12.3.0
   '@iconify/utils': 2.0.0
+  '@types/lodash.compact': 3.0.7
   '@types/node': 18.7.18
   '@types/react': 18.0.20
   '@types/react-dom': 18.0.6
@@ -1583,6 +1587,16 @@ packages:
 
   /@types/json5/0.0.29:
     resolution: {integrity: sha512-dRLjCWHYg4oaA77cxO64oO+7JwCwnIzkZPdrrC71jQmQtlhM556pwKo5bUzqvZndkVbeFLIIi+9TC40JNF5hNQ==}
+    dev: true
+
+  /@types/lodash.compact/3.0.7:
+    resolution: {integrity: sha512-yHP+S4QY9C/OLWc+Ei7A1rdwGcBgwFOaW20eZU8qA42dNRwUWnGltDAmKg5ICVGrgJKTokv0gsz1dsQl1gKA2w==}
+    dependencies:
+      '@types/lodash': 4.14.185
+    dev: true
+
+  /@types/lodash/4.14.185:
+    resolution: {integrity: sha512-evMDG1bC4rgQg4ku9tKpuMh5iBNEwNa3tf9zRHdP1qlv+1WUg44xat4IxCE14gIpZRGUUWAx2VhItCZc25NfMA==}
     dev: true
 
   /@types/mdast/3.0.10:
@@ -5256,6 +5270,10 @@ packages:
     dependencies:
       p-locate: 5.0.0
     dev: true
+
+  /lodash.compact/3.0.1:
+    resolution: {integrity: sha512-2ozeiPi+5eBXW1CLtzjk8XQFhQOEMwwfxblqeq6EGyTxZJ1bPATqilY0e6g2SLQpP4KuMeuioBhEnWz5Pr7ICQ==}
+    dev: false
 
   /lodash.debounce/4.0.8:
     resolution: {integrity: sha512-FT1yDzDYEoYWhnSGnpE/4Kj1fLZkDFyqRb7fNt6FdYOSxlUWAtp42Eh6Wb0rGIv/m9Bgo7x4GhQbm5Ys4SG5ow==}
