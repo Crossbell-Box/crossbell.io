@@ -1,0 +1,10 @@
+.container {
+	overflow: hidden;
+	height: 0;
+	transition: height 0.2s, opacity 0.2s;
+	transition-timing-function: ease-in-out;
+}
+
+.content {
+	overflow: hidden;
+}
