@@ -33,7 +33,6 @@
 		"dayjs": "1.11.5",
 		"embla-carousel-react": "7.0.3",
 		"ethers": "5.7.1",
-		"fastdom": "1.0.11",
 		"link-preview-js": "3.0.4",
 		"lodash.compact": "3.0.1",
 		"lru-cache": "7.14.0",

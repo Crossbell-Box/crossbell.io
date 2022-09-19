@@ -1,10 +1,8 @@
 import type { QueryStatus } from "@tanstack/react-query";
-import { Text, Loader, Center, Tooltip } from "@mantine/core";
+import { Text, Loader, Center, Tooltip, Collapse } from "@mantine/core";
 import { useDisclosure } from "@mantine/hooks";
 import classNames from "classnames";
 import React from "react";
-
-import { Collapsible } from "@/components/common/Collapsible";
 
 import styles from "./block.module.css";
 import { BlockSection, BlockSectionProps } from "./block-section";
@@ -18,11 +16,11 @@ export type BlockProps = {
 };
 
 export function Block({ title, tips, icon, sections, status }: BlockProps) {
-	const [isCollapsed, { toggle: toggleIsCollapsed }] = useDisclosure(true);
+	const [isExpanded, { toggle: toggleIsExpanded }] = useDisclosure(false);
 
 	return (
 		<div className={styles.container}>
-			<div className={styles.header} onClick={toggleIsCollapsed}>
+			<div className={styles.header} onClick={toggleIsExpanded}>
 				<div className={styles.icon}>{icon}</div>
 
 				<span className={styles.title} title={title}>
@@ -46,13 +44,13 @@ export function Block({ title, tips, icon, sections, status }: BlockProps) {
 
 				<Text
 					className={classNames(
-						isCollapsed ? "i-csb:circle-plus" : "i-csb:circle-minus",
-						isCollapsed && styles.isCollapsed,
+						isExpanded ? "i-csb:circle-minus" : "i-csb:circle-plus",
+						isExpanded && styles.isExpanded,
 						styles.toggleIndicator
 					)}
 				/>
 			</div>
-			<Collapsible isCollapsed={isCollapsed} refreshDeps={[status]}>
+			<Collapse in={isExpanded}>
 				{(() => {
 					switch (status) {
 						case "success":
@@ -78,7 +76,7 @@ export function Block({ title, tips, icon, sections, status }: BlockProps) {
 							);
 					}
 				})()}
-			</Collapsible>
+			</Collapse>
 		</div>
 	);
 }

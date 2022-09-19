@@ -34,7 +34,6 @@ specifiers:
   eslint: 8.23.1
   eslint-config-next: 12.3.0
   ethers: 5.7.1
-  fastdom: 1.0.11
   link-preview-js: 3.0.4
   lodash.compact: 3.0.1
   lru-cache: 7.14.0
@@ -82,7 +81,6 @@ dependencies:
   dayjs: 1.11.5
   embla-carousel-react: 7.0.3_react@18.2.0
   ethers: 5.7.1
-  fastdom: 1.0.11
   link-preview-js: 3.0.4
   lodash.compact: 3.0.1
   lru-cache: 7.14.0
@@ -4278,12 +4276,6 @@ packages:
     resolution: {integrity: sha512-wpYMUmFu5f00Sm0cj2pfivpmawLZ0NKdviQ4w9zJeR8JVtOpOxHmLaJuj0vxvGqMJQWyP/COUkF75/57OKyRag==}
     dev: false
 
-  /fastdom/1.0.11:
-    resolution: {integrity: sha512-jl9MwXDFxhg354W4E3s1UMsLh3HWFuVMQiRUlXpHckcHRXQvUe76yzBf1Z7b+x5Ci4TUJ1KmynI9alGUXG95IQ==}
-    dependencies:
-      strictdom: 1.0.1
-    dev: false
-
   /fastq/1.13.0:
     resolution: {integrity: sha512-YpkpUnK8od0o1hmeSc7UUs/eB/vIPWJYjKck2QKIzAf71Vm1AAQ3EbuZB3g2JIy+pg+ERD0vqI79KyZiB2e2Nw==}
     dependencies:
@@ -6957,10 +6949,6 @@ packages:
   /strict-uri-encode/2.0.0:
     resolution: {integrity: sha512-QwiXZgpRcKkhTj2Scnn++4PKtWsH0kpzZ62L2R6c/LUVYv7hVnZqcg2+sMuT6R7Jusu1vviK/MFsu6kNJfWlEQ==}
     engines: {node: '>=4'}
-    dev: false
-
-  /strictdom/1.0.1:
-    resolution: {integrity: sha512-cEmp9QeXXRmjj/rVp9oyiqcvyocWab/HaoN4+bwFeZ7QzykJD6L3yD4v12K1x0tHpqRqVpJevN3gW7kyM39Bqg==}
     dev: false
 
   /string-width/3.1.0:
