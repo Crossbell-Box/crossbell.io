@@ -1,11 +1,12 @@
+import React, { useEffect } from "react";
+import { useRouter } from "next/router";
+import { Aside as Aside_, Title, Space, TextInput, Text } from "@mantine/core";
+
 import TrendingCharactersSection from "@/components/aside/TrendingCharactersSection";
 import TrendingNotesSection from "@/components/aside/TrendingNotesSection";
 import { NoteOnChainSection } from "@/components/aside/NoteOnChainSection";
 import { AchievementSection } from "@/components/aside/AchievementSection";
-import SearchInput from "@/components/common/Input/SearchInput";
-import { Aside as Aside_, Title, Space } from "@mantine/core";
-import { useRouter } from "next/router";
-import { useEffect } from "react";
+import { useSearchInput } from "@/components/common/Input/SearchInput";
 
 export default function Aside() {
 	const router = useRouter();
@@ -50,11 +51,7 @@ export default function Aside() {
 						// width={{ sm: 300, lg: 400 }}
 					>
 						<div className="p-4">
-							{!isSearchPage && (
-								<div>
-									<SearchInput />
-								</div>
-							)}
+							{!isSearchPage && <SearchInput />}
 
 							<Space h={10} />
 
@@ -104,5 +101,25 @@ export default function Aside() {
 				</div>
 			</div>
 		</>
+	);
+}
+
+function SearchInput() {
+	const searchInputProps = useSearchInput();
+
+	return (
+		<div>
+			<TextInput
+				icon={<Text className="i-csb:search text-24px text-[#687792]" />}
+				placeholder="Search"
+				classNames={{
+					wrapper: "text-[#687792]",
+					input:
+						"rounded-12px border-[#E1E8F7] focus:border-[#687792] font-500",
+				}}
+				size="md"
+				{...searchInputProps}
+			/>
+		</div>
 	);
 }
