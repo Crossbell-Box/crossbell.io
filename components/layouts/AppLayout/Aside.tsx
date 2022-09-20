@@ -1,6 +1,7 @@
 import TrendingCharactersSection from "@/components/aside/TrendingCharactersSection";
 import TrendingNotesSection from "@/components/aside/TrendingNotesSection";
 import { NoteOnChainSection } from "@/components/aside/NoteOnChainSection";
+import { AchievementSection } from "@/components/aside/AchievementSection";
 import SearchInput from "@/components/common/Input/SearchInput";
 import { Aside as Aside_, Title, Space } from "@mantine/core";
 import { useRouter } from "next/router";
@@ -10,6 +11,7 @@ export default function Aside() {
 	const router = useRouter();
 	const isSearchPage = router.pathname === "/search";
 	const isNoteDetailPage = router.pathname.startsWith("/notes");
+	const isCharacterPage = router.pathname === "/[handle]";
 
 	useEffect(() => {
 		const f = async () => {
@@ -59,6 +61,18 @@ export default function Aside() {
 							<Title order={5}>Widgets</Title>
 
 							{(() => {
+								const commonSections = (
+									<>
+										<Space h={10} />
+										<TrendingNotesSection />
+										<Space h={10} />
+
+										<Space h={10} />
+										<TrendingCharactersSection />
+										<Space h={10} />
+									</>
+								);
+
 								if (
 									isNoteDetailPage &&
 									typeof router.query.noteid === "string"
@@ -72,17 +86,18 @@ export default function Aside() {
 									);
 								}
 
-								return (
-									<>
-										<Space h={10} />
-										<TrendingNotesSection />
-										<Space h={10} />
+								if (isCharacterPage) {
+									return (
+										<>
+											<Space h={10} />
+											<AchievementSection />
+											<Space h={10} />
+											{commonSections}
+										</>
+									);
+								}
 
-										<Space h={10} />
-										<TrendingCharactersSection />
-										<Space h={10} />
-									</>
-								);
+								return commonSections;
 							})()}
 						</div>
 					</Aside_>
