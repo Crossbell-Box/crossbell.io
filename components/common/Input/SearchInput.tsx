@@ -1,3 +1,4 @@
+import React from "react";
 import { usePrimaryShade } from "@/components/providers/ThemeProvider";
 import { composeSearchHref, useSearchRouterQuery } from "@/utils/url";
 import {
@@ -10,12 +11,36 @@ import {
 import { useInputState } from "@mantine/hooks";
 import { useRouter } from "next/router";
 
-function SearchInput_({ ...props }: TextInputProps) {
-	const { primaryColor } = useMantineTheme();
-	const primaryShade = usePrimaryShade();
+export function useSearchInput() {
 	const [value, setValue] = useInputState("");
 	const router = useRouter();
 	const { type } = useSearchRouterQuery();
+
+	return {
+		value,
+
+		onChange(e: React.ChangeEvent<HTMLInputElement>) {
+			setValue(e.target.value);
+		},
+
+		onKeyDown(e: React.KeyboardEvent<HTMLInputElement>) {
+			if (e.key === "Enter" || e.keyCode === 13) {
+				e.preventDefault();
+				e.stopPropagation();
+				router.push(composeSearchHref(value, type));
+			}
+		},
+
+		onFocus() {
+			router.prefetch(composeSearchHref(value, type));
+		},
+	};
+}
+
+function SearchInput_({ ...props }: TextInputProps) {
+	const { primaryColor } = useMantineTheme();
+	const primaryShade = usePrimaryShade();
+	const inputProps = useSearchInput();
 
 	return (
 		<TextInput
@@ -37,19 +62,7 @@ function SearchInput_({ ...props }: TextInputProps) {
 			autoCorrect="off"
 			spellCheck="false"
 			enterKeyHint="search"
-			onChange={(e: React.ChangeEvent<HTMLInputElement>) =>
-				setValue(e.target.value)
-			}
-			onKeyDown={(e: React.KeyboardEvent<HTMLInputElement>) => {
-				if (e.key === "Enter" || e.keyCode === 13) {
-					e.preventDefault();
-					e.stopPropagation();
-					router.push(composeSearchHref(value, type));
-				}
-			}}
-			onFocus={() => {
-				router.prefetch(composeSearchHref(value, type));
-			}}
+			{...inputProps}
 			{...props}
 		/>
 	);
