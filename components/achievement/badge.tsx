@@ -1,45 +1,45 @@
 import React from "react";
 
-import type { BadgeLevelInfo } from "./types";
+import type { AchievementInfo } from "@/utils/apis/achievement";
+import { AchievementLevelStatus } from "@/utils/apis/achievement";
+
 import { BadgeIcon } from "./badge-icon";
-import styles from "./badge.module.css";
+import { useNextLevel, usePreferredLevel } from "./hooks";
 
 export type BadgeProps = {
-	levels: BadgeLevelInfo[];
-	currentLevelId: BadgeLevelInfo["id"];
-	circleHash: string;
+	achievement: AchievementInfo;
 };
 
-export function Badge(props: BadgeProps) {
-	const currentLevel = useCurrentLevel(props);
-
-	if (!currentLevel) {
-		return null;
-	}
+export function Badge({ achievement }: BadgeProps) {
+	const currentLevel = usePreferredLevel(achievement.levels);
+	const nextLevel = useNextLevel(currentLevel, achievement.levels);
+	const isAbleToMintNewLevel = React.useMemo(
+		() =>
+			achievement.levels.some(
+				({ status }) => status === AchievementLevelStatus.ableToMint
+			),
+		[achievement]
+	);
 
 	return (
-		<div className={styles.container}>
-			<div className={styles.iconContainer}>
-				<BadgeIcon levelInfo={currentLevel} circleHash={props.circleHash} />
+		<div className="flex flex-col items-center">
+			<div className="w-full max-w-140px">
+				<BadgeIcon level={currentLevel} />
 			</div>
-			<h4 className={styles.title}>
-				<div className={styles.redDot} />
-				{currentLevel.title}
+			<h4 className="font-600 text-16px leading-24px flex items-center justify-center mt-16px mb-0 truncate">
+				{isAbleToMintNewLevel && (
+					<div className="w-12px h-12px rounded-full bg-red-primary mr-6px" />
+				)}
+				{achievement.title}
 			</h4>
-			<p className={styles.progress}>
-				<span className={styles.progressInfo}>{currentLevel.progressDesc}</span>
-				<span className={styles.progressUnit}>{currentLevel.unitDesc}</span>
+			<p className="m-0 text-12px font-400 leading-16px flex items-center truncate">
+				<span className="text-purple-primary mr-4px empty:mr-0">
+					{currentLevel.status === AchievementLevelStatus.minted && nextLevel
+						? nextLevel.progressDesc
+						: currentLevel.progressDesc}
+				</span>
+				<span className="text-[#7b8089]">{currentLevel.unitDesc}</span>
 			</p>
 		</div>
-	);
-}
-
-function useCurrentLevel({
-	levels,
-	currentLevelId,
-}: BadgeProps): BadgeLevelInfo | null {
-	return React.useMemo(
-		() => levels.find((level) => level.id === currentLevelId) ?? levels[0],
-		[levels, currentLevelId]
 	);
 }

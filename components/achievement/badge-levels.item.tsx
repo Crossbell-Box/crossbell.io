@@ -1,28 +1,40 @@
-import { useWeb2Url } from "@crossbell/ipfs-react";
 import React from "react";
-import Image from "next/image";
 import classNames from "classnames";
 
-import { ipfsGateway } from "@/utils/ipfs";
+import type { AchievementLevel } from "@/utils/apis/achievement";
+import { AchievementLevelStatus } from "@/utils/apis/achievement";
 
-import type { BadgeLevelInfo } from "./types";
+import { BadgeImage } from "./badge-image";
 
 export type BadgeLevelsItemProps = {
-	level: BadgeLevelInfo;
+	level: AchievementLevel;
 	isSelected: boolean;
+	size: "md" | "sm";
+	displayDotIfAbleToMint: boolean;
 };
 
-export function BadgeLevelsItem({ level, isSelected }: BadgeLevelsItemProps) {
-	const url = useWeb2Url(level.img) ?? level.img;
-
+export function BadgeLevelsItem({
+	level,
+	isSelected,
+	size,
+	displayDotIfAbleToMint,
+}: BadgeLevelsItemProps) {
 	return (
-		<div
-			className={classNames(
-				"relative w-48px h-48px rounded-full border-2 border-solid border-[#695FDE] border-opacity-0",
-				isSelected && "border-opacity-100"
-			)}
-		>
-			<Image unoptimized src={url} layout="fill" alt={`${level.title} Badge`} />
+		<div className="relative z-0">
+			{displayDotIfAbleToMint &&
+				level.status === AchievementLevelStatus.ableToMint && (
+					<div className="absolute top-2px right-0 w-12px h-12px bg-red-primary rounded-full z-1" />
+				)}
+			<div
+				className={classNames(
+					"relative rounded-full overflow-hidden border-solid border-purple-primary border-opacity-0 cursor-pointer",
+					size === "md" && "w-48px h-48px border-2",
+					size === "sm" && "w-26px h-26px border-1",
+					isSelected ? "border-opacity-100" : "hover:border-opacity-50"
+				)}
+			>
+				<BadgeImage level={level} />
+			</div>
 		</div>
 	);
 }

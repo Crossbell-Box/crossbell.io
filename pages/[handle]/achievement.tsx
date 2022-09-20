@@ -1,89 +1,60 @@
-import { Modal, Text } from "@mantine/core";
+import {
+	Modal,
+	Text,
+	SimpleGrid,
+	SimpleGridProps,
+	Skeleton,
+} from "@mantine/core";
 import { useDisclosure } from "@mantine/hooks";
+import React from "react";
 import Head from "next/head";
-import type { CharacterEntity } from "crossbell.js";
+import Image from "next/image";
 
 import { getLayout } from "@/components/layouts/AppLayout";
-import { useCharacterByHandle } from "@/utils/apis/indexer";
+import {
+	useAchievementGroups,
+	AchievementInfo,
+	AchievementGroup,
+} from "@/utils/apis/achievement";
 import { extractCharacterName } from "@/utils/metadata";
-import { useCharacterRouterQuery } from "@/utils/url";
 import Header from "@/components/layouts/Header";
 import {
 	AchievementsTitle,
 	Badge,
 	ComingSoon,
 	BadgeDetail,
-	BadgeLevelInfo,
 } from "@/components/achievement";
+import { useCharacterInfos } from "@/components/achievement/hooks";
+
+import errorImgUrl from "@/public/illustrations/404-purple.png";
 
 import { getServerSideProps } from "./index";
 
 export { getServerSideProps };
 
-type PageProps = {
-	character: CharacterEntity | null;
+const gridProps: SimpleGridProps = {
+	cols: 4,
+	spacing: 32,
+	breakpoints: [
+		{ maxWidth: 1200, cols: 3, spacing: 32 },
+		{ maxWidth: 980, cols: 2, spacing: "sm" },
+		{ maxWidth: 600, cols: 1, spacing: "sm" },
+	],
 };
 
-const levels: BadgeLevelInfo[] = [
-	{
-		id: "base",
-		title: "Popular NFT",
-		img: "ipfs://bafkreihxutrvld37t4lxf2pjnmq5siajl52kv75pojooyx4pmwdjmi4pca",
-		description: "description",
-		unitDesc: "Being minted",
-		progressDesc: "1234/4535",
-		mintId: null,
-		minted: 3234,
-	},
-	{
-		id: "bronze",
-		title: "Popular NFT",
-		img: "ipfs://bafkreihxutrvld37t4lxf2pjnmq5siajl52kv75pojooyx4pmwdjmi4pca",
-		description: "description",
-		unitDesc: "Being minted",
-		progressDesc: "1234/4535",
-		mintId: null,
-		minted: 3234,
-	},
-	{
-		id: "silver",
-		title: "Popular NFT",
-		img: "ipfs://bafkreihxutrvld37t4lxf2pjnmq5siajl52kv75pojooyx4pmwdjmi4pca",
-		description: "description",
-		unitDesc: "Being minted",
-		progressDesc: "1234/4535",
-		mintId: null,
-		minted: 3234,
-	},
-	{
-		id: "gold",
-		title: "Popular NFT",
-		img: "ipfs://bafkreihxutrvld37t4lxf2pjnmq5siajl52kv75pojooyx4pmwdjmi4pca",
-		description: "description",
-		unitDesc: "Being minted",
-		progressDesc: "1234/4535",
-		mintId: 230,
-		minted: 3234,
-	},
-	{
-		id: "special",
-		title: "Popular NFT",
-		img: "ipfs://bafkreihxutrvld37t4lxf2pjnmq5siajl52kv75pojooyx4pmwdjmi4pca",
-		description: "description",
-		unitDesc: "Being minted",
-		progressDesc: "1234/4535",
-		mintId: null,
-		minted: 3234,
-	},
-];
-
-export default function Page(props: PageProps) {
-	const { character, handle } = useCharacterInfo(props);
-	const [isDisplayModal, { toggle: toggleIsDisplayModal }] =
-		useDisclosure(true);
+export default function Page() {
+	const { character, handle, isConnectedCharacter } = useCharacterInfos();
+	const [achievementGroups, status] = useAchievementGroups(character);
+	const [displayModal, modal] = useDisclosure(false);
+	const { selectedAchievement, selectAchievement } =
+		useSelectAchievement(achievementGroups);
 
 	if (!character) {
-		return null;
+		return <PageLoading />;
+	}
+
+	if (!isConnectedCharacter) {
+		return <PageError />;
 	}
 
 	return (
@@ -94,37 +65,106 @@ export default function Page(props: PageProps) {
 
 			<Header hasBackButton>Achievement</Header>
 
-			<Modal
-				withCloseButton={false}
-				opened={isDisplayModal}
-				onClose={toggleIsDisplayModal}
-				padding={0}
-				radius={12}
-				size="500px"
-			>
-				<button
-					onClick={toggleIsDisplayModal}
-					className="bg-[#312F39] hover:bg-white/20 transition absolute right-16px top-16px w-32px h-32px border-none rounded-full flex items-center justify-center outline-none cursor-pointer"
-				>
-					<Text className="i-csb:close text-white text-24px" />
-				</button>
-				<BadgeDetail
-					levels={levels}
-					currentLevelId={"gold"}
-					circleHash={character.owner}
-				/>
-			</Modal>
+			{(() => {
+				switch (status) {
+					case "loading":
+						return <PageLoading />;
+					case "error":
+						return (
+							<div className="flex items-center justify-center pt-100px">
+								<Image
+									width={374}
+									height={374}
+									src={errorImgUrl}
+									alt="Error Illustration"
+								/>
+							</div>
+						);
+					case "success":
+						return (
+							<div>
+								<Modal
+									withCloseButton={false}
+									opened={displayModal}
+									onClose={modal.close}
+									padding={0}
+									radius={12}
+									size="500px"
+								>
+									<button
+										onClick={modal.close}
+										className="bg-[#312F39] hover:bg-white/20 transition absolute right-16px top-16px w-32px h-32px border-none rounded-full flex items-center justify-center outline-none cursor-pointer"
+									>
+										<Text className="i-csb:close text-white text-24px" />
+									</button>
+									{selectedAchievement && (
+										<BadgeDetail
+											achievement={selectedAchievement}
+											characterId={character.characterId}
+										/>
+									)}
+								</Modal>
 
-			<div className="mt-32px">
-				<AchievementsTitle>Beginner journey</AchievementsTitle>
-				<div className="mt-16px flex flex-wrap justify-between">
-					{renderBadge(character)}
-					{renderBadge(character)}
-					{renderBadge(character)}
-					{renderBadge(character)}
-					{renderBadge(character)}
-					{renderLayoutPlaceholder()}
-				</div>
+								<div className="mt-32px">
+									{achievementGroups.map((group) => (
+										<div key={group.id}>
+											<AchievementsTitle>{group.title}</AchievementsTitle>
+											<div className="mt-32px px-24px">
+												<SimpleGrid {...gridProps}>
+													{group.achievements.map((achievement) => {
+														const showAchievement = () => {
+															selectAchievement(achievement);
+															modal.open();
+														};
+
+														return (
+															<div
+																key={achievement.id}
+																onClick={showAchievement}
+																className="cursor-pointer"
+															>
+																<Badge achievement={achievement} />
+															</div>
+														);
+													})}
+												</SimpleGrid>
+											</div>
+										</div>
+									))}
+								</div>
+
+								<ComingSoon />
+							</div>
+						);
+				}
+			})()}
+		</div>
+	);
+}
+
+Page.getLayout = getLayout;
+
+function PageLoading() {
+	return (
+		<div className="mt-32px">
+			<Skeleton className="mb-32px mx-auto" width={150} height={23} />
+
+			<div className="mt-16px px-24px">
+				<SimpleGrid {...gridProps}>
+					{Array.from({ length: 4 }).map((_, key) => (
+						<div className="flex flex-col items-center" key={key}>
+							<div className="w-140/163 mb-19px">
+								<div className="py-1/2 relative">
+									<div className="absolute left-0 top-0 w-full h-full">
+										<Skeleton height="100%" width="100%" radius={999} />
+									</div>
+								</div>
+							</div>
+							<Skeleton className="mb-5px" height={16} width="60%" />
+							<Skeleton height={16} width="100%" />
+						</div>
+					))}
+				</SimpleGrid>
 			</div>
 
 			<ComingSoon />
@@ -132,35 +172,38 @@ export default function Page(props: PageProps) {
 	);
 }
 
-Page.getLayout = getLayout;
-
-function renderBadge(character: CharacterEntity) {
+function PageError() {
 	return (
-		<div className="my-16px mx-8px min-w-163px">
-			<Badge
-				levels={levels}
-				currentLevelId="gold"
-				circleHash={character.owner}
+		<div className="flex items-center justify-center pt-100px">
+			<Image
+				width={374}
+				height={374}
+				src={errorImgUrl}
+				alt="Error Illustration"
 			/>
 		</div>
 	);
 }
 
-function renderLayoutPlaceholder() {
-	return (
-		<>
-			{Array.from({ length: 8 }).map((_, key) => (
-				<div key={key} />
-			))}
-		</>
+function useSelectAchievement(achievementGroups: AchievementGroup[]) {
+	const [selectedAchievementId, setSelectedAchievementId] = React.useState<
+		AchievementInfo["id"] | null
+	>(null);
+
+	const achievements = React.useMemo(
+		() => achievementGroups.flatMap(({ achievements }) => achievements),
+		[achievementGroups]
 	);
-}
 
-function useCharacterInfo(props: PageProps) {
-	const { handle } = useCharacterRouterQuery();
-	const { data: character } = useCharacterByHandle(handle, {
-		initialData: props.character,
-	});
+	return React.useMemo(
+		() => ({
+			selectedAchievement:
+				achievements.find(({ id }) => selectedAchievementId === id) ?? null,
 
-	return { character, handle };
+			selectAchievement(achievement: AchievementInfo) {
+				setSelectedAchievementId(achievement.id);
+			},
+		}),
+		[achievements, selectedAchievementId]
+	);
 }

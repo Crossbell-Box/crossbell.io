@@ -19,9 +19,9 @@ export function AchievementsTitle({
 			)}
 			{...props}
 		>
-			<Text className="i-csb:two-stars text-18px" color="brand" />
+			<Text className="i-csb:two-stars text-18px text-purple-primary" />
 			<span className="mx-4px">{children}</span>
-			<Text className="i-csb:two-stars text-18px" color="brand" />
+			<Text className="i-csb:two-stars text-18px text-purple-primary" />
 		</h3>
 	);
 }

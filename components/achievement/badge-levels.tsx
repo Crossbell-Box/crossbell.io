@@ -1,11 +1,15 @@
 import React from "react";
+import classNames from "classnames";
 
-import type { BadgeLevelInfo } from "./types";
-import { BadgeLevelsItem } from "./badge-levels.item";
+import type { AchievementLevel } from "@/utils/apis/achievement";
+import { BadgeLevelsItem, BadgeLevelsItemProps } from "./badge-levels.item";
 
 export type BadgeLevelsProps = {
-	levels: BadgeLevelInfo[];
-	currentLevelId: BadgeLevelInfo["id"];
+	levels: AchievementLevel[];
+	currentLevelId: AchievementLevel["id"];
+	size: "md" | "sm";
+	displayDotIfAbleToMint: BadgeLevelsItemProps["displayDotIfAbleToMint"];
+	onSelect: (level: AchievementLevel) => void;
 };
 
 const lineStyle = {
@@ -20,20 +24,38 @@ const lineStyle = {
 	},
 };
 
-export function BadgeLevels({ levels, currentLevelId }: BadgeLevelsProps) {
+export function BadgeLevels({
+	levels,
+	currentLevelId,
+	size,
+	onSelect,
+	displayDotIfAbleToMint,
+}: BadgeLevelsProps) {
 	const lastIndex = levels.length - 1;
 
 	return (
 		<div className="flex items-center">
 			{levels.map((level, index) => {
 				const isSelected = level.id === currentLevelId;
+				const handleClick = () => onSelect(level);
+
 				return (
 					<React.Fragment key={level.id}>
-						<BadgeLevelsItem level={level} isSelected={isSelected} />
+						<div className="flex-shrink-0" onClick={handleClick}>
+							<BadgeLevelsItem
+								level={level}
+								isSelected={isSelected}
+								size={size}
+								displayDotIfAbleToMint={displayDotIfAbleToMint}
+							/>
+						</div>
 
 						{index !== lastIndex && (
 							<div
-								className="w-40px h-3px mx-2px"
+								className={classNames(
+									size === "sm" && "w-20px h-1.5px mx-1px",
+									size === "md" && "w-40px h-3px mx-2px"
+								)}
 								style={isSelected ? lineStyle.activated : lineStyle.inactive}
 							/>
 						)}
