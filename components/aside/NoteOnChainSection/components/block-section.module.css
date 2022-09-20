@@ -48,12 +48,6 @@
 	line-height: 16px;
 	letter-spacing: 0.5px;
 	color: #6ad991;
-	overflow: hidden;
-	text-overflow: ellipsis;
-	white-space: nowrap;
 	margin: 0;
-}
-
-.detail.multiline {
-	white-space: pre-wrap;
+	word-break: break-all;
 }
