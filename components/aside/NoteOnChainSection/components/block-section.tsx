@@ -1,7 +1,6 @@
 import { IpfsLink } from "@crossbell/ipfs-react";
 import { Text } from "@mantine/core";
 import React from "react";
-import classNames from "classnames";
 
 import { copyToClipboard } from "@/utils/other";
 
@@ -11,15 +10,9 @@ export type BlockSectionProps = {
 	title: string;
 	link: string | null;
 	detail: string | null;
-	multiline?: boolean;
 };
 
-export function BlockSection({
-	title,
-	link,
-	detail,
-	multiline,
-}: BlockSectionProps) {
+export function BlockSection({ title, link, detail }: BlockSectionProps) {
 	const copy = React.useCallback(
 		() => detail && copyToClipboard(detail, { showNotification: true }),
 		[detail]
@@ -51,10 +44,7 @@ export function BlockSection({
 			</div>
 
 			{detail && (
-				<p
-					className={classNames(styles.detail, multiline && styles.multiline)}
-					title={detail}
-				>
+				<p className={styles.detail} title={detail}>
 					{detail}
 				</p>
 			)}

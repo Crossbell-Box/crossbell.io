@@ -113,7 +113,6 @@ export function useBlocks(props: NoteOnChainSectionProps): BlockProps[] {
 						})(),
 						link: source.link,
 						detail: source.link,
-						multiline: true,
 					},
 				],
 			};
