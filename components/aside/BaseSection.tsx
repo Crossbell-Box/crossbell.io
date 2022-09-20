@@ -1,23 +1,32 @@
-import { Card, Title, CardProps } from "@mantine/core";
+import React from "react";
+import { Card, Text, CardProps } from "@mantine/core";
+import classNames from "classnames";
 
 export type BaseSectionProps = CardProps & {
-	title: string;
+	title: React.ReactNode;
 };
 
 export default function BaseSection({
 	title,
-	style,
 	children,
+	className,
 	...props
 }: BaseSectionProps) {
 	return (
 		<Card
+			className={classNames(
+				"border border-solid border-[#E1E8F7] rounded-12px bg-[#FCFDFF]",
+				className
+			)}
 			{...props}
-			style={{ boxShadow: "0px 0px 10px rgba(38, 108, 158, 0.1)", ...style }}
 		>
-			<Title order={6} className="text-[#687792]">
-				{title}
-			</Title>
+			{typeof title === "string" ? (
+				<Text className="text-[#687792] text-16px leading-24px font-500 tracking-0.15px mb-8px">
+					{title}
+				</Text>
+			) : (
+				title
+			)}
 
 			<Card.Section>{children}</Card.Section>
 		</Card>
