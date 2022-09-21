@@ -43,7 +43,7 @@ function NoteListItem({ note }: { note: NoteEntity }) {
 			<div className="px-4 py-2 bg-hover cursor-pointer">
 				<Group spacing="xs">
 					{/* avatar */}
-					<Avatar characterId={note.characterId} size={32} />
+					<Avatar characterId={note.characterId} size={32} showHoverCard />
 
 					{/* name */}
 					<CharacterName characterId={note.characterId} />

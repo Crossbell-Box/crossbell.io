@@ -162,7 +162,10 @@ export function useHasCharacter() {
 export const SCOPE_KEY_CHARACTER_FOLLOW_STATS = (characterId?: number) => {
 	return [...SCOPE_KEY, "follow", "stats", characterId];
 };
-export function useCharacterFollowStats(characterId?: number) {
+export function useCharacterFollowStats(
+	characterId?: number,
+	options: any = {}
+) {
 	return useQuery(
 		SCOPE_KEY_CHARACTER_FOLLOW_STATS(characterId),
 		async () => {
@@ -186,7 +189,7 @@ export function useCharacterFollowStats(characterId?: number) {
 				followersCount,
 			};
 		},
-		{ enabled: Boolean(characterId) }
+		{ enabled: Boolean(characterId), ...options }
 	);
 }
 
@@ -198,7 +201,8 @@ export const SCOPE_KEY_CHARACTER_FOLLOW_RELATION = (
 };
 export function useCharacterFollowRelation(
 	fromCharacterId?: number,
-	toCharacterID?: number
+	toCharacterID?: number,
+	options: any = {}
 ) {
 	const data = useQuery(
 		SCOPE_KEY_CHARACTER_FOLLOW_RELATION(fromCharacterId, toCharacterID),
@@ -225,7 +229,7 @@ export function useCharacterFollowRelation(
 				isFollowed,
 			};
 		},
-		{ enabled: Boolean(fromCharacterId && toCharacterID) }
+		{ enabled: Boolean(fromCharacterId && toCharacterID), ...options }
 	);
 
 	const isLoadingFollowRelation =

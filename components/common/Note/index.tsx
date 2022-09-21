@@ -117,6 +117,7 @@ export function Note({
 						size={48}
 						characterId={note.characterId}
 						character={character}
+						showHoverCard
 					/>
 				</div>
 			);
@@ -129,6 +130,7 @@ export function Note({
 						size={54}
 						characterId={note.characterId}
 						character={character}
+						showHoverCard
 					/>
 				</div>
 			);

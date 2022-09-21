@@ -5,12 +5,14 @@ import { extractCharacterAvatar } from "@/utils/metadata";
 import { Avatar as Avatar_, AvatarProps } from "@mantine/core";
 import { CharacterEntity } from "crossbell.js";
 import { PropsWithChildren } from "react";
+import CharacterHoverCard from "../Character/CharacterHoverCard";
 
 export default function Avatar({
 	characterId,
 	character: initialCharacter,
 	alt = "Avatar",
 	src,
+	showHoverCard = false,
 	...props
 }: PropsWithChildren<
 	(
@@ -22,8 +24,9 @@ export default function Avatar({
 				characterId?: never;
 				character: CharacterEntity;
 		  }
-	) &
-		AvatarProps
+	) & {
+		showHoverCard?: boolean;
+	} & AvatarProps
 >) {
 	const { isLoading, data: character } = useCharacter(
 		characterId ?? initialCharacter?.characterId,
@@ -44,13 +47,15 @@ export default function Avatar({
 	src_ = ipfsLinkToHttpLink(src_);
 
 	return (
-		<Avatar_
-			className="bg-coolgray-100"
-			src={src_}
-			alt={alt}
-			radius="xl"
-			{...props}
-		/>
+		<CharacterHoverCard character={character} showHoverCard={showHoverCard}>
+			<Avatar_
+				className="bg-coolgray-100"
+				src={src_}
+				alt={alt}
+				radius="xl"
+				{...props}
+			/>
+		</CharacterHoverCard>
 	);
 }
 

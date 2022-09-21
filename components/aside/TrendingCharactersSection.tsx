@@ -35,7 +35,7 @@ function CharacterListItem({ character }: { character: CharacterEntity }) {
 			<div className="px-4 py-2 bg-hover cursor-pointer flex justify-between items-center">
 				<Group spacing="xs">
 					{/* avatar */}
-					<Avatar character={character} size={48} />
+					<Avatar character={character} size={48} showHoverCard />
 
 					{/* name */}
 					<div>
