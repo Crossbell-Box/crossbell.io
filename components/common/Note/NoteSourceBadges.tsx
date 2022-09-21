@@ -9,6 +9,7 @@ const builtInColorMap = {
 	["crossbell.io"]: ["#E1BE60", "#000"],
 	xlog: ["#6466e9", "#fff"],
 	operatorsync: ["#5298e9", "#fff"],
+	sync: ["#5298e9", "#fff"],
 	crosssync: ["#5d87f7", "#fff"],
 	medium: ["#000000", "#fff"],
 	twitter: ["#4691dd", "#fff"],
@@ -87,6 +88,10 @@ function getLinkForSource(source: string, noteMetadata: NoteMetadata) {
 
 	if (isBuiltInSource(s)) {
 		if (s === "operatorsync") {
+			return "/sync";
+		}
+
+		if (s === "sync") {
 			return "/sync";
 		}
 

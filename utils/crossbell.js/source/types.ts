@@ -1,5 +1,6 @@
 export enum KnownSource {
 	operatorSync = "operatorsync",
+	sync = "sync",
 	crossSync = "crosssync",
 	xlog = "xlog",
 	twitter = "twitter",

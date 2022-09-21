@@ -8,6 +8,10 @@ const map: Record<KnownSource, (externalUrls: string[]) => string | null> = {
 		return "/sync";
 	},
 
+	[KnownSource.sync]: () => {
+		return "/sync";
+	},
+
 	[KnownSource.crossSync]: () => {
 		return "https://crosssync.app/";
 	},
