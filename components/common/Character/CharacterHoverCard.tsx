@@ -15,13 +15,14 @@ export default function CharacterHoverCard({
 	showHoverCard?: boolean;
 	children: React.ReactNode;
 }) {
-	if (!character || !showHoverCard) return <>{children}</>;
-
 	const [opened, setOpened] = useState(false);
 
-	const { data: followStats } = useCharacterFollowStats(character.characterId, {
-		enabled: Boolean(character) && opened,
-	});
+	const { data: followStats } = useCharacterFollowStats(
+		character?.characterId,
+		{ enabled: Boolean(character) && opened }
+	);
+
+	if (!character || !showHoverCard) return <>{children}</>;
 
 	return (
 		<HoverCard
