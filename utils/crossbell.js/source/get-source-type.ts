@@ -8,6 +8,7 @@ const map: Record<KnownSource, SourceType> = {
 	[KnownSource.tiktok]: SourceType.externalPlatform,
 
 	[KnownSource.operatorSync]: SourceType.syncTool,
+	[KnownSource.sync]: SourceType.syncTool,
 	[KnownSource.crossSync]: SourceType.syncTool,
 };
 
