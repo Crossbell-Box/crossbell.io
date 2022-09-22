@@ -55,8 +55,6 @@ export default function Aside() {
 
 							<Space h={10} />
 
-							<Title order={5}>Widgets</Title>
-
 							{(() => {
 								const commonSections = (
 									<>
