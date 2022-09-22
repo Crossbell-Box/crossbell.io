@@ -30,6 +30,7 @@ import {
 } from "@/utils/metadata";
 import { ipfsLinkToHttpLink } from "@/utils/ipfs";
 import { useScrollIntoView } from "@mantine/hooks";
+import { cacheRequest } from "@/utils/server";
 
 const SEO = ({
 	note,
@@ -190,6 +191,8 @@ Page.getLayout = getLayout;
 export const getServerSideProps: GetServerSideProps<PageProps> = async (
 	ctx
 ) => {
+	cacheRequest(ctx);
+
 	const { noteid } = ctx.query;
 	const { characterId, noteId } = decomposeNoteId(noteid as string);
 
