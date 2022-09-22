@@ -54,7 +54,7 @@
 		"wagmi": "0.6.6"
 	},
 	"devDependencies": {
-		"@crossbell/ipfs-gateway-next": "0.0.12",
+		"@crossbell/ipfs-gateway-next": "0.0.14",
 		"@iconify/utils": "2.0.0",
 		"@types/lodash.compact": "3.0.7",
 		"@types/node": "18.7.18",

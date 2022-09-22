@@ -2,7 +2,7 @@ lockfileVersion: 5.4
 
 specifiers:
   '@crossbell/ipfs-gateway': 0.0.12
-  '@crossbell/ipfs-gateway-next': 0.0.12
+  '@crossbell/ipfs-gateway-next': 0.0.14
   '@crossbell/ipfs-react': 0.0.12
   '@ctrl/tinycolor': 3.4.1
   '@emotion/core': 11.0.0
@@ -102,7 +102,7 @@ dependencies:
   wagmi: 0.6.6_nznuxirfauibn2fjde2ghjonky
 
 devDependencies:
-  '@crossbell/ipfs-gateway-next': 0.0.12_next@12.3.0
+  '@crossbell/ipfs-gateway-next': 0.0.14_next@12.3.0
   '@iconify/utils': 2.0.0
   '@types/lodash.compact': 3.0.7
   '@types/node': 18.7.18
@@ -290,14 +290,19 @@ packages:
 
   /@crossbell/ipfs-fetch/0.0.12:
     resolution: {integrity: sha512-C4n0nInWQc0oXJ/mNHgqbwUHQpVPYNyT9PrxK3JbhW995ctMiyTLD1dASws/1uoANRXqucp4VmYmC/oNTNH4fw==}
+    dev: false
 
-  /@crossbell/ipfs-gateway-next/0.0.12_next@12.3.0:
-    resolution: {integrity: sha512-0ZeyKoBdkZLbJojUjJ7r6LrXIrxIWPPEpBrS4oT2n+Rxf4loUEP81jC7iVCnmNeb2sUw5OwWqaE+tSY42ByMFA==}
+  /@crossbell/ipfs-fetch/0.0.14:
+    resolution: {integrity: sha512-evgt1ghtkbVIHz4Pr/g8J9h3HMHoZnsEUsQhvFxpIqx+7IhIdNePOcNXewynY1agxLy67/b4C8HmCGTy3uLeNw==}
+    dev: true
+
+  /@crossbell/ipfs-gateway-next/0.0.14_next@12.3.0:
+    resolution: {integrity: sha512-3eMsP4MCp59gchbELxQlM9eBh/0T+6TkM2WR8QdT2dfLXMDU7BRtZBvP3n9A/Wnd/NsHIFbWSiKg+rdOtYh5zg==}
     peerDependencies:
       next: ^12
     dependencies:
-      '@crossbell/ipfs-fetch': 0.0.12
-      '@crossbell/ipfs-gateway-sw': 0.0.12
+      '@crossbell/ipfs-fetch': 0.0.14
+      '@crossbell/ipfs-gateway-sw': 0.0.14
       copy-webpack-plugin: 11.0.0_webpack@5.74.0
       next: 12.3.0_biqbaboplfbrettd7655fr4n2y
       webpack: 5.74.0
@@ -313,6 +318,14 @@ packages:
     dependencies:
       '@crossbell/ipfs-fetch': 0.0.12
       escape-string-regexp: 4.0.0
+    dev: false
+
+  /@crossbell/ipfs-gateway-sw/0.0.14:
+    resolution: {integrity: sha512-9tK47Hc1mXRkYHWBIY5jM8QVEyzT2hFbcuxIOxqgxsPhcG1COJtflOYSSi87pokN54R+SBlPL7ry11U1khjHMQ==}
+    dependencies:
+      '@crossbell/ipfs-fetch': 0.0.14
+      escape-string-regexp: 4.0.0
+    dev: true
 
   /@crossbell/ipfs-gateway/0.0.12:
     resolution: {integrity: sha512-cBRGe7LxD120Qae7PNQFYGMUMYpdLl/6zORFQ+bwvWQxFoRqZnBzQm4XctcN0DLPspufpdsHpFgZaLXBpvLfKA==}
