@@ -357,13 +357,20 @@ export default function CharacterManagement({
 		return (
 			<div className="flex flex-col items-center justify-center">
 				<img
-					src="/illustrations/completed.svg"
+					src={
+						mode === "new"
+							? "/illustrations/completed.svg"
+							: "/illustrations/data-uploaded.svg"
+					}
 					alt="Congratulations"
 					className="w-full"
 				/>
 
 				<Text className="my-5" weight={500}>
-					Congrats! You have minted your own character now!
+					{mode === "new" &&
+						"Congrats! You have minted your own character now!"}
+					{mode === "edit" &&
+						"Your data has been successfully recorded on Crossbell!"}
 				</Text>
 
 				<Button
