@@ -7,18 +7,16 @@ import { useCharacter, useNoteMintedCount } from "@/utils/apis/indexer";
 import {
 	extractCharacterAvatar,
 	extractCharacterName,
-	getValidAttachments,
+	extractCoverImageFromNote,
+	extractPlainTextFromNote,
 } from "@/utils/metadata";
 import Avatar from "../common/Avatar";
 
 const MintedNoteCard = ({ note }: { note: NoteEntity }) => {
 	const noteId = composeNoteId(note.characterId, note.noteId);
 
-	const noteText = note.metadata?.content?.content;
-	const noteImage = getValidAttachments(note.metadata?.content?.attachments, {
-		allowedMediaTypes: ["image"],
-		allowedContentTypes: ["address"],
-	})?.[0]?.address;
+	const noteText = extractPlainTextFromNote(note.metadata?.content);
+	const noteImage = extractCoverImageFromNote(note.metadata?.content);
 
 	// get character
 	const { data: character } = useCharacter(note.characterId);

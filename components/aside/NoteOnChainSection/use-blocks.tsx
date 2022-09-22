@@ -12,7 +12,7 @@ import {
 	formatSources,
 	isPlatformSource,
 	PlatformSourceType,
-} from "@/utils/crossbell.js/source";
+} from "@/utils/metadata/note";
 import { useNote } from "@/utils/apis/indexer";
 
 import type { NoteOnChainSectionProps } from "./index";

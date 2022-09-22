@@ -49,6 +49,7 @@ specifiers:
   rehype-sanitize: 5.0.1
   remark-emoji: 3.0.2
   remark-gfm: 3.0.1
+  remove-markdown: 0.5.0
   sharp: 0.31.0
   sticky-sidebar-v2: 1.1.1
   typeit-react: 2.6.0
@@ -96,6 +97,7 @@ dependencies:
   rehype-sanitize: 5.0.1
   remark-emoji: 3.0.2
   remark-gfm: 3.0.1
+  remove-markdown: 0.5.0
   sharp: 0.31.0
   sticky-sidebar-v2: 1.1.1
   typeit-react: 2.6.0
@@ -6615,6 +6617,10 @@ packages:
 
   /remove-accents/0.4.2:
     resolution: {integrity: sha512-7pXIJqJOq5tFgG1A2Zxti3Ht8jJF337m4sowbuHsW30ZnkQFnDzy9qBNhgzX8ZLW4+UBcXiiR7SwR6pokHsxiA==}
+    dev: false
+
+  /remove-markdown/0.5.0:
+    resolution: {integrity: sha512-x917M80K97K5IN1L8lUvFehsfhR8cYjGQ/yAMRI9E7JIKivtl5Emo5iD13DhMr+VojzMCiYk8V2byNPwT/oapg==}
     dev: false
 
   /require-directory/2.1.1:

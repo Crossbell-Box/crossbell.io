@@ -3,6 +3,7 @@ import { ipfsLinkToHttpLink } from "@/utils/ipfs";
 import {
 	extractCharacterAvatar,
 	extractCoverImageFromNote,
+	extractPlainTextFromNote,
 } from "@/utils/metadata";
 import { composeNoteHref, composeTreasuresWalletsHref } from "@/utils/url";
 import { Space, Text } from "@mantine/core";
@@ -13,7 +14,7 @@ import { Fragment } from "react";
 import Image from "../common/Image";
 
 export default function TreasuresGallery({ address }: { address?: string }) {
-	const { data, isLoading } = useMintedNotesOfAddress(address, { limit: 10 });
+	const { data, isLoading } = useMintedNotesOfAddress(address, { limit: 8 });
 
 	const hasResult = !isLoading && data?.pages.some((page) => page.count > 0);
 
@@ -78,7 +79,10 @@ function NoteCover({ note }: { note?: NoteEntity | null }) {
 		enabled: !cover,
 	});
 	cover = cover ?? extractCharacterAvatar(character);
-	const content = note?.metadata?.content?.content?.slice(0, 50);
+	const content = extractPlainTextFromNote(note?.metadata?.content)?.slice(
+		0,
+		50
+	);
 
 	return (
 		<NextLink
@@ -93,7 +97,7 @@ function NoteCover({ note }: { note?: NoteEntity | null }) {
 			}}
 		>
 			{/* {!cover && ( */}
-			<div className="h-100px w-100px flex justify-center items-center p-2">
+			<div className="h-100px w-100px flex justify-center items-center p-2 overflow-hidden">
 				<Text
 					size="sm"
 					className="leading-1em w-100px text-white"

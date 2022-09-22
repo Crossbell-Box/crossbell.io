@@ -1,6 +1,8 @@
-import { useCharacter } from "@/utils/apis/indexer";
 import { useTrending } from "@/utils/apis/trending";
-import { getValidAttachments } from "@/utils/metadata";
+import {
+	extractPlainTextFromNote,
+	getValidAttachments,
+} from "@/utils/metadata";
 import { composeNoteHref } from "@/utils/url";
 import { Group, Skeleton, Space, Text } from "@mantine/core";
 import { NoteEntity } from "crossbell.js";
@@ -38,6 +40,8 @@ function NoteListItem({ note }: { note: NoteEntity }) {
 		allowedContentTypes: ["address"],
 	})[0]?.address;
 
+	const content = extractPlainTextFromNote(note.metadata?.content);
+
 	return (
 		<Link href={composeNoteHref(note.characterId, note.noteId)}>
 			<div className="px-4 py-2 bg-hover cursor-pointer">
@@ -56,7 +60,7 @@ function NoteListItem({ note }: { note: NoteEntity }) {
 
 				<div className="flex flex-row">
 					<Text size={13} lineClamp={3} className="leading-1.25em flex-1">
-						{note.metadata?.content?.content}
+						{content}
 					</Text>
 
 					{image && (

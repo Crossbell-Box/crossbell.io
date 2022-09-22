@@ -23,7 +23,11 @@ import { CharacterEntity, NoteEntity } from "crossbell.js";
 import type { GetServerSideProps } from "next";
 import { Divider } from "@mantine/core";
 import { NextSeo } from "next-seo";
-import { extractCharacterName, getValidAttachments } from "@/utils/metadata";
+import {
+	extractCharacterName,
+	extractPlainTextFromNote,
+	getValidAttachments,
+} from "@/utils/metadata";
 import { ipfsLinkToHttpLink } from "@/utils/ipfs";
 import { useScrollIntoView } from "@mantine/hooks";
 
@@ -39,25 +43,29 @@ const SEO = ({
 		allowedMediaTypes: ["image"],
 		allowedContentTypes: ["address"],
 	});
-	const title = `${extractCharacterName(
-		character
-	)}: "${note?.metadata?.content?.content
+
+	const titleText = note?.metadata?.content?.title;
+	const contentText = extractPlainTextFromNote(note?.metadata?.content, {
+		excludeTitle: true,
+	});
+
+	const username = extractCharacterName(character);
+
+	const windowTitle = `${username}: "${contentText
 		?.toString()
 		.slice(0, 100)
-		.replace(/\n/g, "")}"`;
+		.replace(/\n/g, " ")}"`;
 
 	return (
 		<NextSeo
-			title={title}
+			title={windowTitle}
 			openGraph={{
 				type: "article",
-				title:
-					note?.metadata?.content?.title ??
-					note?.metadata?.content?.content?.slice(0, 50),
+				title: titleText ?? contentText?.slice(0, 50),
 				profile: {
-					username: extractCharacterName(character),
+					username,
 				},
-				description: note?.metadata?.content?.content,
+				description: contentText,
 				url: origin + composeNoteHref(note?.characterId!, note?.noteId!),
 				article: {
 					publishedTime: note?.createdAt,
