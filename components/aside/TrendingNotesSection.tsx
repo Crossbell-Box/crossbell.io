@@ -50,7 +50,7 @@ function NoteListItem({ note }: { note: NoteEntity }) {
 					<Avatar characterId={note.characterId} size={32} showHoverCard />
 
 					{/* name */}
-					<CharacterName characterId={note.characterId} />
+					<CharacterName characterId={note.characterId} showHoverCard />
 
 					{/* time */}
 					<Time date={note.createdAt} mode="fromNow" />

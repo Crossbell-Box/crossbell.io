@@ -40,12 +40,17 @@ function CharacterListItem({ character }: { character: CharacterEntity }) {
 					{/* name */}
 					<div>
 						<div>
-							<CharacterName character={character} />
+							<CharacterName character={character} showHoverCard />
 						</div>
 
 						{/* handle */}
 						<div>
-							<CharacterHandle character={character} size="sm" color="dimmed" />
+							<CharacterHandle
+								character={character}
+								size="sm"
+								color="dimmed"
+								showHoverCard
+							/>
 						</div>
 					</div>
 				</Group>

@@ -145,13 +145,18 @@ export function Note({
 					<CharacterName
 						character={character}
 						characterId={note.characterId!}
+						showHoverCard
 					/>
 
 					<Space w={3} />
 
-					<Text color="dimmed" size="sm">
-						@{character?.handle}
-					</Text>
+					<CharacterHandle
+						character={character}
+						characterId={note.characterId!}
+						showHoverCard
+						color="dimmed"
+						size="sm"
+					/>
 
 					<Text color="dimmed" size="sm" className="mx-1">
 						·
@@ -166,16 +171,26 @@ export function Note({
 		if (displayMode === "main") {
 			return (
 				<div>
-					{/* username */}
-					<CharacterName
-						size="lg"
-						character={character}
-						characterId={note.characterId!}
-					/>
+					<div>
+						{/* username */}
+						<CharacterName
+							size="lg"
+							character={character}
+							characterId={note.characterId!}
+							showHoverCard
+						/>
+					</div>
 
-					<Text color="dimmed" size="md" className="leading-1em">
-						@{character?.handle}
-					</Text>
+					<div>
+						<CharacterHandle
+							character={character}
+							characterId={note.characterId!}
+							showHoverCard
+							color="dimmed"
+							size="md"
+							className="leading-1em"
+						/>
+					</div>
 				</div>
 			);
 		}

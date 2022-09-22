@@ -5,17 +5,19 @@ import { NextLink } from "@mantine/next";
 import { Text, TextProps } from "@mantine/core";
 import { CharacterEntity } from "crossbell.js";
 import classNames from "classnames";
+import CharacterHoverCard from "./CharacterHoverCard";
 
 export function CharacterName({
 	characterId,
 	character: initialCharacter,
 	ellipsis,
 	className,
+	showHoverCard = false,
 	...props
 }: (
 	| { characterId: number; character?: CharacterEntity | null }
 	| { characterId?: never; character: CharacterEntity }
-) & { ellipsis?: boolean } & TextProps) {
+) & { ellipsis?: boolean; showHoverCard?: boolean } & TextProps) {
 	const { data, isLoading } = useCharacter(
 		characterId ?? initialCharacter.characterId,
 		{
@@ -26,21 +28,23 @@ export function CharacterName({
 	const characterName = extractCharacterName(data);
 
 	return (
-		<Text
-			className={classNames(className, {
-				"overflow-hidden text-ellipsis max-w-8em": ellipsis === true,
-			})}
-			color="dark"
-			weight="bolder"
-			component={NextLink}
-			href={composeCharacterHref(data?.handle!)}
-			variant="link"
-			onClick={(e: any) => e.stopPropagation()}
-			inline
-			{...props}
-		>
-			{characterName ?? (isLoading ? "..." : characterName)}
-		</Text>
+		<CharacterHoverCard character={data} showHoverCard={showHoverCard}>
+			<Text
+				className={classNames(className, {
+					"overflow-hidden text-ellipsis max-w-8em": ellipsis === true,
+				})}
+				color="dark"
+				weight="bolder"
+				component={NextLink}
+				href={composeCharacterHref(data?.handle!)}
+				variant="link"
+				onClick={(e: any) => e.stopPropagation()}
+				inline
+				{...props}
+			>
+				{characterName ?? (isLoading ? "..." : characterName)}
+			</Text>
+		</CharacterHoverCard>
 	);
 }
 
@@ -50,12 +54,13 @@ export function CharacterHandle({
 	character: initialCharacter,
 	ellipsis,
 	className,
+	showHoverCard = false,
 	...props
 }: (
 	| { characterId: number; handle?: never; character?: CharacterEntity | null }
 	| { characterId?: never; handle: string; character?: CharacterEntity | null }
 	| { characterId?: never; handle?: never; character: CharacterEntity }
-) & { ellipsis?: boolean } & TextProps) {
+) & { ellipsis?: boolean; showHoverCard?: boolean } & TextProps) {
 	const { data: data1, isLoading: isLoading1 } = useCharacter(
 		characterId ?? initialCharacter?.characterId,
 		{
@@ -80,18 +85,20 @@ export function CharacterHandle({
 	const characterHandle = passedHandle ?? dataHandle ?? "UNKNOWN";
 
 	return (
-		<Text
-			className={classNames(className, {
-				"overflow-hidden text-ellipsis max-w-8em": ellipsis === true,
-			})}
-			component={NextLink}
-			href={composeCharacterHref(characterHandle)}
-			variant="link"
-			onClick={(e: any) => e.stopPropagation()}
-			inline
-			{...props}
-		>
-			{characterHandle ?? (isLoading ? "..." : characterHandle)}
-		</Text>
+		<CharacterHoverCard character={data} showHoverCard={showHoverCard}>
+			<Text
+				className={classNames(className, {
+					"overflow-hidden text-ellipsis max-w-8em": ellipsis === true,
+				})}
+				component={NextLink}
+				href={composeCharacterHref(characterHandle)}
+				variant="link"
+				onClick={(e: any) => e.stopPropagation()}
+				inline
+				{...props}
+			>
+				{characterHandle ?? (isLoading ? "..." : characterHandle)}
+			</Text>
+		</CharacterHoverCard>
 	);
 }

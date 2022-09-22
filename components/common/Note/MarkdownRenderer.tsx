@@ -272,7 +272,7 @@ export function MarkdownRenderer({
 									</>
 								) : (
 									<>
-										<CharacterHandle handle={props.handle} />{" "}
+										<CharacterHandle handle={props.handle} showHoverCard />{" "}
 									</>
 								);
 							},
