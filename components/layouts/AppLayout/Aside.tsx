@@ -1,6 +1,6 @@
 import React, { useEffect } from "react";
 import { useRouter } from "next/router";
-import { Aside as Aside_, Title, Space, TextInput, Text } from "@mantine/core";
+import { Aside as Aside_, TextInput, Text, Stack } from "@mantine/core";
 
 import TrendingCharactersSection from "@/components/aside/TrendingCharactersSection";
 import TrendingNotesSection from "@/components/aside/TrendingNotesSection";
@@ -51,49 +51,30 @@ export default function Aside() {
 						// width={{ sm: 300, lg: 400 }}
 					>
 						<div className="p-4">
-							{!isSearchPage && <SearchInput />}
+							<Stack spacing={32}>
+								{!isSearchPage && <SearchInput />}
 
-							<Space h={10} />
+								{(() => {
+									if (
+										isNoteDetailPage &&
+										typeof router.query.noteid === "string"
+									) {
+										return (
+											<>
+												<NoteOnChainSection noteId={router.query.noteid} />
+											</>
+										);
+									}
 
-							{(() => {
-								const commonSections = (
-									<>
-										<Space h={10} />
-										<TrendingNotesSection />
-										<Space h={10} />
-
-										<Space h={10} />
-										<TrendingCharactersSection />
-										<Space h={10} />
-									</>
-								);
-
-								if (
-									isNoteDetailPage &&
-									typeof router.query.noteid === "string"
-								) {
 									return (
 										<>
-											<Space h={10} />
-											<NoteOnChainSection noteId={router.query.noteid} />
-											<Space h={10} />
+											{isCharacterPage && <AchievementSection />}
+											<TrendingNotesSection />
+											<TrendingCharactersSection />
 										</>
 									);
-								}
-
-								if (isCharacterPage) {
-									return (
-										<>
-											<Space h={10} />
-											<AchievementSection />
-											<Space h={10} />
-											{commonSections}
-										</>
-									);
-								}
-
-								return commonSections;
-							})()}
+								})()}
+							</Stack>
 						</div>
 					</Aside_>
 				</div>
