@@ -1,9 +1,9 @@
 lockfileVersion: 5.4
 
 specifiers:
-  '@crossbell/ipfs-gateway': 0.0.14
-  '@crossbell/ipfs-gateway-next': 0.0.14
-  '@crossbell/ipfs-react': 0.0.14
+  '@crossbell/ipfs-gateway': 0.0.15
+  '@crossbell/ipfs-gateway-next': 0.0.15
+  '@crossbell/ipfs-react': 0.0.15
   '@ctrl/tinycolor': 3.4.1
   '@emotion/core': 11.0.0
   '@emotion/react': 11.10.4
@@ -60,8 +60,8 @@ specifiers:
   wagmi: 0.6.7
 
 dependencies:
-  '@crossbell/ipfs-gateway': 0.0.14
-  '@crossbell/ipfs-react': 0.0.14_s7fx6edwo2hfusixypdosesoqu
+  '@crossbell/ipfs-gateway': 0.0.15
+  '@crossbell/ipfs-react': 0.0.15_3cuac2dr7yf6nu67tvbbs2j6ry
   '@ctrl/tinycolor': 3.4.1
   '@emotion/core': 11.0.0
   '@emotion/react': 11.10.4_iapumuv4e6jcjznwuxpf4tt22e
@@ -107,7 +107,7 @@ dependencies:
   wagmi: 0.6.7_nznuxirfauibn2fjde2ghjonky
 
 devDependencies:
-  '@crossbell/ipfs-gateway-next': 0.0.14_next@12.3.1
+  '@crossbell/ipfs-gateway-next': 0.0.15_next@12.3.1
   '@iconify/utils': 2.0.0
   '@types/canvas-confetti': 1.4.3
   '@types/lodash.compact': 3.0.7
@@ -294,16 +294,16 @@ packages:
       - utf-8-validate
     dev: false
 
-  /@crossbell/ipfs-fetch/0.0.14:
-    resolution: {integrity: sha512-evgt1ghtkbVIHz4Pr/g8J9h3HMHoZnsEUsQhvFxpIqx+7IhIdNePOcNXewynY1agxLy67/b4C8HmCGTy3uLeNw==}
+  /@crossbell/ipfs-fetch/0.0.15:
+    resolution: {integrity: sha512-AYGDrwiSKqCGNDi0mEPP1k+96loWik+Pd40xH0MzRNM4RtCutPbwm4o+Sj5iWu0tlHoQC2bTs1XcufsLiv+WYw==}
 
-  /@crossbell/ipfs-gateway-next/0.0.14_next@12.3.1:
-    resolution: {integrity: sha512-3eMsP4MCp59gchbELxQlM9eBh/0T+6TkM2WR8QdT2dfLXMDU7BRtZBvP3n9A/Wnd/NsHIFbWSiKg+rdOtYh5zg==}
+  /@crossbell/ipfs-gateway-next/0.0.15_next@12.3.1:
+    resolution: {integrity: sha512-tofxIzY9oUsLuPyFWzcVyNu8VefAqTM8/dQweLhceaTimQlnzO70AEo5/2sa2aKTIeWsSq894+/qQVJQbiOINA==}
     peerDependencies:
       next: ^12
     dependencies:
-      '@crossbell/ipfs-fetch': 0.0.14
-      '@crossbell/ipfs-gateway-sw': 0.0.14
+      '@crossbell/ipfs-fetch': 0.0.15
+      '@crossbell/ipfs-gateway-sw': 0.0.15
       copy-webpack-plugin: 11.0.0_webpack@5.74.0
       next: 12.3.1_biqbaboplfbrettd7655fr4n2y
       webpack: 5.74.0
@@ -314,27 +314,27 @@ packages:
       - webpack-cli
     dev: true
 
-  /@crossbell/ipfs-gateway-sw/0.0.14:
-    resolution: {integrity: sha512-9tK47Hc1mXRkYHWBIY5jM8QVEyzT2hFbcuxIOxqgxsPhcG1COJtflOYSSi87pokN54R+SBlPL7ry11U1khjHMQ==}
+  /@crossbell/ipfs-gateway-sw/0.0.15:
+    resolution: {integrity: sha512-TGP4cI8yLnDSjNNrw2JTrZcxKkKIUzSs8Cw1OZX4b54yNzKSzUwE8uQLd1lEfG25YTysPnpJUHNncOZZ9RGStQ==}
     dependencies:
-      '@crossbell/ipfs-fetch': 0.0.14
+      '@crossbell/ipfs-fetch': 0.0.15
       escape-string-regexp: 4.0.0
 
-  /@crossbell/ipfs-gateway/0.0.14:
-    resolution: {integrity: sha512-jHDJICP6bgOhG3211bmXXVeCoIcg6yAWG22k082PgFG6GoMhAJ4247UsArDPtVf9eHCED408C9qIeAOVrXUB7A==}
+  /@crossbell/ipfs-gateway/0.0.15:
+    resolution: {integrity: sha512-fhmpq6Wh0Cu+ERbHjX3ncgDyTPeQnWAACIciPZRJKHIp4TQ+ohJiFoa3iuUe0zF7DUff7nWUPmfNeG538QGEeg==}
     dependencies:
-      '@crossbell/ipfs-fetch': 0.0.14
-      '@crossbell/ipfs-gateway-sw': 0.0.14
+      '@crossbell/ipfs-fetch': 0.0.15
+      '@crossbell/ipfs-gateway-sw': 0.0.15
       query-string: 7.1.1
     dev: false
 
-  /@crossbell/ipfs-react/0.0.14_s7fx6edwo2hfusixypdosesoqu:
-    resolution: {integrity: sha512-YCmaHj9sywfTTYmUm49qvBawbW8vhd6WRRww2N2Mqa2L0W3f5r02RmLeI2cFB8Fw6xvSa9MzQ+LEXib3IoZJPA==}
+  /@crossbell/ipfs-react/0.0.15_3cuac2dr7yf6nu67tvbbs2j6ry:
+    resolution: {integrity: sha512-Z2NeJz+j6ko/YUb5nAzu432CaBQi2OI+j1ZTr8//ETE0Nrv6ivU83BDCBoG8LoAHFe6FYY7wVBDq8IldBSXqzw==}
     peerDependencies:
-      '@crossbell/ipfs-gateway': 0.0.14
+      '@crossbell/ipfs-gateway': 0.0.15
       react: ^17 || ^18
     dependencies:
-      '@crossbell/ipfs-gateway': 0.0.14
+      '@crossbell/ipfs-gateway': 0.0.15
       react: 18.2.0
     dev: false
 
@@ -2937,7 +2937,7 @@ packages:
     peerDependencies:
       webpack: ^5.1.0
     dependencies:
-      fast-glob: 3.2.11
+      fast-glob: 3.2.12
       glob-parent: 6.0.2
       globby: 13.1.2
       normalize-path: 3.0.0
@@ -4526,7 +4526,7 @@ packages:
     engines: {node: ^12.20.0 || ^14.13.1 || >=16.0.0}
     dependencies:
       dir-glob: 3.0.1
-      fast-glob: 3.2.11
+      fast-glob: 3.2.12
       ignore: 5.2.0
       merge2: 1.4.1
       slash: 4.0.0
