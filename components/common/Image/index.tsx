@@ -49,7 +49,8 @@ const toBase64 = (str: string) =>
 
 const isLocalImage = (s: ImageProps["src"]) =>
 	(typeof s === "string" &&
-		(s.startsWith("data:image/") || s.startsWith("/"))) ||
+		(s.startsWith("data:image/") ||
+			(s.startsWith("/") && !s.startsWith("/ipfs/" /* ipfs sw */)))) ||
 	typeof s === "object"; // StaticImport
 
 export default function Image({
