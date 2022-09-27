@@ -25,7 +25,7 @@ export const ipfsLinkToHttpLink = (
 		ret = window.location.origin + ret;
 	}
 
-	return link;
+	return ret;
 };
 
 export const uploadToIpfs = async (file: File | Blob) => {
