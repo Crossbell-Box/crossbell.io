@@ -5,7 +5,7 @@ import { useCharacter, useNote, useNoteStatus } from "@/utils/apis/indexer";
 import classNames from "classnames";
 import MediaCarousel from "./MediaCarousel";
 import { useRouter } from "next/router";
-import { composeNoteHref, useNoteRouterQuery } from "@/utils/url";
+import { composeNoteHref, getOrigin, useNoteRouterQuery } from "@/utils/url";
 import { useLikeNote, useMintNote, useUnlikeNote } from "@/utils/apis/contract";
 import { copyToClipboard } from "@/utils/other";
 import Tooltip from "../Tooltip";
@@ -374,10 +374,9 @@ function NoteActions({
 	}, [status?.isMinted]);
 
 	const handleCopyToClipboard = useCallback(async () => {
-		await copyToClipboard(
-			location.origin + composeNoteHref(characterId, noteId),
-			{ showNotification: true }
-		);
+		await copyToClipboard(getOrigin() + composeNoteHref(characterId, noteId), {
+			showNotification: true,
+		});
 	}, [characterId, noteId]);
 
 	return (

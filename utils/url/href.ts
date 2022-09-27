@@ -2,11 +2,11 @@ import { composeNoteId } from "./param";
 
 /**
  * The origin of the current page.
- * @returns "https://indexer.crossbell.io" or "http://localhost:3000"
+ * @returns "https://crossbell.io" or "http://localhost:3000"
  */
 export const getOrigin = () => {
 	if (process.env.NODE_ENV === "production") {
-		return "https://indexer.crossbell.io";
+		return "https://crossbell.io";
 	} else {
 		return "http://localhost:3000";
 	}

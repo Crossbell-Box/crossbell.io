@@ -1,3 +1,4 @@
+import { getOrigin } from "@/utils/url";
 import { NoteMetadata } from "crossbell.js";
 
 /**
@@ -11,8 +12,9 @@ export const composeNoteMetadata = (metadata: NoteMetadata): NoteMetadata => {
 	}
 
 	if (!metadata.external_urls) {
-		if (globalThis?.location?.href) {
-			metadata.external_urls = [globalThis.location.href];
+		const origin = getOrigin();
+		if (origin) {
+			metadata.external_urls = [origin];
 		}
 	}
 

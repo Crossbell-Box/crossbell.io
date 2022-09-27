@@ -1,4 +1,5 @@
 import { IpfsGateway, isIpfsUrl } from "@crossbell/ipfs-gateway";
+import { getOrigin } from "../url";
 
 export const ipfsGateway = new IpfsGateway();
 
@@ -14,7 +15,7 @@ export const ipfsLinkToHttpLink = (link: string): string => {
 	}
 
 	if (ret.startsWith("/")) {
-		ret = globalThis.location.origin + ret;
+		ret = getOrigin() + ret;
 	}
 
 	return ret;
