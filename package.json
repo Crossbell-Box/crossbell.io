@@ -9,8 +9,8 @@
 		"lint": "next lint"
 	},
 	"dependencies": {
-		"@crossbell/ipfs-gateway": "0.0.12",
-		"@crossbell/ipfs-react": "0.0.12",
+		"@crossbell/ipfs-gateway": "0.0.14",
+		"@crossbell/ipfs-react": "0.0.14",
 		"@ctrl/tinycolor": "3.4.1",
 		"@emotion/core": "11.0.0",
 		"@emotion/react": "11.10.4",
@@ -28,8 +28,9 @@
 		"@rainbow-me/rainbowkit": "0.6.0",
 		"@tanstack/react-query": "4.3.9",
 		"@tanstack/react-query-devtools": "4.3.9",
+		"canvas-confetti": "1.5.1",
 		"classnames": "2.3.2",
-		"crossbell.js": "0.10.23",
+		"crossbell.js": "0.10.34",
 		"dayjs": "1.11.5",
 		"embla-carousel-react": "7.0.3",
 		"ethers": "5.7.1",
@@ -55,8 +56,9 @@
 		"wagmi": "0.6.6"
 	},
 	"devDependencies": {
-		"@crossbell/ipfs-gateway-next": "0.0.12",
+		"@crossbell/ipfs-gateway-next": "0.0.14",
 		"@iconify/utils": "2.0.0",
+		"@types/canvas-confetti": "1.4.3",
 		"@types/lodash.compact": "3.0.7",
 		"@types/node": "18.7.18",
 		"@types/react": "18.0.20",

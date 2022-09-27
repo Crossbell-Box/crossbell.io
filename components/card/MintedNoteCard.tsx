@@ -92,7 +92,7 @@ const MintedNoteCard = ({ note }: { note: NoteEntity }) => {
 						<Text className="text-xs font-semibold text-[#082135]">
 							{mintedCount}
 						</Text>
-						<Text className="text-xs font-light text-[#687792]">Mint</Text>
+						<Text className="text-xs font-light text-[#687792]">Minted</Text>
 					</div>
 				</div>
 			</div>

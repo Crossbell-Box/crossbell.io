@@ -1,9 +1,9 @@
 lockfileVersion: 5.4
 
 specifiers:
-  '@crossbell/ipfs-gateway': 0.0.12
-  '@crossbell/ipfs-gateway-next': 0.0.12
-  '@crossbell/ipfs-react': 0.0.12
+  '@crossbell/ipfs-gateway': 0.0.14
+  '@crossbell/ipfs-gateway-next': 0.0.14
+  '@crossbell/ipfs-react': 0.0.14
   '@ctrl/tinycolor': 3.4.1
   '@emotion/core': 11.0.0
   '@emotion/react': 11.10.4
@@ -22,13 +22,15 @@ specifiers:
   '@rainbow-me/rainbowkit': 0.6.0
   '@tanstack/react-query': 4.3.9
   '@tanstack/react-query-devtools': 4.3.9
+  '@types/canvas-confetti': 1.4.3
   '@types/lodash.compact': 3.0.7
   '@types/node': 18.7.18
   '@types/react': 18.0.20
   '@types/react-dom': 18.0.6
   '@unocss/webpack': 0.45.21
+  canvas-confetti: 1.5.1
   classnames: 2.3.2
-  crossbell.js: 0.10.23
+  crossbell.js: 0.10.34
   dayjs: 1.11.5
   embla-carousel-react: 7.0.3
   eslint: 8.23.1
@@ -58,8 +60,8 @@ specifiers:
   wagmi: 0.6.6
 
 dependencies:
-  '@crossbell/ipfs-gateway': 0.0.12
-  '@crossbell/ipfs-react': 0.0.12_mpg5vjb67ckxkvteayykp4iqta
+  '@crossbell/ipfs-gateway': 0.0.14
+  '@crossbell/ipfs-react': 0.0.14_s7fx6edwo2hfusixypdosesoqu
   '@ctrl/tinycolor': 3.4.1
   '@emotion/core': 11.0.0
   '@emotion/react': 11.10.4_w5j4k42lgipnm43s3brx6h3c34
@@ -77,8 +79,9 @@ dependencies:
   '@rainbow-me/rainbowkit': 0.6.0_77hisva6i3lzqozyotowjactue
   '@tanstack/react-query': 4.3.9_biqbaboplfbrettd7655fr4n2y
   '@tanstack/react-query-devtools': 4.3.9_epsj7huqxjc5l4xgmicnqhbxle
+  canvas-confetti: 1.5.1
   classnames: 2.3.2
-  crossbell.js: 0.10.23
+  crossbell.js: 0.10.34
   dayjs: 1.11.5
   embla-carousel-react: 7.0.3_react@18.2.0
   ethers: 5.7.1
@@ -104,8 +107,9 @@ dependencies:
   wagmi: 0.6.6_nznuxirfauibn2fjde2ghjonky
 
 devDependencies:
-  '@crossbell/ipfs-gateway-next': 0.0.12_next@12.3.0
+  '@crossbell/ipfs-gateway-next': 0.0.14_next@12.3.0
   '@iconify/utils': 2.0.0
+  '@types/canvas-confetti': 1.4.3
   '@types/lodash.compact': 3.0.7
   '@types/node': 18.7.18
   '@types/react': 18.0.20
@@ -290,16 +294,16 @@ packages:
       - utf-8-validate
     dev: false
 
-  /@crossbell/ipfs-fetch/0.0.12:
-    resolution: {integrity: sha512-C4n0nInWQc0oXJ/mNHgqbwUHQpVPYNyT9PrxK3JbhW995ctMiyTLD1dASws/1uoANRXqucp4VmYmC/oNTNH4fw==}
+  /@crossbell/ipfs-fetch/0.0.14:
+    resolution: {integrity: sha512-evgt1ghtkbVIHz4Pr/g8J9h3HMHoZnsEUsQhvFxpIqx+7IhIdNePOcNXewynY1agxLy67/b4C8HmCGTy3uLeNw==}
 
-  /@crossbell/ipfs-gateway-next/0.0.12_next@12.3.0:
-    resolution: {integrity: sha512-0ZeyKoBdkZLbJojUjJ7r6LrXIrxIWPPEpBrS4oT2n+Rxf4loUEP81jC7iVCnmNeb2sUw5OwWqaE+tSY42ByMFA==}
+  /@crossbell/ipfs-gateway-next/0.0.14_next@12.3.0:
+    resolution: {integrity: sha512-3eMsP4MCp59gchbELxQlM9eBh/0T+6TkM2WR8QdT2dfLXMDU7BRtZBvP3n9A/Wnd/NsHIFbWSiKg+rdOtYh5zg==}
     peerDependencies:
       next: ^12
     dependencies:
-      '@crossbell/ipfs-fetch': 0.0.12
-      '@crossbell/ipfs-gateway-sw': 0.0.12
+      '@crossbell/ipfs-fetch': 0.0.14
+      '@crossbell/ipfs-gateway-sw': 0.0.14
       copy-webpack-plugin: 11.0.0_webpack@5.74.0
       next: 12.3.0_biqbaboplfbrettd7655fr4n2y
       webpack: 5.74.0
@@ -310,27 +314,27 @@ packages:
       - webpack-cli
     dev: true
 
-  /@crossbell/ipfs-gateway-sw/0.0.12:
-    resolution: {integrity: sha512-X/9s8dFdCIACLlC1qz+unpVTvaFXoFhz2UjgQbmkJKYQGhRbRccOwWy/pbPObBKse/VYtkUjvy5kFOU3/p/49w==}
+  /@crossbell/ipfs-gateway-sw/0.0.14:
+    resolution: {integrity: sha512-9tK47Hc1mXRkYHWBIY5jM8QVEyzT2hFbcuxIOxqgxsPhcG1COJtflOYSSi87pokN54R+SBlPL7ry11U1khjHMQ==}
     dependencies:
-      '@crossbell/ipfs-fetch': 0.0.12
+      '@crossbell/ipfs-fetch': 0.0.14
       escape-string-regexp: 4.0.0
 
-  /@crossbell/ipfs-gateway/0.0.12:
-    resolution: {integrity: sha512-cBRGe7LxD120Qae7PNQFYGMUMYpdLl/6zORFQ+bwvWQxFoRqZnBzQm4XctcN0DLPspufpdsHpFgZaLXBpvLfKA==}
+  /@crossbell/ipfs-gateway/0.0.14:
+    resolution: {integrity: sha512-jHDJICP6bgOhG3211bmXXVeCoIcg6yAWG22k082PgFG6GoMhAJ4247UsArDPtVf9eHCED408C9qIeAOVrXUB7A==}
     dependencies:
-      '@crossbell/ipfs-fetch': 0.0.12
-      '@crossbell/ipfs-gateway-sw': 0.0.12
+      '@crossbell/ipfs-fetch': 0.0.14
+      '@crossbell/ipfs-gateway-sw': 0.0.14
       query-string: 7.1.1
     dev: false
 
-  /@crossbell/ipfs-react/0.0.12_mpg5vjb67ckxkvteayykp4iqta:
-    resolution: {integrity: sha512-ghl8QbrqB1HtE1AW+gN0KVzjDAa22VT0GxZ0YGhczOdV5tcclgjgMMIpAwqWoHJ/ZACYWPfxexo0bf75d3Rlyw==}
+  /@crossbell/ipfs-react/0.0.14_s7fx6edwo2hfusixypdosesoqu:
+    resolution: {integrity: sha512-YCmaHj9sywfTTYmUm49qvBawbW8vhd6WRRww2N2Mqa2L0W3f5r02RmLeI2cFB8Fw6xvSa9MzQ+LEXib3IoZJPA==}
     peerDependencies:
-      '@crossbell/ipfs-gateway': 0.0.12
+      '@crossbell/ipfs-gateway': 0.0.14
       react: ^17 || ^18
     dependencies:
-      '@crossbell/ipfs-gateway': 0.0.12
+      '@crossbell/ipfs-gateway': 0.0.14
       react: 18.2.0
     dev: false
 
@@ -1539,6 +1543,10 @@ packages:
       '@types/node': 18.7.18
     dev: false
 
+  /@types/canvas-confetti/1.4.3:
+    resolution: {integrity: sha512-UwFPTsW1ZwVyo/ETp4hPSikSD7yl2V42E3VWBF5P/0+DHO4iajyceWv7hfNdZ2AX5tkZnuViiBWOqyCPohU2FQ==}
+    dev: true
+
   /@types/connect/3.4.35:
     resolution: {integrity: sha512-cdeYyv4KWoEgpBISTxWvqYsVy444DOqehiF3fM3ne10AmJ62RSyNkUnxMJXHQWRQQX2eR94m5y1IZyDwBjV9FQ==}
     dependencies:
@@ -2745,6 +2753,10 @@ packages:
   /caniuse-lite/1.0.30001382:
     resolution: {integrity: sha512-2rtJwDmSZ716Pxm1wCtbPvHtbDWAreTPxXbkc5RkKglow3Ig/4GNGazDI9/BVnXbG/wnv6r3B5FEbkfg9OcTGg==}
 
+  /canvas-confetti/1.5.1:
+    resolution: {integrity: sha512-Ncz+oZJP6OvY7ti4E1slxVlyAV/3g7H7oQtcCDXgwGgARxPnwYY9PW5Oe+I8uvspYNtuHviAdgA0LfcKFWJfpg==}
+    dev: false
+
   /ccount/2.0.1:
     resolution: {integrity: sha512-eyrF0jiFpY+3drT6383f1qhkbGsLSifNAjA61IUjZjmLCWjItY6LB9ft9YhoDgwfmclB2zhu51Lc7+95b8NRAg==}
     dev: false
@@ -3010,8 +3022,8 @@ packages:
       which: 2.0.2
     dev: true
 
-  /crossbell.js/0.10.23:
-    resolution: {integrity: sha512-GIN6eIL1IaGKtX0CSh99xAUMd+m9mrcboMFOdBGNjUYFtrv0U/XX4smOB1ODONeXzgX4DU+kiLvES9F1q5uwxQ==}
+  /crossbell.js/0.10.34:
+    resolution: {integrity: sha512-B9+U/GPnw3/19tPI9YsouGKqmY32tXf1G0EVPKkE/GzbUvE+TzWNdMnBq8Vo24KNraLY9HnWVQXJ3iN54jDfCA==}
     dependencies:
       async-retry: 1.3.3
       ethers: 5.7.1
@@ -3019,7 +3031,7 @@ packages:
       is-ipfs: 6.0.2
       query-string: 7.1.1
       ts-mixer: 6.0.1
-      web3-providers-ws: 1.7.5
+      web3-providers-ws: 1.8.0
     transitivePeerDependencies:
       - bufferutil
       - node-fetch
@@ -7691,35 +7703,35 @@ packages:
     resolution: {integrity: sha512-bKr1DkiNa2krS7qxNtdrtHAmzuYGFQLiQ13TsorsdT6ULTkPLKuu5+GsFpDlg6JFjUTwX2DyhMPG2be8uPrqsQ==}
     dev: false
 
-  /web3-core-helpers/1.7.5:
-    resolution: {integrity: sha512-lDDjTks6Q6aNUO87RYrY2xub3UWTKr/RIWxpHJODEqkLxZS1dWdyliJ6aIx3031VQwsNT5HE7NvABe/t0p3iDQ==}
+  /web3-core-helpers/1.8.0:
+    resolution: {integrity: sha512-nMAVwZB3rEp/khHI2BvFy0e/xCryf501p5NGjswmJtEM+Zrd3Biaw52JrB1qAZZIzCA8cmLKaOgdfamoDOpWdw==}
     engines: {node: '>=8.0.0'}
     dependencies:
-      web3-eth-iban: 1.7.5
-      web3-utils: 1.7.5
+      web3-eth-iban: 1.8.0
+      web3-utils: 1.8.0
     dev: false
 
-  /web3-eth-iban/1.7.5:
-    resolution: {integrity: sha512-mn2W5t/1IpL8OZvzAabLKT4kvwRnZSJ9K0tctndl9sDNWkfITYQibEEhUaNNA50Q5fJKgVudHI/m0gwIVTyG8Q==}
+  /web3-eth-iban/1.8.0:
+    resolution: {integrity: sha512-4RbvUxcMpo/e5811sE3a6inJ2H4+FFqUVmlRYs0RaXaxiHweahSRBNcpO0UWgmlePTolj0rXqPT2oEr0DuC8kg==}
     engines: {node: '>=8.0.0'}
     dependencies:
       bn.js: 5.2.1
-      web3-utils: 1.7.5
+      web3-utils: 1.8.0
     dev: false
 
-  /web3-providers-ws/1.7.5:
-    resolution: {integrity: sha512-9uJNVVkIGC8PmM9kNbgPth56HDMSSsxZh3ZEENdwO3LNWemaADiQYUDCsD/dMVkn0xsGLHP5dgAy4Q5msqySLg==}
+  /web3-providers-ws/1.8.0:
+    resolution: {integrity: sha512-bcZtSifsqyJxwkfQYamfdIRp4nhj9eJd7cxHg1uUkfLJK125WP96wyJL1xbPt7qt0MpfnTFn8/UuIqIB6nFENg==}
     engines: {node: '>=8.0.0'}
     dependencies:
       eventemitter3: 4.0.4
-      web3-core-helpers: 1.7.5
+      web3-core-helpers: 1.8.0
       websocket: 1.0.34
     transitivePeerDependencies:
       - supports-color
     dev: false
 
-  /web3-utils/1.7.5:
-    resolution: {integrity: sha512-9AqNOziQky4wNQadEwEfHiBdOZqopIHzQQVzmvvv6fJwDSMhP+khqmAZC7YTiGjs0MboyZ8tWNivqSO1699XQw==}
+  /web3-utils/1.8.0:
+    resolution: {integrity: sha512-7nUIl7UWpLVka2f09CMbKOSEvorvHnaugIabU4mj7zfMvm0tSByLcEu3eyV9qgS11qxxLuOkzBIwCstTflhmpQ==}
     engines: {node: '>=8.0.0'}
     dependencies:
       bn.js: 5.2.1
