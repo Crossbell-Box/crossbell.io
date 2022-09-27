@@ -54,12 +54,13 @@ const SEO = ({
 
 	const windowTitle = `${username}: "${contentText
 		?.toString()
-		.slice(0, 100)
+		.slice(0, 60)
 		.replace(/\n/g, " ")}"`;
 
 	return (
 		<NextSeo
 			title={windowTitle}
+			description={contentText?.toString().slice(0, 160)}
 			openGraph={{
 				type: "article",
 				title: titleText ?? contentText?.slice(0, 50),
@@ -75,7 +76,7 @@ const SEO = ({
 					tags: note?.metadata?.content?.tags,
 				},
 				images: images.map((i) => ({
-					url: ipfsLinkToHttpLink(i.address!),
+					url: ipfsLinkToHttpLink(i.address!, { withOrigin: true }),
 					type: i.mime_type,
 				})),
 			}}

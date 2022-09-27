@@ -33,6 +33,7 @@ export default function App({ Component, pageProps }: AppPropsWithLayout) {
 					name="viewport"
 					content="minimum-scale=1, initial-scale=1, width=device-width"
 				/>
+				<link rel="shortcut icon" href="/favicon.ico" />
 			</Head>
 
 			<DefaultSeo
