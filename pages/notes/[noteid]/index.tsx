@@ -76,7 +76,7 @@ const SEO = ({
 					tags: note?.metadata?.content?.tags,
 				},
 				images: images.map((i) => ({
-					url: ipfsLinkToHttpLink(i.address!, { withOrigin: true }),
+					url: ipfsLinkToHttpLink(i.address!),
 					type: i.mime_type,
 				})),
 			}}
