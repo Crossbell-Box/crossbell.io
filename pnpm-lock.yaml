@@ -52,7 +52,6 @@ specifiers:
   remark-emoji: 3.0.2
   remark-frontmatter: 4.0.1
   remark-gfm: 3.0.1
-  remove-markdown: 0.5.0
   sharp: 0.31.0
   sticky-sidebar-v2: 1.1.1
   typeit-react: 2.6.0
@@ -102,7 +101,6 @@ dependencies:
   remark-emoji: 3.0.2
   remark-frontmatter: 4.0.1
   remark-gfm: 3.0.1
-  remove-markdown: 0.5.0
   sharp: 0.31.0
   sticky-sidebar-v2: 1.1.1
   typeit-react: 2.6.0
@@ -6667,10 +6665,6 @@ packages:
     resolution: {integrity: sha512-7pXIJqJOq5tFgG1A2Zxti3Ht8jJF337m4sowbuHsW30ZnkQFnDzy9qBNhgzX8ZLW4+UBcXiiR7SwR6pokHsxiA==}
     dev: false
 
-  /remove-markdown/0.5.0:
-    resolution: {integrity: sha512-x917M80K97K5IN1L8lUvFehsfhR8cYjGQ/yAMRI9E7JIKivtl5Emo5iD13DhMr+VojzMCiYk8V2byNPwT/oapg==}
-    dev: false
-
   /require-directory/2.1.1:
     resolution: {integrity: sha512-fGxEI7+wsG9xrvdjsrlmL22OMTTiHRwAMroiEeMgq8gzoLC/PQr7RsRDSTLUg/bZAZtF+TVIkHc6/4RIKrui+Q==}
     engines: {node: '>=0.10.0'}
@@ -7090,7 +7084,7 @@ packages:
     dev: true
 
   /strip-hex-prefix/1.0.0:
-    resolution: {integrity: sha512-q8d4ue7JGEiVcypji1bALTos+0pWtyGlivAWyPuTkHzuTCJqrK9sWxYQZUq6Nq3cuyv3bm734IhHvHtGGURU6A==}
+    resolution: {integrity: sha1-DF8VX+8RUTczd96du1iNoFUA428=}
     engines: {node: '>=6.5.0', npm: '>=3'}
     dependencies:
       is-hex-prefixed: 1.0.0
