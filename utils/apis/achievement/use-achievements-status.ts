@@ -11,7 +11,6 @@ export function useAchievementsStatus(
 ): AchievementsStatus {
 	return React.useMemo(() => {
 		let ableToMintCount = 0;
-		console.log(achievements)
 
 		for (const achievement of achievements) {
 			const statusSet = new Set(achievement.levels.map(({ status }) => status));

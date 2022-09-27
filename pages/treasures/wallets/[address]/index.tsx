@@ -19,7 +19,10 @@ const TreasuresList = () => {
 				<Fragment key={i}>
 					{page.list.map((mintedNote) => (
 						// TODO: should display the minted note! not note!
-						<MintedNoteCard key={mintedNote.noteId} note={mintedNote.note!} />
+						<MintedNoteCard
+							key={`${mintedNote.contractAddress}-${mintedNote.tokenId}`}
+							note={mintedNote.note!}
+						/>
 					))}
 				</Fragment>
 			))}

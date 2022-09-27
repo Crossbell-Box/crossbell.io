@@ -8,4 +8,8 @@ export default {
 				? "https://opsync.crossbell.io/v1"
 				: "https://test-opsync.crossbell.io/v1",
 	},
+	domain:
+		process.env.DOMAIN_NAME ?? process.env.NODE_ENV == "production"
+			? "https://crossbell.io"
+			: "http://localhost:3000",
 } as const;

@@ -63,13 +63,15 @@ export default function Image({
 }) {
 	const originalSrc = src;
 	if (typeof src === "string") {
-		src = ipfsLinkToHttpLink(src);
+		src = ipfsLinkToHttpLink(src, { noOrigin: true });
 	}
 
 	const thumborLoader: ImageLoader = ({ src, width, quality }) => {
 		if (isLocalImage(src)) {
 			return src;
 		}
+
+		src = ipfsLinkToHttpLink(src, { forceProductionOrigin: true });
 		// const w = typeof props.width === "number" ? props.width : width;
 		// const h = typeof props.height === "number" ? props.height : 0;
 		const w = width;

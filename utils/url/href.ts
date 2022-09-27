@@ -1,15 +1,20 @@
+import config from "config";
 import { composeNoteId } from "./param";
 
 /**
  * The origin of the current page.
  * @returns "https://crossbell.io" or "http://localhost:3000"
  */
-export const getOrigin = () => {
-	if (process.env.NODE_ENV === "production") {
+export const getOrigin = ({
+	forceProductionOrigin,
+}: {
+	forceProductionOrigin?: boolean;
+} = {}) => {
+	if (forceProductionOrigin) {
 		return "https://crossbell.io";
-	} else {
-		return "http://localhost:3000";
 	}
+
+	return config.domain;
 };
 
 /**

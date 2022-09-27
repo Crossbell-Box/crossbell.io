@@ -3,7 +3,16 @@ import { getOrigin } from "../url";
 
 export const ipfsGateway = new IpfsGateway();
 
-export const ipfsLinkToHttpLink = (link: string): string => {
+export const ipfsLinkToHttpLink = (
+	link: string,
+	{
+		noOrigin,
+		forceProductionOrigin,
+	}: {
+		noOrigin?: boolean;
+		forceProductionOrigin?: boolean;
+	} = {}
+): string => {
 	if (!link) {
 		return "";
 	}
@@ -14,8 +23,8 @@ export const ipfsLinkToHttpLink = (link: string): string => {
 		ret = ipfsGateway.getSwWeb2Url(link);
 	}
 
-	if (ret.startsWith("/")) {
-		ret = getOrigin() + ret;
+	if (ret.startsWith("/") && !noOrigin) {
+		ret = getOrigin({ forceProductionOrigin }) + ret;
 	}
 
 	return ret;
