@@ -6,15 +6,17 @@ import { useTrending } from "@/utils/apis/trending";
 const IndexTrending = () => {
 	const { data } = useTrending();
 
+	const notes = data?.note?.slice(0, 12);
+
 	return (
 		<>
-			<div className={"m-auto max-w-340 px-8"}>
+			<div className="m-auto max-w-340 px-8">
 				{data && (
 					<>
 						{data.character && (
 							<TrendingCharacters characters={data.character} />
 						)}
-						{data.note && <TrendingTreasures notes={data.note} />}
+						{notes && <TrendingTreasures notes={notes} />}
 						{/* <TrendingLists list={data.list} /> */}
 					</>
 				)}

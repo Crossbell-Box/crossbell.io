@@ -69,7 +69,11 @@ export function extractPlainTextFromNote(
 		content = note.title + "\n" + content;
 	}
 
-	let text = removeMd(note.content, { gfm: true, stripFrontMatter: true });
+	let text = removeMd(content, {
+		gfm: true,
+		stripFrontMatter: true,
+		stripHTML: true,
+	});
 
 	if (length) {
 		text = text.slice(0, length);
