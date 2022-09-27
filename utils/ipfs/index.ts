@@ -1,14 +1,28 @@
-import { IpfsGateway, isIpfsUrl } from "@crossbell/ipfs-gateway"
+import { IpfsGateway, isIpfsUrl } from "@crossbell/ipfs-gateway";
 
-export const ipfsGateway = new IpfsGateway()
+export const ipfsGateway = new IpfsGateway();
 
-export const ipfsLinkToHttpLink = (link: string): string => {
+export const ipfsLinkToHttpLink = (
+	link: string,
+	{
+		withOrigin,
+	}: {
+		/** useful when dealing with SEO */
+		withOrigin?: boolean;
+	} = {}
+): string => {
 	if (!link) {
 		return "";
 	}
 
+	let ret = "";
+
 	if (isIpfsUrl(link)) {
-		return ipfsGateway.getSwWeb2Url(link);
+		ret = ipfsGateway.getSwWeb2Url(link);
+	}
+
+	if (withOrigin && ret.startsWith("/")) {
+		ret = window.location.origin + ret;
 	}
 
 	return link;
