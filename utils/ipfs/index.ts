@@ -15,7 +15,7 @@ export const ipfsLinkToHttpLink = (
 		return "";
 	}
 
-	let ret = "";
+	let ret = link;
 
 	if (isIpfsUrl(link)) {
 		ret = ipfsGateway.getSwWeb2Url(link);

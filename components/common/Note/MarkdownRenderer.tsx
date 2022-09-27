@@ -17,6 +17,7 @@ import classNames from "classnames";
 import rehypeRaw from "rehype-raw";
 import remarkGfm from "remark-gfm";
 import remarkEmoji from "remark-emoji";
+import remarkFrontmatter from "remark-frontmatter";
 import rehypeSanitize, { defaultSchema } from "rehype-sanitize";
 import { Button } from "@mantine/core";
 import { CharacterHandle } from "../Character";
@@ -323,7 +324,11 @@ export function MarkdownRenderer({
 								},
 							],
 						]}
-						remarkPlugins={[remarkGfm, remarkEmoji]}
+						remarkPlugins={[
+							remarkGfm,
+							remarkEmoji,
+							[remarkFrontmatter, ["yaml", "toml"]],
+						]}
 					>
 						{source}
 					</ReactMarkdown>
