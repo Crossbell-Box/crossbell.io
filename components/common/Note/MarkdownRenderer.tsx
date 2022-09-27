@@ -341,7 +341,7 @@ export function MarkdownRenderer({
 				)}
 			</div>
 		);
-	}, [children, collapsible, height]);
+	}, [children, collapsible, showReadMoreButton]);
 
 	return Memoed;
 }

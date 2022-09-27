@@ -1,22 +1,20 @@
 import { WalletCharacterNewHref } from "@/utils/url";
 import { getCurrentAddress } from "@/utils/wallet/provider";
 import { Space, Text, Button } from "@mantine/core";
-import { closeModal, openModal } from "@mantine/modals";
+import { closeAllModals, closeModal, openModal } from "@mantine/modals";
 import Link from "next/link";
 import Image from "@/components/common/Image";
 import Tooltip from "@/components/common/Tooltip";
 import { openBorderlessModal } from "../Modal";
 
 export function openConnectWalletHintModel() {
-	const id = "connect-wallet-hint";
-
 	openModal({
 		title: "Please Connect Wallet",
 		children: (
 			<div>
 				<Text>You need to be connected to see your feed.</Text>
 				<Space h={10} />
-				<Button onClick={() => closeModal(id)} fullWidth size="lg">
+				<Button onClick={() => closeAllModals()} fullWidth size="lg">
 					OK
 				</Button>
 			</div>
@@ -25,8 +23,6 @@ export function openConnectWalletHintModel() {
 }
 
 export function openFaucetHintModel() {
-	const id = "faucet-hint-hint";
-
 	const address = getCurrentAddress();
 
 	openModal({
@@ -52,7 +48,7 @@ export function openFaucetHintModel() {
 					component="a"
 					href={`https://faucet.crossbell.io/?address=${address}`}
 					target="_blank"
-					onClick={() => closeModal(id)}
+					onClick={() => closeAllModals()}
 					fullWidth
 					size="lg"
 				>
@@ -64,13 +60,11 @@ export function openFaucetHintModel() {
 }
 
 export function openMintNewCharacterModel() {
-	const id = "mint-character";
-
 	openBorderlessModal({
 		children: (
 			<div
 				className="relative flex justify-center items-center"
-				onClick={() => closeModal(id)}
+				onClick={() => closeAllModals()}
 			>
 				{/* close btn */}
 				<div className="absolute top-0 right-0 w-100px h-100px cursor-pointer"></div>
