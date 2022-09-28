@@ -1,6 +1,6 @@
 import Link from "next/link";
 import Logo from "@/components/common/Logo";
-import { Menu, Button, Space, Title, Text } from "@mantine/core";
+import { Menu, Button, Title, Text } from "@mantine/core";
 import ConnectButton from "@/components/common/ConnectButton";
 import React from "react";
 import { useCurrentCharacter } from "@/utils/apis/indexer";
@@ -82,19 +82,14 @@ const MobileMenu = () => (
 );
 
 const IndexNav = () => (
-	<div className="flex fixed top-0 bg-white w-full px-8 z-36 py-2">
-		<div
-			className={
-				"flex flex-row justify-between items-center w-full max-w-340 m-auto"
-			}
-		>
+	<div className="flex fixed top-0 bg-white w-full px-8 z-36 py-3">
+		<div className="flex flex-row justify-between items-center w-full max-w-1400px m-auto px-24px">
 			<div className="flex flex-row items-center gap-6">
 				<div>
 					<Link href="/">
 						<a className="flex justify-center items-center">
-							<Logo size={45} />
-							<Space w={8} />
-							<Title order={1} className="inline text-4xl font-semibold">
+							<Logo size={24} />
+							<Title className="ml-4px text-20px leading-28px font-600">
 								Crossbell
 							</Title>
 						</a>
