@@ -1,20 +1,21 @@
-import { ActionIcon, Menu, Space, Text, Title } from "@mantine/core";
+import { Button, Menu, Text } from "@mantine/core";
 import { NextLink } from "@mantine/next";
 import { PropsWithChildren } from "react";
 
 export default function MoreMenu() {
 	return (
-		<Menu shadow="md" width={200}>
+		<Menu shadow="md" width={240}>
 			<Menu.Target>
-				<ActionIcon>
-					<div className="flex flex-row justify-center items-center">
-						<Text color="dark" className="i-csb:more" />
-						<Space w={5} />
-						<Title order={5} color="dark" className="font-500">
-							More
-						</Title>
-					</div>
-				</ActionIcon>
+				<Button
+					variant="subtle"
+					color="gray"
+					size="md"
+					radius="md"
+					leftIcon={<Text color="dark" className="i-csb:more text-24px" />}
+					className="text-[#082135]"
+				>
+					More
+				</Button>
 			</Menu.Target>
 
 			<Menu.Dropdown>
