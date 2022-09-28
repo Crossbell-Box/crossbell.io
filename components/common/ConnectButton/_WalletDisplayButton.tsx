@@ -77,7 +77,7 @@ const WalletDisplayButton = forwardRef<
 					<Text>Loading...</Text>
 				</div>
 			) : (
-				<div className="flex flex-col justify-between w-full">
+				<div className="flex flex-col justify-between w-full pt-10px pb-16px">
 					{/* addr and csb */}
 					<div className="flex flex-row justify-between items-center">
 						{/* addr */}
@@ -89,34 +89,34 @@ const WalletDisplayButton = forwardRef<
 
 						{/* csb */}
 						<div className="flex flex-row items-center">
-							<Logo size={12} />
-							<Space w={2} />
-							<Text size="xs" className="font-400 text-[#F2F2F2]">
+							<Logo size={17} />
+							<Space w={4} />
+							<Text
+								size="sm"
+								className="leading-1.5rem font-400 text-[#F2F2F2]"
+							>
 								{balance?.formatted ?? "0.00"}
 							</Text>
 						</div>
 					</div>
 
-					<Space h={5} />
+					<Space h={4} />
 
 					<div className="flex flex-row justify-between items-center">
-						<Group spacing="xs">
+						<Group spacing={4}>
 							{/* avatar */}
-							<Avatar character={character} className="border-white border-2" />
+							<Avatar
+								character={character}
+								size={40}
+								className="border-white border-2"
+							/>
 
 							<div className="z-1 flex flex-col justify-between">
-								{/* name */}
-								<Text
-									className="font-500 leading-1em overflow-hidden text-ellipsis max-w-8em"
-									color="light"
-								>
-									{extractCharacterName(character)}
-								</Text>
-
-								<Space h={2} />
-
 								{/* handle */}
-								<Text className="font-400 leading-1em overflow-hidden text-ellipsis max-w-8em text-[#F2F2F2]">
+								<Text
+									size="md"
+									className="font-500 leading-1.5rem overflow-hidden text-ellipsis max-w-8em text-[#F2F2F2]"
+								>
 									{character?.handle ? "@" + character.handle : ""}
 								</Text>
 							</div>
@@ -127,7 +127,7 @@ const WalletDisplayButton = forwardRef<
 							src={ArrowIcon}
 							width={24}
 							height={24}
-							className={classNames("transition-transform-500", {
+							className={classNames("transition-transform-150 m-4px", {
 								"rotate-90": menuOpened,
 							})}
 						/>

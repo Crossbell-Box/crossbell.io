@@ -49,6 +49,7 @@ export default function WalletButtonWithMenu({
 				position="bottom-start"
 				radius="md"
 				transition="scale-y"
+				width="target"
 			>
 				<Menu.Target>
 					<WalletDisplayButton
