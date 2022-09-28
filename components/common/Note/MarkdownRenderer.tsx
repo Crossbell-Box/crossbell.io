@@ -83,7 +83,7 @@ export function MarkdownRenderer({
 							p: ({ node, ...props }) => {
 								return (
 									<Text
-										// component="p"
+										component="p"
 										size={fontSize}
 										className={classNames("my-2 break-words", lineHeight)}
 										style={{ wordBreak: "break-word" }}

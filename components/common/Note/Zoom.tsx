@@ -8,7 +8,7 @@ export default function Zoom({ children }: { children: React.ReactNode }) {
 			// className={styles.zoom}
 			onClick={(e) => e.stopPropagation()}
 		>
-			<Zoom_>{children}</Zoom_>
+			<Zoom_ wrapElement="span">{children}</Zoom_>
 		</span>
 	);
 }

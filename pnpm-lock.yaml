@@ -8,6 +8,7 @@ specifiers:
   '@emotion/core': 11.0.0
   '@emotion/react': 11.10.4
   '@emotion/server': 11.10.0
+  '@fastify/deepmerge': 1.1.0
   '@iconify/utils': 2.0.0
   '@mantine/carousel': 5.4.1
   '@mantine/core': 5.4.1
@@ -45,7 +46,7 @@ specifiers:
   react-dom: 18.2.0
   react-intersection-observer: 9.4.0
   react-markdown: 8.0.3
-  react-medium-image-zoom: 5.0.3
+  react-medium-image-zoom: 5.1.0-beta.4
   react-player: 2.11.0
   rehype-raw: 6.1.1
   rehype-sanitize: 5.0.1
@@ -66,6 +67,7 @@ dependencies:
   '@emotion/core': 11.0.0
   '@emotion/react': 11.10.4_iapumuv4e6jcjznwuxpf4tt22e
   '@emotion/server': 11.10.0
+  '@fastify/deepmerge': 1.1.0
   '@mantine/carousel': 5.4.1_4a2bvmguhzz5xql2hsxk7aljw4
   '@mantine/core': 5.4.1_wg74yri6n7msncsqpz6oaue6ce
   '@mantine/dropzone': 5.4.1_yjrp4o5lii4tl5f25x3krrfp6i
@@ -94,7 +96,7 @@ dependencies:
   react-dom: 18.2.0_react@18.2.0
   react-intersection-observer: 9.4.0_react@18.2.0
   react-markdown: 8.0.3_iapumuv4e6jcjznwuxpf4tt22e
-  react-medium-image-zoom: 5.0.3_biqbaboplfbrettd7655fr4n2y
+  react-medium-image-zoom: 5.1.0-beta.4_biqbaboplfbrettd7655fr4n2y
   react-player: 2.11.0_react@18.2.0
   rehype-raw: 6.1.1
   rehype-sanitize: 5.0.1
@@ -799,6 +801,10 @@ packages:
       '@ethersproject/logger': 5.7.0
       '@ethersproject/properties': 5.7.0
       '@ethersproject/strings': 5.7.0
+    dev: false
+
+  /@fastify/deepmerge/1.1.0:
+    resolution: {integrity: sha512-E8Hfdvs1bG6u0N4vN5Nty6JONUfTdOciyD5rn8KnEsLKIenvOVcr210BQR9t34PRkNyjqnMLGk3e0BsaxRdL+g==}
     dev: false
 
   /@floating-ui/core/1.0.1:
@@ -6417,8 +6423,8 @@ packages:
       - supports-color
     dev: false
 
-  /react-medium-image-zoom/5.0.3_biqbaboplfbrettd7655fr4n2y:
-    resolution: {integrity: sha512-ARmYFwxeKsw31WRt9P64KvVX/458LgGsDXSdpZj0JuQEJlSz8qx0gqv7Ip753AkVpv1gwBbZgD8t7Wh/MtaFiQ==}
+  /react-medium-image-zoom/5.1.0-beta.4_biqbaboplfbrettd7655fr4n2y:
+    resolution: {integrity: sha512-LjGefZDkrk9QrT/mY4p/QFDdoVjvja5ntjmtSFeqnvpF4K6C/htPN288ERvDqR+WJtCAMKrRitT8ZDQH1oVa5g==}
     peerDependencies:
       react: ^16.8.0 || ^17.0.0 || ^18.0.0
       react-dom: ^16.8.0 || ^17.0.0 || ^18.0.0

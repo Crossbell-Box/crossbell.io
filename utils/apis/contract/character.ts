@@ -9,6 +9,7 @@ import {
 	SCOPE_KEY_CHARACTER_BY_HANDLE,
 	SCOPE_KEY_PRIMARY_CHARACTER,
 } from "../indexer";
+import { deepMerge } from "@/utils/metadata";
 
 // create new character
 
@@ -55,7 +56,12 @@ export function useSetCharacterMetadata(characterId: number) {
 
 	return useMutation(
 		async ({ metadata }: { metadata: CharacterMetadata }) => {
-			return contract.setCharacterMetadata(characterId, metadata);
+			return contract.changeCharacterMetadata(characterId, (oMetadata) => {
+				if (oMetadata) {
+					return deepMerge(oMetadata, metadata);
+				}
+				return metadata;
+			});
 		},
 		{
 			onSuccess: () => {
