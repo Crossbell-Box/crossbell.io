@@ -29,6 +29,7 @@ export default function CharacterHoverCard({
 			width={320}
 			shadow="md"
 			withArrow
+			withinPortal
 			openDelay={200}
 			closeDelay={200}
 			onOpen={() => {
