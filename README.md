@@ -1,34 +1,68 @@
-This is a [Next.js](https://nextjs.org/) project bootstrapped with [`create-next-app`](https://github.com/vercel/next.js/tree/canary/packages/create-next-app).
+<div align="center">
+  <img src="https://user-images.githubusercontent.com/22665058/192958999-c7c8828d-4c40-41de-a239-d1cf6e3710d2.png" width="100" />
+  <h1>Crossbell</h1>
+  <strong>🔔 Own Your Social Activities on <a href="https://crossbell.io">Crossbell.io</a></strong>
 
-## Getting Started
+  <p>
+    <a href="https://github.com/Crossbell-Box/crossbell.io/blob/master/LICENSE">
+      <img
+        src="https://img.shields.io/badge/license-MIT-blue.svg"
+        alt="crossbell.io is released under the MIT license."
+      />
+    </a>
+    <a href="https://github.com/Crossbell-Box/crossbell.io/pulls">
+      <img
+        src="https://img.shields.io/badge/PRs-welcome-brightgreen.svg"
+        alt="PRs welcome!"
+      />
+    </a>
+    <a href="https://deepsource.io/gh/Crossbell-Box/crossbell.io">
+      <img
+        src="https://deepsource.io/gh/Crossbell-Box/crossbell.io.svg/?label=active+issues&show_trend=true"
+        alt="GitHub actions"
+      />
+    </a>
+    <a href="https://status.crossbell.io/">
+      <img
+        src="https://img.shields.io/website?down_color=red&down_message=offline&up_color=green&up_message=online&url=https%3A%2F%2Fcrossbell.io%2F"
+        alt="Website status"
+      />
+    </a>
+    <a href="https://twitter.com/intent/follow?screen_name=_Crossbell">
+      <img
+        src="https://img.shields.io/twitter/follow/_crossbell?label=_crossbell&style=flat&logo=twitter&color=1DA1F2"
+        alt="Follow @_Crossbell"
+      />
+    </a>
+    <a href="https://discord.gg/4GCwDsruyj">
+      <img
+        src="https://img.shields.io/discord/976854077709369424.svg?label=&logo=discord&logoColor=ffffff&color=7389D8&labelColor=6A7EC2"
+        alt="Discord"
+      />
+    </a>
+  </p>
+</div>
 
-First, run the development server:
+## 🔔 About Crossbell
 
-```bash
-npm run dev
-# or
-yarn dev
-```
+Crossbell is a platform for owning your social activities, composed of [an EVM-compatible blockchain](https://scan.crossbell.io) and [a set of smart contracts](https://github.com/Crossbell-Box/Crossbell-Contracts).
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+[Crossbell.io](https://crossbell.io) is an ecosystem app for Crossbell. You may also want to check out other ecosystem apps:
 
-You can start editing the page by modifying `pages/index.tsx`. The page auto-updates as you edit the file.
+- Blog free on [xLog](https://xlog.app)
+- Sync tweets with [CrossSync](https://crosssync.app)
+- ... (pull requests are welcome to tell us your apps)
 
-[API routes](https://nextjs.org/docs/api-routes/introduction) can be accessed on [http://localhost:3000/api/hello](http://localhost:3000/api/hello). This endpoint can be edited in `pages/api/hello.ts`.
+## 💬 Community
 
-The `pages/api` directory is mapped to `/api/*`. Files in this directory are treated as [API routes](https://nextjs.org/docs/api-routes/introduction) instead of React pages.
+- Discord: <https://discord.gg/4GCwDsruyj>
+- Twitter: <https://twitter.com/_Crossbell>
+- GitHub Discussion: <https://github.com/orgs/Crossbell-Box/discussions>
 
-## Learn More
+## 🧑‍💻 Contributing
 
-To learn more about Next.js, take a look at the following resources:
+Pull requests are welcome. For major changes, please open an [issue](https://github.com/Crossbell-Box/crossbell.io/issues) first to discuss what you would like to change.
 
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
+## 📝 License
 
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js/) - your feedback and contributions are welcome!
-
-## Deploy on Vercel
-
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
-
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/deployment) for more details.
+Crossbell.io is open-sourced software licensed under the © [MIT](https://github.com/Crossbell-Box/crossbell.io/blob/master/LICENSE).
