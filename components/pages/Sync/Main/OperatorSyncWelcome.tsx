@@ -1,7 +1,14 @@
+import { Button, Text } from "@mantine/core";
+import Image from "next/image";
+
 import { useCurrentCharacter } from "@/utils/apis/indexer";
 import { useActivateCharacter } from "@/utils/apis/operator-sync";
 import { useLoginChecker } from "@/utils/wallet/hooks";
-import { Button, Text } from "@mantine/core";
+
+import instagramUrl from "@/public/images/logos-3d/instagram.png";
+import tiktokUrl from "@/public/images/logos-3d/tiktok.png";
+import twitterUrl from "@/public/images/logos-3d/twitter.png";
+import youtubeUrl from "@/public/images/logos-3d/youtube.png";
 
 export default function OperatorSyncWelcome() {
 	const { data: character } = useCurrentCharacter();
@@ -17,7 +24,7 @@ export default function OperatorSyncWelcome() {
 	};
 
 	return (
-		<div>
+		<div className="relative z-0">
 			<SNSIcons />
 			<div className="flex flex-col items-center text-center pt-40 pb-12">
 				{/* title */}
@@ -68,55 +75,55 @@ export default function OperatorSyncWelcome() {
 
 function SNSIcons() {
 	return (
-		<div className="absolute w-full h-full overflow-hidden">
-			<img
-				src="/logos/twitter.png"
-				alt="Twitter Icon"
-				className="absolute left-0 top-0"
-				style={{
-					width: "250.7px",
-					height: "250.7px",
-					left: "-80px",
-					top: "-26px",
-					transform: "rotate(15deg)",
-				}}
-			/>
-			<img
-				src="/logos/instagram.png"
-				alt="Instagram Icon"
-				className="absolute right-0 top-0"
-				style={{
-					width: "128px",
-					height: "128px",
-					right: "-20px",
-					top: "65px",
-					transform: "matrix(-0.97, 0.26, 0.26, 0.97, 0, 0)",
-				}}
-			/>
-			<img
-				src="/logos/youtube.png"
-				alt="Youtube Icon"
-				className="absolute left-0 bottom-0"
-				style={{
-					width: "95.95px",
-					height: "95.95px",
-					left: "-12px",
-					bottom: "-8px",
-					transform: "rotate(-30deg)",
-				}}
-			/>
-			<img
-				src="/logos/tiktok.png"
-				alt="Tiktok Icon"
-				className="absolute right-0 bottom-0"
-				style={{
-					width: "168.28px",
-					height: "168.28px",
-					right: "-30px",
-					bottom: "-16px",
-					transform: "matrix(-0.93, -0.36, -0.36, 0.93, 0, 0)",
-				}}
-			/>
+		<div className="absolute w-full h-full overflow-hidden -z-1">
+			<div
+				className="absolute -left-80px -top-26px"
+				style={{ transform: "rotate(15deg)" }}
+			>
+				<Image
+					src={twitterUrl}
+					alt="Twitter Icon"
+					width={251}
+					height={251}
+					quality={90}
+				/>
+			</div>
+			<div
+				className="absolute -right-20px top-65px"
+				style={{ transform: "matrix(-0.97, 0.26, 0.26, 0.97, 0, 0)" }}
+			>
+				<Image
+					src={instagramUrl}
+					alt="Instagram Icon"
+					width={128}
+					height={128}
+					quality={90}
+				/>
+			</div>
+			<div
+				className="absolute -left-12px -bottom-8px"
+				style={{ transform: "rotate(-30deg)" }}
+			>
+				<Image
+					src={youtubeUrl}
+					alt="Youtube Icon"
+					width={96}
+					height={96}
+					quality={90}
+				/>
+			</div>
+			<div
+				className="absolute -right-30px -bottom-16px"
+				style={{ transform: "matrix(-0.93, -0.36, -0.36, 0.93, 0, 0)" }}
+			>
+				<Image
+					src={tiktokUrl}
+					alt="Tiktok Icon"
+					width={168}
+					height={168}
+					quality={90}
+				/>
+			</div>
 		</div>
 	);
 }
