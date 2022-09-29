@@ -20,9 +20,9 @@ specifiers:
   '@mantine/notifications': 5.4.1
   '@mantine/nprogress': 5.4.1
   '@next/bundle-analyzer': 12.3.1
-  '@rainbow-me/rainbowkit': 0.6.1
-  '@tanstack/react-query': 4.6.1
-  '@tanstack/react-query-devtools': 4.6.1
+  '@rainbow-me/rainbowkit': 0.6.2
+  '@tanstack/react-query': 4.7.2
+  '@tanstack/react-query-devtools': 4.7.2
   '@types/canvas-confetti': 1.4.3
   '@types/lodash.compact': 3.0.7
   '@types/node': 18.7.23
@@ -31,7 +31,7 @@ specifiers:
   '@unocss/webpack': 0.45.25
   canvas-confetti: 1.5.1
   classnames: 2.3.2
-  crossbell.js: 0.10.34
+  crossbell.js: 0.10.35
   dayjs: 1.11.5
   embla-carousel-react: 7.0.3
   eslint: 8.24.0
@@ -56,7 +56,7 @@ specifiers:
   sharp: 0.31.0
   sticky-sidebar-v2: 1.1.1
   typeit-react: 2.6.0
-  typescript: 4.8.3
+  typescript: 4.8.4
   unocss: 0.45.25
   wagmi: 0.6.7
 
@@ -78,12 +78,12 @@ dependencies:
   '@mantine/notifications': 5.4.1_yjrp4o5lii4tl5f25x3krrfp6i
   '@mantine/nprogress': 5.4.1_yjrp4o5lii4tl5f25x3krrfp6i
   '@next/bundle-analyzer': 12.3.1
-  '@rainbow-me/rainbowkit': 0.6.1_dz2k46tyc2wf7kgp3ew5zaoaua
-  '@tanstack/react-query': 4.6.1_biqbaboplfbrettd7655fr4n2y
-  '@tanstack/react-query-devtools': 4.6.1_3ciuqbo4tgglg566jqz6smj4ya
+  '@rainbow-me/rainbowkit': 0.6.2_dz2k46tyc2wf7kgp3ew5zaoaua
+  '@tanstack/react-query': 4.7.2_biqbaboplfbrettd7655fr4n2y
+  '@tanstack/react-query-devtools': 4.7.2_5y6winp2ndk3p734flb325i4v4
   canvas-confetti: 1.5.1
   classnames: 2.3.2
-  crossbell.js: 0.10.34
+  crossbell.js: 0.10.35
   dayjs: 1.11.5
   embla-carousel-react: 7.0.3_react@18.2.0
   ethers: 5.7.1
@@ -118,8 +118,8 @@ devDependencies:
   '@types/react-dom': 18.0.6
   '@unocss/webpack': 0.45.25
   eslint: 8.24.0
-  eslint-config-next: 12.3.1_7ilbxdl5iguzcjriqqcg2m5cku
-  typescript: 4.8.3
+  eslint-config-next: 12.3.1_ypn2ylkkyfa5i233caldtndbqa
+  typescript: 4.8.4
   unocss: 0.45.25_@unocss+webpack@0.45.25
 
 packages:
@@ -1390,8 +1390,8 @@ packages:
       react: 18.2.0
     dev: false
 
-  /@rainbow-me/rainbowkit/0.6.1_dz2k46tyc2wf7kgp3ew5zaoaua:
-    resolution: {integrity: sha512-qiYz93QT/dwqZs8PU3l6okJv4hTylaHd9mYKSU+4RKBnl1RFyV8V8RNkICVYTEV1Yq+eHxq8rTdtevsgRvRWYg==}
+  /@rainbow-me/rainbowkit/0.6.2_dz2k46tyc2wf7kgp3ew5zaoaua:
+    resolution: {integrity: sha512-itVWOPaY1U2kFEDZ0MOmih35Bv92BuC8LrJQj7et1mFlHK2k8LKDoPl50LGNoYKdRDsRFsrqUoUC4OmI1N1uFA==}
     engines: {node: '>=12.4'}
     peerDependencies:
       ethers: '>=5.5.1'
@@ -1399,9 +1399,9 @@ packages:
       react-dom: '>=17'
       wagmi: 0.5.x || 0.6.x
     dependencies:
-      '@vanilla-extract/css': 1.7.0
+      '@vanilla-extract/css': 1.9.1
       '@vanilla-extract/dynamic': 2.0.2
-      '@vanilla-extract/sprinkles': 1.4.1_@vanilla-extract+css@1.7.0
+      '@vanilla-extract/sprinkles': 1.5.0_@vanilla-extract+css@1.9.1
       clsx: 1.1.1
       ethers: 5.7.1
       qrcode: 1.5.0
@@ -1472,23 +1472,23 @@ packages:
       remove-accents: 0.4.2
     dev: false
 
-  /@tanstack/query-core/4.6.1:
-    resolution: {integrity: sha512-r5PXj0EG3z/5Rhb4gttPo/EOqfGhx4wSWJncI8WA4rwe2E2stpeZKnEEsQU7rEqReVCOYseswTYn+lwRF2Ap3Q==}
+  /@tanstack/query-core/4.7.2:
+    resolution: {integrity: sha512-1zQuFsKShMhLY6rQYBEmkYiK9Zcb3lQcCVOTIgQcvliKIxPyZFaE/8LMtaITEEfgGF5qwYqHdm61+BUtpyNsrg==}
     dev: false
 
   /@tanstack/query-sync-storage-persister/4.2.1:
     resolution: {integrity: sha512-exjzMdQ00CfGD/FTPgzxciC57Uvs2SbltEumPpVENvWs2L/Bf7Lxy9rTMVqzgCORHINd1RVPBhN8Lx5fnzPIKQ==}
     dev: false
 
-  /@tanstack/react-query-devtools/4.6.1_3ciuqbo4tgglg566jqz6smj4ya:
-    resolution: {integrity: sha512-QCERm/ZuRWxBaJGEOk92AQ37iBR1x2AysETO6czs83xA2V20xhvK421cqPHP7fWK8d+PUkQLnCYQNOuWTvdg5w==}
+  /@tanstack/react-query-devtools/4.7.2_5y6winp2ndk3p734flb325i4v4:
+    resolution: {integrity: sha512-Dia8EaesGvZeWVFsDnSd98cbNi16+s74glAjrjFigtvUNQKziBqYKMzBpFwFMNfMJbaZlx4b4V5DeJh7hkKfvA==}
     peerDependencies:
-      '@tanstack/react-query': 4.6.1
+      '@tanstack/react-query': 4.7.2
       react: ^16.8.0 || ^17.0.0 || ^18.0.0
       react-dom: ^16.8.0 || ^17.0.0 || ^18.0.0
     dependencies:
       '@tanstack/match-sorter-utils': 8.1.1
-      '@tanstack/react-query': 4.6.1_biqbaboplfbrettd7655fr4n2y
+      '@tanstack/react-query': 4.7.2_biqbaboplfbrettd7655fr4n2y
       react: 18.2.0
       react-dom: 18.2.0_react@18.2.0
       use-sync-external-store: 1.2.0_react@18.2.0
@@ -1498,8 +1498,8 @@ packages:
     resolution: {integrity: sha512-5z3oo6S8stiPTFK7hmv4O04ZTMgdCrhgV+cq+z0t2NJwd5eeKPLrAUSBM+ah9eEhUlzs5ZEhaYeSwtPopOjYdg==}
     dev: false
 
-  /@tanstack/react-query/4.6.1_biqbaboplfbrettd7655fr4n2y:
-    resolution: {integrity: sha512-fDLIqLq4KLv0PmLHOGXp2ppJdydF/8YoYQrePTODK3RsiZDQVPLLAojz7M3v7GK5VionIb4KgiK3qBoAiN3Y4A==}
+  /@tanstack/react-query/4.7.2_biqbaboplfbrettd7655fr4n2y:
+    resolution: {integrity: sha512-4nJ0HxU2kxkaHZ/swJw39io3Bb3liiggJBsCCdFOydZOl8AJDRCor1E3GsOBrtn53HT01R9EIP4PY/6fyYdKsw==}
     peerDependencies:
       react: ^16.8.0 || ^17.0.0 || ^18.0.0
       react-dom: ^16.8.0 || ^17.0.0 || ^18.0.0
@@ -1510,7 +1510,7 @@ packages:
       react-native:
         optional: true
     dependencies:
-      '@tanstack/query-core': 4.6.1
+      '@tanstack/query-core': 4.7.2
       react: 18.2.0
       react-dom: 18.2.0_react@18.2.0
       use-sync-external-store: 1.2.0_react@18.2.0
@@ -1656,7 +1656,7 @@ packages:
       '@types/node': 18.7.23
     dev: false
 
-  /@typescript-eslint/parser/5.34.0_7ilbxdl5iguzcjriqqcg2m5cku:
+  /@typescript-eslint/parser/5.34.0_ypn2ylkkyfa5i233caldtndbqa:
     resolution: {integrity: sha512-SZ3NEnK4usd2CXkoV3jPa/vo1mWX1fqRyIVUQZR4As1vyp4fneknBNJj+OFtV8WAVgGf+rOHMSqQbs2Qn3nFZQ==}
     engines: {node: ^12.22.0 || ^14.17.0 || >=16.0.0}
     peerDependencies:
@@ -1668,10 +1668,10 @@ packages:
     dependencies:
       '@typescript-eslint/scope-manager': 5.34.0
       '@typescript-eslint/types': 5.34.0
-      '@typescript-eslint/typescript-estree': 5.34.0_typescript@4.8.3
+      '@typescript-eslint/typescript-estree': 5.34.0_typescript@4.8.4
       debug: 4.3.4
       eslint: 8.24.0
-      typescript: 4.8.3
+      typescript: 4.8.4
     transitivePeerDependencies:
       - supports-color
     dev: true
@@ -1689,7 +1689,7 @@ packages:
     engines: {node: ^12.22.0 || ^14.17.0 || >=16.0.0}
     dev: true
 
-  /@typescript-eslint/typescript-estree/5.34.0_typescript@4.8.3:
+  /@typescript-eslint/typescript-estree/5.34.0_typescript@4.8.4:
     resolution: {integrity: sha512-mXHAqapJJDVzxauEkfJI96j3D10sd567LlqroyCeJaHnu42sDbjxotGb3XFtGPYKPD9IyLjhsoULML1oI3M86A==}
     engines: {node: ^12.22.0 || ^14.17.0 || >=16.0.0}
     peerDependencies:
@@ -1704,8 +1704,8 @@ packages:
       globby: 11.1.0
       is-glob: 4.0.3
       semver: 7.3.7
-      tsutils: 3.21.0_typescript@4.8.3
-      typescript: 4.8.3
+      tsutils: 3.21.0_typescript@4.8.4
+      typescript: 4.8.4
     transitivePeerDependencies:
       - supports-color
     dev: true
@@ -1896,19 +1896,19 @@ packages:
       - vite
     dev: true
 
-  /@vanilla-extract/css/1.7.0:
-    resolution: {integrity: sha512-2Abpr5aJskwKS+waMWxWnTBqq/rj4J93KtGteW0VSORMUsijrupwjOXECd7Llh+nSFfx/Y6usuexF5/ffyDF8A==}
+  /@vanilla-extract/css/1.9.1:
+    resolution: {integrity: sha512-pu2SFiff5jRhPwvGoj8cM5l/qIyLvigOmy22ss5DGjwV5pJYezRjDLxWumi2luIwioMWvh9EozCjyfH8nq+7fQ==}
     dependencies:
       '@emotion/hash': 0.8.0
       '@vanilla-extract/private': 1.0.3
+      ahocorasick: 1.0.2
       chalk: 4.1.2
-      css-mediaquery: 0.1.2
       css-what: 5.1.0
       cssesc: 3.0.0
       csstype: 3.1.0
       deep-object-diff: 1.1.7
       deepmerge: 4.2.2
-      escape-string-regexp: 4.0.0
+      media-query-parser: 2.0.2
       outdent: 0.8.0
     dev: false
 
@@ -1922,12 +1922,12 @@ packages:
     resolution: {integrity: sha512-17kVyLq3ePTKOkveHxXuIJZtGYs+cSoev7BlP+Lf4916qfDhk/HBjvlYDe8egrea7LNPHKwSZJK/bzZC+Q6AwQ==}
     dev: false
 
-  /@vanilla-extract/sprinkles/1.4.1_@vanilla-extract+css@1.7.0:
-    resolution: {integrity: sha512-aW6CfMMToX4a+baLuVxwcT0FSACjX3xrNt8wdi/3LLRlLAfhyue8OK7kJxhcYNZfydBeWTP59aRy8p5FUTIeew==}
+  /@vanilla-extract/sprinkles/1.5.0_@vanilla-extract+css@1.9.1:
+    resolution: {integrity: sha512-W58f2Rzz5lLmk0jbhgStVlZl5wEiPB1Ur3fRvUaBM+MrifZ3qskmFq/CiH//fEYeG5Dh9vF1qRviMMH46cX9Nw==}
     peerDependencies:
       '@vanilla-extract/css': ^1.0.0
     dependencies:
-      '@vanilla-extract/css': 1.7.0
+      '@vanilla-extract/css': 1.9.1
     dev: false
 
   /@wagmi/core/0.5.7_dydxu2fn2wkfrnp2hy42ydjnaq:
@@ -2302,6 +2302,10 @@ packages:
 
   /aes-js/3.1.2:
     resolution: {integrity: sha512-e5pEa2kBnBOgR4Y/p20pskXI74UEz7de8ZGVo58asOtvSVG5YAbJeELPZxOmt+Bnz3rX753YKhfIn4X4l1PPRQ==}
+    dev: false
+
+  /ahocorasick/1.0.2:
+    resolution: {integrity: sha512-hCOfMzbFx5IDutmWLAt6MZwOUjIfSM9G9FyVxytmE4Rs/5YDPWQrD/+IR1w+FweD9H2oOZEnv36TmkjhNURBVA==}
     dev: false
 
   /ajv-formats/2.1.1:
@@ -3017,8 +3021,8 @@ packages:
       which: 2.0.2
     dev: true
 
-  /crossbell.js/0.10.34:
-    resolution: {integrity: sha512-B9+U/GPnw3/19tPI9YsouGKqmY32tXf1G0EVPKkE/GzbUvE+TzWNdMnBq8Vo24KNraLY9HnWVQXJ3iN54jDfCA==}
+  /crossbell.js/0.10.35:
+    resolution: {integrity: sha512-u/GsjPj1V3j19bC4MQSm9WTNhn33n30OGgyDpDzkrvU96HNYmAg4xszi8S1xH9Z4ZzBW+99kKOGzxzK9w3ccgw==}
     dependencies:
       async-retry: 1.3.3
       ethers: 5.7.1
@@ -3032,10 +3036,6 @@ packages:
       - node-fetch
       - supports-color
       - utf-8-validate
-    dev: false
-
-  /css-mediaquery/0.1.2:
-    resolution: {integrity: sha512-COtn4EROW5dBGlE/4PiKnh6rZpAPxDeFLaEEwt4i10jpDMFt2EhQGS79QmmrO+iKCHv0PU/HrOWEhijFd1x99Q==}
     dev: false
 
   /css-select/5.1.0:
@@ -3716,7 +3716,7 @@ packages:
     engines: {node: '>=12'}
     dev: false
 
-  /eslint-config-next/12.3.1_7ilbxdl5iguzcjriqqcg2m5cku:
+  /eslint-config-next/12.3.1_ypn2ylkkyfa5i233caldtndbqa:
     resolution: {integrity: sha512-EN/xwKPU6jz1G0Qi6Bd/BqMnHLyRAL0VsaQaWA7F3KkjAgZHi4f1uL1JKGWNxdQpHTW/sdGONBd0bzxUka/DJg==}
     peerDependencies:
       eslint: ^7.23.0 || ^8.0.0
@@ -3727,7 +3727,7 @@ packages:
     dependencies:
       '@next/eslint-plugin-next': 12.3.1
       '@rushstack/eslint-patch': 1.1.4
-      '@typescript-eslint/parser': 5.34.0_7ilbxdl5iguzcjriqqcg2m5cku
+      '@typescript-eslint/parser': 5.34.0_ypn2ylkkyfa5i233caldtndbqa
       eslint: 8.24.0
       eslint-import-resolver-node: 0.3.6
       eslint-import-resolver-typescript: 2.7.1_dg2pe6kqkrddxbf2funb723kue
@@ -3735,7 +3735,7 @@ packages:
       eslint-plugin-jsx-a11y: 6.6.1_eslint@8.24.0
       eslint-plugin-react: 7.31.8_eslint@8.24.0
       eslint-plugin-react-hooks: 4.6.0_eslint@8.24.0
-      typescript: 4.8.3
+      typescript: 4.8.4
     transitivePeerDependencies:
       - eslint-import-resolver-webpack
       - supports-color
@@ -3789,7 +3789,7 @@ packages:
       eslint-import-resolver-webpack:
         optional: true
     dependencies:
-      '@typescript-eslint/parser': 5.34.0_7ilbxdl5iguzcjriqqcg2m5cku
+      '@typescript-eslint/parser': 5.34.0_ypn2ylkkyfa5i233caldtndbqa
       debug: 3.2.7
       eslint: 8.24.0
       eslint-import-resolver-node: 0.3.6
@@ -3808,7 +3808,7 @@ packages:
       '@typescript-eslint/parser':
         optional: true
     dependencies:
-      '@typescript-eslint/parser': 5.34.0_7ilbxdl5iguzcjriqqcg2m5cku
+      '@typescript-eslint/parser': 5.34.0_ypn2ylkkyfa5i233caldtndbqa
       array-includes: 3.1.5
       array.prototype.flat: 1.3.0
       debug: 2.6.9
@@ -5435,6 +5435,12 @@ packages:
 
   /mdurl/1.0.1:
     resolution: {integrity: sha512-/sKlQJCBYVY9Ers9hqzKou4H6V5UWc/M59TH2dvkt+84itfnq7uFOMLpOiOS4ujvHP4etln18fmIxA5R5fll0g==}
+    dev: false
+
+  /media-query-parser/2.0.2:
+    resolution: {integrity: sha512-1N4qp+jE0pL5Xv4uEcwVUhIkwdUO3S/9gML90nqKA7v7FcOS5vUtatfzok9S9U1EJU8dHWlcv95WLnKmmxZI9w==}
+    dependencies:
+      '@babel/runtime': 7.18.9
     dev: false
 
   /memoize-one/5.2.1:
@@ -7301,14 +7307,14 @@ packages:
   /tslib/2.4.0:
     resolution: {integrity: sha512-d6xOpEDfsi2CZVlPQzGeux8XMwLT9hssAsaPYExaQMuYskwb+x1x7J371tWlbBdWHroy99KnVB6qIkUbs5X3UQ==}
 
-  /tsutils/3.21.0_typescript@4.8.3:
+  /tsutils/3.21.0_typescript@4.8.4:
     resolution: {integrity: sha512-mHKK3iUXL+3UF6xL5k0PEhKRUBKPBCv/+RkEOpjRWxxx27KKRBmmA60A9pgOUvMi8GKhRMPEmjBRPzs2W7O1OA==}
     engines: {node: '>= 6'}
     peerDependencies:
       typescript: '>=2.8.0 || >= 3.2.0-dev || >= 3.3.0-dev || >= 3.4.0-dev || >= 3.5.0-dev || >= 3.6.0-dev || >= 3.6.0-beta || >= 3.7.0-dev || >= 3.7.0-beta'
     dependencies:
       tslib: 1.14.1
-      typescript: 4.8.3
+      typescript: 4.8.4
     dev: true
 
   /tunnel-agent/0.6.0:
@@ -7366,8 +7372,8 @@ packages:
     requiresBuild: true
     dev: false
 
-  /typescript/4.8.3:
-    resolution: {integrity: sha512-goMHfm00nWPa8UvR/CPSvykqf6dVV8x/dp0c5mFTMTIu0u0FlGWRioyy7Nn0PGAdHxpJZnuO/ut+PpQ8UiHAig==}
+  /typescript/4.8.4:
+    resolution: {integrity: sha512-QCh+85mCy+h0IGff8r5XWzOVSbBO+KfeYrMQh7NJ58QujwcE22u+NUSmUxqF+un70P9GXKxa2HCNiTTMJknyjQ==}
     engines: {node: '>=4.2.0'}
     hasBin: true
     dev: true
@@ -7708,7 +7714,7 @@ packages:
     dependencies:
       '@coinbase/wallet-sdk': 3.5.0
       '@tanstack/query-sync-storage-persister': 4.2.1
-      '@tanstack/react-query': 4.6.1_biqbaboplfbrettd7655fr4n2y
+      '@tanstack/react-query': 4.7.2_biqbaboplfbrettd7655fr4n2y
       '@tanstack/react-query-persist-client': 4.2.1
       '@wagmi/core': 0.5.7_dydxu2fn2wkfrnp2hy42ydjnaq
       '@walletconnect/ethereum-provider': 1.8.0
