@@ -2,7 +2,15 @@ import { Button, Title, Text, Space } from "@mantine/core";
 import { NextLink } from "@mantine/next";
 // @ts-ignore
 import TypeIt from "typeit-react";
+import Image from "next/image";
+
 import VideoPlayer from "@/components/common/Note/VideoPlayer";
+
+import instagramUrl from "@/public/images/logos-3d/instagram.png";
+import tiktokUrl from "@/public/images/logos-3d/tiktok.png";
+import twitterUrl from "@/public/images/logos-3d/twitter.png";
+import youtubeUrl from "@/public/images/logos-3d/youtube.png";
+import pinterestUrl from "@/public/images/logos-3d/pinterest.png";
 
 export default function IndexHero() {
 	return (
@@ -18,54 +26,66 @@ export default function IndexHero() {
 function SNSIcons() {
 	return (
 		<div className="absolute w-full h-full overflow-hidden hidden md:block">
-			<img
-				src="/logos/twitter.png"
-				alt="Twitter Icon"
-				className="absolute left-0 top-0"
-				style={{
-					width: "413.65px",
-					height: "413.65px",
-					left: "80px",
-					top: "126px",
-					transform: "rotate(15deg)",
-				}}
-			/>
-			<img
-				src="/logos/instagram.png"
-				alt="Instagram Icon"
-				className="absolute right-0 top-0"
-				style={{
-					width: "211.2px",
-					height: "211.2px",
-					right: "180px",
-					top: "165px",
-					transform: "matrix(-0.97, 0.26, 0.26, 0.97, 0, 0)",
-				}}
-			/>
-			<img
-				src="/logos/youtube.png"
-				alt="Youtube Icon"
-				className="absolute left-0 bottom-0"
-				style={{
-					width: "158.32px",
-					height: "158.32px",
-					left: "180px",
-					bottom: "118px",
-					transform: "rotate(-30deg)",
-				}}
-			/>
-			<img
-				src="/logos/tiktok.png"
-				alt="Tiktok Icon"
-				className="absolute right-0 bottom-0"
-				style={{
-					width: "226.47px",
-					height: "226.47px",
-					right: "120px",
-					bottom: "116px",
-					transform: "matrix(-0.93, -0.36, -0.36, 0.93, 0, 0)",
-				}}
-			/>
+			<div
+				className="absolute left-80px top-126px"
+				style={{ transform: "rotate(15deg)" }}
+			>
+				<Image
+					src={twitterUrl}
+					alt="Twitter Icon"
+					width={414}
+					height={414}
+					quality={90}
+				/>
+			</div>
+			<div
+				className="absolute right-180px top-165px"
+				style={{ transform: "matrix(-0.97, 0.26, 0.26, 0.97, 0, 0)" }}
+			>
+				<Image
+					src={instagramUrl}
+					alt="Instagram Icon"
+					width={211}
+					height={211}
+					quality={90}
+				/>
+			</div>
+			<div
+				className="absolute left-180px bottom-118px"
+				style={{ transform: "rotate(-30deg)" }}
+			>
+				<Image
+					src={youtubeUrl}
+					alt="Youtube Icon"
+					width={158}
+					height={158}
+					quality={90}
+				/>
+			</div>
+			<div
+				className="absolute left-368px bottom-60px"
+				style={{ transform: "rotate(-36deg)" }}
+			>
+				<Image
+					src={pinterestUrl}
+					alt="Pinterest Icon"
+					width={113}
+					height={113}
+					quality={90}
+				/>
+			</div>
+			<div
+				className="absolute right-120px bottom-116px"
+				style={{ transform: "matrix(-0.93, -0.36, -0.36, 0.93, 0, 0)" }}
+			>
+				<Image
+					src={tiktokUrl}
+					alt="Tiktok Icon"
+					width={226}
+					height={226}
+					quality={90}
+				/>
+			</div>
 		</div>
 	);
 }
