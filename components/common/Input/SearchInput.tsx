@@ -47,14 +47,9 @@ function SearchInput_({ ...props }: TextInputProps) {
 			type="text"
 			icon={<Text className="i-csb:search" />}
 			placeholder="Search"
-			styles={{
-				input: {
-					borderColor: "transparent",
-					":focus": { borderColor: primaryColor[primaryShade] },
-				},
-				wrapper: {
-					boxShadow: "0px 0px 10px rgba(38, 108, 158, 0.1)",
-				},
+			classNames={{
+				wrapper: "text-[#687792]",
+				input: "rounded-12px border-[#E1E8F7] focus:border-[#687792]",
 			}}
 			className="w-full"
 			autoComplete="off"
