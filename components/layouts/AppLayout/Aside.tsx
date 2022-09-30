@@ -1,12 +1,12 @@
 import React, { useEffect } from "react";
 import { useRouter } from "next/router";
-import { Aside as Aside_, TextInput, Text, Stack } from "@mantine/core";
+import { Aside as Aside_, Stack } from "@mantine/core";
 
 import TrendingCharactersSection from "@/components/aside/TrendingCharactersSection";
 import TrendingNotesSection from "@/components/aside/TrendingNotesSection";
 import { NoteOnChainSection } from "@/components/aside/NoteOnChainSection";
 import { AchievementSection } from "@/components/aside/AchievementSection";
-import { useSearchInput } from "@/components/common/Input/SearchInput";
+import SearchInput from "@/components/common/Input/SearchInput";
 
 export default function Aside() {
 	const router = useRouter();
@@ -70,26 +70,6 @@ export default function Aside() {
 					</div>
 				</Aside_>
 			</div>
-		</div>
-	);
-}
-
-function SearchInput() {
-	const searchInputProps = useSearchInput();
-
-	return (
-		<div>
-			<TextInput
-				icon={<Text className="i-csb:search text-24px text-[#687792]" />}
-				placeholder="Search"
-				classNames={{
-					wrapper: "text-[#687792]",
-					input:
-						"rounded-12px border-[#E1E8F7] focus:border-[#687792] font-500",
-				}}
-				size="md"
-				{...searchInputProps}
-			/>
 		</div>
 	);
 }

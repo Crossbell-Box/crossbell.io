@@ -1,46 +1,21 @@
 import React from "react";
-import { usePrimaryShade } from "@/components/providers/ThemeProvider";
 import { composeSearchHref, useSearchRouterQuery } from "@/utils/url";
 import {
 	createPolymorphicComponent,
 	Text,
 	TextInput,
 	TextInputProps,
-	useMantineTheme,
 } from "@mantine/core";
 import { useInputState } from "@mantine/hooks";
 import { useRouter } from "next/router";
 
-export function useSearchInput() {
-	const [value, setValue] = useInputState("");
+type SearchInputProps = {
+	initialValue?: string;
+} & TextInputProps;
+function SearchInput_({ initialValue, ...props }: SearchInputProps) {
+	const [value, setValue] = useInputState(initialValue ?? "");
 	const router = useRouter();
 	const { type } = useSearchRouterQuery();
-
-	return {
-		value,
-
-		onChange(e: React.ChangeEvent<HTMLInputElement>) {
-			setValue(e.target.value);
-		},
-
-		onKeyDown(e: React.KeyboardEvent<HTMLInputElement>) {
-			if (e.key === "Enter" || e.keyCode === 13) {
-				e.preventDefault();
-				e.stopPropagation();
-				router.push(composeSearchHref(value, type));
-			}
-		},
-
-		onFocus() {
-			router.prefetch(composeSearchHref(value, type));
-		},
-	};
-}
-
-function SearchInput_({ ...props }: TextInputProps) {
-	const { primaryColor } = useMantineTheme();
-	const primaryShade = usePrimaryShade();
-	const inputProps = useSearchInput();
 
 	return (
 		<TextInput
@@ -48,21 +23,35 @@ function SearchInput_({ ...props }: TextInputProps) {
 			icon={<Text className="i-csb:search" />}
 			placeholder="Search"
 			classNames={{
+				root: "w-full",
 				wrapper: "text-[#687792]",
-				input: "rounded-12px border-[#E1E8F7] focus:border-[#687792]",
+				input: "rounded-12px border-[#E1E8F7] focus:border-[#687792] font-500",
 			}}
-			className="w-full"
+			size="md"
 			autoComplete="off"
 			autoCapitalize="sentences"
 			autoCorrect="off"
 			spellCheck="false"
 			enterKeyHint="search"
-			{...inputProps}
+			onChange={(e) => {
+				setValue(e.target.value);
+			}}
+			onKeyDown={(e) => {
+				if (e.key === "Enter" || e.keyCode === 13) {
+					e.preventDefault();
+					e.stopPropagation();
+					router.push(composeSearchHref(value, type));
+				}
+			}}
+			onFocus={(e) => {
+				e.target.select();
+				router.prefetch(composeSearchHref(value, type));
+			}}
 			{...props}
 		/>
 	);
 }
-const SearchInput = createPolymorphicComponent<"input", TextInputProps>(
+const SearchInput = createPolymorphicComponent<"input", SearchInputProps>(
 	SearchInput_
 );
 

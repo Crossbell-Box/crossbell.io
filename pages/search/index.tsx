@@ -52,7 +52,7 @@ const Page: NextPageWithLayout = () => {
 				)}
 			>
 				<div className="py-5 w-full">
-					<SearchInput value={q} />
+					<SearchInput initialValue={q} />
 				</div>
 			</Header>
 
