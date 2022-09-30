@@ -35,51 +35,42 @@ export default function Aside() {
 	}, []);
 
 	return (
-		<>
-			{/* {!isSearchPage && (
-				<div className="sticky top-0">
-				<SearchInput />
-				</div>
-			)} */}
+		<div className="sidebar w-401px hidden md:block">
+			<div className="sidebar__inner">
+				<Aside_
+					className="bg-transparent min-h-100vh"
+					hiddenBreakpoint="sm"
+					height="auto"
+				>
+					<div className="p-4">
+						<Stack spacing={32}>
+							{!isSearchPage && <SearchInput />}
 
-			<div className="sidebar w-300px lg:w-400px hidden sm:block">
-				<div className="sidebar__inner">
-					<Aside_
-						className="bg-transparent min-h-100vh"
-						hiddenBreakpoint="sm"
-						height="auto"
-						// width={{ sm: 300, lg: 400 }}
-					>
-						<div className="p-4">
-							<Stack spacing={32}>
-								{!isSearchPage && <SearchInput />}
-
-								{(() => {
-									if (
-										isNoteDetailPage &&
-										typeof router.query.noteid === "string"
-									) {
-										return (
-											<>
-												<NoteOnChainSection noteId={router.query.noteid} />
-											</>
-										);
-									}
-
+							{(() => {
+								if (
+									isNoteDetailPage &&
+									typeof router.query.noteid === "string"
+								) {
 									return (
 										<>
-											{isCharacterPage && <AchievementSection />}
-											<TrendingNotesSection />
-											<TrendingCharactersSection />
+											<NoteOnChainSection noteId={router.query.noteid} />
 										</>
 									);
-								})()}
-							</Stack>
-						</div>
-					</Aside_>
-				</div>
+								}
+
+								return (
+									<>
+										{isCharacterPage && <AchievementSection />}
+										<TrendingNotesSection />
+										<TrendingCharactersSection />
+									</>
+								);
+							})()}
+						</Stack>
+					</div>
+				</Aside_>
 			</div>
-		</>
+		</div>
 	);
 }
 

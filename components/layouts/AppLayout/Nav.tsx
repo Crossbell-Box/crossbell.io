@@ -16,30 +16,29 @@ export default function Nav() {
 	const [opened, setOpened] = useState(false);
 	return (
 		<Navbar
-			p="md"
-			// fixed
-			className="sticky top-0 bg-transparent"
+			className="sticky top-0 bg-transparent w-281px pl-24px pr-16px py-16px"
 			hiddenBreakpoint="sm"
 			hidden={!opened}
-			width={{ sm: 250, lg: 250 }}
 		>
 			<Navbar.Section>
 				<Link href="/">
-					<a className="flex justify-center items-center">
-						<Logo />
-						<Space w={5} />
-						<Title order={1} className="inline text-xl font-500">
+					<a className="flex items-center">
+						<Logo size={24} />
+						<Title className="ml-4px text-20px leading-25px font-600">
 							Crossbell
 						</Title>
 					</a>
 				</Link>
 			</Navbar.Section>
+
 			<Navbar.Section mt="md">
 				<ConnectButton />
 			</Navbar.Section>
+
 			<Navbar.Section grow mt="md">
 				<NavLinks />
 			</Navbar.Section>
+
 			<Navbar.Section className="flex justify-center items-center">
 				<MoreMenu />
 			</Navbar.Section>
@@ -161,7 +160,7 @@ function NavLink({
 			component={NextLink}
 			href={href}
 			className={classNames(
-				"relative block py-3 px-4 my-4 rounded-lg",
+				"relative block py-3 px-4 my-4 rounded-12px",
 				"transition-colors",
 				className,
 				{
@@ -174,7 +173,7 @@ function NavLink({
 
 			<div
 				className={classNames(
-					"absolute top--1 left--1 right--1 bottom--1 rounded-xl",
+					"absolute top--1 left--1 right--1 bottom--1 rounded-14px",
 					"transition-border-width transition-border-color",
 					{
 						["border-2 border-black"]: showBorder,

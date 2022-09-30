@@ -14,9 +14,9 @@ const BaseButton_ = forwardRef<HTMLButtonElement, BaseButtonProps>(
 			<Button
 				ref={ref}
 				className={classNames(
-					"overflow-hidden rounded-lg w-full cursor-pointer px-2",
+					"overflow-hidden rounded-12px w-full cursor-pointer px-4",
 					{
-						"h-80px": mode === "default",
+						"h-92px": mode === "default",
 						// "h-auto": mode === "minimal",
 					},
 					className
