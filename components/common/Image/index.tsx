@@ -57,6 +57,7 @@ export default function Image({
 	src,
 	alt,
 	fill,
+	placeholder = "blur",
 	...props
 }: PropsWithChildren<Omit<ImageProps, "alt">> & {
 	alt?: string;
@@ -94,7 +95,7 @@ export default function Image({
 					: "image"
 			}
 			loader={thumborLoader}
-			placeholder="blur"
+			placeholder={placeholder}
 			// blurDataURL={randomColor()}
 			blurDataURL={`data:image/svg+xml;base64,${toBase64(shimmer())}`}
 			onError={() => _setSrc("/images/image-error.png")}

@@ -2,15 +2,9 @@ import { Button, Title, Text, Space } from "@mantine/core";
 import { NextLink } from "@mantine/next";
 // @ts-ignore
 import TypeIt from "typeit-react";
-import Image from "next/image";
 
 import VideoPlayer from "@/components/common/Note/VideoPlayer";
-
-import instagramUrl from "@/public/images/logos-3d/instagram.png";
-import tiktokUrl from "@/public/images/logos-3d/tiktok.png";
-import twitterUrl from "@/public/images/logos-3d/twitter.png";
-import youtubeUrl from "@/public/images/logos-3d/youtube.png";
-import pinterestUrl from "@/public/images/logos-3d/pinterest.png";
+import Image from "@/components/common/Image";
 
 export default function IndexHero() {
 	return (
@@ -31,8 +25,9 @@ function SNSIcons() {
 				style={{ transform: "rotate(15deg)" }}
 			>
 				<Image
-					src={twitterUrl}
+					src="/images/logos-3d/twitter.png"
 					alt="Twitter Icon"
+					placeholder="empty"
 					width={414}
 					height={414}
 					quality={90}
@@ -43,8 +38,9 @@ function SNSIcons() {
 				style={{ transform: "matrix(-0.97, 0.26, 0.26, 0.97, 0, 0)" }}
 			>
 				<Image
-					src={instagramUrl}
+					src="/images/logos-3d/instagram.png"
 					alt="Instagram Icon"
+					placeholder="empty"
 					width={211}
 					height={211}
 					quality={90}
@@ -55,8 +51,9 @@ function SNSIcons() {
 				style={{ transform: "rotate(-30deg)" }}
 			>
 				<Image
-					src={youtubeUrl}
+					src="/images/logos-3d/youtube.png"
 					alt="Youtube Icon"
+					placeholder="empty"
 					width={158}
 					height={158}
 					quality={90}
@@ -67,8 +64,9 @@ function SNSIcons() {
 				style={{ transform: "rotate(-36deg)" }}
 			>
 				<Image
-					src={pinterestUrl}
+					src="/images/logos-3d/pinterest.png"
 					alt="Pinterest Icon"
+					placeholder="empty"
 					width={113}
 					height={113}
 					quality={90}
@@ -79,8 +77,9 @@ function SNSIcons() {
 				style={{ transform: "matrix(-0.93, -0.36, -0.36, 0.93, 0, 0)" }}
 			>
 				<Image
-					src={tiktokUrl}
+					src="/images/logos-3d/tiktok.png"
 					alt="Tiktok Icon"
+					placeholder="empty"
 					width={226}
 					height={226}
 					quality={90}

@@ -1,14 +1,9 @@
 import { Button, Text } from "@mantine/core";
-import Image from "next/image";
 
 import { useCurrentCharacter } from "@/utils/apis/indexer";
 import { useActivateCharacter } from "@/utils/apis/operator-sync";
 import { useLoginChecker } from "@/utils/wallet/hooks";
-
-import instagramUrl from "@/public/images/logos-3d/instagram.png";
-import tiktokUrl from "@/public/images/logos-3d/tiktok.png";
-import twitterUrl from "@/public/images/logos-3d/twitter.png";
-import youtubeUrl from "@/public/images/logos-3d/youtube.png";
+import Image from "@/components/common/Image";
 
 export default function OperatorSyncWelcome() {
 	const { data: character } = useCurrentCharacter();
@@ -81,8 +76,9 @@ function SNSIcons() {
 				style={{ transform: "rotate(15deg)" }}
 			>
 				<Image
-					src={twitterUrl}
+					src="/images/logos-3d/twitter.png"
 					alt="Twitter Icon"
+					placeholder="empty"
 					width={251}
 					height={251}
 					quality={90}
@@ -93,8 +89,9 @@ function SNSIcons() {
 				style={{ transform: "matrix(-0.97, 0.26, 0.26, 0.97, 0, 0)" }}
 			>
 				<Image
-					src={instagramUrl}
+					src="/images/logos-3d/instagram.png"
 					alt="Instagram Icon"
+					placeholder="empty"
 					width={128}
 					height={128}
 					quality={90}
@@ -105,8 +102,9 @@ function SNSIcons() {
 				style={{ transform: "rotate(-30deg)" }}
 			>
 				<Image
-					src={youtubeUrl}
+					src="/images/logos-3d/youtube.png"
 					alt="Youtube Icon"
+					placeholder="empty"
 					width={96}
 					height={96}
 					quality={90}
@@ -117,8 +115,9 @@ function SNSIcons() {
 				style={{ transform: "matrix(-0.93, -0.36, -0.36, 0.93, 0, 0)" }}
 			>
 				<Image
-					src={tiktokUrl}
+					src="/images/logos-3d/tiktok.png"
 					alt="Tiktok Icon"
+					placeholder="empty"
 					width={168}
 					height={168}
 					quality={90}
