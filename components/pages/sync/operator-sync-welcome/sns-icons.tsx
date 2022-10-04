@@ -1,8 +1,10 @@
+import React from "react";
+
 import Image from "@/components/common/Image";
 
-export function SNSIcons() {
+export const SNSIcons = React.memo(function Bg() {
 	return (
-		<div className="absolute w-full h-full overflow-hidden -z-1">
+		<div className="absolute top-0 left-0 right-0 bottom-0 overflow-hidden -z-1">
 			<div
 				className="absolute -left-80px -top-26px"
 				style={{ transform: "rotate(15deg)" }}
@@ -30,7 +32,7 @@ export function SNSIcons() {
 				/>
 			</div>
 			<div
-				className="absolute -left-12px -bottom-8px"
+				className="absolute left-0 bottom-44px"
 				style={{ transform: "rotate(-30deg)" }}
 			>
 				<Image
@@ -39,6 +41,19 @@ export function SNSIcons() {
 					placeholder="empty"
 					width={96}
 					height={96}
+					quality={90}
+				/>
+			</div>
+			<div
+				className="absolute left-153px bottom-0"
+				style={{ transform: "rotate(-36deg)" }}
+			>
+				<Image
+					src="/images/logos-3d/pinterest.png"
+					alt="Pinterest Icon"
+					placeholder="empty"
+					width={68}
+					height={68}
 					quality={90}
 				/>
 			</div>
@@ -57,4 +72,4 @@ export function SNSIcons() {
 			</div>
 		</div>
 	);
-}
+});

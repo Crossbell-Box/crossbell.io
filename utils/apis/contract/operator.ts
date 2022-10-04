@@ -3,19 +3,19 @@ import { showNotification } from "@mantine/notifications";
 import { useMutation, useQueryClient } from "@tanstack/react-query";
 import { SCOPE_KEY_CHARACTER_OPERATOR } from "../indexer";
 
-export function useSetCharacterOperator(characterId: number, operator: string) {
+export function useSetCharacterOperator(operator: string) {
 	const contract = useContract();
 	const queryClient = useQueryClient();
 
 	return useMutation(
-		async () => {
+		async (characterId: number) => {
 			return contract.setOperator(characterId, operator);
 		},
 		{
-			onSuccess: () => {
+			onSuccess: (_, characterId) => {
 				return Promise.all([
 					queryClient.invalidateQueries(
-						SCOPE_KEY_CHARACTER_OPERATOR(characterId!)
+						SCOPE_KEY_CHARACTER_OPERATOR(characterId)
 					),
 				]);
 			},

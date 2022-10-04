@@ -14,7 +14,7 @@ export function useCharacterOperator(characterId?: number) {
 		SCOPE_KEY_CHARACTER_OPERATOR(characterId!),
 		() => contract.getOperator(characterId!).then((res) => res.data),
 		{
-			enabled: Boolean(characterId),
+			enabled: typeof characterId === "number",
 		}
 	);
 }

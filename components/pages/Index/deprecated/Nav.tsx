@@ -13,7 +13,7 @@ const NavLinks = () => {
 	const navLinks = [
 		{ href: "/feed", title: "Feed" },
 		// { href: "/shop", title: "Shop" },
-		{ href: "/sync", title: "Sync" },
+		{ href: "/sync", title: "xSync" },
 		{
 			href: character ? `/@${character.handle}` : "/character",
 			title: "Character",
@@ -60,7 +60,7 @@ const MobileMenu = () => (
 				component={NextLink}
 				href="/sync"
 			>
-				Sync
+				xSync
 			</Menu.Item>
 			<Menu.Item
 				icon={<Text className="i-csb:character" />}

@@ -1,6 +1,6 @@
 import { getLayout } from "@/components/layouts/AppLayout";
 import Header from "@/components/layouts/Header";
-import Main from "@/components/pages/Sync/Main";
+import OperatorSyncPage from "@/components/pages/sync";
 import type { NextPageWithLayout } from "@/pages/_app";
 import Head from "next/head";
 
@@ -8,13 +8,13 @@ const Page: NextPageWithLayout = () => {
 	return (
 		<div>
 			<Head>
-				<title>Sync</title>
+				<title>xSync</title>
 			</Head>
 
-			<Header>Sync</Header>
+			<Header>xSync</Header>
 
 			<div className="my-5">
-				<Main />
+				<OperatorSyncPage />
 			</div>
 		</div>
 	);
