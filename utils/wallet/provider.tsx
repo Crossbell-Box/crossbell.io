@@ -1,9 +1,13 @@
 import React from "react";
+import { connectorsForWallets } from "@rainbow-me/rainbowkit";
 import {
-	getDefaultWallets,
-	connectorsForWallets,
-	wallet,
-} from "@rainbow-me/rainbowkit";
+	injectedWallet,
+	rainbowWallet,
+	metaMaskWallet,
+	coinbaseWallet,
+	walletConnectWallet,
+	braveWallet,
+} from "@rainbow-me/rainbowkit/wallets";
 import {
 	type Chain,
 	configureChains,
@@ -41,21 +45,16 @@ const { chains, provider } = configureChains(
 	{ pollingInterval: 1_000 }
 );
 
-// const { connectors } = getDefaultWallets({
-// 	appName: "Crossbell.io",
-// 	chains,
-// });
-
 const connectors = connectorsForWallets([
 	{
 		groupName: "Popular",
 		wallets: [
-			wallet.metaMask({ chains, shimDisconnect: true }),
-			wallet.walletConnect({ chains }),
-			wallet.rainbow({ chains }),
-			wallet.brave({ chains, shimDisconnect: true }),
-			wallet.coinbase({ appName: "Crossbell.io", chains }),
-			wallet.injected({ chains, shimDisconnect: true }),
+			metaMaskWallet({ chains, shimDisconnect: true }),
+			walletConnectWallet({ chains }),
+			rainbowWallet({ chains }),
+			braveWallet({ chains, shimDisconnect: true }),
+			coinbaseWallet({ appName: "Crossbell.io", chains }),
+			injectedWallet({ chains, shimDisconnect: true }),
 		],
 	},
 ]);
