@@ -83,7 +83,7 @@ const MobileMenu = () => (
 
 const IndexNav = () => (
 	<div className="flex fixed top-0 bg-white w-full px-8 z-36 py-3">
-		<div className="flex flex-row justify-between items-center w-full max-w-1400px m-auto px-24px">
+		<div className="flex flex-row justify-between items-center w-full max-w-1440px m-auto px-24px">
 			<div className="flex flex-row items-center gap-6">
 				<div>
 					<Link href="/">
