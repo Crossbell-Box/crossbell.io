@@ -25,7 +25,8 @@ function SearchInput_({ initialValue, ...props }: SearchInputProps) {
 			classNames={{
 				root: "w-full",
 				wrapper: "text-[#687792]",
-				input: "rounded-12px border-[#E1E8F7] focus:border-[#687792] font-500",
+				input:
+					"rounded-12px border-[#E1E8F7] focus:border-[#687792] font-500 transition-border-color",
 			}}
 			size="md"
 			autoComplete="off"
@@ -33,6 +34,7 @@ function SearchInput_({ initialValue, ...props }: SearchInputProps) {
 			autoCorrect="off"
 			spellCheck="false"
 			enterKeyHint="search"
+			value={value}
 			onChange={(e) => {
 				setValue(e.target.value);
 			}}
