@@ -46,7 +46,7 @@ specifiers:
   react-dom: 18.2.0
   react-intersection-observer: 9.4.0
   react-markdown: 8.0.3
-  react-medium-image-zoom: 5.1.0-beta.9
+  react-medium-image-zoom: 5.1.0
   react-player: 2.11.0
   rehype-raw: 6.1.1
   rehype-sanitize: 5.0.1
@@ -96,7 +96,7 @@ dependencies:
   react-dom: 18.2.0_react@18.2.0
   react-intersection-observer: 9.4.0_react@18.2.0
   react-markdown: 8.0.3_iapumuv4e6jcjznwuxpf4tt22e
-  react-medium-image-zoom: 5.1.0-beta.9_biqbaboplfbrettd7655fr4n2y
+  react-medium-image-zoom: 5.1.0_biqbaboplfbrettd7655fr4n2y
   react-player: 2.11.0_react@18.2.0
   rehype-raw: 6.1.1
   rehype-sanitize: 5.0.1
@@ -6415,8 +6415,8 @@ packages:
       - supports-color
     dev: false
 
-  /react-medium-image-zoom/5.1.0-beta.9_biqbaboplfbrettd7655fr4n2y:
-    resolution: {integrity: sha512-GLxpuLUuhjfvkK+Jny7UU65fi3ynZHPp618K9DGnKC2ga38Z2o7fwTjWpV6MUcqxVBYVg6joKkLHnQ7YmAmPiQ==}
+  /react-medium-image-zoom/5.1.0_biqbaboplfbrettd7655fr4n2y:
+    resolution: {integrity: sha512-2aswBrZ20cqfVyNdAEf5PsN7ieIvvTPN0EauYTcty2ah0H5sNZRanJZ4gFH2+xbmsO3oM+uDWIOmt8rRiVNS3w==}
     peerDependencies:
       react: ^16.8.0 || ^17.0.0 || ^18.0.0
       react-dom: ^16.8.0 || ^17.0.0 || ^18.0.0
