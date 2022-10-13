@@ -33,9 +33,9 @@ const nextConfig = {
 					"https://raw.githubusercontent.com/Crossbell-Box/io-sitemap/main/sitemaps/sitemap-index.xml",
 			},
 			{
-				source: "/sitemaps/:match*",
+				source: "/sitemap-:match*.xml",
 				destination:
-					"https://raw.githubusercontent.com/Crossbell-Box/io-sitemap/main/sitemaps/:match*",
+					"https://raw.githubusercontent.com/Crossbell-Box/io-sitemap/main/sitemaps/sitemap-:match*.xml",
 			},
 			{
 				source: "/robots.txt",
