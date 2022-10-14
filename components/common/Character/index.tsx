@@ -19,7 +19,7 @@ export function CharacterName({
 	| { characterId?: never; character: CharacterEntity }
 ) & { ellipsis?: boolean; showHoverCard?: boolean } & TextProps) {
 	const { data, isLoading } = useCharacter(
-		characterId ?? initialCharacter.characterId,
+		characterId ?? initialCharacter?.characterId,
 		{
 			initialData: initialCharacter,
 		}
