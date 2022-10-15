@@ -21,11 +21,11 @@ specifiers:
   '@mantine/nprogress': 5.5.5
   '@next/bundle-analyzer': 12.3.1
   '@rainbow-me/rainbowkit': 0.7.1
-  '@tanstack/react-query': 4.10.3
-  '@tanstack/react-query-devtools': 4.11.0
+  '@tanstack/react-query': 4.12.0
+  '@tanstack/react-query-devtools': 4.12.0
   '@types/canvas-confetti': 1.4.3
   '@types/lodash.compact': 3.0.7
-  '@types/node': 18.8.5
+  '@types/node': 18.11.0
   '@types/react': 18.0.21
   '@types/react-dom': 18.0.6
   '@unocss/webpack': 0.45.29
@@ -46,7 +46,7 @@ specifiers:
   react-dom: 18.2.0
   react-intersection-observer: 9.4.0
   react-markdown: 8.0.3
-  react-medium-image-zoom: 5.1.0
+  react-medium-image-zoom: 5.1.1
   react-player: 2.11.0
   rehype-raw: 6.1.1
   rehype-sanitize: 5.0.1
@@ -58,7 +58,7 @@ specifiers:
   typeit-react: 2.6.0
   typescript: 4.8.4
   unocss: 0.45.29
-  wagmi: 0.7.2
+  wagmi: 0.7.3
 
 dependencies:
   '@crossbell/ipfs-gateway': 0.0.15
@@ -78,9 +78,9 @@ dependencies:
   '@mantine/notifications': 5.5.5_sboc75uudxrw5k7gcptvtad4eq
   '@mantine/nprogress': 5.5.5_sboc75uudxrw5k7gcptvtad4eq
   '@next/bundle-analyzer': 12.3.1
-  '@rainbow-me/rainbowkit': 0.7.1_5xetwfrotjxfgmcmms6vgnnnaa
-  '@tanstack/react-query': 4.10.3_biqbaboplfbrettd7655fr4n2y
-  '@tanstack/react-query-devtools': 4.11.0_vhepussragssjkevgznguhxexq
+  '@rainbow-me/rainbowkit': 0.7.1_f7ajxyn3uxsvbfximgani4qw4m
+  '@tanstack/react-query': 4.12.0_biqbaboplfbrettd7655fr4n2y
+  '@tanstack/react-query-devtools': 4.12.0_pqnxmwujmmnpcx44ucekqkefny
   canvas-confetti: 1.5.1
   classnames: 2.3.2
   crossbell.js: 0.10.36
@@ -96,7 +96,7 @@ dependencies:
   react-dom: 18.2.0_react@18.2.0
   react-intersection-observer: 9.4.0_react@18.2.0
   react-markdown: 8.0.3_iapumuv4e6jcjznwuxpf4tt22e
-  react-medium-image-zoom: 5.1.0_biqbaboplfbrettd7655fr4n2y
+  react-medium-image-zoom: 5.1.1_biqbaboplfbrettd7655fr4n2y
   react-player: 2.11.0_react@18.2.0
   rehype-raw: 6.1.1
   rehype-sanitize: 5.0.1
@@ -106,14 +106,14 @@ dependencies:
   sharp: 0.31.1
   sticky-sidebar-v2: 1.1.1
   typeit-react: 2.6.0
-  wagmi: 0.7.2_edjenglnoidfgdksnn2us6dmze
+  wagmi: 0.7.3_edjenglnoidfgdksnn2us6dmze
 
 devDependencies:
   '@crossbell/ipfs-gateway-next': 0.0.15_next@12.3.1
   '@iconify/utils': 2.0.1
   '@types/canvas-confetti': 1.4.3
   '@types/lodash.compact': 3.0.7
-  '@types/node': 18.8.5
+  '@types/node': 18.11.0
   '@types/react': 18.0.21
   '@types/react-dom': 18.0.6
   '@unocss/webpack': 0.45.29
@@ -1386,7 +1386,7 @@ packages:
       react: 18.2.0
     dev: false
 
-  /@rainbow-me/rainbowkit/0.7.1_5xetwfrotjxfgmcmms6vgnnnaa:
+  /@rainbow-me/rainbowkit/0.7.1_f7ajxyn3uxsvbfximgani4qw4m:
     resolution: {integrity: sha512-8Q8uZ3ElrIjXhIiumc6s+8KlYzaN5HDTnpC5CjhnYcWkid7ZuKEzb/1uiNARmt0LTm0y7VGdOHRT74UBksxD0A==}
     engines: {node: '>=12.4'}
     peerDependencies:
@@ -1404,7 +1404,7 @@ packages:
       react: 18.2.0
       react-dom: 18.2.0_react@18.2.0
       react-remove-scroll: 2.5.4_iapumuv4e6jcjznwuxpf4tt22e
-      wagmi: 0.7.2_edjenglnoidfgdksnn2us6dmze
+      wagmi: 0.7.3_edjenglnoidfgdksnn2us6dmze
     transitivePeerDependencies:
       - '@types/react'
     dev: false
@@ -1468,8 +1468,8 @@ packages:
       remove-accents: 0.4.2
     dev: false
 
-  /@tanstack/query-core/4.10.3:
-    resolution: {integrity: sha512-+ME02sUmBfx3Pjd+0XtEthK8/4rVMD2jcxvnW9DSgFONpKtpjzfRzjY4ykzpDw1QEo2eoPvl7NS8J5mNI199aA==}
+  /@tanstack/query-core/4.12.0:
+    resolution: {integrity: sha512-KEiFPNLMFByhNL2s6RBFL6Z5cNdwwQzFpW/II3GY+rEuQ343ZEoVyQ48zlUXXkEkbamQFIFg2onM8Pxf0Yo01A==}
     dev: false
 
   /@tanstack/query-persist-client-core/4.10.3:
@@ -1486,34 +1486,34 @@ packages:
       - '@tanstack/query-core'
     dev: false
 
-  /@tanstack/react-query-devtools/4.11.0_vhepussragssjkevgznguhxexq:
-    resolution: {integrity: sha512-g/414SruE0TEp4jeMYxVUSXGXCc+zMY9j0gB8Q6B91gmyPseNqs9WLkVrqxRXoQDyRvDcphVOaEANNygGx+zGg==}
+  /@tanstack/react-query-devtools/4.12.0_pqnxmwujmmnpcx44ucekqkefny:
+    resolution: {integrity: sha512-gUV+aKpwgP7Cfp2+vwgu6krXCytncGWjTqFcnzC1l2INOf8dRi8/GEupYF7npxD9ky72FTuxc5+TI/lC8eB0Eg==}
     peerDependencies:
-      '@tanstack/react-query': 4.10.3
+      '@tanstack/react-query': 4.12.0
       react: ^16.8.0 || ^17.0.0 || ^18.0.0
       react-dom: ^16.8.0 || ^17.0.0 || ^18.0.0
     dependencies:
       '@tanstack/match-sorter-utils': 8.1.1
-      '@tanstack/react-query': 4.10.3_biqbaboplfbrettd7655fr4n2y
+      '@tanstack/react-query': 4.12.0_biqbaboplfbrettd7655fr4n2y
       react: 18.2.0
       react-dom: 18.2.0_react@18.2.0
       superjson: 1.10.0
       use-sync-external-store: 1.2.0_react@18.2.0
     dev: false
 
-  /@tanstack/react-query-persist-client/4.10.3_44u2an622imnmu2zk5qotweaoa:
+  /@tanstack/react-query-persist-client/4.10.3_drd77wjzdtjhkwvbq4fmcrf7wi:
     resolution: {integrity: sha512-TKfRv5FibgpQu0yt//UDKnBueplqKwEK4MyCgfE/4mKVKYHSQsa8yq5bT/VbQlzbYnxmi0btCE/N6adeJ6wyug==}
     peerDependencies:
       '@tanstack/react-query': 4.10.3
     dependencies:
       '@tanstack/query-persist-client-core': 4.10.3
-      '@tanstack/react-query': 4.10.3_biqbaboplfbrettd7655fr4n2y
+      '@tanstack/react-query': 4.12.0_biqbaboplfbrettd7655fr4n2y
     transitivePeerDependencies:
       - '@tanstack/query-core'
     dev: false
 
-  /@tanstack/react-query/4.10.3_biqbaboplfbrettd7655fr4n2y:
-    resolution: {integrity: sha512-4OEJjkcsCTmG3ui7RjsVzsXerWQvInTe95CBKFyOV/GchMUlNztoFnnYmlMhX7hLUqJMhbG9l7M507V7+xU8Hw==}
+  /@tanstack/react-query/4.12.0_biqbaboplfbrettd7655fr4n2y:
+    resolution: {integrity: sha512-prchV1q+CJ0ZVo8Rts2cOF3azDfQizZZySmH6XXsXRcPTbir0sgb9fp0vY/5l5ZkSYjTvWt/OL8WQhAhYMSvrA==}
     peerDependencies:
       react: ^16.8.0 || ^17.0.0 || ^18.0.0
       react-dom: ^16.8.0 || ^17.0.0 || ^18.0.0
@@ -1524,7 +1524,7 @@ packages:
       react-native:
         optional: true
     dependencies:
-      '@tanstack/query-core': 4.10.3
+      '@tanstack/query-core': 4.12.0
       react: 18.2.0
       react-dom: 18.2.0_react@18.2.0
       use-sync-external-store: 1.2.0_react@18.2.0
@@ -1533,13 +1533,13 @@ packages:
   /@types/bn.js/4.11.6:
     resolution: {integrity: sha512-pqr857jrp2kPuO9uRjZ3PwnJTjoQy+fcdxvBTvHm6dkmEL9q+hDD/2j/0ELOBPtPnS8LjCX0gI9nbl8lVkadpg==}
     dependencies:
-      '@types/node': 18.8.5
+      '@types/node': 18.11.0
     dev: false
 
   /@types/bn.js/5.1.0:
     resolution: {integrity: sha512-QSSVYj7pYFN49kW77o2s9xTCwZ8F2xLbjLLSEVh8D2F4JUhZtPAGOFLTD+ffqksBx/u4cE/KImFjyhqCjn/LIA==}
     dependencies:
-      '@types/node': 18.8.5
+      '@types/node': 18.11.0
     dev: false
 
   /@types/canvas-confetti/1.4.3:
@@ -1549,7 +1549,7 @@ packages:
   /@types/connect/3.4.35:
     resolution: {integrity: sha512-cdeYyv4KWoEgpBISTxWvqYsVy444DOqehiF3fM3ne10AmJ62RSyNkUnxMJXHQWRQQX2eR94m5y1IZyDwBjV9FQ==}
     dependencies:
-      '@types/node': 18.8.5
+      '@types/node': 18.11.0
     dev: false
 
   /@types/debug/4.1.7:
@@ -1618,8 +1618,8 @@ packages:
     resolution: {integrity: sha512-J8xLz7q2OFulZ2cyGTLE1TbbZcjpno7FaN6zdJNrgAdrJ+DZzh/uFR6YrTb4C+nXakvud8Q4+rbhoIWlYQbUFQ==}
     dev: false
 
-  /@types/node/18.8.5:
-    resolution: {integrity: sha512-Bq7G3AErwe5A/Zki5fdD3O6+0zDChhg671NfPjtIcbtzDNZTv4NPKMRFr7gtYPG7y+B8uTiNK4Ngd9T0FTar6Q==}
+  /@types/node/18.11.0:
+    resolution: {integrity: sha512-IOXCvVRToe7e0ny7HpT/X9Rb2RYtElG1a+VshjwT00HxrM2dWBApHQoqsI6WiY7Q03vdf2bCrIGzVrkF/5t10w==}
 
   /@types/parse-json/4.0.0:
     resolution: {integrity: sha512-//oorEZjL6sbPcKUaCdIGlIUeH26mgzimjBB77G6XRgnDl/L5wOnpyBGRe/Mmf5CVW3PwEBE1NjiMZ/ssFh4wA==}
@@ -1632,7 +1632,7 @@ packages:
   /@types/pbkdf2/3.1.0:
     resolution: {integrity: sha512-Cf63Rv7jCQ0LaL8tNXmEyqTHuIJxRdlS5vMh1mj5voN4+QFhVZnlZruezqpWYDiJ8UTzhP0VmeLXCmBk66YrMQ==}
     dependencies:
-      '@types/node': 18.8.5
+      '@types/node': 18.11.0
     dev: false
 
   /@types/prop-types/15.7.5:
@@ -1657,7 +1657,7 @@ packages:
   /@types/secp256k1/4.0.3:
     resolution: {integrity: sha512-Da66lEIFeIz9ltsdMZcpQvmrmmoqrfju8pm1BH8WbYjZSwUgCwXLb9C+9XYogwBITnbsSaMdVPb2ekf7TV+03w==}
     dependencies:
-      '@types/node': 18.8.5
+      '@types/node': 18.11.0
     dev: false
 
   /@types/unist/2.0.6:
@@ -1667,7 +1667,7 @@ packages:
   /@types/ws/7.4.7:
     resolution: {integrity: sha512-JQbbmxZTZehdc2iszGKs5oC3NFnjeay7mtAWrdt7qNtAVK0g19muApzAy4bm9byz79xa2ZnO/BOBC2R8RC5Lww==}
     dependencies:
-      '@types/node': 18.8.5
+      '@types/node': 18.11.0
     dev: false
 
   /@typescript-eslint/parser/5.34.0_z4bbprzjrhnsfa24uvmcbu7f5q:
@@ -1933,8 +1933,8 @@ packages:
       '@vanilla-extract/css': 1.9.1
     dev: false
 
-  /@wagmi/core/0.6.2_xbhc4673zxhgzqr4xljbxofikm:
-    resolution: {integrity: sha512-jdL2xuwlKGNOfOXSdwZ4K80cttxlc4uDAwoq07xnoSgEwXOoCIUizUMLtOZOnEpeUtACG+pcdpnDeVokGLsf+w==}
+  /@wagmi/core/0.6.3_xbhc4673zxhgzqr4xljbxofikm:
+    resolution: {integrity: sha512-tvhYsGR4/Sgo4/E9iIuNJosPy/UZnjcylNdwk2CdXxjpf8vVbeQDsYa4Ue/We2RZlpFMt7CpPLVCVU8BKduOug==}
     peerDependencies:
       '@coinbase/wallet-sdk': '>=3.3.0'
       '@walletconnect/ethereum-provider': '>=1.7.5'
@@ -5057,7 +5057,7 @@ packages:
     resolution: {integrity: sha512-7vuh85V5cdDofPyxn58nrPjBktZo0u9x1g8WtjQol+jZDaE+fhN+cIvTj11GndBnMnyfrUOG1sZQxCdjKh+DKg==}
     engines: {node: '>= 10.13.0'}
     dependencies:
-      '@types/node': 18.8.5
+      '@types/node': 18.11.0
       merge-stream: 2.0.0
       supports-color: 8.1.1
     dev: true
@@ -6443,8 +6443,8 @@ packages:
       - supports-color
     dev: false
 
-  /react-medium-image-zoom/5.1.0_biqbaboplfbrettd7655fr4n2y:
-    resolution: {integrity: sha512-2aswBrZ20cqfVyNdAEf5PsN7ieIvvTPN0EauYTcty2ah0H5sNZRanJZ4gFH2+xbmsO3oM+uDWIOmt8rRiVNS3w==}
+  /react-medium-image-zoom/5.1.1_biqbaboplfbrettd7655fr4n2y:
+    resolution: {integrity: sha512-6YVFpFy2zmFxSLHV5qOxmyH1QJIKCCbGU6STFr05iokvXhNO7yDS7rR3jlr9SV4QUgwrGLAWkmiqF2UPP2wmXA==}
     peerDependencies:
       react: ^16.8.0 || ^17.0.0 || ^18.0.0
       react-dom: ^16.8.0 || ^17.0.0 || ^18.0.0
@@ -7712,17 +7712,17 @@ packages:
       fsevents: 2.3.2
     dev: false
 
-  /wagmi/0.7.2_edjenglnoidfgdksnn2us6dmze:
-    resolution: {integrity: sha512-Um7GgUVoHFkxPUMIioCUO8mW2I3wTtbE4jW3DN8RvXar0JHWcM/GtgDRg+rB2dWA10XmT6b87V82qhIoHS8S9g==}
+  /wagmi/0.7.3_edjenglnoidfgdksnn2us6dmze:
+    resolution: {integrity: sha512-2HWgshtByBPZ3/Px8rTKtY3K6uZPwC8kW5mPtZnFllQuHGDBPwPi1/zKWLz5yY/02/9JaGrUVlggCcIysIVq2Q==}
     peerDependencies:
       ethers: '>=5.5.1'
       react: '>=17.0.0'
     dependencies:
       '@coinbase/wallet-sdk': 3.5.3
       '@tanstack/query-sync-storage-persister': 4.10.3
-      '@tanstack/react-query': 4.10.3_biqbaboplfbrettd7655fr4n2y
-      '@tanstack/react-query-persist-client': 4.10.3_44u2an622imnmu2zk5qotweaoa
-      '@wagmi/core': 0.6.2_xbhc4673zxhgzqr4xljbxofikm
+      '@tanstack/react-query': 4.12.0_biqbaboplfbrettd7655fr4n2y
+      '@tanstack/react-query-persist-client': 4.10.3_drd77wjzdtjhkwvbq4fmcrf7wi
+      '@wagmi/core': 0.6.3_xbhc4673zxhgzqr4xljbxofikm
       '@walletconnect/ethereum-provider': 1.8.0
       abitype: 0.1.6_typescript@4.8.4
       ethers: 5.7.1
