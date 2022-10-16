@@ -1,5 +1,5 @@
 import Avatar from "@/components/common/Avatar";
-import TrendingBase from "@/components/pages/Index/Trending/_base";
+import TrendingBase from "@/components/pages/Index/deprecated/Trending/_base";
 import { TrendingRawResponse } from "@/utils/apis/trending";
 
 // Mantine v5.0.0-alpha.19 doesn't have AvatarsGroup element
