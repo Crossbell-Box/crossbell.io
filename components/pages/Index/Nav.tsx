@@ -1,118 +1,60 @@
-import Link from "next/link";
-import Logo from "@/components/common/Logo";
-import { Menu, Button, Title, Text } from "@mantine/core";
-import ConnectButton from "@/components/common/ConnectButton";
-import React from "react";
-import { useCurrentCharacter } from "@/utils/apis/indexer";
-import SearchInput from "@/components/common/Input/SearchInput";
-import { NextLink } from "@mantine/next";
+import classNames from "classnames";
+import { AnimatePresence, m } from "framer-motion";
+import { useCallback, useState } from "react";
 
-const NavLinks = () => {
-	const { data: character } = useCurrentCharacter();
-
-	const navLinks = [
-		{ href: "/feed", title: "Feed" },
-		// { href: "/shop", title: "Shop" },
-		{ href: "/sync", title: "Sync" },
-		{
-			href: character ? `/@${character.handle}` : "/character",
-			title: "Character",
-		},
+export default function Nav({
+	mode,
+	index,
+	onSwitchPage,
+}: {
+	mode: "light" | "dark";
+	index: number;
+	onSwitchPage: (index: number) => void;
+}) {
+	const navs = [
+		{ title: "Philosophy", activeColor: "text-white" },
+		{ title: "xSync", activeColor: "text-blue" },
+		{ title: "xFeed", activeColor: "text-yellow" },
+		{ title: "xCharacter", activeColor: "text-green" },
+		{ title: "xLog", activeColor: "text-[#9688F2]" },
+		{ title: "xShop", activeColor: "text-[#E65040]" },
 	];
 
+	const handleSwitch = (i: number) => {
+		onSwitchPage?.(i);
+	};
+
+	const shouldShow = index !== 6; // the video page
+
 	return (
-		<>
-			{navLinks.map((link) => (
-				<Link key={link.title} href={link.href}>
-					<span className="font-semibold text-lg cursor-pointer">
-						{link.title}
-					</span>
-				</Link>
-			))}
-		</>
+		<AnimatePresence>
+			{shouldShow && (
+				<m.nav
+					className="fixed top-30% left-100px z-10 flex flex-col space-y-20px"
+					transition={{ delay: 0.3 }}
+					initial={{ opacity: 0 }}
+					animate={{ opacity: 1 }}
+					exit={{ opacity: 0 }}
+				>
+					{navs.map((nav, i) => (
+						<div
+							key={i}
+							onClick={() => handleSwitch(i)}
+							className={classNames(
+								"cursor-pointer transition-all text-xl font-500",
+								{
+									"text-white": index !== i && mode === "light",
+									"text-black": index !== i && mode === "dark",
+									"scale-120 translate-x-10%": index === i,
+									[nav.activeColor]: index === i,
+								}
+							)}
+						>
+							{nav.title}
+						</div>
+					))}
+				</m.nav>
+			)}
+		</AnimatePresence>
 	);
-};
-
-const MobileMenu = () => (
-	<Menu shadow="md">
-		<Menu.Target>
-			<Button size="xs">
-				<Text className="i-csb:more" />
-			</Button>
-		</Menu.Target>
-		<Menu.Dropdown>
-			<Menu.Item
-				icon={<Text className="i-csb:feed" />}
-				component={NextLink}
-				href="/feed"
-			>
-				Feed
-			</Menu.Item>
-			<Menu.Item
-				icon={<Text className="i-csb:shop" />}
-				component={NextLink}
-				href="/shop"
-			>
-				Shop
-			</Menu.Item>
-			<Menu.Item
-				icon={<Text className="i-csb:sync" />}
-				component={NextLink}
-				href="/sync"
-			>
-				Sync
-			</Menu.Item>
-			<Menu.Item
-				icon={<Text className="i-csb:character" />}
-				component={NextLink}
-				href="/character"
-			>
-				Character
-			</Menu.Item>
-			<Menu.Divider />
-			<Menu.Item>
-				<SearchInput />
-			</Menu.Item>
-			<Menu.Item>
-				{/* FIXME: button cannot be inside another button */}
-				<div className="flex relative">{/* <ConnectButton /> */}</div>
-			</Menu.Item>
-		</Menu.Dropdown>
-	</Menu>
-);
-
-const IndexNav = () => (
-	<div className="flex fixed top-0 bg-white w-full px-8 z-36 py-3">
-		<div className="flex flex-row justify-between items-center w-full max-w-1400px m-auto px-24px">
-			<div className="flex flex-row items-center gap-6">
-				<div>
-					<Link href="/">
-						<a className="flex justify-center items-center">
-							<Logo size={24} />
-							<Title className="ml-4px text-20px leading-28px font-600">
-								Crossbell
-							</Title>
-						</a>
-					</Link>
-				</div>
-				<div className="flex-row items-center gap-4 hidden md:flex">
-					<NavLinks />
-				</div>
-			</div>
-			<div className="flex-row items-center gap-6 hidden md:flex">
-				<div>
-					<SearchInput />
-				</div>
-				<div className="flex relative">
-					<ConnectButton mode="minimal" />
-				</div>
-			</div>
-			<div className="flex md:hidden">
-				{/*Mobile Menu*/}
-				<MobileMenu />
-			</div>
-		</div>
-	</div>
-);
-
-export default IndexNav;
+}
