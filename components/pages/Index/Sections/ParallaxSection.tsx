@@ -97,6 +97,7 @@ export default function ParallaxSection({
 										src={handSvg}
 										alt="btn"
 										className="absolute bottom-0 left-15px group-hover:scale-120 origin-bottom transition-transform-2000"
+										placeholder="empty"
 									/>
 									<div className="w-80px"></div>
 									<Text className="text-white font-700 group-hover:text-xl transition-font-1500">
