@@ -10,12 +10,13 @@ import {
 import { Button, Card, Space, Text, LoadingOverlay } from "@mantine/core";
 import classNames from "classnames";
 import type { StaticImageData } from "next/image";
+import { openConfirmModal, closeAllModals } from "@mantine/modals";
+import { useClickOutside } from "@mantine/hooks";
 
 import HandleGuideMedium from "@/public/images/sync/platforms/medium-bio.png";
 import HandleGuideTiktok from "@/public/images/sync/platforms/tiktok-bio.png";
 import seeYouImage from "@/public/images/sync/see-you-later.svg";
 import { useCurrentCharacter } from "@/utils/apis/indexer";
-import { openConfirmModal, closeAllModals } from "@mantine/modals";
 
 import { getChangeBioUrl, openWindowToChangeBio } from "../utils";
 
@@ -74,8 +75,14 @@ function UnbindingModal({ platform, identity }: UnbindingModalProps) {
 		identity
 	);
 
+	const ref = useClickOutside(() => {
+		if (!unbindAccount.isLoading) {
+			closeModals();
+		}
+	});
+
 	return (
-		<Card className="min-h-50vh flex flex-col justify-between">
+		<Card ref={ref} className="min-h-50vh flex flex-col justify-between">
 			<LoadingOverlay visible={unbindAccount.isLoading} />
 
 			{step === 0 && (
