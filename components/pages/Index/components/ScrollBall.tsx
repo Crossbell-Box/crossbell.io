@@ -17,14 +17,14 @@ export default function ScrollBall({
 	];
 	const color = colors[index];
 
-	return (
+	return color ? (
 		<div
 			className="absolute bottom-50px left-50% translate-x--50% cursor-pointer"
 			onClick={() => {
 				onClickNext?.();
 			}}
 		>
-			{color && <BouncyBall size={20} color={color} />}
+			<BouncyBall size={20} color={color} />
 		</div>
-	);
+	) : null;
 }

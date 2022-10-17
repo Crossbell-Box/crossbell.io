@@ -1,11 +1,5 @@
 import { ComponentProps, PropsWithChildren } from "react";
-import {
-	MotionValue,
-	m,
-	AnimatePresence,
-	useTime,
-	useTransform,
-} from "framer-motion";
+import { m, AnimatePresence, useTime, useTransform } from "framer-motion";
 import { Text, Title, UnstyledButton } from "@mantine/core";
 import BaseSection from "./BaseSection";
 import Padding from "./Padding";

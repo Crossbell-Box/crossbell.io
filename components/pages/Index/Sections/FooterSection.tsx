@@ -7,7 +7,6 @@ import bellBlackImage from "@/public/images/pages/index/resources/bell-black.svg
 import IndexFooter from "../components/Footer";
 import Padding from "./Padding";
 import { Text } from "@mantine/core";
-import Logo from "../components/Logo";
 
 export default function FooterSection({
 	onClickTop,

@@ -26,30 +26,35 @@ export default function Carousel({
 		}
 	}, [embla, onIndexChange]);
 
-	const makePreventEdgeScrolling = useCallback(() => {
-		const { limit, target, location, scrollTo } = embla?.internalEngine() ?? {};
-		return () => {
-			if (embla && limit && target && location && scrollTo) {
-				if (limit.reachedMax(target.get())) {
-					if (limit.reachedMax(location.get())) location.set(limit.max);
-					target.set(limit.max);
-					scrollTo.distance(0, false);
-				}
-				if (limit.reachedMin(target.get())) {
-					if (limit.reachedMin(location.get())) location.set(limit.min);
-					target.set(limit.min);
-					scrollTo.distance(0, false);
-				}
+	const preventEdgeScrolling = useCallback(() => {
+		if (embla) {
+			const { limit, target, location, scrollTo } = embla.internalEngine();
+			if (limit.reachedMax(target.get())) {
+				if (limit.reachedMax(location.get())) location.set(limit.max);
+				target.set(limit.max);
+				scrollTo.distance(0, false);
 			}
-		};
+			if (limit.reachedMin(target.get())) {
+				if (limit.reachedMin(location.get())) location.set(limit.min);
+				target.set(limit.min);
+				scrollTo.distance(0, false);
+			}
+		}
 	}, [embla]);
 
 	useEffect(() => {
 		if (embla) {
 			embla.on("select", handleScroll);
-			embla.on("scroll", makePreventEdgeScrolling());
+			embla.on("scroll", preventEdgeScrolling);
 			handleScroll();
 		}
+
+		return () => {
+			if (embla) {
+				embla.off("select", handleScroll);
+				embla.off("scroll", preventEdgeScrolling);
+			}
+		};
 	}, [embla]);
 
 	useEffect(() => {
