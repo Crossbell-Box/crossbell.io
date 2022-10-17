@@ -2,15 +2,13 @@ import React from "react";
 import compact from "lodash.compact";
 import { closeAllModals } from "@mantine/modals";
 import { Button, LoadingOverlay, Text } from "@mantine/core";
+import { useClickOutside } from "@mantine/hooks";
 
 import { openBorderlessModal } from "@/components/common/Modal";
 import Image from "@/components/common/Image";
 import { useSetCharacterOperator } from "@/utils/apis/contract";
 import { NIL_ADDRESS } from "@/utils/ethers";
-import {
-	useCharacterOperator,
-	useCurrentCharacter,
-} from "@/utils/apis/indexer";
+import { useCurrentCharacter } from "@/utils/apis/indexer";
 import { useCharacterBoundAccounts } from "@/utils/apis/operator-sync";
 import seeYouImage from "@/public/images/sync/see-you-later.svg";
 
@@ -55,10 +53,16 @@ export function RemoveOperatorModal() {
 				},
 			});
 		}
-	}, [removeOperator_, isRemoving]);
+	}, [removeOperator_, isRemoving, character]);
+
+	const ref = useClickOutside(() => {
+		if (!isRemoving) {
+			closeModals();
+		}
+	});
 
 	return (
-		<div className="bg-white">
+		<div className="bg-white" ref={ref}>
 			<LoadingOverlay visible={isRemoving} />
 			{(() => {
 				switch (scene) {
