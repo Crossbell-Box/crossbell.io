@@ -1,6 +1,7 @@
 import Image from "@/components/common/Image";
 import classNames from "classnames";
 import { AnimatePresence, m } from "framer-motion";
+import { useId } from "react";
 
 export default function Logo({
 	mode = "light",
@@ -9,6 +10,7 @@ export default function Logo({
 	mode?: "light" | "dark";
 	position?: "top-left" | "bottom-left";
 }) {
+	const id = useId();
 	return (
 		<AnimatePresence>
 			<m.div
@@ -22,20 +24,14 @@ export default function Logo({
 					"bottom-20px": position === "bottom-left",
 				})}
 			>
-				<svg
-					width="125"
-					height="34"
-					viewBox="0 0 125 34"
-					fill="none"
-					xmlns="http://www.w3.org/2000/svg"
-				>
-					<g clipPath="url(#clip0_3559_25856)">
+				<svg width="125" height="34" viewBox="0 0 125 34" fill="none">
+					<g clipPath={`url(#clip0_${id})`}>
 						<line
 							x1="4"
 							y1="17.75"
 							x2="125"
 							y2="17.75"
-							stroke="url(#paint0_linear_3559_25856)"
+							stroke={`url(#liner_gradient_${id})`}
 							strokeWidth="4.5"
 						/>
 						<path
@@ -45,7 +41,7 @@ export default function Logo({
 					</g>
 					<defs>
 						<linearGradient
-							id="paint0_linear_3559_25856"
+							id={`liner_gradient_${id}`}
 							x1="4"
 							y1="21.0001"
 							x2="125"
@@ -58,7 +54,7 @@ export default function Logo({
 							<stop offset="0.760417" stopColor="#5B89F7" />
 							<stop offset="1" stopColor="#6AD991" />
 						</linearGradient>
-						<clipPath id="clip0_3559_25856">
+						<clipPath id={`clip0_${id}`}>
 							<rect width="125" height="34" fill="currentColor" />
 						</clipPath>
 					</defs>
