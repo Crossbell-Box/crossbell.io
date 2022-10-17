@@ -7,7 +7,7 @@ import bellBlackImage from "@/public/images/pages/index/resources/bell-black.svg
 import IndexFooter from "../components/Footer";
 import Padding from "./Padding";
 import { Text } from "@mantine/core";
-import Logo from "../Logo";
+import Logo from "../components/Logo";
 
 export default function FooterSection({
 	onClickTop,
@@ -22,11 +22,11 @@ export default function FooterSection({
 
 			<Padding />
 
-			<div className="flex flex-col justify-end items-center h-screen w-full">
+			<div className="absolute top-50% left-50% translate--50%">
 				<Image src={bellBlackImage} />
+			</div>
 
-				<div className="h-200px"></div>
-
+			<div className="flex flex-col justify-end items-center h-screen w-full">
 				<IndexFooter />
 			</div>
 

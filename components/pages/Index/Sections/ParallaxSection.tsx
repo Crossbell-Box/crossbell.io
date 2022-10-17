@@ -49,7 +49,7 @@ export default function ParallaxSection({
 
 			{/* text */}
 			<AnimatePresence>
-				<div className="flex space-x-40px space-y-40px sm:flex-row flex-wrap justify-around items-center mt-20vh">
+				<div className="flex flex-wrap space-x-40px space-y-40px justify-around items-center mt-20vh">
 					<m.div className="w-500px">
 						{isCurrentPage && (
 							<m.div
@@ -58,7 +58,7 @@ export default function ParallaxSection({
 								animate={{ opacity: 1 }}
 								exit={{ opacity: 0 }}
 							>
-								<Title order={3} className="font-500 text-3xl">
+								<Title order={3} className="font-500 text-40px">
 									{title}
 								</Title>
 							</m.div>
@@ -71,7 +71,9 @@ export default function ParallaxSection({
 								animate={{ opacity: 1 }}
 								exit={{ opacity: 0 }}
 							>
-								<Text className="mt-30px font-300">{description}</Text>
+								<Text className="mt-30px font-300 text-18px">
+									{description}
+								</Text>
 							</m.div>
 						)}
 

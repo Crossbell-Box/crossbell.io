@@ -30,7 +30,7 @@ export default function PhilosophySection({
 				<Image
 					src={bgSvg}
 					alt="bg"
-					className="absolute inset-0 w-screen h-screen blur-125px"
+					className="absolute inset-0 w-screen h-screen blur-25px"
 				/>
 			</m.div>
 
@@ -43,7 +43,7 @@ export default function PhilosophySection({
 						animate={{ opacity: 1 }}
 						exit={{ opacity: 0 }}
 					>
-						<Text className="text-xl">We empower you to</Text>
+						{/* <Text className="text-xl">We empower you to</Text> */}
 						<m.span
 							transition={{ delay: 0.5 }}
 							initial={{ opacity: 0 }}
@@ -51,7 +51,7 @@ export default function PhilosophySection({
 							exit={{ opacity: 0 }}
 						>
 							<Text className="font-deca font-300 text-2xl sm:text-3xl md:text-6xl">
-								Own Your Social Activity
+								Own Your Social Activities
 							</Text>
 						</m.span>
 					</m.div>

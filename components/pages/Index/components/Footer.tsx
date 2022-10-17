@@ -1,9 +1,4 @@
-import { Divider, Group, Space, Text } from "@mantine/core";
-import Image from "@/components/common/Image";
-import FollowBtn from "@/public/images/pages/index/follow-btn.svg";
-import Logo from "@/components/common/Logo";
-import Link from "next/link";
-import { composeCharacterHref } from "@/utils/url";
+import { Space, Text } from "@mantine/core";
 import { NextLink } from "@mantine/next";
 
 const linksGroup: { title: string; list: { text: string; href: string }[] }[] =

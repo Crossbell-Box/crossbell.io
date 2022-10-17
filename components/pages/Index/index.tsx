@@ -1,7 +1,7 @@
 import { domAnimation, LazyMotion } from "framer-motion";
 import PhilosophySection from "./Sections/PhilosophySection";
-import Logo from "./Logo";
-import Nav from "./Nav";
+import Logo from "./components/Logo";
+import Nav from "./components/Nav";
 import Carousel from "./components/Carousel";
 import { useState } from "react";
 import ParallaxSection from "./Sections/ParallaxSection";
@@ -17,6 +17,7 @@ import VideoSection from "./Sections/VideoSection";
 import FooterSection from "./Sections/FooterSection";
 import ScrollBall from "./components/ScrollBall";
 import { useHotkeys } from "@mantine/hooks";
+import Loading from "./components/Loading";
 
 export default function Index() {
 	const [index, setIndex] = useState(0);
@@ -38,7 +39,7 @@ export default function Index() {
 				onSwitchPage={(i) => setIndex(i)}
 			/>
 
-			{/* <Loading /> */}
+			<Loading />
 
 			<main>
 				<Carousel index={index} onIndexChange={(i) => setIndex(i)}>

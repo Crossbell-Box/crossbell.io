@@ -1,4 +1,3 @@
-import Image from "@/components/common/Image";
 import { Text } from "@mantine/core";
 import { m } from "framer-motion";
 import { PropsWithChildren } from "react";
@@ -6,16 +5,20 @@ import { PropsWithChildren } from "react";
 export default function WelcomeRing({
 	children,
 	withArrow,
+	animate,
 }: PropsWithChildren<{
 	withArrow?: boolean;
+	animate?: boolean;
 }>) {
 	return (
 		<m.div
 			className="w-full flex justify-center items-center group"
-			initial={{ opacity: 0 }}
-			animate={{ opacity: 1 }}
-			exit={{ opacity: 0 }}
-			transition={{ delay: 1, duration: 2 }}
+			{...(animate && {
+				initial: { opacity: 0 },
+				animate: { opacity: 1 },
+				exit: { opacity: 0 },
+				transition: { delay: 1, duration: 2 },
+			})}
 		>
 			<svg
 				width="143"
