@@ -1,4 +1,10 @@
-import { domAnimation, LazyMotion } from "framer-motion";
+import {
+	domAnimation,
+	LazyMotion,
+	m,
+	useTime,
+	useTransform,
+} from "framer-motion";
 import PhilosophySection from "./Sections/PhilosophySection";
 import Logo from "./components/Logo";
 import Nav from "./components/Nav";
@@ -11,7 +17,7 @@ import characterImage from "@/public/images/pages/index/resources/character.webp
 import xlogImage from "@/public/images/pages/index/resources/xlog.webp";
 import shopImage from "@/public/images/pages/index/resources/shop.webp";
 import feedImage from "@/public/images/pages/index/resources/feed.webp";
-import feedScrollingImage from "@/public/images/pages/index/resources/feed.gif";
+import feedScrollingImage from "@/public/images/pages/index/resources/feed-scroll.webp";
 import Image from "@/components/common/Image";
 import VideoSection from "./Sections/VideoSection";
 import FooterSection from "./Sections/FooterSection";
@@ -26,6 +32,9 @@ export default function Index() {
 		["ArrowUp", () => setIndex((index) => (index === 0 ? 0 : index - 1))],
 		["ArrowDown", () => setIndex((index) => (index === 7 ? 7 : index + 1))],
 	]);
+
+	const time = useTime();
+	const y = useTransform(time, (v) => Math.cos(v / 3000) * 350 - 350);
 
 	return (
 		<LazyMotion features={domAnimation} strict>
@@ -67,15 +76,16 @@ export default function Index() {
 						title="Meet stories"
 						description="Browser the content synced from other characters you follow."
 						btnText="Browse now"
-						btnHoverClassName="hover:bg-yellow"
+						btnHoverClassName="hover:bg-yellow group"
 						link="/feed"
 						image={feedImage}
 					>
 						<Image src={feedImage} className="w-800px max-w-screen h-auto" />
-						<Image
-							src={feedScrollingImage}
-							className="absolute w-350px left-200px h-auto"
-						/>
+						<div className="absolute left-25% top--5% h-600px overflow-hidden hover:shadow-lg hover:scale-110 transition-all-300">
+							<m.div style={{ y }}>
+								<Image src={feedScrollingImage} className="w-350px h-auto" />
+							</m.div>
+						</div>
 					</ParallaxSection>
 					{/* 3 */}
 					<ParallaxSection

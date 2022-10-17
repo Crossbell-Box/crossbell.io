@@ -12,8 +12,8 @@ export default function VideoSection({}: PropsWithChildren<{}>) {
 	const { x, y } = useMouse();
 
 	return (
-		<BaseSection className="relative flex flex-row justify-center items-start">
-			<AnimatePresence>
+		<AnimatePresence>
+			<BaseSection className="relative flex flex-row justify-center items-start">
 				<video
 					src="/images/pages/index/resources/intro-preview.mp4"
 					className="h-screen"
@@ -94,7 +94,7 @@ export default function VideoSection({}: PropsWithChildren<{}>) {
 						)}
 					</m.div>
 				)}
-			</AnimatePresence>
-		</BaseSection>
+			</BaseSection>
+		</AnimatePresence>
 	);
 }
