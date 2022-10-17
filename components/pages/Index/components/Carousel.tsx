@@ -26,27 +26,28 @@ export default function Carousel({
 		}
 	}, [embla, onIndexChange]);
 
-	const preventEdgeScrolling = () => {
-		if (embla) {
-			const { limit, target, location, scrollTo } = embla.internalEngine();
-
-			if (limit.reachedMax(target.get())) {
-				if (limit.reachedMax(location.get())) location.set(limit.max);
-				target.set(limit.max);
-				scrollTo.distance(0, false);
+	const makePreventEdgeScrolling = useCallback(() => {
+		const { limit, target, location, scrollTo } = embla?.internalEngine() ?? {};
+		return () => {
+			if (embla && limit && target && location && scrollTo) {
+				if (limit.reachedMax(target.get())) {
+					if (limit.reachedMax(location.get())) location.set(limit.max);
+					target.set(limit.max);
+					scrollTo.distance(0, false);
+				}
+				if (limit.reachedMin(target.get())) {
+					if (limit.reachedMin(location.get())) location.set(limit.min);
+					target.set(limit.min);
+					scrollTo.distance(0, false);
+				}
 			}
-			if (limit.reachedMin(target.get())) {
-				if (limit.reachedMin(location.get())) location.set(limit.min);
-				target.set(limit.min);
-				scrollTo.distance(0, false);
-			}
-		}
-	};
+		};
+	}, [embla]);
 
 	useEffect(() => {
 		if (embla) {
 			embla.on("select", handleScroll);
-			embla.on("scroll", preventEdgeScrolling);
+			embla.on("scroll", makePreventEdgeScrolling());
 			handleScroll();
 		}
 	}, [embla]);

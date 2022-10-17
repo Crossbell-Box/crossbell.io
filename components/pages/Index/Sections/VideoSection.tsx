@@ -32,7 +32,7 @@ export default function VideoSection({}: PropsWithChildren<{}>) {
 				</div>
 
 				{showVideo && (
-					<div className="cursor-none">
+					<m.div className="cursor-none">
 						{/* overlay */}
 						<m.div
 							initial={{ opacity: 0 }}
@@ -92,7 +92,7 @@ export default function VideoSection({}: PropsWithChildren<{}>) {
 								</div>
 							</m.div>
 						)}
-					</div>
+					</m.div>
 				)}
 			</AnimatePresence>
 		</BaseSection>

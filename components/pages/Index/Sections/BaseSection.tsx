@@ -10,7 +10,7 @@ export default function BaseSection({
 }>) {
 	return (
 		<Carousel.Slide>
-			<section className={classNames("h-screen", className)}>
+			<section className={classNames("h-screen overflow-hidden", className)}>
 				{children}
 			</section>
 		</Carousel.Slide>

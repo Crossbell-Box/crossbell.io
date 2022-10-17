@@ -9,7 +9,7 @@ import {
 import { Text, Title, UnstyledButton } from "@mantine/core";
 import BaseSection from "./BaseSection";
 import Padding from "./Padding";
-import handSvg from "@/public/images/pages/index/resources/hand.svg";
+import handImage from "@/public/images/pages/index/resources/hand.webp";
 import Image from "@/components/common/Image";
 import { NextLink } from "@mantine/next";
 import classNames from "classnames";
@@ -94,9 +94,9 @@ export default function ParallaxSection({
 									)}
 								>
 									<Image
-										src={handSvg}
+										src={handImage}
 										alt="btn"
-										className="absolute bottom-0 left-15px group-hover:scale-120 origin-bottom transition-transform-2000"
+										className="absolute bottom-0 left-10px group-hover:scale-120 origin-bottom transition-transform-2000 w-160px h-auto"
 										placeholder="empty"
 									/>
 									<div className="w-80px"></div>
