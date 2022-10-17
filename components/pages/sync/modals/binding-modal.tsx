@@ -10,6 +10,7 @@ import {
 import { useHotkeys } from "@mantine/hooks";
 import { closeAllModals } from "@mantine/modals";
 import classNames from "classnames";
+import { useClickOutside } from "@mantine/hooks";
 
 import Image from "@/components/common/Image";
 import { openBorderlessModal } from "@/components/common/Modal";
@@ -64,6 +65,12 @@ function BindingModal({ platform }: { platform: SupportedPlatform }) {
 		username
 	);
 
+	const ref = useClickOutside(() => {
+		if (!bindAccount.isLoading) {
+			closeModals();
+		}
+	});
+
 	async function submit() {
 		if (!bindAccount.isLoading && username) {
 			await bindAccount.mutateAsync(undefined, {
@@ -83,7 +90,7 @@ function BindingModal({ platform }: { platform: SupportedPlatform }) {
 	useHotkeys([["Enter", submit]]);
 
 	return (
-		<Card className="min-h-50vh flex flex-col justify-between">
+		<Card ref={ref} className="min-h-50vh flex flex-col justify-between">
 			<LoadingOverlay visible={bindAccount.isLoading} />
 			{scene === Scene.form && (
 				<div>
