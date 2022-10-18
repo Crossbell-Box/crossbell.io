@@ -275,20 +275,20 @@ function BindingModal({ platform }: { platform: SupportedPlatform }) {
 								size="md"
 								variant="outline"
 								radius={100}
-								onClick={closeModals}
+								onClick={() => openPlatformSite(platform)}
 								fullWidth
 							>
-								Close
+								Go to {platform}
 							</Button>
 
 							<Button
 								color="blue"
 								size="md"
 								radius={100}
-								onClick={() => openPlatformSite(platform)}
+								onClick={closeModals}
 								fullWidth
 							>
-								Go to {platform}
+								OK
 							</Button>
 						</div>
 					</div>
