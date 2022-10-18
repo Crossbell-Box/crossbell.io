@@ -14,4 +14,8 @@ export function formatToRFC3339(date: Date | number | string) {
 	return dayjs(date).format("YYYY-MM-DDTHH:mm:ss[Z]");
 }
 
+export function formatToISO(date: Date | number | string) {
+	return dayjs(date).toISOString();
+}
+
 export { dayjs };
