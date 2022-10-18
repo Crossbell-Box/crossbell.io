@@ -31,11 +31,11 @@ export default function Header({
 	const router = useRouter();
 
 	const handleCLickBack = () => {
-		// TODO: this would be a bug if the previous page was not the app
-		if (history.length > 0) {
-			router.back();
-		} else {
+		if (history.length === 1) {
 			router.push("/feed");
+		} else {
+			// TODO: this would be a bug if the previous page was not the app
+			router.back();
 		}
 	};
 
