@@ -39,7 +39,6 @@ const Page: NextPageWithLayout<PageProps> = (props) => {
 	const headerText =
 		name ?? extractCharacterName(character) ?? handle ?? "Character";
 
-	const title = `${extractCharacterName(character)} (@${handle})`;
 	return (
 		<div>
 			<Seo character={character} />
@@ -135,7 +134,9 @@ export const getServerSideProps: GetServerSideProps<PageProps> = async (
 
 function Seo({ character }: { character?: CharacterEntity | null }) {
 	const title = `${extractCharacterName(character)} (@${character?.handle})`;
-	const description = character?.metadata?.content?.bio;
+	const description =
+		character?.metadata?.content?.bio ??
+		`Follow ${title} on Crossbell blockchain to see their notes and treasures.`;
 
 	const { handle } = useCharacterRouterQuery();
 
