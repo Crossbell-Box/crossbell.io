@@ -28,6 +28,7 @@ export default function CharacterSection() {
 		<div>
 			<LoadingOverlay
 				visible={isTogglingOperator}
+				overlayBlur={2}
 				description="Waiting for the transaction to be confirmed"
 			/>
 			<div className="flex items-center pt-15px pb-13px">

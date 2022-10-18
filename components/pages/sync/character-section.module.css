@@ -1,8 +1,8 @@
 .switch {
 	margin-left: auto;
-	cursor: pointer;
 }
 
 .switch label {
 	font-size: 11px;
+	cursor: pointer;
 }
