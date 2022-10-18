@@ -8,6 +8,7 @@ import { showNotification } from "@mantine/notifications";
 
 import { useCurrentCharacter } from "@/utils/apis/indexer";
 import {
+	getPlatformDisplayName,
 	getPlatformUserProfileUrl,
 	SupportedPlatform,
 	useSyncAccount,
@@ -93,7 +94,7 @@ export function PlatformCard({
 				/>
 			</div>
 
-			<div>
+			<div className="flex items-center">
 				<Image
 					src={icon}
 					alt={platform}
@@ -101,6 +102,8 @@ export function PlatformCard({
 					height={40}
 					className={"rounded-12px"}
 				/>
+
+				<p className="m-0 ml-8px text-16px leading-24px font-400">{getPlatformDisplayName(platform)}</p>
 			</div>
 
 			{isBound ? (
@@ -115,8 +118,8 @@ export function PlatformCard({
 							</tr>
 
 							<tr className="font-400 text-12px leading-16px text-[#A9AAAB]">
-								<td className="p-0">Articles</td>
-								<td className="p-0 pl-8px">Capacity</td>
+								<td className="p-0">Synced Articles</td>
+								<td className="p-0 pl-8px">Used Storage</td>
 							</tr>
 						</tbody>
 					</table>
@@ -192,7 +195,7 @@ export function PlatformCard({
 						<Image width={90} height={90} src={bindIllustration} />
 					</div>
 					<p className="m-0 font-400 text-14px leading-20px text-[#49454F]">
-						No {platform} content, sync to own
+						Sync to own your {platform} content
 					</p>
 				</div>
 			)}

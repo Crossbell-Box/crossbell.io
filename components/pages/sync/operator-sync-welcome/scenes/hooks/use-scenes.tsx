@@ -55,7 +55,7 @@ export function getScenes(): SceneConfig[] {
 				</div>
 			),
 			description:
-				"Select the desired platform you wish to bind. You can always unbind your platform at any time.",
+				"Select the desired platforms you wish to bind. You can always unbind your platform at any time.",
 		},
 		{
 			id: "4",

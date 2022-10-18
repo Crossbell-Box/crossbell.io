@@ -1,12 +1,13 @@
 import React from "react";
 import classNames from "classnames";
 import prettyBytes from "pretty-bytes";
-import { Text, Switch, LoadingOverlay } from "@mantine/core";
+import { Text, Switch } from "@mantine/core";
 
 import Avatar from "@/components/common/Avatar";
 import { useCurrentCharacter } from "@/utils/apis/indexer";
 import { useCharacterMediaUsage } from "@/utils/apis/operator-sync";
 import { extractCharacterName } from "@/utils/metadata";
+import LoadingOverlay from "@/components/common/LoadingOverlay";
 
 import { openGuideModal } from "./modals";
 import { useToggleOperator } from "./hooks";
@@ -25,9 +26,12 @@ export default function CharacterSection() {
 
 	return (
 		<div>
-			<LoadingOverlay visible={isTogglingOperator} />
+			<LoadingOverlay
+				visible={isTogglingOperator}
+				description="Waiting for the transaction to be confirmed"
+			/>
 			<div className="flex items-center pt-15px pb-13px">
-				<h4 className="font-deca my-0 text-18px font-600">xSync account</h4>
+				<h4 className="font-deca my-0 text-18px font-600">xSync Account</h4>
 				<button
 					className={classNames(
 						"ml-1px transform -translate-y-2/3",

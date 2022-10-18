@@ -96,18 +96,17 @@ function UnbindingModal({ platform, identity }: UnbindingModalProps) {
 
 						<div className="p-24px mb-24px">
 							<h4 className="text-24px leading-32px font-400 mt-0 mb-12px">
-								UnBind
+								Unbind
 							</h4>
 
 							<p className="text-16px leading-24px font-400 mt-0 mb-48px">
-								Easily unbind your platform and the system will stop syncing
-								your content.
+								After unbinding, the system will stop syncing your content.
 							</p>
 
 							<div className="flex items-center mb-12px">
 								<Text className="i-csb:person-remove text-36px text-blue-primary mr-8px" />
 								<span className="text-16px leading-24px font-500">
-									{"Delete our handle in your "}
+									{"Delete your handle in the "}
 									<a
 										className="text-blue-primary"
 										href={getChangeBioUrl(platform, identity)}
@@ -116,7 +115,7 @@ function UnbindingModal({ platform, identity }: UnbindingModalProps) {
 									>
 										{platform} account
 									</a>
-									{" Bio"}
+									{" bio"}
 								</span>
 							</div>
 
