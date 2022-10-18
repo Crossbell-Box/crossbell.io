@@ -18,11 +18,7 @@ export function Welcome() {
 			</h4>
 			<p className="m-0 font-400 text-16px leading-24px text-[#262626] children:text-[#5B89F7]">
 				Try to bind a platform to sync your content! Visiting our{" "}
-				<a
-					href="https://sync-landing-page-i51q.vercel.app"
-					target="_blank"
-					rel="noreferrer"
-				>
+				<a href="https://xsync.crossbell.io/" target="_blank" rel="noreferrer">
 					introduction page
 				</a>
 				{" to know more about sync feature, and also we have a "}
