@@ -1,4 +1,4 @@
-import { formatDate, formatDateFromNow } from "@/utils/time";
+import { formatDate, formatDateFromNow, formatToRFC3339 } from "@/utils/time";
 import { Tooltip, Text, TextProps } from "@mantine/core";
 import { NextLink } from "@mantine/next";
 import { useEffect, useState } from "react";
@@ -13,15 +13,15 @@ export default function Time({
 	date: string;
 	mode?: "fromNow" | "accurate";
 } & TextProps) {
-	// TODO: need a better way to handle this
+	// TODO: need a better way to handle this for SSR
 	const [isMounted, setIsMounted] = useState(false);
 
 	useEffect(() => {
 		setIsMounted(true);
 	}, []);
 
-	return isMounted ? (
-		<Tooltip label={formatDate(date)}>
+	return (
+		<Tooltip label={isMounted ? formatDate(date) : formatToRFC3339(date)}>
 			{/* @ts-ignore */}
 			<Text
 				{...(href ? { component: NextLink, href, variant: "link" } : {})}
@@ -32,9 +32,15 @@ export default function Time({
 				size="sm"
 				{...props}
 			>
-				{mode === "accurate" && formatDate(date)}
-				{mode === "fromNow" && formatDateFromNow(date)}
+				{isMounted ? (
+					<>
+						{mode === "accurate" && formatDate(date)}
+						{mode === "fromNow" && formatDateFromNow(date)}
+					</>
+				) : (
+					formatToRFC3339(date)
+				)}
 			</Text>
 		</Tooltip>
-	) : null;
+	);
 }
