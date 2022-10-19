@@ -10,13 +10,13 @@ export function getScenes(): SceneConfig[] {
 			id: "1",
 			modalIllustration: "/images/sync/modal-process-1.png",
 			illustration: (
-				<div className="absolute left-2vw top-1/2 w-500px h-400px overflow-hidden transform -translate-y-1/2">
+				<div className="absolute left-15px top-1/2 transform -translate-y-1/2">
 					<Image
-						src="/images/sync/hands-3d.png"
-						className="object-contain absolute -left-4vw top-0"
+						src="/images/sync/process1.png"
+						className="object-contain"
 						placeholder="empty"
-						width={500}
-						height={500}
+						width={401}
+						height={277}
 					/>
 				</div>
 			),
@@ -29,7 +29,7 @@ export function getScenes(): SceneConfig[] {
 			illustration: (
 				<div className="absolute left-2vw top-1/2 transform -translate-y-1/2">
 					<Image
-						src="/images/sync/process1.png"
+						src="/images/sync/process2.png"
 						className="object-contain"
 						placeholder="empty"
 						width={313}
@@ -46,7 +46,7 @@ export function getScenes(): SceneConfig[] {
 			illustration: (
 				<div className="absolute left-2vw top-1/2 transform -translate-y-1/2">
 					<Image
-						src="/images/sync/process2.png"
+						src="/images/sync/process3.png"
 						className="object-contain"
 						placeholder="empty"
 						width={309.1}
@@ -63,7 +63,7 @@ export function getScenes(): SceneConfig[] {
 			illustration: (
 				<div className="absolute left-2vw top-1/2 transform -translate-y-1/2">
 					<Image
-						src="/images/sync/process3.png"
+						src="/images/sync/process4.png"
 						className="object-contain"
 						placeholder="empty"
 						width={313}
@@ -79,7 +79,7 @@ export function getScenes(): SceneConfig[] {
 			illustration: (
 				<div className="absolute left-2vw top-1/2 transform -translate-y-1/2">
 					<Image
-						src="/images/sync/process4.png"
+						src="/images/sync/process5.png"
 						className="object-contain"
 						placeholder="empty"
 						width={313}
