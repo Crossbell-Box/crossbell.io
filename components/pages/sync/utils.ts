@@ -1,4 +1,5 @@
 import {
+	getPlatformUserProfileUrl,
 	SupportedPlatform,
 	useCharacterBoundAccounts,
 } from "@/utils/apis/operator-sync";
@@ -24,8 +25,19 @@ export function getChangeBioUrl(
 	switch (platform) {
 		case "medium":
 			return "https://medium.com/me/settings";
+		case "twitter":
+			return `https://twitter.com/settings/profile`;
+		case "pinterest":
+			return `https://www.pinterest.com/settings/edit-profile`;
+		case "pixiv":
+			return `https://www.pixiv.net/settings/profile`;
+		case "substack":
+			return identity
+				? `https://${identity}.substack.com/publish/settings`
+				: getPlatformSite("substack");
 		case "tiktok":
-			return `https://www.tiktok.com/@${identity}`;
+		case "tg_channel":
+			return getPlatformUserProfileUrl(platform, identity);
 	}
 }
 
@@ -42,6 +54,16 @@ export function getPlatformSite(platform: SupportedPlatform): string {
 			return "https://medium.com";
 		case "tiktok":
 			return `https://www.tiktok.com`;
+		case "pinterest":
+			return `https://www.pinterest.com`;
+		case "twitter":
+			return `https://twitter.com`;
+		case "tg_channel":
+			return `https://telegram.org`;
+		case "substack":
+			return `https://substack.com`;
+		case "pixiv":
+			return `https://www.pixiv.net`;
 	}
 }
 

@@ -10,8 +10,13 @@ import {
 } from "@/utils/apis/operator-sync";
 
 import LoadingOverlay from "@/components/common/LoadingOverlay";
-import LogoMedium from "@/public/images/brands/medium.png";
-import LogoTiktok from "@/public/images/brands/tiktok.png";
+import LogoMedium from "@/public/images/sync/platform-icons/medium.svg";
+import LogoTiktok from "@/public/images/sync/platform-icons/tiktok.svg";
+import LogoTwitter from "@/public/images/sync/platform-icons/twitter.svg";
+import LogoTelegram from "@/public/images/sync/platform-icons/telegram.svg";
+import LogoPixiv from "@/public/images/sync/platform-icons/pixiv.svg";
+import LogoPinterest from "@/public/images/sync/platform-icons/pinterest.svg";
+import LogoSubstack from "@/public/images/sync/platform-icons/substack.svg";
 
 import { sumUpMediaUsage } from "../utils";
 import { PlatformCard, PlatformCardProps } from "./platform-card";
@@ -20,6 +25,11 @@ import { Welcome } from "./welcome";
 const ICON_MAP: Record<SupportedPlatform, StaticImageData> = {
 	medium: LogoMedium,
 	tiktok: LogoTiktok,
+	twitter: LogoTwitter,
+	tg_channel: LogoTelegram,
+	substack: LogoSubstack,
+	pinterest: LogoPinterest,
+	pixiv: LogoPixiv,
 };
 
 export default function PlatformsSection() {
@@ -44,7 +54,7 @@ export default function PlatformsSection() {
 
 	const unboundPlatforms = SUPPORTED_PLATFORMS
 		// TODO: remove this when tiktok is ready
-		.filter((v) => v === "medium")
+		.filter((v) => v !== "tiktok")
 		.filter((v) => !boundPlatforms?.some((bound) => bound.platform === v))
 		.map<PlatformCardProps>((platform) => {
 			return {

@@ -97,13 +97,15 @@ export function PlatformCard({
 			<div className="flex items-center">
 				<Image
 					src={icon}
-					alt={platform}
+					alt={getPlatformDisplayName(platform)}
 					width={40}
 					height={40}
 					className={"rounded-12px"}
 				/>
 
-				<p className="m-0 ml-8px text-16px leading-24px font-400">{getPlatformDisplayName(platform)}</p>
+				<p className="m-0 ml-8px text-16px leading-24px font-400">
+					{getPlatformDisplayName(platform)}
+				</p>
 			</div>
 
 			{isBound ? (
@@ -194,8 +196,8 @@ export function PlatformCard({
 					<div className="transform -translate-x-1/7">
 						<Image width={90} height={90} src={bindIllustration} />
 					</div>
-					<p className="m-0 font-400 text-14px leading-20px text-[#49454F]">
-						Sync to own your {platform} content
+					<p className="m-0 font-400 text-14px leading-20px text-[#49454F] text-center">
+						Sync to own your {getPlatformDisplayName(platform)} content
 					</p>
 				</div>
 			)}

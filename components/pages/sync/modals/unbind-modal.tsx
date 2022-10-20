@@ -9,21 +9,14 @@ import {
 } from "@/utils/apis/operator-sync";
 import { Button, Card, Space, Text, LoadingOverlay } from "@mantine/core";
 import classNames from "classnames";
-import type { StaticImageData } from "next/image";
 import { openConfirmModal, closeAllModals } from "@mantine/modals";
 import { useClickOutside } from "@mantine/hooks";
 
-import HandleGuideMedium from "@/public/images/sync/platforms/medium-bio.png";
-import HandleGuideTiktok from "@/public/images/sync/platforms/tiktok-bio.png";
 import seeYouImage from "@/public/images/sync/see-you-later.svg";
 import { useCurrentCharacter } from "@/utils/apis/indexer";
 
 import { getChangeBioUrl, openWindowToChangeBio } from "../utils";
-
-const HANDLE_GUIDE_IMAGES: Record<SupportedPlatform, StaticImageData> = {
-	medium: HandleGuideMedium,
-	tiktok: HandleGuideTiktok,
-};
+import { BIO_IMAGE_MAP } from "./binding-modal.images";
 
 export function openUnbindingModal(
 	platform: SupportedPlatform,
@@ -89,7 +82,7 @@ function UnbindingModal({ platform, identity }: UnbindingModalProps) {
 				<>
 					<Card.Section>
 						<Image
-							src={HANDLE_GUIDE_IMAGES[platform]}
+							src={BIO_IMAGE_MAP[platform]}
 							placeholder="empty"
 							className="w-full h-auto"
 						/>
@@ -113,7 +106,7 @@ function UnbindingModal({ platform, identity }: UnbindingModalProps) {
 										target="_blank"
 										rel="noreferrer"
 									>
-										{platform} account
+										{getPlatformDisplayName(platform)} account
 									</a>
 									{" bio"}
 								</span>

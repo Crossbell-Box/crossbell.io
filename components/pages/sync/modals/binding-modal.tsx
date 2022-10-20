@@ -15,6 +15,8 @@ import { useClickOutside } from "@mantine/hooks";
 import Image from "@/components/common/Image";
 import { openBorderlessModal } from "@/components/common/Modal";
 import {
+	getPlatformDisplayName,
+	getPlatformIdentityKind,
 	getPlatformUserProfileUrl,
 	getVeriHandle,
 	SupportedPlatform,
@@ -116,9 +118,9 @@ function BindingModal({ platform }: { platform: SupportedPlatform }) {
 									target="_blank"
 									rel="noreferrer"
 								>
-									{platform} account
+									{getPlatformDisplayName(platform)} account
 								</a>
-								{" name."}
+								{` ${getPlatformIdentityKind(platform)}.`}
 
 								<Tooltip
 									withinPortal={true}
@@ -128,7 +130,7 @@ function BindingModal({ platform }: { platform: SupportedPlatform }) {
 										<Image
 											placeholder="empty"
 											src={NAME_IMAGE_MAP[platform]}
-											className="w-444px h-auto"
+											className="w-888px max-w-90vw h-auto"
 										/>
 									}
 								>
@@ -190,7 +192,7 @@ function BindingModal({ platform }: { platform: SupportedPlatform }) {
 										<Image
 											placeholder="empty"
 											src={BIO_IMAGE_MAP[platform]}
-											className="w-444px h-auto"
+											className="w-888px max-w-90vw h-auto"
 										/>
 									}
 								>
@@ -278,7 +280,7 @@ function BindingModal({ platform }: { platform: SupportedPlatform }) {
 								onClick={() => openPlatformSite(platform)}
 								fullWidth
 							>
-								Go to {platform}
+								Go to {getPlatformDisplayName(platform)}
 							</Button>
 
 							<Button
