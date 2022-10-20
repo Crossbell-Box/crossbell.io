@@ -31,7 +31,7 @@
 		"@tanstack/react-query-devtools": "4.12.0",
 		"canvas-confetti": "1.5.1",
 		"classnames": "2.3.2",
-		"crossbell.js": "0.10.36",
+		"crossbell.js": "0.10.38",
 		"dayjs": "1.11.5",
 		"embla-carousel-react": "7.0.3",
 		"embla-carousel-wheel-gestures": "3.0.0",
