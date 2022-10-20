@@ -54,7 +54,7 @@ export default function PlatformsSection() {
 
 	const unboundPlatforms = SUPPORTED_PLATFORMS
 		// TODO: remove this when tiktok is ready
-		.filter((v) => v !== "tiktok")
+		.filter((v) => !["tiktok", "pinterest"].includes(v))
 		.filter((v) => !boundPlatforms?.some((bound) => bound.platform === v))
 		.map<PlatformCardProps>((platform) => {
 			return {
