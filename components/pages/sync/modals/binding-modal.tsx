@@ -90,7 +90,7 @@ function BindingModal({ platform }: { platform: SupportedPlatform }) {
 	useHotkeys([["Enter", submit]]);
 
 	return (
-		<Card ref={ref} className="min-h-50vh flex flex-col justify-between">
+		<Card ref={ref} className="flex flex-col justify-between">
 			<LoadingOverlay visible={bindAccount.isLoading} />
 			{scene === Scene.form && (
 				<div>
