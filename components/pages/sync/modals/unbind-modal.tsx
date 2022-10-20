@@ -82,7 +82,7 @@ function UnbindingModal({ platform, identity }: UnbindingModalProps) {
 	});
 
 	return (
-		<Card ref={ref} className="min-h-50vh flex flex-col justify-between">
+		<Card ref={ref} className="flex flex-col justify-between">
 			<LoadingOverlay visible={unbindAccount.isLoading} />
 
 			{step === 0 && (
