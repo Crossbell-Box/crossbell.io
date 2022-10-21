@@ -1,7 +1,6 @@
 import { PropsWithChildren, useState } from "react";
 import BaseSection from "./BaseSection";
 import WelcomeRing from "../components/WelcomeRing";
-import classNames from "classnames";
 import { useMouse } from "@mantine/hooks";
 import { AnimatePresence, m } from "framer-motion";
 

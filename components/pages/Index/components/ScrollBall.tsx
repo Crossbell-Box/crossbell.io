@@ -19,7 +19,7 @@ export default function ScrollBall({
 
 	return color ? (
 		<div
-			className="absolute bottom-50px left-50% translate-x--50% cursor-pointer"
+			className="fixed bottom-50px left-50% translate-x--50% cursor-pointer z-10"
 			onClick={() => {
 				onClickNext?.();
 			}}

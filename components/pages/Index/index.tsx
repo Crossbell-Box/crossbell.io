@@ -2,16 +2,14 @@ import {
 	domAnimation,
 	LazyMotion,
 	m,
+	useMotionTemplate,
 	useTime,
 	useTransform,
 } from "framer-motion";
-import { Suspense, useState } from "react";
+import { Suspense } from "react";
 import dynamic from "next/dynamic";
 const Logo = dynamic(() => import("./components/Logo"), { suspense: true });
 const Nav = dynamic(() => import("./components/Nav"), { suspense: true });
-const Carousel = dynamic(() => import("./components/Carousel"), {
-	suspense: true,
-});
 const ScrollBall = dynamic(() => import("./components/ScrollBall"), {
 	suspense: true,
 });
@@ -40,26 +38,23 @@ import shopImage from "@/public/images/pages/index/resources/shop.webp";
 import feedImage from "@/public/images/pages/index/resources/feed.webp";
 import feedScrollingImage from "@/public/images/pages/index/resources/feed-scroll.webp";
 
-import { useHotkeys } from "@mantine/hooks";
 import Loading from "./components/Loading";
+import { useScroller } from "./utils";
+import { useMediaQuery } from "@mantine/hooks";
 
 export default function Index() {
-	const [index, setIndex] = useState(0);
-
-	useHotkeys([
-		["ArrowUp", () => setIndex((index) => (index === 0 ? 0 : index - 1))],
-		["ArrowDown", () => setIndex((index) => (index === 7 ? 7 : index + 1))],
-	]);
-
-	const time = useTime();
-	const y = useTransform(time, (v) => Math.cos(v / 3000) * 350 - 350);
+	const { index, setIndex } = useScroller(7);
 
 	return (
 		<LazyMotion features={domAnimation} strict>
 			<Suspense fallback={<Loading />}>
 				<Logo mode={index === 0 ? "light" : "dark"} />
 
-				{index === 7 && <Logo mode="dark" position="bottom-left" />}
+				{index === 7 && (
+					<div className="hidden sm:block">
+						<Logo mode="dark" position="bottom-left" />
+					</div>
+				)}
 
 				<Nav
 					index={index}
@@ -67,89 +62,119 @@ export default function Index() {
 					onSwitchPage={(i) => setIndex(i)}
 				/>
 
+				<ScrollBall index={index} onClickNext={() => setIndex(index + 1)} />
+
 				<Loading />
 
 				<main>
-					<Carousel index={index} onIndexChange={(i) => setIndex(i)}>
-						{/* 0 */}
-						<PhilosophySection
-							currentPageIndex={index}
-							onClickNext={() => setIndex(index + 1)}
-						/>
+					<style global jsx>{`
+						html {
+							scroll-snap-type: y mandatory;
+						}
+						section {
+							height: 100vh;
+							scroll-snap-align: center;
+							perspective: 500px;
+						}
+					`}</style>
 
-						{/* 1 */}
-						<ParallaxSection
-							sectionIndex={1}
-							currentPageIndex={index}
-							title="Sync to own"
-							description="Sync your social media content on Crossbell. Go from a user to an owner."
-							btnText="Sync now"
-							btnHoverClassName="hover:bg-blue"
-							link="/sync"
-							image={syncImage}
-						/>
-						{/* 2 */}
-						<ParallaxSection
-							sectionIndex={2}
-							currentPageIndex={index}
-							title="Meet stories"
-							description="Browser the content synced from other characters you follow."
-							btnText="Browse now"
-							btnHoverClassName="hover:bg-yellow group"
-							link="/feed"
-							image={feedImage}
-						>
-							<Image src={feedImage} className="w-800px max-w-screen h-auto" />
-							<div className="absolute left-25% top--5% h-600px overflow-hidden hover:shadow-lg hover:scale-110 transition-all-300">
-								<m.div style={{ y }}>
-									<Image src={feedScrollingImage} className="w-350px h-auto" />
-								</m.div>
-							</div>
-						</ParallaxSection>
-						{/* 3 */}
-						<ParallaxSection
-							sectionIndex={3}
-							currentPageIndex={index}
-							title="All about your characters"
-							description="All about your character can be managed and shown in xCharacter."
-							btnText="Search now"
-							btnHoverClassName="hover:bg-green"
-							link="/search"
-							image={characterImage}
-						/>
-						{/* 4 */}
-						<ParallaxSection
-							sectionIndex={4}
-							currentPageIndex={index}
-							title="Blog Free"
-							description="xLog is an on-chain and open-source blogging platform for everyone."
-							btnText="Write now"
-							btnHoverClassName="hover:bg-[#9688F2]"
-							link="https://xlog.app"
-							image={xlogImage}
-						/>
-						{/* 5 */}
-						<ParallaxSection
-							sectionIndex={5}
-							currentPageIndex={index}
-							title="xShop"
-							description="Manage and trade your assets generated in xShop."
-							btnText="Coming Soon"
-							btnHoverClassName="hover:bg-[#E65040]"
-							link="#"
-							image={shopImage}
-						/>
+					{/* 0 */}
+					<PhilosophySection
+						currentPageIndex={index}
+						onClickNext={() => setIndex(index + 1)}
+					/>
 
-						{/* 6 */}
-						<VideoSection />
+					{/* 1 */}
+					<ParallaxSection
+						title="Sync to own"
+						description="Sync your social media content on Crossbell. Go from a user to an owner."
+						btnText="Sync now"
+						btnHoverClassName="hover:bg-blue"
+						link="/sync"
+						image={syncImage}
+					/>
+					{/* 2 */}
+					<ParallaxSection
+						title="Meet stories"
+						description="Browser the content synced from other characters you follow."
+						btnText="Browse now"
+						btnHoverClassName="hover:bg-yellow group"
+						link="/feed"
+						image={feedImage}
+					>
+						<FeedImage />
+					</ParallaxSection>
+					{/* 3 */}
+					<ParallaxSection
+						title="All about your characters"
+						description="All about your character can be managed and shown in xCharacter."
+						btnText="Search now"
+						btnHoverClassName="hover:bg-green"
+						link="/search"
+						image={characterImage}
+					/>
+					{/* 4 */}
+					<ParallaxSection
+						title="Blog Free"
+						description="xLog is an on-chain and open-source blogging platform for everyone."
+						btnText="Write now"
+						btnHoverClassName="hover:bg-[#9688F2]"
+						link="https://xlog.app"
+						image={xlogImage}
+					/>
+					{/* 5 */}
+					<ParallaxSection
+						title="xShop"
+						description="Manage and trade your assets generated in xShop."
+						btnText="Coming Soon"
+						btnHoverClassName="hover:bg-[#E65040]"
+						link="#"
+						image={shopImage}
+					/>
 
-						{/* 7 */}
-						<FooterSection onClickTop={() => setIndex(0)} />
-					</Carousel>
+					{/* 6 */}
+					<VideoSection />
+
+					{/* 7 */}
+					<FooterSection onClickTop={() => setIndex(0)} />
 				</main>
-
-				<ScrollBall index={index} onClickNext={() => setIndex(index + 1)} />
 			</Suspense>
 		</LazyMotion>
+	);
+}
+
+function FeedImage() {
+	const time = useTime();
+	// width : height = 35vw : 128vw
+	// scroll range : 0 ~ 70vw
+	const isSmallScreen = useMediaQuery("(max-width: 800px)");
+
+	const y = useTransform(
+		time,
+		(v) =>
+			isSmallScreen
+				? Math.cos(v / 3000) * 35 - 35 // vw
+				: Math.cos(v / 3000) * 350 - 350 // px
+	);
+	const transformInVw = useMotionTemplate`translateY(${y}vw)`;
+	const transformInPx = useMotionTemplate`translateY(${y}px)`;
+
+	return (
+		<>
+			<Image
+				src={feedImage}
+				className="w-80vw sm:w-800px max-w-screen h-auto"
+			/>
+			<div className="absolute left-25% top--5% h-600px overflow-hidden hover:shadow-lg hover:scale-110 transition-all-300">
+				<m.div
+					style={{ transform: isSmallScreen ? transformInVw : transformInPx }}
+				>
+					<Image
+						src={feedScrollingImage}
+						className="w-35vw sm:w-350px h-auto"
+					/>
+				</m.div>
+			</div>
+		</>
 	);
 }

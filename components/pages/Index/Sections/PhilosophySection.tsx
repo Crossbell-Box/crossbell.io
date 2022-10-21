@@ -1,7 +1,7 @@
 import Image from "@/components/common/Image";
 import { Text } from "@mantine/core";
 import classNames from "classnames";
-import { AnimatePresence, m } from "framer-motion";
+import { m } from "framer-motion";
 import WelcomeRing from "../components/WelcomeRing";
 import bgSvg from "@/public/images/pages/index/resources/bg.svg";
 import BaseSection from "./BaseSection";
@@ -35,28 +35,25 @@ export default function PhilosophySection({
 			</m.div>
 
 			{/* main */}
-			<AnimatePresence>
-				{currentPageIndex === INDEX && (
-					<m.div
-						className="text-white flex flex-col h-screen justify-center items-center"
-						initial={{ opacity: 0 }}
-						animate={{ opacity: 1 }}
-						exit={{ opacity: 0 }}
-					>
-						{/* <Text className="text-xl">We empower you to</Text> */}
-						<m.span
-							transition={{ delay: 0.5 }}
-							initial={{ opacity: 0 }}
-							animate={{ opacity: 1 }}
-							exit={{ opacity: 0 }}
-						>
-							<Text className="font-deca font-300 text-2xl sm:text-3xl md:text-6xl">
-								Own Your Social Activities
-							</Text>
-						</m.span>
-					</m.div>
-				)}
-			</AnimatePresence>
+
+			<m.div
+				className="text-white flex flex-col h-screen justify-center items-center"
+				initial={{ opacity: 0 }}
+				whileInView={{ opacity: 1 }}
+				exit={{ opacity: 0 }}
+			>
+				{/* <Text className="text-xl">We empower you to</Text> */}
+				<m.span
+					transition={{ delay: 0.5 }}
+					initial={{ opacity: 0 }}
+					whileInView={{ opacity: 1 }}
+					exit={{ opacity: 0 }}
+				>
+					<Text className="font-deca font-300 text-2xl sm:text-3xl md:text-6xl">
+						Own Your Social Activities
+					</Text>
+				</m.span>
+			</m.div>
 
 			{/* scroll hint */}
 			<div

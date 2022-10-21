@@ -78,21 +78,22 @@ const socialMedias: {
 
 export default function IndexFooter() {
 	return (
-		<div className="w-full py-10 px-5 md:px-10 lg:px-20 flex flex-col items-center md:items-start">
+		<div className="w-full py-10 px-5 md:px-10 lg:px-20 flex flex-col items-start">
 			{/* middle - links */}
 			<div className="w-fit md:w-full">
 				<div className="flex flex-col justify-center items-start md:flex-row md:justify-between md:items-start">
 					{linksGroup.map((lg) => (
 						<div key={lg.title}>
-							<Text color="dark.9" className="font-800 text-4xl">
+							<Text
+								color="dark.9"
+								className="font-800 text-xl sm:text-4xl sm:my-10"
+							>
 								{lg.title}
 							</Text>
 
-							<Space h={10} />
-
 							<div>
 								{lg.list.map((l) => (
-									<div className="my-2" key={l.text}>
+									<div className="my-1 sm:my-2" key={l.text}>
 										<Text
 											variant="link"
 											component={NextLink}
@@ -111,16 +112,14 @@ export default function IndexFooter() {
 				</div>
 			</div>
 
-			<Space h={25} />
-
 			{/* bottom - social medias */}
-			<div className="w-full flex items-center justify-end">
+			<div className="w-full flex items-center justify-end sm:mt-25">
 				{/* social medias */}
 				<div className="flex space-x-10px">
 					{socialMedias.map((sm) => (
 						<Text
 							key={sm.text}
-							className="my-2 p-2 bg-hover rounded-md cursor-pointer text-3xl"
+							className="my-2 p-2 bg-hover rounded-md cursor-pointer text-2xl sm:text-3xl"
 							component={NextLink}
 							href={sm.link}
 							target="_blank"
