@@ -126,7 +126,6 @@ function useBadgeInfos(mintedAchievements: AchievementInfo[]) {
 				mintedAchievements.map((achievement) => {
 					const highestLevel = getHighestLevel(achievement.levels, [
 						AchievementLevelStatus.minted,
-						AchievementLevelStatus.ableToMint,
 					]);
 
 					return highestLevel ? { achievement, highestLevel } : null;
