@@ -23,7 +23,7 @@ import { useLoginChecker } from "@/utils/wallet/hooks";
 const Page: NextPageWithLayout = () => {
 	return (
 		<div>
-			<Header>Feed</Header>
+			<Header>xFeed</Header>
 
 			<FeedTabs />
 

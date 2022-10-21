@@ -36,7 +36,7 @@ const TreasuresList = () => {
 const Page: NextPageWithLayout = () => {
 	return (
 		<div>
-			<Header hasBackButton>Treasures</Header>
+			<Header hasBackButton>xShop</Header>
 
 			<TreasuresList />
 		</div>

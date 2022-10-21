@@ -64,7 +64,7 @@ function NavLinks() {
 		feed: {
 			index: 0,
 			href: "/feed",
-			title: "Feed",
+			title: "xFeed",
 			icon: "i-csb:feed",
 			iconColor: "text-yellow-primary/20",
 			className: "focus:bg-yellow-primary",
@@ -96,7 +96,7 @@ function NavLinks() {
 			oldNavLinks.character = {
 				index: 3,
 				href: character ? `/@${character.handle}` : "#",
-				title: "Character",
+				title: "xCharacter",
 				icon: "i-csb:character",
 				iconColor: "text-green-primary/20",
 				className: "focus:bg-green-primary",
@@ -110,7 +110,7 @@ function NavLinks() {
 			oldNavLinks.treasures = {
 				index: 4,
 				href: address ? composeTreasuresWalletsHref(address) : "#",
-				title: "Treasures",
+				title: "xShop",
 				icon: "i-csb:treasures",
 				iconColor: "text-purple-primary/20",
 				className: "focus:bg-purple-primary",

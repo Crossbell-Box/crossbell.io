@@ -37,7 +37,7 @@ const Page: NextPageWithLayout<PageProps> = (props) => {
 	});
 
 	const headerText =
-		name ?? extractCharacterName(character) ?? handle ?? "Character";
+		name ?? extractCharacterName(character) ?? handle ?? "xCharacter";
 
 	return (
 		<div>
