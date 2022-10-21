@@ -22,7 +22,7 @@ export default function Nav({
 		{ title: "xShop", activeColor: "text-[#E65040]" },
 	];
 
-	const isLargeScreen = useMediaQuery("(min-width: 900px)", false, {
+	const isLargeScreen = useMediaQuery("(min-width: 800px)", false, {
 		getInitialValueInEffect: true,
 	});
 	const [opened, setOpened] = useState(false);

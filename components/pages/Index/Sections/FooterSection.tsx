@@ -15,8 +15,8 @@ export default function FooterSection({
 }>) {
 	return (
 		<BaseSection className="relative flex flex-row">
-			<div className="absolute top-30vw left--25vw w-150vw h-screen animate-spin animate-duration-60s z--1 flex justify-center items-center">
-				<Image src={bigRingImage} className="w-150vw" />
+			<div className="absolute top-10% left--25vw w-150vw h-150vw animate-spin animate-duration-60s z--1 flex justify-center items-center">
+				<Image src={bigRingImage} className="w-150vw h-auto" />
 			</div>
 
 			<Padding />

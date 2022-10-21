@@ -78,10 +78,10 @@ const socialMedias: {
 
 export default function IndexFooter() {
 	return (
-		<div className="w-full py-10 px-5 md:px-10 lg:px-20 flex flex-col items-start">
+		<div className="w-full py-10 px-5 sm:px-10 lg:px-20 flex flex-col items-start">
 			{/* middle - links */}
-			<div className="w-fit md:w-full">
-				<div className="flex flex-col justify-center items-start md:flex-row md:justify-between md:items-start">
+			<div className="w-fit sm:w-full">
+				<div className="flex flex-col justify-center items-start sm:flex-row sm:justify-between sm:items-start">
 					{linksGroup.map((lg) => (
 						<div key={lg.title}>
 							<Text
