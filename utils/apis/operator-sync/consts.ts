@@ -33,3 +33,12 @@ export function getPlatformUserProfileUrl(
 			return `https://www.tiktok.com/@${identity}`;
 	}
 }
+
+export function getPlatformDisplayName(platform: SupportedPlatform): string {
+	const map: Record<SupportedPlatform, string> = {
+		tiktok: "TikTok",
+		medium: "Medium",
+	};
+
+	return map[platform] ?? platform;
+}

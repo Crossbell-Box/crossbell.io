@@ -89,7 +89,7 @@ export default class OperatorSyncApi {
 		const accounts = await this.getBoundAccounts(characterId);
 		let total = 0;
 		accounts.result.forEach((account) => {
-			account.media_usage.forEach((media) => {
+			account.media_usage?.forEach((media) => {
 				total += media.usage;
 			});
 		});

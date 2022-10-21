@@ -18,8 +18,8 @@ export default defineConfig({
 		presetUno(),
 	],
 	rules: [
-		["font-roboto", { "font-family": "Roboto" }],
-		["font-deca", { "font-family": "Lexend Deca" }],
+		["font-roboto", { "font-family": `"Roboto", sans-serif` }],
+		["font-deca", { "font-family": `"Lexend Deca", sans-serif` }],
 	],
 	shortcuts: {
 		"bg-hover": "hover:bg-gray/5 active:bg-gray/10 transition-background-color",
@@ -57,7 +57,7 @@ export default defineConfig({
 			sm: "768px",
 			md: "992px",
 			lg: "1200px",
-			xl: "1400px",
+			xl: "1440px",
 		},
 	},
 });

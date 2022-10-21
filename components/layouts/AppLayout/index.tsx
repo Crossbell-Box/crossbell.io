@@ -25,7 +25,7 @@ const AppLayout = withCachedMainWidth(
 			<AppShell
 				ref={rootRef}
 				styles={{
-					root: { maxWidth: "min(100vw, 1400px)" },
+					root: { maxWidth: "min(100vw, 1440px)" },
 					main: { padding: 0, width: mainWidth },
 				}}
 				classNames={{

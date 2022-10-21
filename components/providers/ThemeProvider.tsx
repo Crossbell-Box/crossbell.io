@@ -20,7 +20,7 @@ export default function ThemeProvider({ children }: PropsWithChildren) {
 			theme={{
 				/** Put your mantine theme override here */
 				colorScheme: "light",
-				fontFamily: "Roboto",
+				fontFamily: `"Roboto", sans-serif, "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol", "Noto Color Emoji"`,
 				fontFamilyMonospace: "Monaco, Courier, monospace",
 				headings: { fontFamily: "Lexend Deca" },
 				white: "#fff",

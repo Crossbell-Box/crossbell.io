@@ -82,7 +82,7 @@ function NavLinks() {
 		sync: {
 			index: 2,
 			href: "/sync",
-			title: "Sync",
+			title: "xSync",
 			icon: "i-csb:sync",
 			iconColor: "text-blue-primary/20",
 			className: "focus:bg-blue-primary",
