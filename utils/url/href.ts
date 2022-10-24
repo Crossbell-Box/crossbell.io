@@ -71,8 +71,8 @@ export const composeSearchHref = (
 };
 
 /**
- * @example /treasures/wallets/0x...
+ * @example /shop/wallets/0x...
  */
 export const composeTreasuresWalletsHref = (address: string) => {
-	return `/treasures/wallets/${address}`;
+	return `/shop/wallets/${address}`;
 };
