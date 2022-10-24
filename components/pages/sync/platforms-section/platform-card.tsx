@@ -13,6 +13,7 @@ import {
 	SupportedPlatform,
 	useSyncAccount,
 } from "@/utils/apis/operator-sync";
+import { getPlatformSite } from "@/components/pages/sync/utils";
 import {
 	openBindingModal,
 	openUnbindingModal,
@@ -63,6 +64,10 @@ export function PlatformCard({
 		identity!
 	);
 
+	const platformUrl = identity
+		? getPlatformUserProfileUrl(platform, identity)
+		: getPlatformSite(platform);
+
 	return (
 		<div
 			className="relative p-16px rounded-24px border border-1 border-[#E1E8F7]"
@@ -94,19 +99,21 @@ export function PlatformCard({
 				/>
 			</div>
 
-			<div className="flex items-center">
-				<Image
-					src={icon}
-					alt={getPlatformDisplayName(platform)}
-					width={40}
-					height={40}
-					className={"rounded-12px"}
-				/>
+			<Link passHref={true} href={platformUrl}>
+				<a className="flex items-center" target="_blank" rel="noreferrer">
+					<Image
+						src={icon}
+						alt={getPlatformDisplayName(platform)}
+						width={40}
+						height={40}
+						className={"rounded-12px"}
+					/>
 
-				<p className="m-0 ml-8px text-16px leading-24px font-400">
-					{getPlatformDisplayName(platform)}
-				</p>
-			</div>
+					<p className="m-0 ml-8px text-16px leading-24px font-400">
+						{getPlatformDisplayName(platform)}
+					</p>
+				</a>
+			</Link>
 
 			{isBound ? (
 				<>
@@ -127,12 +134,7 @@ export function PlatformCard({
 					</table>
 
 					<div className="flex items-center">
-						<Link
-							passHref={true}
-							href={
-								identity ? getPlatformUserProfileUrl(platform, identity) : ""
-							}
-						>
+						<Link passHref={true} href={platformUrl}>
 							<a
 								className={classNames(
 									"font-500 text-black text-16px leading-24px tracking-0.15px",
