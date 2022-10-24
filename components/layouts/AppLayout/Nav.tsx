@@ -1,5 +1,4 @@
 import ConnectButton from "@/components/common/ConnectButton";
-import Logo from "@/components/common/Logo";
 import { useCurrentCharacter } from "@/utils/apis/indexer";
 import { composeTreasuresWalletsHref } from "@/utils/url";
 import { UnstyledButton, Text, Space, Title, Navbar } from "@mantine/core";
@@ -10,6 +9,8 @@ import Link from "next/link";
 import { useRouter } from "next/router";
 import { useEffect, useState } from "react";
 import { useAccount } from "wagmi";
+import Image from "@/components/common/Image";
+
 import MoreMenu from "./MoreMenu";
 
 export default function Nav() {
@@ -22,11 +23,14 @@ export default function Nav() {
 		>
 			<Navbar.Section>
 				<Link href="/">
-					<a className="flex items-center">
-						<Logo size={24} />
-						<Title className="ml-4px text-20px leading-25px font-600">
-							Crossbell
-						</Title>
+					<a>
+						<Image
+							src="/logos/crossbell.svg"
+							className="w-125px h-34px"
+							placeholder="empty"
+							width={125}
+							height={34}
+						/>
 					</a>
 				</Link>
 			</Navbar.Section>
