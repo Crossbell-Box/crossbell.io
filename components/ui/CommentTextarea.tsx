@@ -6,6 +6,7 @@ import { NoteEntity } from "crossbell.js";
 import { useState } from "react";
 import Avatar from "../common/Avatar";
 import Textarea from "../common/Input/Textarea";
+import EmojiPicker from "@/components/common/Input/EmojiPicker";
 
 export function CommentTextarea({ note }: { note: NoteEntity }) {
 	const { data: character } = useCurrentCharacter();
@@ -25,16 +26,23 @@ export function CommentTextarea({ note }: { note: NoteEntity }) {
 
 				<Space w={10} />
 
-				<Textarea
-					placeholder="Type your comment"
-					className="flex-grow"
-					autosize
-					minRows={2}
-					maxRows={10}
-					value={value}
-					onChange={(e) => setValue(e.target.value)}
-					disabled={postNoteForNote.isLoading}
-				/>
+				{/* textarea */}
+				<div className="relative flex-grow">
+					<Textarea
+						placeholder="Type your comment"
+						autosize
+						minRows={2}
+						maxRows={10}
+						value={value}
+						onChange={(e) => setValue(e.target.value)}
+						disabled={postNoteForNote.isLoading}
+					/>
+
+					{/* emoji */}
+					<div className="absolute top-5px right-5px">
+						<EmojiPicker onEmojiSelect={(e) => setValue((v) => v + e)} />
+					</div>
+				</div>
 			</div>
 
 			<Space h={10} />

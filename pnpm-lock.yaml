@@ -5,6 +5,7 @@ specifiers:
   '@crossbell/ipfs-gateway-next': 0.0.15
   '@crossbell/ipfs-react': 0.0.15
   '@ctrl/tinycolor': 3.4.1
+  '@emoji-mart/react': 1.0.1
   '@emotion/core': 11.0.0
   '@emotion/react': 11.10.4
   '@emotion/server': 11.10.0
@@ -34,6 +35,7 @@ specifiers:
   crossbell.js: 0.10.38
   dayjs: 1.11.6
   embla-carousel-react: 7.0.3
+  emoji-mart: 5.2.2
   eslint: 8.26.0
   eslint-config-next: 12.3.1
   ethers: 5.7.2
@@ -66,6 +68,7 @@ dependencies:
   '@crossbell/ipfs-gateway': 0.0.15
   '@crossbell/ipfs-react': 0.0.15_3cuac2dr7yf6nu67tvbbs2j6ry
   '@ctrl/tinycolor': 3.4.1
+  '@emoji-mart/react': 1.0.1_7bfolod3fxggxsuqg7r6agi3si
   '@emotion/core': 11.0.0
   '@emotion/react': 11.10.4_gd4tregka43x4eiz452mfdbv4y
   '@emotion/server': 11.10.0
@@ -88,6 +91,7 @@ dependencies:
   crossbell.js: 0.10.38
   dayjs: 1.11.6
   embla-carousel-react: 7.0.3_react@18.2.0
+  emoji-mart: 5.2.2
   ethers: 5.7.2
   framer-motion: 7.6.1_biqbaboplfbrettd7655fr4n2y
   link-preview-js: 3.0.4
@@ -347,6 +351,16 @@ packages:
   /@ctrl/tinycolor/3.4.1:
     resolution: {integrity: sha512-ej5oVy6lykXsvieQtqZxCOaLT+xD4+QNarq78cIYISHmZXshCvROLudpQN3lfL8G0NL7plMSSK+zlyvCaIJ4Iw==}
     engines: {node: '>=10'}
+    dev: false
+
+  /@emoji-mart/react/1.0.1_7bfolod3fxggxsuqg7r6agi3si:
+    resolution: {integrity: sha512-ALhLD96BOL5w+a4NI5NpmfqfF1aVjjj2qJE0dLst/OhjBfVmpteWNgn/h8LZy9ulU6AnbeS+13KnPFzDjCvRRw==}
+    peerDependencies:
+      emoji-mart: ^5.2
+      react: ^16.8 || ^17 || ^18
+    dependencies:
+      emoji-mart: 5.2.2
+      react: 18.2.0
     dev: false
 
   /@emotion/babel-plugin/11.10.2:
@@ -3457,6 +3471,10 @@ packages:
 
   /embla-carousel/7.0.3:
     resolution: {integrity: sha512-Zo8E/qNb8J7n/jcfQxPrfdARlTgsMvmcXshn3J/2oxWVLwL/3N4cAhuqLQiud/oCjZzl+A8maCJDe2PDVlc/cA==}
+    dev: false
+
+  /emoji-mart/5.2.2:
+    resolution: {integrity: sha512-BvcrX+Ps9MxSVEjnvxupclU3MBD6WVC4WZOY26csfC6oFdaWpFhdrzeVNVBmCLPOmzY1SE0aAsqZJRNVbZ1yhQ==}
     dev: false
 
   /emoji-regex/7.0.3:
