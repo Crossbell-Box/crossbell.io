@@ -8,6 +8,10 @@ on:
     branches:
       - "main"
 
+concurrency:
+  group: ${{ github.ref }}
+  cancel-in-progress: true
+
 env:
   IMAGE_NAME: flosspicks/crossbell-io
   REGION_ID: us-east-1
@@ -42,8 +46,8 @@ jobs:
           version: latest
       - uses: actions/setup-node@v3
         with:
-          node-version: '18'
-          cache: 'pnpm'
+          node-version: "18"
+          cache: "pnpm"
       - run: pnpm fetch && pnpm install -r --offline
       - name: Build and push
         uses: docker/build-push-action@v2
