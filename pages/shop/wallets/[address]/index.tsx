@@ -1,7 +1,7 @@
 import { getLayout } from "@/components/layouts/AppLayout";
 import type { NextPageWithLayout } from "@/pages/_app";
 import MintedNoteCard from "@/components/card/MintedNoteCard";
-import { LoadingOverlay } from "@mantine/core";
+import { LoadingOverlay, Divider } from "@mantine/core";
 import { useMintedNotesOfAddress } from "@/utils/apis/indexer";
 import Header from "@/components/layouts/Header";
 import { useAddressRouterQuery } from "@/utils/url";
@@ -13,7 +13,7 @@ const TreasuresList = () => {
 		useMintedNotesOfAddress(address);
 
 	return (
-		<div className="grid grid-cols-3 gap-4 relative min-h-300px">
+		<div className="grid grid-cols-3 gap-4">
 			<LoadingOverlay visible={mintedNotesLoading} />
 			{data?.pages?.map((page, i) => (
 				<Fragment key={i}>
@@ -38,7 +38,16 @@ const Page: NextPageWithLayout = () => {
 		<div>
 			<Header hasBackButton>xShop</Header>
 
-			<TreasuresList />
+			<div className="relative min-h-300px px-4 py-8">
+				<TreasuresList />
+
+				<Divider
+					my={44}
+					label="Trading is coming soon"
+					labelProps={{ color: "dimmed" }}
+					labelPosition="center"
+				/>
+			</div>
 		</div>
 	);
 };
