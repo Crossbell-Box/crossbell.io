@@ -25,7 +25,7 @@ jobs:
       version: ${{ steps.meta.outputs.version }}
     steps:
       - name: Checkout
-        uses: actions/checkout@v2
+        uses: actions/checkout@v3
       - name: docker meta
         id: meta
         uses: docker/metadata-action@v3
@@ -64,7 +64,7 @@ jobs:
     needs: build
     steps:
       - name: Checkout
-        uses: actions/checkout@v2
+        uses: actions/checkout@v3
       - name: Set K8s context
         uses: aliyun/ack-set-context@v1
         with:
@@ -84,7 +84,7 @@ jobs:
     needs: [build]
     steps:
       - name: Checkout
-        uses: actions/checkout@v2
+        uses: actions/checkout@v3
       - name: Set K8s context
         uses: aliyun/ack-set-context@v1
         with:
