@@ -21,11 +21,15 @@ export default function FooterSection({
 
 			<Padding />
 
-			<div className="absolute top-50% left-50% translate--50%">
+			<div className="absolute top-50% left-50% translate--50% block sm:hidden">
 				<Image src={bellBlackImage} className="w-full h-auto" />
 			</div>
 
 			<div className="flex flex-col justify-end items-center h-screen w-full">
+				<Image
+					src={bellBlackImage}
+					className="w-100px h-auto hidden sm:block"
+				/>
 				<IndexFooter />
 			</div>
 
