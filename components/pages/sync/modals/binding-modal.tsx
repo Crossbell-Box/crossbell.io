@@ -158,7 +158,9 @@ function BindingModal({ platform }: { platform: SupportedPlatform }) {
 							value={username}
 							autoCapitalize="off"
 							autoComplete="off"
-							onChange={(e) => setUsername(e.target.value)}
+							onChange={(e) => {
+								setUsername(normalizedUsername(platform, e.target.value));
+							}}
 						/>
 
 						<p
@@ -298,4 +300,17 @@ function BindingModal({ platform }: { platform: SupportedPlatform }) {
 			)}
 		</Card>
 	);
+}
+
+function normalizedUsername(
+	platform: SupportedPlatform,
+	username: string
+): string {
+	switch (platform) {
+		case "tg_channel":
+			const regex = /^(https?:\/\/)?t\.me\/([^/]+)$/;
+			return (regex.exec(username.trim()) ?? [])[2] || username;
+		default:
+			return username;
+	}
 }
