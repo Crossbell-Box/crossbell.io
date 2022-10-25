@@ -61,18 +61,17 @@ export default function Header({
 					}
 				)}
 			>
-				<Space w={8} />
 				{hasBackButton && (
 					<ActionIcon
-						className="flex items-center justify-center"
+						className="flex items-center justify-center mr-8px"
 						onClick={handleCLickBack}
 					>
 						<Text className="i-csb:back text-size-3xl" />
 					</ActionIcon>
 				)}
-				<Space w={8} />
+
 				{typeof children === "string" ? (
-					<Text className="py-3 font-semibold text-size-4xl overflow-hidden text-ellipsis">
+					<Text className="py-3 font-semibold leading-1em text-size-2xl sm:text-size-3xl md:text-size-4xl overflow-hidden text-ellipsis">
 						{children}
 					</Text>
 				) : (
