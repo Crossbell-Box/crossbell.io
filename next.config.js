@@ -44,6 +44,15 @@ const nextConfig = {
 			},
 		];
 	},
+	async redirects() {
+		return [
+			{
+				source: "/treasures/:slug*",
+				destination: "/shop/:slug*",
+				permanent: true,
+			},
+		];
+	},
 };
 
 module.exports = withBundleAnalyzer(withIpfsGateway(nextConfig));
