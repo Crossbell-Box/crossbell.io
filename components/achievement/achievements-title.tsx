@@ -14,7 +14,7 @@ export function AchievementsTitle({
 	return (
 		<h3
 			className={classNames(
-				"text-center text-18px font-600 leading-23px m-0 flex items-end justify-center",
+				"text-center text-18px font-600 m-0 flex items-end justify-center",
 				className
 			)}
 			{...props}
