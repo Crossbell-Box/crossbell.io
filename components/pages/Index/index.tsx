@@ -126,9 +126,9 @@ export default function Index() {
 					<ParallaxSection
 						title="xShop"
 						description="Manage and trade your assets generated in xShop."
-						btnText="Coming Soon"
+						btnText="Shop now"
 						btnHoverClassName="hover:bg-[#E65040]"
-						link="#"
+						link="/shop"
 						image={shopImage}
 					/>
 

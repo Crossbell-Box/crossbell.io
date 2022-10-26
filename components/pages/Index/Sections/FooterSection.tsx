@@ -28,7 +28,7 @@ export default function FooterSection({
 			<div className="flex flex-col justify-end items-center h-screen w-full">
 				<Image
 					src={bellBlackImage}
-					className="w-100px h-auto hidden sm:block"
+					className="w-100px h-auto hidden sm:block translate-x--80px"
 				/>
 				<IndexFooter />
 			</div>
