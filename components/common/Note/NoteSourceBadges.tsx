@@ -15,6 +15,10 @@ const builtInColorMap = {
 	twitter: ["#4691dd", "#fff"],
 	tiktok: ["#000000", "#fff"],
 	youtube: ["#ea3323", "#fff"],
+	pinterest: ["#e60019", "#fff"],
+	substack: ["#ff6719", "#fff"],
+	pixiv: ["#3e97f3", "#fff"],
+	"telegram channel": ["#08c", "#fff"],
 } as const;
 
 export default function NoteSources({
@@ -87,36 +91,34 @@ function getLinkForSource(source: string, noteMetadata: NoteMetadata) {
 	const s = source.toLowerCase();
 
 	if (isBuiltInSource(s)) {
-		if (s === "operatorsync") {
-			return "/sync";
-		}
-
-		if (s === "sync") {
+		if (["operatorsync", "sync", "xsync"].includes(s)) {
 			return "/sync";
 		}
 
 		if (s === "xlog") {
-			const url = noteMetadata.external_urls?.[0];
-			return url;
+			return noteMetadata.external_urls?.[0];
 		}
 
 		if (s === "crosssync") {
 			return "https://crosssync.app/";
 		}
 
-		if (s === "twitter") {
-			return findUrlIncludes(noteMetadata.external_urls, "twitter.com");
+		switch (s) {
+			case "twitter":
+				return findUrlIncludes(noteMetadata.external_urls, "twitter.com");
+			case "medium":
+				return findUrlIncludes(noteMetadata.external_urls, "medium.com");
+			case "tiktok":
+				return findUrlIncludes(noteMetadata.external_urls, "tiktok.com");
+			case "substack":
+				return findUrlIncludes(noteMetadata.external_urls, "substack.com");
+			case "pixiv":
+				return findUrlIncludes(noteMetadata.external_urls, "pixiv.com");
+			case "telegram channel":
+				return findUrlIncludes(noteMetadata.external_urls, "t.me");
+			case "pinterest":
+				return findUrlIncludes(noteMetadata.external_urls, "pinterest.com");
 		}
-
-		if (s === "medium") {
-			return findUrlIncludes(noteMetadata.external_urls, "medium.com");
-		}
-
-		if (s === "tiktok") {
-			return findUrlIncludes(noteMetadata.external_urls, "tiktok.com");
-		}
-
-		return undefined;
 	}
 
 	return undefined;
