@@ -14,7 +14,7 @@
 		"@ctrl/tinycolor": "3.4.1",
 		"@emoji-mart/react": "1.0.1",
 		"@emotion/core": "11.0.0",
-		"@emotion/react": "11.10.4",
+		"@emotion/react": "11.10.5",
 		"@emotion/server": "11.10.0",
 		"@fastify/deepmerge": "1.1.0",
 		"@mantine/carousel": "5.6.2",
