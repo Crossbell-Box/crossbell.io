@@ -21,7 +21,7 @@ specifiers:
   '@mantine/notifications': 5.6.2
   '@mantine/nprogress': 5.6.2
   '@next/bundle-analyzer': 12.3.1
-  '@rainbow-me/rainbowkit': 0.7.3
+  '@rainbow-me/rainbowkit': 0.7.4
   '@tanstack/react-query': 4.13.0
   '@tanstack/react-query-devtools': 4.13.0
   '@types/canvas-confetti': 1.4.3
@@ -83,7 +83,7 @@ dependencies:
   '@mantine/notifications': 5.6.2_flpsrn4ztwxtwu74zpyotzqome
   '@mantine/nprogress': 5.6.2_flpsrn4ztwxtwu74zpyotzqome
   '@next/bundle-analyzer': 12.3.1
-  '@rainbow-me/rainbowkit': 0.7.3_d2vfeoibat3dsdj2lbwzb7msxu
+  '@rainbow-me/rainbowkit': 0.7.4_d2vfeoibat3dsdj2lbwzb7msxu
   '@tanstack/react-query': 4.13.0_biqbaboplfbrettd7655fr4n2y
   '@tanstack/react-query-devtools': 4.13.0_vwr3yfyniquaygdm2roeczqxuu
   canvas-confetti: 1.6.0
@@ -1464,14 +1464,14 @@ packages:
       react: 18.2.0
     dev: false
 
-  /@rainbow-me/rainbowkit/0.7.3_d2vfeoibat3dsdj2lbwzb7msxu:
-    resolution: {integrity: sha512-a0AdR8F+XcwmtX2Y074Y4dZRfl+3OShJidhQ9FmCTJ3FXsc3JAEXiJGJuoTjiK7QdZtI1BVk/+2W3NEdCIa+8Q==}
+  /@rainbow-me/rainbowkit/0.7.4_d2vfeoibat3dsdj2lbwzb7msxu:
+    resolution: {integrity: sha512-o3kwaHZw9O40gfK2DamJZzoqPbK7EHC+8++QtFy5AQ0Sw5P+U0tzb/87KHatSIXyIwrZTEGD0uciPjCGikJMjg==}
     engines: {node: '>=12.4'}
     peerDependencies:
       ethers: '>=5.5.1'
       react: '>=17'
       react-dom: '>=17'
-      wagmi: 0.5.x || 0.6.x
+      wagmi: 0.5.x || 0.6.x || 0.7.x
     dependencies:
       '@vanilla-extract/css': 1.9.1
       '@vanilla-extract/dynamic': 2.0.2
