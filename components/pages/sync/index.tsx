@@ -10,6 +10,7 @@ import {
 import {
 	OPERATOR_ADDRESS,
 	useCharacterActivation,
+	useCharacterBoundAccounts,
 } from "@/utils/apis/operator-sync";
 import { isAddressEqual } from "@/utils/ethers";
 
@@ -21,6 +22,9 @@ import { CharacterEntity } from "crossbell.js";
 export default function OperatorSyncMain() {
 	const characterInfo = useCharacterInfo();
 	const operatorInfo = useOperatorInfo(characterInfo.character?.characterId);
+	const boundAccounts = useCharacterBoundAccounts(
+		characterInfo.character?.characterId
+	);
 	const isFirstMount = useIsFirstMount();
 
 	if (isFirstMount) {
@@ -28,7 +32,11 @@ export default function OperatorSyncMain() {
 	}
 
 	if (characterInfo.hasCharacterId) {
-		if (characterInfo.isLoading || operatorInfo.isLoading) {
+		if (
+			characterInfo.isLoading ||
+			operatorInfo.isLoading ||
+			boundAccounts.isLoading
+		) {
 			return renderLoading();
 		}
 
