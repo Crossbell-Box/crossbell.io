@@ -25,7 +25,7 @@ export function BadgeImage({ level, ...props }: BadgeImageProps) {
 		>
 			<Image
 				unoptimized={!!web2Url}
-				layout="fill"
+				fill
 				src={web2Url ?? level.img}
 				alt="Badge"
 			/>

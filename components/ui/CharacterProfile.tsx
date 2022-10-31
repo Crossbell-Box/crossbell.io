@@ -21,7 +21,6 @@ import {
 	useFollowCharacter,
 	useUnfollowCharacter,
 } from "@/utils/apis/contract";
-import Link from "next/link";
 import {
 	composeCharacterFollowHref,
 	composeWalletCharacterEditHref,

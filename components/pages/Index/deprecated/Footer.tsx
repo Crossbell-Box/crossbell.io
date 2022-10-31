@@ -4,7 +4,6 @@ import FollowBtn from "@/public/images/pages/index/follow-btn.svg";
 import Logo from "@/components/common/Logo";
 import Link from "next/link";
 import { composeCharacterHref } from "@/utils/url";
-import Link from "next/link";
 
 const linksGroup: { title: string; list: { text: string; href: string }[] }[] =
 	[

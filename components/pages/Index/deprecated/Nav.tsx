@@ -2,10 +2,8 @@ import Link from "next/link";
 import Logo from "@/components/common/Logo";
 import { Menu, Button, Title, Text } from "@mantine/core";
 import ConnectButton from "@/components/common/ConnectButton";
-import React from "react";
 import { useCurrentCharacter } from "@/utils/apis/indexer";
 import SearchInput from "@/components/common/Input/SearchInput";
-import Link from "next/link";
 
 const NavLinks = () => {
 	const { data: character } = useCurrentCharacter();

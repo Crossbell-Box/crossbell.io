@@ -9,9 +9,7 @@ import { composeNoteHref, composeTreasuresWalletsHref } from "@/utils/url";
 import { Space, Text } from "@mantine/core";
 import Link from "next/link";
 import { NoteEntity } from "crossbell.js";
-import Link from "next/link";
 import { Fragment } from "react";
-import Image from "../common/Image";
 
 export default function TreasuresGallery({ address }: { address?: string }) {
 	const { data, isLoading } = useMintedNotesOfAddress(address, { limit: 8 });

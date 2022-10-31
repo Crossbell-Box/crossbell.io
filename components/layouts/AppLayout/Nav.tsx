@@ -28,7 +28,7 @@ export default function Nav() {
 						placeholder="empty"
 						width={125}
 						height={34}
-						priority="eager"
+						priority
 					/>
 				</Link>
 			</Navbar.Section>

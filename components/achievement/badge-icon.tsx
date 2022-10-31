@@ -102,7 +102,7 @@ function CircleText({ children }: { children: string }) {
 function BackSideLogo() {
 	return (
 		<div className="absolute bottom-19% left-1/2 transform -translate-x-1/2 p-8.5%">
-			<Image layout="fill" src={logoUrl} alt="Crossbell Logo" />
+			<Image fill src={logoUrl} alt="Crossbell Logo" />
 		</div>
 	);
 }
@@ -138,7 +138,9 @@ function BackSideId({
 				)}
 				style={style}
 			>
-				<span className="truncate max-w-full font-600">{level.ownerHandle}</span>
+				<span className="truncate max-w-full font-600">
+					{level.ownerHandle}
+				</span>
 				{dateDisplay && (
 					<span className="text-0.9em truncate max-w-full">{dateDisplay}</span>
 				)}

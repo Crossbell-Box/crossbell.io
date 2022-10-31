@@ -13,7 +13,6 @@ import {
 	WalletCharacterNewHref,
 } from "@/utils/url";
 import { Grid, Menu, Title, Text, Skeleton, ActionIcon } from "@mantine/core";
-import Link from "next/link";
 import { showNotification } from "@mantine/notifications";
 import { CharacterEntity } from "crossbell.js";
 import Link from "next/link";
