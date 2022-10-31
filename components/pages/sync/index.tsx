@@ -1,5 +1,7 @@
 import { Loader } from "@mantine/core";
+
 import React from "react";
+import { useIsFirstMount } from "@/utils/hooks/use-is-first-mount";
 
 import {
 	useCharacterOperator,
@@ -8,6 +10,7 @@ import {
 import {
 	OPERATOR_ADDRESS,
 	useCharacterActivation,
+	useCharacterBoundAccounts,
 } from "@/utils/apis/operator-sync";
 import { isAddressEqual } from "@/utils/ethers";
 
@@ -19,9 +22,21 @@ import { CharacterEntity } from "crossbell.js";
 export default function OperatorSyncMain() {
 	const characterInfo = useCharacterInfo();
 	const operatorInfo = useOperatorInfo(characterInfo.character?.characterId);
+	const boundAccounts = useCharacterBoundAccounts(
+		characterInfo.character?.characterId
+	);
+	const isFirstMount = useIsFirstMount();
+
+	if (isFirstMount) {
+		return renderLoading();
+	}
 
 	if (characterInfo.hasCharacterId) {
-		if (characterInfo.isLoading || operatorInfo.isLoading) {
+		if (
+			characterInfo.isLoading ||
+			operatorInfo.isLoading ||
+			boundAccounts.isLoading
+		) {
 			return renderLoading();
 		}
 
