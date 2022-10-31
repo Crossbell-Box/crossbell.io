@@ -4,7 +4,7 @@ import FollowBtn from "@/public/images/pages/index/follow-btn.svg";
 import Logo from "@/components/common/Logo";
 import Link from "next/link";
 import { composeCharacterHref } from "@/utils/url";
-import { NextLink } from "@mantine/next";
+import Link from "next/link";
 
 const linksGroup: { title: string; list: { text: string; href: string }[] }[] =
 	[
@@ -130,7 +130,7 @@ function IndexFooter() {
 									<div className="my-2" key={l.text}>
 										<Text
 											variant="link"
-											component={NextLink}
+											component={Link}
 											href={l.href}
 											color="dimmed"
 											target="_blank"
@@ -171,7 +171,7 @@ function IndexFooter() {
 						<Text
 							key={sm.text}
 							className="my-2 p-2 bg-hover rounded-md cursor-pointer text-xl"
-							component={NextLink}
+							component={Link}
 							href={sm.link}
 							target="_blank"
 							rel="noopener noreferrer"

@@ -11,7 +11,7 @@ import {
 } from "@/utils/apis/indexer";
 import { Fragment, useEffect } from "react";
 import { Button, Text } from "@mantine/core";
-import { NextLink } from "@mantine/next";
+import Link from "next/link";
 import { useAccount } from "wagmi";
 import { useRouter } from "next/router";
 import {
@@ -129,7 +129,7 @@ function FeedList() {
 					<Button
 						className="text-dark"
 						size="lg"
-						component={NextLink}
+						component={Link}
 						href="/explore"
 					>
 						Explore

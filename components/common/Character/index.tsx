@@ -1,11 +1,11 @@
 import { useCharacter, useCharacterByHandle } from "@/utils/apis/indexer";
 import { extractCharacterName } from "@/utils/metadata";
 import { composeCharacterHref } from "@/utils/url";
-import { NextLink } from "@mantine/next";
 import { Text, TextProps } from "@mantine/core";
 import { CharacterEntity } from "crossbell.js";
 import classNames from "classnames";
 import CharacterHoverCard from "./CharacterHoverCard";
+import Link from "next/link";
 
 export function CharacterName({
 	characterId,
@@ -35,7 +35,7 @@ export function CharacterName({
 				})}
 				color="dark"
 				weight="bolder"
-				component={NextLink}
+				component={Link}
 				href={composeCharacterHref(data?.handle!)}
 				variant="link"
 				onClick={(e: any) => e.stopPropagation()}
@@ -90,7 +90,7 @@ export function CharacterHandle({
 				className={classNames(className, {
 					"overflow-hidden text-ellipsis max-w-8em": ellipsis === true,
 				})}
-				component={NextLink}
+				component={Link}
 				href={composeCharacterHref(characterHandle)}
 				variant="link"
 				onClick={(e: any) => e.stopPropagation()}

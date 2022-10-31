@@ -5,7 +5,7 @@ import ConnectButton from "@/components/common/ConnectButton";
 import React from "react";
 import { useCurrentCharacter } from "@/utils/apis/indexer";
 import SearchInput from "@/components/common/Input/SearchInput";
-import { NextLink } from "@mantine/next";
+import Link from "next/link";
 
 const NavLinks = () => {
 	const { data: character } = useCurrentCharacter();
@@ -43,28 +43,28 @@ const MobileMenu = () => (
 		<Menu.Dropdown>
 			<Menu.Item
 				icon={<Text className="i-csb:feed" />}
-				component={NextLink}
+				component={Link}
 				href="/feed"
 			>
 				Feed
 			</Menu.Item>
 			<Menu.Item
 				icon={<Text className="i-csb:shop" />}
-				component={NextLink}
+				component={Link}
 				href="/shop"
 			>
 				Shop
 			</Menu.Item>
 			<Menu.Item
 				icon={<Text className="i-csb:sync" />}
-				component={NextLink}
+				component={Link}
 				href="/sync"
 			>
 				xSync
 			</Menu.Item>
 			<Menu.Item
 				icon={<Text className="i-csb:character" />}
-				component={NextLink}
+				component={Link}
 				href="/character"
 			>
 				Character
@@ -86,13 +86,11 @@ const IndexNav = () => (
 		<div className="flex flex-row justify-between items-center w-full max-w-1440px m-auto px-24px">
 			<div className="flex flex-row items-center gap-6">
 				<div>
-					<Link href="/">
-						<a className="flex justify-center items-center">
-							<Logo size={24} />
-							<Title className="ml-4px text-20px leading-28px font-600">
-								Crossbell
-							</Title>
-						</a>
+					<Link href="/" className="flex justify-center items-center">
+						<Logo size={24} />
+						<Title className="ml-4px text-20px leading-28px font-600">
+							Crossbell
+						</Title>
 					</Link>
 				</div>
 				<div className="flex-row items-center gap-4 hidden md:flex">

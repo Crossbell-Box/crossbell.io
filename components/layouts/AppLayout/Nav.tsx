@@ -3,9 +3,8 @@ import { useCurrentCharacter } from "@/utils/apis/indexer";
 import { composeTreasuresWalletsHref } from "@/utils/url";
 import { UnstyledButton, Text, Space, Title, Navbar } from "@mantine/core";
 import { useFocusWithin } from "@mantine/hooks";
-import { NextLink } from "@mantine/next";
-import classNames from "classnames";
 import Link from "next/link";
+import classNames from "classnames";
 import { useRouter } from "next/router";
 import { useEffect, useState } from "react";
 import { useAccount } from "wagmi";
@@ -23,15 +22,14 @@ export default function Nav() {
 		>
 			<Navbar.Section>
 				<Link href="/">
-					<a>
-						<Image
-							src="/logos/crossbell.svg"
-							className="w-125px h-34px"
-							placeholder="empty"
-							width={125}
-							height={34}
-						/>
-					</a>
+					<Image
+						src="/logos/crossbell.svg"
+						className="w-125px h-34px"
+						placeholder="empty"
+						width={125}
+						height={34}
+						priority="eager"
+					/>
 				</Link>
 			</Navbar.Section>
 
@@ -161,7 +159,7 @@ function NavLink({
 	return (
 		<UnstyledButton
 			ref={ref}
-			component={NextLink}
+			component={Link}
 			href={href}
 			className={classNames(
 				"relative block py-3 px-4 my-4 rounded-12px",

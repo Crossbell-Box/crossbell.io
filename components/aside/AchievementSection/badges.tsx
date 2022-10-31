@@ -51,21 +51,22 @@ export function Badges({ achievements, isConnectedCharacter }: BadgesProps) {
 							<Text className="i-csb:two-stars mt-1.75px font-14px" />
 						</div>
 						<div className="ml-auto">
-							<Link href={`/@${handle}/achievement`} passHref>
-								<a className="flex items-center text-white text-12px leading-16px font-400 hover:underline">
-									<span className="relative">
-										More badges
-										{isAbleToMint && (
-											<div className="absolute w-8px h-8px bg-red-primary rounded-full right-0 top-0 transform translate-x-1/1 -translate-y-1/2" />
-										)}
-									</span>
-									<Text
-										className={classNames(
-											"i-csb:back transform rotate-180 text-16px",
-											isAbleToMint && "ml-4px"
-										)}
-									/>
-								</a>
+							<Link
+								href={`/@${handle}/achievement`}
+								className="flex items-center text-white text-12px leading-16px font-400 hover:underline"
+							>
+								<span className="relative">
+									More badges
+									{isAbleToMint && (
+										<div className="absolute w-8px h-8px bg-red-primary rounded-full right-0 top-0 transform translate-x-1/1 -translate-y-1/2" />
+									)}
+								</span>
+								<Text
+									className={classNames(
+										"i-csb:back transform rotate-180 text-16px",
+										isAbleToMint && "ml-4px"
+									)}
+								/>
 							</Link>
 						</div>
 						<div className="absolute -z-1 -right-30px -bottom-48px w-190px opacity-95">

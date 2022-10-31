@@ -21,7 +21,7 @@ import {
 	useFollowCharacter,
 	useUnfollowCharacter,
 } from "@/utils/apis/contract";
-import { NextLink } from "@mantine/next";
+import Link from "next/link";
 import {
 	composeCharacterFollowHref,
 	composeWalletCharacterEditHref,
@@ -134,21 +134,19 @@ export default function CharacterProfile({
 							<Link
 								key={el.label}
 								href={composeCharacterFollowHref(character?.handle!, el.type)}
-								passHref
+								className="mr-10 bg-hover cursor-pointer px-1 py-1"
 							>
-								<a className="mr-10 bg-hover cursor-pointer px-1 py-1">
-									<Skeleton
-										width={isLoadingFollowStatus ? "3em" : "auto"}
-										visible={isLoadingFollowStatus}
-									>
-										<Text className="font-semibold leading-1.25em text-dark">
-											{el.count ?? "..."}
-										</Text>
-									</Skeleton>
-									<Text className="font-normal text-xs leading-1.25em text-dimmed">
-										{el.label}
+								<Skeleton
+									width={isLoadingFollowStatus ? "3em" : "auto"}
+									visible={isLoadingFollowStatus}
+								>
+									<Text className="font-semibold leading-1.25em text-dark">
+										{el.count ?? "..."}
 									</Text>
-								</a>
+								</Skeleton>
+								<Text className="font-normal text-xs leading-1.25em text-dimmed">
+									{el.label}
+								</Text>
 							</Link>
 						))}
 					</div>
@@ -169,7 +167,7 @@ export default function CharacterProfile({
 						<BelowAvatarButton loading>Follow</BelowAvatarButton>
 					) : character?.characterId === currentCharacter?.characterId ? (
 						<BelowAvatarButton
-							component={NextLink}
+							component={Link}
 							href={composeWalletCharacterEditHref(character?.characterId!)}
 						>
 							Edit Character

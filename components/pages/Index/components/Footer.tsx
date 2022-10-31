@@ -1,5 +1,5 @@
 import { Space, Text } from "@mantine/core";
-import { NextLink } from "@mantine/next";
+import Link from "next/link";
 
 const linksGroup: { title: string; list: { text: string; href: string }[] }[] =
 	[
@@ -96,7 +96,7 @@ export default function IndexFooter() {
 									<div className="my-1 sm:my-2" key={l.text}>
 										<Text
 											variant="link"
-											component={NextLink}
+											component={Link}
 											href={l.href}
 											color="dimmed"
 											target="_blank"
@@ -120,7 +120,7 @@ export default function IndexFooter() {
 						<Text
 							key={sm.text}
 							className="my-2 p-2 bg-hover rounded-md cursor-pointer text-2xl sm:text-3xl"
-							component={NextLink}
+							component={Link}
 							href={sm.link}
 							target="_blank"
 							rel="noopener noreferrer"

@@ -1,6 +1,6 @@
 import { PropsWithChildren } from "react";
 import { Title, Button } from "@mantine/core";
-import { NextLink } from "@mantine/next";
+import Link from "next/link";
 
 const TrendingBase = ({
 	title,
@@ -21,7 +21,7 @@ const TrendingBase = ({
 		</div>
 		<div className="mt-18 mb-12 w-full">{children}</div>
 		<div>
-			<Button component={NextLink} href={viewMoreLink} color="dark">
+			<Button component={Link} href={viewMoreLink} color="dark">
 				View More
 			</Button>
 		</div>

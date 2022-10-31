@@ -7,6 +7,7 @@ import { composeNoteHref } from "@/utils/url";
 import { Group, Skeleton, Space, Text } from "@mantine/core";
 import { NoteEntity } from "crossbell.js";
 import Link from "next/link";
+import { useRouter } from "next/router";
 import Avatar from "../common/Avatar";
 import { CharacterName } from "../common/Character";
 import Image from "../common/Image";
@@ -42,40 +43,43 @@ function NoteListItem({ note }: { note: NoteEntity }) {
 
 	const content = extractPlainTextFromNote(note.metadata?.content);
 
+	const router = useRouter();
+
+	const handlePushNote = () =>
+		router.push(composeNoteHref(note.characterId, note.noteId));
+
 	return (
-		<Link href={composeNoteHref(note.characterId, note.noteId)}>
-			<div className="px-4 py-2 bg-hover cursor-pointer">
-				<Group spacing="xs">
-					{/* avatar */}
-					<Avatar characterId={note.characterId} size={32} showHoverCard />
+		<div className="px-4 py-2 bg-hover cursor-pointer" onClick={handlePushNote}>
+			<Group spacing="xs">
+				{/* avatar */}
+				<Avatar characterId={note.characterId} size={32} showHoverCard />
 
-					{/* name */}
-					<CharacterName characterId={note.characterId} showHoverCard />
+				{/* name */}
+				<CharacterName characterId={note.characterId} showHoverCard />
 
-					{/* time */}
-					<Time date={note.createdAt} mode="fromNow" />
-				</Group>
+				{/* time */}
+				<Time date={note.createdAt} mode="fromNow" />
+			</Group>
 
-				<Space h={5} />
+			<Space h={5} />
 
-				<div className="flex flex-row">
-					<Text size={13} lineClamp={3} className="leading-1.25em flex-1">
-						{content}
-					</Text>
+			<div className="flex flex-row">
+				<Text size={13} lineClamp={3} className="leading-1.25em flex-1">
+					{content}
+				</Text>
 
-					{image && (
-						<div className="h-50px w-50px ml-2 rounded-md overflow-hidden">
-							<Image
-								src={image}
-								className="object-cover"
-								height={50}
-								width={50}
-							/>
-						</div>
-					)}
-				</div>
+				{image && (
+					<div className="h-50px w-50px ml-2 rounded-md overflow-hidden">
+						<Image
+							src={image}
+							className="object-cover"
+							height={50}
+							width={50}
+						/>
+					</div>
+				)}
 			</div>
-		</Link>
+		</div>
 	);
 }
 

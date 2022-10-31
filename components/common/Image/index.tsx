@@ -3,7 +3,7 @@ import {
 	default as NextImage,
 	type ImageLoader,
 	type ImageProps,
-} from "next/future/image";
+} from "next/image";
 import { PropsWithChildren, useEffect, useState, memo } from "react";
 
 // Pixel GIF code adapted from https://stackoverflow.com/a/33919020/266535

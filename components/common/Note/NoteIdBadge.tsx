@@ -1,6 +1,6 @@
 import { composeScanTxHref } from "@/utils/url";
 import { Badge, useMantineTheme } from "@mantine/core";
-import { NextLink } from "@mantine/next";
+import Link from "next/link";
 import { NoteEntity } from "crossbell.js";
 import Tooltip from "../Tooltip";
 
@@ -12,7 +12,7 @@ export default function NoteIdBadge({ note }: { note: NoteEntity }) {
 		<Tooltip position="top" label={note.transactionHash}>
 			<Badge
 				className="cursor-pointer hover:shadow-sm active:scale-95 transition text-black"
-				component={NextLink}
+				component={Link}
 				href={composeScanTxHref(note.transactionHash)}
 				target="_blank"
 				rel="noopener noreferrer"

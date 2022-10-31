@@ -2,13 +2,13 @@ import { useDisconnectCurrentCharacter } from "@/utils/apis/indexer";
 import { WalletCharacterManageHref } from "@/utils/url";
 import { Menu, Space, Text } from "@mantine/core";
 import { useDisclosure } from "@mantine/hooks";
-import { NextLink } from "@mantine/next";
 import { useDisconnect, useAccount, useBalance } from "wagmi";
 import Modal from "@/components/common/Modal";
 import AccountList from "./_AccountList";
 import MenuItem from "./_MenuItem";
 import WalletDisplayButton from "./_WalletDisplayButton";
 import { ConnectButtonProps } from "./index";
+import Link from "next/link";
 
 export default function WalletButtonWithMenu({
 	mode,
@@ -78,7 +78,7 @@ export default function WalletButtonWithMenu({
 
 					<Menu.Divider />
 
-					<MenuItem component={NextLink} href={WalletCharacterManageHref}>
+					<MenuItem component={Link} href={WalletCharacterManageHref}>
 						Manage Characters
 					</MenuItem>
 					<MenuItem onClick={() => disconnHandlers.open()}>Disconnect</MenuItem>

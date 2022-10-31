@@ -130,6 +130,7 @@ const WalletDisplayButton = forwardRef<
 							className={classNames("transition-transform-150 m-4px", {
 								"rotate-90": menuOpened,
 							})}
+							placeholder="empty"
 						/>
 					</div>
 				</div>
