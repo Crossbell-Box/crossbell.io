@@ -7,6 +7,7 @@ import {
 	SupportedPlatform,
 	SUPPORTED_PLATFORMS,
 	useCharacterBoundAccounts,
+	isShowPlatform,
 } from "@/utils/apis/operator-sync";
 
 import LoadingOverlay from "@/components/common/LoadingOverlay";
@@ -52,9 +53,7 @@ export default function PlatformsSection() {
 			};
 		}) ?? [];
 
-	const unboundPlatforms = SUPPORTED_PLATFORMS
-		// TODO: remove this when tiktok is ready
-		.filter((v) => !["tiktok", "pinterest"].includes(v))
+	const unboundPlatforms = SUPPORTED_PLATFORMS.filter(isShowPlatform)
 		.filter((v) => !boundPlatforms?.some((bound) => bound.platform === v))
 		.map<PlatformCardProps>((platform) => {
 			return {

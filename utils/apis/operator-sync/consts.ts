@@ -12,6 +12,20 @@ export const SUPPORTED_PLATFORMS = [
 
 export type SupportedPlatform = typeof SUPPORTED_PLATFORMS[number];
 
+const PLATFORM_DISPLAY_STATUS_MAP: Record<SupportedPlatform, boolean> = {
+	medium: true,
+	tiktok: false,
+	pinterest: false,
+	twitter: true,
+	tg_channel: false,
+	substack: false,
+	pixiv: false,
+};
+
+export function isShowPlatform(platform: SupportedPlatform): boolean {
+	return PLATFORM_DISPLAY_STATUS_MAP[platform];
+}
+
 export function isSupportedPlatform(
 	platform: string
 ): platform is SupportedPlatform {
