@@ -26,7 +26,7 @@
 		"@mantine/next": "5.6.2",
 		"@mantine/notifications": "5.6.2",
 		"@mantine/nprogress": "5.6.2",
-		"@next/bundle-analyzer": "12.3.1",
+		"@next/bundle-analyzer": "13.0.1",
 		"@rainbow-me/rainbowkit": "0.7.3",
 		"@tanstack/react-query": "4.13.0",
 		"@tanstack/react-query-devtools": "4.13.0",
@@ -41,7 +41,7 @@
 		"link-preview-js": "3.0.4",
 		"lodash.compact": "3.0.1",
 		"lru-cache": "7.14.0",
-		"next": "12.3.1",
+		"next": "13.0.1",
 		"next-seo": "5.8.0",
 		"pretty-bytes": "6.0.0",
 		"react": "18.2.0",
@@ -70,7 +70,7 @@
 		"@types/react-dom": "18.0.7",
 		"@unocss/webpack": "0.46.0",
 		"eslint": "8.26.0",
-		"eslint-config-next": "12.3.1",
+		"eslint-config-next": "13.0.1",
 		"typescript": "4.8.4",
 		"unocss": "0.46.0"
 	}
