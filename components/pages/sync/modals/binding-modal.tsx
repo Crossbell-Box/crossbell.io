@@ -200,7 +200,7 @@ function BindingModal({ platform }: { platform: SupportedPlatform }) {
 								>
 									<button
 										className={classNames(
-											"absolute transform -translate-y-1/4 translate-x-0",
+											"absolute transform -translate-y-1/10 translate-x-0",
 											"text-16px bg-transparent border-none outline-none color-black p-0 cursor-pointer"
 										)}
 									>
