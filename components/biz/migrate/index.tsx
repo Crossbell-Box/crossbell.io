@@ -1,6 +1,6 @@
 import { Button, Dialog, Space, Text } from "@mantine/core";
 import { useLocalStorage } from "@mantine/hooks";
-import { NextLink } from "@mantine/next";
+import Link from "next/link";
 import { useAccount } from "wagmi";
 
 export function MigrationNotification() {
@@ -34,7 +34,7 @@ export function MigrationNotification() {
 			<Space h={10} />
 
 			<Button
-				component={NextLink}
+				component={Link}
 				href="https://migrate.crossbell.io"
 				target="_blank"
 				onClick={() => setStatus("hide")}

@@ -5,7 +5,7 @@ import BaseSection from "./BaseSection";
 import Padding from "./Padding";
 import handImage from "@/public/images/pages/index/resources/hand.webp";
 import Image from "@/components/common/Image";
-import { NextLink } from "@mantine/next";
+import Link from "next/link";
 import classNames from "classnames";
 
 export default function ParallaxSection({
@@ -64,7 +64,7 @@ export default function ParallaxSection({
 						exit={{ opacity: 0, transform: "translateX(20px)" }}
 					>
 						<UnstyledButton
-							component={NextLink}
+							component={Link}
 							href={link}
 							className={classNames(
 								"mt-50px relative flex flex-row items-center justify-center space-x-10px w-300px h-60px rounded-md bg-black transition-colors group",

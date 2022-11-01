@@ -13,7 +13,6 @@ import {
 	WalletCharacterNewHref,
 } from "@/utils/url";
 import { Grid, Menu, Title, Text, Skeleton, ActionIcon } from "@mantine/core";
-import { NextLink } from "@mantine/next";
 import { showNotification } from "@mantine/notifications";
 import { CharacterEntity } from "crossbell.js";
 import Link from "next/link";
@@ -160,7 +159,7 @@ function CharacterCard({ character }: { character: CharacterEntity }) {
 
 					<Menu.Dropdown className="w-fit shadow-md">
 						<Menu.Item
-							component={NextLink}
+							component={Link}
 							href={composeWalletCharacterEditHref(character.characterId)}
 						>
 							Edit

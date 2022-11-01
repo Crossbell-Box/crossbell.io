@@ -1,7 +1,7 @@
 import { composeScanTxHref } from "@/utils/url";
 import { Badge, BadgeProps, useMantineTheme } from "@mantine/core";
-import { NextLink } from "@mantine/next";
 import { CharacterEntity } from "crossbell.js";
+import Link from "next/link";
 import Tooltip from "../Tooltip";
 
 export default function CharacterIdBadge({
@@ -17,7 +17,7 @@ export default function CharacterIdBadge({
 		<Tooltip position="top" label={character.transactionHash}>
 			<Badge
 				className="cursor-pointer hover:shadow-sm active:scale-95 transition text-black"
-				component={NextLink}
+				component={Link}
 				href={composeScanTxHref(character.transactionHash)}
 				target="_blank"
 				rel="noopener noreferrer"

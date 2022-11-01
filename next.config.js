@@ -19,12 +19,10 @@ const nextConfig = {
 	},
 	experimental: {
 		scrollRestoration: true,
-		// newNextLinkBehavior: true,
 	},
 	compiler: {
 		// removeConsole: { exclude: ["error"] },
 	},
-	swcMinify: true,
 	rewrites: async () => {
 		return [
 			{

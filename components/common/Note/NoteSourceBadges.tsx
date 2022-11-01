@@ -2,7 +2,7 @@ import { Badge } from "@mantine/core";
 import { NoteMetadata } from "crossbell.js";
 import { TinyColor, random, mostReadable } from "@ctrl/tinycolor";
 import { stringToInteger } from "@/utils/helpers";
-import { NextLink } from "@mantine/next";
+import Link from "next/link";
 import { ReactNode } from "react";
 
 const builtInColorMap = {
@@ -31,9 +31,9 @@ export default function NoteSources({
 
 				const Wrapper = ({ children }: { children: ReactNode }) =>
 					href ? (
-						<NextLink href={href} target="_blank" passHref>
+						<Link href={href} target="_blank" passHref>
 							{children}
-						</NextLink>
+						</Link>
 					) : (
 						<>{children}</>
 					);

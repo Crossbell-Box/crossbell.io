@@ -25,7 +25,7 @@ import {
 import LoadingOverlay from "../common/LoadingOverlay";
 import { composeCharacterHref } from "@/utils/url";
 import { showNotification } from "@mantine/notifications";
-import { NextLink } from "@mantine/next";
+import Link from "next/link";
 import { useConnectModal } from "@rainbow-me/rainbowkit";
 import { useAccount } from "wagmi";
 import { BizError } from "@/utils/errors";
@@ -376,7 +376,7 @@ export default function CharacterManagement({
 				<Button
 					className="text-dark"
 					size="lg"
-					component={NextLink}
+					component={Link}
 					href={composeCharacterHref(form.values.handle)}
 				>
 					My Character Page

@@ -1,5 +1,5 @@
 import { Button, Title, Text, Space } from "@mantine/core";
-import { NextLink } from "@mantine/next";
+import Link from "next/link";
 // @ts-ignore
 import TypeIt from "typeit-react";
 
@@ -128,7 +128,7 @@ function HeroTexts() {
 			<Space h={20} />
 
 			<span>
-				<Button color="#FFDA48" size="xl" component={NextLink} href="/explore">
+				<Button color="#FFDA48" size="xl" component={Link} href="/explore">
 					<span className="text-lg text-black font-lg mx-11">Explore</span>
 				</Button>
 			</span>

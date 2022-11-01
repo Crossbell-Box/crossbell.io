@@ -1,5 +1,5 @@
 import { Button, Menu, Text } from "@mantine/core";
-import { NextLink } from "@mantine/next";
+import Link from "next/link";
 import { PropsWithChildren } from "react";
 
 export default function MoreMenu() {
@@ -56,7 +56,7 @@ function MenuItemLink({
 }: PropsWithChildren<{ href: string; iconUrl?: string }>) {
 	return (
 		<Menu.Item
-			component={NextLink}
+			component={Link}
 			href={href}
 			target="_blank"
 			rel="noopener noreferrer"

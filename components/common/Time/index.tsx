@@ -1,6 +1,6 @@
 import { formatDate, formatDateFromNow, formatToISO } from "@/utils/time";
 import { Tooltip, Text, TextProps } from "@mantine/core";
-import { NextLink } from "@mantine/next";
+import Link from "next/link";
 import { useEffect, useState } from "react";
 
 export default function Time({
@@ -24,8 +24,8 @@ export default function Time({
 		<Tooltip label={isMounted ? formatDate(date) : formatToISO(date)}>
 			{/* @ts-ignore */}
 			<Text
-				{...(href ? { component: NextLink, href, variant: "link" } : {})}
-				// component={NextLink}
+				{...(href ? { component: Link, href, variant: "link" } : {})}
+				// component={Link}
 				// href={href}
 				// variant="link"
 				color="dimmed"

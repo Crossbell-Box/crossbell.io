@@ -7,11 +7,9 @@ import {
 } from "@/utils/metadata";
 import { composeNoteHref, composeTreasuresWalletsHref } from "@/utils/url";
 import { Space, Text } from "@mantine/core";
-import { NextLink } from "@mantine/next";
-import { NoteEntity } from "crossbell.js";
 import Link from "next/link";
+import { NoteEntity } from "crossbell.js";
 import { Fragment } from "react";
-import Image from "../common/Image";
 
 export default function TreasuresGallery({ address }: { address?: string }) {
 	const { data, isLoading } = useMintedNotesOfAddress(address, { limit: 8 });
@@ -58,13 +56,14 @@ export default function TreasuresGallery({ address }: { address?: string }) {
 				{/* right - more */}
 				<div>
 					{hasResult && (
-						<Link href={composeTreasuresWalletsHref(address!)} passHref>
-							<a className="flex items-center">
-								<Text color="dimmed" className="text-center">
-									More
-								</Text>
-								<Text color="dimmed" className="i-csb:more-right-arrow" />
-							</a>
+						<Link
+							href={composeTreasuresWalletsHref(address!)}
+							className="flex items-center"
+						>
+							<Text color="dimmed" className="text-center">
+								More
+							</Text>
+							<Text color="dimmed" className="i-csb:more-right-arrow" />
 						</Link>
 					)}
 				</div>
@@ -85,7 +84,7 @@ function NoteCover({ note }: { note?: NoteEntity | null }) {
 	);
 
 	return (
-		<NextLink
+		<Link
 			href={composeNoteHref(note?.characterId!, note?.noteId!)}
 			className="aspect-ratio-square relative flex justify-center items-center ml--20px first:ml-0 w-100px h-100px overflow-hidden rounded-md hover:translate-y--10px transition-transform cursor-pointer"
 			style={{
@@ -107,6 +106,6 @@ function NoteCover({ note }: { note?: NoteEntity | null }) {
 				</Text>
 			</div>
 			{/* )} */}
-		</NextLink>
+		</Link>
 	);
 }

@@ -3,6 +3,7 @@ import { composeCharacterHref } from "@/utils/url";
 import { Group, Skeleton, Space } from "@mantine/core";
 import { CharacterEntity } from "crossbell.js";
 import Link from "next/link";
+import { useRouter } from "next/router";
 import Avatar from "../common/Avatar";
 import { CharacterHandle, CharacterName } from "../common/Character";
 import FollowButton from "../common/FollowButton";
@@ -30,36 +31,42 @@ export default function TrendingCharactersSection() {
 }
 
 function CharacterListItem({ character }: { character: CharacterEntity }) {
+	const router = useRouter();
+
+	const handlePushCharacter = () =>
+		router.push(composeCharacterHref(character.handle));
+
 	return (
-		<Link href={composeCharacterHref(character.handle)}>
-			<div className="px-4 py-2 bg-hover cursor-pointer flex justify-between items-center">
-				<Group spacing="xs">
-					{/* avatar */}
-					<Avatar character={character} size={48} showHoverCard />
+		<div
+			className="px-4 py-2 bg-hover cursor-pointer flex justify-between items-center"
+			onClick={handlePushCharacter}
+		>
+			<Group spacing="xs">
+				{/* avatar */}
+				<Avatar character={character} size={48} showHoverCard />
 
-					{/* name */}
-					<div>
-						<div>
-							<CharacterName character={character} showHoverCard />
-						</div>
-
-						{/* handle */}
-						<div>
-							<CharacterHandle
-								character={character}
-								size="sm"
-								color="dimmed"
-								showHoverCard
-							/>
-						</div>
-					</div>
-				</Group>
-
+				{/* name */}
 				<div>
-					<FollowButton character={character} />
+					<div>
+						<CharacterName character={character} showHoverCard />
+					</div>
+
+					{/* handle */}
+					<div>
+						<CharacterHandle
+							character={character}
+							size="sm"
+							color="dimmed"
+							showHoverCard
+						/>
+					</div>
 				</div>
+			</Group>
+
+			<div>
+				<FollowButton character={character} />
 			</div>
-		</Link>
+		</div>
 	);
 }
 
