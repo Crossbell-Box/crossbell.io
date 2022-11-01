@@ -99,20 +99,23 @@ export function PlatformCard({
 				/>
 			</div>
 
-			<Link passHref={true} href={platformUrl}>
-				<a className="flex items-center" target="_blank" rel="noreferrer">
-					<Image
-						src={icon}
-						alt={getPlatformDisplayName(platform)}
-						width={40}
-						height={40}
-						className={"rounded-12px"}
-					/>
+			<Link
+				href={platformUrl}
+				className="flex items-center"
+				target="_blank"
+				rel="noreferrer"
+			>
+				<Image
+					src={icon}
+					alt={getPlatformDisplayName(platform)}
+					width={40}
+					height={40}
+					className={"rounded-12px"}
+				/>
 
-					<p className="m-0 ml-8px text-16px leading-24px font-400">
-						{getPlatformDisplayName(platform)}
-					</p>
-				</a>
+				<p className="m-0 ml-8px text-16px leading-24px font-400">
+					{getPlatformDisplayName(platform)}
+				</p>
 			</Link>
 
 			{isBound ? (
@@ -134,17 +137,16 @@ export function PlatformCard({
 					</table>
 
 					<div className="flex items-center">
-						<Link passHref={true} href={platformUrl}>
-							<a
-								className={classNames(
-									"font-500 text-black text-16px leading-24px tracking-0.15px",
-									!identity && "opacity-50"
-								)}
-								target="_blank"
-								rel="noreferrer"
-							>
-								{identity ? `@${identity}` : "NOT BOUND"}
-							</a>
+						<Link
+							href={platformUrl}
+							className={classNames(
+								"font-500 text-black text-16px leading-24px tracking-0.15px",
+								!identity && "opacity-50"
+							)}
+							target="_blank"
+							rel="noreferrer"
+						>
+							{identity ? `@${identity}` : "NOT BOUND"}
 						</Link>
 
 						<div className="ml-auto flex flex-col items-end">
