@@ -15,6 +15,8 @@ import { useClickOutside } from "@mantine/hooks";
 import Image from "@/components/common/Image";
 import { openBorderlessModal } from "@/components/common/Modal";
 import {
+	getPlatformDisplayName,
+	getPlatformIdentityKind,
 	getPlatformUserProfileUrl,
 	getVeriHandle,
 	SupportedPlatform,
@@ -116,9 +118,9 @@ function BindingModal({ platform }: { platform: SupportedPlatform }) {
 									target="_blank"
 									rel="noreferrer"
 								>
-									{platform} account
+									{getPlatformDisplayName(platform)} account
 								</a>
-								{" name."}
+								{` ${getPlatformIdentityKind(platform)}.`}
 
 								<Tooltip
 									withinPortal={true}
@@ -128,7 +130,7 @@ function BindingModal({ platform }: { platform: SupportedPlatform }) {
 										<Image
 											placeholder="empty"
 											src={NAME_IMAGE_MAP[platform]}
-											className="w-444px h-auto"
+											className="w-888px max-w-90vw h-auto"
 										/>
 									}
 								>
@@ -156,7 +158,9 @@ function BindingModal({ platform }: { platform: SupportedPlatform }) {
 							value={username}
 							autoCapitalize="off"
 							autoComplete="off"
-							onChange={(e) => setUsername(e.target.value)}
+							onChange={(e) => {
+								setUsername(normalizedUsername(platform, e.target.value));
+							}}
 						/>
 
 						<p
@@ -178,10 +182,10 @@ function BindingModal({ platform }: { platform: SupportedPlatform }) {
 					</div>
 
 					<div className="mt-24px mb-72px">
-						<div className="m-0 text-16px leading-24px font-500 flex items-center mb-12px">
-							<Text className="i-csb:background-replace text-36px mr-8px" />
-							<span className="relative">
-								2. To verify, please put your handle into your bio.
+						<div className="m-0 text-16px leading-24px font-500 flex items-start mb-12px">
+							<Text className="i-csb:background-replace text-36px mr-8px flex-shrink-0" />
+							<span className="relative mr-9px">
+								{step2Description(platform)}
 								<Tooltip
 									withinPortal={true}
 									zIndex={modalZIndex}
@@ -190,13 +194,13 @@ function BindingModal({ platform }: { platform: SupportedPlatform }) {
 										<Image
 											placeholder="empty"
 											src={BIO_IMAGE_MAP[platform]}
-											className="w-444px h-auto"
+											className="w-888px max-w-90vw h-auto"
 										/>
 									}
 								>
 									<button
 										className={classNames(
-											"absolute right-0 top-0 transform -translate-y-1/2 translate-x-full",
+											"absolute transform -translate-y-1/10 translate-x-0",
 											"text-16px bg-transparent border-none outline-none color-black p-0 cursor-pointer"
 										)}
 									>
@@ -278,7 +282,7 @@ function BindingModal({ platform }: { platform: SupportedPlatform }) {
 								onClick={() => openPlatformSite(platform)}
 								fullWidth
 							>
-								Go to {platform}
+								Go to {getPlatformDisplayName(platform)}
 							</Button>
 
 							<Button
@@ -296,4 +300,36 @@ function BindingModal({ platform }: { platform: SupportedPlatform }) {
 			)}
 		</Card>
 	);
+}
+
+function normalizedUsername(
+	platform: SupportedPlatform,
+	username: string
+): string {
+	switch (platform) {
+		case "tg_channel":
+			const regex = /^(https?:\/\/)?t\.me\/([^/]+)$/;
+			return (regex.exec(username.trim()) ?? [])[2] || username;
+		default:
+			return username;
+	}
+}
+
+function step2Description(platform: SupportedPlatform): string {
+	switch (platform) {
+		case "tg_channel":
+			return "2. To verify, please copy your handle below into Telegram Info Description.";
+		case "pixiv":
+			return "2. To verify, please copy your handle below into Pixiv Self Introduction.";
+		case "medium":
+			return "2. To verify, please copy your handle below into Medium Short Bio.";
+		case "pinterest":
+			return "2. To verify, please copy your handle below into Pinterest About.";
+		case "substack":
+			return "2. To verify, please copy your handle below into Substack One-line Description.";
+		case "tiktok":
+			return "2. To verify, please copy your handle below into Tiktok Bio.";
+		case "twitter":
+			return "2. To verify, please copy your handle below into Twitter Bio.";
+	}
 }

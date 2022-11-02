@@ -13,6 +13,7 @@ import {
 	SupportedPlatform,
 	useSyncAccount,
 } from "@/utils/apis/operator-sync";
+import { getPlatformSite } from "@/components/pages/sync/utils";
 import {
 	openBindingModal,
 	openUnbindingModal,
@@ -63,6 +64,10 @@ export function PlatformCard({
 		identity!
 	);
 
+	const platformUrl = identity
+		? getPlatformUserProfileUrl(platform, identity)
+		: getPlatformSite(platform);
+
 	return (
 		<div
 			className="relative p-16px rounded-24px border border-1 border-[#E1E8F7]"
@@ -94,17 +99,24 @@ export function PlatformCard({
 				/>
 			</div>
 
-			<div className="flex items-center">
+			<Link
+				href={platformUrl}
+				className="flex items-center"
+				target="_blank"
+				rel="noreferrer"
+			>
 				<Image
 					src={icon}
-					alt={platform}
+					alt={getPlatformDisplayName(platform)}
 					width={40}
 					height={40}
 					className={"rounded-12px"}
 				/>
 
-				<p className="m-0 ml-8px text-16px leading-24px font-400">{getPlatformDisplayName(platform)}</p>
-			</div>
+				<p className="m-0 ml-8px text-16px leading-24px font-400">
+					{getPlatformDisplayName(platform)}
+				</p>
+			</Link>
 
 			{isBound ? (
 				<>
@@ -126,21 +138,15 @@ export function PlatformCard({
 
 					<div className="flex items-center">
 						<Link
-							passHref={true}
-							href={
-								identity ? getPlatformUserProfileUrl(platform, identity) : ""
-							}
+							href={platformUrl}
+							className={classNames(
+								"font-500 text-black text-16px leading-24px tracking-0.15px",
+								!identity && "opacity-50"
+							)}
+							target="_blank"
+							rel="noreferrer"
 						>
-							<a
-								className={classNames(
-									"font-500 text-black text-16px leading-24px tracking-0.15px",
-									!identity && "opacity-50"
-								)}
-								target="_blank"
-								rel="noreferrer"
-							>
-								{identity ? `@${identity}` : "NOT BOUND"}
-							</a>
+							{identity ? `@${identity}` : "NOT BOUND"}
 						</Link>
 
 						<div className="ml-auto flex flex-col items-end">
@@ -194,8 +200,8 @@ export function PlatformCard({
 					<div className="transform -translate-x-1/7">
 						<Image width={90} height={90} src={bindIllustration} />
 					</div>
-					<p className="m-0 font-400 text-14px leading-20px text-[#49454F]">
-						Sync to own your {platform} content
+					<p className="m-0 font-400 text-14px leading-20px text-[#49454F] text-center">
+						Sync to own your {getPlatformDisplayName(platform)} content
 					</p>
 				</div>
 			)}

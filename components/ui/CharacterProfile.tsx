@@ -132,7 +132,11 @@ export default function CharacterProfile({
 						).map((el) => (
 							<Link
 								key={el.label}
-								href={composeCharacterFollowHref(character?.handle!, el.type)}
+								href={
+									character?.handle
+										? composeCharacterFollowHref(character.handle, el.type)
+										: ""
+								}
 								className="mr-10 bg-hover cursor-pointer px-1 py-1"
 							>
 								<Skeleton
