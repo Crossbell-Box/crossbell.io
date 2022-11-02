@@ -219,14 +219,14 @@ export function MarkdownRenderer({
 							},
 							ol: ({ node, ...props }) => {
 								return (
-									<List type="ordered" withPadding>
+									<List type="ordered" withPadding className="list-outside">
 										{props.children}
 									</List>
 								);
 							},
 							ul: ({ node, ...props }) => {
 								return (
-									<List type="unordered" withPadding>
+									<List type="unordered" withPadding className="list-outside">
 										{props.children}
 									</List>
 								);
