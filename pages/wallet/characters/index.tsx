@@ -28,7 +28,7 @@ const Page: NextPageWithLayout = () => {
 		<div>
 			<Header>Manage Characters</Header>
 
-			<div>
+			<div className="mt-4">
 				<Grid justify="space-around" gutter="xs">
 					{data?.pages.map((page, i) => (
 						<Fragment key={i}>
@@ -54,11 +54,10 @@ const Page: NextPageWithLayout = () => {
 					</LoadMore>
 
 					{/* mint new */}
-					<Link href={WalletCharacterNewHref}>
-						<Grid.Col
-							md={4}
-							lg={3}
-							className="inline-flex items-center justify-center px-4 py-7 m-2 border cursor-pointer align-middle rounded-xl flex-col text-center relative overflow-hidden border-dark/10 shadow-sm bg-white hover:shadow-md transition-shadow"
+					<Grid.Col md={4} lg={3} p={0}>
+						<Link
+							href={WalletCharacterNewHref}
+							className="flex min-h-full items-center justify-center px-4 py-7 m-2 border cursor-pointer align-middle rounded-xl flex-col text-center relative overflow-hidden border-dark/10 shadow-sm bg-white hover:shadow-md transition-shadow"
 						>
 							<Title order={6} className="font-bold">
 								Mint new character
@@ -66,8 +65,8 @@ const Page: NextPageWithLayout = () => {
 							<div className="w-20 h-20 bg-slate-200 text-white rounded-full leading-none my-8">
 								<div className="text-7xl bottom-1">+</div>
 							</div>
-						</Grid.Col>
-					</Link>
+						</Link>
+					</Grid.Col>
 				</Grid>
 			</div>
 		</div>
@@ -91,14 +90,11 @@ function CharacterCard({ character }: { character: CharacterEntity }) {
 	};
 
 	return (
-		<Link
-			href={composeCharacterHref(character.handle)}
-			key={character.characterId}
-		>
-			<Grid.Col
-				md={4}
-				lg={3}
-				className="flex items-center justify-center px-4 py-7 m-2 border cursor-pointer align-middle rounded-xl flex-col text-center relative overflow-hidden border-dark/10 shadow-sm bg-white hover:shadow-md transition-shadow"
+		<Grid.Col md={4} lg={3} p={0}>
+			<Link
+				href={composeCharacterHref(character.handle)}
+				key={character.characterId}
+				className="flex items-center justify-center min-h-full px-4 py-7 m-2 border cursor-pointer align-middle rounded-xl flex-col text-center relative overflow-hidden border-dark/10 shadow-sm bg-white hover:shadow-md transition-shadow"
 			>
 				<LoadingOverlay visible={setPrimary.isLoading} />
 
@@ -170,8 +166,8 @@ function CharacterCard({ character }: { character: CharacterEntity }) {
 						</Menu.Item>
 					</Menu.Dropdown>
 				</Menu>
-			</Grid.Col>
-		</Link>
+			</Link>
+		</Grid.Col>
 	);
 }
 
