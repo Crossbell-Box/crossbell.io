@@ -1,3 +1,4 @@
+import { Promotion } from "@/components/pages/sync/promotion";
 import { Feed, FeedSkeleton } from "@/components/common/Feed";
 import LoadMore from "@/components/common/LoadMore";
 import Tabs from "@/components/common/Tabs";
@@ -12,21 +13,15 @@ import {
 import { Fragment, useEffect } from "react";
 import { Button, Text } from "@mantine/core";
 import Link from "next/link";
-import { useAccount } from "wagmi";
 import { useRouter } from "next/router";
-import {
-	openConnectWalletHintModel,
-	openMintNewCharacterModel,
-} from "@/components/common/NewUserGuide";
 import { useLoginChecker } from "@/utils/wallet/hooks";
 
 const Page: NextPageWithLayout = () => {
 	return (
 		<div>
 			<Header>xFeed</Header>
-
+			<Promotion />
 			<FeedTabs />
-
 			<Home />
 		</div>
 	);
