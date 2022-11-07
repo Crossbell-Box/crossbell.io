@@ -17,7 +17,7 @@ const PLATFORM_DISPLAY_STATUS_MAP: Record<SupportedPlatform, boolean> = {
 	tiktok: false,
 	pinterest: false,
 	twitter: true,
-	tg_channel: false,
+	tg_channel: true,
 	substack: false,
 	pixiv: false,
 };
