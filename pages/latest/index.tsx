@@ -1,3 +1,4 @@
+import { Promotion } from "@/components/pages/sync/promotion";
 import LoadMore from "@/components/common/LoadMore";
 import { Note, NoteSkeleton } from "@/components/common/Note";
 import { getLayout } from "@/components/layouts/AppLayout";
@@ -11,9 +12,8 @@ const Page: NextPageWithLayout = () => {
 	return (
 		<div>
 			<Header>Latest</Header>
-
+			<Promotion />
 			<FeedTabs />
-
 			<Latest />
 		</div>
 	);

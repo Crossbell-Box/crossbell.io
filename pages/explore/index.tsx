@@ -1,3 +1,4 @@
+import { Promotion } from "@/components/pages/sync/promotion";
 import { Note, NoteSkeleton } from "@/components/common/Note";
 import { getLayout } from "@/components/layouts/AppLayout";
 import Header from "@/components/layouts/Header";
@@ -9,9 +10,8 @@ const Page: NextPageWithLayout = () => {
 	return (
 		<div>
 			<Header>Explore</Header>
-
+			<Promotion />
 			<FeedTabs />
-
 			<Explore />
 		</div>
 	);
