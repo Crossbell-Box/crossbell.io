@@ -219,14 +219,24 @@ export function MarkdownRenderer({
 							},
 							ol: ({ node, ...props }) => {
 								return (
-									<List type="ordered" withPadding className="list-outside">
+									<List
+										type="ordered"
+										withPadding
+										className="list-outside"
+										classNames={{ itemWrapper: "block break-normal" }}
+									>
 										{props.children}
 									</List>
 								);
 							},
 							ul: ({ node, ...props }) => {
 								return (
-									<List type="unordered" withPadding className="list-outside">
+									<List
+										type="unordered"
+										withPadding
+										className="list-outside"
+										classNames={{ itemWrapper: "block break-normal" }}
+									>
 										{props.children}
 									</List>
 								);
