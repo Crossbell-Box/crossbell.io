@@ -1,6 +1,7 @@
 import React from "react";
 import Link from "next/link";
 import { Text } from "@mantine/core";
+import { useIsomorphicEffect } from "@mantine/hooks";
 
 import Image from "@/components/common/Image";
 
@@ -21,7 +22,7 @@ export function Promotion() {
 		[setIsClosed]
 	);
 
-	React.useEffect(() => {
+	useIsomorphicEffect(() => {
 		setIsClosed(window.localStorage.getItem(STORAGE_KEY) === "true");
 	}, []);
 

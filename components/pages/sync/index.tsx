@@ -27,7 +27,7 @@ export default function OperatorSyncMain() {
 	);
 	const isFirstMount = useIsFirstMount();
 
-	if (isFirstMount) {
+	if (characterInfo.hasCharacterId && isFirstMount) {
 		return renderLoading();
 	}
 
