@@ -1,5 +1,8 @@
 import { useDisconnectCurrentCharacter } from "@/utils/apis/indexer";
-import { WalletCharacterManageHref } from "@/utils/url";
+import {
+	ExportCrossbellDataHref,
+	WalletCharacterManageHref,
+} from "@/utils/url";
 import { Menu, Space, Text } from "@mantine/core";
 import { useDisclosure } from "@mantine/hooks";
 import { useDisconnect, useAccount, useBalance } from "wagmi";
@@ -80,6 +83,9 @@ export default function WalletButtonWithMenu({
 
 					<MenuItem component={Link} href={WalletCharacterManageHref}>
 						Manage Characters
+					</MenuItem>
+					<MenuItem component={Link} href={ExportCrossbellDataHref} target="_blank">
+						Export Your Data
 					</MenuItem>
 					<MenuItem onClick={() => disconnHandlers.open()}>Disconnect</MenuItem>
 				</Menu.Dropdown>

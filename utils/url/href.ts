@@ -52,6 +52,7 @@ export const composeCharacterFollowHref = (
 
 export const WalletCharacterManageHref = `/wallet/characters`;
 export const WalletCharacterNewHref = `/wallet/characters/new`;
+export const ExportCrossbellDataHref = `https://export.crossbell.io/`;
 
 /**
  * @example "/wallet/characters/10"
