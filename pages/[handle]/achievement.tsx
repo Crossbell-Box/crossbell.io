@@ -105,11 +105,11 @@ export default function Page() {
 									)}
 								</Modal>
 
-								<div className="mt-32px">
+								<div className="mt-40px">
 									{achievementGroups.map((group) => (
 										<div key={group.id}>
 											<AchievementsTitle>{group.title}</AchievementsTitle>
-											<div className="mt-32px px-24px">
+											<div className="mt-40px px-24px">
 												<SimpleGrid {...gridProps}>
 													{group.achievements.map((achievement) => {
 														const showAchievement = () => {
@@ -146,7 +146,7 @@ Page.getLayout = getLayout;
 
 function PageLoading() {
 	return (
-		<div className="mt-32px">
+		<div className="mt-40px">
 			<Skeleton className="mb-32px mx-auto" width={150} height={23} />
 
 			<div className="mt-16px px-24px">
