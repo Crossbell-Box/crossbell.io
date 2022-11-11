@@ -37,7 +37,7 @@ export default function PhilosophySection({
 			{/* main */}
 
 			<m.div
-				className="text-white flex flex-col h-screen justify-center items-center"
+				className="text-white flex justify-center items-center lg:justify-start lg:items-end h-screen px-5vw md:pl-10vw lg:pb-13vh lg:pl-300px"
 				initial={{ opacity: 0 }}
 				whileInView={{ opacity: 1 }}
 				exit={{ opacity: 0 }}
@@ -49,15 +49,20 @@ export default function PhilosophySection({
 					whileInView={{ opacity: 1 }}
 					exit={{ opacity: 0 }}
 				>
-					<Text className="font-deca font-300 text-2xl sm:text-3xl md:text-6xl">
-						Own Your Social Activities
+					<Text className="font-deca font-300 text-2xl md:text-3xl lg:text-6xl mb-24px">
+						Own your social activities
+					</Text>
+
+					<Text className="font-roboto font-400 max-w-533px text-[#B9B9B9]">
+						Crossbell is a platform for owning your social activities, composed
+						of an EVM-compatible blockchain and a set of smart contracts.
 					</Text>
 				</m.span>
 			</m.div>
 
 			{/* scroll hint */}
 			<div
-				className="absolute bottom-100px left-50% translate-x--50% text-white cursor-pointer"
+				className="absolute bottom-13vh right-1/2 transform translate-x-1/2 md:translate-x-0 md:bottom-95px md:right-100px text-white cursor-pointer"
 				onClick={() => onClickNext()}
 			>
 				<WelcomeRing withArrow>Scroll</WelcomeRing>
