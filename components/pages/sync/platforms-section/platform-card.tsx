@@ -6,10 +6,15 @@ import React from "react";
 import { StaticImageData } from "next/image";
 import { showNotification } from "@mantine/notifications";
 
-import { useCurrentCharacter } from "@/utils/apis/indexer";
+import { isAddressEqual } from "@/utils/ethers";
+import {
+	useCharacterOperator,
+	useCurrentCharacter,
+} from "@/utils/apis/indexer";
 import {
 	getPlatformDisplayName,
 	getPlatformUserProfileUrl,
+	OPERATOR_ADDRESS,
 	SupportedPlatform,
 	useSyncAccount,
 } from "@/utils/apis/operator-sync";
@@ -57,6 +62,7 @@ export function PlatformCard({
 	lastUpdatedAt,
 }: PlatformCardProps) {
 	const { data: character } = useCurrentCharacter();
+	const { data: operator } = useCharacterOperator(character?.characterId);
 
 	const syncAccount = useSyncAccount(
 		character?.characterId!,
@@ -68,21 +74,31 @@ export function PlatformCard({
 		? getPlatformUserProfileUrl(platform, identity)
 		: getPlatformSite(platform);
 
+	const hasOperator = isAddressEqual(operator, OPERATOR_ADDRESS);
+
 	return (
 		<div
 			className="relative p-16px rounded-24px border border-1 border-[#E1E8F7]"
 			style={containerStyle}
 		>
-			<div className="absolute z-1 top-40px -right-20px flex">
+			<div
+				className={classNames(
+					"absolute z-1 top-40px -right-20px flex",
+					!hasOperator && "grayscale-80 brightness-160"
+				)}
+			>
 				<button
 					className={classNames(
 						"font-roboto text-16px font-500 leading-24px",
 						"py-16px px-8px min-w-65px rounded-12px border-none",
-						"cursor-pointer transition hover:opacity-90 active:opacity-100",
+						hasOperator
+							? "cursor-pointer transition hover:opacity-90 active:opacity-100"
+							: "cursor-not-allowed",
 						isBound
 							? "bg-[#DAE2FF] text-blue-primary"
 							: "bg-blue-primary text-white"
 					)}
+					disabled={!hasOperator}
 					onClick={() => {
 						if (isBound) {
 							openUnbindingModal(platform, identity!);
