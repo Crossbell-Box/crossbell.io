@@ -14,7 +14,7 @@ const linksGroup: { title: string; list: { text: string; href: string }[] }[] =
 		{
 			title: "Resources",
 			list: [
-				{ text: "Indexer", href: "https://index.crossbell.io/docs" },
+				{ text: "Indexer", href: "https://indexer.crossbell.io/docs" },
 				{
 					text: "Wiki",
 					href: "https://github.com/Crossbell-Box/Crossbell-Contracts/wiki",
