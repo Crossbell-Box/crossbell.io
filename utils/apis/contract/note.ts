@@ -1,25 +1,23 @@
-import { useContract } from "@/utils/crossbell.js";
 import { showNotification } from "@mantine/notifications";
-import { NoteMetadata } from "crossbell.js";
 import { useMutation, useQueryClient } from "@tanstack/react-query";
-import {
-	SCOPE_KEY_NOTES_OF_NOTE,
-	SCOPE_KEY_NOTE_STATUS,
-	useCurrentCharacter,
-} from "../indexer";
+import { CharacterEntity, NoteMetadata } from "crossbell.js";
+
+import { useContract } from "@/utils/crossbell.js";
+
+import { SCOPE_KEY_NOTES_OF_NOTE, SCOPE_KEY_NOTE_STATUS } from "../indexer";
 
 export function usePostNoteForNote(
 	targetCharacterId: number,
-	targetNoteId: number
+	targetNoteId: number,
+	currentCharacter: CharacterEntity
 ) {
-	const { data: character } = useCurrentCharacter();
 	const contract = useContract();
 	const queryClient = useQueryClient();
 
 	return useMutation(
 		async (metadata: NoteMetadata) => {
 			return contract.postNoteForNote(
-				character?.characterId!,
+				currentCharacter.characterId,
 				metadata,
 				targetCharacterId,
 				targetNoteId

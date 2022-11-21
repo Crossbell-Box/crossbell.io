@@ -1,19 +1,20 @@
-import { openMintNewCharacterModel } from "@/components/common/NewUserGuide";
-import { useConnectModal } from "@rainbow-me/rainbowkit";
 import { useCallback } from "react";
 import { useAccount } from "wagmi";
-import { useCurrentCharacter } from "../apis/indexer";
+
+import { openMintNewCharacterModel } from "@/components/common/NewUserGuide";
+import { useAccountCharacter, useConnectKit } from "@/components/connectkit";
 
 export function useLoginChecker() {
 	const { address, isConnected } = useAccount();
-	const { characterId } = useCurrentCharacter();
-	const { openConnectModal } = useConnectModal();
+	const { data: character } = useAccountCharacter();
+	const { modal } = useConnectKit();
 
+	const characterId = character?.characterId;
 	const hasCharacter = Boolean(characterId);
 
 	const validate = useCallback(() => {
 		if (!isConnected) {
-			openConnectModal?.();
+			modal.show();
 			return false;
 		}
 
@@ -23,7 +24,7 @@ export function useLoginChecker() {
 		}
 
 		return true;
-	}, [address, isConnected, characterId]);
+	}, [isConnected, hasCharacter, modal]);
 
 	return {
 		address,

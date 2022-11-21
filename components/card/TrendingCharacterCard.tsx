@@ -1,21 +1,21 @@
 import { Button, Space, Text } from "@mantine/core";
 import type { CharacterEntity } from "crossbell.js";
-import { ipfsLinkToHttpLink } from "@/utils/ipfs";
-import {
-	useCharacterFollowRelation,
-	useCurrentCharacter,
-} from "@/utils/apis/indexer";
-import { useFollowCharacter } from "@/utils/apis/contract";
 import { MouseEventHandler } from "react";
-import { extractCharacterAvatar, extractCharacterName } from "@/utils/metadata";
 import Link from "next/link";
+
+import { useAccountCharacter } from "@/components/connectkit";
+import { ipfsLinkToHttpLink } from "@/utils/ipfs";
+import { useCharacterFollowRelation } from "@/utils/apis/indexer";
+import { useFollowCharacter } from "@/utils/apis/contract";
+import { extractCharacterAvatar, extractCharacterName } from "@/utils/metadata";
 import { composeCharacterHref } from "@/utils/url";
+
 import Avatar from "../common/Avatar";
 import CharacterIdBadge from "../common/Character/CharacterIdBadge";
 
 // TODO: extract this compose
 const FollowButton = ({ characterId }: { characterId: number }) => {
-	const { data: currentCharacter } = useCurrentCharacter();
+	const { data: currentCharacter } = useAccountCharacter();
 
 	const isSelf = currentCharacter?.characterId === characterId;
 

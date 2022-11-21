@@ -1,12 +1,10 @@
 import { Loader } from "@mantine/core";
-
+import { CharacterEntity } from "crossbell.js";
 import React from "react";
-import { useIsFirstMount } from "@/utils/hooks/use-is-first-mount";
 
-import {
-	useCharacterOperator,
-	useCurrentCharacter,
-} from "@/utils/apis/indexer";
+import { useIsFirstMount } from "@/utils/hooks/use-is-first-mount";
+import { useAccountCharacter } from "@/components/connectkit";
+import { useCharacterOperator } from "@/utils/apis/indexer";
 import {
 	OPERATOR_ADDRESS,
 	useCharacterActivation,
@@ -17,7 +15,6 @@ import { isAddressEqual } from "@/utils/ethers";
 import CharacterSection from "./character-section";
 import OperatorSyncWelcome from "./operator-sync-welcome";
 import PlatformsSection from "./platforms-section";
-import { CharacterEntity } from "crossbell.js";
 
 export default function OperatorSyncMain() {
 	const characterInfo = useCharacterInfo();
@@ -70,7 +67,7 @@ function useOperatorInfo(
 }
 
 function useCharacterInfo() {
-	const { data: character, characterId } = useCurrentCharacter();
+	const { data: character } = useAccountCharacter();
 	const { data: isActivated, isLoading } = useCharacterActivation(
 		character?.characterId
 	);
@@ -79,10 +76,10 @@ function useCharacterInfo() {
 		() => ({
 			isLoading,
 			character,
-			hasCharacterId: !!characterId || !!character?.characterId,
+			hasCharacterId: !!character?.characterId,
 			isActivated,
 		}),
-		[isLoading, isActivated, character, characterId]
+		[isLoading, isActivated, character]
 	);
 }
 

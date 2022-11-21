@@ -2,7 +2,7 @@ import { indexer } from "@/utils/crossbell.js";
 import { useQuery, useInfiniteQuery } from "@tanstack/react-query";
 import { useAccount } from "wagmi";
 import { LinkTypes } from "../contract";
-import { useCurrentCharacter } from "./character";
+import { CharacterEntity } from "crossbell.js";
 
 const SCOPE_KEY = ["indexer", "notes"];
 
@@ -95,8 +95,11 @@ export function useNote(
 export const SCOPE_KEY_NOTE_STATUS = (characterId: number, noteId: number) => {
 	return [...SCOPE_KEY, "status", characterId, noteId];
 };
-export function useNoteStatus(characterId: number, noteId: number) {
-	const { data: currentCharacter } = useCurrentCharacter();
+export function useNoteStatus(
+	characterId: number,
+	noteId: number,
+	currentCharacter: CharacterEntity | null
+) {
 	const { address } = useAccount();
 
 	return useQuery(

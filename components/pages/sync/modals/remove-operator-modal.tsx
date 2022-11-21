@@ -4,12 +4,13 @@ import { closeAllModals } from "@mantine/modals";
 import { Button, LoadingOverlay, Text } from "@mantine/core";
 import { useClickOutside } from "@mantine/hooks";
 
+import { useAccountCharacter } from "@/components/connectkit";
 import { openBorderlessModal } from "@/components/common/Modal";
 import Image from "@/components/common/Image";
 import { useToggleSyncOperator } from "@/utils/apis/contract";
 import { NIL_ADDRESS } from "@/utils/ethers";
-import { useCurrentCharacter } from "@/utils/apis/indexer";
 import { useCharacterBoundAccounts } from "@/utils/apis/operator-sync";
+
 import seeYouImage from "@/public/images/sync/see-you-later.svg";
 
 export async function openRemoveOperatorModal() {
@@ -36,7 +37,7 @@ enum Scene {
 const closeModals = () => closeAllModals();
 
 export function RemoveOperatorModal() {
-	const { data: character } = useCurrentCharacter();
+	const { data: character } = useAccountCharacter();
 	const { data: boundAccounts = [] } = useCharacterBoundAccounts(
 		character?.characterId
 	);

@@ -2,7 +2,6 @@ import React from "react";
 import { Divider } from "@mantine/core";
 import { StaticImageData } from "next/image";
 
-import { useCurrentCharacter } from "@/utils/apis/indexer";
 import {
 	SupportedPlatform,
 	SUPPORTED_PLATFORMS,
@@ -10,7 +9,9 @@ import {
 	isShowPlatform,
 } from "@/utils/apis/operator-sync";
 
+import { useAccountCharacter } from "@/components/connectkit";
 import LoadingOverlay from "@/components/common/LoadingOverlay";
+
 import LogoMedium from "@/public/images/sync/platform-icons/medium.svg";
 import LogoTiktok from "@/public/images/sync/platform-icons/tiktok.svg";
 import LogoTwitter from "@/public/images/sync/platform-icons/twitter.svg";
@@ -21,6 +22,7 @@ import LogoSubstack from "@/public/images/sync/platform-icons/substack.svg";
 import LogoJike from "@/public/images/sync/platform-icons/jike.svg";
 
 import { sumUpMediaUsage } from "../utils";
+
 import { PlatformCard, PlatformCardProps } from "./platform-card";
 import { Welcome } from "./welcome";
 
@@ -36,7 +38,7 @@ const ICON_MAP: Record<SupportedPlatform, StaticImageData> = {
 };
 
 export default function PlatformsSection() {
-	const { data: character } = useCurrentCharacter();
+	const { data: character } = useAccountCharacter();
 	const { data: boundAccounts, isLoading } = useCharacterBoundAccounts(
 		character?.characterId
 	);

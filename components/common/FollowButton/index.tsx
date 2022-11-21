@@ -1,14 +1,13 @@
+import { Button, ButtonProps } from "@mantine/core";
+import { useModals } from "@mantine/modals";
+import { CharacterEntity } from "crossbell.js";
+
 import {
 	useFollowCharacter,
 	useUnfollowCharacter,
 } from "@/utils/apis/contract";
-import {
-	useCharacterFollowRelation,
-	useCurrentCharacter,
-} from "@/utils/apis/indexer";
-import { Button, ButtonProps } from "@mantine/core";
-import { useModals } from "@mantine/modals";
-import { CharacterEntity } from "crossbell.js";
+import { useCharacterFollowRelation } from "@/utils/apis/indexer";
+import { useAccountCharacter } from "@/components/connectkit";
 
 export default function FollowButton({
 	character,
@@ -16,7 +15,7 @@ export default function FollowButton({
 }: {
 	character: CharacterEntity;
 } & ButtonProps) {
-	const { data: currentCharacter } = useCurrentCharacter();
+	const { data: currentCharacter } = useAccountCharacter();
 
 	const isSelf = currentCharacter?.characterId === character.characterId;
 

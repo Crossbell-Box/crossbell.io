@@ -7,16 +7,16 @@ import {
 	Space,
 	Text,
 } from "@mantine/core";
+import { PropsWithChildren } from "react";
+import { useModals } from "@mantine/modals";
+import Link from "next/link";
+
+import { useAccountCharacter } from "@/components/connectkit";
 import { extractCharacterName } from "@/utils/metadata";
-import Tooltip from "../common/Tooltip";
 import {
 	useCharacterFollowRelation,
 	useCharacterFollowStats,
-	useCurrentCharacter,
 } from "@/utils/apis/indexer";
-import Avatar from "../common/Avatar";
-import { PropsWithChildren } from "react";
-import { useModals } from "@mantine/modals";
 import {
 	useFollowCharacter,
 	useUnfollowCharacter,
@@ -25,7 +25,9 @@ import {
 	composeCharacterFollowHref,
 	composeWalletCharacterEditHref,
 } from "@/utils/url";
-import Link from "next/link";
+
+import Tooltip from "../common/Tooltip";
+import Avatar from "../common/Avatar";
 
 // used in character page to display the profile
 export default function CharacterProfile({
@@ -35,7 +37,7 @@ export default function CharacterProfile({
 }) {
 	const loading = character === undefined;
 
-	const { data: currentCharacter } = useCurrentCharacter();
+	const { data: currentCharacter } = useAccountCharacter();
 	const { data: followStatus, isLoading: isLoadingFollowStatus } =
 		useCharacterFollowStats(character?.characterId);
 	const {

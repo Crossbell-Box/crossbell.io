@@ -1,18 +1,16 @@
 import React from "react";
+import { showNotification } from "@mantine/notifications";
 
 import { useToggleSyncOperator } from "@/utils/apis/contract";
 import { isAddressEqual } from "@/utils/ethers";
 import { OPERATOR_ADDRESS } from "@/utils/apis/operator-sync";
-import {
-	useCharacterOperator,
-	useCurrentCharacter,
-} from "@/utils/apis/indexer";
-import { showNotification } from "@mantine/notifications";
+import { useCharacterOperator } from "@/utils/apis/indexer";
+import { useAccountCharacter } from "@/components/connectkit";
 
 import { openRemoveOperatorModal } from "../modals";
 
 export function useToggleOperator() {
-	const { data: character } = useCurrentCharacter();
+	const { data: character } = useAccountCharacter();
 	const { data: operator } = useCharacterOperator(character?.characterId);
 	const [isTogglingOperator, setIsTogglingOperator] = React.useState(false);
 

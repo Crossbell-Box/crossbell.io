@@ -1,24 +1,28 @@
-import Avatar from "@/components/common/Avatar";
 import { Skeleton, Space, Text, Title } from "@mantine/core";
 import { CharacterEntity, NoteEntity } from "crossbell.js";
-import { useCharacter, useNote, useNoteStatus } from "@/utils/apis/indexer";
-import classNames from "classnames";
-import MediaCarousel from "./MediaCarousel";
 import { useRouter } from "next/router";
+import { useAccount } from "wagmi";
+import { useCallback } from "react";
+import classNames from "classnames";
+
+import Avatar from "@/components/common/Avatar";
+import { useAccountCharacter } from "@/components/connectkit";
+import { useCharacter, useNote, useNoteStatus } from "@/utils/apis/indexer";
 import { composeNoteHref, getOrigin, useNoteRouterQuery } from "@/utils/url";
 import { useLikeNote, useMintNote, useUnlikeNote } from "@/utils/apis/contract";
 import { copyToClipboard } from "@/utils/other";
-import Tooltip from "../Tooltip";
-import LoadingOverlay from "../LoadingOverlay";
-import { MarkdownRenderer } from "./MarkdownRenderer";
-import { useAccount } from "wagmi";
-import { CharacterHandle, CharacterName } from "../Character";
-import Time from "../Time";
 import { getValidAttachments } from "@/utils/metadata";
+
+import { CharacterHandle, CharacterName } from "../Character";
+import LoadingOverlay from "../LoadingOverlay";
+import Tooltip from "../Tooltip";
+import Time from "../Time";
+import MetadataContentUpdater from "../MetadataContentUpdater";
+
+import { MarkdownRenderer } from "./MarkdownRenderer";
+import MediaCarousel from "./MediaCarousel";
 import NoteSourceBadges from "./NoteSourceBadges";
 import NoteIdBadge from "./NoteIdBadge";
-import { useCallback } from "react";
-import MetadataContentUpdater from "../MetadataContentUpdater";
 
 function ActionButton({
 	text,
@@ -349,7 +353,12 @@ function NoteActions({
 	characterId: number;
 	noteId: number;
 }) {
-	const { data: status } = useNoteStatus(characterId, noteId);
+	const { data: currentCharacter } = useAccountCharacter();
+	const { data: status } = useNoteStatus(
+		characterId,
+		noteId,
+		currentCharacter ?? null
+	);
 
 	const likeNote = useLikeNote(characterId, noteId);
 	const unlikeNote = useUnlikeNote(characterId, noteId);

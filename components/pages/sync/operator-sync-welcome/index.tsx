@@ -2,10 +2,8 @@ import { showNotification } from "@mantine/notifications";
 import { useConnectModal } from "@rainbow-me/rainbowkit";
 import React from "react";
 
-import {
-	useCharacterOperator,
-	useCurrentCharacter,
-} from "@/utils/apis/indexer";
+import { useAccountCharacter } from "@/components/connectkit";
+import { useCharacterOperator } from "@/utils/apis/indexer";
 import {
 	OPERATOR_ADDRESS,
 	useActivateCharacter,
@@ -18,7 +16,7 @@ import { SNSIcons } from "./sns-icons";
 import { Scenes } from "./scenes";
 
 export default function OperatorSyncWelcome() {
-	const { data: character } = useCurrentCharacter();
+	const { data: character } = useAccountCharacter();
 	const { validate } = useLoginChecker();
 	const activate = useActivateCharacter(character?.characterId);
 	const setOperator = useToggleSyncOperator("add");

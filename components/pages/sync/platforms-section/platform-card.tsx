@@ -5,12 +5,11 @@ import { Text } from "@mantine/core";
 import React from "react";
 import { StaticImageData } from "next/image";
 import { showNotification } from "@mantine/notifications";
+import dayjs from "dayjs";
 
 import { isAddressEqual } from "@/utils/ethers";
-import {
-	useCharacterOperator,
-	useCurrentCharacter,
-} from "@/utils/apis/indexer";
+import { useAccountCharacter } from "@/components/connectkit";
+import { useCharacterOperator } from "@/utils/apis/indexer";
 import {
 	getPlatformDisplayName,
 	getPlatformUserProfileUrl,
@@ -25,8 +24,8 @@ import {
 } from "@/components/pages/sync/modals";
 import Image from "@/components/common/Image";
 import { formatDate } from "@/utils/time";
+
 import bindIllustration from "@/public/images/sync/bind-illustration.png";
-import dayjs from "dayjs";
 
 export type PlatformCardProps = {
 	isBound: boolean;
@@ -61,7 +60,7 @@ export function PlatformCard({
 	noteCount,
 	lastUpdatedAt,
 }: PlatformCardProps) {
-	const { data: character } = useCurrentCharacter();
+	const { data: character } = useAccountCharacter();
 	const { data: operator } = useCharacterOperator(character?.characterId);
 
 	const syncAccount = useSyncAccount(

@@ -1,4 +1,3 @@
-import React from "react";
 import {
 	Button,
 	Card,
@@ -9,8 +8,9 @@ import {
 } from "@mantine/core";
 import { useHotkeys } from "@mantine/hooks";
 import { closeAllModals } from "@mantine/modals";
-import classNames from "classnames";
 import { useClickOutside } from "@mantine/hooks";
+import React from "react";
+import classNames from "classnames";
 
 import Image from "@/components/common/Image";
 import { openBorderlessModal } from "@/components/common/Modal";
@@ -22,8 +22,7 @@ import {
 	SupportedPlatform,
 	useBindAccount,
 } from "@/utils/apis/operator-sync";
-
-import { useCurrentCharacter } from "@/utils/apis/indexer";
+import { useAccountCharacter } from "@/components/connectkit";
 import { copyToClipboard } from "@/utils/other";
 
 import DoneImage from "@/public/images/sync/congrats.svg";
@@ -57,7 +56,7 @@ enum Scene {
 function BindingModal({ platform }: { platform: SupportedPlatform }) {
 	const [scene, setScene] = React.useState(Scene.form);
 	const [username, setUsername] = React.useState("");
-	const { data: character } = useCurrentCharacter();
+	const { data: character } = useAccountCharacter();
 	const veriHandle = character?.handle && getVeriHandle(character.handle);
 	const profileUrl = username && getPlatformUserProfileUrl(platform, username);
 

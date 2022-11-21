@@ -1,11 +1,13 @@
-import { useContract } from "@/utils/crossbell.js";
 import { showNotification } from "@mantine/notifications";
 import { useMutation, useQueryClient } from "@tanstack/react-query";
+
+import { useContract } from "@/utils/crossbell.js";
+import { useAccountCharacter } from "@/components/connectkit";
+
 import {
 	SCOPE_KEY_CHARACTER_FOLLOW_RELATION,
 	SCOPE_KEY_CHARACTER_FOLLOW_STATS,
 	SCOPE_KEY_NOTE_STATUS,
-	useCurrentCharacter,
 } from "../indexer";
 
 export const LinkTypes = {
@@ -18,7 +20,7 @@ type LinkType = typeof LinkTypes[keyof typeof LinkTypes];
 // link note
 
 function useLinkNote(characterId: number, noteId: number, linkType: LinkType) {
-	const { data: character } = useCurrentCharacter();
+	const { data: character } = useAccountCharacter();
 	const contract = useContract();
 	const queryClient = useQueryClient();
 
@@ -53,7 +55,7 @@ function useUnlinkNote(
 	noteId: number,
 	linkType: LinkType
 ) {
-	const { data: character } = useCurrentCharacter();
+	const { data: character } = useAccountCharacter();
 	const contract = useContract();
 	const queryClient = useQueryClient();
 
@@ -98,7 +100,7 @@ function useLinkCharacter(
 	linkType: LinkType,
 	options?: any
 ) {
-	const { data: character } = useCurrentCharacter();
+	const { data: character } = useAccountCharacter();
 	const contract = useContract();
 
 	return useMutation(
@@ -127,7 +129,7 @@ function useUnlinkCharacter(
 	linkType: LinkType,
 	options?: any
 ) {
-	const { data: character } = useCurrentCharacter();
+	const { data: character } = useAccountCharacter();
 	const contract = useContract();
 
 	return useMutation(
@@ -152,7 +154,7 @@ function useUnlinkCharacter(
 }
 
 export function useFollowCharacter(characterId: number) {
-	const { data: character } = useCurrentCharacter();
+	const { data: character } = useAccountCharacter();
 	const queryClient = useQueryClient();
 
 	return useLinkCharacter(characterId, LinkTypes.follow, {
@@ -173,7 +175,7 @@ export function useFollowCharacter(characterId: number) {
 }
 
 export function useUnfollowCharacter(characterId: number) {
-	const { data: character } = useCurrentCharacter();
+	const { data: character } = useAccountCharacter();
 	const queryClient = useQueryClient();
 
 	return useUnlinkCharacter(characterId, LinkTypes.follow, {

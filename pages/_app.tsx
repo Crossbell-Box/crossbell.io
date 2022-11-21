@@ -10,6 +10,7 @@ import QueryProvider from "@/components/providers/QueryProvider";
 import NotificationsProvider from "@/components/providers/NotificationsProvider";
 import ModalsProvider from "@/components/providers/ModalsProvider";
 import { RouterTransition } from "@/components/providers/RouterTransition";
+import { ConnectKitProvider } from "@/components/connectkit";
 import { ipfsGateway } from "@/utils/ipfs";
 import "@/styles/globals.css";
 import "uno.css";
@@ -58,7 +59,9 @@ export default function App({ Component, pageProps }: AppPropsWithLayout) {
 							<NotificationsProvider>
 								<RouterTransition />
 								<IpfsGatewayContext.Provider value={ipfsGateway}>
-									{getLayout(<Component {...pageProps} />)}
+									<ConnectKitProvider>
+										{getLayout(<Component {...pageProps} />)}
+									</ConnectKitProvider>
 								</IpfsGatewayContext.Provider>
 							</NotificationsProvider>
 						</ModalsProvider>
