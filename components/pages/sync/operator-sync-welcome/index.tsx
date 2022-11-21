@@ -1,8 +1,7 @@
 import { showNotification } from "@mantine/notifications";
-import { useConnectModal } from "@rainbow-me/rainbowkit";
 import React from "react";
 
-import { useAccountCharacter } from "@/components/connectkit";
+import { useAccountCharacter, useConnectKit } from "@/components/connectkit";
 import { useCharacterOperator } from "@/utils/apis/indexer";
 import {
 	OPERATOR_ADDRESS,
@@ -21,7 +20,7 @@ export default function OperatorSyncWelcome() {
 	const activate = useActivateCharacter(character?.characterId);
 	const setOperator = useToggleSyncOperator("add");
 	const { data: operator } = useCharacterOperator(character?.characterId);
-	const { openConnectModal } = useConnectModal();
+	const { modal } = useConnectKit();
 
 	const handleStart = React.useCallback(async () => {
 		if (character?.characterId && validate()) {
@@ -38,9 +37,9 @@ export default function OperatorSyncWelcome() {
 				});
 			}
 		} else {
-			openConnectModal?.();
+			modal.show();
 		}
-	}, [operator, validate, character, activate, setOperator, openConnectModal]);
+	}, [operator, validate, character, activate, setOperator, modal]);
 
 	return (
 		<div className="relative z-0 pt-70px pb-100px">

@@ -1,16 +1,18 @@
+import config from "config";
+import { Indexer, Contract } from "crossbell.js";
+import { useAccount } from "wagmi";
+import { BigNumber } from "ethers";
+import { parseEther } from "ethers/lib/utils";
+
 import {
 	openFaucetHintModel,
 	openMintNewCharacterModel,
 } from "@/components/common/NewUserGuide";
-import config from "config";
-import { Indexer, Contract } from "crossbell.js";
-import { useAccount } from "wagmi";
+import { useConnectKit } from "@/components/connectkit";
+
 import { getCsbBalance, getCurrentCharacterId } from "../apis/indexer";
-import { BigNumber } from "ethers";
-import { parseEther } from "ethers/lib/utils";
 import { BizError, ERROR_CODES } from "../errors";
 import { getCurrentAddress } from "../wallet/provider";
-import { useConnectModal } from "@rainbow-me/rainbowkit";
 
 const isProductionServer =
 	typeof window === "undefined" && process.env.NODE_ENV === "production";
@@ -20,23 +22,24 @@ export const indexer = new Indexer(
 );
 
 let contract: Contract;
+
 export const useContract = () => {
 	const { connector, isConnected } = useAccount();
-	const { openConnectModal } = useConnectModal();
+	const { modal } = useConnectKit();
 
 	if (isConnected && connector) {
 		// connect the contract with the provider
 		connector.getProvider().then(async (res) => {
 			contract = new Contract(res as any);
 			await contract.connect();
-			contract = injectContractChecker(contract, openConnectModal);
+			contract = injectContractChecker(contract, modal.show);
 			return contract;
 		});
 	} else {
 		// user is not logged in
 		contract = new Contract();
 		contract.connect();
-		contract = injectContractChecker(contract, openConnectModal);
+		contract = injectContractChecker(contract, modal.show);
 	}
 
 	return contract;

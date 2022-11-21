@@ -1,32 +1,7 @@
 import React from "react";
-import { connectorsForWallets } from "@rainbow-me/rainbowkit";
-import {
-	injectedWallet,
-	rainbowWallet,
-	metaMaskWallet,
-	coinbaseWallet,
-	walletConnectWallet,
-	braveWallet,
-} from "@rainbow-me/rainbowkit/wallets";
 import { createClient, createStorage } from "wagmi";
-import { type RainbowKitProviderProps } from "@rainbow-me/rainbowkit/dist/components/RainbowKitProvider/RainbowKitProvider";
-import "@rainbow-me/rainbowkit/styles.css";
 
-import { chains, provider } from "@/components/connectkit/config";
-
-const connectors = connectorsForWallets([
-	{
-		groupName: "Popular",
-		wallets: [
-			metaMaskWallet({ chains, shimDisconnect: true }),
-			walletConnectWallet({ chains }),
-			rainbowWallet({ chains }),
-			braveWallet({ chains, shimDisconnect: true }),
-			coinbaseWallet({ appName: "Crossbell.io", chains }),
-			injectedWallet({ chains, shimDisconnect: true }),
-		],
-	},
-]);
+import { chains, provider, connectors } from "@/components/connectkit/config";
 
 const noopStorage: Storage = {
 	getItem: (_) => "",
@@ -46,19 +21,6 @@ const wagmiClient = createClient({
 	storage,
 });
 
-const appInfo: RainbowKitProviderProps["appInfo"] = {
-	appName: "Crossbell.io",
-	learnMoreUrl: "https://learnaboutcryptowallets.example",
-	disclaimer: ({ Text, Link }) => (
-		<Text>
-			By connecting your wallet, you agree to the{" "}
-			<Link href="https://termsofservice.xyz">Terms of Service</Link> and
-			acknowledge you have read and understand the protocol{" "}
-			<Link href="https://disclaimer.xyz">Disclaimer</Link>
-		</Text>
-	),
-};
-
 export function getCurrentAddress() {
 	let data = storage.getItem("store") as any;
 
@@ -73,4 +35,4 @@ export function getCurrentAddress() {
 	return data?.state?.data?.account;
 }
 
-export { chains, wagmiClient, appInfo };
+export { chains, wagmiClient };
