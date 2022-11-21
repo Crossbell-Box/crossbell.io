@@ -1,33 +1,37 @@
-import { useDisconnectCurrentCharacter } from "@/utils/apis/indexer";
+import { Menu, Space, Text } from "@mantine/core";
+import { useDisclosure } from "@mantine/hooks";
+import Link from "next/link";
+
 import {
 	ExportCrossbellDataHref,
 	WalletCharacterManageHref,
 } from "@/utils/url";
-import { Menu, Space, Text } from "@mantine/core";
-import { useDisclosure } from "@mantine/hooks";
-import { useDisconnect, useAccount, useBalance } from "wagmi";
 import Modal from "@/components/common/Modal";
+
+import { ConnectButtonProps } from "./index";
+import WalletDisplayButton from "./_WalletDisplayButton";
 import AccountList from "./_AccountList";
 import MenuItem from "./_MenuItem";
-import WalletDisplayButton from "./_WalletDisplayButton";
-import { ConnectButtonProps } from "./index";
-import Link from "next/link";
+
+import {
+	useDisconnectAccount,
+	useAccountBalance,
+	GeneralAccount,
+} from "@/components/connectkit";
+
+export type WalletButtonWithMenuProps = {
+	mode: ConnectButtonProps["mode"];
+	account: GeneralAccount;
+};
 
 export default function WalletButtonWithMenu({
 	mode,
-}: Pick<ConnectButtonProps, "mode">) {
+	account,
+}: WalletButtonWithMenuProps) {
 	const [menuOpened, menuHandlers] = useDisclosure(false);
-
 	const [disconnOpened, disconnHandlers] = useDisclosure(false);
-
-	const { disconnect } = useDisconnect();
-
-	const { address } = useAccount();
-	const { data, isLoading: isLoadingBalance } = useBalance({
-		addressOrName: address,
-	});
-
-	const { disconnect: disconnCharacter } = useDisconnectCurrentCharacter();
+	const { balance, isLoading: isLoadingBalance } = useAccountBalance();
+	const disconnectAccount = useDisconnectAccount();
 
 	return (
 		<>
@@ -35,10 +39,7 @@ export default function WalletButtonWithMenu({
 				opened={disconnOpened}
 				onClose={() => disconnHandlers.close()}
 				title="Disconnect Wallet?"
-				onConfirm={() => {
-					disconnCharacter();
-					disconnect();
-				}}
+				onConfirm={disconnectAccount}
 				confirmText="Disconnect"
 				confirmType="danger"
 			>
@@ -59,6 +60,7 @@ export default function WalletButtonWithMenu({
 						className="w-full"
 						menuOpened={menuOpened}
 						mode={mode}
+						account={account}
 					/>
 				</Menu.Target>
 
@@ -69,7 +71,7 @@ export default function WalletButtonWithMenu({
 							<Text className="i-csb:logo text-lg" color="black" />
 							<Space w={5} />
 							<Text className="font-600">
-								{isLoadingBalance ? "..." : data?.formatted}
+								{isLoadingBalance ? "..." : balance}
 							</Text>
 						</div>
 					</MenuItem>
@@ -81,10 +83,17 @@ export default function WalletButtonWithMenu({
 
 					<Menu.Divider />
 
-					<MenuItem component={Link} href={WalletCharacterManageHref}>
-						Manage Characters
-					</MenuItem>
-					<MenuItem component={Link} href={ExportCrossbellDataHref} target="_blank">
+					{account.type === "wallet" && (
+						<MenuItem component={Link} href={WalletCharacterManageHref}>
+							Manage Characters
+						</MenuItem>
+					)}
+
+					<MenuItem
+						component={Link}
+						href={ExportCrossbellDataHref}
+						target="_blank"
+					>
 						Export Your Data
 					</MenuItem>
 					<MenuItem onClick={() => disconnHandlers.open()}>Disconnect</MenuItem>
