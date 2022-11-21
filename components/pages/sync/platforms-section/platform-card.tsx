@@ -75,6 +75,7 @@ export function PlatformCard({
 		: getPlatformSite(platform);
 
 	const hasOperator = isAddressEqual(operator, OPERATOR_ADDRESS);
+	const disableBtn = !hasOperator && !isBound;
 
 	return (
 		<div
@@ -91,14 +92,14 @@ export function PlatformCard({
 					className={classNames(
 						"font-roboto text-16px font-500 leading-24px",
 						"py-16px px-8px min-w-65px rounded-12px border-none",
-						hasOperator
-							? "cursor-pointer transition hover:opacity-90 active:opacity-100"
-							: "cursor-not-allowed",
+						disableBtn
+							? "cursor-not-allowed"
+							: "cursor-pointer transition hover:opacity-90 active:opacity-100",
 						isBound
 							? "bg-[#DAE2FF] text-blue-primary"
 							: "bg-blue-primary text-white"
 					)}
-					disabled={!hasOperator}
+					disabled={disableBtn}
 					onClick={() => {
 						if (isBound) {
 							openUnbindingModal(platform, identity!);
