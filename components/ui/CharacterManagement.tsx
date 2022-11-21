@@ -20,15 +20,12 @@ import { PropsWithChildren, useEffect, useState } from "react";
 import { useCharacter, useCharacterByHandle } from "@/utils/apis/indexer";
 import { ipfsLinkToHttpLink, uploadToIpfs } from "@/utils/ipfs";
 import { extractCharacterName } from "@/utils/metadata";
-import {
-	useCreateCharacter,
-	useSetCharacterMetadata,
-} from "@/utils/apis/contract";
 import { composeCharacterHref } from "@/utils/url";
 import { BizError } from "@/utils/errors";
 import {
 	useAccountStore,
 	useConnectKit,
+	useCreateCharacter,
 	useUpdateCharacterHandle,
 	useUpdateCharacterMetadata,
 } from "@/components/connectkit";
