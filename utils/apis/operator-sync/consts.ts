@@ -19,7 +19,7 @@ const PLATFORM_DISPLAY_STATUS_MAP: Record<SupportedPlatform, boolean> = {
 	twitter: true,
 	tg_channel: true,
 	substack: true,
-	pixiv: false,
+	pixiv: true,
 };
 
 export function isShowPlatform(platform: SupportedPlatform): boolean {
