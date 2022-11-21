@@ -1,0 +1,24 @@
+.progress {
+	height: 3px;
+	background: rgba(255, 255, 255, 0.6);
+	border-radius: 3px;
+	overflow: hidden;
+}
+
+.progressFill {
+	height: 100%;
+	width: 100%;
+	animation-name: progress;
+	animation-timing-function: linear;
+	background: rgba(8, 33, 53, 0.6);
+}
+
+@keyframes progress {
+	from {
+		transform: translateX(100%);
+	}
+
+	to {
+		transform: translateX(0%);
+	}
+}

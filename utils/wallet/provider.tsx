@@ -8,42 +8,11 @@ import {
 	walletConnectWallet,
 	braveWallet,
 } from "@rainbow-me/rainbowkit/wallets";
-import {
-	type Chain,
-	configureChains,
-	createClient,
-	createStorage,
-} from "wagmi";
-import { jsonRpcProvider } from "wagmi/providers/jsonRpc";
+import { createClient, createStorage } from "wagmi";
 import { type RainbowKitProviderProps } from "@rainbow-me/rainbowkit/dist/components/RainbowKitProvider/RainbowKitProvider";
 import "@rainbow-me/rainbowkit/styles.css";
 
-const crossbellChain: Chain = {
-	id: 3737,
-	name: "Crossbell",
-	network: "crossbell",
-	// @ts-ignore
-	iconUrl: "/images/logo.svg",
-	iconBackground: "#fff",
-	nativeCurrency: {
-		decimals: 18,
-		name: "CSB",
-		symbol: "CSB",
-	},
-	rpcUrls: {
-		default: "https://rpc.crossbell.io",
-	},
-	blockExplorers: {
-		default: { name: "CrossScan", url: "https://scan.crossbell.io" },
-	},
-	testnet: false,
-};
-
-const { chains, provider } = configureChains(
-	[crossbellChain],
-	[jsonRpcProvider({ rpc: (chain) => ({ http: chain.rpcUrls.default }) })],
-	{ pollingInterval: 1_000 }
-);
+import { chains, provider } from "@/components/connectkit/config";
 
 const connectors = connectorsForWallets([
 	{
