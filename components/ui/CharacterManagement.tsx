@@ -1,5 +1,3 @@
-import { PropsWithChildren, useEffect, useState } from "react";
-import { useCharacter, useCharacterByHandle } from "@/utils/apis/indexer";
 import {
 	TextInput,
 	Button,
@@ -14,21 +12,24 @@ import {
 } from "@mantine/core";
 import { useForm } from "@mantine/form";
 import { Dropzone, IMAGE_MIME_TYPE } from "@mantine/dropzone";
+import { useDebouncedValue } from "@mantine/hooks";
+import { showNotification } from "@mantine/notifications";
+import Link from "next/link";
+import { PropsWithChildren, useEffect, useState } from "react";
+
+import { useCharacter, useCharacterByHandle } from "@/utils/apis/indexer";
 import { ipfsLinkToHttpLink, uploadToIpfs } from "@/utils/ipfs";
 import { extractCharacterName } from "@/utils/metadata";
-import { useDebouncedValue } from "@mantine/hooks";
 import {
 	useCreateCharacter,
 	useSetCharacterHandle,
 	useSetCharacterMetadata,
 } from "@/utils/apis/contract";
-import LoadingOverlay from "../common/LoadingOverlay";
 import { composeCharacterHref } from "@/utils/url";
-import { showNotification } from "@mantine/notifications";
-import Link from "next/link";
-import { useConnectModal } from "@rainbow-me/rainbowkit";
-import { useAccount } from "wagmi";
 import { BizError } from "@/utils/errors";
+import { useAccountStore, useConnectKit } from "@/components/connectkit";
+
+import LoadingOverlay from "../common/LoadingOverlay";
 
 export default function CharacterManagement({
 	characterId,
@@ -408,14 +409,17 @@ export default function CharacterManagement({
 
 // This will keep popping up if the user is not logged in.
 function LoginPopup() {
-	const { isConnected } = useAccount();
-	const connectModal = useConnectModal();
+	const { account, ssrReady } = useAccountStore((s) => ({
+		account: s.computed.account,
+		ssrReady: s.ssrReady,
+	}));
+	const { modal } = useConnectKit();
 
 	useEffect(() => {
-		if (!isConnected) {
-			connectModal.openConnectModal?.();
+		if (ssrReady && !account) {
+			modal.show();
 		}
-	});
+	}, [account, ssrReady, modal]);
 
 	return <></>;
 }
