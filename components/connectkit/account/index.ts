@@ -4,5 +4,6 @@ export * from "./use-account-character";
 export * from "./use-account-characters";
 export * from "./use-account-has-character";
 export * from "./use-disconnect-account";
+export * from "./use-set-primary-character";
 export * from "./use-update-character-handle";
 export * from "./use-update-character-metadata";

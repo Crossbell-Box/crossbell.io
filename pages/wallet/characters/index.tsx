@@ -9,7 +9,6 @@ import LoadMore from "@/components/common/LoadMore";
 import { getLayout } from "@/components/layouts/AppLayout";
 import Header from "@/components/layouts/Header";
 import { NextPageWithLayout } from "@/pages/_app";
-import { useSetPrimaryCharacterId } from "@/utils/apis/contract";
 import { useCharacterFollowStats } from "@/utils/apis/indexer";
 import { extractCharacterName } from "@/utils/metadata";
 import {
@@ -17,7 +16,11 @@ import {
 	composeWalletCharacterEditHref,
 	WalletCharacterNewHref,
 } from "@/utils/url";
-import { useAccountCharacters, useAccountStore } from "@/components/connectkit";
+import {
+	useAccountCharacters,
+	useAccountStore,
+	useSetPrimaryCharacter,
+} from "@/components/connectkit";
 
 const Page: NextPageWithLayout = () => {
 	const { characters, hasNextPage, fetchNextPage, isFetchingNextPage } =
@@ -71,10 +74,10 @@ function CharacterCard({ character }: { character: CharacterEntity }) {
 	);
 	const account = useAccountStore((s) => s.computed.account);
 
-	const setPrimary = useSetPrimaryCharacterId(character.characterId);
+	const setPrimary = useSetPrimaryCharacter();
 
 	const handleSetPrimary = () => {
-		setPrimary.mutate(undefined, {
+		setPrimary.mutate(character, {
 			onSuccess: () => {
 				showNotification({
 					message: `Character @${character.handle} is now your primary character.`,
