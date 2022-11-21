@@ -1,3 +1,5 @@
+import { CharacterMetadata } from "crossbell.js";
+
 import { indexer } from "@/utils/crossbell.js";
 
 type RequestConfig = {
@@ -168,5 +170,16 @@ export async function updateHandle(
 		method: "POST",
 		token,
 		body: { handle },
+	});
+}
+
+export async function updateMetadata(
+	token: string,
+	metadata: CharacterMetadata
+): Promise<{ transactionHash: string; data: string }> {
+	return request("/newbie/contract/characters/me/metadata", {
+		method: "POST",
+		token,
+		body: { metadata },
 	});
 }

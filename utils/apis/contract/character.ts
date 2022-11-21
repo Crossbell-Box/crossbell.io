@@ -9,7 +9,6 @@ import {
 	SCOPE_KEY_CHARACTER_BY_HANDLE,
 	SCOPE_KEY_PRIMARY_CHARACTER,
 } from "../indexer";
-import { deepMerge } from "@/utils/metadata";
 
 // create new character
 
@@ -40,36 +39,6 @@ export function useCreateCharacter() {
 			onError: (err: any) => {
 				showNotification({
 					title: "Error while creating character",
-					message: err.message,
-					color: "red",
-				});
-			},
-		}
-	);
-}
-
-// set character metadata
-
-export function useSetCharacterMetadata(characterId: number) {
-	const contract = useContract();
-	const queryClient = useQueryClient();
-
-	return useMutation(
-		async ({ metadata }: { metadata: CharacterMetadata }) => {
-			return contract.changeCharacterMetadata(characterId, (oMetadata) => {
-				if (oMetadata) {
-					return deepMerge(oMetadata, metadata);
-				}
-				return metadata;
-			});
-		},
-		{
-			onSuccess: () => {
-				return queryClient.invalidateQueries(SCOPE_KEY_CHARACTER(characterId));
-			},
-			onError: (err: any) => {
-				showNotification({
-					title: "Error while setting character metadata",
 					message: err.message,
 					color: "red",
 				});

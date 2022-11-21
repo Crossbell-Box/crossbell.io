@@ -30,6 +30,7 @@ import {
 	useAccountStore,
 	useConnectKit,
 	useUpdateCharacterHandle,
+	useUpdateCharacterMetadata,
 } from "@/components/connectkit";
 
 import LoadingOverlay from "../common/LoadingOverlay";
@@ -157,7 +158,7 @@ export default function CharacterManagement({
 
 	const createCharacter = useCreateCharacter();
 	const setHandle = useUpdateCharacterHandle();
-	const setMetadata = useSetCharacterMetadata(character?.characterId!);
+	const setMetadata = useUpdateCharacterMetadata();
 
 	const [loadingDescription, setLoadingDescription] = useState(
 		"Loading character..."
@@ -180,8 +181,8 @@ export default function CharacterManagement({
 				const currentName = extractCharacterName(character, {
 					fallbackToHandle: false,
 				});
-				const currentBio = character.metadata?.content?.bio;
-				const currentAvatar = character.metadata?.content?.avatars?.[0];
+				const currentBio = character.metadata?.content?.bio ?? "";
+				const currentAvatar = character.metadata?.content?.avatars?.[0] ?? "";
 
 				// task1: check if handle is changed
 				if (form.values.handle !== currentHandle) {
@@ -203,6 +204,7 @@ export default function CharacterManagement({
 					taskNames.push("Updating metadata");
 					tasks.push(async () => {
 						await setMetadata.mutateAsync({
+							characterId: character.characterId,
 							metadata: {
 								name: form.values.name,
 								avatars: [form.values.avatar].filter((x) => Boolean(x)),
