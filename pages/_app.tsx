@@ -1,19 +1,22 @@
+import "uno.css";
+import "@/styles/globals.css";
+
 import { IpfsGatewayContext } from "@crossbell/ipfs-react";
 import { ReactElement, ReactNode } from "react";
 import { DefaultSeo } from "next-seo";
 import { AppProps } from "next/app";
 import { NextPage } from "next/types";
 import Head from "next/head";
+
 import WalletProvider from "@/components/providers/WalletProvider";
 import ThemeProvider from "@/components/providers/ThemeProvider";
 import QueryProvider from "@/components/providers/QueryProvider";
 import NotificationsProvider from "@/components/providers/NotificationsProvider";
 import ModalsProvider from "@/components/providers/ModalsProvider";
 import { RouterTransition } from "@/components/providers/RouterTransition";
-import { ConnectKitProvider } from "@/components/connectkit";
+import { ConnectKitProvider, useConnectKit } from "@/components/connectkit";
 import { ipfsGateway } from "@/utils/ipfs";
-import "@/styles/globals.css";
-import "uno.css";
+import { ContractProvider } from "@/utils/crossbell.js";
 
 export type NextPageWithLayout<P = {}, IP = P> = NextPage<P, IP> & {
 	getLayout?: (page: ReactElement) => ReactNode;
@@ -25,6 +28,7 @@ type AppPropsWithLayout = AppProps & {
 
 export default function App({ Component, pageProps }: AppPropsWithLayout) {
 	const getLayout = Component.getLayout ?? ((page) => page);
+	const { modal } = useConnectKit();
 
 	return (
 		<>
@@ -60,7 +64,9 @@ export default function App({ Component, pageProps }: AppPropsWithLayout) {
 								<RouterTransition />
 								<IpfsGatewayContext.Provider value={ipfsGateway}>
 									<ConnectKitProvider>
-										{getLayout(<Component {...pageProps} />)}
+										<ContractProvider openConnectModal={modal.show}>
+											{getLayout(<Component {...pageProps} />)}
+										</ContractProvider>
 									</ConnectKitProvider>
 								</IpfsGatewayContext.Provider>
 							</NotificationsProvider>
