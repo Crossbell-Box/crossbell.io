@@ -22,12 +22,15 @@ import { ipfsLinkToHttpLink, uploadToIpfs } from "@/utils/ipfs";
 import { extractCharacterName } from "@/utils/metadata";
 import {
 	useCreateCharacter,
-	useSetCharacterHandle,
 	useSetCharacterMetadata,
 } from "@/utils/apis/contract";
 import { composeCharacterHref } from "@/utils/url";
 import { BizError } from "@/utils/errors";
-import { useAccountStore, useConnectKit } from "@/components/connectkit";
+import {
+	useAccountStore,
+	useConnectKit,
+	useUpdateCharacterHandle,
+} from "@/components/connectkit";
 
 import LoadingOverlay from "../common/LoadingOverlay";
 
@@ -153,7 +156,7 @@ export default function CharacterManagement({
 	};
 
 	const createCharacter = useCreateCharacter();
-	const setHandle = useSetCharacterHandle(character?.characterId!);
+	const setHandle = useUpdateCharacterHandle();
 	const setMetadata = useSetCharacterMetadata(character?.characterId!);
 
 	const [loadingDescription, setLoadingDescription] = useState(
@@ -185,6 +188,7 @@ export default function CharacterManagement({
 					taskNames.push("Updating handle");
 					tasks.push(async () => {
 						await setHandle.mutateAsync({
+							characterId: character.characterId,
 							handle: form.values.handle,
 						});
 					});

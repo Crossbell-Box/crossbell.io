@@ -78,34 +78,6 @@ export function useSetCharacterMetadata(characterId: number) {
 	);
 }
 
-// set handle
-
-export function useSetCharacterHandle(characterId: number) {
-	const contract = useContract();
-	const queryClient = useQueryClient();
-
-	return useMutation(
-		async ({ handle }: { handle: string }) => {
-			return contract.setHandle(characterId, handle);
-		},
-		{
-			onSuccess: (data, { handle }) => {
-				return Promise.all([
-					queryClient.invalidateQueries(SCOPE_KEY_CHARACTER(characterId)),
-					queryClient.invalidateQueries(SCOPE_KEY_CHARACTER_BY_HANDLE(handle)),
-				]);
-			},
-			onError: (err: any) => {
-				showNotification({
-					title: "Error while setting character handle",
-					message: err.message,
-					color: "red",
-				});
-			},
-		}
-	);
-}
-
 // set primary character
 
 export function useSetPrimaryCharacterId(characterId: number) {

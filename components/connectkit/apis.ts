@@ -137,7 +137,6 @@ export type FetchAccountInfoResult =
 			ok: true;
 			email: string;
 			characterId: number;
-			handle: string;
 			csb: string;
 	  }
 	| {
@@ -149,17 +148,25 @@ export async function fetchAccountInfo(
 	token: string
 ): Promise<FetchAccountInfoResult> {
 	// FIXME: - remove handle placeholder
-	const {
-		email,
-		characterId,
-		message,
-		csb,
-		handle = "handle",
-	} = await request("/newbie/account", { method: "GET", token });
+	const { email, characterId, message, csb } = await request(
+		"/newbie/account",
+		{ method: "GET", token }
+	);
 
 	if (email && characterId) {
-		return { ok: true, email, characterId, csb, handle };
+		return { ok: true, email, characterId, csb };
 	} else {
 		return { ok: false, msg: message };
 	}
+}
+
+export async function updateHandle(
+	token: string,
+	handle: string
+): Promise<{ ok: boolean; msg: string }> {
+	return request("/newbie/contract/characters/me/handle", {
+		method: "POST",
+		token,
+		body: { handle },
+	});
 }

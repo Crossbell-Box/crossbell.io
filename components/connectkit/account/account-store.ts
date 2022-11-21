@@ -13,6 +13,7 @@ import {
 	WalletAccountSlice,
 } from "./account-store.wallet";
 
+export type { EmailAccount, WalletAccount };
 export type GeneralAccount = EmailAccount | WalletAccount;
 
 type AccountSlices = EmailAccountSlice & WalletAccountSlice;
