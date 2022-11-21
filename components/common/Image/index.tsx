@@ -90,9 +90,8 @@ export default memo(function Image({
 		<NextImage
 			src={_src}
 			alt={
-				alt ?? typeof originalSrc === "string"
-					? (originalSrc as string)
-					: "image"
+				alt ??
+				(typeof originalSrc === "string" ? (originalSrc as string) : "image")
 			}
 			loader={thumborLoader}
 			placeholder={placeholder}
