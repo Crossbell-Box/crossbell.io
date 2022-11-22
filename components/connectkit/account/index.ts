@@ -1,4 +1,5 @@
 export * from "./account-store";
+export * from "./character-operator";
 export * from "./link-character";
 export * from "./link-note";
 export * from "./use-account-balance";

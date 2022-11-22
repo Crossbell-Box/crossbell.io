@@ -7,9 +7,10 @@ import { StaticImageData } from "next/image";
 import { showNotification } from "@mantine/notifications";
 import dayjs from "dayjs";
 
-import { isAddressEqual } from "@/utils/ethers";
-import { useAccountCharacter } from "@/components/connectkit";
-import { useCharacterOperator } from "@/utils/apis/indexer";
+import {
+	useAccountCharacter,
+	useCharacterHasOperator,
+} from "@/components/connectkit";
 import {
 	getPlatformDisplayName,
 	getPlatformUserProfileUrl,
@@ -61,7 +62,7 @@ export function PlatformCard({
 	lastUpdatedAt,
 }: PlatformCardProps) {
 	const { data: character } = useAccountCharacter();
-	const { data: operator } = useCharacterOperator(character?.characterId);
+	const { hasOperator } = useCharacterHasOperator(OPERATOR_ADDRESS);
 
 	const syncAccount = useSyncAccount(
 		character?.characterId!,
@@ -73,7 +74,6 @@ export function PlatformCard({
 		? getPlatformUserProfileUrl(platform, identity)
 		: getPlatformSite(platform);
 
-	const hasOperator = isAddressEqual(operator, OPERATOR_ADDRESS);
 	const disableBtn = !hasOperator && !isBound;
 
 	return (

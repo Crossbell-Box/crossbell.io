@@ -1,16 +1,17 @@
 import { Loader } from "@mantine/core";
-import { CharacterEntity } from "crossbell.js";
 import React from "react";
 
 import { useIsFirstMount } from "@/utils/hooks/use-is-first-mount";
-import { useAccountCharacter } from "@/components/connectkit";
-import { useCharacterOperator } from "@/utils/apis/indexer";
+import {
+	useAccountCharacter,
+	useCharacterHasOperator,
+	useCharacterOperators,
+} from "@/components/connectkit";
 import {
 	OPERATOR_ADDRESS,
 	useCharacterActivation,
 	useCharacterBoundAccounts,
 } from "@/utils/apis/operator-sync";
-import { isAddressEqual } from "@/utils/ethers";
 
 import CharacterSection from "./character-section";
 import OperatorSyncWelcome from "./operator-sync-welcome";
@@ -18,7 +19,7 @@ import PlatformsSection from "./platforms-section";
 
 export default function OperatorSyncMain() {
 	const characterInfo = useCharacterInfo();
-	const operatorInfo = useOperatorInfo(characterInfo.character?.characterId);
+	const operatorInfo = useCharacterHasOperator(OPERATOR_ADDRESS);
 	const boundAccounts = useCharacterBoundAccounts(
 		characterInfo.character?.characterId
 	);
@@ -51,18 +52,15 @@ export default function OperatorSyncMain() {
 	return <OperatorSyncWelcome />;
 }
 
-function useOperatorInfo(
-	characterId: CharacterEntity["characterId"] | undefined
-) {
-	const { data, isLoading } = useCharacterOperator(characterId);
+function useOperatorInfo() {
+	const { data: operators, isLoading } = useCharacterOperators();
 
 	return React.useMemo(
 		() => ({
 			isLoading,
-			operator: data,
-			hasOperator: isAddressEqual(data, OPERATOR_ADDRESS),
+			hasOperator: operators?.includes(OPERATOR_ADDRESS) ?? false,
 		}),
-		[data, isLoading]
+		[operators, isLoading]
 	);
 }
 

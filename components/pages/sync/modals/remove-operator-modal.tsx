@@ -4,12 +4,16 @@ import { closeAllModals } from "@mantine/modals";
 import { Button, LoadingOverlay, Text } from "@mantine/core";
 import { useClickOutside } from "@mantine/hooks";
 
-import { useAccountCharacter } from "@/components/connectkit";
+import {
+	useAccountCharacter,
+	useToggleCharacterOperator,
+} from "@/components/connectkit";
 import { openBorderlessModal } from "@/components/common/Modal";
 import Image from "@/components/common/Image";
-import { useToggleSyncOperator } from "@/utils/apis/contract";
-import { NIL_ADDRESS } from "@/utils/ethers";
-import { useCharacterBoundAccounts } from "@/utils/apis/operator-sync";
+import {
+	OPERATOR_ADDRESS,
+	useCharacterBoundAccounts,
+} from "@/utils/apis/operator-sync";
 
 import seeYouImage from "@/public/images/sync/see-you-later.svg";
 
@@ -43,18 +47,16 @@ export function RemoveOperatorModal() {
 	);
 	const [scene, setScene] = React.useState(Scene.wannaRemoveTips);
 
-	const { mutate: removeOperator_, isLoading: isRemoving } =
-		useToggleSyncOperator("remove");
+	const [{ toggleOperator }, { isLoading: isRemoving }] =
+		useToggleCharacterOperator(OPERATOR_ADDRESS);
 
 	const removeOperator = React.useCallback(() => {
 		if (!isRemoving && character?.characterId) {
-			removeOperator_(character.characterId, {
-				onSuccess() {
-					setScene(Scene.removed);
-				},
+			toggleOperator().then(() => {
+				setScene(Scene.removed);
 			});
 		}
-	}, [removeOperator_, isRemoving, character]);
+	}, [toggleOperator, isRemoving, character]);
 
 	const ref = useClickOutside(() => {
 		if (!isRemoving) {

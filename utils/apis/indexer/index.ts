@@ -7,4 +7,3 @@ export * from "./link";
 export * from "./account";
 export * from "./search";
 export * from "./csb";
-export * from "./operator";
