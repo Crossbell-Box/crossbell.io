@@ -2,6 +2,8 @@ import React from "react";
 import classNames from "classnames";
 import { LoadingOverlay } from "@mantine/core";
 
+import { useRefreshDynamicContainer } from "../../components";
+
 import { Header } from "../components/header";
 import { TextInput } from "../components/text-input";
 import { Field } from "../components/field";
@@ -11,13 +13,12 @@ import { CodeInput } from "../components/code-input";
 import { TipsSection } from "../components/tips-section";
 
 import { SceneKind } from "../types";
-import { useConnectModalContext } from "../context";
 import { useResetPasswordStore, useScenesStore } from "../stores";
 
 export function InputEmailToResetPassword1() {
 	const goTo = useScenesStore(({ goTo }) => goTo);
 	const store = useResetPasswordStore();
-	const { refreshSize } = useConnectModalContext();
+	const refreshSize = useRefreshDynamicContainer();
 
 	// eslint-disable-next-line react-hooks/exhaustive-deps
 	React.useEffect(refreshSize, [store.isCodeSent]);

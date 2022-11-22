@@ -1,4 +1,4 @@
-.layoutContainer {
+.container {
 	overflow: hidden;
 	box-sizing: content-box;
 	will-change: transform, opacity, width, height;
@@ -8,18 +8,18 @@
 	transition-timing-function: cubic-bezier(0.25, 0.1, 0.25, 1) !important;
 }
 
-.sceneContainer {
+.content {
 	position: absolute;
 	left: 50%;
 	top: 0;
 	transform: translate(-50%, 0);
 }
 
-.sceneContainer [data-animation="scale-fade-in"] {
+.content [data-animation="scale-fade-in"] {
 	animation: scaleFadeIn 0.2s;
 }
 
-.sceneContainer [data-animation="fade-in"] {
+.content [data-animation="fade-in"] {
 	animation: fadeIn 0.2s;
 }
 
