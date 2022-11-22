@@ -1,12 +1,17 @@
-import { usePostNoteForNote } from "@/utils/apis/contract";
-import { composeNoteMetadata } from "@/utils/metadata";
 import { Button, Space } from "@mantine/core";
 import { NoteEntity } from "crossbell.js";
 import { useState } from "react";
+
+import { composeNoteMetadata } from "@/utils/metadata";
+import EmojiPicker from "@/components/common/Input/EmojiPicker";
+import {
+	useAccountCharacter,
+	useConnectKit,
+	usePostNoteForNote,
+} from "@/components/connectkit";
+
 import Avatar from "../common/Avatar";
 import Textarea from "../common/Input/Textarea";
-import EmojiPicker from "@/components/common/Input/EmojiPicker";
-import { useAccountCharacter, useConnectKit } from "@/components/connectkit";
 
 export function CommentTextarea({ note }: { note: NoteEntity }) {
 	const { data: character } = useAccountCharacter();
@@ -14,11 +19,7 @@ export function CommentTextarea({ note }: { note: NoteEntity }) {
 
 	const [value, setValue] = useState("");
 
-	const postNoteForNote = usePostNoteForNote(
-		note.characterId,
-		note.noteId,
-		character!
-	);
+	const postNoteForNote = usePostNoteForNote();
 
 	return (
 		<div className="px-3 py-3">
@@ -59,9 +60,11 @@ export function CommentTextarea({ note }: { note: NoteEntity }) {
 						character
 							? () => {
 									const metadata = composeNoteMetadata({ content: value });
-									postNoteForNote.mutate(metadata, {
-										onSuccess: () => setValue(""),
-									});
+
+									postNoteForNote.mutate(
+										{ metadata, note },
+										{ onSuccess: () => setValue("") }
+									);
 							  }
 							: modal.show
 					}

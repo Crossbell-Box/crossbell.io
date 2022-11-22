@@ -1,4 +1,9 @@
-import { CharacterMetadata } from "crossbell.js";
+import {
+	CharacterMetadata,
+	LinkItemType,
+	NoteMetadata,
+	LinkItemNote,
+} from "crossbell.js";
 
 import { indexer } from "@/utils/crossbell.js";
 
@@ -18,15 +23,7 @@ const request = (url: `/${string}`, { body, method, token }: RequestConfig) => {
 		method,
 		headers,
 		body: body && JSON.stringify(body),
-	}).then(async (res) => {
-		if (res.ok) {
-			return res.json();
-		} else {
-			throw new Error(
-				`Request Error(${res.status}): ${JSON.stringify(await res.json())}`
-			);
-		}
-	});
+	}).then(async (res) => res.json());
 };
 
 export async function registerSendCodeToEmail(
@@ -258,4 +255,21 @@ export async function unlinkCharacter({
 		`/newbie/contract/links/characters/${toCharacterId}/${linkType}`,
 		{ method: "DELETE", token }
 	);
+}
+
+export async function putNote({
+	token,
+	...body
+}: {
+	token: string;
+	metadata: NoteMetadata;
+	linkItemType: LinkItemType;
+	linkItem: LinkItemNote;
+	locked?: boolean;
+}): Promise<{ transactionHash: string; data: string }> {
+	return request(`/newbie/contract/notes`, {
+		method: "PUT",
+		token,
+		body,
+	});
 }
