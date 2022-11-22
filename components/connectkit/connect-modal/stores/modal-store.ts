@@ -6,14 +6,22 @@ export interface ModalStore {
 	show: () => void;
 }
 
-export const useModalStore = create<ModalStore>((set) => ({
+export const useModalStore = create<ModalStore>((set, get) => ({
 	isActive: false,
 
 	hide: () => {
-		set({ isActive: false });
+		const { isActive } = get();
+
+		if (isActive) {
+			set({ isActive: false });
+		}
 	},
 
 	show: () => {
-		set({ isActive: true });
+		const { isActive } = get();
+
+		if (!isActive) {
+			set({ isActive: true });
+		}
 	},
 }));
