@@ -3,15 +3,11 @@ import classNames from "classnames";
 
 import Image from "@/components/common/Image";
 
-import { Header } from "../../components/header";
-
 import styles from "./index.module.css";
 
 export function ConnectKindDifferences() {
 	return (
-		<div className="overflow-hidden">
-			<Header title="Supported Features" />
-
+		<>
 			<div data-animation="scale-fade-in" className="w-343px">
 				<div className="relative aspect-343/176">
 					<Image
@@ -79,7 +75,7 @@ export function ConnectKindDifferences() {
 
 			{/* TODO: - add link */}
 			<a
-				href=""
+				href="@/components/connectkit/components/connect-kind-differences/index"
 				target="_blank"
 				rel="noreferrer"
 				className="flex mt-12px mx-24px mb-24px"
@@ -88,6 +84,6 @@ export function ConnectKindDifferences() {
 					Learn More
 				</button>
 			</a>
-		</div>
+		</>
 	);
 }
