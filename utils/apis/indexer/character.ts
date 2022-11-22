@@ -3,7 +3,8 @@ import { indexer } from "@/utils/crossbell.js";
 import { useLocalStorage } from "@mantine/hooks";
 import { useEffect } from "react";
 import { useAccount } from "wagmi";
-import { LinkTypes } from "../contract";
+
+import { CharacterLinkType } from "./types";
 
 const SCOPE_KEY = ["indexer", "characters"];
 
@@ -173,13 +174,13 @@ export function useCharacterFollowStats(
 				indexer
 					.getLinks(characterId!, {
 						limit: 0,
-						linkType: LinkTypes.follow,
+						linkType: CharacterLinkType.follow,
 					})
 					.then((links) => links.count),
 				indexer
 					.getBacklinksOfCharacter(characterId!, {
 						limit: 0,
-						linkType: LinkTypes.follow,
+						linkType: CharacterLinkType.follow,
 					})
 					.then((links) => links.count),
 			]);
@@ -210,14 +211,14 @@ export function useCharacterFollowRelation(
 			const [isFollowing, isFollowed] = await Promise.all([
 				indexer
 					.getLinks(fromCharacterId!, {
-						linkType: LinkTypes.follow,
+						linkType: CharacterLinkType.follow,
 						limit: 0,
 						toCharacterId: toCharacterID,
 					})
 					.then((links) => links.count > 0),
 				indexer
 					.getLinks(toCharacterID!, {
-						linkType: LinkTypes.follow,
+						linkType: CharacterLinkType.follow,
 						limit: 0,
 						toCharacterId: fromCharacterId,
 					})
