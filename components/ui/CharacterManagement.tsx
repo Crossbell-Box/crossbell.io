@@ -24,7 +24,7 @@ import { composeCharacterHref } from "@/utils/url";
 import { BizError } from "@/utils/errors";
 import {
 	useAccountStore,
-	useConnectKit,
+	useConnectModal,
 	useCreateCharacter,
 	useUpdateCharacterHandle,
 	useUpdateCharacterMetadata,
@@ -419,13 +419,13 @@ function LoginPopup() {
 		account: s.computed.account,
 		ssrReady: s.ssrReady,
 	}));
-	const { modal } = useConnectKit();
+	const connectModal = useConnectModal();
 
 	useEffect(() => {
-		if (ssrReady && !account && !modal.isActive) {
-			modal.show();
+		if (ssrReady && !account && !connectModal.isActive) {
+			connectModal.show();
 		}
-	}, [account, ssrReady, modal]);
+	}, [account, ssrReady, connectModal]);
 
 	return <></>;
 }

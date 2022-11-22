@@ -1,11 +1,11 @@
 import React from "react";
 
 import { openMintNewCharacterModel } from "@/components/common/NewUserGuide";
-import { useAccountStore, useConnectKit } from "@/components/connectkit";
+import { useAccountStore, useConnectModal } from "@/components/connectkit";
 
 export function useLoginChecker() {
 	const account = useAccountStore((s) => s.computed.account);
-	const { modal } = useConnectKit();
+	const connectModal = useConnectModal();
 
 	return React.useMemo(
 		() => ({
@@ -22,10 +22,10 @@ export function useLoginChecker() {
 						}
 				}
 
-				modal.show();
+				connectModal.show();
 				return false;
 			},
 		}),
-		[modal, account]
+		[connectModal, account]
 	);
 }

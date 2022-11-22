@@ -4,7 +4,7 @@ import {
 	useAccountCharacter,
 	useAccountStore,
 	useCharacterHasOperator,
-	useConnectKit,
+	useConnectModal,
 	useToggleCharacterOperator,
 } from "@/components/connectkit";
 import {
@@ -23,7 +23,7 @@ export default function OperatorSyncWelcome() {
 	const activate = useActivateCharacter(character?.characterId);
 	const [{ toggleOperator }] = useToggleCharacterOperator(OPERATOR_ADDRESS);
 	const { hasOperator } = useCharacterHasOperator(OPERATOR_ADDRESS);
-	const { modal } = useConnectKit();
+	const connectModal = useConnectModal();
 
 	const handleStart = React.useCallback(async () => {
 		if (character?.characterId && validate()) {
@@ -33,7 +33,7 @@ export default function OperatorSyncWelcome() {
 				await toggleOperator();
 			}
 		} else if (ssrReady) {
-			modal.show();
+			connectModal.show();
 		}
 	}, [
 		ssrReady,
@@ -42,7 +42,7 @@ export default function OperatorSyncWelcome() {
 		character,
 		activate,
 		toggleOperator,
-		modal,
+		connectModal,
 	]);
 
 	return (

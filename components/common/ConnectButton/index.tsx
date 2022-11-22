@@ -1,4 +1,4 @@
-import { useConnectKit, useAccountStore } from "@/components/connectkit";
+import { useAccountStore, useConnectModal } from "@/components/connectkit";
 
 import styles from "./styles.module.css";
 import BaseButton from "./_BaseButton";
@@ -11,7 +11,7 @@ export type ConnectButtonProps = {
 export default function ConnectButton({
 	mode = "default",
 }: ConnectButtonProps) {
-	const connectKit = useConnectKit();
+	const connectModal = useConnectModal();
 	const account = useAccountStore((s) => s.computed.account);
 
 	if (account) {
@@ -26,7 +26,7 @@ export default function ConnectButton({
 		<BaseButton
 			mode={mode}
 			className={styles["gradient-background"]}
-			onClick={connectKit.modal.show}
+			onClick={connectModal.show}
 		>
 			Connect
 		</BaseButton>

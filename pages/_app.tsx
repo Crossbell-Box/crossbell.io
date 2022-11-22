@@ -14,7 +14,7 @@ import QueryProvider from "@/components/providers/QueryProvider";
 import NotificationsProvider from "@/components/providers/NotificationsProvider";
 import ModalsProvider from "@/components/providers/ModalsProvider";
 import { RouterTransition } from "@/components/providers/RouterTransition";
-import { ConnectKitProvider, useConnectKit } from "@/components/connectkit";
+import { ConnectKitProvider, useConnectModal } from "@/components/connectkit";
 import { ipfsGateway } from "@/utils/ipfs";
 import { ContractProvider } from "@/utils/crossbell.js";
 
@@ -28,7 +28,7 @@ type AppPropsWithLayout = AppProps & {
 
 export default function App({ Component, pageProps }: AppPropsWithLayout) {
 	const getLayout = Component.getLayout ?? ((page) => page);
-	const { modal } = useConnectKit();
+	const connectModal = useConnectModal();
 
 	return (
 		<>
@@ -64,7 +64,7 @@ export default function App({ Component, pageProps }: AppPropsWithLayout) {
 								<RouterTransition />
 								<IpfsGatewayContext.Provider value={ipfsGateway}>
 									<ConnectKitProvider>
-										<ContractProvider openConnectModal={modal.show}>
+										<ContractProvider openConnectModal={connectModal.show}>
 											{getLayout(<Component {...pageProps} />)}
 										</ContractProvider>
 									</ConnectKitProvider>

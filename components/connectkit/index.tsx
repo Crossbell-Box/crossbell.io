@@ -2,14 +2,14 @@ import React from "react";
 import { useAccount } from "wagmi";
 
 import { useAccountStore } from "./account";
-import { ConnectModal, useModalStore } from "./connect-modal";
+import {
+	ConnectModal,
+	useModalStore as useConnectModal,
+} from "./connect-modal";
 
 export * from "./account";
 
-export function useConnectKit() {
-	const modal = useModalStore();
-	return { modal };
-}
+export { useConnectModal };
 
 export function ConnectKitProvider({ children }: React.PropsWithChildren) {
 	const accountStore = useAccountStore();

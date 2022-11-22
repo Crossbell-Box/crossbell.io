@@ -6,7 +6,7 @@ import { composeNoteMetadata } from "@/utils/metadata";
 import EmojiPicker from "@/components/common/Input/EmojiPicker";
 import {
 	useAccountCharacter,
-	useConnectKit,
+	useConnectModal,
 	usePostNoteForNote,
 } from "@/components/connectkit";
 
@@ -15,7 +15,7 @@ import Textarea from "../common/Input/Textarea";
 
 export function CommentTextarea({ note }: { note: NoteEntity }) {
 	const { data: character } = useAccountCharacter();
-	const { modal } = useConnectKit();
+	const connectModal = useConnectModal();
 
 	const [value, setValue] = useState("");
 
@@ -66,7 +66,7 @@ export function CommentTextarea({ note }: { note: NoteEntity }) {
 										{ onSuccess: () => setValue("") }
 									);
 							  }
-							: modal.show
+							: connectModal.show
 					}
 					loading={postNoteForNote.isLoading}
 				>
