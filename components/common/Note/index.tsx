@@ -6,10 +6,14 @@ import { useCallback } from "react";
 import classNames from "classnames";
 
 import Avatar from "@/components/common/Avatar";
-import { useAccountCharacter } from "@/components/connectkit";
+import {
+	useAccountCharacter,
+	useLikeNote,
+	useUnlikeNote,
+} from "@/components/connectkit";
 import { useCharacter, useNote, useNoteStatus } from "@/utils/apis/indexer";
 import { composeNoteHref, getOrigin, useNoteRouterQuery } from "@/utils/url";
-import { useLikeNote, useMintNote, useUnlikeNote } from "@/utils/apis/contract";
+import { useMintNote } from "@/utils/apis/contract";
 import { copyToClipboard } from "@/utils/other";
 import { getValidAttachments } from "@/utils/metadata";
 
@@ -360,21 +364,17 @@ function NoteActions({
 		currentCharacter ?? null
 	);
 
-	const likeNote = useLikeNote(characterId, noteId);
-	const unlikeNote = useUnlikeNote(characterId, noteId);
+	const [toggleLikeNote, { isLoading: isToggleLikeNoteLoading }] =
+		useToggleLikeNote({
+			characterId,
+			noteId,
+			isLiked: !!status?.isLiked,
+		});
 
 	const { address } = useAccount();
 	const mintNote = useMintNote(characterId, noteId, address!);
 
 	const { navigate } = useNavigateToNote(characterId, noteId);
-
-	const handleLike = useCallback(() => {
-		if (status?.isLiked) {
-			unlikeNote.mutate();
-		} else {
-			likeNote.mutate();
-		}
-	}, [status?.isLiked]);
 
 	const handleMint = useCallback(() => {
 		if (!status?.isMinted) {
@@ -391,9 +391,7 @@ function NoteActions({
 	return (
 		<div className="flex items-center justify-between">
 			<LoadingOverlay
-				visible={
-					likeNote.isLoading || unlikeNote.isLoading || mintNote.isLoading
-				}
+				visible={isToggleLikeNoteLoading || mintNote.isLoading}
 				description="Loading..."
 				global
 			/>
@@ -416,7 +414,7 @@ function NoteActions({
 				color={status?.isLiked ? "text-red" : "text-dimmed"}
 				bgHoverColor="group-hover:bg-red/10"
 				textHoverColor="group-hover:text-red"
-				onClick={handleLike}
+				onClick={toggleLikeNote}
 			/>
 
 			{/* mint */}
@@ -514,4 +512,25 @@ function useNavigateToNote(characterId: number, noteId: number) {
 	};
 
 	return { navigate, href: targetURL, prefetch };
+}
+
+function useToggleLikeNote({
+	characterId,
+	noteId,
+	isLiked,
+}: {
+	characterId: number;
+	noteId: number;
+	isLiked: boolean;
+}) {
+	const likeNote = useLikeNote();
+	const unlikeNote = useUnlikeNote();
+	const toggleLikeNote = isLiked ? unlikeNote : likeNote;
+
+	const toggle = useCallback(
+		() => toggleLikeNote.mutate({ characterId, noteId }),
+		[toggleLikeNote, characterId, noteId]
+	);
+
+	return [toggle, toggleLikeNote] as const;
 }

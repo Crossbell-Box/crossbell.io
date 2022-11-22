@@ -7,91 +7,13 @@ import { useAccountCharacter } from "@/components/connectkit";
 import {
 	SCOPE_KEY_CHARACTER_FOLLOW_RELATION,
 	SCOPE_KEY_CHARACTER_FOLLOW_STATS,
-	SCOPE_KEY_NOTE_STATUS,
 } from "../indexer";
 
 export const LinkTypes = {
 	follow: "follow",
-	like: "like",
 } as const;
 
 type LinkType = typeof LinkTypes[keyof typeof LinkTypes];
-
-// link note
-
-function useLinkNote(characterId: number, noteId: number, linkType: LinkType) {
-	const { data: character } = useAccountCharacter();
-	const contract = useContract();
-	const queryClient = useQueryClient();
-
-	return useMutation(
-		() => {
-			return contract.linkNote(
-				character?.characterId!,
-				characterId,
-				noteId,
-				linkType
-			);
-		},
-		{
-			onSuccess: () => {
-				return queryClient.invalidateQueries(
-					SCOPE_KEY_NOTE_STATUS(characterId, noteId)
-				);
-			},
-			onError: (err: any) => {
-				showNotification({
-					title: "Error while linking note",
-					message: err.message,
-					color: "red",
-				});
-			},
-		}
-	);
-}
-
-function useUnlinkNote(
-	characterId: number,
-	noteId: number,
-	linkType: LinkType
-) {
-	const { data: character } = useAccountCharacter();
-	const contract = useContract();
-	const queryClient = useQueryClient();
-
-	return useMutation(
-		() => {
-			return contract.unlinkNote(
-				character?.characterId!,
-				characterId,
-				noteId,
-				linkType
-			);
-		},
-		{
-			onSuccess: () => {
-				return queryClient.invalidateQueries(
-					SCOPE_KEY_NOTE_STATUS(characterId, noteId)
-				);
-			},
-			onError: (err: any) => {
-				showNotification({
-					title: "Error while unlinking note",
-					message: err.message,
-					color: "red",
-				});
-			},
-		}
-	);
-}
-
-export function useLikeNote(characterId: number, noteId: number) {
-	return useLinkNote(characterId, noteId, LinkTypes.like);
-}
-
-export function useUnlikeNote(characterId: number, noteId: number) {
-	return useUnlinkNote(characterId, noteId, LinkTypes.like);
-}
 
 // link character
 

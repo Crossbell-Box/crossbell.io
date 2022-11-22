@@ -183,3 +183,39 @@ export async function updateMetadata(
 		body: { metadata },
 	});
 }
+
+export async function linkNote({
+	token,
+	toNoteId,
+	toCharacterId,
+	linkType,
+	data,
+}: {
+	token: string;
+	toCharacterId: number;
+	toNoteId: number;
+	linkType: string;
+	data?: string;
+}): Promise<{ transactionHash: string; data: string }> {
+	return request(
+		`/newbie/contract/links/notes/${toCharacterId}/${toNoteId}/${linkType}`,
+		{ method: "PUT", token, body: { data } }
+	);
+}
+
+export async function unlinkNote({
+	token,
+	toNoteId,
+	toCharacterId,
+	linkType,
+}: {
+	token: string;
+	toCharacterId: number;
+	toNoteId: number;
+	linkType: string;
+}): Promise<{ transactionHash: string; data: string }> {
+	return request(
+		`/newbie/contract/links/notes/${toCharacterId}/${toNoteId}/${linkType}`,
+		{ method: "DELETE", token }
+	);
+}
