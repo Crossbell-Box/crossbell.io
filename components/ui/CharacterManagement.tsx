@@ -39,6 +39,7 @@ export default function CharacterManagement({
 }>) {
 	const { data: character, isLoading: isLoadingCharacter } =
 		useCharacter(characterId);
+	const isAbleToEditHandle = useAccountStore((s) => !!s.wallet);
 
 	const [avatarLoading, setAvatarLoading] = useState(false);
 	const mode: "new" | "edit" = characterId ? "edit" : "new";
@@ -308,20 +309,22 @@ export default function CharacterManagement({
 					<Space h={15} />
 
 					{/* handle */}
-					<Group>
-						<TextInput
-							className="flex-1"
-							placeholder="A globally unique handle (ID) for your character"
-							label="Handle"
-							required
-							size="md"
-							maxLength={31}
-							rightSection={
-								isFetchingExistingHandle ? <Loader size="xs" /> : null
-							}
-							{...form.getInputProps("handle")}
-						/>
-					</Group>
+					{isAbleToEditHandle && (
+						<Group>
+							<TextInput
+								className="flex-1"
+								placeholder="A globally unique handle (ID) for your character"
+								label="Handle"
+								required
+								size="md"
+								maxLength={31}
+								rightSection={
+									isFetchingExistingHandle ? <Loader size="xs" /> : null
+								}
+								{...form.getInputProps("handle")}
+							/>
+						</Group>
+					)}
 
 					<Space h={15} />
 
@@ -419,7 +422,7 @@ function LoginPopup() {
 	const { modal } = useConnectKit();
 
 	useEffect(() => {
-		if (ssrReady && !account) {
+		if (ssrReady && !account && !modal.isActive) {
 			modal.show();
 		}
 	}, [account, ssrReady, modal]);
