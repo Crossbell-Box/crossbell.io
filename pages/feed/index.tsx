@@ -42,14 +42,14 @@ export function FeedTabs() {
 	const { validate } = useLoginChecker();
 
 	// if no character, redirect to explore page
-	const hasCharacter = useAccountHasCharacter();
+	const { hasCharacter, ssrReady } = useAccountHasCharacter();
 	const router = useRouter();
 
 	useEffect(() => {
-		if (router.asPath === "/feed" && !hasCharacter) {
+		if (router.asPath === "/feed" && !hasCharacter && ssrReady) {
 			router.replace("/explore");
 		}
-	}, [hasCharacter]);
+	}, [hasCharacter, ssrReady, router]);
 
 	return (
 		<Tabs

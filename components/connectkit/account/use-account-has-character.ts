@@ -1,6 +1,8 @@
 import { useAccountStore } from "./account-store";
 
 export function useAccountHasCharacter() {
-	const account = useAccountStore((s) => s.computed.account);
-	return !!account?.characterId;
+	return useAccountStore((s) => ({
+		hasCharacter: !!s.computed.account?.characterId,
+		ssrReady: s.ssrReady,
+	}));
 }
