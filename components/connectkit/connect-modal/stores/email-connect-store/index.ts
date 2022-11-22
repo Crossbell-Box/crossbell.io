@@ -3,13 +3,14 @@ import create from "zustand";
 
 import { isEmail } from "@/utils/validators/is-email";
 
+import { useAccountStore } from "../../../account";
 import { connectByEmail } from "../../../apis";
+import { createContextStore } from "../../../utils";
+
 import { useModalStore } from "../modal-store";
-import { createContextStore } from "../zustand-context";
 
 import { EmailSlice, createEmailSlice } from "./email";
 import { PasswordSlice, createPasswordSlice } from "./password";
-import { useAccountStore } from "@/components/connectkit";
 
 export type EmailConnectStore = EmailSlice &
 	PasswordSlice & {

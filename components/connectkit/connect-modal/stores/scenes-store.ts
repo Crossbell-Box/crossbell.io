@@ -1,7 +1,7 @@
 import create from "zustand";
 import { immer } from "zustand/middleware/immer";
 
-import { createContextStore } from "./zustand-context";
+import { createContextStore } from "../../utils";
 
 import { SceneKind, Scene, SceneWithoutContext } from "../types";
 

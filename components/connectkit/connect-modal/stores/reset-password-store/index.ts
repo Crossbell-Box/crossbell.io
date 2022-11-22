@@ -8,6 +8,7 @@ import {
 	resetPasswordSendCodeToEmail,
 	resetPasswordVerifyEmailCode,
 } from "../../../apis";
+import { createContextStore } from "../../../utils";
 
 import { createEmailSlice, EmailSlice } from "../email-register-store/email";
 import {
@@ -15,7 +16,6 @@ import {
 	PasswordSlice,
 } from "../email-register-store/password";
 import { isValidPasswordFormat } from "../email-register-store/password.strength";
-import { createContextStore } from "../zustand-context";
 
 export type ResetPasswordStore = EmailSlice &
 	PasswordSlice & {

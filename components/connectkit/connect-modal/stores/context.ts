@@ -1,4 +1,4 @@
-import { withMultipleProviders } from "./zustand-context";
+import { withMultipleProviders } from "../../utils";
 
 import { EmailConnectStoreProvider } from "./email-connect-store";
 import { EmailRegisterStoreProvider } from "./email-register-store";

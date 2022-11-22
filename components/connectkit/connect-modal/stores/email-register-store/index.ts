@@ -8,16 +8,13 @@ import {
 	registerByEmail,
 	registerVerifyEmailCode,
 } from "../../../apis";
-
 import { useAccountStore } from "../../../account";
-
-import { useModalStore } from "../modal-store";
-import { createContextStore } from "../zustand-context";
+import { createContextStore } from "../../../utils";
 
 import { createEmailSlice, EmailSlice } from "./email";
 import { createPasswordSlice, PasswordSlice } from "./password";
 import { createCharacterSlice, CharacterSlice } from "./character";
-import { checkStrength, isValidPasswordFormat } from "./password.strength";
+import { isValidPasswordFormat } from "./password.strength";
 
 export type EmailRegisterStore = EmailSlice &
 	PasswordSlice &
