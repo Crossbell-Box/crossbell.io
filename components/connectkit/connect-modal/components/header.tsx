@@ -1,13 +1,11 @@
 import React from "react";
 import { Text, Button } from "@mantine/core";
 
+import { ModalHeaderProps, ModalHeader } from "../../components";
+
 import { useModalStore, useScenesStore } from "../stores";
 
-export type HeaderProps = {
-	title: React.ReactNode;
-	leftNode?: React.ReactNode;
-	rightNode?: React.ReactNode;
-};
+export type HeaderProps = ModalHeaderProps;
 
 export function Header({ title, leftNode, rightNode }: HeaderProps) {
 	const isAbleToGoBack = useScenesStore(
@@ -17,12 +15,10 @@ export function Header({ title, leftNode, rightNode }: HeaderProps) {
 	const { hide } = useModalStore();
 
 	return (
-		<div
-			data-animation="fade-in"
-			className="flex items-center gap-1 pb-10px px-21px pt-23px"
-		>
-			<div>
-				{leftNode || (
+		<ModalHeader
+			title={title}
+			leftNode={
+				leftNode || (
 					<Button
 						className="h-auto p-5px text-22px"
 						variant="subtle"
@@ -33,11 +29,10 @@ export function Header({ title, leftNode, rightNode }: HeaderProps) {
 					>
 						<Text className="i-csb:back transform translate-x-1/4" />
 					</Button>
-				)}
-			</div>
-			<div className="mx-auto text-16px font-500">{title}</div>
-			<div>
-				{rightNode || (
+				)
+			}
+			rightNode={
+				rightNode || (
 					<Button
 						className="h-auto p-5px text-22px"
 						variant="subtle"
@@ -47,8 +42,8 @@ export function Header({ title, leftNode, rightNode }: HeaderProps) {
 					>
 						<Text className="i-csb:close" />
 					</Button>
-				)}
-			</div>
-		</div>
+				)
+			}
+		/>
 	);
 }

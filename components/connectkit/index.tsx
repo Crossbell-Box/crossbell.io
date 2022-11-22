@@ -6,16 +6,18 @@ import {
 	ConnectModal,
 	useModalStore as useConnectModal,
 } from "./connect-modal";
+import {
+	DisconnectModal,
+	useModalStore as useDisconnectModal,
+} from "./disconnect-modal";
 
 export * from "./account";
 
-export { useConnectModal };
+export { useConnectModal, useDisconnectModal };
 
 export function ConnectKitProvider({ children }: React.PropsWithChildren) {
 	const accountStore = useAccountStore();
 	const account = useAccount();
-
-	console.log(accountStore);
 
 	React.useEffect(() => {
 		accountStore.connectWallet(account.address ?? null);
@@ -30,6 +32,7 @@ export function ConnectKitProvider({ children }: React.PropsWithChildren) {
 	return (
 		<>
 			<ConnectModal />
+			<DisconnectModal />
 			{children}
 		</>
 	);
