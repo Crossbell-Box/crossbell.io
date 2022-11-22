@@ -1,36 +1,31 @@
-import { useCallback } from "react";
-import { useAccount } from "wagmi";
+import React from "react";
 
 import { openMintNewCharacterModel } from "@/components/common/NewUserGuide";
-import { useAccountCharacter, useConnectKit } from "@/components/connectkit";
+import { useAccountStore, useConnectKit } from "@/components/connectkit";
 
 export function useLoginChecker() {
-	const { address, isConnected } = useAccount();
-	const { data: character } = useAccountCharacter();
+	const account = useAccountStore((s) => s.computed.account);
 	const { modal } = useConnectKit();
 
-	const characterId = character?.characterId;
-	const hasCharacter = Boolean(characterId);
+	return React.useMemo(
+		() => ({
+			validate() {
+				switch (account?.type) {
+					case "email":
+						return true;
+					case "wallet":
+						if (account.characterId) {
+							return true;
+						} else {
+							openMintNewCharacterModel();
+							return false;
+						}
+				}
 
-	const validate = useCallback(() => {
-		if (!isConnected) {
-			modal.show();
-			return false;
-		}
-
-		if (!hasCharacter) {
-			openMintNewCharacterModel();
-			return false;
-		}
-
-		return true;
-	}, [isConnected, hasCharacter, modal]);
-
-	return {
-		address,
-		isConnected,
-		hasCharacter,
-		currentCharacterId: characterId,
-		validate,
-	};
+				modal.show();
+				return false;
+			},
+		}),
+		[modal, account]
+	);
 }

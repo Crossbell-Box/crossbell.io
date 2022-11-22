@@ -4,7 +4,7 @@ import prettyBytes from "pretty-bytes";
 import { Text, Switch } from "@mantine/core";
 
 import Avatar from "@/components/common/Avatar";
-import { useAccountCharacter } from "@/components/connectkit";
+import { useAccountStore, useAccountCharacter } from "@/components/connectkit";
 import { useCharacterMediaUsage } from "@/utils/apis/operator-sync";
 import { extractCharacterName } from "@/utils/metadata";
 import LoadingOverlay from "@/components/common/LoadingOverlay";
@@ -14,8 +14,9 @@ import { useToggleOperator } from "./hooks";
 import styles from "./character-section.module.css";
 
 export default function CharacterSection() {
+	const account = useAccountStore((s) => s.computed.account);
 	const { data: character } = useAccountCharacter();
-	const { data: mediaUsage } = useCharacterMediaUsage(character?.characterId);
+	const { data: mediaUsage } = useCharacterMediaUsage(account?.characterId);
 	const characterName = React.useMemo(
 		() => extractCharacterName(character),
 		[character]
@@ -43,6 +44,7 @@ export default function CharacterSection() {
 					<Text className="i-csb:circle-help" />
 				</button>
 				<Switch
+					disabled={account?.type === "email"}
 					checked={hasOperator}
 					onChange={toggleOperator}
 					className={styles.switch}

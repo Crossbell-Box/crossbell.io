@@ -5,7 +5,6 @@ import { useIsFirstMount } from "@/utils/hooks/use-is-first-mount";
 import {
 	useAccountCharacter,
 	useCharacterHasOperator,
-	useCharacterOperators,
 } from "@/components/connectkit";
 import {
 	OPERATOR_ADDRESS,
@@ -50,18 +49,6 @@ export default function OperatorSyncMain() {
 	}
 
 	return <OperatorSyncWelcome />;
-}
-
-function useOperatorInfo() {
-	const { data: operators, isLoading } = useCharacterOperators();
-
-	return React.useMemo(
-		() => ({
-			isLoading,
-			hasOperator: operators?.includes(OPERATOR_ADDRESS) ?? false,
-		}),
-		[operators, isLoading]
-	);
 }
 
 function useCharacterInfo() {
