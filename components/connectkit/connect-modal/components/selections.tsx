@@ -4,6 +4,7 @@ export type Selection = {
 	id: string;
 	title: React.ReactNode;
 	icon: React.ReactNode;
+	style?: React.CSSProperties;
 	onClick: () => void;
 };
 
@@ -17,7 +18,8 @@ export function Selections({ items }: SelectionsProps) {
 			{items.map((item) => (
 				<div
 					key={item.id}
-					className="flex items-center bg-[#F7F7F7] hover:bg-[#F0F2F5] py-14px px-20px w-full rounded-12px cursor-pointer transition"
+					className="flex items-center bg-[#F7F7F7] py-14px px-20px w-full rounded-12px transition ux-overlay"
+					style={item.style}
 					onClick={item.onClick}
 				>
 					<span className="mr-auto text-16px leading-24px font-500">

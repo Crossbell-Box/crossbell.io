@@ -10,10 +10,14 @@ import {
 	DisconnectModal,
 	useModalStore as useDisconnectModal,
 } from "./disconnect-modal";
+import {
+	UpgradeAccountModal,
+	useModalStore as useUpgradeAccountModal,
+} from "./upgrade-account-modal";
 
 export * from "./account";
 
-export { useConnectModal, useDisconnectModal };
+export { useConnectModal, useDisconnectModal, useUpgradeAccountModal };
 
 export function ConnectKitProvider({ children }: React.PropsWithChildren) {
 	const accountStore = useAccountStore();
@@ -33,6 +37,7 @@ export function ConnectKitProvider({ children }: React.PropsWithChildren) {
 		<>
 			<ConnectModal />
 			<DisconnectModal />
+			<UpgradeAccountModal />
 			{children}
 		</>
 	);
