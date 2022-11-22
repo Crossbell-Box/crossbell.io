@@ -14,7 +14,12 @@ import QueryProvider from "@/components/providers/QueryProvider";
 import NotificationsProvider from "@/components/providers/NotificationsProvider";
 import ModalsProvider from "@/components/providers/ModalsProvider";
 import { RouterTransition } from "@/components/providers/RouterTransition";
-import { ConnectKitProvider, useConnectModal } from "@/components/connectkit";
+import {
+	ConnectKitProvider,
+	useAccountStore,
+	useConnectModal,
+	useUpgradeAccountModal,
+} from "@/components/connectkit";
 import { ipfsGateway } from "@/utils/ipfs";
 import { ContractProvider } from "@/utils/crossbell.js";
 
@@ -28,7 +33,9 @@ type AppPropsWithLayout = AppProps & {
 
 export default function App({ Component, pageProps }: AppPropsWithLayout) {
 	const getLayout = Component.getLayout ?? ((page) => page);
+	const isEmailConnected = useAccountStore((s) => !!s.email);
 	const connectModal = useConnectModal();
+	const upgradeAccountModal = useUpgradeAccountModal();
 
 	return (
 		<>
@@ -64,7 +71,13 @@ export default function App({ Component, pageProps }: AppPropsWithLayout) {
 								<RouterTransition />
 								<IpfsGatewayContext.Provider value={ipfsGateway}>
 									<ConnectKitProvider>
-										<ContractProvider openConnectModal={connectModal.show}>
+										<ContractProvider
+											openConnectModal={
+												isEmailConnected
+													? upgradeAccountModal.show
+													: connectModal.show
+											}
+										>
 											{getLayout(<Component {...pageProps} />)}
 										</ContractProvider>
 									</ConnectKitProvider>
