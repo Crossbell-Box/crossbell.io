@@ -3,12 +3,10 @@ import { showNotification } from "@mantine/notifications";
 import React from "react";
 
 import { useContract } from "@/utils/crossbell.js";
+import { CharacterLinkType } from "@/utils/apis/indexer";
 
 import { linkCharacter } from "../../apis";
 import { useAccountStore } from "../account-store";
-
-import { CharacterLinkType } from "./types";
-
 type UpdateFn = (params: { characterId: number }) => Promise<unknown>;
 
 export type LinkCharacterOptions = UseMutationOptions<
@@ -28,7 +26,10 @@ export function useLinkCharacter(
 	return account?.type === "email" ? linkByEmail : linkByContract;
 }
 
-function useLinkByEmail(linkType: CharacterLinkType, config: LinkCharacterOptions) {
+function useLinkByEmail(
+	linkType: CharacterLinkType,
+	config: LinkCharacterOptions
+) {
 	const account = useAccountStore((s) => s.email);
 
 	const updateFn: UpdateFn = React.useCallback(
@@ -49,7 +50,10 @@ function useLinkByEmail(linkType: CharacterLinkType, config: LinkCharacterOption
 	return useBaseLinkCharacter(linkType, updateFn, config);
 }
 
-function useLinkByContract(linkType: CharacterLinkType, config: LinkCharacterOptions) {
+function useLinkByContract(
+	linkType: CharacterLinkType,
+	config: LinkCharacterOptions
+) {
 	const contract = useContract();
 	const account = useAccountStore((s) => s.wallet);
 

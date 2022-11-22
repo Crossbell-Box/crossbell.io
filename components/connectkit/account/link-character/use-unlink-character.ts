@@ -7,12 +7,10 @@ import { showNotification } from "@mantine/notifications";
 import React from "react";
 
 import { useContract } from "@/utils/crossbell.js";
-import { SCOPE_KEY_NOTE_STATUS } from "@/utils/apis/indexer";
+import { CharacterLinkType } from "@/utils/apis/indexer";
 
 import { unlinkCharacter } from "../../apis";
 import { useAccountStore } from "../account-store";
-
-import { CharacterLinkType } from "./types";
 
 type UpdateFn = (params: { characterId: number }) => Promise<unknown>;
 
@@ -33,7 +31,10 @@ export function useUnlinkCharacter(
 	return account?.type === "email" ? unlinkByEmail : unlinkByContract;
 }
 
-function useUnlinkByEmail(linkType: CharacterLinkType, options: UnlinkCharacterOptions) {
+function useUnlinkByEmail(
+	linkType: CharacterLinkType,
+	options: UnlinkCharacterOptions
+) {
 	const account = useAccountStore((s) => s.email);
 
 	const updateFn: UpdateFn = React.useCallback(
