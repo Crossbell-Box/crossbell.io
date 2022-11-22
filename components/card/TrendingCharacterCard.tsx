@@ -3,10 +3,12 @@ import type { CharacterEntity } from "crossbell.js";
 import { MouseEventHandler } from "react";
 import Link from "next/link";
 
-import { useAccountCharacter } from "@/components/connectkit";
+import {
+	useAccountCharacter,
+	useFollowCharacter,
+} from "@/components/connectkit";
 import { ipfsLinkToHttpLink } from "@/utils/ipfs";
 import { useCharacterFollowRelation } from "@/utils/apis/indexer";
-import { useFollowCharacter } from "@/utils/apis/contract";
 import { extractCharacterAvatar, extractCharacterName } from "@/utils/metadata";
 import { composeCharacterHref } from "@/utils/url";
 
@@ -22,11 +24,11 @@ const FollowButton = ({ characterId }: { characterId: number }) => {
 	const { data: followRelation, isLoadingFollowRelation } =
 		useCharacterFollowRelation(currentCharacter?.characterId, characterId);
 
-	const follow = useFollowCharacter(characterId);
+	const follow = useFollowCharacter();
 
 	const handleFollow: MouseEventHandler<HTMLButtonElement> = (e) => {
 		e.stopPropagation();
-		follow.mutate();
+		follow.mutate({ characterId });
 	};
 
 	return isSelf ? (

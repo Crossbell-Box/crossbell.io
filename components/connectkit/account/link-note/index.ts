@@ -1,12 +1,12 @@
-import { LinkType } from "./types";
+import { NoteLinkType } from "@/utils/apis/indexer";
 
 import { useLinkNote } from "./use-link-note";
 import { useUnlinkNote } from "./use-unlink-note";
 
 export function useLikeNote() {
-	return useLinkNote(LinkType.like);
+	return useLinkNote(NoteLinkType.like);
 }
 
 export function useUnlikeNote() {
-	return useUnlinkNote(LinkType.like);
+	return useUnlinkNote(NoteLinkType.like);
 }

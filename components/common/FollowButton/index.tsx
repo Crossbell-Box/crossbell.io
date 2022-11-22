@@ -2,12 +2,12 @@ import { Button, ButtonProps } from "@mantine/core";
 import { useModals } from "@mantine/modals";
 import { CharacterEntity } from "crossbell.js";
 
+import { useCharacterFollowRelation } from "@/utils/apis/indexer";
 import {
+	useAccountCharacter,
 	useFollowCharacter,
 	useUnfollowCharacter,
-} from "@/utils/apis/contract";
-import { useCharacterFollowRelation } from "@/utils/apis/indexer";
-import { useAccountCharacter } from "@/components/connectkit";
+} from "@/components/connectkit";
 
 export default function FollowButton({
 	character,
@@ -25,13 +25,11 @@ export default function FollowButton({
 			character?.characterId
 		);
 
-	const follow = useFollowCharacter(character.characterId!);
-	const unfollow = useUnfollowCharacter(character.characterId!);
+	const follow = useFollowCharacter();
+	const unfollow = useUnfollowCharacter();
 
 	const modals = useModals();
-	const handleFollow = () => {
-		follow.mutate();
-	};
+	const handleFollow = () => follow.mutate(character);
 	const handleUnfollow = () => {
 		modals.openConfirmModal({
 			title: `Unfollow @${character.handle}?`,
@@ -39,9 +37,7 @@ export default function FollowButton({
 				"Their activities will no longer show up in your home timeline. You can still view their profile. ",
 			labels: { confirm: "Unfollow", cancel: "Cancel" },
 			confirmProps: { color: "red" },
-			onConfirm: () => {
-				unfollow.mutate();
-			},
+			onConfirm: () => unfollow.mutate(character),
 		});
 	};
 

@@ -8,14 +8,14 @@ import { SCOPE_KEY_NOTE_STATUS } from "@/utils/apis/indexer";
 import { linkNote } from "../../apis";
 import { useAccountStore } from "../account-store";
 
-import { LinkType } from "./types";
+import { NoteLinkType } from "./types";
 
 type UpdateFn = (params: {
 	characterId: number;
 	noteId: number;
 }) => Promise<unknown>;
 
-export function useLinkNote(linkType: LinkType) {
+export function useLinkNote(linkType: NoteLinkType) {
 	const account = useAccountStore((s) => s.computed.account);
 	const linkByContract = useLinkByContract(linkType);
 	const linkByEmail = useLinkByEmail(linkType);
@@ -23,7 +23,7 @@ export function useLinkNote(linkType: LinkType) {
 	return account?.type === "email" ? linkByEmail : linkByContract;
 }
 
-function useLinkByEmail(linkType: LinkType) {
+function useLinkByEmail(linkType: NoteLinkType) {
 	const account = useAccountStore((s) => s.email);
 
 	const updateFn: UpdateFn = React.useCallback(
@@ -45,7 +45,7 @@ function useLinkByEmail(linkType: LinkType) {
 	return useBaseLinkNote(linkType, updateFn);
 }
 
-function useLinkByContract(linkType: LinkType) {
+function useLinkByContract(linkType: NoteLinkType) {
 	const contract = useContract();
 	const account = useAccountStore((s) => s.wallet);
 
@@ -68,7 +68,7 @@ function useLinkByContract(linkType: LinkType) {
 	return useBaseLinkNote(linkType, updateFn);
 }
 
-function useBaseLinkNote(linkType: LinkType, updateFn: UpdateFn) {
+function useBaseLinkNote(linkType: NoteLinkType, updateFn: UpdateFn) {
 	const queryClient = useQueryClient();
 
 	return useMutation((params: Parameters<UpdateFn>[0]) => updateFn(params), {

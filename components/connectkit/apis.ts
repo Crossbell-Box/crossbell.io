@@ -18,7 +18,15 @@ const request = (url: `/${string}`, { body, method, token }: RequestConfig) => {
 		method,
 		headers,
 		body: body && JSON.stringify(body),
-	}).then((res) => res.json());
+	}).then(async (res) => {
+		if (res.ok) {
+			return res.json();
+		} else {
+			throw new Error(
+				`Request Error(${res.status}): ${JSON.stringify(await res.json())}`
+			);
+		}
+	});
 };
 
 export async function registerSendCodeToEmail(
@@ -216,6 +224,38 @@ export async function unlinkNote({
 }): Promise<{ transactionHash: string; data: string }> {
 	return request(
 		`/newbie/contract/links/notes/${toCharacterId}/${toNoteId}/${linkType}`,
+		{ method: "DELETE", token }
+	);
+}
+
+export async function linkCharacter({
+	token,
+	toCharacterId,
+	linkType,
+	data,
+}: {
+	token: string;
+	toCharacterId: number;
+	linkType: string;
+	data?: string;
+}): Promise<{ transactionHash: string; data: string }> {
+	return request(
+		`/newbie/contract/links/characters/${toCharacterId}/${linkType}`,
+		{ method: "PUT", token, body: { data } }
+	);
+}
+
+export async function unlinkCharacter({
+	token,
+	toCharacterId,
+	linkType,
+}: {
+	token: string;
+	toCharacterId: number;
+	linkType: string;
+}): Promise<{ transactionHash: string; data: string }> {
+	return request(
+		`/newbie/contract/links/characters/${toCharacterId}/${linkType}`,
 		{ method: "DELETE", token }
 	);
 }

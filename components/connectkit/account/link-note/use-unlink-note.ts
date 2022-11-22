@@ -8,14 +8,14 @@ import { SCOPE_KEY_NOTE_STATUS } from "@/utils/apis/indexer";
 import { unlinkNote } from "../../apis";
 import { useAccountStore } from "../account-store";
 
-import { LinkType } from "./types";
+import { NoteLinkType } from "./types";
 
 type UpdateFn = (params: {
 	characterId: number;
 	noteId: number;
 }) => Promise<unknown>;
 
-export function useUnlinkNote(linkType: LinkType) {
+export function useUnlinkNote(linkType: NoteLinkType) {
 	const account = useAccountStore((s) => s.computed.account);
 	const unlinkByContract = useUnlinkByContract(linkType);
 	const unlinkByEmail = useUnlinkByEmail(linkType);
@@ -23,7 +23,7 @@ export function useUnlinkNote(linkType: LinkType) {
 	return account?.type === "email" ? unlinkByEmail : unlinkByContract;
 }
 
-function useUnlinkByEmail(linkType: LinkType) {
+function useUnlinkByEmail(linkType: NoteLinkType) {
 	const account = useAccountStore((s) => s.email);
 
 	const updateFn: UpdateFn = React.useCallback(
@@ -45,7 +45,7 @@ function useUnlinkByEmail(linkType: LinkType) {
 	return useBaseUnlinkNote(linkType, updateFn);
 }
 
-function useUnlinkByContract(linkType: LinkType) {
+function useUnlinkByContract(linkType: NoteLinkType) {
 	const contract = useContract();
 	const account = useAccountStore((s) => s.wallet);
 
@@ -68,7 +68,7 @@ function useUnlinkByContract(linkType: LinkType) {
 	return useBaseUnlinkNote(linkType, updateFn);
 }
 
-function useBaseUnlinkNote(linkType: LinkType, updateFn: UpdateFn) {
+function useBaseUnlinkNote(linkType: NoteLinkType, updateFn: UpdateFn) {
 	const queryClient = useQueryClient();
 
 	return useMutation((params: Parameters<UpdateFn>[0]) => updateFn(params), {

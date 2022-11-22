@@ -11,16 +11,16 @@ import { PropsWithChildren } from "react";
 import { useModals } from "@mantine/modals";
 import Link from "next/link";
 
-import { useAccountCharacter } from "@/components/connectkit";
 import { extractCharacterName } from "@/utils/metadata";
+import {
+	useAccountCharacter,
+	useFollowCharacter,
+	useUnfollowCharacter,
+} from "@/components/connectkit";
 import {
 	useCharacterFollowRelation,
 	useCharacterFollowStats,
 } from "@/utils/apis/indexer";
-import {
-	useFollowCharacter,
-	useUnfollowCharacter,
-} from "@/utils/apis/contract";
 import {
 	composeCharacterFollowHref,
 	composeWalletCharacterEditHref,
@@ -52,12 +52,14 @@ export default function CharacterProfile({
 	const isLoadingFollowRelation =
 		followRelationStatus === "loading" && followRelationFetchStatus !== "idle";
 
-	const follow = useFollowCharacter(character?.characterId!);
-	const unfollow = useUnfollowCharacter(character?.characterId!);
+	const follow = useFollowCharacter();
+	const unfollow = useUnfollowCharacter();
 
 	const modals = useModals();
 	const handleFollow = () => {
-		follow.mutate();
+		if (character) {
+			follow.mutate(character);
+		}
 	};
 	const handleUnfollow = () => {
 		modals.openConfirmModal({
@@ -67,7 +69,9 @@ export default function CharacterProfile({
 			labels: { confirm: "Unfollow", cancel: "Cancel" },
 			confirmProps: { color: "red" },
 			onConfirm: () => {
-				unfollow.mutate();
+				if (character) {
+					unfollow.mutate(character);
+				}
 			},
 		});
 	};
