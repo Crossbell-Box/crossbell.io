@@ -3,6 +3,7 @@ import classNames from "classnames";
 import { Carousel, Embla } from "@mantine/carousel";
 
 import { Header } from "../../components/header";
+import { useModalStore } from "../../stores";
 
 import { Airplane, ArrowDown, Wallet, Key, Email } from "./icons";
 import styles from "./index.module.css";
@@ -90,23 +91,38 @@ export function AboutWallets() {
 	const [embla, setEmbla] = React.useState<Embla | null>(null);
 	const [index, setIndex] = React.useState(0);
 	const currentScene = React.useMemo(() => scenes[index], [index]);
+	const setModalCanHide = useModalStore((s) => s.setCanHide);
 
 	React.useEffect(() => {
 		if (embla) {
-			const onSelect = () => setIndex(embla.selectedScrollSnap());
+			let setCanHideTimeout: number;
 
+			const onSelect = () => setIndex(embla.selectedScrollSnap());
+			const setCanNotHide = () => setModalCanHide(false);
+			const setCanHide = () => {
+				window.clearTimeout(setCanHideTimeout);
+				setCanHideTimeout = window.setTimeout(() => setModalCanHide(true), 500);
+			};
+
+			embla.on("pointerDown", setCanNotHide);
+			embla.on("pointerUp", setCanHide);
 			embla.on("select", onSelect);
 
 			return () => {
+				window.clearTimeout(setCanHideTimeout);
 				embla.off("select", onSelect);
 			};
 		}
-	}, [embla]);
+	}, [embla, setModalCanHide]);
 
 	return (
 		<div>
 			<Header title={currentScene.headerTitle} />
-			<div className="px-24px pb-27px" data-animation="scale-fade-in" onAnimationEnd={() => embla?.reInit()}>
+			<div
+				className="px-24px pb-27px"
+				data-animation="scale-fade-in"
+				onAnimationEnd={() => embla?.reInit()}
+			>
 				<Carousel
 					getEmblaApi={setEmbla}
 					sx={{ width: 320 }}
