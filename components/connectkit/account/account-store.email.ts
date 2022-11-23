@@ -2,6 +2,7 @@ import { showNotification } from "@mantine/notifications";
 import { CharacterEntity } from "crossbell.js";
 
 import { SliceFn } from "../connect-modal/stores/types";
+import { asyncRetry } from "../utils";
 
 import { fetchAccountInfo } from "../apis";
 import { indexer } from "@/utils/crossbell.js";
@@ -41,7 +42,9 @@ export const createEmailAccountSlice: SliceFn<EmailAccountSlice> = (
 			const result = await fetchAccountInfo(token);
 
 			if (result.ok) {
-				const character = await indexer.getCharacter(result.characterId);
+				const character = await asyncRetry(async (RETRY) => {
+					return (await indexer.getCharacter(result.characterId)) || RETRY;
+				});
 
 				if (character) {
 					set({
