@@ -1,7 +1,7 @@
 import React from "react";
 import { useAccount } from "wagmi";
 
-import { useAccountState } from "./account";
+import { useAccountState } from "./hooks";
 import {
 	ConnectModal,
 	useModalStore as useConnectModal,
@@ -15,7 +15,7 @@ import {
 	useModalStore as useUpgradeAccountModal,
 } from "./upgrade-account-modal";
 
-export * from "./account";
+export * from "./hooks";
 
 export { useConnectModal, useDisconnectModal, useUpgradeAccountModal };
 

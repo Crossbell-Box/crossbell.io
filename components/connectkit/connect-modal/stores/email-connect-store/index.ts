@@ -3,7 +3,7 @@ import create from "zustand";
 
 import { isEmail } from "@/utils/validators/is-email";
 
-import { useAccountState } from "../../../account";
+import { useAccountState } from "../../../hooks";
 import { connectByEmail } from "../../../apis";
 import { createContextStore } from "../../../utils";
 

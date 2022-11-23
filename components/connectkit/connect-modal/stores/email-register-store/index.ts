@@ -8,7 +8,7 @@ import {
 	registerByEmail,
 	registerVerifyEmailCode,
 } from "../../../apis";
-import { useAccountState } from "../../../account";
+import { useAccountState } from "../../../hooks";
 import { createContextStore } from "../../../utils";
 
 import { createEmailSlice, EmailSlice } from "./email";

@@ -3,7 +3,7 @@ import classNames from "classnames";
 import { Button, Modal, Text } from "@mantine/core";
 
 import { ModalHeader } from "../components";
-import { useDisconnectAccount } from "../account";
+import { useDisconnectAccount } from "../hooks";
 
 import { useModalStore } from "./stores";
 
