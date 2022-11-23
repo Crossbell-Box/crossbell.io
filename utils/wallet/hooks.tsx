@@ -1,18 +1,28 @@
 import React from "react";
 
 import { openMintNewCharacterModel } from "@/components/common/NewUserGuide";
-import { useAccountStore, useConnectModal } from "@/components/connectkit";
+import {
+	useAccountStore,
+	useConnectModal,
+	useUpgradeAccountModal,
+} from "@/components/connectkit";
 
 export function useLoginChecker() {
 	const account = useAccountStore((s) => s.computed.account);
 	const connectModal = useConnectModal();
+	const upgradeAccountModal = useUpgradeAccountModal();
 
 	return React.useMemo(
 		() => ({
-			validate() {
+			validate({ walletRequired }: { walletRequired?: boolean } = {}) {
 				switch (account?.type) {
 					case "email":
-						return true;
+						if (walletRequired) {
+							upgradeAccountModal.show();
+							return false;
+						} else {
+							return true;
+						}
 					case "wallet":
 						if (account.characterId) {
 							return true;
@@ -26,6 +36,6 @@ export function useLoginChecker() {
 				return false;
 			},
 		}),
-		[connectModal, account]
+		[account, connectModal, upgradeAccountModal]
 	);
 }

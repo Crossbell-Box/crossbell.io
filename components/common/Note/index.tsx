@@ -16,6 +16,7 @@ import { composeNoteHref, getOrigin, useNoteRouterQuery } from "@/utils/url";
 import { useMintNote } from "@/utils/apis/contract";
 import { copyToClipboard } from "@/utils/other";
 import { getValidAttachments } from "@/utils/metadata";
+import { useLoginChecker } from "@/utils/wallet/hooks";
 
 import { CharacterHandle, CharacterName } from "../Character";
 import LoadingOverlay from "../LoadingOverlay";
@@ -375,9 +376,10 @@ function NoteActions({
 	const mintNote = useMintNote(characterId, noteId, address!);
 
 	const { navigate } = useNavigateToNote(characterId, noteId);
+	const { validate } = useLoginChecker();
 
 	const handleMint = useCallback(() => {
-		if (!status?.isMinted) {
+		if (!status?.isMinted && validate({ walletRequired: true })) {
 			mintNote.mutate();
 		}
 	}, [status?.isMinted]);
