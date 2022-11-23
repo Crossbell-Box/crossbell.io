@@ -23,6 +23,16 @@ export function InputEmailToRegister1() {
 	// eslint-disable-next-line react-hooks/exhaustive-deps
 	React.useEffect(refreshSize, [store.isCodeSent]);
 
+	const verifyCode = React.useCallback(() => {
+		if (store.computed.canVerifyCode) {
+			store.verifyCode().then((isCodeValid) => {
+				if (isCodeValid) {
+					goTo(SceneKind.inputEmailToRegister2);
+				}
+			});
+		}
+	}, [store, goTo]);
+
 	return (
 		<>
 			<Header title="Register Email Account 1/2" />
@@ -44,8 +54,14 @@ export function InputEmailToRegister1() {
 						type="text"
 						onBlur={store.validateEmail}
 						value={store.email}
+						onKeyDown={({ key }) => {
+							if (key === "Enter") {
+								store.sendCode();
+							}
+						}}
 						onChange={(e) => store.updateEmail(e.currentTarget.value)}
 						disabled={store.computed.isPending}
+						className="pr-108px"
 						rightSection={
 							<button
 								disabled={!store.computed.canSendCode}
@@ -87,13 +103,18 @@ export function InputEmailToRegister1() {
 							)}
 						/>
 					}
-					tips={<span className="text-[#E65040]">{store.codeErrorMsg}</span>}
+					tips={
+						<span className="text-[#E65040]" title={store.codeErrorMsg}>
+							{store.codeErrorMsg}
+						</span>
+					}
 				>
 					<CodeInput
 						size={44}
 						count={store.codeCount}
 						value={store.code}
 						onValueChange={store.updateCode}
+						onComplete={verifyCode}
 					/>
 				</Field>
 
@@ -109,13 +130,7 @@ export function InputEmailToRegister1() {
 
 					<NextStepButton
 						disabled={!store.computed.canVerifyCode}
-						onClick={() =>
-							store.verifyCode().then((isCodeValid) => {
-								if (isCodeValid) {
-									goTo(SceneKind.inputEmailToRegister2);
-								}
-							})
-						}
+						onClick={verifyCode}
 					>
 						Next Step
 					</NextStepButton>

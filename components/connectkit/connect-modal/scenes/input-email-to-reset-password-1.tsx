@@ -23,6 +23,16 @@ export function InputEmailToResetPassword1() {
 	// eslint-disable-next-line react-hooks/exhaustive-deps
 	React.useEffect(refreshSize, [store.isCodeSent]);
 
+	const verifyCode = React.useCallback(() => {
+		if (store.computed.canVerifyCode) {
+			store.verifyCode().then((isCodeValid) => {
+				if (isCodeValid) {
+					goTo(SceneKind.inputEmailToResetPassword2);
+				}
+			});
+		}
+	}, [store, goTo]);
+
 	return (
 		<>
 			<Header title="Reset Password" />
@@ -94,19 +104,14 @@ export function InputEmailToResetPassword1() {
 						count={store.codeCount}
 						value={store.code}
 						onValueChange={store.updateCode}
+						onComplete={verifyCode}
 					/>
 				</Field>
 
 				<div className="flex justify-end mt-48px">
 					<NextStepButton
 						disabled={!store.computed.canVerifyCode}
-						onClick={() =>
-							store.verifyCode().then((isCodeValid) => {
-								if (isCodeValid) {
-									goTo(SceneKind.inputEmailToResetPassword2);
-								}
-							})
-						}
+						onClick={verifyCode}
 					>
 						Next Step
 					</NextStepButton>

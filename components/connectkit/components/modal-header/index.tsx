@@ -17,7 +17,7 @@ export function ModalHeader({ title, leftNode, rightNode }: ModalHeaderProps) {
 		>
 			<div className="flex items-center justify-between gap-1 relative">
 				<div>{leftNode}</div>
-				<div className="mx-auto text-16px font-500 absolute left-1/2 top-1/2 transform -translate-x-1/2 -translate-y-1/2">
+				<div className="mx-auto text-16px font-500 absolute left-1/2 top-1/2 transform -translate-x-1/2 -translate-y-1/2 whitespace-nowrap">
 					{title}
 				</div>
 				<div>{rightNode}</div>

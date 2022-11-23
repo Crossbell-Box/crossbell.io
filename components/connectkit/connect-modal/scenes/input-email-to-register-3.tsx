@@ -14,6 +14,16 @@ export function InputEmailToRegister3() {
 	const store = useEmailRegisterStore();
 	const scene = useScenesStore();
 
+	const register = React.useCallback(() => {
+		if (store.computed.canRegister) {
+			store.register().then((ok) => {
+				if (ok) {
+					scene.goTo(SceneKind.inputEmailToRegister4);
+				}
+			});
+		}
+	}, [store, scene]);
+
 	return (
 		<>
 			<Header title="Mint Character" />
@@ -43,19 +53,18 @@ export function InputEmailToRegister3() {
 						value={store.characterName}
 						onChange={(e) => store.updateCharacterName(e.currentTarget.value)}
 						onBlur={() => store.validateCharacterName()}
+						onKeyDown={({ key }) => {
+							if (key === "Enter") {
+								register();
+							}
+						}}
 					/>
 				</Field>
 
 				<div className="flex justify-end mt-48px">
 					<NextStepButton
 						disabled={!store.computed.canRegister}
-						onClick={() => {
-							store.register().then((ok) => {
-								if (ok) {
-									scene.goTo(SceneKind.inputEmailToRegister4);
-								}
-							});
-						}}
+						onClick={register}
 					>
 						Mint
 					</NextStepButton>

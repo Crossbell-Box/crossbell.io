@@ -58,6 +58,7 @@ export function InputEmailToConnect() {
 							color="gray"
 							className="font-400"
 							compact={true}
+							tabIndex={1}
 							onClick={() => goTo(SceneKind.inputEmailToResetPassword1)}
 						>
 							Forgot?
@@ -72,6 +73,11 @@ export function InputEmailToConnect() {
 						onChange={(e: React.ChangeEvent<HTMLInputElement>) =>
 							store.updatePassword(e.currentTarget.value)
 						}
+						onKeyDown={({ key }) => {
+							if (key === "Enter") {
+								store.connect();
+							}
+						}}
 					/>
 				</Field>
 

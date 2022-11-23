@@ -6,6 +6,7 @@ type InputStateParams = {
 	value: string;
 	count: number;
 	onValueChange: (code: string) => void;
+	onComplete: () => void;
 };
 
 export type CodeInputProps = React.HTMLAttributes<HTMLDivElement> &
@@ -16,10 +17,17 @@ export function CodeInput({
 	count,
 	value,
 	onValueChange,
+	onComplete,
 	className,
 	...props
 }: CodeInputProps) {
-	const state = useInputState({ count, value, onValueChange, size });
+	const state = useInputState({
+		count,
+		value,
+		onValueChange,
+		size,
+		onComplete,
+	});
 
 	return (
 		<div
@@ -60,6 +68,7 @@ function useInputState({
 	count,
 	value: rawValue,
 	onValueChange,
+	onComplete,
 }: InputStateParams) {
 	const refs = useRefs(count);
 
@@ -102,12 +111,12 @@ function useInputState({
 					if (nextIndex < count) {
 						this.moveFocusOn(nextIndex);
 					} else {
-						refs[index].current?.blur();
+						onComplete();
 					}
 				}
 			},
 		};
-	}, [refs, count, rawValue, onValueChange]);
+	}, [refs, count, rawValue, onValueChange, onComplete]);
 }
 
 function useRefs(count: number) {
