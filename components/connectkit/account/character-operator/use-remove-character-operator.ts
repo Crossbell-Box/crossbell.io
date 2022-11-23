@@ -3,7 +3,7 @@ import { useMutation, useQueryClient } from "@tanstack/react-query";
 import React from "react";
 
 import { useContract } from "@/utils/crossbell.js";
-import { useAccountStore } from "@/components/connectkit";
+import { useAccountState } from "@/components/connectkit";
 
 import { removeOperator } from "../../apis";
 
@@ -15,7 +15,7 @@ type UpdateFn = (params: {
 }) => Promise<unknown>;
 
 export function useRemoveCharacterOperator() {
-	const account = useAccountStore((s) => s.computed.account);
+	const account = useAccountState((s) => s.computed.account);
 	const removeByContract = useRemoveOperatorByContract();
 	const removeByEmail = useRemoveOperatorByEmail();
 
@@ -23,7 +23,7 @@ export function useRemoveCharacterOperator() {
 }
 
 function useRemoveOperatorByEmail() {
-	const account = useAccountStore((s) => s.email);
+	const account = useAccountState((s) => s.email);
 
 	const updateFn: UpdateFn = React.useCallback(
 		async ({ characterId, operator }) => {

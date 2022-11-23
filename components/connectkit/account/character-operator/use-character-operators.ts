@@ -3,15 +3,15 @@ import { useQuery } from "@tanstack/react-query";
 import { useContract } from "@/utils/crossbell.js";
 import { OPERATOR_ADDRESS } from "@/utils/apis/operator-sync";
 
-import { useAccountStore } from "../account-store";
+import { useAccountState } from "../account-state";
 
 import { SCOPE_KEY_CHARACTER_OPERATOR } from "./const";
 
 export function useCharacterOperators() {
 	const contract = useContract();
-	const isEmailAccount = useAccountStore((s) => !!s.email);
-	const characterId = useAccountStore((s) => s.computed.account?.characterId);
-	const ssrReady = useAccountStore((s) => s.ssrReady);
+	const isEmailAccount = useAccountState((s) => !!s.email);
+	const characterId = useAccountState((s) => s.computed.account?.characterId);
+	const ssrReady = useAccountState((s) => s.ssrReady);
 
 	return useQuery(
 		SCOPE_KEY_CHARACTER_OPERATOR(characterId ?? -1),

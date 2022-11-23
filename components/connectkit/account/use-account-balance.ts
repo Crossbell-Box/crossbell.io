@@ -3,7 +3,7 @@ import { BigNumber } from "ethers";
 
 import { formatUnits } from "ethers/lib/utils";
 
-import { useAccountStore } from "./account-store";
+import { useAccountState } from "./account-state";
 
 export type UseAccountBalanceResult = {
 	balance: string | null;
@@ -11,7 +11,7 @@ export type UseAccountBalanceResult = {
 };
 
 export function useAccountBalance(): UseAccountBalanceResult {
-	const account = useAccountStore((s) => s.computed.account);
+	const account = useAccountState((s) => s.computed.account);
 
 	const { data: balance, isLoading } = useBalance({
 		addressOrName: account?.address,

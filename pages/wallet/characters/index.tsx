@@ -18,7 +18,7 @@ import {
 } from "@/utils/url";
 import {
 	useAccountCharacters,
-	useAccountStore,
+	useAccountState,
 	useSetPrimaryCharacter,
 } from "@/components/connectkit";
 
@@ -72,7 +72,7 @@ function CharacterCard({ character }: { character: CharacterEntity }) {
 	const { data: followingStats } = useCharacterFollowStats(
 		character.characterId
 	);
-	const account = useAccountStore((s) => s.computed.account);
+	const account = useAccountState((s) => s.computed.account);
 
 	const setPrimary = useSetPrimaryCharacter();
 

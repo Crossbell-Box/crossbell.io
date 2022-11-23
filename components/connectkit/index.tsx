@@ -1,7 +1,7 @@
 import React from "react";
 import { useAccount } from "wagmi";
 
-import { useAccountStore } from "./account";
+import { useAccountState } from "./account";
 import {
 	ConnectModal,
 	useModalStore as useConnectModal,
@@ -20,7 +20,7 @@ export * from "./account";
 export { useConnectModal, useDisconnectModal, useUpgradeAccountModal };
 
 export function ConnectKitProvider({ children }: React.PropsWithChildren) {
-	const accountStore = useAccountStore();
+	const accountStore = useAccountState();
 	const account = useAccount();
 
 	React.useEffect(() => {

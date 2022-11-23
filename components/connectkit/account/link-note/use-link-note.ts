@@ -6,7 +6,7 @@ import { useContract } from "@/utils/crossbell.js";
 import { NoteLinkType, SCOPE_KEY_NOTE_STATUS } from "@/utils/apis/indexer";
 
 import { linkNote } from "../../apis";
-import { useAccountStore } from "../account-store";
+import { useAccountState } from "../account-state";
 
 type UpdateFn = (params: {
 	characterId: number;
@@ -14,7 +14,7 @@ type UpdateFn = (params: {
 }) => Promise<unknown>;
 
 export function useLinkNote(linkType: NoteLinkType) {
-	const account = useAccountStore((s) => s.computed.account);
+	const account = useAccountState((s) => s.computed.account);
 	const linkByContract = useLinkByContract(linkType);
 	const linkByEmail = useLinkByEmail(linkType);
 
@@ -22,7 +22,7 @@ export function useLinkNote(linkType: NoteLinkType) {
 }
 
 function useLinkByEmail(linkType: NoteLinkType) {
-	const account = useAccountStore((s) => s.email);
+	const account = useAccountState((s) => s.email);
 
 	const updateFn: UpdateFn = React.useCallback(
 		async ({ characterId, noteId }) => {
@@ -45,7 +45,7 @@ function useLinkByEmail(linkType: NoteLinkType) {
 
 function useLinkByContract(linkType: NoteLinkType) {
 	const contract = useContract();
-	const account = useAccountStore((s) => s.wallet);
+	const account = useAccountState((s) => s.wallet);
 
 	const updateFn: UpdateFn = React.useCallback(
 		async ({ characterId, noteId }) => {

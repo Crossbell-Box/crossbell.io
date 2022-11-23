@@ -2,7 +2,7 @@ import React from "react";
 
 import {
 	useAccountCharacter,
-	useAccountStore,
+	useAccountState,
 	useCharacterHasOperator,
 	useConnectModal,
 	useToggleCharacterOperator,
@@ -17,7 +17,7 @@ import { SNSIcons } from "./sns-icons";
 import { Scenes } from "./scenes";
 
 export default function OperatorSyncWelcome() {
-	const ssrReady = useAccountStore((s) => s.ssrReady);
+	const ssrReady = useAccountState((s) => s.ssrReady);
 	const { data: character } = useAccountCharacter();
 	const { validate } = useLoginChecker();
 	const activate = useActivateCharacter(character?.characterId);

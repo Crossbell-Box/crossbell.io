@@ -2,13 +2,13 @@ import React from "react";
 
 import { openMintNewCharacterModel } from "@/components/common/NewUserGuide";
 import {
-	useAccountStore,
+	useAccountState,
 	useConnectModal,
 	useUpgradeAccountModal,
 } from "@/components/connectkit";
 
 export function useLoginChecker() {
-	const account = useAccountStore((s) => s.computed.account);
+	const account = useAccountState((s) => s.computed.account);
 	const connectModal = useConnectModal();
 	const upgradeAccountModal = useUpgradeAccountModal();
 

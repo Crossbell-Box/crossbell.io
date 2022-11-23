@@ -3,7 +3,7 @@ import create from "zustand";
 
 import { isEmail } from "@/utils/validators/is-email";
 
-import { useAccountStore } from "../../../account";
+import { useAccountState } from "../../../account";
 import { connectByEmail } from "../../../apis";
 import { createContextStore } from "../../../utils";
 
@@ -69,7 +69,7 @@ export const [EmailConnectStoreProvider, useEmailConnectStore] =
 					const result = await connectByEmail({ email, password });
 
 					if (result.ok) {
-						useAccountStore
+						useAccountState
 							.getState()
 							.connectEmail(result.token)
 							.then(() => {

@@ -1,13 +1,13 @@
 import React from "react";
 
-import { useAccountStore } from "../account-store";
+import { useAccountState } from "../account-state";
 
 import { useCharacterHasOperator } from "./use-character-has-operator";
 import { useAddCharacterOperator } from "./use-add-character-operator";
 import { useRemoveCharacterOperator } from "./use-remove-character-operator";
 
 export function useToggleCharacterOperator(operator: string) {
-	const characterId = useAccountStore((s) => s.computed.account?.characterId);
+	const characterId = useAccountState((s) => s.computed.account?.characterId);
 	const { hasOperator } = useCharacterHasOperator(operator);
 
 	const add = useAddCharacterOperator();

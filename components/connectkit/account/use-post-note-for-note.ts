@@ -11,7 +11,7 @@ import {
 
 import { putNote } from "../apis";
 
-import { useAccountStore } from "./account-store";
+import { useAccountState } from "./account-state";
 
 type UpdateFn = (params: {
 	note: NoteEntity;
@@ -19,7 +19,7 @@ type UpdateFn = (params: {
 }) => Promise<unknown>;
 
 export function usePostNoteForNote() {
-	const account = useAccountStore((s) => s.computed.account);
+	const account = useAccountState((s) => s.computed.account);
 	const postByContract = usePostByContract();
 	const postByEmail = usePostByEmail();
 
@@ -27,7 +27,7 @@ export function usePostNoteForNote() {
 }
 
 function usePostByEmail() {
-	const account = useAccountStore((s) => s.email);
+	const account = useAccountState((s) => s.email);
 
 	const updateFn: UpdateFn = React.useCallback(
 		async ({ metadata, note }) => {
@@ -50,7 +50,7 @@ function usePostByEmail() {
 
 function usePostByContract() {
 	const contract = useContract();
-	const account = useAccountStore((s) => s.wallet);
+	const account = useAccountState((s) => s.wallet);
 
 	const updateFn: UpdateFn = React.useCallback(
 		async ({ metadata, note }) => {

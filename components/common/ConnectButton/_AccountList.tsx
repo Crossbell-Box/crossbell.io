@@ -10,7 +10,7 @@ import { useModals } from "@mantine/modals";
 import { showNotification } from "@mantine/notifications";
 import { useRouter } from "next/router";
 
-import { useAccountStore, useAccountCharacters } from "@/components/connectkit";
+import { useAccountState, useAccountCharacters } from "@/components/connectkit";
 import { extractCharacterName } from "@/utils/metadata";
 import { composeCharacterHref } from "@/utils/url";
 import LoadMore from "@/components/common/LoadMore";
@@ -19,8 +19,8 @@ import Avatar from "@/components/common/Avatar";
 import MenuItem from "./_MenuItem";
 
 export default function AccountList() {
-	const account = useAccountStore((s) => s.computed.account);
-	const switchCharacter = useAccountStore((s) => s.switchCharacter);
+	const account = useAccountState((s) => s.computed.account);
+	const switchCharacter = useAccountState((s) => s.switchCharacter);
 	const {
 		isLoading,
 		characters,

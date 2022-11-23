@@ -1,11 +1,11 @@
 import { showNotification } from "@mantine/notifications";
 import { CharacterEntity } from "crossbell.js";
 
-import { SliceFn } from "../connect-modal/stores/types";
-import { asyncRetry } from "../utils";
-
-import { fetchAccountInfo } from "../apis";
 import { indexer } from "@/utils/crossbell.js";
+
+import { SliceFn } from "../../connect-modal/stores/types";
+import { asyncRetry } from "../../utils";
+import { fetchAccountInfo } from "../../apis";
 
 export type EmailAccount = {
 	type: "email";

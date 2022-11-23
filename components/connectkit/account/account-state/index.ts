@@ -5,20 +5,20 @@ import {
 	createEmailAccountSlice,
 	EmailAccount,
 	EmailAccountSlice,
-} from "./account-store.email";
+} from "./email";
 
 import {
 	createWalletAccountSlice,
 	WalletAccount,
 	WalletAccountSlice,
-} from "./account-store.wallet";
+} from "./wallet";
 
 export type { EmailAccount, WalletAccount };
 export type GeneralAccount = EmailAccount | WalletAccount;
 
 type AccountSlices = EmailAccountSlice & WalletAccountSlice;
 
-export type AccountStore = AccountSlices & {
+export type AccountState = AccountSlices & {
 	ssrReady: boolean;
 
 	computed: {
@@ -28,15 +28,9 @@ export type AccountStore = AccountSlices & {
 	markSSRReady(): void;
 };
 
-const defaultState = {
-	email: null,
-	wallet: null,
-} as const;
-
-export const useAccountStore = create(
-	persist<AccountStore, [], [], Omit<AccountStore, "computed" | "ssrReady">>(
+export const useAccountState = create(
+	persist<AccountState, [], [], Omit<AccountState, "computed" | "ssrReady">>(
 		(set, get) => ({
-			...defaultState,
 			...createEmailAccountSlice(set, get),
 			...createWalletAccountSlice(set, get),
 			ssrReady: false,

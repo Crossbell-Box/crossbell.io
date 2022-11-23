@@ -23,7 +23,7 @@ import { extractCharacterName } from "@/utils/metadata";
 import { composeCharacterHref } from "@/utils/url";
 import { BizError } from "@/utils/errors";
 import {
-	useAccountStore,
+	useAccountState,
 	useConnectModal,
 	useCreateCharacter,
 	useUpdateCharacterHandle,
@@ -39,7 +39,7 @@ export default function CharacterManagement({
 }>) {
 	const { data: character, isLoading: isLoadingCharacter } =
 		useCharacter(characterId);
-	const isAbleToEditHandle = useAccountStore((s) => !!s.wallet);
+	const isAbleToEditHandle = useAccountState((s) => !!s.wallet);
 
 	const [avatarLoading, setAvatarLoading] = useState(false);
 	const mode: "new" | "edit" = characterId ? "edit" : "new";
@@ -415,7 +415,7 @@ export default function CharacterManagement({
 
 // This will keep popping up if the user is not logged in.
 function LoginPopup() {
-	const { account, ssrReady } = useAccountStore((s) => ({
+	const { account, ssrReady } = useAccountState((s) => ({
 		account: s.computed.account,
 		ssrReady: s.ssrReady,
 	}));

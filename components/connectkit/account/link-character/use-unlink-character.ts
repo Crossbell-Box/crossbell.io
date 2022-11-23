@@ -10,7 +10,7 @@ import { useContract } from "@/utils/crossbell.js";
 import { CharacterLinkType } from "@/utils/apis/indexer";
 
 import { unlinkCharacter } from "../../apis";
-import { useAccountStore } from "../account-store";
+import { useAccountState } from "../account-state";
 
 type UpdateFn = (params: { characterId: number }) => Promise<unknown>;
 
@@ -24,7 +24,7 @@ export function useUnlinkCharacter(
 	linkType: CharacterLinkType,
 	options: UnlinkCharacterOptions
 ) {
-	const account = useAccountStore((s) => s.computed.account);
+	const account = useAccountState((s) => s.computed.account);
 	const unlinkByContract = useUnlinkByContract(linkType, options);
 	const unlinkByEmail = useUnlinkByEmail(linkType, options);
 
@@ -35,7 +35,7 @@ function useUnlinkByEmail(
 	linkType: CharacterLinkType,
 	options: UnlinkCharacterOptions
 ) {
-	const account = useAccountStore((s) => s.email);
+	const account = useAccountState((s) => s.email);
 
 	const updateFn: UpdateFn = React.useCallback(
 		async ({ characterId }) => {
@@ -60,7 +60,7 @@ function useUnlinkByContract(
 	options: UnlinkCharacterOptions
 ) {
 	const contract = useContract();
-	const account = useAccountStore((s) => s.wallet);
+	const account = useAccountState((s) => s.wallet);
 
 	const updateFn: UpdateFn = React.useCallback(
 		async ({ characterId }) => {

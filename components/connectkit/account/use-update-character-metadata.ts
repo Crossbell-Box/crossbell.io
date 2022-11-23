@@ -9,7 +9,7 @@ import { SCOPE_KEY_CHARACTER } from "@/utils/apis/indexer";
 
 import { updateMetadata } from "../apis";
 
-import { useAccountStore } from "./account-store";
+import { useAccountState } from "./account-state";
 
 type UpdateFn = (params: {
 	characterId: number;
@@ -17,7 +17,7 @@ type UpdateFn = (params: {
 }) => Promise<unknown>;
 
 export function useUpdateCharacterMetadata() {
-	const account = useAccountStore((s) => s.computed.account);
+	const account = useAccountState((s) => s.computed.account);
 	const updateByContract = useUpdateByContract();
 	const updateByEmail = useUpdateByEmail();
 
@@ -25,8 +25,8 @@ export function useUpdateCharacterMetadata() {
 }
 
 function useUpdateByEmail() {
-	const account = useAccountStore((s) => s.email);
-	const refreshEmail = useAccountStore((s) => s.refreshEmail.bind(s));
+	const account = useAccountState((s) => s.email);
+	const refreshEmail = useAccountState((s) => s.refreshEmail.bind(s));
 	const updateFn: UpdateFn = React.useCallback(
 		async ({ characterId, metadata }) => {
 			if (account?.characterId === characterId) {

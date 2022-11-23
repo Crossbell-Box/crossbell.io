@@ -8,7 +8,7 @@ import {
 	registerByEmail,
 	registerVerifyEmailCode,
 } from "../../../apis";
-import { useAccountStore } from "../../../account";
+import { useAccountState } from "../../../account";
 import { createContextStore } from "../../../utils";
 
 import { createEmailSlice, EmailSlice } from "./email";
@@ -156,7 +156,7 @@ export const [EmailRegisterStoreProvider, useEmailRegisterStore] =
 					set({ status: ok ? "registered" : "idle" });
 
 					if (ok) {
-						const connectOk = await useAccountStore
+						const connectOk = await useAccountState
 							.getState()
 							.connectEmail(token);
 

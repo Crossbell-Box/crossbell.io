@@ -7,14 +7,14 @@ import {
 	SCOPE_KEY_CHARACTER_FOLLOW_STATS,
 } from "@/utils/apis/indexer";
 
-import { useAccountStore } from "../account-store";
+import { useAccountState } from "../account-state";
 
 import { useLinkCharacter, LinkCharacterOptions } from "./use-link-character";
 import { useUnlinkCharacter } from "./use-unlink-character";
 
 export function useFollowCharacter() {
 	const queryClient = useQueryClient();
-	const currentCharacterId = useAccountStore(
+	const currentCharacterId = useAccountState(
 		(s) => s.computed.account?.characterId
 	);
 
@@ -39,7 +39,7 @@ export function useFollowCharacter() {
 
 export function useUnfollowCharacter() {
 	const queryClient = useQueryClient();
-	const currentCharacterId = useAccountStore(
+	const currentCharacterId = useAccountState(
 		(s) => s.computed.account?.characterId
 	);
 

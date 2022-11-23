@@ -16,7 +16,7 @@ import ModalsProvider from "@/components/providers/ModalsProvider";
 import { RouterTransition } from "@/components/providers/RouterTransition";
 import {
 	ConnectKitProvider,
-	useAccountStore,
+	useAccountState,
 	useConnectModal,
 	useUpgradeAccountModal,
 } from "@/components/connectkit";
@@ -36,7 +36,7 @@ export default function App({ Component, pageProps }: AppPropsWithLayout) {
 	const getLayout = Component.getLayout ?? ((page) => page);
 	const connectModal = useConnectModal();
 	const upgradeAccountModal = useUpgradeAccountModal();
-	const [isEmailConnected, characterId] = useAccountStore((s) => [
+	const [isEmailConnected, characterId] = useAccountState((s) => [
 		!!s.email,
 		s.computed.account?.characterId,
 	]);

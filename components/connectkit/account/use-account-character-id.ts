@@ -1,7 +1,7 @@
-import { useAccountStore } from "./account-store";
+import { useAccountState } from "./account-state";
 
 export function useAccountCharacterId() {
-	return useAccountStore((s) => ({
+	return useAccountState((s) => ({
 		characterId: s.computed.account?.characterId,
 		ssrReady: s.ssrReady,
 	}));

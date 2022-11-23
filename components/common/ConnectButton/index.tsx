@@ -1,4 +1,4 @@
-import { useAccountStore, useConnectModal } from "@/components/connectkit";
+import { useAccountState, useConnectModal } from "@/components/connectkit";
 
 import styles from "./styles.module.css";
 import BaseButton from "./_BaseButton";
@@ -12,7 +12,7 @@ export default function ConnectButton({
 	mode = "default",
 }: ConnectButtonProps) {
 	const connectModal = useConnectModal();
-	const account = useAccountStore((s) => s.computed.account);
+	const account = useAccountState((s) => s.computed.account);
 
 	if (account) {
 		return (
