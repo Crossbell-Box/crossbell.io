@@ -1,6 +1,5 @@
 import { Button, Tooltip, LoadingOverlay } from "@mantine/core";
 import { useDisclosure } from "@mantine/hooks";
-
 import classNames from "classnames";
 import React from "react";
 
@@ -12,12 +11,16 @@ import { EmailIcon, PasswordIcon, RegisterIcon } from "../components/icons";
 import { NextStepButton } from "../components/next-step-button";
 
 import { SceneKind } from "../types";
-import { useScenesStore, useEmailConnectStore } from "../stores";
+import {
+	useScenesStore,
+	useEmailConnectStore,
+	useEmailRegisterStore,
+} from "../stores";
 
 export function InputEmailToConnect() {
 	const goTo = useScenesStore(({ goTo }) => goTo);
-	const store = useEmailConnectStore();
-	const needAutoDisplayTooltipRef = React.useRef(true);
+	const emailConnectStore = useEmailConnectStore();
+	const emailRegisterStore = useEmailRegisterStore();
 	const [visible, setVisible] = React.useState(false);
 	const tooltip = useTooltipState();
 
@@ -31,20 +34,26 @@ export function InputEmailToConnect() {
 						<EmailIcon
 							className={classNames(
 								"transition",
-								store.emailErrorMsg ? "text-[#E65040]" : "text-[#FFB74D]"
+								emailConnectStore.emailErrorMsg
+									? "text-[#E65040]"
+									: "text-[#FFB74D]"
 							)}
 						/>
 					}
 					className="mb-24px"
-					tips={<span className="text-[#E65040]">{store.emailErrorMsg}</span>}
+					tips={
+						<span className="text-[#E65040]">
+							{emailConnectStore.emailErrorMsg}
+						</span>
+					}
 				>
 					<TextInput
 						type="text"
-						value={store.email}
-						onBlur={store.validateEmail}
+						value={emailConnectStore.email}
+						onBlur={emailConnectStore.validateEmail}
 						onFocus={tooltip.hide}
 						onChange={(e: React.ChangeEvent<HTMLInputElement>) =>
-							store.updateEmail(e.currentTarget.value)
+							emailConnectStore.updateEmail(e.currentTarget.value)
 						}
 					/>
 				</Field>
@@ -68,14 +77,14 @@ export function InputEmailToConnect() {
 					<PasswordInput
 						visible={visible}
 						onVisibleChange={setVisible}
-						value={store.password}
+						value={emailConnectStore.password}
 						onFocus={tooltip.hide}
 						onChange={(e: React.ChangeEvent<HTMLInputElement>) =>
-							store.updatePassword(e.currentTarget.value)
+							emailConnectStore.updatePassword(e.currentTarget.value)
 						}
 						onKeyDown={({ key }) => {
 							if (key === "Enter") {
-								store.connect();
+								emailConnectStore.connect();
 							}
 						}}
 					/>
@@ -90,7 +99,11 @@ export function InputEmailToConnect() {
 						<button
 							onPointerEnter={tooltip.show}
 							onPointerLeave={tooltip.hide}
-							onClick={() => goTo(SceneKind.inputEmailToRegister1)}
+							onClick={() => {
+								emailRegisterStore.updateEmail(emailConnectStore.email);
+								emailRegisterStore.sendCode();
+								goTo(SceneKind.inputEmailToRegister1);
+							}}
 							className="transition text-[#999] hover:text-[#111] bg-transparent border-none text-14px font-400 flex items-center justify-center px-40px py-14px font-roboto gap-12px cursor-pointer"
 						>
 							<RegisterIcon />
@@ -99,14 +112,14 @@ export function InputEmailToConnect() {
 					</Tooltip>
 
 					<NextStepButton
-						disabled={!store.computed.isAbleToConnect}
-						onClick={store.connect}
+						disabled={!emailConnectStore.computed.isAbleToConnect}
+						onClick={emailConnectStore.connect}
 					>
 						Connect
 					</NextStepButton>
 				</div>
 			</div>
-			<LoadingOverlay visible={store.computed.isPending} />
+			<LoadingOverlay visible={emailConnectStore.computed.isPending} />
 		</>
 	);
 }
