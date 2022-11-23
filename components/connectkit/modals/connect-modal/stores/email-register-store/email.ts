@@ -1,6 +1,6 @@
 import { isEmail } from "@/utils/validators/is-email";
 
-import { SliceFn } from "../types";
+import { SliceFn } from "../../../../utils";
 
 export interface EmailSlice {
 	email: string;

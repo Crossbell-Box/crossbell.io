@@ -1,4 +1,4 @@
-import { SliceFn } from "../types";
+import { SliceFn } from "../../../../utils";
 
 import { checkStrength } from "./password.strength";
 

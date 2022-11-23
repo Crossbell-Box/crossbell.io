@@ -1,4 +1,4 @@
-import { SliceFn } from "../types";
+import { SliceFn } from "../../../../utils";
 
 export type PasswordSlice = {
 	password: string;
