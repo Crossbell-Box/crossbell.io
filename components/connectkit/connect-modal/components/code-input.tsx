@@ -33,27 +33,17 @@ export function CodeInput({
 					value={value}
 					ref={state.refs[index]}
 					onFocus={({ currentTarget }) => {
-						if (state.list[index]) {
-							currentTarget.select();
-						} else {
-							for (let i = count - 1; i >= 0; i--) {
-								if (state.list[i]) {
-									return state.focusOn(i + 1);
-								}
-							}
-
-							return state.focusOn(0);
-						}
+						currentTarget.select();
+						state.moveFocusOn(index);
 					}}
 					onSelect={({ currentTarget }) => currentTarget.select()}
 					onKeyDown={({ key }) => {
-						console.log(key);
 						switch (key) {
 							case "ArrowLeft":
-								return state.focusOn(index - 1);
-							case "ArrowRight":
-								return state.focusOn(index + 1);
 							case "Backspace":
+								return state.moveFocusOn(index - 1);
+							case "ArrowRight":
+								return state.moveFocusOn(index + 1);
 						}
 					}}
 					onChange={(event: React.ChangeEvent<HTMLInputElement>) => {
@@ -80,28 +70,44 @@ function useInputState({
 			list,
 			refs,
 
-			focusOn(index: number) {
-				refs[(count + index) % count].current?.focus();
+			moveFocusOn(index: number) {
+				const nextIndex = (count + index) % count;
+				const moveFocusOn = (i: number) => refs[i].current?.focus();
+				const getValue = (i: number) => refs[i].current?.value ?? "";
+
+				if (!!getValue(nextIndex)) {
+					return moveFocusOn(nextIndex);
+				} else {
+					for (let i = count - 1; i >= 0; i--) {
+						if (!!getValue(i)) {
+							return moveFocusOn(i + 1);
+						}
+					}
+
+					return moveFocusOn(0);
+				}
 			},
 
 			onChange(v: string, index: number) {
 				const value = v.trim();
 				const length = value.length;
-				const nextIndex = index + (length > 0 ? length : -1);
+				const newList = list.slice(0, index);
 
-				list.length = index;
-				list.push(value);
-				onValueChange(list.join("").substring(0, count));
+				newList.push(value);
+				onValueChange(newList.join("").substring(0, count));
 
-				if (nextIndex < count) {
-					this.focusOn(nextIndex);
-				} else {
-					refs[index].current?.blur();
-					console.log("next!!");
+				if (length > 0) {
+					const nextIndex = index + length;
+
+					if (nextIndex < count) {
+						this.moveFocusOn(nextIndex);
+					} else {
+						refs[index].current?.blur();
+					}
 				}
 			},
 		};
-	}, [refs, count, onValueChange, rawValue]);
+	}, [refs, count, rawValue, onValueChange]);
 }
 
 function useRefs(count: number) {
