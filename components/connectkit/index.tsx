@@ -5,15 +5,15 @@ import { useAccountState } from "./hooks";
 import {
 	ConnectModal,
 	useModalStore as useConnectModal,
-} from "./connect-modal";
+} from "./modals/connect-modal";
 import {
 	DisconnectModal,
 	useModalStore as useDisconnectModal,
-} from "./disconnect-modal";
+} from "./modals/disconnect-modal";
 import {
 	UpgradeAccountModal,
 	useModalStore as useUpgradeAccountModal,
-} from "./upgrade-account-modal";
+} from "./modals/upgrade-account-modal";
 
 export * from "./hooks";
 

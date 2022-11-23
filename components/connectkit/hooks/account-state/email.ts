@@ -3,7 +3,7 @@ import { CharacterEntity } from "crossbell.js";
 
 import { indexer } from "@/utils/crossbell.js";
 
-import { SliceFn } from "../../connect-modal/stores/types";
+import { SliceFn } from "../../modals/connect-modal/stores/types";
 import { asyncRetry } from "../../utils";
 import { fetchAccountInfo } from "../../apis";
 
