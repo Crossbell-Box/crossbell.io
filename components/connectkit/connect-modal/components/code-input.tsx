@@ -57,7 +57,7 @@ export function CodeInput({
 					onChange={(event: React.ChangeEvent<HTMLInputElement>) => {
 						state.onChange(event.currentTarget.value, index);
 					}}
-					className="selection:bg-transparent rounded-12px p-0 font-500 text-22px text-center leading-1 border-none bg-[#1C1B1F] bg-opacity-4 font-mono"
+					className="selection:bg-transparent rounded-12px p-0 font-500 text-22px text-center leading-1 border-none bg-[#1C1B1F] bg-opacity-4 font-mono outline-[#6AD991]"
 				/>
 			))}
 		</div>
