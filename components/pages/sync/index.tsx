@@ -1,9 +1,8 @@
 import { Loader } from "@mantine/core";
 import React from "react";
 
-import { useIsFirstMount } from "@/utils/hooks/use-is-first-mount";
 import {
-	useAccountCharacter,
+	useAccountCharacterId,
 	useCharacterHasOperator,
 } from "@/components/connectkit";
 import {
@@ -19,16 +18,9 @@ import PlatformsSection from "./platforms-section";
 export default function OperatorSyncMain() {
 	const characterInfo = useCharacterInfo();
 	const operatorInfo = useCharacterHasOperator(OPERATOR_ADDRESS);
-	const boundAccounts = useCharacterBoundAccounts(
-		characterInfo.character?.characterId
-	);
-	const isFirstMount = useIsFirstMount();
+	const boundAccounts = useCharacterBoundAccounts(characterInfo.characterId);
 
-	if (characterInfo.hasCharacterId && isFirstMount) {
-		return renderLoading();
-	}
-
-	if (characterInfo.hasCharacterId) {
+	if (characterInfo.characterId) {
 		if (
 			characterInfo.isLoading ||
 			operatorInfo.isLoading ||
@@ -48,23 +40,21 @@ export default function OperatorSyncMain() {
 		}
 	}
 
-	return <OperatorSyncWelcome />;
+	return characterInfo.ssrReady ? <OperatorSyncWelcome /> : renderLoading();
 }
 
 function useCharacterInfo() {
-	const { data: character } = useAccountCharacter();
-	const { data: isActivated, isLoading } = useCharacterActivation(
-		character?.characterId
-	);
+	const { characterId, ssrReady } = useAccountCharacterId();
+	const { data: isActivated, isLoading } = useCharacterActivation(characterId);
 
 	return React.useMemo(
 		() => ({
+			ssrReady,
 			isLoading,
-			character,
-			hasCharacterId: !!character?.characterId,
+			characterId,
 			isActivated,
 		}),
-		[isLoading, isActivated, character]
+		[isLoading, isActivated, ssrReady]
 	);
 }
 
