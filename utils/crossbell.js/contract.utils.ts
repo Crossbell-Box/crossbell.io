@@ -1,4 +1,4 @@
-import { Indexer, Contract } from "crossbell.js";
+import { Contract } from "crossbell.js";
 import { BigNumber } from "ethers";
 import { parseEther } from "ethers/lib/utils";
 
@@ -7,14 +7,21 @@ import {
 	openMintNewCharacterModel,
 } from "@/components/common/NewUserGuide";
 
-import { getCsbBalance, getCurrentCharacterId } from "../apis/indexer";
+import { getCsbBalance } from "../apis/indexer";
 import { BizError, ERROR_CODES } from "../errors";
 import { getCurrentAddress } from "../wallet/provider";
 
-export function injectContractChecker(
-	contract: Contract,
-	openConnectModal?: () => void
-) {
+export type InjectContractCheckerConfig = {
+	contract: Contract;
+	getCurrentCharacterId: () => number | null;
+	openConnectModal: () => void;
+};
+
+export function injectContractChecker({
+	contract,
+	openConnectModal,
+	getCurrentCharacterId,
+}: InjectContractCheckerConfig) {
 	return new Proxy(contract, {
 		get: (target, prop) => {
 			return async (...args: any[]) => {

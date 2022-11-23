@@ -22,6 +22,7 @@ import {
 } from "@/components/connectkit";
 import { ipfsGateway } from "@/utils/ipfs";
 import { ContractProvider } from "@/utils/crossbell.js";
+import { useRefCallback } from "@/utils/hooks/use-ref-callback";
 
 export type NextPageWithLayout<P = {}, IP = P> = NextPage<P, IP> & {
 	getLayout?: (page: ReactElement) => ReactNode;
@@ -33,9 +34,13 @@ type AppPropsWithLayout = AppProps & {
 
 export default function App({ Component, pageProps }: AppPropsWithLayout) {
 	const getLayout = Component.getLayout ?? ((page) => page);
-	const isEmailConnected = useAccountStore((s) => !!s.email);
 	const connectModal = useConnectModal();
 	const upgradeAccountModal = useUpgradeAccountModal();
+	const [isEmailConnected, characterId] = useAccountStore((s) => [
+		!!s.email,
+		s.computed.account?.characterId,
+	]);
+	const getCurrentCharacterId = useRefCallback(() => characterId ?? null);
 
 	return (
 		<>
@@ -77,6 +82,7 @@ export default function App({ Component, pageProps }: AppPropsWithLayout) {
 													? upgradeAccountModal.show
 													: connectModal.show
 											}
+											getCurrentCharacterId={getCurrentCharacterId}
 										>
 											{getLayout(<Component {...pageProps} />)}
 										</ContractProvider>
