@@ -55,12 +55,12 @@ export function DisconnectModal() {
 						Cancel
 					</button>
 
-					<p className="flex items-center justify-center text-[#999] mb-27px">
+					<div className="flex items-center justify-center text-[#999] mt-12px mb-27px">
 						<Text className="i-csb:light-bulb text-24px mr-4px" />
 						<span className="text-14px font-400">
 							you can always log back in at any time.
 						</span>
-					</p>
+					</div>
 				</div>
 			</div>
 		</Modal>
