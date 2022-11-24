@@ -1,35 +1,70 @@
 import React from "react";
 
 import {
-	useAccountCharacter,
 	useAccountState,
 	useCharacterHasOperator,
-	useConnectModal,
 	useToggleCharacterOperator,
 } from "@/components/connectkit";
 import {
 	OPERATOR_ADDRESS,
 	useActivateCharacter,
+	useCharacterActivation,
 } from "@/utils/apis/operator-sync";
+import { useLoginChecker } from "@/utils/wallet/hooks";
+import { useRefCallback } from "@/utils/hooks/use-ref-callback";
 
 export function useTurnSyncOn() {
 	const account = useAccountState((s) => s.computed.account);
 	const characterId = account?.characterId;
-	const { data: character } = useAccountCharacter();
-	const activate = useActivateCharacter(character?.characterId);
+	const activate = useActivateCharacter(characterId);
 	const [{ toggleOperator }] = useToggleCharacterOperator(OPERATOR_ADDRESS);
 	const { hasOperator } = useCharacterHasOperator(OPERATOR_ADDRESS);
-	const connectModal = useConnectModal();
+	const { validate } = useLoginChecker();
 
-	return React.useCallback(async () => {
-		if (characterId) {
-			await activate.mutateAsync();
+	const turnSyncOn = useRefCallback(async () => {
+		console.log("turnSyncOn!!");
 
-			if (!hasOperator) {
-				await toggleOperator();
-			}
-		} else {
-			connectModal.show();
+		await activate.mutateAsync();
+
+		if (!hasOperator) {
+			await toggleOperator();
 		}
-	}, [account, hasOperator, character, activate, toggleOperator, connectModal]);
+	});
+
+	const { needAutoTurnOnAfterConnect } = useAutoTurnOn(characterId, turnSyncOn);
+
+	return useRefCallback(async () => {
+		if (validate()) {
+			turnSyncOn();
+		} else {
+			needAutoTurnOnAfterConnect();
+		}
+	});
+}
+
+function useAutoTurnOn(
+	characterId: number | undefined,
+	turnSyncOn: () => void
+) {
+	const autoTurnOnRef = React.useRef(false);
+	const { data: isActivated, isLoading: isActivationLoading } =
+		useCharacterActivation(characterId);
+
+	const needAutoTurnOnAfterConnect = useRefCallback(
+		() => (autoTurnOnRef.current = true)
+	);
+
+	React.useEffect(() => {
+		if (characterId && autoTurnOnRef.current && !isActivationLoading) {
+			autoTurnOnRef.current = false;
+
+			if (!isActivated) {
+				turnSyncOn();
+			}
+		}
+	}, [characterId, isActivated, isActivationLoading, turnSyncOn]);
+
+	return {
+		needAutoTurnOnAfterConnect,
+	};
 }

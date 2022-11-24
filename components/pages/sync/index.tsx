@@ -60,7 +60,7 @@ function useCharacterInfo() {
 			characterId,
 			isActivated,
 		}),
-		[isLoading, isActivated, ssrReady]
+		[ssrReady, isLoading, characterId, isActivated]
 	);
 }
 
