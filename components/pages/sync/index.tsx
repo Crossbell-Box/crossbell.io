@@ -11,6 +11,7 @@ import {
 	useCharacterBoundAccounts,
 } from "@/utils/apis/operator-sync";
 
+import { useTurnSyncOn } from "./hooks";
 import CharacterSection from "./character-section";
 import OperatorSyncWelcome from "./operator-sync-welcome";
 import PlatformsSection from "./platforms-section";
@@ -19,6 +20,7 @@ export default function OperatorSyncMain() {
 	const characterInfo = useCharacterInfo();
 	const operatorInfo = useCharacterHasOperator(OPERATOR_ADDRESS);
 	const boundAccounts = useCharacterBoundAccounts(characterInfo.characterId);
+	const turnSyncOn = useTurnSyncOn();
 
 	if (characterInfo.characterId) {
 		if (
@@ -40,7 +42,11 @@ export default function OperatorSyncMain() {
 		}
 	}
 
-	return characterInfo.ssrReady ? <OperatorSyncWelcome /> : renderLoading();
+	return characterInfo.ssrReady ? (
+		<OperatorSyncWelcome onStart={turnSyncOn} />
+	) : (
+		renderLoading()
+	);
 }
 
 function useCharacterInfo() {
