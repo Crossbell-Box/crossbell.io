@@ -8,8 +8,7 @@ import classNames from "classnames";
 import Avatar from "@/components/common/Avatar";
 import {
 	useAccountCharacter,
-	useLikeNote,
-	useUnlikeNote,
+	useToggleLikeNote,
 } from "@/components/connectkit";
 import { useCharacter, useNote, useNoteStatus } from "@/utils/apis/indexer";
 import { composeNoteHref, getOrigin, useNoteRouterQuery } from "@/utils/url";
@@ -365,12 +364,16 @@ function NoteActions({
 		currentCharacter ?? null
 	);
 
-	const [toggleLikeNote, { isLoading: isToggleLikeNoteLoading }] =
-		useToggleLikeNote({
-			characterId,
-			noteId,
-			isLiked: !!status?.isLiked,
-		});
+	const {
+		isLiked,
+		isLoading: isToggleLikeNoteLoading,
+		likeCount,
+		toggleLike,
+	} = useToggleLikeNote({
+		characterId,
+		noteId,
+		status,
+	});
 
 	const { address } = useAccount();
 	const mintNote = useMintNote(characterId, noteId, address!);
@@ -410,13 +413,13 @@ function NoteActions({
 
 			{/* like */}
 			<ActionButton
-				text={status?.likeCount ?? "..."}
+				text={likeCount ?? "..."}
 				label="Like"
-				icon={status?.isLiked ? "i-csb:like-filled" : "i-csb:like"}
-				color={status?.isLiked ? "text-red" : "text-dimmed"}
+				icon={isLiked ? "i-csb:like-filled" : "i-csb:like"}
+				color={isLiked ? "text-red" : "text-dimmed"}
 				bgHoverColor="group-hover:bg-red/10"
 				textHoverColor="group-hover:text-red"
-				onClick={toggleLikeNote}
+				onClick={toggleLike}
 			/>
 
 			{/* mint */}
@@ -514,25 +517,4 @@ function useNavigateToNote(characterId: number, noteId: number) {
 	};
 
 	return { navigate, href: targetURL, prefetch };
-}
-
-function useToggleLikeNote({
-	characterId,
-	noteId,
-	isLiked,
-}: {
-	characterId: number;
-	noteId: number;
-	isLiked: boolean;
-}) {
-	const likeNote = useLikeNote();
-	const unlikeNote = useUnlikeNote();
-	const toggleLikeNote = isLiked ? unlikeNote : likeNote;
-
-	const toggle = useCallback(
-		() => toggleLikeNote.mutate({ characterId, noteId }),
-		[toggleLikeNote, characterId, noteId]
-	);
-
-	return [toggle, toggleLikeNote] as const;
 }
