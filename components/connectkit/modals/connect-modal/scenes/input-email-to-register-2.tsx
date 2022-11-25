@@ -83,11 +83,21 @@ export function InputEmailToRegister2() {
 					label={
 						<span className="whitespace-pre-wrap">
 							{"I have read and agree to the "}
-							<a href="@/components/connectkit/modals/connect-modal/scenes/input-email-to-register-2" className="text-[#F6C549]">
+							<a
+								href="https://legal.xlog.app/Terms-of-Service"
+								target="_blank"
+								rel="noreferrer"
+								className="text-[#F6C549]"
+							>
 								Terms of Service
 							</a>
 							{" and\nthe "}
-							<a href="@/components/connectkit/modals/connect-modal/scenes/input-email-to-register-2" className="text-[#F6C549]">
+							<a
+								href="https://legal.xlog.app/Privacy-Policy"
+								target="_blank"
+								rel="noreferrer"
+								className="text-[#F6C549]"
+							>
 								Privacy Policy
 							</a>
 							{"."}
