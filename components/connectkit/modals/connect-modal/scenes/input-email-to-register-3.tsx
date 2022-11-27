@@ -38,13 +38,13 @@ export function InputEmailToRegister3() {
 							className="absolute -right-25px -bottom-10px text-[#6AD991]"
 						/>
 					</div>
-					<p className="text-16px font-500 mt-24px mb-57px">
-						Give a name to get your character now!
+					<p className="text-16px font-500 mt-8px mb-44px">
+						You’re almost done!
 					</p>
 				</div>
 
 				<Field
-					title="Your Character Name"
+					title="Give your character a name"
 					icon={<MemberIcon className="text-[#FFB74D]" />}
 					className="mb-24px flex flex-col items-center"
 				>
@@ -65,6 +65,7 @@ export function InputEmailToRegister3() {
 					<NextStepButton
 						disabled={!store.computed.canRegister}
 						onClick={register}
+						className="px-50px"
 					>
 						Mint
 					</NextStepButton>
