@@ -33,8 +33,9 @@ const WalletDisplayButton = forwardRef<
 	const { balance, isLoading: isLoadingBalance } = useAccountBalance();
 
 	const isLoading = isLoadingCharacter || isLoadingBalance;
-	const addressDisplay =
-		account.type === "email" ? account.email : truncateAddress(account.address);
+	const addressDisplay = truncateAddress(
+		account.type === "email" ? account.email : account.address
+	);
 
 	if (mode === "minimal") {
 		return (

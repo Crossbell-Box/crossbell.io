@@ -4,7 +4,7 @@ import { CharacterEntity } from "crossbell.js";
 import { indexer } from "@/utils/crossbell.js";
 
 import { asyncRetry, SliceFn } from "../../utils";
-import { fetchAccountInfo } from "../../apis";
+import { fetchAccountInfo, refillBalance } from "../../apis";
 
 export type EmailAccount = {
 	type: "email";
@@ -22,6 +22,7 @@ export type EmailAccountSlice = {
 	connectEmail(token: string): Promise<boolean>;
 	disconnectEmail(): void;
 	refreshEmail(): Promise<boolean>;
+	refillEmailBalance(): Promise<boolean>;
 };
 
 export const createEmailAccountSlice: SliceFn<EmailAccountSlice> = (
@@ -74,6 +75,30 @@ export const createEmailAccountSlice: SliceFn<EmailAccountSlice> = (
 
 		if (email) {
 			return this.connectEmail(email.token);
+		} else {
+			return false;
+		}
+	},
+
+	async refillEmailBalance() {
+		const { email } = get();
+
+		if (email) {
+			const result = await refillBalance(email);
+
+			if (result.balance) {
+				set({ email: { ...email, csb: result.balance } });
+			}
+
+			if (result.message) {
+				showNotification({
+					color: result.ok ? "green" : "red",
+					message: result.message,
+					title: "Refill Balance",
+				});
+			}
+
+			return result.ok;
 		} else {
 			return false;
 		}
