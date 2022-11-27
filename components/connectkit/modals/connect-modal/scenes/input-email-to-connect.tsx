@@ -104,10 +104,9 @@ export function InputEmailToConnect() {
 								emailRegisterStore.sendCode();
 								goTo(SceneKind.inputEmailToRegister1);
 							}}
-							className="transition text-[#999] hover:text-[#111] bg-transparent border-none text-14px font-400 flex items-center justify-center px-40px py-14px font-roboto gap-12px cursor-pointer"
+							className="transition text-[#999] hover:text-[#111] bg-transparent border-none text-14px font-400 flex items-center justify-center px-15px py-14px font-roboto gap-12px cursor-pointer"
 						>
-							<RegisterIcon />
-							Register
+							Don’t have account?
 						</button>
 					</Tooltip>
 
