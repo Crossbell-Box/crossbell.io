@@ -105,9 +105,9 @@ export default function Page() {
 									)}
 								</Modal>
 
-								<div className="mt-40px">
+								<div>
 									{achievementGroups.map((group) => (
-										<div key={group.id}>
+										<div key={group.id} className="mt-40px">
 											<AchievementsTitle>{group.title}</AchievementsTitle>
 											<div className="mt-40px px-24px">
 												<SimpleGrid {...gridProps}>
