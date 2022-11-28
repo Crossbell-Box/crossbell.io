@@ -24,6 +24,9 @@ export function PasswordInput({
 					"transition h-full w-full rounded-12px border-none px-12px bg-[#1C1B1F] bg-opacity-4 focus:bg-opacity-6 outline-none"
 				}
 				type={visible ? "text" : "password"}
+				spellCheck="false"
+				autoCorrect="off"
+				autoCapitalize="off"
 				{...props}
 			/>
 			<div className="transition absolute cursor-pointer right-8px p-8px top-1/2 transform -translate-y-1/2 text-16px text-[#999] hover:text-[#000]">

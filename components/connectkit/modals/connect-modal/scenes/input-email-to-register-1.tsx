@@ -51,7 +51,12 @@ export function InputEmailToRegister1() {
 					tips={<span className="text-[#E65040]">{store.emailErrorMsg}</span>}
 				>
 					<TextInput
-						type="text"
+						name="email"
+						type="email"
+						spellCheck="false"
+						autoCorrect="off"
+						autoCapitalize="off"
+						autoComplete="email"
 						onBlur={store.validateEmail}
 						value={store.email}
 						onKeyDown={({ key }) => {

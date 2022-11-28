@@ -7,7 +7,7 @@ import { Header } from "../components/header";
 import { TextInput } from "../components/text-input";
 import { PasswordInput } from "../components/password-input";
 import { Field } from "../components/field";
-import { EmailIcon, PasswordIcon, RegisterIcon } from "../components/icons";
+import { EmailIcon, PasswordIcon } from "../components/icons";
 import { NextStepButton } from "../components/next-step-button";
 
 import { SceneKind } from "../types";
@@ -48,7 +48,12 @@ export function InputEmailToConnect() {
 					}
 				>
 					<TextInput
-						type="text"
+						name="email"
+						type="email"
+						spellCheck="false"
+						autoCorrect="off"
+						autoCapitalize="off"
+						autoComplete="email"
 						value={emailConnectStore.email}
 						onBlur={emailConnectStore.validateEmail}
 						onFocus={tooltip.hide}
@@ -87,6 +92,8 @@ export function InputEmailToConnect() {
 								emailConnectStore.connect();
 							}
 						}}
+						name="password"
+						autoComplete="password"
 					/>
 				</Field>
 

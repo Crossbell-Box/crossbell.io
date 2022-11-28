@@ -42,6 +42,8 @@ export function InputEmailToRegister2() {
 						value={store.password}
 						onBlur={store.validatePassword2}
 						onChange={(e) => store.updatePassword(e.currentTarget.value)}
+						name="password1"
+						autoComplete="new-password"
 					/>
 				</Field>
 
@@ -65,6 +67,8 @@ export function InputEmailToRegister2() {
 						value={store.password2}
 						onBlur={store.validatePassword2}
 						onChange={(e) => store.updatePassword2(e.currentTarget.value)}
+						name="password2"
+						autoComplete="new-password"
 					/>
 				</Field>
 
