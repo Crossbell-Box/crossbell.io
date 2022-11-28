@@ -5,7 +5,7 @@ export type FieldProps = {
 	title: React.ReactNode;
 	icon: React.ReactNode;
 	tips?: React.ReactNode;
-} & React.HTMLAttributes<HTMLDivElement>;
+} & Omit<React.HTMLAttributes<HTMLDivElement>, "title">;
 
 export function Field({
 	tips,
@@ -22,7 +22,9 @@ export function Field({
 					{icon}
 					<span className="font-500 text-16px text-[#49454F]">{title}</span>
 				</div>
-				<div className="ml-auto text-12px flex-grow-0 text-ellipsis overflow-hidden">{tips}</div>
+				<div className="ml-auto text-12px flex-grow-0 text-ellipsis overflow-hidden">
+					{tips}
+				</div>
 			</div>
 
 			<div className="w-full">{children}</div>

@@ -1,5 +1,6 @@
 import React from "react";
-import { LoadingOverlay } from "@mantine/core";
+import { LoadingOverlay, Text, Tooltip } from "@mantine/core";
+import Image from "@/components/common/Image";
 
 import { Header } from "../components/header";
 import { TextInput } from "../components/text-input";
@@ -44,7 +45,55 @@ export function InputEmailToRegister3() {
 				</div>
 
 				<Field
-					title="Give your character a name"
+					title={
+						<span>
+							{"Give your character a name"}
+							<Tooltip
+								offset={4}
+								withinPortal={true}
+								px={20}
+								py={16}
+								radius={16}
+								classNames={{ tooltip: "bg-[#6AD991]" }}
+								arrowSize={10}
+								label={
+									<div className="w-312px rounded-16px pb-30px">
+										<div className="flex flex-col items-center bg-black rounded-12px">
+											<div className="w-125px h-34px relative my-20px">
+												<Image
+													src="/logos/crossbell-white.svg"
+													alt="Crossbell"
+													fill
+												/>
+											</div>
+
+											<div className="aspect-253/128 relative w-full mx-10px mb-10px">
+												<Image
+													src="/images/connect-kit/what-is-character.png"
+													alt="What Is Character"
+													fill
+												/>
+											</div>
+										</div>
+										<h3 className="text-16px font-600 mt-14px mb-6px">
+											Guide - What is Character？
+										</h3>
+										<p className="text-14px font-400 m-0">
+											Character is your Crossbell profile where you can check
+											all the content synced from other social media and also
+											browse your treasure collection and achievements.
+										</p>
+									</div>
+								}
+								openDelay={200}
+								multiline={true}
+								transition="pop-bottom-left"
+								withArrow={true}
+							>
+								<Text className="i-csb:circle-help inline-block transform -translate-y-1/2" />
+							</Tooltip>
+						</span>
+					}
 					icon={<MemberIcon className="text-[#FFB74D]" />}
 					className="mb-24px flex flex-col items-center"
 				>
