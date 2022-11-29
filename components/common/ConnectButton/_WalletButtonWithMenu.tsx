@@ -2,6 +2,7 @@ import { Menu, Text, Button } from "@mantine/core";
 import { useDisclosure } from "@mantine/hooks";
 import Link from "next/link";
 
+import { useIntervalMemo } from "@/utils/hooks/use-interval-memo";
 import {
 	ExportCrossbellDataHref,
 	WalletCharacterManageHref,
@@ -27,10 +28,15 @@ export default function WalletButtonWithMenu({
 	mode,
 	account,
 }: WalletButtonWithMenuProps) {
-	const refillEmailBalance = useAccountState((s) => s.refillEmailBalance);
+	const [refillEmailBalance, checkIsAbleToRefillEmailBalance] = useAccountState(
+		(s) => [s.refillEmailBalance, s.checkIsAbleToRefillEmailBalance]
+	);
 	const [menuOpened, menuHandlers] = useDisclosure(false);
 	const { balance, isLoading: isLoadingBalance } = useAccountBalance();
 	const disconnectModal = useDisconnectModal();
+	const isAbleToRefillEmailBalance = useIntervalMemo(
+		checkIsAbleToRefillEmailBalance
+	);
 
 	return (
 		<Menu
@@ -62,13 +68,13 @@ export default function WalletButtonWithMenu({
 						{account.type === "email" && (
 							<Button
 								size="xs"
-								variant="outline"
 								className="ml-auto h-24px"
 								px={10}
 								radius={6}
+								disabled={!isAbleToRefillEmailBalance}
 								onClick={refillEmailBalance}
 							>
-								<span className="text-black text-12px font-500">Claim</span>
+								<span className="text-12px font-500">Claim</span>
 							</Button>
 						)}
 					</div>

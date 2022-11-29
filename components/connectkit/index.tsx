@@ -2,6 +2,7 @@ import React from "react";
 import { useAccount } from "wagmi";
 
 import { useAccountState } from "./hooks";
+import { ClaimCSBModal } from "./modals/claim-csb-modal";
 import {
 	ConnectModal,
 	useModalStore as useConnectModal,
@@ -38,6 +39,7 @@ export function ConnectKitProvider({ children }: React.PropsWithChildren) {
 			<ConnectModal />
 			<DisconnectModal />
 			<UpgradeAccountModal />
+			<ClaimCSBModal />
 			{children}
 		</>
 	);

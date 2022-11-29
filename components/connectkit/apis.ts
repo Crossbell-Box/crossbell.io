@@ -305,7 +305,7 @@ export async function refillBalance({
 	token,
 }: {
 	token: string;
-}): Promise<{ balance: string; ok: boolean; message: string }> {
+}): Promise<{ balance: string } | { ok: boolean; message: string }> {
 	return request(`/newbie/account/balance/refill`, {
 		method: "POST",
 		token,
