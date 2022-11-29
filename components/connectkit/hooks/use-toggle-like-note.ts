@@ -45,8 +45,8 @@ function useToggleContract(
 	return {
 		isLoading,
 		toggleLike,
-		likeCount: status?.likeCount ?? 0,
-		isLiked: status?.isLiked ?? false,
+		likeCount: status?.likeCount,
+		isLiked: status?.isLiked,
 	};
 }
 
