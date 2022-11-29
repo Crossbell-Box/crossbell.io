@@ -1,5 +1,6 @@
 import React from "react";
 import { Modal } from "@mantine/core";
+import { useAccount } from "wagmi";
 
 import { DynamicContainer, DynamicContainerContent } from "../../components";
 
@@ -25,7 +26,14 @@ export { useModalStore };
 
 export function ConnectModal() {
 	const { isActive, hide } = useModalStore();
+	const { isConnected } = useAccount();
 	const storeKey = useResetStore();
+
+	React.useEffect(() => {
+		if (isConnected) {
+			hide();
+		}
+	}, [isConnected, hide]);
 
 	return (
 		<Modal
