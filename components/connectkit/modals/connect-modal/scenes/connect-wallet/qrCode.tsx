@@ -10,6 +10,7 @@ import { QRCode } from "@/components/common/QRCode";
 import { Header } from "../../components/header";
 
 import { useInitiateConnect } from "./use-initiate-connect";
+import { isMobile } from "@/components/connectkit/utils";
 
 type QRCodeWalletConnector = RequireAtLeastOne<WalletConnector, "qrCode">;
 
@@ -26,8 +27,16 @@ export function ConnectWithQRCode({
 	const { connectAsync } = useConnect();
 
 	useInitiateConnect(() => {
-		connector.connector.on("message", async () => {
-			setConnectorUri(await connector.qrCode());
+		connector.connector.on("message", async ({ type }) => {
+			if (type === "connecting") {
+				const qrCode = await connector.qrCode();
+
+				setConnectorUri(qrCode);
+
+				if (qrCode && isMobile()) {
+					window.location.href = qrCode;
+				}
+			}
 		});
 
 		connectAsync(connector).catch((err) =>

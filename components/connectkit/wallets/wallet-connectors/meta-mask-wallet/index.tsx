@@ -5,7 +5,7 @@ import Image from "@/components/common/Image";
 import metaMaskUrl from "@/public/images/connect-kit/wallet-logos/meta-mask.svg";
 
 import { Chain, Wallet } from "../../types";
-import { isAndroid } from "../../../utils";
+import { isAndroid, isMobile } from "../../../utils";
 import { getWalletConnectConnector } from "../get-wallet-connect-connector";
 import { ConnectStatus } from "./connect-status";
 
@@ -51,7 +51,7 @@ export const metaMaskWallet = ({
 		typeof window.ethereum !== "undefined" &&
 		isMetaMask(window.ethereum);
 
-	const shouldUseWalletConnect = !isMetaMaskInjected;
+	const shouldUseWalletConnect = isMobile() && !isMetaMaskInjected;
 
 	return {
 		id: "metaMask",
