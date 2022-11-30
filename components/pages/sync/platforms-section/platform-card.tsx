@@ -157,16 +157,17 @@ export function PlatformCard({
 						<Link
 							href={platformUrl}
 							className={classNames(
-								"font-500 text-black text-16px leading-24px tracking-0.15px",
+								"font-500 text-black text-16px leading-24px tracking-0.15px overflow-hidden text-ellipsis flex-1 whitespace-nowrap",
 								!identity && "opacity-50"
 							)}
 							target="_blank"
 							rel="noreferrer"
+							title={identity}
 						>
 							{identity ? `@${identity}` : "NOT BOUND"}
 						</Link>
 
-						<div className="ml-auto flex flex-col items-end">
+						<div className="ml-1 flex flex-col items-end flex-shrink-0">
 							<div className="flex items-center mb-4px">
 								<button
 									className={classNames(
