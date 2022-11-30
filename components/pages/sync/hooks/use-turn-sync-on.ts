@@ -18,7 +18,7 @@ export function useTurnSyncOn() {
 	const characterId = account?.characterId;
 	const activate = useActivateCharacter(characterId);
 	const [{ toggleOperator }] = useToggleCharacterOperator(OPERATOR_ADDRESS);
-	const { hasOperator } = useCharacterHasOperator(OPERATOR_ADDRESS);
+	const hasOperator = useCharacterHasOperator(OPERATOR_ADDRESS);
 	const { validate } = useLoginChecker();
 
 	const turnSyncOn = useRefCallback(async () => {

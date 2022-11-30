@@ -62,7 +62,7 @@ export function PlatformCard({
 	lastUpdatedAt,
 }: PlatformCardProps) {
 	const { data: character } = useAccountCharacter();
-	const { hasOperator } = useCharacterHasOperator(OPERATOR_ADDRESS);
+	const hasOperator = useCharacterHasOperator(OPERATOR_ADDRESS);
 
 	const syncAccount = useSyncAccount(
 		character?.characterId!,

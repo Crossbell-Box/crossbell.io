@@ -8,7 +8,7 @@ import { useRemoveCharacterOperator } from "./use-remove-character-operator";
 
 export function useToggleCharacterOperator(operator: string) {
 	const characterId = useAccountState((s) => s.computed.account?.characterId);
-	const { hasOperator } = useCharacterHasOperator(operator);
+	const hasOperator = useCharacterHasOperator(operator);
 
 	const add = useAddCharacterOperator();
 	const remove = useRemoveCharacterOperator();

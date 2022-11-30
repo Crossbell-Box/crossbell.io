@@ -1,12 +1,8 @@
 import { Loader } from "@mantine/core";
 import React from "react";
 
+import { useAccountCharacterId } from "@/components/connectkit";
 import {
-	useAccountCharacterId,
-	useCharacterHasOperator,
-} from "@/components/connectkit";
-import {
-	OPERATOR_ADDRESS,
 	useCharacterActivation,
 	useCharacterBoundAccounts,
 } from "@/utils/apis/operator-sync";
@@ -18,16 +14,11 @@ import PlatformsSection from "./platforms-section";
 
 export default function OperatorSyncMain() {
 	const characterInfo = useCharacterInfo();
-	const operatorInfo = useCharacterHasOperator(OPERATOR_ADDRESS);
 	const boundAccounts = useCharacterBoundAccounts(characterInfo.characterId);
 	const turnSyncOn = useTurnSyncOn();
 
 	if (characterInfo.characterId) {
-		if (
-			characterInfo.isLoading ||
-			operatorInfo.isLoading ||
-			boundAccounts.isLoading
-		) {
+		if (characterInfo.isLoading || boundAccounts.isLoading) {
 			return renderLoading();
 		}
 
