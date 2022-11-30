@@ -8,6 +8,7 @@ export const SUPPORTED_PLATFORMS = [
 	"tg_channel",
 	"substack",
 	"pixiv",
+	"jike",
 ] as const;
 
 export type SupportedPlatform = typeof SUPPORTED_PLATFORMS[number];
@@ -20,6 +21,7 @@ const PLATFORM_DISPLAY_STATUS_MAP: Record<SupportedPlatform, boolean> = {
 	tg_channel: true,
 	substack: true,
 	pixiv: true,
+	jike: true,
 };
 
 export function isShowPlatform(platform: SupportedPlatform): boolean {
@@ -63,6 +65,8 @@ export function getPlatformUserProfileUrl(
 			return `https://${identity}.substack.com`;
 		case "pixiv":
 			return `https://www.pixiv.net/users/${identity}`;
+		case "jike":
+			return `https://web.okjike.com/u/${identity}`;
 	}
 }
 
@@ -75,6 +79,7 @@ export function getPlatformDisplayName(platform: SupportedPlatform): string {
 		substack: "Substack",
 		pixiv: "Pixiv",
 		tg_channel: "Telegram Channel",
+		jike: "Jike",
 	};
 
 	return map[platform] ?? platform;
@@ -83,6 +88,7 @@ export function getPlatformDisplayName(platform: SupportedPlatform): string {
 export function getPlatformIdentityKind(platform: SupportedPlatform): string {
 	switch (platform) {
 		case "pixiv":
+		case "jike":
 			return "id";
 		case "tg_channel":
 			return "username";

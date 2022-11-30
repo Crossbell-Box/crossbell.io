@@ -331,5 +331,7 @@ function step2Description(platform: SupportedPlatform): string {
 			return "2. To verify, please copy your handle below into Tiktok Bio.";
 		case "twitter":
 			return "2. To verify, please copy your handle below into Twitter Bio.";
+		case "jike":
+			return "2. To verify, please copy your handle below into Jike Bio.";
 	}
 }

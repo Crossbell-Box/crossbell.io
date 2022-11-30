@@ -18,6 +18,7 @@ import LogoTelegram from "@/public/images/sync/platform-icons/telegram.svg";
 import LogoPixiv from "@/public/images/sync/platform-icons/pixiv.svg";
 import LogoPinterest from "@/public/images/sync/platform-icons/pinterest.svg";
 import LogoSubstack from "@/public/images/sync/platform-icons/substack.svg";
+import LogoJike from "@/public/images/sync/platform-icons/jike.svg";
 
 import { sumUpMediaUsage } from "../utils";
 import { PlatformCard, PlatformCardProps } from "./platform-card";
@@ -31,6 +32,7 @@ const ICON_MAP: Record<SupportedPlatform, StaticImageData> = {
 	substack: LogoSubstack,
 	pinterest: LogoPinterest,
 	pixiv: LogoPixiv,
+	jike: LogoJike,
 };
 
 export default function PlatformsSection() {
