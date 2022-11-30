@@ -61,11 +61,11 @@ function BindingModal({ platform }: { platform: SupportedPlatform }) {
 	const veriHandle = character?.handle && getVeriHandle(character.handle);
 	const profileUrl = username && getPlatformUserProfileUrl(platform, username);
 
-	const bindAccount = useBindAccount(
-		character?.characterId!,
+	const bindAccount = useBindAccount({
+		characterId: character?.characterId!,
 		platform,
-		username
-	);
+		identity: username,
+	});
 
 	const ref = useClickOutside(() => {
 		if (!bindAccount.isLoading) {

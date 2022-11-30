@@ -1,10 +1,17 @@
 import { showNotification } from "@mantine/notifications";
 import { useMutation, useQuery, useQueryClient } from "@tanstack/react-query";
+
+import { useContract } from "@/utils/crossbell.js";
+import { deepMerge } from "@/utils/metadata";
+
 import OperatorSyncApi from "./api";
 import { SupportedPlatform } from "./consts";
+
 const api = new OperatorSyncApi();
 
 const SCOPE_KEY = ["api", "operator-sync"];
+const csbAccountURI = (identity: string, platform: SupportedPlatform) =>
+	`csb://account:${identity}@${platform}`;
 
 // get character media usage
 
@@ -66,16 +73,40 @@ export function useCharacterBoundAccounts(characterId?: number) {
 
 // bind an account to a character
 
-export function useBindAccount(
-	characterId: number,
-	platform: SupportedPlatform,
-	identity: string,
+export type UseBindAccountParams = {
+	characterId: number;
+	platform: SupportedPlatform;
+	identity: string;
 	/** in RFC 3339 format */
-	startTime?: string
-) {
+	startTime?: string;
+};
+
+export function useBindAccount({
+	characterId,
+	platform,
+	identity,
+	startTime,
+}: UseBindAccountParams) {
 	const client = useQueryClient();
+	const contract = useContract();
+
 	return useMutation(
-		() => api.bindAccount(characterId!, platform, identity, startTime),
+		async () => {
+			await contract.changeCharacterMetadata(characterId, (oMetadata) => {
+				const connectedAccountSet = new Set([
+					...(oMetadata?.connected_accounts ?? []),
+					csbAccountURI(identity, platform),
+				]);
+
+				const connected_accounts = Array.from(connectedAccountSet);
+
+				return oMetadata
+					? deepMerge(oMetadata, { connected_accounts })
+					: { connected_accounts };
+			});
+
+			return api.bindAccount(characterId!, platform, identity, startTime);
+		},
 		{
 			onSuccess: () => {
 				return Promise.all([
@@ -96,14 +127,35 @@ export function useBindAccount(
 
 // unbind an account from a character
 
-export function useUnbindAccount(
-	characterId: number,
-	platform: SupportedPlatform,
-	identity: string
-) {
+export type UseUnbindAccountParams = {
+	characterId: number;
+	platform: SupportedPlatform;
+	identity: string;
+};
+
+export function useUnbindAccount({
+	characterId,
+	platform,
+	identity,
+}: UseUnbindAccountParams) {
 	const client = useQueryClient();
+	const contract = useContract();
+
 	return useMutation(
-		() => api.unbindAccount(characterId!, platform!, identity),
+		async () => {
+			await contract.changeCharacterMetadata(characterId, (oMetadata) => {
+				const connected_accounts =
+					oMetadata?.connected_accounts?.filter(
+						(account) => account !== csbAccountURI(identity, platform)
+					) ?? [];
+
+				return oMetadata
+					? deepMerge(oMetadata, { connected_accounts })
+					: { connected_accounts };
+			});
+
+			return api.unbindAccount(characterId!, platform!, identity);
+		},
 		{
 			onSuccess: () => {
 				return Promise.all([
