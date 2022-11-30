@@ -64,7 +64,7 @@ export const SCOPE_KEY_CHARACTER_BOUND_ACCOUNTS = (characterId: number) => {
 export function useCharacterBoundAccounts(characterId?: number) {
 	return useQuery(
 		SCOPE_KEY_CHARACTER_BOUND_ACCOUNTS(characterId!),
-		() => api.getBoundAccounts(characterId!).then((res) => res.result),
+		() => api.getBoundAccounts(characterId!).then((res) => res.result ?? []),
 		{
 			enabled: Boolean(characterId),
 		}
