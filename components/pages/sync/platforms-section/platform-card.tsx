@@ -86,7 +86,7 @@ export function PlatformCard({
 			<div
 				className={classNames(
 					"absolute z-1 top-40px -right-20px flex",
-					!hasOperator && "grayscale-80 brightness-160"
+					disableBtn && "grayscale-80 brightness-160"
 				)}
 			>
 				<button
