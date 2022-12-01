@@ -53,6 +53,7 @@ function useAddOperator(updadeFn: UpdateFn) {
 	return useMutation((params: Parameters<UpdateFn>[0]) => updadeFn(params), {
 		onSuccess: (_, { characterId }) => {
 			return Promise.all([
+				useAccountState.getState().refresh(),
 				queryClient.invalidateQueries(
 					SCOPE_KEY_CHARACTER_OPERATOR(characterId)
 				),
