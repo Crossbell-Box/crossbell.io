@@ -33,12 +33,14 @@ export function useChangeCharacterMetadata() {
 							token: account.token,
 							metadata: newMetadata,
 						});
+						await useAccountState.getState().refresh();
 						return true;
 					case "wallet":
 						await contract.setCharacterMetadata(
 							account.character.characterId,
 							newMetadata
 						);
+						await useAccountState.getState().refresh();
 						return true;
 				}
 			} catch (err) {
