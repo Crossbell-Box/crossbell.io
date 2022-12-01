@@ -43,14 +43,14 @@ function useRemoveOperatorByContract() {
 	const contract = useContract();
 
 	return useRemoveOperator(({ characterId, operator }) =>
-		contract.addOperator(characterId, operator)
+		contract.removeOperator(characterId, operator)
 	);
 }
 
-function useRemoveOperator(updadeFn: UpdateFn) {
+function useRemoveOperator(updateFn: UpdateFn) {
 	const queryClient = useQueryClient();
 
-	return useMutation((params: Parameters<UpdateFn>[0]) => updadeFn(params), {
+	return useMutation((params: Parameters<UpdateFn>[0]) => updateFn(params), {
 		onSuccess: (_, { characterId }) => {
 			return Promise.all([
 				useAccountState.getState().refresh(),
