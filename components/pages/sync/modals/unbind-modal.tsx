@@ -62,11 +62,11 @@ function UnbindingModal({ platform, identity }: UnbindingModalProps) {
 	const { data: character } = useCurrentCharacter();
 	const veriHandle = getVeriHandle(character?.handle!);
 
-	const unbindAccount = useUnbindAccount(
-		character?.characterId!,
+	const unbindAccount = useUnbindAccount({
+		characterId: character?.characterId!,
 		platform,
-		identity
-	);
+		identity,
+	});
 
 	const ref = useClickOutside(() => {
 		if (!unbindAccount.isLoading) {

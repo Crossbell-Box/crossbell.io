@@ -36,7 +36,7 @@ export default class OperatorSyncApi {
 
 	async getBoundAccounts(
 		characterId: number
-	): Promise<OperatorSyncServerResponse<Account[]>> {
+	): Promise<OperatorSyncServerResponse<Account[] | null>> {
 		const res = await fetch(`${this.endpoint}/${characterId}/account`).then(
 			(res) => res.json()
 		);
@@ -88,11 +88,13 @@ export default class OperatorSyncApi {
 	async getCharacterMediaUsage(characterId: number): Promise<number> {
 		const accounts = await this.getBoundAccounts(characterId);
 		let total = 0;
-		accounts.result.forEach((account) => {
+
+		accounts.result?.forEach((account) => {
 			account.media_usage?.forEach((media) => {
 				total += media.usage;
 			});
 		});
+
 		return total;
 	}
 

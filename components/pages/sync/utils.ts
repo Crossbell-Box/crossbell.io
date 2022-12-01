@@ -37,6 +37,7 @@ export function getChangeBioUrl(
 				: getPlatformSite("substack");
 		case "tiktok":
 		case "tg_channel":
+		case "jike":
 			return getPlatformUserProfileUrl(platform, identity);
 	}
 }
@@ -64,6 +65,8 @@ export function getPlatformSite(platform: SupportedPlatform): string {
 			return `https://substack.com`;
 		case "pixiv":
 			return `https://www.pixiv.net`;
+		case "jike":
+			return `https://www.okjike.com/`;
 	}
 }
 

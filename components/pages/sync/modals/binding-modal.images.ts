@@ -16,6 +16,8 @@ import substackBio from "@/public/images/sync/platforms/substack-bio.png";
 import substackName from "@/public/images/sync/platforms/substack-name.png";
 import pixivBio from "@/public/images/sync/platforms/pixiv-bio.png";
 import pixivName from "@/public/images/sync/platforms/pixiv-name.png";
+import jikeBio from "@/public/images/sync/platforms/jike-bio.png";
+import jikeName from "@/public/images/sync/platforms/jike-name.png";
 
 export const NAME_IMAGE_MAP: Record<SupportedPlatform, StaticImageData> = {
 	tiktok: tiktokName,
@@ -25,6 +27,7 @@ export const NAME_IMAGE_MAP: Record<SupportedPlatform, StaticImageData> = {
 	tg_channel: telegramName,
 	substack: substackName,
 	pixiv: pixivName,
+	jike: jikeName,
 };
 
 export const BIO_IMAGE_MAP: Record<SupportedPlatform, StaticImageData> = {
@@ -35,4 +38,5 @@ export const BIO_IMAGE_MAP: Record<SupportedPlatform, StaticImageData> = {
 	tg_channel: telegramBio,
 	substack: substackBio,
 	pixiv: pixivBio,
+	jike: jikeBio,
 };

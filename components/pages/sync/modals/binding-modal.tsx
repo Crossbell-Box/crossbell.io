@@ -61,11 +61,11 @@ function BindingModal({ platform }: { platform: SupportedPlatform }) {
 	const veriHandle = character?.handle && getVeriHandle(character.handle);
 	const profileUrl = username && getPlatformUserProfileUrl(platform, username);
 
-	const bindAccount = useBindAccount(
-		character?.characterId!,
+	const bindAccount = useBindAccount({
+		characterId: character?.characterId!,
 		platform,
-		username
-	);
+		identity: username,
+	});
 
 	const ref = useClickOutside(() => {
 		if (!bindAccount.isLoading) {
@@ -331,5 +331,7 @@ function step2Description(platform: SupportedPlatform): string {
 			return "2. To verify, please copy your handle below into Tiktok Bio.";
 		case "twitter":
 			return "2. To verify, please copy your handle below into Twitter Bio.";
+		case "jike":
+			return "2. To verify, please copy your handle below into Jike Bio.";
 	}
 }

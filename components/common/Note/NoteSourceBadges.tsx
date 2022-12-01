@@ -18,6 +18,7 @@ const builtInColorMap = {
 	pinterest: ["#e60019", "#fff"],
 	substack: ["#ff6719", "#fff"],
 	pixiv: ["#3e97f3", "#fff"],
+	jike: ["#F8E026", "#000"],
 	"telegram channel": ["#08c", "#fff"],
 } as const;
 
@@ -118,6 +119,8 @@ function getLinkForSource(source: string, noteMetadata: NoteMetadata) {
 				return findUrlIncludes(noteMetadata.external_urls, "t.me");
 			case "pinterest":
 				return findUrlIncludes(noteMetadata.external_urls, "pinterest.com");
+			case "jike":
+				return findUrlIncludes(noteMetadata.external_urls, "okjike.com");
 		}
 	}
 
