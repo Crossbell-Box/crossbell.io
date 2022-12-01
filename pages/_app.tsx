@@ -21,7 +21,7 @@ import {
 	useUpgradeAccountModal,
 } from "@/components/connectkit";
 import { ipfsGateway } from "@/utils/ipfs";
-import { ContractProvider } from "@/utils/crossbell.js";
+import { InitContractProvider } from "@/utils/crossbell.js";
 import { useRefCallback } from "@/utils/hooks/use-ref-callback";
 
 export type NextPageWithLayout<P = {}, IP = P> = NextPage<P, IP> & {
@@ -76,7 +76,7 @@ export default function App({ Component, pageProps }: AppPropsWithLayout) {
 								<RouterTransition />
 								<IpfsGatewayContext.Provider value={ipfsGateway}>
 									<ConnectKitProvider>
-										<ContractProvider
+										<InitContractProvider
 											openConnectModal={
 												isEmailConnected
 													? upgradeAccountModal.show
@@ -85,7 +85,7 @@ export default function App({ Component, pageProps }: AppPropsWithLayout) {
 											getCurrentCharacterId={getCurrentCharacterId}
 										>
 											{getLayout(<Component {...pageProps} />)}
-										</ContractProvider>
+										</InitContractProvider>
 									</ConnectKitProvider>
 								</IpfsGatewayContext.Provider>
 							</NotificationsProvider>

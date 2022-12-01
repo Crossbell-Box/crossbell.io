@@ -6,6 +6,7 @@ import {
 	useAccountCharacter,
 	useToggleCharacterOperator,
 } from "@/components/connectkit";
+import { useContract } from "@/utils/crossbell.js";
 
 import { openRemoveOperatorModal } from "../modals";
 
@@ -14,6 +15,7 @@ export function useToggleOperator() {
 	const [{ toggleOperator, hasOperator }] =
 		useToggleCharacterOperator(OPERATOR_ADDRESS);
 	const [isTogglingOperator, setIsTogglingOperator] = React.useState(false);
+	const contract = useContract();
 
 	return React.useMemo(() => {
 		return {
@@ -26,7 +28,7 @@ export function useToggleOperator() {
 					setIsTogglingOperator(true);
 
 					if (hasOperator) {
-						await openRemoveOperatorModal();
+						await openRemoveOperatorModal(contract);
 					} else {
 						await toggleOperator();
 

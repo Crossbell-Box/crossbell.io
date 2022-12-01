@@ -3,6 +3,7 @@ import compact from "lodash.compact";
 import { closeAllModals } from "@mantine/modals";
 import { Button, LoadingOverlay, Text } from "@mantine/core";
 import { useClickOutside } from "@mantine/hooks";
+import { Contract } from "crossbell.js";
 
 import {
 	useAccountCharacter,
@@ -14,14 +15,19 @@ import {
 	OPERATOR_ADDRESS,
 	useCharacterBoundAccounts,
 } from "@/utils/apis/operator-sync";
+import { ContractProvider } from "@/utils/crossbell.js";
 
 import seeYouImage from "@/public/images/sync/see-you-later.svg";
 
-export async function openRemoveOperatorModal() {
+export async function openRemoveOperatorModal(contract: Contract) {
 	return new Promise<void>((resolve) =>
 		openBorderlessModal({
 			zIndex: 10000,
-			children: <RemoveOperatorModal />,
+			children: (
+				<ContractProvider contract={contract}>
+					<RemoveOperatorModal />
+				</ContractProvider>
+			),
 			classNames: { modal: "rounded-28px overflow-hidden w-auto" },
 			closeOnEscape: false,
 			closeOnClickOutside: false,

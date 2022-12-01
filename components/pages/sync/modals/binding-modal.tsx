@@ -11,6 +11,7 @@ import { closeAllModals } from "@mantine/modals";
 import { useClickOutside } from "@mantine/hooks";
 import React from "react";
 import classNames from "classnames";
+import { Contract } from "crossbell.js";
 
 import Image from "@/components/common/Image";
 import { openBorderlessModal } from "@/components/common/Modal";
@@ -24,6 +25,7 @@ import {
 } from "@/utils/apis/operator-sync";
 import { useAccountCharacter } from "@/components/connectkit";
 import { copyToClipboard } from "@/utils/other";
+import { ContractProvider } from "@/utils/crossbell.js";
 
 import DoneImage from "@/public/images/sync/congrats.svg";
 
@@ -38,10 +40,17 @@ const closeModals = () => closeAllModals();
 
 const modalZIndex = 10000;
 
-export function openBindingModal(platform: SupportedPlatform) {
+export function openBindingModal(
+	platform: SupportedPlatform,
+	contract: Contract
+) {
 	openBorderlessModal({
 		zIndex: modalZIndex,
-		children: <BindingModal platform={platform} />,
+		children: (
+			<ContractProvider contract={contract}>
+				<BindingModal platform={platform} />
+			</ContractProvider>
+		),
 		classNames: { modal: "rounded-24px overflow-hidden" },
 		closeOnClickOutside: false,
 		closeOnEscape: false,

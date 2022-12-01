@@ -25,6 +25,7 @@ import {
 } from "@/components/pages/sync/modals";
 import Image from "@/components/common/Image";
 import { formatDate } from "@/utils/time";
+import { useContract } from "@/utils/crossbell.js";
 
 import bindIllustration from "@/public/images/sync/bind-illustration.png";
 
@@ -63,6 +64,7 @@ export function PlatformCard({
 }: PlatformCardProps) {
 	const { data: character } = useAccountCharacter();
 	const hasOperator = useCharacterHasOperator(OPERATOR_ADDRESS);
+	const contract = useContract();
 
 	const syncAccount = useSyncAccount(
 		character?.characterId!,
@@ -101,9 +103,9 @@ export function PlatformCard({
 					disabled={disableBtn}
 					onClick={() => {
 						if (isBound) {
-							openUnbindingModal(platform, identity!);
+							openUnbindingModal(platform, identity!, contract);
 						} else {
-							openBindingModal(platform);
+							openBindingModal(platform, contract);
 						}
 					}}
 				>

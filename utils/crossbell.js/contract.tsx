@@ -11,18 +11,34 @@ import {
 
 const ContractContext = React.createContext<Contract | null>(null);
 
-export type ContractProviderProps = Omit<
+export type ContractProviderProps = {
+	contract: Contract;
+	children?: React.ReactNode;
+};
+
+export function ContractProvider({
+	contract,
+	children,
+}: ContractProviderProps) {
+	return (
+		<ContractContext.Provider value={contract}>
+			{children}
+		</ContractContext.Provider>
+	);
+}
+
+export type InitContractProviderProps = Omit<
 	InjectContractCheckerConfig,
 	"contract"
 > & {
 	children: React.ReactNode;
 };
 
-export function ContractProvider({
+export function InitContractProvider({
 	children,
 	openConnectModal: openConnectModal_,
 	getCurrentCharacterId,
-}: ContractProviderProps) {
+}: InitContractProviderProps) {
 	const { connector, isConnected } = useAccount();
 	const openConnectModal = useRefCallback(openConnectModal_);
 
@@ -52,11 +68,7 @@ export function ContractProvider({
 		}
 	}, [connector, isConnected, openConnectModal]);
 
-	return (
-		<ContractContext.Provider value={contract}>
-			{children}
-		</ContractContext.Provider>
-	);
+	return <ContractProvider contract={contract}>{children}</ContractProvider>;
 }
 
 export function useContract() {
