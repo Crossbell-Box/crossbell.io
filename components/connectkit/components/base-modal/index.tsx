@@ -18,7 +18,7 @@ export function BaseModal({ isActive, children, onClose }: BaseModalProps) {
 			radius={0}
 			classNames={{
 				modal:
-					"mt-auto sm:mb-auto rounded-t-28px sm:rounded-b-28px w-full sm:w-auto",
+					"mt-auto sm:mb-auto rounded-t-28px sm:rounded-b-28px w-full sm:w-auto overflow-hidden",
 				inner: "p-0",
 			}}
 		>
