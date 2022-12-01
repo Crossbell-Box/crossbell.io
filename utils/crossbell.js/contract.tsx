@@ -72,5 +72,13 @@ export function InitContractProvider({
 }
 
 export function useContract() {
-	return React.useContext(ContractContext)!;
+	const contract = React.useContext(ContractContext);
+
+	if (!contract) {
+		throw new Error(
+			"No contract found. Please inject the contract through context."
+		);
+	}
+
+	return contract;
 }
