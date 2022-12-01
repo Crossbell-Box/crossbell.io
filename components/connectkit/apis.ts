@@ -312,3 +312,19 @@ export async function refillBalance({
 		body: {},
 	});
 }
+
+export async function updateCharactersMetadata({
+	token,
+	metadata,
+	mode = "merge",
+}: {
+	token: string;
+	metadata: CharacterMetadata;
+	mode?: "merge" | "replace";
+}): Promise<{ transactionHash: string; data: string }> {
+	return request(`/newbie/contract/characters/me/metadata`, {
+		method: "POST",
+		token,
+		body: { metadata, mode },
+	});
+}

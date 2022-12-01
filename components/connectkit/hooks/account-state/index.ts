@@ -26,6 +26,7 @@ export type AccountState = AccountSlices & {
 	};
 
 	markSSRReady(): void;
+	refresh(): Promise<void>;
 };
 
 export const useAccountState = create(
@@ -49,6 +50,10 @@ export const useAccountState = create(
 
 			markSSRReady() {
 				set({ ssrReady: true });
+			},
+
+			async refresh() {
+				await Promise.all([this.refreshEmail(), this.refreshWallet()]);
 			},
 		}),
 		{

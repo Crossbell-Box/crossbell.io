@@ -29,8 +29,7 @@ export function ConnectKitProvider({ children }: React.PropsWithChildren) {
 	}, [account.address]);
 
 	React.useEffect(() => {
-		accountStore.refreshEmail();
-		accountStore.refreshWallet();
+		accountStore.refresh();
 		accountStore.markSSRReady();
 	}, []);
 
