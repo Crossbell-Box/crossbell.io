@@ -9,7 +9,7 @@ export function UpgradeToWallet() {
 
 			<div
 				data-animation="scale-fade-in"
-				className="w-360px px-24px pb-60px pt-10px flex flex-col items-center gap-15px"
+				className="sm:w-360px px-24px pb-60px pt-10px flex flex-col items-center gap-15px"
 			>
 				<img
 					className="w-145px h-104px"

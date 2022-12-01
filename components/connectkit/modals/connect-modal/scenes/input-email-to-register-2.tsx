@@ -20,7 +20,7 @@ export function InputEmailToRegister2() {
 	return (
 		<>
 			<Header title="Register Email Account 2/2" />
-			<div data-animation="scale-fade-in" className="w-362px p-24px">
+			<div data-animation="scale-fade-in" className="sm:w-362px p-24px">
 				<Field
 					title="Password"
 					className="mb-24px"

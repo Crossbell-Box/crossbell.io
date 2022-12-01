@@ -19,7 +19,7 @@ export function InputEmailToResetPassword2() {
 	return (
 		<>
 			<Header title="Reset Password" />
-			<div data-animation="scale-fade-in" className="w-362px p-24px">
+			<div data-animation="scale-fade-in" className="sm:w-362px p-24px">
 				<Field
 					title="New Password"
 					className="mb-24px"

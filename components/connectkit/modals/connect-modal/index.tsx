@@ -1,8 +1,11 @@
 import React from "react";
-import { Modal } from "@mantine/core";
 import { useAccount } from "wagmi";
 
-import { DynamicContainer, DynamicContainerContent } from "../../components";
+import {
+	DynamicContainer,
+	DynamicContainerContent,
+	BaseModal,
+} from "../../components";
 
 import { SceneKind } from "./types";
 import { useScenesStore, useModalStore, StoresProvider } from "./stores";
@@ -36,21 +39,13 @@ export function ConnectModal() {
 	}, [isConnected, hide]);
 
 	return (
-		<Modal
-			size="auto"
-			radius={28}
-			withCloseButton={false}
-			opened={isActive}
-			onClose={hide}
-			centered={true}
-			padding={0}
-		>
-			<DynamicContainer className="rounded-28px">
+		<BaseModal isActive={isActive} onClose={hide}>
+			<DynamicContainer>
 				<StoresProvider key={storeKey}>
 					<Main />
 				</StoresProvider>
 			</DynamicContainer>
-		</Modal>
+		</BaseModal>
 	);
 }
 

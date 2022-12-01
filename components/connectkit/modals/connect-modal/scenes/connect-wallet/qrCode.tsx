@@ -53,7 +53,7 @@ export function ConnectWithQRCode({
 			<Header title={`Scan with ${wallet.name}`} />
 
 			<div data-animation="scale-fade-in" className="px-24px pb-24px">
-				<div className="w-295px h-295px mx-auto relative flex items-center justify-center border rounded-24px border-[#f7f6f8] p-14px">
+				<div className="sm:w-295px h-295px mx-auto relative flex items-center justify-center border rounded-24px border-[#f7f6f8] p-14px">
 					{connectorUri ? (
 						<>
 							<QRCode

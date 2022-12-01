@@ -27,7 +27,7 @@ export function InputEmailToConnect() {
 	return (
 		<>
 			<Header title="Connect Email" />
-			<div data-animation="scale-fade-in" className="w-362px p-24px">
+			<div data-animation="scale-fade-in" className="sm:w-362px p-24px">
 				<Field
 					title="Email Address"
 					icon={

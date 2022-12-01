@@ -20,7 +20,7 @@ export function SelectWalletToConnect() {
 		<>
 			<Header title="Connect Wallet" />
 
-			<div data-animation="scale-fade-in" className="w-312px px-24px">
+			<div data-animation="scale-fade-in" className="sm:w-312px px-24px">
 				<Selections
 					items={walletConnectors
 						.map((wallet) => ({

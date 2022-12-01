@@ -1,9 +1,9 @@
 import React from "react";
-import { Button, Modal, Text } from "@mantine/core";
+import { Button, Text } from "@mantine/core";
 
 import Image from "@/components/common/Image";
 
-import { ModalHeader } from "../../components";
+import { ModalHeader, BaseModal } from "../../components";
 
 import { useClaimCSBModal } from "./stores";
 
@@ -13,16 +13,8 @@ export function ClaimCSBModal() {
 	const { isActive, hide, msg } = useClaimCSBModal();
 
 	return (
-		<Modal
-			size="auto"
-			radius={28}
-			withCloseButton={false}
-			opened={isActive}
-			onClose={hide}
-			centered={true}
-			padding={0}
-		>
-			<div className="w-360px">
+		<BaseModal isActive={isActive} onClose={hide}>
+			<div className="sm:w-360px">
 				<ModalHeader
 					title="Claim"
 					rightNode={
@@ -48,6 +40,6 @@ export function ClaimCSBModal() {
 					<p className="m-0 text-14px font-400 text-[#49454F] mb-24px">{msg}</p>
 				</div>
 			</div>
-		</Modal>
+		</BaseModal>
 	);
 }

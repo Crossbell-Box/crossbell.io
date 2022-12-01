@@ -18,7 +18,7 @@ export function SelectOptions() {
 		<>
 			<Header title="Upgrade Account" leftNode={false} />
 
-			<div data-animation="scale-fade-in" className="w-312px mx-24px pb-18px">
+			<div data-animation="scale-fade-in" className="sm:w-312px mx-24px pb-18px">
 				<p className="text-14px font-400 text-[#999] my-10px text-center">
 					{`Email account can't mint because a wallet is required to keep your assets. `}
 					<a

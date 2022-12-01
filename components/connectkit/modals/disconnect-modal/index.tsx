@@ -1,8 +1,8 @@
 import React from "react";
 import classNames from "classnames";
-import { Button, Modal, Text } from "@mantine/core";
+import { Button, Text } from "@mantine/core";
 
-import { ModalHeader } from "../../components";
+import { ModalHeader, BaseModal } from "../../components";
 import { useDisconnectAccount } from "../../hooks";
 
 import { useModalStore } from "./stores";
@@ -18,16 +18,8 @@ export function DisconnectModal() {
 	const disconnectAccount = useDisconnectAccount(hide);
 
 	return (
-		<Modal
-			size="auto"
-			radius={28}
-			withCloseButton={false}
-			opened={isActive}
-			onClose={hide}
-			centered={true}
-			padding={0}
-		>
-			<div className="w-360px">
+		<BaseModal isActive={isActive} onClose={hide}>
+			<div className="sm:w-360px">
 				<ModalHeader
 					title="Disconnect Wallet"
 					rightNode={
@@ -63,6 +55,6 @@ export function DisconnectModal() {
 					</div>
 				</div>
 			</div>
-		</Modal>
+		</BaseModal>
 	);
 }

@@ -8,7 +8,7 @@ import styles from "./index.module.css";
 export function ConnectKindDifferences() {
 	return (
 		<>
-			<div data-animation="scale-fade-in" className="w-343px">
+			<div data-animation="scale-fade-in" className="sm:w-343px">
 				<div className="relative aspect-343/176">
 					<Image
 						fill

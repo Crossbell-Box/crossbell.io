@@ -33,7 +33,7 @@ export function SelectConnectKind() {
 				}
 			/>
 
-			<div data-animation="scale-fade-in" className="w-312px mx-24px pb-18px">
+			<div data-animation="scale-fade-in" className="sm:w-312px mx-24px pb-18px">
 				<Selections
 					items={[
 						{

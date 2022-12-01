@@ -23,6 +23,16 @@
 	animation: fadeIn 0.2s;
 }
 
+@media (max-width: 767px) {
+	.container {
+		min-width: 100%;
+	}
+
+	.content {
+		width: 100%;
+	}
+}
+
 @keyframes scaleFadeIn {
 	from {
 		opacity: 0;

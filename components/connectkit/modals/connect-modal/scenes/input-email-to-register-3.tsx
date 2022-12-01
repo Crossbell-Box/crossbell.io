@@ -29,7 +29,7 @@ export function InputEmailToRegister3() {
 		<>
 			<Header title="Mint Character" />
 
-			<div data-animation="scale-fade-in" className="w-362px p-24px">
+			<div data-animation="scale-fade-in" className="sm:w-362px p-24px">
 				<div className="flex flex-col items-center justify-center pt-46px">
 					<div className="relative">
 						<EmailIcon width={72} height={72} className="text-[#FFB74D]" />
@@ -57,7 +57,7 @@ export function InputEmailToRegister3() {
 								classNames={{ tooltip: "bg-[#6AD991]" }}
 								arrowSize={10}
 								label={
-									<div className="w-312px rounded-16px pb-30px">
+									<div className="sm:w-312px rounded-16px pb-30px">
 										<div className="flex flex-col items-center bg-black rounded-12px">
 											<div className="w-125px h-34px relative my-20px">
 												<Image

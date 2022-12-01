@@ -26,7 +26,7 @@ export function Congrats({
 	timeout,
 }: CongratsProps) {
 	return (
-		<div className="w-360px relative z-0 p-24px text-[#082135] bg-[#F5F5F5]">
+		<div className="sm:w-360px relative z-0 p-24px text-[#082135] bg-[#F5F5F5]">
 			{!!timeout && (
 				<div className={classNames(styles.progress, "mb-12px")}>
 					<div

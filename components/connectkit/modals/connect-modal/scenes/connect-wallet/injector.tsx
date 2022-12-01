@@ -28,7 +28,7 @@ export function ConnectWithInjector({
 			<Header title={wallet.name} />
 			<div
 				data-animation="scale-fade-in"
-				className="flex flex-col items-center text-center w-295px mx-24px pb-20px"
+				className="flex flex-col items-center text-center sm:w-295px mx-24px pb-20px"
 			>
 				<div className="min-h-150px flex items-center justify-center">
 					<div
