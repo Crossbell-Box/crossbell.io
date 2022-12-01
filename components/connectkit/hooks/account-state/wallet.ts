@@ -28,7 +28,11 @@ export const createWalletAccountSlice: SliceFn<WalletAccountSlice> = (
 
 	async connectWallet(address) {
 		if (address) {
-			const character = await indexer.getPrimaryCharacter(address);
+			const { wallet } = get();
+			const character =
+				wallet?.address === address && wallet.characterId
+					? await indexer.getCharacter(wallet.characterId)
+					: await indexer.getPrimaryCharacter(address);
 
 			if (character) {
 				set({
