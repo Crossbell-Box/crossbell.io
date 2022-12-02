@@ -60,7 +60,7 @@ type NavLinkProps = {
 };
 
 function NavLinks() {
-	const { data: character } = useAccountCharacter();
+	const character = useAccountCharacter();
 	const { address } = useAccount();
 
 	const [navLinks, setNavLinks] = useState<Record<string, NavLinkProps>>({

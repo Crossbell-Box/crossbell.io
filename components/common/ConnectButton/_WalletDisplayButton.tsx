@@ -27,12 +27,11 @@ const WalletDisplayButton = forwardRef<
 	HTMLButtonElement,
 	WalletDisplayButtonProps
 >(({ menuOpened, mode, account, ...props }, ref) => {
-	const { data: character, isLoading: isLoadingCharacter } =
-		useAccountCharacter();
+	const character = useAccountCharacter();
 
 	const { balance, isLoading: isLoadingBalance } = useAccountBalance();
 
-	const isLoading = isLoadingCharacter || isLoadingBalance;
+	const isLoading = isLoadingBalance;
 	const addressDisplay = truncateAddress(
 		account.type === "email" ? account.email : account.address
 	);

@@ -9,7 +9,7 @@ import { useAccountCharacter } from "@/components/connectkit";
 export function InputEmailToRegister4() {
 	const router = useRouter();
 	const { hide: hideModal } = useModalStore();
-	const { data: character } = useAccountCharacter();
+	const character = useAccountCharacter();
 
 	React.useEffect(showConfetti, []);
 

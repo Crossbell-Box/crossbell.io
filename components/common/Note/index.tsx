@@ -357,7 +357,7 @@ function NoteActions({
 	characterId: number;
 	noteId: number;
 }) {
-	const { data: currentCharacter } = useAccountCharacter();
+	const currentCharacter = useAccountCharacter();
 	const { data: status } = useNoteStatus(
 		characterId,
 		noteId,

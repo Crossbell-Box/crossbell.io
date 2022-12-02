@@ -17,7 +17,7 @@ import CharacterIdBadge from "../common/Character/CharacterIdBadge";
 
 // TODO: extract this compose
 const FollowButton = ({ characterId }: { characterId: number }) => {
-	const { data: currentCharacter } = useAccountCharacter();
+	const currentCharacter = useAccountCharacter();
 
 	const isSelf = currentCharacter?.characterId === characterId;
 

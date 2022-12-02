@@ -7,7 +7,7 @@ import SearchInput from "@/components/common/Input/SearchInput";
 import { useAccountCharacter } from "@/components/connectkit";
 
 const NavLinks = () => {
-	const { data: character } = useAccountCharacter();
+	const character = useAccountCharacter();
 
 	const navLinks = [
 		{ href: "/feed", title: "Feed" },

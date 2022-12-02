@@ -38,7 +38,7 @@ const ICON_MAP: Record<SupportedPlatform, StaticImageData> = {
 };
 
 export default function PlatformsSection() {
-	const { data: character } = useAccountCharacter();
+	const character = useAccountCharacter();
 	const { data: boundAccounts, isLoading } = useCharacterBoundAccounts(
 		character?.characterId
 	);

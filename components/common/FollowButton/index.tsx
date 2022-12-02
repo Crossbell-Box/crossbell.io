@@ -15,7 +15,7 @@ export default function FollowButton({
 }: {
 	character: CharacterEntity;
 } & ButtonProps) {
-	const { data: currentCharacter } = useAccountCharacter();
+	const currentCharacter = useAccountCharacter();
 
 	const isSelf = currentCharacter?.characterId === character.characterId;
 

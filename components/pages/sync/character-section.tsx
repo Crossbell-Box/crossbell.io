@@ -15,7 +15,7 @@ import styles from "./character-section.module.css";
 
 export default function CharacterSection() {
 	const account = useAccountState((s) => s.computed.account);
-	const { data: character } = useAccountCharacter();
+	const character = useAccountCharacter();
 	const { data: mediaUsage } = useCharacterMediaUsage(account?.characterId);
 	const characterName = React.useMemo(
 		() => extractCharacterName(character),

@@ -47,7 +47,7 @@ enum Scene {
 const closeModals = () => closeAllModals();
 
 export function RemoveOperatorModal() {
-	const { data: character } = useAccountCharacter();
+	const character = useAccountCharacter();
 	const { data: boundAccounts = [] } = useCharacterBoundAccounts(
 		character?.characterId
 	);

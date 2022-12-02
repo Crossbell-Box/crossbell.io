@@ -37,7 +37,7 @@ export default function CharacterProfile({
 }) {
 	const loading = character === undefined;
 
-	const { data: currentCharacter } = useAccountCharacter();
+	const currentCharacter = useAccountCharacter();
 	const { data: followStatus, isLoading: isLoadingFollowStatus } =
 		useCharacterFollowStats(character?.characterId);
 	const {

@@ -3,7 +3,7 @@ import { useCharacterRouterQuery } from "@/utils/url";
 import { useAccountCharacter } from "@/components/connectkit";
 
 export function useCharacterInfos() {
-	const { data: character } = useAccountCharacter();
+	const character = useAccountCharacter();
 	const { handle } = useCharacterRouterQuery();
 	const { data, status } = useCharacterByHandle(handle);
 

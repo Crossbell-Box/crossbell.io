@@ -51,7 +51,7 @@ export function AchievementSection() {
 }
 
 function useCharacterInfos() {
-	const { data: character } = useAccountCharacter();
+	const character = useAccountCharacter();
 	const { handle } = useCharacterRouterQuery();
 	const { data } = useCharacterByHandle(handle);
 

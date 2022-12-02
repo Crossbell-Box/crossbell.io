@@ -62,7 +62,7 @@ export function PlatformCard({
 	noteCount,
 	lastUpdatedAt,
 }: PlatformCardProps) {
-	const { data: character } = useAccountCharacter();
+	const character = useAccountCharacter();
 	const hasOperator = useCharacterHasOperator(OPERATOR_ADDRESS);
 	const contract = useContract();
 

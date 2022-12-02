@@ -14,7 +14,7 @@ import Avatar from "../common/Avatar";
 import Textarea from "../common/Input/Textarea";
 
 export function CommentTextarea({ note }: { note: NoteEntity }) {
-	const { data: character } = useAccountCharacter();
+	const character = useAccountCharacter();
 	const connectModal = useConnectModal();
 
 	const [value, setValue] = useState("");

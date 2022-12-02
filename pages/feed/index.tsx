@@ -73,7 +73,7 @@ function Home() {
 }
 
 function FeedList() {
-	const { data: character } = useAccountCharacter();
+	const character = useAccountCharacter();
 	const { data, hasNextPage, fetchNextPage, isFetchingNextPage, isLoading } =
 		useFollowingFeedsOfCharacter(character?.characterId);
 

@@ -65,7 +65,7 @@ enum Scene {
 function BindingModal({ platform }: { platform: SupportedPlatform }) {
 	const [scene, setScene] = React.useState(Scene.form);
 	const [username, setUsername] = React.useState("");
-	const { data: character } = useAccountCharacter();
+	const character = useAccountCharacter();
 	const veriHandle = character?.handle && getVeriHandle(character.handle);
 	const profileUrl = username && getPlatformUserProfileUrl(platform, username);
 
