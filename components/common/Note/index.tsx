@@ -16,6 +16,7 @@ import { useMintNote } from "@/utils/apis/contract";
 import { copyToClipboard } from "@/utils/other";
 import { getValidAttachments } from "@/utils/metadata";
 import { useLoginChecker } from "@/utils/wallet/hooks";
+import { useRefCallback } from "@/utils/hooks/use-ref-callback";
 
 import { CharacterHandle, CharacterName } from "../Character";
 import LoadingOverlay from "../LoadingOverlay";
@@ -381,11 +382,17 @@ function NoteActions({
 	const { navigate } = useNavigateToNote(characterId, noteId);
 	const { validate } = useLoginChecker();
 
-	const handleMint = useCallback(() => {
+	const handleLike = useRefCallback(() => {
+		if (validate()) {
+			toggleLike();
+		}
+	});
+
+	const handleMint = useRefCallback(() => {
 		if (!status?.isMinted && validate({ walletRequired: true })) {
 			mintNote.mutate();
 		}
-	}, [status?.isMinted]);
+	});
 
 	const handleCopyToClipboard = useCallback(async () => {
 		await copyToClipboard(getOrigin() + composeNoteHref(characterId, noteId), {
@@ -419,7 +426,7 @@ function NoteActions({
 				color={isLiked ? "text-red" : "text-dimmed"}
 				bgHoverColor="group-hover:bg-red/10"
 				textHoverColor="group-hover:text-red"
-				onClick={toggleLike}
+				onClick={handleLike}
 			/>
 
 			{/* mint */}
