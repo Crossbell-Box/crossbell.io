@@ -12,7 +12,7 @@ export function useChangeCharacterMetadata() {
 
 	return useRefCallback(
 		async (
-			update: (metadata: Draft<CharacterMetadata>) => void
+			update: (draft: Draft<CharacterMetadata>) => void
 		): Promise<boolean> => {
 			// Make sure character metadata is up-to-date.
 			await useAccountState.getState().refresh();

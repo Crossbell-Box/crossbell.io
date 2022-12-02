@@ -91,13 +91,15 @@ export function useBindAccount({
 
 	return useMutation(
 		async () => {
-			await changeCharacterMetadata((metadata) => {
-				const connectedAccountSet = new Set([
-					...(metadata.connected_accounts ?? []),
-					csbAccountURI(identity, platform),
-				]);
+			await changeCharacterMetadata((draft) => {
+				const accountURI = csbAccountURI(identity, platform);
 
-				metadata.connected_accounts = Array.from(connectedAccountSet);
+				if (!draft.connected_accounts?.includes(accountURI)) {
+					draft.connected_accounts = [
+						...(draft.connected_accounts ?? []),
+						accountURI,
+					];
+				}
 			});
 
 			return api.bindAccount(characterId!, platform, identity, startTime);
@@ -138,10 +140,13 @@ export function useUnbindAccount({
 
 	return useMutation(
 		async () => {
-			await changeCharacterMetadata((metadata) => {
-				metadata.connected_accounts = metadata.connected_accounts?.filter(
-					(account) => account !== csbAccountURI(identity, platform)
-				);
+			await changeCharacterMetadata((draft) => {
+				const accountURI = csbAccountURI(identity, platform);
+				const index = draft.connected_accounts?.indexOf(accountURI) ?? -1;
+
+				if (index > -1) {
+					draft.connected_accounts?.splice(index, 1);
+				}
 			});
 
 			return api.unbindAccount(characterId!, platform!, identity);
