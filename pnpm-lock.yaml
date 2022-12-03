@@ -44,7 +44,7 @@ specifiers:
   lodash.compact: 3.0.1
   lru-cache: 7.14.0
   next: 13.0.0
-  next-seo: 5.11.1
+  next-seo: 5.15.0
   pretty-bytes: 6.0.0
   react: 18.2.0
   react-dom: 18.2.0
@@ -98,7 +98,7 @@ dependencies:
   lodash.compact: 3.0.1
   lru-cache: 7.14.0
   next: 13.0.0_biqbaboplfbrettd7655fr4n2y
-  next-seo: 5.11.1_r5sq4deac3rmm2d5onhwvomqve
+  next-seo: 5.15.0_r5sq4deac3rmm2d5onhwvomqve
   pretty-bytes: 6.0.0
   react: 18.2.0
   react-dom: 18.2.0_react@18.2.0
@@ -5987,8 +5987,8 @@ packages:
     resolution: {integrity: sha512-Yd3UES5mWCSqR+qNT93S3UoYUkqAZ9lLg8a7g9rimsWmYGK8cVToA4/sF3RrshdyV3sAGMXVUmpMYOw+dLpOuw==}
     dev: true
 
-  /next-seo/5.11.1_r5sq4deac3rmm2d5onhwvomqve:
-    resolution: {integrity: sha512-P18E5mDaUEvIK/hDlCLAl7w02Ew6a8m1E3KO3d+rIPKWPcBRMckcMzxkdFkafFqwHl4ygCLNCWlKWM9EKD3jIQ==}
+  /next-seo/5.15.0_r5sq4deac3rmm2d5onhwvomqve:
+    resolution: {integrity: sha512-LGbcY91yDKGMb7YI+28n3g+RuChUkt6pXNpa8FkfKkEmNiJkeRDEXTnnjVtwT9FmMhG6NH8qwHTelGrlYm9rgg==}
     peerDependencies:
       next: ^8.1.1-canary.54 || >=9.0.0
       react: '>=16.0.0'

@@ -42,7 +42,7 @@
 		"lodash.compact": "3.0.1",
 		"lru-cache": "7.14.0",
 		"next": "13.0.0",
-		"next-seo": "5.11.1",
+		"next-seo": "5.15.0",
 		"pretty-bytes": "6.0.0",
 		"react": "18.2.0",
 		"react-dom": "18.2.0",
