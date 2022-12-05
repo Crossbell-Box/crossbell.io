@@ -16,7 +16,7 @@ import { useMintNote } from "@/utils/apis/contract";
 import { copyToClipboard } from "@/utils/other";
 import { getValidAttachments } from "@/utils/metadata";
 import { useLoginChecker } from "@/utils/wallet/hooks";
-import { useRefCallback } from "@/utils/hooks/use-ref-callback";
+import { useRefCallback } from "@crossbell/util-hooks";
 
 import { CharacterHandle, CharacterName } from "../Character";
 import LoadingOverlay from "../LoadingOverlay";

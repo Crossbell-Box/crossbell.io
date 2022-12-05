@@ -2,7 +2,7 @@ import React from "react";
 import { useAccount } from "wagmi";
 import { Contract } from "crossbell.js";
 
-import { useRefCallback } from "@/utils/hooks/use-ref-callback";
+import { useRefCallback } from "@crossbell/util-hooks";
 
 import {
 	injectContractChecker,

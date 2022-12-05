@@ -1,0 +1,31 @@
+{
+	"name": "@crossbell/util-hooks",
+	"version": "0.0.1",
+	"license": "MIT",
+	"repository": "github:Crossbell-Box/crossbell-universe",
+	"bugs": "https://github.com/Crossbell-Box/crossbell-universe/issues",
+	"homepage": "https://github.com/Crossbell-Box/crossbell-universe#readme",
+	"author": "Natural Selection Labs",
+	"keywords": [],
+	"main": "dist/cjs/index.js",
+	"module": "dist/esm/index.js",
+	"typings": "dist/esm/index.d.ts",
+	"sideEffects": false,
+	"files": [
+		"dist",
+		"package.json"
+	],
+	"scripts": {
+		"build": "npm run clean && run-p build:cjs build:esm",
+		"build:cjs": "tsc -p tsconfig.json -m CommonJS --outDir dist/cjs",
+		"build:esm": "tsc -p tsconfig.json -m ESNext --outDir dist/esm",
+		"clean": "rm -rf ./dist"
+	},
+	"peerDependencies": {
+		"react": "^17 || ^18"
+	},
+	"devDependencies": {
+		"@types/react": "18.0.24",
+		"react": "^18.2.0"
+	}
+}

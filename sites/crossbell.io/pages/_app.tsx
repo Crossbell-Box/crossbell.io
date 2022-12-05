@@ -23,7 +23,7 @@ import {
 } from "@/components/connectkit";
 import { ipfsGateway } from "@/utils/ipfs";
 import { InitContractProvider } from "@/utils/crossbell.js";
-import { useRefCallback } from "@/utils/hooks/use-ref-callback";
+import { useRefCallback } from "@crossbell/util-hooks";
 
 export type NextPageWithLayout<P = {}, IP = P> = NextPage<P, IP> & {
 	getLayout?: (page: ReactElement) => ReactNode;

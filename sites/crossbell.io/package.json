@@ -9,6 +9,7 @@
 		"lint": "next lint"
 	},
 	"dependencies": {
+		"@crossbell/util-hooks": "workspace:*",
 		"@crossbell/ipfs-gateway": "0.0.15",
 		"@crossbell/ipfs-react": "0.0.15",
 		"@ctrl/tinycolor": "3.4.1",

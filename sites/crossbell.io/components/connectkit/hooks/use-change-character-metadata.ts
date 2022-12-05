@@ -2,7 +2,7 @@ import { produce, Draft } from "immer";
 import { CharacterMetadata } from "crossbell.js";
 
 import { useContract } from "@/utils/crossbell.js";
-import { useRefCallback } from "@/utils/hooks/use-ref-callback";
+import { useRefCallback } from "@crossbell/util-hooks";
 import { updateCharactersMetadata } from "@/components/connectkit/apis";
 
 import { useAccountState } from "./account-state";

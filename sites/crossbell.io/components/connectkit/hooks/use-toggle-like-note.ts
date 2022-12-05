@@ -1,6 +1,6 @@
 import React from "react";
 
-import { useRefCallback } from "@/utils/hooks/use-ref-callback";
+import { useRefCallback } from "@crossbell/util-hooks";
 
 import { useAccountState } from "./account-state";
 import { useLikeNote, useUnlikeNote } from "./link-note";

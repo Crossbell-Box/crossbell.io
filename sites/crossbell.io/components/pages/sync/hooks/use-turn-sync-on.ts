@@ -11,7 +11,7 @@ import {
 	useCharacterActivation,
 } from "@/utils/apis/operator-sync";
 import { useLoginChecker } from "@/utils/wallet/hooks";
-import { useRefCallback } from "@/utils/hooks/use-ref-callback";
+import { useRefCallback } from "@crossbell/util-hooks";
 
 export function useTurnSyncOn() {
 	const account = useAccountState((s) => s.computed.account);

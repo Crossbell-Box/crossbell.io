@@ -3,7 +3,7 @@ import { useDisclosure } from "@mantine/hooks";
 import Link from "next/link";
 import classNames from "classnames";
 
-import { useIntervalMemo } from "@/utils/hooks/use-interval-memo";
+import { useIntervalMemo } from "@crossbell/util-hooks";
 import {
 	ExportCrossbellDataHref,
 	WalletCharacterManageHref,

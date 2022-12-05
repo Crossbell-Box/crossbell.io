@@ -1,7 +1,7 @@
 import React from "react";
 import { useDisconnect } from "wagmi";
 
-import { useRefCallback } from "@/utils/hooks/use-ref-callback";
+import { useRefCallback } from "@crossbell/util-hooks";
 
 import { useAccountState } from "./account-state";
 
