@@ -1,4 +1,4 @@
-import { useCharacterByHandle } from "@/utils/apis/indexer";
+import { useCharacterByHandle } from "@crossbell/indexer";
 import { useCharacterRouterQuery } from "@/utils/url";
 import { useAccountCharacter } from "@/components/connectkit";
 

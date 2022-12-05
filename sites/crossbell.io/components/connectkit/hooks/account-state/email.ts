@@ -3,7 +3,7 @@ import { CharacterEntity } from "crossbell.js";
 import { BigNumber } from "ethers";
 import { parseEther } from "ethers/lib/utils";
 
-import { indexer } from "@/utils/crossbell.js";
+import { indexer } from "@crossbell/indexer";
 
 import { useClaimCSBModal } from "../../modals/claim-csb-modal";
 import { asyncRetry, SliceFn } from "../../utils";

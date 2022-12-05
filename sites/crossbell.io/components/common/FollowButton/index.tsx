@@ -2,7 +2,7 @@ import { Button, ButtonProps } from "@mantine/core";
 import { useModals } from "@mantine/modals";
 import { CharacterEntity } from "crossbell.js";
 
-import { useCharacterFollowRelation } from "@/utils/apis/indexer";
+import { useCharacterFollowRelation } from "@crossbell/indexer";
 import {
 	useAccountCharacter,
 	useFollowCharacter,

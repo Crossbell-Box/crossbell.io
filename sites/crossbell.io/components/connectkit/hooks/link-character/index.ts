@@ -5,7 +5,7 @@ import {
 	CharacterLinkType,
 	SCOPE_KEY_CHARACTER_FOLLOW_RELATION,
 	SCOPE_KEY_CHARACTER_FOLLOW_STATS,
-} from "@/utils/apis/indexer";
+} from "@crossbell/indexer";
 
 import { useAccountState } from "../account-state";
 

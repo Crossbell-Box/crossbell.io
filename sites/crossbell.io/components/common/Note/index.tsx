@@ -10,7 +10,7 @@ import {
 	useAccountCharacter,
 	useToggleLikeNote,
 } from "@/components/connectkit";
-import { useCharacter, useNote, useNoteStatus } from "@/utils/apis/indexer";
+import { useCharacter, useNote, useNoteStatus } from "@crossbell/indexer";
 import { composeNoteHref, getOrigin, useNoteRouterQuery } from "@/utils/url";
 import { useMintNote } from "@/utils/apis/contract";
 import { copyToClipboard } from "@/utils/other";

@@ -1,4 +1,4 @@
-import { useCharacter, useMintedNotesOfAddress } from "@/utils/apis/indexer";
+import { useCharacter, useMintedNotesOfAddress } from "@crossbell/indexer";
 import { ipfsLinkToHttpLink } from "@/utils/ipfs";
 import {
 	extractCharacterAvatar,

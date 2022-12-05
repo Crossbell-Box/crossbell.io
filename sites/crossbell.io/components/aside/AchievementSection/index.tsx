@@ -1,7 +1,7 @@
 import React from "react";
 
 import { useAccountCharacter } from "@/components/connectkit";
-import { useCharacterByHandle } from "@/utils/apis/indexer";
+import { useCharacterByHandle } from "@crossbell/indexer";
 import {
 	AchievementsStatus,
 	useAchievementGroups,

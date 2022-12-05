@@ -8,7 +8,7 @@ import {
 	useQueryClient,
 } from "@tanstack/react-query";
 
-import { indexer } from "@/utils/crossbell.js";
+import { indexer } from "@crossbell/indexer";
 
 import {
 	AchievementGroup,

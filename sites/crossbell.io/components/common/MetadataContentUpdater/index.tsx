@@ -1,4 +1,4 @@
-import { useSyncMetadataOfNote } from "@/utils/apis/indexer/metadata";
+import { useSyncMetadataOfNote } from "@crossbell/indexer";
 import { copyToClipboard } from "@/utils/other";
 import { ActionIcon, Menu, Text } from "@mantine/core";
 import { showNotification } from "@mantine/notifications";

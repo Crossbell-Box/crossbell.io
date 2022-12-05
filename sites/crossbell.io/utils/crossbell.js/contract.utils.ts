@@ -7,7 +7,7 @@ import {
 	openMintNewCharacterModel,
 } from "@/components/common/NewUserGuide";
 
-import { getCsbBalance } from "../apis/indexer";
+import { getCsbBalance } from "@crossbell/indexer";
 import { BizError, ERROR_CODES } from "../errors";
 import { getCurrentAddress } from "../wallet/provider";
 

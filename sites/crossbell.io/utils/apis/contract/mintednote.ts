@@ -5,7 +5,7 @@ import {
 	SCOPE_KEY_MINTED_NOTE_OF_ADDRESS,
 	SCOPE_KEY_MINTED_NOTE_OF_NOTE,
 	SCOPE_KEY_NOTE_STATUS,
-} from "../indexer";
+} from "@crossbell/indexer";
 
 export function useMintNote(
 	characterId: number,

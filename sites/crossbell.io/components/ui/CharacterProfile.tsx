@@ -20,7 +20,7 @@ import {
 import {
 	useCharacterFollowRelation,
 	useCharacterFollowStats,
-} from "@/utils/apis/indexer";
+} from "@crossbell/indexer";
 import {
 	composeCharacterFollowHref,
 	composeWalletCharacterEditHref,

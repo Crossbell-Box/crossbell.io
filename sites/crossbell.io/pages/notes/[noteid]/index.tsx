@@ -11,7 +11,7 @@ import {
 	useCharacter,
 	useNote,
 	useNotesForNote,
-} from "@/utils/apis/indexer";
+} from "@crossbell/indexer";
 import {
 	composeCharacterHref,
 	composeNoteHref,

@@ -1,4 +1,4 @@
-import { indexer } from "@/utils/crossbell.js";
+import { indexer } from "../indexer";
 import { useQuery } from "@tanstack/react-query";
 
 const SCOPE_KEY = ["indexer", "links"];

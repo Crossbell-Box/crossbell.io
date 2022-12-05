@@ -1,6 +1,8 @@
 import "uno.css";
 import "@/styles/globals.css";
 
+import "@/utils/crossbell.js/setup-indexer";
+
 import { IpfsGatewayContext } from "@crossbell/ipfs-react";
 import { ReactElement, ReactNode } from "react";
 import { DefaultSeo } from "next-seo";

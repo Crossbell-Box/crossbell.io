@@ -1,5 +1,5 @@
 import { useInfiniteQuery, useQuery } from "@tanstack/react-query";
-import { indexer } from "@/utils/crossbell.js";
+import { indexer } from "../indexer";
 
 const SCOPE_KEY = ["indexer", "mintedNotes"];
 
@@ -33,7 +33,7 @@ export function useMintedNotesOfAddress(address?: string, { limit = 20 } = {}) {
 			}),
 		{
 			enabled: Boolean(address),
-			getNextPageParam: (lastPage, allPages) => lastPage.cursor,
+			getNextPageParam: (lastPage) => lastPage.cursor,
 		}
 	);
 }
@@ -54,7 +54,7 @@ export function useMintedNotesOfNote(characterId?: number, noteId?: number) {
 			}),
 		{
 			enabled: Boolean(characterId) && Boolean(noteId),
-			getNextPageParam: (lastPage, allPages) => lastPage.cursor,
+			getNextPageParam: (lastPage) => lastPage.cursor,
 		}
 	);
 }

@@ -5,7 +5,7 @@ import {
 	LinkItemNote,
 } from "crossbell.js";
 
-import { indexer } from "@/utils/crossbell.js";
+import { indexer } from "@crossbell/indexer";
 
 type RequestConfig = {
 	method: string;

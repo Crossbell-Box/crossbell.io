@@ -9,7 +9,7 @@ import {
 	fetchCharacterByHandle,
 	useCharacterByHandle,
 	useNotesOfCharacter,
-} from "@/utils/apis/indexer";
+} from "@crossbell/indexer";
 import { ipfsLinkToHttpLink } from "@/utils/ipfs";
 import {
 	extractCharacterAvatars,

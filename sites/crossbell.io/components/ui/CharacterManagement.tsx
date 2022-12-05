@@ -17,7 +17,7 @@ import { showNotification } from "@mantine/notifications";
 import Link from "next/link";
 import { PropsWithChildren, useEffect, useState } from "react";
 
-import { useCharacter, useCharacterByHandle } from "@/utils/apis/indexer";
+import { useCharacter, useCharacterByHandle } from "@crossbell/indexer";
 import { ipfsLinkToHttpLink, uploadToIpfs } from "@/utils/ipfs";
 import { extractCharacterName } from "@/utils/metadata";
 import { composeCharacterHref } from "@/utils/url";

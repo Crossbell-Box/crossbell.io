@@ -9,7 +9,7 @@ import {
 	SCOPE_KEY_CHARACTER_BY_HANDLE,
 	SCOPE_KEY_CHARACTERS,
 	SCOPE_KEY_PRIMARY_CHARACTER,
-} from "@/utils/apis/indexer";
+} from "@crossbell/indexer";
 
 export function useCreateCharacter() {
 	const { address } = useAccount();

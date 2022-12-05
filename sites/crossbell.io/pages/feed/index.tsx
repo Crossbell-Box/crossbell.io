@@ -10,7 +10,7 @@ import LoadMore from "@/components/common/LoadMore";
 import Tabs from "@/components/common/Tabs";
 import { getLayout } from "@/components/layouts/AppLayout";
 import Header from "@/components/layouts/Header";
-import { useFollowingFeedsOfCharacter } from "@/utils/apis/indexer";
+import { useFollowingFeedsOfCharacter } from "@crossbell/indexer";
 import { useLoginChecker } from "@/utils/wallet/hooks";
 import {
 	useAccountCharacter,

@@ -7,7 +7,7 @@ import { useContract } from "@/utils/crossbell.js";
 import {
 	SCOPE_KEY_NOTES_OF_NOTE,
 	SCOPE_KEY_NOTE_STATUS,
-} from "@/utils/apis/indexer";
+} from "@crossbell/indexer";
 
 import { putNote } from "../apis";
 

@@ -5,7 +5,7 @@ import React from "react";
 import {
 	SCOPE_KEY_CHARACTER,
 	SCOPE_KEY_CHARACTER_BY_HANDLE,
-} from "@/utils/apis/indexer";
+} from "@crossbell/indexer";
 import { useContract } from "@/utils/crossbell.js";
 
 import { updateHandle } from "../apis";

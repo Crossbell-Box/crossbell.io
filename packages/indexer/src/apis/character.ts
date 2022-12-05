@@ -1,5 +1,5 @@
 import { useInfiniteQuery, useQuery } from "@tanstack/react-query";
-import { indexer } from "@/utils/crossbell.js";
+import { indexer } from "../indexer";
 
 import { CharacterLinkType } from "./types";
 
@@ -20,7 +20,7 @@ export function useCharacters(address?: string) {
 			}),
 		{
 			enabled: Boolean(address),
-			getNextPageParam: (lastPage, allPages) => lastPage.cursor,
+			getNextPageParam: (lastPage) => lastPage.cursor,
 		}
 	);
 }

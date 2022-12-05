@@ -1,5 +1,5 @@
 import { useInfiniteQuery } from "@tanstack/react-query";
-import { indexer } from "@/utils/crossbell.js";
+import { indexer } from "../indexer";
 
 import { CharacterLinkType } from "./types";
 
@@ -16,7 +16,7 @@ export function useFollowingCharactersOfCharacter(characterId?: number) {
 			}),
 		{
 			enabled: Boolean(characterId),
-			getNextPageParam: (lastPage, allPages) => lastPage.cursor,
+			getNextPageParam: (lastPage) => lastPage.cursor,
 		}
 	);
 }
@@ -32,7 +32,7 @@ export function useFollowerCharactersOfCharacter(characterId?: number) {
 			}),
 		{
 			enabled: Boolean(characterId),
-			getNextPageParam: (lastPage, allPages) => lastPage.cursor,
+			getNextPageParam: (lastPage) => lastPage.cursor,
 		}
 	);
 }

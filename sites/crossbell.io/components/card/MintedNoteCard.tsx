@@ -3,7 +3,7 @@ import type { NoteEntity } from "crossbell.js";
 import { ipfsLinkToHttpLink } from "@/utils/ipfs";
 import Link from "next/link";
 import { composeNoteHref, composeNoteId } from "@/utils/url";
-import { useCharacter, useNoteMintedCount } from "@/utils/apis/indexer";
+import { useCharacter, useNoteMintedCount } from "@crossbell/indexer";
 import {
 	extractCharacterAvatar,
 	extractCharacterName,

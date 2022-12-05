@@ -1,4 +1,4 @@
-import { NoteLinkType } from "@/utils/apis/indexer";
+import { NoteLinkType } from "@crossbell/indexer";
 
 import { useLinkNote } from "./use-link-note";
 import { useUnlinkNote } from "./use-unlink-note";

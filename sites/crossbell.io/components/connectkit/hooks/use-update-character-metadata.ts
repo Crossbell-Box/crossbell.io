@@ -5,7 +5,7 @@ import React from "react";
 
 import { useContract } from "@/utils/crossbell.js";
 import { deepMerge } from "@/utils/metadata";
-import { SCOPE_KEY_CHARACTER } from "@/utils/apis/indexer";
+import { SCOPE_KEY_CHARACTER } from "@crossbell/indexer";
 
 import { updateMetadata } from "../apis";
 

@@ -1,4 +1,4 @@
-import { indexer } from "@/utils/crossbell.js";
+import { indexer } from "../indexer";
 import { useQuery, useInfiniteQuery } from "@tanstack/react-query";
 import { useAccount } from "wagmi";
 import { CharacterEntity } from "crossbell.js";
@@ -19,7 +19,7 @@ export function useNotesOfCharacter(characterId?: number) {
 			indexer.getNotes({ characterId, cursor: pageParam, limit: 20 }),
 		{
 			enabled: Boolean(characterId),
-			getNextPageParam: (lastPage, allPages) => lastPage.cursor,
+			getNextPageParam: (lastPage) => lastPage.cursor,
 		}
 	);
 }
@@ -34,7 +34,7 @@ export function useNotes() {
 		SCOPE_KEY_NOTES(),
 		({ pageParam }) => indexer.getNotes({ cursor: pageParam, limit: 20 }),
 		{
-			getNextPageParam: (lastPage, allPages) => lastPage.cursor,
+			getNextPageParam: (lastPage) => lastPage.cursor,
 		}
 	);
 }
@@ -63,7 +63,7 @@ export function useNotesForNote(characterId: number, noteId: number) {
 		({ pageParam }) => fetchNotesForNote(characterId, noteId, pageParam),
 		{
 			enabled: Boolean(characterId && noteId),
-			getNextPageParam: (lastPage, allPages) => lastPage.cursor,
+			getNextPageParam: (lastPage) => lastPage.cursor,
 		}
 	);
 }

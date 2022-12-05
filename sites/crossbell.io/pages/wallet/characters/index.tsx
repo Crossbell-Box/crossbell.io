@@ -9,7 +9,7 @@ import LoadMore from "@/components/common/LoadMore";
 import { getLayout } from "@/components/layouts/AppLayout";
 import Header from "@/components/layouts/Header";
 import { NextPageWithLayout } from "@/pages/_app";
-import { useCharacterFollowStats } from "@/utils/apis/indexer";
+import { useCharacterFollowStats } from "@crossbell/indexer";
 import { extractCharacterName } from "@/utils/metadata";
 import {
 	composeCharacterHref,

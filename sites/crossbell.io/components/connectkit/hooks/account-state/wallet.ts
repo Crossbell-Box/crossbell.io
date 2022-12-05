@@ -1,6 +1,6 @@
 import { CharacterEntity } from "crossbell.js";
 
-import { indexer } from "@/utils/crossbell.js";
+import { indexer } from "@crossbell/indexer";
 
 import { SliceFn } from "../../utils";
 

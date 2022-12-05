@@ -1,4 +1,4 @@
-import { indexer } from "@/utils/crossbell.js";
+import { indexer } from "../indexer";
 import { FeedType } from "crossbell.js";
 import { useQuery, useInfiniteQuery } from "@tanstack/react-query";
 
@@ -26,7 +26,7 @@ export function useFeedsOfCharacter(characterId: number) {
 			}),
 		{
 			enabled: Boolean(characterId),
-			getNextPageParam: (lastPage, allPages) => lastPage.cursor,
+			getNextPageParam: (lastPage) => lastPage.cursor,
 		}
 	);
 }
@@ -42,7 +42,7 @@ export function useFollowingFeedsOfCharacter(characterId?: number) {
 			}),
 		{
 			enabled: Boolean(characterId),
-			getNextPageParam: (lastPage, allPages) => lastPage.cursor,
+			getNextPageParam: (lastPage) => lastPage.cursor,
 		}
 	);
 }

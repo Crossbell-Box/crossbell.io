@@ -2,7 +2,7 @@ import LoadMore from "@/components/common/LoadMore";
 import { getLayout } from "@/components/layouts/AppLayout";
 import Header from "@/components/layouts/Header";
 import type { NextPageWithLayout } from "@/pages/_app";
-import { useCharacterByHandle } from "@/utils/apis/indexer";
+import { useCharacterByHandle } from "@crossbell/indexer";
 import { extractCharacterName } from "@/utils/metadata";
 import { useCharacterRouterQuery } from "@/utils/url";
 import { Fragment } from "react";
@@ -10,7 +10,7 @@ import { useRouter } from "next/router";
 import FollowCharacterCard, {
 	FollowCharacterSkeleton,
 } from "@/components/card/FollowCharacterCard";
-import { useFollowingCharactersOfCharacter } from "@/utils/apis/indexer/follow";
+import { useFollowingCharactersOfCharacter } from "@crossbell/indexer";
 import { Text } from "@mantine/core";
 import { getServerSideProps as getServerSideProps_ } from "./index";
 import Head from "next/head";

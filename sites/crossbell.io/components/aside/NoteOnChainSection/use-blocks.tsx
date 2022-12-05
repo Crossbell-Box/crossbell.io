@@ -13,7 +13,7 @@ import {
 	isPlatformSource,
 	PlatformSourceType,
 } from "@/utils/metadata/note";
-import { useNote } from "@/utils/apis/indexer";
+import { useNote } from "@crossbell/indexer";
 
 import type { NoteOnChainSectionProps } from "./index";
 import type { BlockProps } from "./components/block";

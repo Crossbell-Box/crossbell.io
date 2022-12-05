@@ -4,7 +4,7 @@ import { Note, NoteSkeleton } from "@/components/common/Note";
 import { getLayout } from "@/components/layouts/AppLayout";
 import Header from "@/components/layouts/Header";
 import type { NextPageWithLayout } from "@/pages/_app";
-import { useNotes } from "@/utils/apis/indexer";
+import { useNotes } from "@crossbell/indexer";
 import { Fragment } from "react";
 import { FeedTabs } from "../feed";
 

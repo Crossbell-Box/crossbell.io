@@ -1,4 +1,4 @@
-import { useCharacter, useCharacterByHandle } from "@/utils/apis/indexer";
+import { useCharacter, useCharacterByHandle } from "@crossbell/indexer";
 import { extractCharacterName } from "@/utils/metadata";
 import { composeCharacterHref } from "@/utils/url";
 import { Text, TextProps } from "@mantine/core";

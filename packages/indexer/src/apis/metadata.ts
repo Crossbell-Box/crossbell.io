@@ -1,4 +1,4 @@
-import { indexer } from "@/utils/crossbell.js";
+import { indexer } from "../indexer";
 import { useMutation, useQueryClient } from "@tanstack/react-query";
 import { SCOPE_KEY_NOTE } from "./note";
 
@@ -10,9 +10,9 @@ export function useSyncMetadataOfNote(characterId: number, noteId: number) {
 		[...SCOPE_KEY, "note", characterId, noteId],
 		() => indexer.syncMetadataOfNote(characterId, noteId),
 		{
-			onSuccess: (data) => {
+			onSuccess: async (data) => {
 				if (data) {
-					return Promise.all([
+					await Promise.all([
 						queryClient.invalidateQueries([
 							SCOPE_KEY_NOTE(characterId, noteId),
 						]),

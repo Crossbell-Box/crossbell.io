@@ -1,7 +1,7 @@
 import React from "react";
 import { CharacterEntity } from "crossbell.js";
 
-import { useCharacters } from "@/utils/apis/indexer";
+import { useCharacters } from "@crossbell/indexer";
 
 import { useAccountState } from "./account-state";
 

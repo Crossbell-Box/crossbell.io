@@ -21,7 +21,7 @@ import remarkFrontmatter from "remark-frontmatter";
 import rehypeSanitize, { defaultSchema } from "rehype-sanitize";
 import { Button } from "@mantine/core";
 import { CharacterHandle } from "../Character";
-import { useCharacterHandleExists } from "@/utils/apis/indexer";
+import { useCharacterHandleExists } from "@crossbell/indexer";
 import Zoom from "./Zoom";
 import VideoPlayer from "./VideoPlayer";
 

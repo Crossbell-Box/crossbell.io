@@ -2,7 +2,7 @@ import { getLayout } from "@/components/layouts/AppLayout";
 import type { NextPageWithLayout } from "@/pages/_app";
 import MintedNoteCard from "@/components/card/MintedNoteCard";
 import { LoadingOverlay, Divider } from "@mantine/core";
-import { useMintedNotesOfAddress } from "@/utils/apis/indexer";
+import { useMintedNotesOfAddress } from "@crossbell/indexer";
 import Header from "@/components/layouts/Header";
 import { useAddressRouterQuery } from "@/utils/url";
 import { Fragment } from "react";

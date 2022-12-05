@@ -3,7 +3,7 @@ import { showNotification } from "@mantine/notifications";
 import React from "react";
 
 import { useContract } from "@/utils/crossbell.js";
-import { CharacterLinkType } from "@/utils/apis/indexer";
+import { CharacterLinkType } from "@crossbell/indexer";
 
 import { linkCharacter } from "../../apis";
 import { useAccountState } from "../account-state";

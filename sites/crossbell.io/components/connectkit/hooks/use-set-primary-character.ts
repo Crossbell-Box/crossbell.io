@@ -6,7 +6,7 @@ import { useContract } from "@/utils/crossbell.js";
 import {
 	SCOPE_KEY_CHARACTERS,
 	SCOPE_KEY_PRIMARY_CHARACTER,
-} from "@/utils/apis/indexer";
+} from "@crossbell/indexer";
 
 export function useSetPrimaryCharacter() {
 	const { address } = useAccount();

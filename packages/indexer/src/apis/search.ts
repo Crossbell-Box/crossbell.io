@@ -1,4 +1,4 @@
-import { indexer } from "@/utils/crossbell.js";
+import { indexer } from "../indexer";
 import { useInfiniteQuery } from "@tanstack/react-query";
 
 const SCOPE_KEY = ["indexer", "search"];
@@ -19,7 +19,7 @@ export function useSearchingCharacters(
 			}),
 		{
 			enabled: Boolean(query),
-			getNextPageParam: (lastPage, allPages) => lastPage.cursor,
+			getNextPageParam: (lastPage) => lastPage.cursor,
 			...options,
 		}
 	);
@@ -41,7 +41,7 @@ export function useSearchingNotes(
 			}),
 		{
 			enabled: Boolean(query),
-			getNextPageParam: (lastPage, allPages) => lastPage.cursor,
+			getNextPageParam: (lastPage) => lastPage.cursor,
 			...options,
 		}
 	);

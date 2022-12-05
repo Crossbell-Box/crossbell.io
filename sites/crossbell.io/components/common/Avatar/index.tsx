@@ -1,4 +1,4 @@
-import { useCharacter } from "@/utils/apis/indexer";
+import { useCharacter } from "@crossbell/indexer";
 import { stringToInteger } from "@/utils/helpers";
 import { ipfsLinkToHttpLink } from "@/utils/ipfs";
 import { extractCharacterAvatar } from "@/utils/metadata";
