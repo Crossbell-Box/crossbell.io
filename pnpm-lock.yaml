@@ -14,7 +14,7 @@ specifiers:
   '@mantine/carousel': 5.6.3
   '@mantine/core': 5.6.3
   '@mantine/dropzone': 5.6.3
-  '@mantine/form': 5.6.3
+  '@mantine/form': 5.9.2
   '@mantine/hooks': 5.6.3
   '@mantine/modals': 5.6.3
   '@mantine/next': 5.6.3
@@ -76,7 +76,7 @@ dependencies:
   '@mantine/carousel': 5.6.3_ivlikz7x5r2hqlgolnas4aupji
   '@mantine/core': 5.6.3_4md2hhxmujtaycbumrxkp2e5ju
   '@mantine/dropzone': 5.6.3_hliqdvg4trnmlenfv3ync25tfa
-  '@mantine/form': 5.6.3_react@18.2.0
+  '@mantine/form': 5.9.2_react@18.2.0
   '@mantine/hooks': 5.6.3_react@18.2.0
   '@mantine/modals': 5.6.3_hliqdvg4trnmlenfv3ync25tfa
   '@mantine/next': 5.6.3_ae6fqzw2xsl3x7be62hhoqcim4
@@ -1032,8 +1032,8 @@ packages:
       react-dropzone: 14.2.3_react@18.2.0
     dev: false
 
-  /@mantine/form/5.6.3_react@18.2.0:
-    resolution: {integrity: sha512-FMOoDdcZp6LaBOAbTF35QRqCU/FMYHmyMZv2oOOZh8/9C27/fI40YgTp2BLMzNRMnuVZSDWoLecudXVaPuDYLA==}
+  /@mantine/form/5.9.2_react@18.2.0:
+    resolution: {integrity: sha512-FXIaKI91oRhgpBV0JNSo+b1e8NzzwXRhKeGGRMswddEOZO9C5htnsaq+5dfeEY2xgJup2nFpz9e6PYz2XrKcuw==}
     peerDependencies:
       react: '>=16.8.0'
     dependencies:
