@@ -13,7 +13,7 @@ specifiers:
   '@iconify/utils': 2.0.1
   '@mantine/carousel': 5.6.3
   '@mantine/core': 5.6.3
-  '@mantine/dropzone': 5.6.3
+  '@mantine/dropzone': 5.9.2
   '@mantine/form': 5.6.3
   '@mantine/hooks': 5.6.3
   '@mantine/modals': 5.6.3
@@ -75,7 +75,7 @@ dependencies:
   '@fastify/deepmerge': 1.1.0
   '@mantine/carousel': 5.6.3_ivlikz7x5r2hqlgolnas4aupji
   '@mantine/core': 5.6.3_4md2hhxmujtaycbumrxkp2e5ju
-  '@mantine/dropzone': 5.6.3_hliqdvg4trnmlenfv3ync25tfa
+  '@mantine/dropzone': 5.9.2_hliqdvg4trnmlenfv3ync25tfa
   '@mantine/form': 5.6.3_react@18.2.0
   '@mantine/hooks': 5.6.3_react@18.2.0
   '@mantine/modals': 5.6.3_hliqdvg4trnmlenfv3ync25tfa
@@ -1016,17 +1016,17 @@ packages:
       - '@types/react'
     dev: false
 
-  /@mantine/dropzone/5.6.3_hliqdvg4trnmlenfv3ync25tfa:
-    resolution: {integrity: sha512-7Y+JSFxFXuM+Mx9dguFkrP7ZzKtkkrNnPFj7XqzqE7nOopm29Mj45HHCignBCOFCDFMkdDoikHHfHQI+HWLv8Q==}
+  /@mantine/dropzone/5.9.2_hliqdvg4trnmlenfv3ync25tfa:
+    resolution: {integrity: sha512-bsZf2khTh3ICSKTB+PS4vnqY5c/gxxDIISHHK+MRFO28sXicdXKzFs4rxpKpKWX4oDWjceOKs/G2mfq+GKJzbQ==}
     peerDependencies:
-      '@mantine/core': 5.6.3
-      '@mantine/hooks': 5.6.3
+      '@mantine/core': 5.9.2
+      '@mantine/hooks': 5.9.2
       react: '>=16.8.0'
       react-dom: '>=16.8.0'
     dependencies:
       '@mantine/core': 5.6.3_4md2hhxmujtaycbumrxkp2e5ju
       '@mantine/hooks': 5.6.3_react@18.2.0
-      '@mantine/utils': 5.6.3_react@18.2.0
+      '@mantine/utils': 5.9.2_react@18.2.0
       react: 18.2.0
       react-dom: 18.2.0_react@18.2.0
       react-dropzone: 14.2.3_react@18.2.0
@@ -1145,6 +1145,14 @@ packages:
 
   /@mantine/utils/5.6.3_react@18.2.0:
     resolution: {integrity: sha512-GrDvXJG7inJaQHjsfg8pOYFE/vNpHMKScQM0M4hKlDoVjXsQUPxw8Lx4A7jhmVf2eNJUqvOQ9A1jbO7W7bedcA==}
+    peerDependencies:
+      react: '>=16.8.0'
+    dependencies:
+      react: 18.2.0
+    dev: false
+
+  /@mantine/utils/5.9.2_react@18.2.0:
+    resolution: {integrity: sha512-dvqqbdrK/nw4stFCXRCn38Ru12RqdWv8uzbywP5dQVCyTw8pW/Cq+T7YCWpbkFcKFea9UhOrPhBygJcjc13FgA==}
     peerDependencies:
       react: '>=16.8.0'
     dependencies:
