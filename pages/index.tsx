@@ -1,7 +1,7 @@
 import type { NextPage } from "next";
 import React from "react";
 import Head from "next/head";
-import Index from "@/components/pages/Index/lazy";
+import Index from "@/components/pages/Index";
 
 const Home: NextPage = () => (
 	// Use RootLayout directly would cause hydrogen error
