@@ -54,7 +54,7 @@ export function InputEmailToRegister3() {
 								px={20}
 								py={16}
 								radius={16}
-								classNames={{ tooltip: "bg-[#6AD991]" }}
+								classNames={{ tooltip: "bg-[#50C07B]" }}
 								arrowSize={10}
 								label={
 									<div className="sm:w-312px rounded-16px pb-30px">
