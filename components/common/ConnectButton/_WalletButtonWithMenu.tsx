@@ -1,6 +1,7 @@
-import { Menu, Text, Button } from "@mantine/core";
+import { Menu, Text, Button, Tooltip } from "@mantine/core";
 import { useDisclosure } from "@mantine/hooks";
 import Link from "next/link";
+import classNames from "classnames";
 
 import { useIntervalMemo } from "@/utils/hooks/use-interval-memo";
 import {
@@ -28,15 +29,23 @@ export default function WalletButtonWithMenu({
 	mode,
 	account,
 }: WalletButtonWithMenuProps) {
-	const [refillEmailBalance, checkIsAbleToRefillEmailBalance] = useAccountState(
-		(s) => [s.refillEmailBalance, s.checkIsAbleToRefillEmailBalance]
-	);
+	const [
+		refillEmailBalance,
+		checkIsAbleToRefillEmailBalance,
+		getRefillEmailBalanceStatus,
+	] = useAccountState((s) => [
+		s.refillEmailBalance,
+		s.checkIsAbleToRefillEmailBalance,
+		s.getRefillEmailBalanceStatus,
+	]);
 	const [menuOpened, menuHandlers] = useDisclosure(false);
 	const { balance, isLoading: isLoadingBalance } = useAccountBalance();
 	const disconnectModal = useDisconnectModal();
-	const isAbleToRefillEmailBalance = useIntervalMemo(
-		checkIsAbleToRefillEmailBalance
-	);
+	const [isAbleToRefillEmailBalance, refillEmailBalanceStatus] =
+		useIntervalMemo(() => [
+			checkIsAbleToRefillEmailBalance(),
+			getRefillEmailBalanceStatus(),
+		]);
 
 	return (
 		<Menu
@@ -65,18 +74,34 @@ export default function WalletButtonWithMenu({
 						<Text className="font-400 text-16px ml-5px text-[#082135]">
 							{isLoadingBalance ? "..." : balance}
 						</Text>
-						{account.type === "email" && (
-							<Button
-								size="xs"
-								className="ml-auto h-24px"
-								px={10}
-								radius={6}
-								disabled={!isAbleToRefillEmailBalance}
-								onClick={refillEmailBalance}
-							>
-								<span className="text-12px font-500">Claim</span>
-							</Button>
-						)}
+						{account.type === "email" &&
+							(() => {
+								const text = (
+									<span className="text-12px font-500 text-roboto">Claim</span>
+								);
+
+								return isAbleToRefillEmailBalance ? (
+									<Button
+										size="xs"
+										className="ml-auto h-24px"
+										px={10}
+										radius={6}
+										onClick={refillEmailBalance}
+									>
+										{text}
+									</Button>
+								) : (
+									<Tooltip
+										multiline
+										width={220}
+										label={refillEmailBalanceStatus.msg}
+									>
+										<button className="ml-auto h-24px border-none bg-gray/10 text-gray rounded-6px px-10px border-1 border-transparent cursor-not-allowed">
+											{text}
+										</button>
+									</Tooltip>
+								);
+							})()}
 					</div>
 				</Menu.Label>
 

@@ -22,6 +22,23 @@ export type EmailAccount = {
 
 const ONE_DAY_TIMESTAMP = 86400000;
 
+export enum RefillEmailBalanceStatusType {
+	ableToRefill = "ableToRefill",
+	todayAlreadyRefilled = "todayAlreadyRefilled",
+	tooMuchCSB = "tooMuchCSB",
+	userNotConnected = "userNotConnected",
+}
+
+const RefillEmailBalanceStatusMsg: Record<
+	RefillEmailBalanceStatusType,
+	string
+> = {
+	ableToRefill: "Able To Refill",
+	todayAlreadyRefilled: "You can only claim CSB once a day.",
+	tooMuchCSB: "You can only claim CSB when your CSB is under 0.02.",
+	userNotConnected: "User Not Connected",
+};
+
 export type EmailAccountSlice = {
 	email: EmailAccount | null;
 
@@ -29,6 +46,10 @@ export type EmailAccountSlice = {
 	disconnectEmail(): void;
 	refreshEmail(): Promise<boolean>;
 	refillEmailBalance(): Promise<boolean>;
+	getRefillEmailBalanceStatus(): {
+		type: RefillEmailBalanceStatusType;
+		msg: string;
+	};
 	checkIsAbleToRefillEmailBalance(config?: { showTips?: boolean }): boolean;
 };
 
@@ -113,35 +134,41 @@ export const createEmailAccountSlice: SliceFn<EmailAccountSlice> = (
 		return false;
 	},
 
-	checkIsAbleToRefillEmailBalance({ showTips } = {}) {
+	getRefillEmailBalanceStatus() {
 		const { email } = get();
 
-		if (email) {
-			const { lastCSBRefillTimestamp, csb } = email;
+		const type = (() => {
+			if (email) {
+				const { lastCSBRefillTimestamp, csb } = email;
 
-			if (isMoreThanADaySinceLastClaim(lastCSBRefillTimestamp)) {
-				if (showTips) {
-					useClaimCSBModal
-						.getState()
-						.show("You can only claim CSB once a day.");
+				if (hasEnoughCsb(csb)) {
+					return RefillEmailBalanceStatusType.tooMuchCSB;
 				}
 
-				return false;
+				return isMoreThanADaySinceLastClaim(lastCSBRefillTimestamp)
+					? RefillEmailBalanceStatusType.ableToRefill
+					: RefillEmailBalanceStatusType.todayAlreadyRefilled;
+			} else {
+				return RefillEmailBalanceStatusType.userNotConnected;
 			}
+		})();
 
-			if (hasEnoughCsb(csb)) {
+		return { type, msg: RefillEmailBalanceStatusMsg[type] };
+	},
+
+	checkIsAbleToRefillEmailBalance({ showTips } = {}) {
+		const status = get().getRefillEmailBalanceStatus();
+
+		switch (status.type) {
+			case RefillEmailBalanceStatusType.ableToRefill:
+				return true;
+			case RefillEmailBalanceStatusType.todayAlreadyRefilled:
+			case RefillEmailBalanceStatusType.tooMuchCSB:
+			case RefillEmailBalanceStatusType.userNotConnected:
 				if (showTips) {
-					useClaimCSBModal
-						.getState()
-						.show("You can only claim CSB when your CSB is under 0.02.");
+					useClaimCSBModal.getState().show(status.msg);
 				}
-
 				return false;
-			}
-
-			return true;
-		} else {
-			return false;
 		}
 	},
 
