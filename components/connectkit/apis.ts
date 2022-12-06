@@ -154,7 +154,6 @@ export type FetchAccountInfoResult =
 export async function fetchAccountInfo(
 	token: string
 ): Promise<FetchAccountInfoResult> {
-	// FIXME: - remove handle placeholder
 	const { email, characterId, message, csb } = await request(
 		"/newbie/account",
 		{ method: "GET", token }
