@@ -27,7 +27,11 @@ export function InputEmailToConnect() {
 	return (
 		<>
 			<Header title="Connect Email" />
-			<div data-animation="scale-fade-in" className="sm:w-362px p-24px">
+			<div
+				data-animation="scale-fade-in"
+				className="sm:w-362px p-24px"
+				onAnimationEnd={tooltip.markReady}
+			>
 				<Field
 					title="Email Address"
 					icon={
@@ -132,30 +136,43 @@ export function InputEmailToConnect() {
 
 function useTooltipState() {
 	const needAutoDisplayTooltipRef = React.useRef(true);
+	const [isReady, { open: markReady }] = useDisclosure(false);
 	const [isActive, { open, close }] = useDisclosure(false);
 
 	React.useEffect(() => {
-		const timeout = setTimeout(() => {
-			if (needAutoDisplayTooltipRef.current) {
-				open();
-			}
-		}, 300);
+		if (isReady) {
+			console.log("!isReady");
+			const timeout = setTimeout(() => {
+				console.log("timeout!!");
+				if (needAutoDisplayTooltipRef.current) {
+					open();
+				}
+			}, 300);
 
-		return () => clearTimeout(timeout);
+			return () => clearTimeout(timeout);
+		}
 		// eslint-disable-next-line react-hooks/exhaustive-deps
-	}, []);
+	}, [isReady]);
 
 	return React.useMemo(
 		() => ({
 			isActive,
 
-			show: open,
+			markReady,
+
+			show() {
+				if (isReady) {
+					open();
+				}
+			},
 
 			hide() {
-				close();
-				needAutoDisplayTooltipRef.current = false;
+				if (isReady) {
+					close();
+					needAutoDisplayTooltipRef.current = false;
+				}
 			},
 		}),
-		[isActive, open, close, needAutoDisplayTooltipRef]
+		[isReady, markReady, isActive, open, close, needAutoDisplayTooltipRef]
 	);
 }
