@@ -42,7 +42,7 @@ import Loading from "./components/Loading";
 import { useScroller } from "./utils";
 import { useMediaQuery } from "@mantine/hooks";
 
-export default function Index() {
+export default function LazyIndex() {
 	const { index, setIndex } = useScroller(7);
 
 	return (
