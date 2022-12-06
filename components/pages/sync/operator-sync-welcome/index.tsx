@@ -11,7 +11,7 @@ import {
 	useActivateCharacter,
 } from "@/utils/apis/operator-sync";
 import { useLoginChecker } from "@/utils/wallet/hooks";
-import { useSetCharacterOperator } from "@/utils/apis/contract";
+import { useToggleSyncOperator } from "@/utils/apis/contract";
 import { isAddressEqual, NIL_ADDRESS } from "@/utils/ethers";
 
 import { SNSIcons } from "./sns-icons";
@@ -21,7 +21,7 @@ export default function OperatorSyncWelcome() {
 	const { data: character } = useCurrentCharacter();
 	const { validate } = useLoginChecker();
 	const activate = useActivateCharacter(character?.characterId);
-	const setOperator = useSetCharacterOperator(OPERATOR_ADDRESS);
+	const setOperator = useToggleSyncOperator("add");
 	const { data: operator } = useCharacterOperator(character?.characterId);
 	const { openConnectModal } = useConnectModal();
 

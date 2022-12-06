@@ -6,7 +6,7 @@ import { useClickOutside } from "@mantine/hooks";
 
 import { openBorderlessModal } from "@/components/common/Modal";
 import Image from "@/components/common/Image";
-import { useSetCharacterOperator } from "@/utils/apis/contract";
+import { useToggleSyncOperator } from "@/utils/apis/contract";
 import { NIL_ADDRESS } from "@/utils/ethers";
 import { useCurrentCharacter } from "@/utils/apis/indexer";
 import { useCharacterBoundAccounts } from "@/utils/apis/operator-sync";
@@ -43,7 +43,7 @@ export function RemoveOperatorModal() {
 	const [scene, setScene] = React.useState(Scene.wannaRemoveTips);
 
 	const { mutate: removeOperator_, isLoading: isRemoving } =
-		useSetCharacterOperator(NIL_ADDRESS);
+		useToggleSyncOperator("remove");
 
 	const removeOperator = React.useCallback(() => {
 		if (!isRemoving && character?.characterId) {
