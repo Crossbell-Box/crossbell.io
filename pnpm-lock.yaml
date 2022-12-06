@@ -32,7 +32,7 @@ specifiers:
   '@unocss/webpack': 0.46.1
   canvas-confetti: 1.6.0
   classnames: 2.3.2
-  crossbell.js: 0.10.38
+  crossbell.js: 0.11.5
   dayjs: 1.11.6
   embla-carousel-react: 7.0.4
   emoji-mart: 5.2.2
@@ -88,7 +88,7 @@ dependencies:
   '@tanstack/react-query-devtools': 4.13.5_i7kuhmcsnmccyzigx3mxdtc2mu
   canvas-confetti: 1.6.0
   classnames: 2.3.2
-  crossbell.js: 0.10.38
+  crossbell.js: 0.11.5
   dayjs: 1.11.6
   embla-carousel-react: 7.0.4_react@18.2.0
   emoji-mart: 5.2.2
@@ -2843,7 +2843,6 @@ packages:
     engines: {node: '>=10.16.0'}
     dependencies:
       streamsearch: 1.1.0
-    dev: true
 
   /cac/6.7.14:
     resolution: {integrity: sha512-b6Ilus+c3RrdDk+JhLKUAQfzzgLEPy6wcXqS7f/xe1EETvsDP6GORG7SFuOs6cID5YkqchW/LXZbX5bc8j7ZcQ==}
@@ -3147,16 +3146,16 @@ packages:
       which: 2.0.2
     dev: true
 
-  /crossbell.js/0.10.38:
-    resolution: {integrity: sha512-w7z7DkKKQzExl/kC/Q5Z27ybnv7zUxwcG8F9MVrj/Cntfcv7u7rm5LhXipVv5pvmhxMQZaMTPU3DN3gNXAZhkQ==}
+  /crossbell.js/0.11.5:
+    resolution: {integrity: sha512-25lvV2YVNpgb7mZapJAO429ToYuFvx7f2I4/MM13YP91YtvABWoiBrne/gHIyXlEb6QqclQNVRY1H63Vhdabrg==}
     dependencies:
       async-retry: 1.3.3
       ethers: 5.7.2
       fetch-undici: 3.0.1
       is-ipfs: 6.0.2
       query-string: 7.1.1
-      ts-mixer: 6.0.1
-      web3-providers-ws: 1.8.0
+      ts-mixer: 6.0.2
+      web3-providers-ws: 1.8.1
     transitivePeerDependencies:
       - bufferutil
       - node-fetch
@@ -4431,7 +4430,7 @@ packages:
     resolution: {integrity: sha512-UHHu1HqW22ZhK6C/1Zmjf7mQpOwPwLYZ+xcsOgpzistONU8QqvCop6Od29p/kw1GUVoq2Ihu6ItpKLtlojx4FQ==}
     engines: {node: '>=16'}
     dependencies:
-      undici: 5.10.0
+      undici: 5.11.0
     dev: false
 
   /file-entry-cache/6.0.1:
@@ -5941,6 +5940,7 @@ packages:
 
   /multiaddr/10.0.1:
     resolution: {integrity: sha512-G5upNcGzEGuTHkzxezPrrD6CaIHR9uo+7MwqhNVcXTs33IInon4y7nMiGxl2CY5hG7chvYQUQhz5V52/Qe3cbg==}
+    deprecated: This module is deprecated, please upgrade to @multiformats/multiaddr
     dependencies:
       dns-over-http-resolver: 1.2.3
       err-code: 3.0.1
@@ -7180,7 +7180,6 @@ packages:
   /streamsearch/1.1.0:
     resolution: {integrity: sha512-Mcc5wHehp9aXz1ax6bZUyY5afg9u2rv5cqQI3mRrYkGC8rW2hM02jWuwjtL++LS5qinSyhj2QfLyNsuc+VsExg==}
     engines: {node: '>=10.0.0'}
-    dev: true
 
   /strict-uri-encode/2.0.0:
     resolution: {integrity: sha512-QwiXZgpRcKkhTj2Scnn++4PKtWsH0kpzZ62L2R6c/LUVYv7hVnZqcg2+sMuT6R7Jusu1vviK/MFsu6kNJfWlEQ==}
@@ -7272,7 +7271,7 @@ packages:
     dev: true
 
   /strip-hex-prefix/1.0.0:
-    resolution: {integrity: sha1-DF8VX+8RUTczd96du1iNoFUA428=}
+    resolution: {integrity: sha512-q8d4ue7JGEiVcypji1bALTos+0pWtyGlivAWyPuTkHzuTCJqrK9sWxYQZUq6Nq3cuyv3bm734IhHvHtGGURU6A==}
     engines: {node: '>=6.5.0', npm: '>=3'}
     dependencies:
       is-hex-prefixed: 1.0.0
@@ -7479,8 +7478,8 @@ packages:
     resolution: {integrity: sha512-AqTiAOLcj85xS7vQ8QkAV41hPDIJ71XJB4RCUrzo/1GM2CQwhkJGaf9Hgr7BOugMRpgGUrqRg/DrBDl4H40+8g==}
     dev: false
 
-  /ts-mixer/6.0.1:
-    resolution: {integrity: sha512-hvE+ZYXuINrx6Ei6D6hz+PTim0Uf++dYbK9FFifLNwQj+RwKquhQpn868yZsCtJYiclZF1u8l6WZxxKi+vv7Rg==}
+  /ts-mixer/6.0.2:
+    resolution: {integrity: sha512-zvHx3VM83m2WYCE8XL99uaM7mFwYSkjR2OZti98fabHrwkjsCvgwChda5xctein3xGOyaQhtTeDq/1H/GNvF3A==}
     dev: false
 
   /tsconfig-paths/3.14.1:
@@ -7594,17 +7593,11 @@ packages:
       jiti: 1.16.0
     dev: true
 
-  /undici/5.10.0:
-    resolution: {integrity: sha512-c8HsD3IbwmjjbLvoZuRI26TZic+TSEe8FPMLLOkN1AfYRhdjnKBU6yL+IwcSCbdZiX4e5t0lfMDLDCqj4Sq70g==}
-    engines: {node: '>=12.18'}
-    dev: false
-
   /undici/5.11.0:
     resolution: {integrity: sha512-oWjWJHzFet0Ow4YZBkyiJwiK5vWqEYoH7BINzJAJOLedZ++JpAlCbUktW2GQ2DS2FpKmxD/JMtWUUWl1BtghGw==}
     engines: {node: '>=12.18'}
     dependencies:
       busboy: 1.6.0
-    dev: true
 
   /unified/10.1.2:
     resolution: {integrity: sha512-pUSWAi/RAnVy1Pif2kAoeWNBa3JVrx0MId2LASj8G+7AiHWoKZNTomq6LG326T68U7/e263X6fTdcXIy7XnF7Q==}
@@ -7933,35 +7926,35 @@ packages:
     resolution: {integrity: sha512-bKr1DkiNa2krS7qxNtdrtHAmzuYGFQLiQ13TsorsdT6ULTkPLKuu5+GsFpDlg6JFjUTwX2DyhMPG2be8uPrqsQ==}
     dev: false
 
-  /web3-core-helpers/1.8.0:
-    resolution: {integrity: sha512-nMAVwZB3rEp/khHI2BvFy0e/xCryf501p5NGjswmJtEM+Zrd3Biaw52JrB1qAZZIzCA8cmLKaOgdfamoDOpWdw==}
+  /web3-core-helpers/1.8.1:
+    resolution: {integrity: sha512-ClzNO6T1S1gifC+BThw0+GTfcsjLEY8T1qUp6Ly2+w4PntAdNtKahxWKApWJ0l9idqot/fFIDXwO3Euu7I0Xqw==}
     engines: {node: '>=8.0.0'}
     dependencies:
-      web3-eth-iban: 1.8.0
-      web3-utils: 1.8.0
+      web3-eth-iban: 1.8.1
+      web3-utils: 1.8.1
     dev: false
 
-  /web3-eth-iban/1.8.0:
-    resolution: {integrity: sha512-4RbvUxcMpo/e5811sE3a6inJ2H4+FFqUVmlRYs0RaXaxiHweahSRBNcpO0UWgmlePTolj0rXqPT2oEr0DuC8kg==}
+  /web3-eth-iban/1.8.1:
+    resolution: {integrity: sha512-DomoQBfvIdtM08RyMGkMVBOH0vpOIxSSQ+jukWk/EkMLGMWJtXw/K2c2uHAeq3L/VPWNB7zXV2DUEGV/lNE2Dg==}
     engines: {node: '>=8.0.0'}
     dependencies:
       bn.js: 5.2.1
-      web3-utils: 1.8.0
+      web3-utils: 1.8.1
     dev: false
 
-  /web3-providers-ws/1.8.0:
-    resolution: {integrity: sha512-bcZtSifsqyJxwkfQYamfdIRp4nhj9eJd7cxHg1uUkfLJK125WP96wyJL1xbPt7qt0MpfnTFn8/UuIqIB6nFENg==}
+  /web3-providers-ws/1.8.1:
+    resolution: {integrity: sha512-TNefIDAMpdx57+YdWpYZ/xdofS0P+FfKaDYXhn24ie/tH9G+AB+UBSOKnjN0KSadcRSCMBwGPRiEmNHPavZdsA==}
     engines: {node: '>=8.0.0'}
     dependencies:
       eventemitter3: 4.0.4
-      web3-core-helpers: 1.8.0
+      web3-core-helpers: 1.8.1
       websocket: 1.0.34
     transitivePeerDependencies:
       - supports-color
     dev: false
 
-  /web3-utils/1.8.0:
-    resolution: {integrity: sha512-7nUIl7UWpLVka2f09CMbKOSEvorvHnaugIabU4mj7zfMvm0tSByLcEu3eyV9qgS11qxxLuOkzBIwCstTflhmpQ==}
+  /web3-utils/1.8.1:
+    resolution: {integrity: sha512-LgnM9p6V7rHHUGfpMZod+NST8cRfGzJ1BTXAyNo7A9cJX9LczBfSRxJp+U/GInYe9mby40t3v22AJdlELibnsQ==}
     engines: {node: '>=8.0.0'}
     dependencies:
       bn.js: 5.2.1
