@@ -127,10 +127,9 @@ export function InputEmailToRegister1() {
 					<button
 						disabled={store.computed.isPending}
 						onClick={() => goTo(SceneKind.inputEmailToConnect)}
-						className="transition text-[#999] hover:text-[#111] bg-transparent border-none text-14px font-400 flex items-center justify-center px-40px py-14px font-roboto gap-12px cursor-pointer"
+						className="transition text-[#999] hover:text-[#111] bg-transparent border-none text-14px font-400 flex items-center justify-center px-0 py-14px font-roboto gap-12px cursor-pointer"
 					>
-						<RegisterIcon />
-						Login
+						Have an account already?
 					</button>
 
 					<NextStepButton
