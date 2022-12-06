@@ -7,6 +7,7 @@ import { DefaultSeo } from "next-seo";
 import { AppProps } from "next/app";
 import { NextPage } from "next/types";
 import Head from "next/head";
+import { LazyMotion } from "framer-motion";
 
 import WalletProvider from "@/components/providers/WalletProvider";
 import ThemeProvider from "@/components/providers/ThemeProvider";
@@ -31,6 +32,9 @@ export type NextPageWithLayout<P = {}, IP = P> = NextPage<P, IP> & {
 type AppPropsWithLayout = AppProps & {
 	Component: NextPageWithLayout;
 };
+
+const loadFeatures = () =>
+	import("@/utils/framer/features").then((res) => res.default);
 
 export default function App({ Component, pageProps }: AppPropsWithLayout) {
 	const getLayout = Component.getLayout ?? ((page) => page);
@@ -71,25 +75,27 @@ export default function App({ Component, pageProps }: AppPropsWithLayout) {
 			<ThemeProvider>
 				<WalletProvider>
 					<QueryProvider>
-						<ModalsProvider>
-							<NotificationsProvider>
-								<RouterTransition />
-								<IpfsGatewayContext.Provider value={ipfsGateway}>
-									<ConnectKitProvider>
-										<InitContractProvider
-											openConnectModal={
-												isEmailConnected
-													? upgradeAccountModal.show
-													: connectModal.show
-											}
-											getCurrentCharacterId={getCurrentCharacterId}
-										>
-											{getLayout(<Component {...pageProps} />)}
-										</InitContractProvider>
-									</ConnectKitProvider>
-								</IpfsGatewayContext.Provider>
-							</NotificationsProvider>
-						</ModalsProvider>
+						<LazyMotion features={loadFeatures} strict>
+							<ModalsProvider>
+								<NotificationsProvider>
+									<RouterTransition />
+									<IpfsGatewayContext.Provider value={ipfsGateway}>
+										<ConnectKitProvider>
+											<InitContractProvider
+												openConnectModal={
+													isEmailConnected
+														? upgradeAccountModal.show
+														: connectModal.show
+												}
+												getCurrentCharacterId={getCurrentCharacterId}
+											>
+												{getLayout(<Component {...pageProps} />)}
+											</InitContractProvider>
+										</ConnectKitProvider>
+									</IpfsGatewayContext.Provider>
+								</NotificationsProvider>
+							</ModalsProvider>
+						</LazyMotion>
 					</QueryProvider>
 				</WalletProvider>
 			</ThemeProvider>

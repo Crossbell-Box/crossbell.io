@@ -1,7 +1,7 @@
 import React from "react";
 import classNames from "classnames";
 import { useIsomorphicEffect } from "@mantine/hooks";
-import { motion, AnimatePresence } from "framer-motion";
+import { m, AnimatePresence } from "framer-motion";
 
 import { DynamicContainerContext } from "./context";
 
@@ -46,7 +46,7 @@ export function DynamicContainerContent({
 	return (
 		<AnimatePresence>
 			{[
-				<motion.div
+				<m.div
 					className={styles.content}
 					ref={updateElm}
 					key={id}
@@ -54,7 +54,7 @@ export function DynamicContainerContent({
 					exit={{ opacity: 0 }}
 				>
 					{children}
-				</motion.div>,
+				</m.div>,
 			]}
 		</AnimatePresence>
 	);
