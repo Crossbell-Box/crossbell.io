@@ -46,6 +46,24 @@ importers:
       turbo: 1.4.4
       typescript: 4.8.2
 
+  packages/contract:
+    specifiers:
+      '@tanstack/react-query': 4.13.5
+      '@types/react': 18.0.24
+      crossbell.js: 0.11.5
+      ethers: 5.7.2
+      react: 18.2.0
+      react-dom: 18.2.0
+      wagmi: 0.7.9
+    devDependencies:
+      '@tanstack/react-query': 4.13.5_biqbaboplfbrettd7655fr4n2y
+      '@types/react': 18.0.24
+      crossbell.js: 0.11.5
+      ethers: 5.7.2
+      react: 18.2.0
+      react-dom: 18.2.0_react@18.2.0
+      wagmi: 0.7.9_n2cgurg25g7cgftjzlbstkeb2y
+
   packages/indexer:
     specifiers:
       '@tanstack/react-query': 4.13.5
@@ -67,14 +85,15 @@ importers:
 
   packages/util-hooks:
     specifiers:
-      '@types/react': 18.0.18
+      '@types/react': 18.0.24
       react: ^18.2.0
     devDependencies:
-      '@types/react': 18.0.18
+      '@types/react': 18.0.24
       react: 18.2.0
 
   sites/crossbell.io:
     specifiers:
+      '@crossbell/contract': workspace:*
       '@crossbell/indexer': workspace:*
       '@crossbell/ipfs-gateway': 0.0.15
       '@crossbell/ipfs-gateway-next': 0.0.15
@@ -147,6 +166,7 @@ importers:
       wagmi: 0.7.9
       zustand: 4.1.4
     dependencies:
+      '@crossbell/contract': link:../../packages/contract
       '@crossbell/indexer': link:../../packages/indexer
       '@crossbell/ipfs-gateway': 0.0.15
       '@crossbell/ipfs-react': 0.0.15_3cuac2dr7yf6nu67tvbbs2j6ry
@@ -1871,14 +1891,6 @@ packages:
     resolution: {integrity: sha512-C3GYO0HLaOkk9dDAz3Dl4sbe4AKUGTCfFIZsz3n/82dPNN8Du533HzKatDxeUYWu24wJgMP1xICqkWk1YOLOIw==}
     dependencies:
       '@types/react': 18.0.24
-    dev: true
-
-  /@types/react/18.0.18:
-    resolution: {integrity: sha512-6hI08umYs6NaiHFEEGioXnxJ+oEhY3eRz8VCUaudZmGdtvPviCJB8mgaMxaDWAdPSYd4eFavrPk2QIolwbLYrg==}
-    dependencies:
-      '@types/prop-types': 15.7.5
-      '@types/scheduler': 0.16.2
-      csstype: 3.1.0
     dev: true
 
   /@types/react/18.0.24:

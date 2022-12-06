@@ -3,7 +3,7 @@ import { CharacterMetadata } from "crossbell.js";
 import { useMutation, useQueryClient } from "@tanstack/react-query";
 import { showNotification } from "@mantine/notifications";
 
-import { useContract } from "@/utils/crossbell.js";
+import { useContract } from "@crossbell/contract";
 import {
 	SCOPE_KEY_CHARACTER,
 	SCOPE_KEY_CHARACTER_BY_HANDLE,

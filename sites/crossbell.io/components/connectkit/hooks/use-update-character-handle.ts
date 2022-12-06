@@ -6,7 +6,7 @@ import {
 	SCOPE_KEY_CHARACTER,
 	SCOPE_KEY_CHARACTER_BY_HANDLE,
 } from "@crossbell/indexer";
-import { useContract } from "@/utils/crossbell.js";
+import { useContract } from "@crossbell/contract";
 
 import { updateHandle } from "../apis";
 

@@ -2,7 +2,7 @@ import { useAccount } from "wagmi";
 import { useMutation, useQueryClient } from "@tanstack/react-query";
 import { showNotification } from "@mantine/notifications";
 
-import { useContract } from "@/utils/crossbell.js";
+import { useContract } from "@crossbell/contract";
 import {
 	SCOPE_KEY_CHARACTERS,
 	SCOPE_KEY_PRIMARY_CHARACTER,

@@ -1,4 +1,4 @@
-import { useContract } from "@/utils/crossbell.js";
+import { useContract } from "@crossbell/contract";
 import { showNotification } from "@mantine/notifications";
 import { useQueryClient, useMutation } from "@tanstack/react-query";
 import {

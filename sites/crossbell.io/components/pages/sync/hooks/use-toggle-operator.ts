@@ -6,7 +6,7 @@ import {
 	useAccountCharacter,
 	useToggleCharacterOperator,
 } from "@/components/connectkit";
-import { useContract } from "@/utils/crossbell.js";
+import { useContract } from "@crossbell/contract";
 
 import { openRemoveOperatorModal } from "../modals";
 

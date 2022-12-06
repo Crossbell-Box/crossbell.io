@@ -25,7 +25,7 @@ import {
 } from "@/utils/apis/operator-sync";
 import { useAccountCharacter } from "@/components/connectkit";
 import { copyToClipboard } from "@/utils/other";
-import { ContractProvider } from "@/utils/crossbell.js";
+import { ContractProvider } from "@crossbell/contract";
 
 import DoneImage from "@/public/images/sync/congrats.svg";
 

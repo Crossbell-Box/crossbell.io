@@ -4,6 +4,7 @@ import "@/styles/globals.css";
 import "@/utils/crossbell.js/setup-indexer";
 
 import { IpfsGatewayContext } from "@crossbell/ipfs-react";
+import { InitContractProvider } from "@crossbell/contract";
 import { ReactElement, ReactNode } from "react";
 import { DefaultSeo } from "next-seo";
 import { AppProps } from "next/app";
@@ -18,13 +19,16 @@ import NotificationsProvider from "@/components/providers/NotificationsProvider"
 import ModalsProvider from "@/components/providers/ModalsProvider";
 import { RouterTransition } from "@/components/providers/RouterTransition";
 import {
+	openFaucetHintModel,
+	openMintNewCharacterModel,
+} from "@/components/common/NewUserGuide";
+import {
 	ConnectKitProvider,
 	useAccountState,
 	useConnectModal,
 	useUpgradeAccountModal,
 } from "@/components/connectkit";
 import { ipfsGateway } from "@/utils/ipfs";
-import { InitContractProvider } from "@/utils/crossbell.js";
 import { useRefCallback } from "@crossbell/util-hooks";
 
 export type NextPageWithLayout<P = {}, IP = P> = NextPage<P, IP> & {
@@ -84,6 +88,8 @@ export default function App({ Component, pageProps }: AppPropsWithLayout) {
 									<IpfsGatewayContext.Provider value={ipfsGateway}>
 										<ConnectKitProvider>
 											<InitContractProvider
+												openFaucetHintModel={openFaucetHintModel}
+												openMintNewCharacterModel={openMintNewCharacterModel}
 												openConnectModal={
 													isEmailConnected
 														? upgradeAccountModal.show

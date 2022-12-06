@@ -6,7 +6,7 @@ import {
 import { showNotification } from "@mantine/notifications";
 import React from "react";
 
-import { useContract } from "@/utils/crossbell.js";
+import { useContract } from "@crossbell/contract";
 import { CharacterLinkType } from "@crossbell/indexer";
 
 import { unlinkCharacter } from "../../apis";

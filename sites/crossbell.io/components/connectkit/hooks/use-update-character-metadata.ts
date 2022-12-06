@@ -3,7 +3,7 @@ import { showNotification } from "@mantine/notifications";
 import { CharacterMetadata } from "crossbell.js";
 import React from "react";
 
-import { useContract } from "@/utils/crossbell.js";
+import { useContract } from "@crossbell/contract";
 import { deepMerge } from "@/utils/metadata";
 import { SCOPE_KEY_CHARACTER } from "@crossbell/indexer";
 

@@ -2,7 +2,7 @@ import { showNotification } from "@mantine/notifications";
 import { useMutation, useQueryClient } from "@tanstack/react-query";
 import React from "react";
 
-import { useContract } from "@/utils/crossbell.js";
+import { useContract } from "@crossbell/contract";
 import { useAccountState } from "@/components/connectkit";
 
 import { addOperator } from "../../apis";

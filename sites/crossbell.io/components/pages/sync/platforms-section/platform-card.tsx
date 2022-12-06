@@ -25,7 +25,7 @@ import {
 } from "@/components/pages/sync/modals";
 import Image from "@/components/common/Image";
 import { formatDate } from "@/utils/time";
-import { useContract } from "@/utils/crossbell.js";
+import { useContract } from "@crossbell/contract";
 
 import bindIllustration from "@/public/images/sync/bind-illustration.png";
 

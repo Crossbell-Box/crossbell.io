@@ -2,35 +2,43 @@ import { Contract } from "crossbell.js";
 import { BigNumber } from "ethers";
 import { parseEther } from "ethers/lib/utils";
 
-import {
-	openFaucetHintModel,
-	openMintNewCharacterModel,
-} from "@/components/common/NewUserGuide";
-
 import { getCsbBalance } from "@crossbell/indexer";
-import { BizError, ERROR_CODES } from "../errors";
-import { getCurrentAddress } from "../wallet/provider";
+
+import { BizError, ERROR_CODES } from "./errors";
 
 export type InjectContractCheckerConfig = {
 	contract: Contract;
 	getCurrentCharacterId: () => number | null;
+	getCurrentAddress: () => string | null;
+	openFaucetHintModel: () => void;
+	openMintNewCharacterModel: () => void;
 	openConnectModal: () => void;
 };
 
 export function injectContractChecker({
 	contract,
-	openConnectModal,
 	getCurrentCharacterId,
+	getCurrentAddress,
+	openConnectModal,
+	openFaucetHintModel,
+	openMintNewCharacterModel,
 }: InjectContractCheckerConfig) {
 	return new Proxy(contract, {
 		get: (target, prop) => {
 			return async (...args: any[]) => {
 				const noNeedTxMethods: (string | symbol)[] = ["then"];
 
-				// check if the user is logged in
 				const address = getCurrentAddress();
 				if (!noNeedTxMethods.includes(prop)) {
-					if (!address) {
+					if (address) {
+						// check if $CSB is enough to pay for the transaction
+						const balance = await getCsbBalance(address);
+						if (!hasEnoughCsb(balance)) {
+							openFaucetHintModel();
+							throw new BizError("Not enough $CSB.", ERROR_CODES.NO_CHARACTER);
+						}
+					} else {
+						// check if the user is logged in
 						openConnectModal?.();
 						throw new BizError(
 							"Not connected. Please connect your wallet.",
@@ -53,16 +61,6 @@ export function injectContractChecker({
 							"You don't have a character yet",
 							ERROR_CODES.NO_CHARACTER
 						);
-					}
-				}
-
-				// check if $CSB is enough to pay for the transaction
-
-				if (!noNeedTxMethods.includes(prop)) {
-					const balance = await getCsbBalance(address);
-					if (!hasEnoughCsb(balance)) {
-						openFaucetHintModel();
-						throw new BizError("Not enough $CSB.", ERROR_CODES.NO_CHARACTER);
 					}
 				}
 

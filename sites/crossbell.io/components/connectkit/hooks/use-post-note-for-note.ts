@@ -3,7 +3,7 @@ import { useMutation, useQueryClient } from "@tanstack/react-query";
 import { NoteEntity, NoteMetadata } from "crossbell.js";
 import React from "react";
 
-import { useContract } from "@/utils/crossbell.js";
+import { useContract } from "@crossbell/contract";
 import {
 	SCOPE_KEY_NOTES_OF_NOTE,
 	SCOPE_KEY_NOTE_STATUS,

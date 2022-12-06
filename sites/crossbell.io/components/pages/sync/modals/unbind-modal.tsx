@@ -14,7 +14,7 @@ import {
 	useUnbindAccount,
 } from "@/utils/apis/operator-sync";
 import { useAccountCharacter } from "@/components/connectkit";
-import { ContractProvider } from "@/utils/crossbell.js";
+import { ContractProvider } from "@crossbell/contract";
 
 import seeYouImage from "@/public/images/sync/see-you-later.svg";
 

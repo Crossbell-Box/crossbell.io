@@ -21,7 +21,7 @@ import { useCharacter, useCharacterByHandle } from "@crossbell/indexer";
 import { ipfsLinkToHttpLink, uploadToIpfs } from "@/utils/ipfs";
 import { extractCharacterName } from "@/utils/metadata";
 import { composeCharacterHref } from "@/utils/url";
-import { BizError } from "@/utils/errors";
+import { BizError } from "@crossbell/contract";
 import {
 	useAccountState,
 	useConnectModal,
