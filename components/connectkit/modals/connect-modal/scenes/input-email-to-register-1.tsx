@@ -93,7 +93,7 @@ export function InputEmailToRegister1() {
 				{store.isCodeSent && (
 					<TipsSection className="-mt-14px mb-24px">
 						{
-							"We've sent an email to verify your account, make sure it didn't wind up in your Junk Mail and enter the Verification Code"
+							"We've sent a verification email to you. Please check your email inbox and enter the Verification Code. If you didn't receive the email after a while, please check your spam or junk mail folder or contact us."
 						}
 					</TipsSection>
 				)}
