@@ -1,6 +1,6 @@
 import React from "react";
 
-import { useSetCharacterOperator } from "@/utils/apis/contract";
+import { useToggleSyncOperator } from "@/utils/apis/contract";
 import { isAddressEqual } from "@/utils/ethers";
 import { OPERATOR_ADDRESS } from "@/utils/apis/operator-sync";
 import {
@@ -16,7 +16,7 @@ export function useToggleOperator() {
 	const { data: operator } = useCharacterOperator(character?.characterId);
 	const [isTogglingOperator, setIsTogglingOperator] = React.useState(false);
 
-	const setOperator = useSetCharacterOperator(OPERATOR_ADDRESS);
+	const setOperator = useToggleSyncOperator("add");
 
 	return React.useMemo(() => {
 		const hasOperator = isAddressEqual(operator, OPERATOR_ADDRESS);

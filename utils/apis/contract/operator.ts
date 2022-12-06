@@ -1,22 +1,24 @@
 import { useContract } from "@/utils/crossbell.js";
 import { showNotification } from "@mantine/notifications";
 import { useMutation, useQueryClient } from "@tanstack/react-query";
-import { SCOPE_KEY_CHARACTER_OPERATOR } from "../indexer";
+import { OPERATOR_ADDRESS } from "@/utils/apis/operator-sync";
 
-export function useSetCharacterOperator(operator: string) {
+import { SCOPE_KEY_CHARACTER } from "../indexer";
+
+export function useToggleSyncOperator(type: "add" | "remove") {
 	const contract = useContract();
 	const queryClient = useQueryClient();
 
 	return useMutation(
 		async (characterId: number) => {
-			return contract.setOperator(characterId, operator);
+			return type === "add"
+				? contract.addOperator(characterId, OPERATOR_ADDRESS)
+				: contract.removeOperator(characterId, OPERATOR_ADDRESS);
 		},
 		{
 			onSuccess: (_, characterId) => {
 				return Promise.all([
-					queryClient.invalidateQueries(
-						SCOPE_KEY_CHARACTER_OPERATOR(characterId)
-					),
+					queryClient.invalidateQueries(SCOPE_KEY_CHARACTER(characterId)),
 				]);
 			},
 			onError: (err: any) => {
