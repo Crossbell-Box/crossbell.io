@@ -87,20 +87,20 @@ export default function App({ Component, pageProps }: AppPropsWithLayout) {
 								<NotificationsProvider>
 									<RouterTransition />
 									<IpfsGatewayContext.Provider value={ipfsGateway}>
-										<ConnectKitProvider>
-											<InitContractProvider
-												openFaucetHintModel={openFaucetHintModel}
-												openMintNewCharacterModel={openMintNewCharacterModel}
-												openConnectModal={
-													isEmailConnected
-														? upgradeAccountModal.show
-														: connectModal.show
-												}
-												getCurrentCharacterId={getCurrentCharacterId}
-											>
+										<InitContractProvider
+											openFaucetHintModel={openFaucetHintModel}
+											openMintNewCharacterModel={openMintNewCharacterModel}
+											openConnectModal={
+												isEmailConnected
+													? upgradeAccountModal.show
+													: connectModal.show
+											}
+											getCurrentCharacterId={getCurrentCharacterId}
+										>
+											<ConnectKitProvider>
 												{getLayout(<Component {...pageProps} />)}
-											</InitContractProvider>
-										</ConnectKitProvider>
+											</ConnectKitProvider>
+										</InitContractProvider>
 									</IpfsGatewayContext.Provider>
 								</NotificationsProvider>
 							</ModalsProvider>

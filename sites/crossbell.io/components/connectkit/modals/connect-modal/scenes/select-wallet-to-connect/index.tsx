@@ -1,8 +1,10 @@
 import React from "react";
 import classNames from "classnames";
 
-import { walletConnectors } from "../../../../wallets/wallet-connectors";
-import { useDefaultWalletConnect } from "../../../../wallets";
+import {
+	useDefaultWalletConnect,
+	useWalletConnectors,
+} from "../../../../wallets";
 
 import { SceneKind } from "../../types";
 import { useScenesStore } from "../../stores";
@@ -13,6 +15,7 @@ import { OtherWallets } from "../../components/other-wallets";
 import styles from "./index.module.css";
 
 export function SelectWalletToConnect() {
+	const walletConnectors = useWalletConnectors();
 	const { openDefaultWalletConnect } = useDefaultWalletConnect();
 	const goTo = useScenesStore(({ goTo }) => goTo);
 

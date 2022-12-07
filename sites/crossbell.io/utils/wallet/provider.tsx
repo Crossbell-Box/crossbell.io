@@ -1,7 +1,7 @@
 import React from "react";
 import { createClient, createStorage } from "wagmi";
 
-import { chains, provider, connectors } from "@/components/connectkit/config";
+import { chains, provider, connectors } from "./config";
 
 const noopStorage: Storage = {
 	getItem: (_) => "",
