@@ -1,7 +1,7 @@
 import React from "react";
 import compact from "lodash.compact";
 
-import { NIL_ADDRESS } from "@/utils/ethers";
+import { NIL_ADDRESS } from "@crossbell/util-ethers";
 import {
 	composeScanTxHref,
 	decomposeNoteId,

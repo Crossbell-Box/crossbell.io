@@ -4,7 +4,7 @@ import classNames from "classnames";
 
 import Avatar from "@/components/common/Avatar";
 import Logo from "@/components/common/Logo";
-import { truncateAddress } from "@/utils/ethers";
+import { truncateAddress } from "@crossbell/util-ethers";
 
 import { ConnectButtonProps } from "./index";
 import BaseButton from "./_BaseButton";

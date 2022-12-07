@@ -1,5 +1,5 @@
 import { CharacterEntity } from "crossbell.js";
-import { truncateAddress } from "../../ethers";
+import { truncateAddress } from "@crossbell/util-ethers";
 
 export function extractCharacterName(
 	character: CharacterEntity | null | undefined,
