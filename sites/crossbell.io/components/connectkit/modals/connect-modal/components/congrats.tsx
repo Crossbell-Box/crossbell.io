@@ -2,8 +2,6 @@ import React from "react";
 import { Text } from "@mantine/core";
 import classNames from "classnames";
 
-import Image from "@/components/common/Image";
-
 import styles from "./congrats.module.css";
 
 export type CongratsProps = {
@@ -54,21 +52,16 @@ export function Congrats({
 			</div>
 
 			<div className="aspect-308/228 relative -mt-20px">
-				<Image
-					fill
-					placeholder="empty"
+				<img
+					className="absolute top-0 left-0 w-full h-full object-cover"
 					src="/images/connect-kit/congrats/illustration.png"
 				/>
 			</div>
 
-			<div className="absolute inset-0 -z-1 opacity-50">
-				<Image
-					fill
-					className="object-cover"
-					placeholder="empty"
-					src="/images/connect-kit/congrats/bg.png"
-				/>
-			</div>
+			<img
+				className="object-cover absolute top-0 left-0 w-full h-full -z-1 opacity-50"
+				src="/images/connect-kit/congrats/bg.png"
+			/>
 
 			<button
 				className="w-full h-48px flex items-center justify-center border-none bg-[#6AD991] outline-none rounded-16px text-white text-14px font-500 font-roboto cursor-pointer"

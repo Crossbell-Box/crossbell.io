@@ -2,12 +2,15 @@ import React from "react";
 import classNames from "classnames";
 import { LoadingOverlay } from "@mantine/core";
 
-import { useRefreshDynamicContainer } from "../../../components";
+import {
+	useRefreshDynamicContainer,
+	EmailIcon,
+	PasswordIcon,
+} from "../../../components";
 
 import { Header } from "../components/header";
 import { TextInput } from "../components/text-input";
 import { Field } from "../components/field";
-import { EmailIcon, PasswordIcon, RegisterIcon } from "../components/icons";
 import { NextStepButton } from "../components/next-step-button";
 import { CodeInput } from "../components/code-input";
 import { TipsSection } from "../components/tips-section";

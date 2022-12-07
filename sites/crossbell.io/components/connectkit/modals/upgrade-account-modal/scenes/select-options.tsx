@@ -1,9 +1,7 @@
 import React from "react";
 import { Button, Text } from "@mantine/core";
 
-import Image from "@/components/common/Image";
-import email from "@/public/images/connect-kit/email-icon.svg";
-import wallet from "@/public/images/connect-kit/wallet-icon.svg";
+import { WalletIcon, EmailIcon } from "../../../components";
 
 import { SceneKind } from "../types";
 import { useScenesStore, useModalStore } from "../stores";
@@ -18,7 +16,10 @@ export function SelectOptions() {
 		<>
 			<Header title="Upgrade Account" leftNode={false} />
 
-			<div data-animation="scale-fade-in" className="sm:w-312px mx-24px pb-18px">
+			<div
+				data-animation="scale-fade-in"
+				className="sm:w-312px mx-24px pb-18px"
+			>
 				<p className="text-14px font-400 text-[#999] my-10px text-center">
 					{`Email account can't mint because a wallet is required to keep your assets. `}
 					<a
@@ -36,28 +37,14 @@ export function SelectOptions() {
 							id: SceneKind.upgradeToWallet,
 							title: "Upgrade to Wallet",
 							style: { background: "#6AD991", color: "#FFF" },
-							icon: (
-								<Image
-									src={wallet}
-									alt="Wallet"
-									placeholder="empty"
-									className="w-36px h-36px"
-								/>
-							),
+							icon: <WalletIcon className="w-36px h-36px" />,
 							onClick: () => goToScene(SceneKind.upgradeToWallet),
 						},
 
 						{
 							id: "keep-email-login",
 							title: "Keep Email Login",
-							icon: (
-								<Image
-									alt="Email"
-									src={email}
-									placeholder="empty"
-									className="w-36px h-36px"
-								/>
-							),
+							icon: <EmailIcon className="w-36px h-36px text-[#FFB74D]" />,
 							onClick: hideModal,
 						},
 					]}

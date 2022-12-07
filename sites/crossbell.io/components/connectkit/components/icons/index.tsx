@@ -22,6 +22,42 @@ export function EmailIcon(props: React.SVGAttributes<SVGSVGElement>) {
 	);
 }
 
+export function WalletIcon(props: React.SVGAttributes<SVGSVGElement>) {
+	return (
+		<svg
+			fill="none"
+			height="36"
+			viewBox="0 0 36 36"
+			width="36"
+			xmlns="http://www.w3.org/2000/svg"
+			{...props}
+		>
+			<path
+				d="m33 21v12h-25.5c-2.481 0-4.5-2.019-4.5-4.5v-9c0-2.481 2.019-4.5 4.5-4.5h24v6z"
+				fill="#6d4c41"
+			/>
+			<path
+				d="m7.5 18h7.5 16.5v3h-24c-.8265 0-1.5-.6735-1.5-1.5s.6735-1.5 1.5-1.5z"
+				fill="#000"
+				opacity=".2"
+			/>
+			<path
+				d="m24.75 13.5c-2.895 0-5.25-2.355-5.25-5.25s2.355-5.25 5.25-5.25 5.25 2.355 5.25 5.25-2.355 5.25-5.25 5.25z"
+				fill="#fbc02d"
+			/>
+			<path
+				d="m7.5765 18c-.036-.2475-.0765-.4935-.0765-.75 0-2.895 2.355-5.25 5.25-5.25s5.25 2.355 5.25 5.25c0 .2565-.0405.5025-.0765.75z"
+				fill="#fbc02d"
+			/>
+			<path
+				d="m24.75 10.5c-1.242 0-2.25-1.008-2.25-2.25s1.008-2.25 2.25-2.25 2.25 1.008 2.25 2.25-1.008 2.25-2.25 2.25zm-9.888 7.5c.084-.2355.138-.486.138-.75 0-1.242-1.008-2.25-2.25-2.25s-2.25 1.008-2.25 2.25c0 .264.054.5145.138.75z"
+				fill="#000"
+				opacity=".2"
+			/>
+		</svg>
+	);
+}
+
 export function PasswordIcon(props: React.SVGAttributes<SVGSVGElement>) {
 	return (
 		<svg

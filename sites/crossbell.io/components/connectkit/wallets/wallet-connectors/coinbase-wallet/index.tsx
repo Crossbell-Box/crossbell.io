@@ -1,10 +1,6 @@
 import { CoinbaseWalletConnector } from "wagmi/connectors/coinbaseWallet";
 import React from "react";
 
-import Image from "@/components/common/Image";
-
-import coinbaseUrl from "@/public/images/connect-kit/wallet-logos/coinbase.svg";
-
 import { Chain, Wallet } from "../../../wallets";
 
 export interface CoinbaseWalletOptions {
@@ -20,7 +16,11 @@ export const coinbaseWallet = ({
 		id: "coinbaseWallet",
 		name: "Coinbase Wallet",
 		icon: (
-			<Image fill src={coinbaseUrl} placeholder="empty" alt="Coinbase Logo" />
+			<img
+				className="absolute top-0 left-0 w-full h-full object-contain"
+				src="/images/connect-kit/wallet-logos/coinbase.svg"
+				alt="Coinbase Logo"
+			/>
 		),
 		installed: isCoinbaseWallet(),
 		createConnector: () => {

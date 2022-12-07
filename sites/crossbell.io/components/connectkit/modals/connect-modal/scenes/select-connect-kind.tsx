@@ -1,9 +1,7 @@
 import React from "react";
 import { Button, Text } from "@mantine/core";
 
-import Image from "@/components/common/Image";
-import email from "@/public/images/connect-kit/email-icon.svg";
-import wallet from "@/public/images/connect-kit/wallet-icon.svg";
+import { EmailIcon, WalletIcon } from "../../../components";
 
 import { SceneKind } from "../types";
 import { useScenesStore } from "../stores";
@@ -33,34 +31,23 @@ export function SelectConnectKind() {
 				}
 			/>
 
-			<div data-animation="scale-fade-in" className="sm:w-312px mx-24px pb-18px">
+			<div
+				data-animation="scale-fade-in"
+				className="sm:w-312px mx-24px pb-18px"
+			>
 				<Selections
 					items={[
 						{
 							id: SceneKind.selectWalletToConnect,
 							title: "Connect Wallet",
-							icon: (
-								<Image
-									src={wallet}
-									alt="Wallet"
-									placeholder="empty"
-									className="w-36px h-36px"
-								/>
-							),
+							icon: <WalletIcon className="w-36px h-36px" />,
 							onClick: () => goToScene(SceneKind.selectWalletToConnect),
 						},
 
 						{
 							id: SceneKind.inputEmailToConnect,
 							title: "Connect Email",
-							icon: (
-								<Image
-									alt="Email"
-									src={email}
-									placeholder="empty"
-									className="w-36px h-36px"
-								/>
-							),
+							icon: <EmailIcon className="w-36px h-36px text-[#FFB74D]" />,
 							onClick: () => goToScene(SceneKind.inputEmailToConnect),
 						},
 					]}

@@ -1,11 +1,11 @@
 import React from "react";
 import { LoadingOverlay, Text, Tooltip } from "@mantine/core";
-import Image from "@/components/common/Image";
+
+import { CheckIcon, EmailIcon, MemberIcon } from "../../../components";
 
 import { Header } from "../components/header";
 import { TextInput } from "../components/text-input";
 import { Field } from "../components/field";
-import { CheckIcon, EmailIcon, MemberIcon } from "../components/icons";
 import { NextStepButton } from "../components/next-step-button";
 
 import { SceneKind } from "../types";
@@ -59,19 +59,19 @@ export function InputEmailToRegister3() {
 								label={
 									<div className="sm:w-312px rounded-16px pb-30px">
 										<div className="flex flex-col items-center bg-black rounded-12px">
-											<div className="w-125px h-34px relative my-20px">
-												<Image
+											<div>
+												<img
+													className="w-125px h-34px block my-20px object-contain"
 													src="/logos/crossbell-white.svg"
 													alt="Crossbell"
-													fill
 												/>
 											</div>
 
 											<div className="aspect-253/128 relative w-full mx-10px mb-10px">
-												<Image
+												<img
+													className="absolute top-0 left-0 w-full h-full"
 													src="/images/connect-kit/what-is-character.png"
 													alt="What Is Character"
-													fill
 												/>
 											</div>
 										</div>

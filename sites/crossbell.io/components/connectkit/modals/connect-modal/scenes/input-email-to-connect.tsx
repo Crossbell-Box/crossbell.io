@@ -3,11 +3,12 @@ import { useDisclosure } from "@mantine/hooks";
 import classNames from "classnames";
 import React from "react";
 
+import { EmailIcon, PasswordIcon } from "../../../components";
+
 import { Header } from "../components/header";
 import { TextInput } from "../components/text-input";
 import { PasswordInput } from "../components/password-input";
 import { Field } from "../components/field";
-import { EmailIcon, PasswordIcon } from "../components/icons";
 import { NextStepButton } from "../components/next-step-button";
 
 import { SceneKind } from "../types";
