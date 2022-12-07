@@ -2,6 +2,7 @@ import "uno.css";
 import "@/styles/globals.css";
 
 import "@/utils/crossbell.js/setup-indexer";
+import "@/utils/crossbell.js/setup-operator-sync";
 
 import { IpfsGatewayContext } from "@crossbell/ipfs-react";
 import { InitContractProvider } from "@crossbell/contract";

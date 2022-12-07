@@ -8,6 +8,8 @@ import { SupportedPlatform } from "./consts";
 
 const api = new OperatorSyncApi();
 
+export { api as operatorSyncApi };
+
 const SCOPE_KEY = ["api", "operator-sync"];
 const csbAccountURI = (identity: string, platform: SupportedPlatform) =>
 	`csb://account:${identity}@${platform}`;

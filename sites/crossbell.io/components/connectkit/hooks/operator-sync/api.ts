@@ -1,16 +1,7 @@
-import config from "config";
 import { SupportedPlatform } from "./consts";
 
 export default class OperatorSyncApi {
-	endpoint: string;
-
-	constructor(endpoint?: string) {
-		if (endpoint) {
-			this.endpoint = endpoint;
-		} else {
-			this.endpoint = config.operatorSync.endpoint;
-		}
-	}
+	endpoint = "https://opsync.crossbell.io/v1";
 
 	async isCharacterActivated(characterId: number): Promise<boolean> {
 		const res = (await fetch(`${this.endpoint}/${characterId}`).then((res) =>
