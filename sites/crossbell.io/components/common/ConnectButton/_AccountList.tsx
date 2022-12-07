@@ -11,7 +11,7 @@ import { showNotification } from "@mantine/notifications";
 import { useRouter } from "next/router";
 
 import { useAccountState, useAccountCharacters } from "@/components/connectkit";
-import { extractCharacterName } from "@/utils/metadata";
+import { extractCharacterName } from "@crossbell/util-metadata";
 import { composeCharacterHref } from "@/utils/url";
 import LoadMore from "@/components/common/LoadMore";
 import Avatar from "@/components/common/Avatar";

@@ -4,7 +4,7 @@ import Image from "../Image";
 import { MouseEvent, useCallback, useEffect, useState } from "react";
 import { Modal, Space } from "@mantine/core";
 import classNames from "classnames";
-import { getValidAttachments, mimeTypeToMediaType } from "@/utils/metadata";
+import { getValidAttachments, mimeTypeToMediaType } from "@crossbell/util-metadata";
 import { useElementSize, useHotkeys } from "@mantine/hooks";
 import VideoPlayer from "./VideoPlayer";
 import { ipfsLinkToHttpLink } from "@crossbell/util-ipfs";

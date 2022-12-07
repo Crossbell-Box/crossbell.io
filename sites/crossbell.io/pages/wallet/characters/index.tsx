@@ -10,7 +10,7 @@ import { getLayout } from "@/components/layouts/AppLayout";
 import Header from "@/components/layouts/Header";
 import { NextPageWithLayout } from "@/pages/_app";
 import { useCharacterFollowStats } from "@crossbell/indexer";
-import { extractCharacterName } from "@/utils/metadata";
+import { extractCharacterName } from "@crossbell/util-metadata";
 import {
 	composeCharacterHref,
 	composeWalletCharacterEditHref,

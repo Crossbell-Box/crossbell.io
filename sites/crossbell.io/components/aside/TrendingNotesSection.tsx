@@ -2,7 +2,7 @@ import { useTrending } from "@/utils/apis/trending";
 import {
 	extractPlainTextFromNote,
 	getValidAttachments,
-} from "@/utils/metadata";
+} from "@crossbell/util-metadata";
 import { composeNoteHref } from "@/utils/url";
 import { Group, Skeleton, Space, Text } from "@mantine/core";
 import { NoteEntity } from "crossbell.js";

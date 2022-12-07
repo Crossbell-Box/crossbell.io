@@ -12,7 +12,6 @@ importers:
       '@emotion/core': 11.0.0
       '@emotion/react': 11.10.5
       '@emotion/server': 11.10.0
-      '@fastify/deepmerge': 1.1.0
       '@iconify/utils': 2.0.1
       '@mantine/carousel': 5.6.3
       '@mantine/core': 5.6.3
@@ -98,7 +97,6 @@ importers:
       '@emotion/core': 11.0.0
       '@emotion/react': 11.10.5_bbvjflvjoibwhtpmedigb26h6y
       '@emotion/server': 11.10.0
-      '@fastify/deepmerge': 1.1.0
       '@mantine/carousel': 5.6.3_ivlikz7x5r2hqlgolnas4aupji
       '@mantine/core': 5.6.3_4md2hhxmujtaycbumrxkp2e5ju
       '@mantine/dropzone': 5.6.3_hliqdvg4trnmlenfv3ync25tfa
@@ -202,6 +200,17 @@ importers:
   packages/util-ipfs:
     specifiers: {}
 
+  packages/util-metadata:
+    specifiers:
+      '@crossbell/util-ethers': workspace:*
+      '@crossbell/util-ipfs': workspace:*
+      '@fastify/deepmerge': 1.1.0
+    dependencies:
+      '@fastify/deepmerge': 1.1.0
+    devDependencies:
+      '@crossbell/util-ethers': link:../util-ethers
+      '@crossbell/util-ipfs': link:../util-ipfs
+
   sites/crossbell.io:
     specifiers:
       '@crossbell/contract': workspace:*
@@ -209,12 +218,14 @@ importers:
       '@crossbell/util-ethers': workspace:*
       '@crossbell/util-hooks': workspace:*
       '@crossbell/util-ipfs': workspace:*
+      '@crossbell/util-metadata': workspace:*
     dependencies:
       '@crossbell/contract': link:../../packages/contract
       '@crossbell/indexer': link:../../packages/indexer
       '@crossbell/util-ethers': link:../../packages/util-ethers
       '@crossbell/util-hooks': link:../../packages/util-hooks
       '@crossbell/util-ipfs': link:../../packages/util-ipfs
+      '@crossbell/util-metadata': link:../../packages/util-metadata
 
 packages:
 

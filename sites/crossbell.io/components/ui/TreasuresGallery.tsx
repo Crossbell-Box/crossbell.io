@@ -4,7 +4,7 @@ import {
 	extractCharacterAvatar,
 	extractCoverImageFromNote,
 	extractPlainTextFromNote,
-} from "@/utils/metadata";
+} from "@crossbell/util-metadata";
 import { composeNoteHref, composeTreasuresWalletsHref } from "@/utils/url";
 import { Space, Text } from "@mantine/core";
 import Link from "next/link";

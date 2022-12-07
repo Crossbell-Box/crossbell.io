@@ -3,7 +3,7 @@ import { NoteEntity } from "crossbell.js";
 import { useState } from "react";
 
 import { getOrigin } from "@/utils/url";
-import { composeNoteMetadata } from "@/utils/metadata";
+import { composeNoteMetadata } from "@crossbell/util-metadata";
 import EmojiPicker from "@/components/common/Input/EmojiPicker";
 import {
 	useAccountCharacter,

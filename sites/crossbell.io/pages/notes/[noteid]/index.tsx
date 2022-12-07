@@ -27,7 +27,7 @@ import {
 	extractCharacterName,
 	extractPlainTextFromNote,
 	getValidAttachments,
-} from "@/utils/metadata";
+} from "@crossbell/util-metadata";
 import { ipfsLinkToHttpLink } from "@crossbell/util-ipfs";
 import { useScrollIntoView } from "@mantine/hooks";
 import { cacheRequest } from "@/utils/server";

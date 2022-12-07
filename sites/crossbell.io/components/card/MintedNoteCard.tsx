@@ -9,7 +9,7 @@ import {
 	extractCharacterName,
 	extractCoverImageFromNote,
 	extractPlainTextFromNote,
-} from "@/utils/metadata";
+} from "@crossbell/util-metadata";
 import Avatar from "../common/Avatar";
 
 const MintedNoteCard = ({ note }: { note: NoteEntity }) => {

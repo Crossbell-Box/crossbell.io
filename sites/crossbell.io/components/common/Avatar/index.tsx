@@ -1,7 +1,7 @@
 import { useCharacter } from "@crossbell/indexer";
 import { stringToInteger } from "@/utils/helpers";
 import { ipfsLinkToHttpLink } from "@crossbell/util-ipfs";
-import { extractCharacterAvatar } from "@/utils/metadata";
+import { extractCharacterAvatar } from "@crossbell/util-metadata";
 import { Avatar as Avatar_, AvatarProps } from "@mantine/core";
 import { CharacterEntity } from "crossbell.js";
 import { PropsWithChildren } from "react";

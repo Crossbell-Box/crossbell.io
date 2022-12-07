@@ -11,7 +11,7 @@ import { PropsWithChildren } from "react";
 import { useModals } from "@mantine/modals";
 import Link from "next/link";
 
-import { extractCharacterName } from "@/utils/metadata";
+import { extractCharacterName } from "@crossbell/util-metadata";
 import {
 	useAccountCharacter,
 	useFollowCharacter,

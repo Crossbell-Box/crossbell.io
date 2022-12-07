@@ -9,7 +9,7 @@ import {
 } from "@/components/connectkit";
 import { ipfsLinkToHttpLink } from "@crossbell/util-ipfs";
 import { useCharacterFollowRelation } from "@crossbell/indexer";
-import { extractCharacterAvatar, extractCharacterName } from "@/utils/metadata";
+import { extractCharacterAvatar, extractCharacterName } from "@crossbell/util-metadata";
 import { composeCharacterHref } from "@/utils/url";
 
 import Avatar from "../common/Avatar";

@@ -3,7 +3,7 @@ import { getLayout } from "@/components/layouts/AppLayout";
 import Header from "@/components/layouts/Header";
 import type { NextPageWithLayout } from "@/pages/_app";
 import { useCharacterByHandle } from "@crossbell/indexer";
-import { extractCharacterName } from "@/utils/metadata";
+import { extractCharacterName } from "@crossbell/util-metadata";
 import { useCharacterRouterQuery } from "@/utils/url";
 import { Fragment } from "react";
 import { useRouter } from "next/router";

@@ -14,7 +14,7 @@ import { ipfsLinkToHttpLink } from "@crossbell/util-ipfs";
 import {
 	extractCharacterAvatars,
 	extractCharacterName,
-} from "@/utils/metadata";
+} from "@crossbell/util-metadata";
 import {
 	composeCharacterHref,
 	getOrigin,
