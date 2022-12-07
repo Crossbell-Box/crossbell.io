@@ -4,10 +4,9 @@ import { Loader } from "@mantine/core";
 import { showNotification } from "@mantine/notifications";
 import { useConnect } from "wagmi";
 
-import { QRCode } from "@/components/common/QRCode";
-
-import { Wallet, WalletConnector } from "../../../../wallets";
 import { isMobile } from "../../../../utils";
+import { QRCode } from "../../../../components";
+import { Wallet, WalletConnector } from "../../../../wallets";
 
 import { Header } from "../../components/header";
 import { useInitiateConnect } from "./use-initiate-connect";
