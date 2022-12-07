@@ -2,6 +2,7 @@ import { Button, Space } from "@mantine/core";
 import { NoteEntity } from "crossbell.js";
 import { useState } from "react";
 
+import { getOrigin } from "@/utils/url";
 import { composeNoteMetadata } from "@/utils/metadata";
 import EmojiPicker from "@/components/common/Input/EmojiPicker";
 import {
@@ -59,7 +60,10 @@ export function CommentTextarea({ note }: { note: NoteEntity }) {
 					onClick={
 						character
 							? () => {
-									const metadata = composeNoteMetadata({ content: value });
+									const metadata = composeNoteMetadata(
+										{ content: value },
+										getOrigin()
+									);
 
 									postNoteForNote.mutate(
 										{ metadata, note },
