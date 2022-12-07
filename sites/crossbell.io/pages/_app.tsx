@@ -28,7 +28,7 @@ import {
 	useConnectModal,
 	useUpgradeAccountModal,
 } from "@/components/connectkit";
-import { ipfsGateway } from "@/utils/ipfs";
+import { ipfsGateway } from "@crossbell/util-ipfs";
 import { useRefCallback } from "@crossbell/util-hooks";
 
 export type NextPageWithLayout<P = {}, IP = P> = NextPage<P, IP> & {

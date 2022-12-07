@@ -1,5 +1,5 @@
 import { NoteMetadata } from "crossbell.js";
-import { ipfsLinkToHttpLink } from "../../ipfs";
+import { ipfsLinkToHttpLink } from "@crossbell/util-ipfs";
 import { MediaType, MediaTypes, mimeTypeToMediaType } from "./mimetype";
 
 const ContentTypes = ["address", "content"] as const;

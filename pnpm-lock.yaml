@@ -199,17 +199,22 @@ importers:
   packages/util-hooks:
     specifiers: {}
 
+  packages/util-ipfs:
+    specifiers: {}
+
   sites/crossbell.io:
     specifiers:
       '@crossbell/contract': workspace:*
       '@crossbell/indexer': workspace:*
       '@crossbell/util-ethers': workspace:*
       '@crossbell/util-hooks': workspace:*
+      '@crossbell/util-ipfs': workspace:*
     dependencies:
       '@crossbell/contract': link:../../packages/contract
       '@crossbell/indexer': link:../../packages/indexer
       '@crossbell/util-ethers': link:../../packages/util-ethers
       '@crossbell/util-hooks': link:../../packages/util-hooks
+      '@crossbell/util-ipfs': link:../../packages/util-ipfs
 
 packages:
 

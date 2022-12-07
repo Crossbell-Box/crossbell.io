@@ -12,6 +12,7 @@
 		"@crossbell/util-hooks": "workspace:*",
 		"@crossbell/indexer": "workspace:*",
 		"@crossbell/contract": "workspace:*",
-		"@crossbell/util-ethers": "workspace:*"
+		"@crossbell/util-ethers": "workspace:*",
+		"@crossbell/util-ipfs": "workspace:*"
 	}
 }

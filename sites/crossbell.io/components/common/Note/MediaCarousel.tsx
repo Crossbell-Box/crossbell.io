@@ -7,7 +7,7 @@ import classNames from "classnames";
 import { getValidAttachments, mimeTypeToMediaType } from "@/utils/metadata";
 import { useElementSize, useHotkeys } from "@mantine/hooks";
 import VideoPlayer from "./VideoPlayer";
-import { ipfsLinkToHttpLink } from "@/utils/ipfs";
+import { ipfsLinkToHttpLink } from "@crossbell/util-ipfs";
 
 export default function MediaCarousel({
 	attachments = [],

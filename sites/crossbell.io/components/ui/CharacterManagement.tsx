@@ -18,7 +18,7 @@ import Link from "next/link";
 import { PropsWithChildren, useEffect, useState } from "react";
 
 import { useCharacter, useCharacterByHandle } from "@crossbell/indexer";
-import { ipfsLinkToHttpLink, uploadToIpfs } from "@/utils/ipfs";
+import { ipfsLinkToHttpLink, uploadToIpfs } from "@crossbell/util-ipfs";
 import { extractCharacterName } from "@/utils/metadata";
 import { composeCharacterHref } from "@/utils/url";
 import { BizError } from "@crossbell/contract";
