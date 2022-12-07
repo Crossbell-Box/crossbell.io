@@ -4,7 +4,7 @@ import confetti from "canvas-confetti";
 
 import { Congrats } from "../components/congrats";
 import { useModalStore } from "../stores";
-import { useAccountCharacter } from "@/components/connectkit";
+import { useAccountCharacter } from "../../../hooks";
 
 export function InputEmailToRegister4() {
 	const router = useRouter();

@@ -2,7 +2,7 @@ import React from "react";
 import { Popover, Text } from "@mantine/core";
 import classNames from "classnames";
 
-import { Wallet, WalletConnector } from "@/components/connectkit/wallets";
+import { Wallet, WalletConnector } from "../../../../wallets";
 
 import { Header } from "../../components/header";
 

@@ -1,5 +1,4 @@
-import { OPERATOR_ADDRESS } from "@/components/connectkit";
-
+import { OPERATOR_ADDRESS } from "../operator-sync";
 import { useAccountState } from "../account-state";
 
 export function useCharacterOperators() {

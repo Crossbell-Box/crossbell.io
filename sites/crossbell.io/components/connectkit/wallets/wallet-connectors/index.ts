@@ -1,4 +1,4 @@
-import { chains } from "@/components/connectkit/config";
+import { chains } from "../../config";
 
 import { metaMaskWallet } from "./meta-mask-wallet";
 import { coinbaseWallet } from "./coinbase-wallet";

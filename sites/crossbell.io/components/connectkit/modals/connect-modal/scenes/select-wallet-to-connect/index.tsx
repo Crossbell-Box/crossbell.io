@@ -1,11 +1,11 @@
 import React from "react";
 import classNames from "classnames";
 
-import { walletConnectors } from "@/components/connectkit/wallets/wallet-connectors";
-import { useDefaultWalletConnect } from "@/components/connectkit/wallets";
-import { SceneKind } from "@/components/connectkit/modals/connect-modal/types";
-import { useScenesStore } from "@/components/connectkit/modals/connect-modal/stores";
+import { walletConnectors } from "../../../../wallets/wallet-connectors";
+import { useDefaultWalletConnect } from "../../../../wallets";
 
+import { SceneKind } from "../../types";
+import { useScenesStore } from "../../stores";
 import { Header } from "../../components/header";
 import { Selections } from "../../components/selections";
 import { OtherWallets } from "../../components/other-wallets";

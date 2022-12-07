@@ -1,6 +1,6 @@
 import React from "react";
 
-import { Wallet } from "@/components/connectkit/wallets";
+import { Wallet } from "../../../../wallets";
 
 import { ConnectStatus } from "./types";
 

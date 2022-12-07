@@ -3,10 +3,9 @@ import { useMutation, useQueryClient } from "@tanstack/react-query";
 import React from "react";
 
 import { useContract } from "@crossbell/contract";
-import { useAccountState } from "@/components/connectkit";
 
 import { removeOperator } from "../../apis";
-
+import { useAccountState } from "../account-state";
 import { SCOPE_KEY_CHARACTER_OPERATOR } from "./const";
 
 type UpdateFn = (params: {

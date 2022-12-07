@@ -75,6 +75,7 @@ export function ConnectKindDifferences() {
 
 			{/* TODO: - add link */}
 			<a
+				href=""
 				target="_blank"
 				rel="noreferrer"
 				className="flex mt-12px mx-24px mb-24px"

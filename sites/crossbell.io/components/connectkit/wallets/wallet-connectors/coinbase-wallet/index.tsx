@@ -1,9 +1,11 @@
 import { CoinbaseWalletConnector } from "wagmi/connectors/coinbaseWallet";
 import React from "react";
 
-import { Chain, Wallet } from "@/components/connectkit/wallets/types";
 import Image from "@/components/common/Image";
+
 import coinbaseUrl from "@/public/images/connect-kit/wallet-logos/coinbase.svg";
+
+import { Chain, Wallet } from "../../../wallets";
 
 export interface CoinbaseWalletOptions {
 	chains: Chain[];

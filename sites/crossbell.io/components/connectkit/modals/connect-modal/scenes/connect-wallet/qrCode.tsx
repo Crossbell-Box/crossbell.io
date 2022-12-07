@@ -4,13 +4,13 @@ import { Loader } from "@mantine/core";
 import { showNotification } from "@mantine/notifications";
 import { useConnect } from "wagmi";
 
-import { Wallet, WalletConnector } from "@/components/connectkit/wallets";
 import { QRCode } from "@/components/common/QRCode";
 
-import { Header } from "../../components/header";
+import { Wallet, WalletConnector } from "../../../../wallets";
+import { isMobile } from "../../../../utils";
 
+import { Header } from "../../components/header";
 import { useInitiateConnect } from "./use-initiate-connect";
-import { isMobile } from "@/components/connectkit/utils";
 
 type QRCodeWalletConnector = RequireAtLeastOne<WalletConnector, "qrCode">;
 

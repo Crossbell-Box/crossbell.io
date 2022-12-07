@@ -1,7 +1,7 @@
 import { showNotification } from "@mantine/notifications";
 import { useMutation, useQuery, useQueryClient } from "@tanstack/react-query";
 
-import { useChangeCharacterMetadata } from "@/components/connectkit";
+import { useChangeCharacterMetadata } from "../use-change-character-metadata";
 
 import OperatorSyncApi from "./api";
 import { SupportedPlatform } from "./consts";

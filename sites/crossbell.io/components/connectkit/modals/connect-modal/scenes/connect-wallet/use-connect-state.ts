@@ -1,7 +1,7 @@
 import { useAccount, useConnect } from "wagmi";
 import React from "react";
 
-import { WalletConnector } from "@/components/connectkit/wallets";
+import { WalletConnector } from "../../../../wallets";
 
 import { ConnectStatus } from "./types";
 import { useInitiateConnect } from "./use-initiate-connect";
