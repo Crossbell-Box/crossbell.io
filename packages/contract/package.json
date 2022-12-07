@@ -24,19 +24,13 @@
 	"peerDependencies": {
 		"@crossbell/util-hooks": "workspace:*",
 		"@crossbell/indexer": "workspace:*",
-		"@tanstack/react-query": "^4.0.0",
-		"crossbell.js": "^0.11.0",
-		"ethers": "^5.7.2",
-		"wagmi": "^0.7.9",
-		"react": "^18.0.0"
+		"crossbell.js": "0.11.x",
+		"ethers": "5.x.x",
+		"wagmi": "0.7.x",
+		"react": "18.x.x"
 	},
 	"devDependencies": {
-		"@tanstack/react-query": "4.13.5",
-		"@types/react": "18.0.24",
-		"crossbell.js": "0.11.5",
-		"react": "18.2.0",
-		"react-dom": "18.2.0",
-		"ethers": "5.7.2",
-		"wagmi": "0.7.9"
+		"@crossbell/util-hooks": "workspace:*",
+		"@crossbell/indexer": "workspace:*"
 	}
 }
