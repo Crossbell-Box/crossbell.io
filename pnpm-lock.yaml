@@ -211,6 +211,9 @@ importers:
       '@crossbell/util-ethers': link:../util-ethers
       '@crossbell/util-ipfs': link:../util-ipfs
 
+  packages/util-validators:
+    specifiers: {}
+
   sites/crossbell.io:
     specifiers:
       '@crossbell/contract': workspace:*
@@ -219,6 +222,7 @@ importers:
       '@crossbell/util-hooks': workspace:*
       '@crossbell/util-ipfs': workspace:*
       '@crossbell/util-metadata': workspace:*
+      '@crossbell/util-validators': workspace:*
     dependencies:
       '@crossbell/contract': link:../../packages/contract
       '@crossbell/indexer': link:../../packages/indexer
@@ -226,6 +230,7 @@ importers:
       '@crossbell/util-hooks': link:../../packages/util-hooks
       '@crossbell/util-ipfs': link:../../packages/util-ipfs
       '@crossbell/util-metadata': link:../../packages/util-metadata
+      '@crossbell/util-validators': link:../../packages/util-validators
 
 packages:
 

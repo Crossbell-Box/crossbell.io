@@ -1,4 +1,4 @@
-import { isEmail } from "@/utils/validators/is-email";
+import { isEmail } from "@crossbell/util-validators";
 
 import { SliceFn } from "../../../../utils";
 
