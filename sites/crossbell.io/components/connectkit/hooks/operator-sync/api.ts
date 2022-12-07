@@ -2,7 +2,7 @@ import config from "config";
 import { SupportedPlatform } from "./consts";
 
 export default class OperatorSyncApi {
-	public endpoint: string;
+	endpoint: string;
 
 	constructor(endpoint?: string) {
 		if (endpoint) {
