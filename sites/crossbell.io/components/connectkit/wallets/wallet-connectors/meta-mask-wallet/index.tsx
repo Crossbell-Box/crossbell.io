@@ -1,9 +1,11 @@
 import { MetaMaskConnector } from "wagmi/connectors/metaMask";
 import React from "react";
 
-import { Chain, Wallet } from "../../types";
+import { MetamaskIcon } from "../../../components";
 import { isAndroid, isMobile } from "../../../utils";
+import { Chain, Wallet } from "../../types";
 import { getWalletConnectConnector } from "../get-wallet-connect-connector";
+
 import { ConnectStatus } from "./connect-status";
 
 export interface MetaMaskWalletOptions {
@@ -54,13 +56,7 @@ export const metaMaskWallet = ({
 		id: "metaMask",
 		name: "MetaMask",
 		installed: isMetaMaskInjected,
-		icon: (
-			<img
-				className="absolute top-0 left-0 w-full h-full object-contain"
-				src="/images/connect-kit/wallet-logos/meta-mask.svg"
-				alt="MetaMask Logo"
-			/>
-		),
+		icon: <MetamaskIcon className="absolute top-0 left-0 w-full h-full" />,
 		ConnectStatus,
 		createConnector: () => {
 			if (shouldUseWalletConnect) {

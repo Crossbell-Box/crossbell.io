@@ -3,22 +3,16 @@ import classNames from "classnames";
 
 import styles from "./index.module.css";
 
+import { EmailSvg, EmailBg, WalletSvg, WalletBg } from "./svgs";
+
 export function ConnectKindDifferences() {
 	return (
 		<>
 			<div data-animation="scale-fade-in" className="sm:w-343px">
 				<div className="relative aspect-343/176">
-					<img
-						src="/images/connect-kit/connect-kind-differences/wallet-bg.svg"
-						className="object-cover absolute top-0 left-0 w-full h-full pointer-events-none"
-					/>
+					<WalletBg className="object-cover absolute top-0 left-0 w-full h-full pointer-events-none" />
 
-					<img
-						src="/images/connect-kit/connect-kind-differences/wallet.svg"
-						width={76}
-						height={76}
-						className="absolute left-21px top-55px"
-					/>
+					<WalletSvg className="absolute w-76px h-76px left-21px top-55px" />
 
 					<div className="absolute right-43px top-20px">
 						<h4 className="text-16px font-500 m-0 text-center">Wallet</h4>
@@ -37,17 +31,9 @@ export function ConnectKindDifferences() {
 				</div>
 
 				<div className="relative aspect-340/176">
-					<img
-						src="/images/connect-kit/connect-kind-differences/email-bg.svg"
-						className="object-cover absolute top-0 left-0 w-full h-full pointer-events-none"
-					/>
+					<EmailBg className="object-cover absolute top-0 left-0 w-full h-full pointer-events-none" />
 
-					<img
-						src="/images/connect-kit/connect-kind-differences/email.svg"
-						width={76}
-						height={76}
-						className="absolute right-61px top-67px"
-					/>
+					<EmailSvg className="absolute w-76px h-76px right-61px top-67px" />
 
 					<div className="absolute left-30px top-40px">
 						<h4 className="text-16px font-500 m-0 text-center">Email</h4>
