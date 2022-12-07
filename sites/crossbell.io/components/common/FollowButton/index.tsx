@@ -7,7 +7,7 @@ import {
 	useAccountCharacter,
 	useFollowCharacter,
 	useUnfollowCharacter,
-} from "@/components/connectkit";
+} from "@crossbell/connect-kit";
 
 export default function FollowButton({
 	character,

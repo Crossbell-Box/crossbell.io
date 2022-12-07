@@ -28,7 +28,7 @@ import {
 	useAccountState,
 	useConnectModal,
 	useUpgradeAccountModal,
-} from "@/components/connectkit";
+} from "@crossbell/connect-kit";
 import { ipfsGateway } from "@crossbell/util-ipfs";
 import { useRefCallback } from "@crossbell/util-hooks";
 

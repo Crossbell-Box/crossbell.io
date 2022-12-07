@@ -15,6 +15,7 @@
 		"@crossbell/util-ethers": "workspace:*",
 		"@crossbell/util-ipfs": "workspace:*",
 		"@crossbell/util-metadata": "workspace:*",
-		"@crossbell/util-validators": "workspace:*"
+		"@crossbell/util-validators": "workspace:*",
+		"@crossbell/connect-kit": "workspace:*"
 	}
 }

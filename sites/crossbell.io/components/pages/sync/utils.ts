@@ -2,7 +2,7 @@ import {
 	getPlatformUserProfileUrl,
 	SupportedPlatform,
 	useCharacterBoundAccounts,
-} from "@/components/connectkit";
+} from "@crossbell/connect-kit";
 
 export function sumUpMediaUsage(
 	mediaUsage?: NonNullable<

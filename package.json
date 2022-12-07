@@ -58,7 +58,6 @@
     "next": "13.0.0",
     "next-seo": "5.11.1",
     "pretty-bytes": "6.0.0",
-    "qrcode": "1.5.1",
     "react": "18.2.0",
     "react-dom": "18.2.0",
     "react-intersection-observer": "9.4.0",
@@ -75,8 +74,7 @@
     "sticky-sidebar-v2": "1.1.1",
     "type-fest": "3.1.0",
     "typeit-react": "2.6.0",
-    "wagmi": "0.7.9",
-    "zustand": "4.1.4"
+    "wagmi": "0.7.9"
   },
   "devDependencies": {
     "@crossbell/ipfs-gateway-next": "0.0.15",

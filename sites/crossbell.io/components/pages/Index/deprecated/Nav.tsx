@@ -4,7 +4,7 @@ import { Menu, Button, Title, Text } from "@mantine/core";
 import Logo from "@/components/common/Logo";
 import ConnectButton from "@/components/common/ConnectButton";
 import SearchInput from "@/components/common/Input/SearchInput";
-import { useAccountCharacter } from "@/components/connectkit";
+import { useAccountCharacter } from "@crossbell/connect-kit";
 
 const NavLinks = () => {
 	const character = useAccountCharacter();

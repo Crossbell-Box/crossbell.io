@@ -9,7 +9,7 @@ import {
 	useAccountCharacter,
 	useConnectModal,
 	usePostNoteForNote,
-} from "@/components/connectkit";
+} from "@crossbell/connect-kit";
 
 import Avatar from "../common/Avatar";
 import Textarea from "../common/Input/Textarea";

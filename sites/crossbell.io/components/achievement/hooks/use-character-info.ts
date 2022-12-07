@@ -1,6 +1,6 @@
 import { useCharacterByHandle } from "@crossbell/indexer";
 import { useCharacterRouterQuery } from "@/utils/url";
-import { useAccountCharacter } from "@/components/connectkit";
+import { useAccountCharacter } from "@crossbell/connect-kit";
 
 export function useCharacterInfos() {
 	const character = useAccountCharacter();

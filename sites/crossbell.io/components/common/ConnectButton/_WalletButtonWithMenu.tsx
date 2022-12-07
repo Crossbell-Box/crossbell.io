@@ -13,7 +13,7 @@ import {
 	useAccountBalance,
 	GeneralAccount,
 	useAccountState,
-} from "@/components/connectkit";
+} from "@crossbell/connect-kit";
 
 import { ConnectButtonProps } from "./index";
 import WalletDisplayButton from "./_WalletDisplayButton";

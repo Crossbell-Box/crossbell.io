@@ -1,11 +1,11 @@
 import React from "react";
 import { showNotification } from "@mantine/notifications";
 
-import { OPERATOR_ADDRESS } from "@/components/connectkit";
+import { OPERATOR_ADDRESS } from "@crossbell/connect-kit";
 import {
 	useAccountCharacter,
 	useToggleCharacterOperator,
-} from "@/components/connectkit";
+} from "@crossbell/connect-kit";
 import { useContract } from "@crossbell/contract";
 
 import { openRemoveOperatorModal } from "../modals";

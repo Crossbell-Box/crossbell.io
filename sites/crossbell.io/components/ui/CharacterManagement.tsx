@@ -28,7 +28,7 @@ import {
 	useCreateCharacter,
 	useUpdateCharacterHandle,
 	useUpdateCharacterMetadata,
-} from "@/components/connectkit";
+} from "@crossbell/connect-kit";
 
 import LoadingOverlay from "../common/LoadingOverlay";
 

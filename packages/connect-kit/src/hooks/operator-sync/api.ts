@@ -6,7 +6,7 @@ export default class OperatorSyncApi {
 	async isCharacterActivated(characterId: number): Promise<boolean> {
 		const res = (await fetch(`${this.endpoint}/${characterId}`).then((res) =>
 			res.json()
-		)) as OperatorSyncServerResponse<Character>;
+		)) as OperatorSyncServerResponse<OperatorSyncCharacter>;
 
 		const isActivate =
 			res.result?.crossbell_character_id === characterId?.toString();
@@ -17,7 +17,7 @@ export default class OperatorSyncApi {
 	async activateCharacter(characterId: number): Promise<boolean> {
 		const res = (await fetch(`${this.endpoint}/${characterId}`, {
 			method: "POST",
-		}).then((res) => res.json())) as OperatorSyncServerResponse<Character>;
+		}).then((res) => res.json())) as OperatorSyncServerResponse<OperatorSyncCharacter>;
 
 		const isActivate =
 			res.result?.crossbell_character_id === characterId?.toString();
@@ -27,7 +27,7 @@ export default class OperatorSyncApi {
 
 	async getBoundAccounts(
 		characterId: number
-	): Promise<OperatorSyncServerResponse<Account[] | null>> {
+	): Promise<OperatorSyncServerResponse<OperatorSyncAccount[] | null>> {
 		const res = await fetch(`${this.endpoint}/${characterId}/account`).then(
 			(res) => res.json()
 		);
@@ -93,11 +93,11 @@ export default class OperatorSyncApi {
 		characterId: number,
 		platform: SupportedPlatform,
 		username: string
-	): Promise<OperatorSyncServerResponse<Account>> {
+	): Promise<OperatorSyncServerResponse<OperatorSyncAccount>> {
 		const res = (await fetch(
 			`${this.endpoint}/${characterId}/account/sync/${platform}/${username}`,
 			{ method: "POST" }
-		).then((res) => res.json())) as OperatorSyncServerResponse<Account>;
+		).then((res) => res.json())) as OperatorSyncServerResponse<OperatorSyncAccount>;
 
 		if (!(res.ok && res.result)) {
 			throw res;
@@ -123,25 +123,25 @@ interface FailResponse extends BaseResponse {
 	result: never;
 }
 
-type OperatorSyncServerResponse<T> = SucceedResponse<T> | FailResponse;
+export type OperatorSyncServerResponse<T> = SucceedResponse<T> | FailResponse;
 
-interface Character {
+export interface OperatorSyncCharacter {
 	crossbell_character_id: string;
 }
 
-interface MediaUsage {
+export interface OperatorSyncMediaUsage {
 	content_type: string;
 	usage: number; // In Bytes
 }
 
-interface Account {
+export interface OperatorSyncAccount {
 	// Metadata
 	crossbell_character_id: string;
 	platform: SupportedPlatform;
 	username: string;
 	feeds_count: number;
 	notes_count: number;
-	media_usage: MediaUsage[];
+	media_usage: OperatorSyncMediaUsage[];
 
 	// OPSync status
 	is_onchain_paused: boolean;

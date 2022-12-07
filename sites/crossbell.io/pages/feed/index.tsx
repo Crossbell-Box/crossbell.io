@@ -15,7 +15,7 @@ import { useLoginChecker } from "@/utils/wallet/hooks";
 import {
 	useAccountCharacter,
 	useAccountHasCharacter,
-} from "@/components/connectkit";
+} from "@crossbell/connect-kit";
 
 const Page: NextPageWithLayout = () => {
 	return (

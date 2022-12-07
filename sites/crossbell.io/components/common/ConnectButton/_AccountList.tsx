@@ -10,7 +10,7 @@ import { useModals } from "@mantine/modals";
 import { showNotification } from "@mantine/notifications";
 import { useRouter } from "next/router";
 
-import { useAccountState, useAccountCharacters } from "@/components/connectkit";
+import { useAccountState, useAccountCharacters } from "@crossbell/connect-kit";
 import { extractCharacterName } from "@crossbell/util-metadata";
 import { composeCharacterHref } from "@/utils/url";
 import LoadMore from "@/components/common/LoadMore";

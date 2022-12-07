@@ -1,4 +1,4 @@
-import { operatorSyncApi } from "@/components/connectkit";
+import { operatorSyncApi } from "@crossbell/connect-kit";
 
 import config from "../../config";
 

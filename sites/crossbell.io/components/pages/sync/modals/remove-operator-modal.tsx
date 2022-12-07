@@ -8,13 +8,13 @@ import { Contract } from "crossbell.js";
 import {
 	useAccountCharacter,
 	useToggleCharacterOperator,
-} from "@/components/connectkit";
+} from "@crossbell/connect-kit";
 import { openBorderlessModal } from "@/components/common/Modal";
 import Image from "@/components/common/Image";
 import {
 	OPERATOR_ADDRESS,
 	useCharacterBoundAccounts,
-} from "@/components/connectkit";
+} from "@crossbell/connect-kit";
 import { ContractProvider } from "@crossbell/contract";
 
 import seeYouImage from "@/public/images/sync/see-you-later.svg";

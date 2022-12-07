@@ -1,5 +1,4 @@
 import React from "react";
-import { useRouter } from "next/router";
 import confetti from "canvas-confetti";
 
 import { Congrats } from "../components/congrats";
@@ -7,7 +6,6 @@ import { useModalStore } from "../stores";
 import { useAccountCharacter } from "../../../hooks";
 
 export function InputEmailToRegister4() {
-	const router = useRouter();
 	const { hide: hideModal } = useModalStore();
 	const character = useAccountCharacter();
 
@@ -23,7 +21,7 @@ export function InputEmailToRegister4() {
 			onClose={hideModal}
 			onClickBtn={() => {
 				if (character) {
-					router.push(`/@${character.handle}`);
+					window.open(`https://xchar.app/${character.handle}`, "_blank");
 				}
 				hideModal();
 			}}

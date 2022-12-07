@@ -1,11 +1,11 @@
 import { Loader } from "@mantine/core";
 import React from "react";
 
-import { useAccountCharacterId } from "@/components/connectkit";
+import { useAccountCharacterId } from "@crossbell/connect-kit";
 import {
 	useCharacterActivation,
 	useCharacterBoundAccounts,
-} from "@/components/connectkit";
+} from "@crossbell/connect-kit";
 
 import { useTurnSyncOn } from "./hooks";
 import CharacterSection from "./character-section";

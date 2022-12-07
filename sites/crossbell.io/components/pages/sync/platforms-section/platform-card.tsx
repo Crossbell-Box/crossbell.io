@@ -10,14 +10,14 @@ import dayjs from "dayjs";
 import {
 	useAccountCharacter,
 	useCharacterHasOperator,
-} from "@/components/connectkit";
+} from "@crossbell/connect-kit";
 import {
 	getPlatformDisplayName,
 	getPlatformUserProfileUrl,
 	OPERATOR_ADDRESS,
 	SupportedPlatform,
 	useSyncAccount,
-} from "@/components/connectkit";
+} from "@crossbell/connect-kit";
 import { getPlatformSite } from "@/components/pages/sync/utils";
 import {
 	openBindingModal,

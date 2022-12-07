@@ -22,8 +22,8 @@ import {
 	getVeriHandle,
 	SupportedPlatform,
 	useBindAccount,
-} from "@/components/connectkit";
-import { useAccountCharacter } from "@/components/connectkit";
+} from "@crossbell/connect-kit";
+import { useAccountCharacter } from "@crossbell/connect-kit";
 import { copyToClipboard } from "@/utils/other";
 import { ContractProvider } from "@crossbell/contract";
 

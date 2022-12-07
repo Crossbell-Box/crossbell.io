@@ -12,8 +12,8 @@ import {
 	getVeriHandle,
 	SupportedPlatform,
 	useUnbindAccount,
-} from "@/components/connectkit";
-import { useAccountCharacter } from "@/components/connectkit";
+} from "@crossbell/connect-kit";
+import { useAccountCharacter } from "@crossbell/connect-kit";
 import { ContractProvider } from "@crossbell/contract";
 
 import seeYouImage from "@/public/images/sync/see-you-later.svg";

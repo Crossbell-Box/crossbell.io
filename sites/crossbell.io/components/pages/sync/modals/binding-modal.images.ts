@@ -1,6 +1,6 @@
 import { StaticImageData } from "next/image";
 
-import { SupportedPlatform } from "@/components/connectkit";
+import { SupportedPlatform } from "@crossbell/connect-kit";
 
 import mediumBio from "@/public/images/sync/platforms/medium-bio.png";
 import mediumName from "@/public/images/sync/platforms/medium-name.png";

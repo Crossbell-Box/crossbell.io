@@ -61,7 +61,7 @@ function useUpdateHandle(
 	return useMutation(
 		async (params: Parameters<UpdateFn>[0]) => updateFn(params),
 		{
-			onSuccess: (data, { handle, characterId }) => {
+			onSuccess: (_data, { handle, characterId }) => {
 				return Promise.all([
 					queryClient.invalidateQueries(SCOPE_KEY_CHARACTER(characterId)),
 					queryClient.invalidateQueries(SCOPE_KEY_CHARACTER_BY_HANDLE(handle)),

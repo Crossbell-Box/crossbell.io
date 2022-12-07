@@ -5,7 +5,7 @@ export type PasswordSlice = {
 	updatePassword: (password: string) => void;
 };
 
-export const createPasswordSlice: SliceFn<PasswordSlice> = (set, get) => ({
+export const createPasswordSlice: SliceFn<PasswordSlice> = (set) => ({
 	password: "",
 
 	updatePassword(password) {

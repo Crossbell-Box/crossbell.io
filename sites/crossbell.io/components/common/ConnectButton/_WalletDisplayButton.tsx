@@ -15,7 +15,7 @@ import {
 	GeneralAccount,
 	useAccountBalance,
 	useAccountCharacter,
-} from "@/components/connectkit";
+} from "@crossbell/connect-kit";
 
 type WalletDisplayButtonProps = ButtonProps & {
 	menuOpened: boolean;

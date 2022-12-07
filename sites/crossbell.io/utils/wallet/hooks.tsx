@@ -5,7 +5,7 @@ import {
 	useAccountState,
 	useConnectModal,
 	useUpgradeAccountModal,
-} from "@/components/connectkit";
+} from "@crossbell/connect-kit";
 
 export function useLoginChecker() {
 	const account = useAccountState((s) => s.computed.account);

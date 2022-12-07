@@ -20,7 +20,7 @@ import {
 	useAccountCharacters,
 	useAccountState,
 	useSetPrimaryCharacter,
-} from "@/components/connectkit";
+} from "@crossbell/connect-kit";
 
 const Page: NextPageWithLayout = () => {
 	const { characters, hasNextPage, fetchNextPage, isFetchingNextPage } =

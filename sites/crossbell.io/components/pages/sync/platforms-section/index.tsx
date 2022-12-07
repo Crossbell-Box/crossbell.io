@@ -7,9 +7,9 @@ import {
 	SUPPORTED_PLATFORMS,
 	useCharacterBoundAccounts,
 	isShowPlatform,
-} from "@/components/connectkit";
+} from "@crossbell/connect-kit";
 
-import { useAccountCharacter } from "@/components/connectkit";
+import { useAccountCharacter } from "@crossbell/connect-kit";
 import LoadingOverlay from "@/components/common/LoadingOverlay";
 
 import LogoMedium from "@/public/images/sync/platform-icons/medium.svg";

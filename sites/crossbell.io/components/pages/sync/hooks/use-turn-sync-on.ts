@@ -4,12 +4,12 @@ import {
 	useAccountState,
 	useCharacterHasOperator,
 	useToggleCharacterOperator,
-} from "@/components/connectkit";
+} from "@crossbell/connect-kit";
 import {
 	OPERATOR_ADDRESS,
 	useActivateCharacter,
 	useCharacterActivation,
-} from "@/components/connectkit";
+} from "@crossbell/connect-kit";
 import { useLoginChecker } from "@/utils/wallet/hooks";
 import { useRefCallback } from "@crossbell/util-hooks";
 

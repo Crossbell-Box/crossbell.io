@@ -1,4 +1,4 @@
-import { useAccountState, useConnectModal } from "@/components/connectkit";
+import { useAccountState, useConnectModal } from "@crossbell/connect-kit";
 
 import styles from "./styles.module.css";
 import BaseButton from "./_BaseButton";
