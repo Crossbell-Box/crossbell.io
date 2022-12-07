@@ -7,7 +7,7 @@ import {
 	SUPPORTED_PLATFORMS,
 	useCharacterBoundAccounts,
 	isShowPlatform,
-} from "@/utils/apis/operator-sync";
+} from "@/components/connectkit";
 
 import { useAccountCharacter } from "@/components/connectkit";
 import LoadingOverlay from "@/components/common/LoadingOverlay";

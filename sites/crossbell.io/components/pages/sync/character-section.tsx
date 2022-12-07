@@ -5,7 +5,7 @@ import { Text, Switch } from "@mantine/core";
 
 import Avatar from "@/components/common/Avatar";
 import { useAccountState, useAccountCharacter } from "@/components/connectkit";
-import { useCharacterMediaUsage } from "@/utils/apis/operator-sync";
+import { useCharacterMediaUsage } from "@/components/connectkit";
 import { extractCharacterName } from "@/utils/metadata";
 import LoadingOverlay from "@/components/common/LoadingOverlay";
 

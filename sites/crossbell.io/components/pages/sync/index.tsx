@@ -5,7 +5,7 @@ import { useAccountCharacterId } from "@/components/connectkit";
 import {
 	useCharacterActivation,
 	useCharacterBoundAccounts,
-} from "@/utils/apis/operator-sync";
+} from "@/components/connectkit";
 
 import { useTurnSyncOn } from "./hooks";
 import CharacterSection from "./character-section";

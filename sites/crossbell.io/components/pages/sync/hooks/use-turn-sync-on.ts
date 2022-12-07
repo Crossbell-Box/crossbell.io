@@ -9,7 +9,7 @@ import {
 	OPERATOR_ADDRESS,
 	useActivateCharacter,
 	useCharacterActivation,
-} from "@/utils/apis/operator-sync";
+} from "@/components/connectkit";
 import { useLoginChecker } from "@/utils/wallet/hooks";
 import { useRefCallback } from "@crossbell/util-hooks";
 

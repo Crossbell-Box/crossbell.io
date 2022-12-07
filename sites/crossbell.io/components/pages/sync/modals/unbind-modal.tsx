@@ -12,7 +12,7 @@ import {
 	getVeriHandle,
 	SupportedPlatform,
 	useUnbindAccount,
-} from "@/utils/apis/operator-sync";
+} from "@/components/connectkit";
 import { useAccountCharacter } from "@/components/connectkit";
 import { ContractProvider } from "@crossbell/contract";
 

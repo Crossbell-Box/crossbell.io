@@ -1,7 +1,7 @@
 import React from "react";
 import { showNotification } from "@mantine/notifications";
 
-import { OPERATOR_ADDRESS } from "@/utils/apis/operator-sync";
+import { OPERATOR_ADDRESS } from "@/components/connectkit";
 import {
 	useAccountCharacter,
 	useToggleCharacterOperator,

@@ -14,7 +14,7 @@ import Image from "@/components/common/Image";
 import {
 	OPERATOR_ADDRESS,
 	useCharacterBoundAccounts,
-} from "@/utils/apis/operator-sync";
+} from "@/components/connectkit";
 import { ContractProvider } from "@crossbell/contract";
 
 import seeYouImage from "@/public/images/sync/see-you-later.svg";

@@ -17,7 +17,7 @@ import {
 	OPERATOR_ADDRESS,
 	SupportedPlatform,
 	useSyncAccount,
-} from "@/utils/apis/operator-sync";
+} from "@/components/connectkit";
 import { getPlatformSite } from "@/components/pages/sync/utils";
 import {
 	openBindingModal,

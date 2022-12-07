@@ -2,7 +2,7 @@ import {
 	getPlatformUserProfileUrl,
 	SupportedPlatform,
 	useCharacterBoundAccounts,
-} from "@/utils/apis/operator-sync";
+} from "@/components/connectkit";
 
 export function sumUpMediaUsage(
 	mediaUsage?: NonNullable<

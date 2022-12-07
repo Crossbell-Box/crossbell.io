@@ -1,4 +1,4 @@
-import { OPERATOR_ADDRESS } from "@/utils/apis/operator-sync";
+import { OPERATOR_ADDRESS } from "@/components/connectkit";
 
 import { useAccountState } from "../account-state";
 

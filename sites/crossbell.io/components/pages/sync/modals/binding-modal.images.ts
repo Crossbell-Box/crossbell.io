@@ -1,6 +1,6 @@
 import { StaticImageData } from "next/image";
 
-import { SupportedPlatform } from "@/utils/apis/operator-sync";
+import { SupportedPlatform } from "@/components/connectkit";
 
 import mediumBio from "@/public/images/sync/platforms/medium-bio.png";
 import mediumName from "@/public/images/sync/platforms/medium-name.png";

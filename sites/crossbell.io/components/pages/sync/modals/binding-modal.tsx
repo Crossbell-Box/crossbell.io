@@ -22,7 +22,7 @@ import {
 	getVeriHandle,
 	SupportedPlatform,
 	useBindAccount,
-} from "@/utils/apis/operator-sync";
+} from "@/components/connectkit";
 import { useAccountCharacter } from "@/components/connectkit";
 import { copyToClipboard } from "@/utils/other";
 import { ContractProvider } from "@crossbell/contract";
