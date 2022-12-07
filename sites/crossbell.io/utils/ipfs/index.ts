@@ -1,33 +1,27 @@
 import { IpfsGateway, isIpfsUrl } from "@crossbell/ipfs-gateway";
-import { getOrigin } from "../url";
 
 export const ipfsGateway = new IpfsGateway();
 
 export const ipfsLinkToHttpLink = (
-	link: string,
-	{
-		noOrigin,
-		forceProductionOrigin,
-	}: {
-		noOrigin?: boolean;
-		forceProductionOrigin?: boolean;
-	} = {}
+	rawLink: string,
+	config?: { origin?: string | null }
 ): string => {
-	if (!link) {
+	if (!rawLink) {
 		return "";
 	}
 
-	let ret = link;
+	const origin = config?.origin ?? null;
+	const link = isIpfsUrl(rawLink) ? ipfsGateway.getSwWeb2Url(rawLink) : rawLink;
 
-	if (isIpfsUrl(link)) {
-		ret = ipfsGateway.getSwWeb2Url(link);
+	if (origin === null) {
+		return link;
+	} else {
+		if (link.startsWith("/")) {
+			return origin + link;
+		} else {
+			return link;
+		}
 	}
-
-	if (ret.startsWith("/") && !noOrigin) {
-		ret = getOrigin({ forceProductionOrigin }) + ret;
-	}
-
-	return ret;
 };
 
 export const uploadToIpfs = async (file: File | Blob) => {

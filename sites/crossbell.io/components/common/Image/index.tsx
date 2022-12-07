@@ -1,10 +1,12 @@
-import { ipfsLinkToHttpLink } from "@/utils/ipfs";
 import {
 	default as NextImage,
 	type ImageLoader,
 	type ImageProps,
 } from "next/image";
 import { PropsWithChildren, useEffect, useState, memo } from "react";
+
+import { ipfsLinkToHttpLink } from "@/utils/ipfs";
+import { getOrigin } from "@/utils/url";
 
 // Pixel GIF code adapted from https://stackoverflow.com/a/33919020/266535
 const keyStr =
@@ -64,7 +66,7 @@ export default memo(function Image({
 }) {
 	const originalSrc = src;
 	if (typeof src === "string") {
-		src = ipfsLinkToHttpLink(src, { noOrigin: true });
+		src = ipfsLinkToHttpLink(src, { origin: null });
 	}
 
 	const thumborLoader: ImageLoader = ({ src, width, quality }) => {
@@ -72,7 +74,9 @@ export default memo(function Image({
 			return src;
 		}
 
-		src = ipfsLinkToHttpLink(src, { forceProductionOrigin: true });
+		src = ipfsLinkToHttpLink(src, {
+			origin: getOrigin({ forceProductionOrigin: true }),
+		});
 		// const w = typeof props.width === "number" ? props.width : width;
 		// const h = typeof props.height === "number" ? props.height : 0;
 		const w = width;
