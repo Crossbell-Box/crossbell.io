@@ -9,10 +9,10 @@ import Avatar from "@/components/common/Avatar";
 import {
 	useAccountCharacter,
 	useToggleLikeNote,
+	useMintNote,
 } from "@/components/connectkit";
 import { useCharacter, useNote, useNoteStatus } from "@crossbell/indexer";
 import { composeNoteHref, getOrigin, useNoteRouterQuery } from "@/utils/url";
-import { useMintNote } from "@/utils/apis/contract";
 import { copyToClipboard } from "@/utils/other";
 import { getValidAttachments } from "@/utils/metadata";
 import { useLoginChecker } from "@/utils/wallet/hooks";

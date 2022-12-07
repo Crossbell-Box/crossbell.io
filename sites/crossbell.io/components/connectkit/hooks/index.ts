@@ -10,6 +10,7 @@ export * from "./use-account-has-character";
 export * from "./use-change-character-metadata";
 export * from "./use-create-character";
 export * from "./use-disconnect-account";
+export * from "./use-mint-note";
 export * from "./use-post-note-for-note";
 export * from "./use-set-primary-character";
 export * from "./use-toggle-like-note";
