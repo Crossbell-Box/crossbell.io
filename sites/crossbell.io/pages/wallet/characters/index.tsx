@@ -3,7 +3,7 @@ import { showNotification } from "@mantine/notifications";
 import { CharacterEntity } from "crossbell.js";
 import Link from "next/link";
 
-import Avatar from "@/components/common/Avatar";
+import { Avatar } from "~/shared/components/avatar";
 import LoadingOverlay from "@/components/common/LoadingOverlay";
 import LoadMore from "@/components/common/LoadMore";
 import { getLayout } from "@/components/layouts/AppLayout";

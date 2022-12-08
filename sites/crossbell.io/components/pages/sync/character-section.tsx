@@ -3,7 +3,7 @@ import classNames from "classnames";
 import prettyBytes from "pretty-bytes";
 import { Text, Switch } from "@mantine/core";
 
-import Avatar from "@/components/common/Avatar";
+import { Avatar } from "~/shared/components/avatar";
 import { useAccountState, useAccountCharacter } from "@crossbell/connect-kit";
 import { useCharacterMediaUsage } from "@crossbell/connect-kit";
 import { extractCharacterName } from "@crossbell/util-metadata";

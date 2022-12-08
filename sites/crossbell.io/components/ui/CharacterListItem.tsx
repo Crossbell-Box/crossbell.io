@@ -1,8 +1,8 @@
 import { extractCharacterName } from "@crossbell/util-metadata";
 import { Box, Space, Text } from "@mantine/core";
 import { CharacterEntity } from "crossbell.js";
-import Avatar from "../common/Avatar";
-import { CharacterName } from "../common/Character";
+import { Avatar } from "~/shared/components/avatar";
+import { CharacterName } from "~/shared/components/character";
 
 export default function CharacterListItem({
 	character,

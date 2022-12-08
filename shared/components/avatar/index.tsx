@@ -1,3 +1,4 @@
+import React from "react";
 import { useCharacter } from "@crossbell/indexer";
 import { stringToInteger } from "~/shared/helpers";
 import { ipfsLinkToHttpLink } from "@crossbell/util-ipfs";
@@ -5,9 +6,9 @@ import { extractCharacterAvatar } from "@crossbell/util-metadata";
 import { Avatar as Avatar_, AvatarProps } from "@mantine/core";
 import { CharacterEntity } from "crossbell.js";
 import { PropsWithChildren } from "react";
-import CharacterHoverCard from "../Character/CharacterHoverCard";
+import CharacterHoverCard from "~/shared/components/character/character-hover-card";
 
-export default function Avatar({
+export function Avatar({
 	characterId,
 	character: initialCharacter,
 	alt = "Avatar",

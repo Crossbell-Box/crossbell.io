@@ -1,3 +1,4 @@
+import React from "react";
 import { composeScanTxHref } from "~/shared/url";
 import { Badge, BadgeProps, useMantineTheme } from "@mantine/core";
 import { CharacterEntity } from "crossbell.js";

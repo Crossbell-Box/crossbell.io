@@ -2,7 +2,7 @@ import { Text, Space, type ButtonProps, Group } from "@mantine/core";
 import { forwardRef } from "react";
 import classNames from "classnames";
 
-import Avatar from "@/components/common/Avatar";
+import { Avatar } from "~/shared/components/avatar";
 import Logo from "@/components/common/Logo";
 import { truncateAddress } from "@crossbell/util-ethers";
 

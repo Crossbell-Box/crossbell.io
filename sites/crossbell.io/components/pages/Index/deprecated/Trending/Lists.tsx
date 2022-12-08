@@ -1,4 +1,4 @@
-import Avatar from "@/components/common/Avatar";
+import { Avatar } from "~/shared/components/avatar";
 import TrendingBase from "@/components/pages/Index/deprecated/Trending/_base";
 import { TrendingRawResponse } from "~/shared/apis/trending";
 

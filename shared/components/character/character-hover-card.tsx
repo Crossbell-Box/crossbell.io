@@ -1,7 +1,8 @@
+import React from "react";
 import { HoverCard, Text, Group, Stack } from "@mantine/core";
 import { CharacterEntity } from "crossbell.js";
 import { CharacterHandle, CharacterName } from ".";
-import Avatar from "@/components/common/Avatar";
+import { Avatar } from "~/shared/components/avatar";
 import { useCharacterFollowStats } from "@crossbell/indexer";
 import { useState } from "react";
 import { FollowButton } from "~/shared/components/follow-button";

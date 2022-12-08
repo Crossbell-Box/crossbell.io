@@ -14,7 +14,7 @@ import { useAccountState, useAccountCharacters } from "@crossbell/connect-kit";
 import { extractCharacterName } from "@crossbell/util-metadata";
 import { composeCharacterHref } from "~/shared/url";
 import LoadMore from "@/components/common/LoadMore";
-import Avatar from "@/components/common/Avatar";
+import { Avatar } from "~/shared/components/avatar";
 
 import MenuItem from "./_MenuItem";
 

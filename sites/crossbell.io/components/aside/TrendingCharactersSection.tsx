@@ -1,11 +1,10 @@
 import { useTrending } from "~/shared/apis/trending";
 import { composeCharacterHref } from "~/shared/url";
-import { Group, Skeleton, Space } from "@mantine/core";
+import { Group, Skeleton } from "@mantine/core";
 import { CharacterEntity } from "crossbell.js";
-import Link from "next/link";
 import { useRouter } from "next/router";
-import Avatar from "../common/Avatar";
-import { CharacterHandle, CharacterName } from "../common/Character";
+import { Avatar } from "~/shared/components/avatar";
+import { CharacterHandle, CharacterName } from "~/shared/components/character";
 import { FollowButton } from "~/shared/components/follow-button";
 import BaseSection from "./BaseSection";
 

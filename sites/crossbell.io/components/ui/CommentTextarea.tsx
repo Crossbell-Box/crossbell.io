@@ -11,7 +11,7 @@ import {
 	usePostNoteForNote,
 } from "@crossbell/connect-kit";
 
-import Avatar from "../common/Avatar";
+import { Avatar } from "~/shared/components/avatar";
 import Textarea from "../common/Input/Textarea";
 
 export function CommentTextarea({ note }: { note: NoteEntity }) {

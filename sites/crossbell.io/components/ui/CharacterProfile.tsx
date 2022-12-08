@@ -27,7 +27,7 @@ import {
 } from "~/shared/url";
 
 import { Tooltip } from "~/shared/components/tooltip";
-import Avatar from "../common/Avatar";
+import { Avatar } from "~/shared/components/avatar";
 
 // used in character page to display the profile
 export default function CharacterProfile({

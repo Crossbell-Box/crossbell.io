@@ -1,7 +1,7 @@
 import { Skeleton, Text } from "@mantine/core";
 import type { CharacterEntity } from "crossbell.js";
-import Avatar from "../common/Avatar";
-import { CharacterName } from "../common/Character";
+import { Avatar } from "~/shared/components/avatar";
+import { CharacterName } from "~/shared/components/character";
 import { composeCharacterHref } from "~/shared/url";
 import { useRouter } from "next/router";
 import { FollowButton } from "~/shared/components/follow-button";

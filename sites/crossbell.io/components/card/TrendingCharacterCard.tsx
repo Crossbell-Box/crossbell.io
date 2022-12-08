@@ -12,8 +12,8 @@ import { useCharacterFollowRelation } from "@crossbell/indexer";
 import { extractCharacterAvatar, extractCharacterName } from "@crossbell/util-metadata";
 import { composeCharacterHref } from "~/shared/url";
 
-import Avatar from "../common/Avatar";
-import CharacterIdBadge from "../common/Character/CharacterIdBadge";
+import { Avatar } from "~/shared/components/avatar";
+import CharacterIdBadge from "~/shared/components/character/character-id-badge";
 
 // TODO: extract this compose
 const FollowButton = ({ characterId }: { characterId: number }) => {

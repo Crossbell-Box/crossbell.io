@@ -10,7 +10,7 @@ import {
 	extractCoverImageFromNote,
 	extractPlainTextFromNote,
 } from "@crossbell/util-metadata";
-import Avatar from "../common/Avatar";
+import { Avatar } from "~/shared/components/avatar";
 
 const MintedNoteCard = ({ note }: { note: NoteEntity }) => {
 	const noteId = composeNoteId(note.characterId, note.noteId);

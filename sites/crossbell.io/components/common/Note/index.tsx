@@ -5,7 +5,7 @@ import { useAccount } from "wagmi";
 import { useCallback } from "react";
 import classNames from "classnames";
 
-import Avatar from "@/components/common/Avatar";
+import { Avatar } from "~/shared/components/avatar";
 import {
 	useAccountCharacter,
 	useToggleLikeNote,
@@ -18,7 +18,7 @@ import { getValidAttachments } from "@crossbell/util-metadata";
 import { useLoginChecker } from "@/utils/wallet/hooks";
 import { useRefCallback } from "@crossbell/util-hooks";
 
-import { CharacterHandle, CharacterName } from "../Character";
+import { CharacterHandle, CharacterName } from "~/shared/components/character";
 import LoadingOverlay from "../LoadingOverlay";
 import { Tooltip } from "~/shared/components/tooltip";
 import Time from "../Time";

@@ -19,7 +19,7 @@ import remarkEmoji from "remark-emoji";
 import remarkFrontmatter from "remark-frontmatter";
 import rehypeSanitize, { defaultSchema } from "rehype-sanitize";
 import { Button } from "@mantine/core";
-import { CharacterHandle } from "../Character";
+import { CharacterHandle } from "~/shared/components/character";
 import { useCharacterHandleExists } from "@crossbell/indexer";
 import Zoom from "./Zoom";
 import VideoPlayer from "./VideoPlayer";
