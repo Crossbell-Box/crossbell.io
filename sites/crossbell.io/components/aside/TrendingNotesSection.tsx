@@ -6,11 +6,10 @@ import {
 import { composeNoteHref } from "~/shared/url";
 import { Group, Skeleton, Space, Text } from "@mantine/core";
 import { NoteEntity } from "crossbell.js";
-import Link from "next/link";
 import { useRouter } from "next/router";
 import Avatar from "../common/Avatar";
 import { CharacterName } from "../common/Character";
-import Image from "../common/Image";
+import { Image } from "~/shared/components/image";
 import Time from "../common/Time";
 import BaseSection from "./BaseSection";
 

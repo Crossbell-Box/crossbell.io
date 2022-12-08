@@ -7,7 +7,7 @@ import { useAccount } from "wagmi";
 import classNames from "classnames";
 
 import ConnectButton from "@/components/common/ConnectButton";
-import Image from "@/components/common/Image";
+import { Image } from "~/shared/components/image"
 import { useAccountCharacter } from "@crossbell/connect-kit";
 import { composeTreasuresWalletsHref } from "~/shared/url";
 

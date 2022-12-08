@@ -23,7 +23,7 @@ import {
 	openBindingModal,
 	openUnbindingModal,
 } from "@/components/pages/sync/modals";
-import Image from "@/components/common/Image";
+import { Image } from "~/shared/components/image"
 import { formatDate } from "~/shared/time";
 import { useContract } from "@crossbell/contract";
 

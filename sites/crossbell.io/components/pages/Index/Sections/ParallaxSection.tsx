@@ -4,7 +4,7 @@ import { Text, Title, UnstyledButton } from "@mantine/core";
 import BaseSection from "./BaseSection";
 import Padding from "./Padding";
 import handImage from "@/public/images/pages/index/resources/hand.webp";
-import Image from "@/components/common/Image";
+import { Image } from "~/shared/components/image"
 import Link from "next/link";
 import classNames from "classnames";
 

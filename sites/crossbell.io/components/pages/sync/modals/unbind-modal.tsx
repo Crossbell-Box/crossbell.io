@@ -5,7 +5,7 @@ import { openConfirmModal, closeAllModals } from "@mantine/modals";
 import { useClickOutside } from "@mantine/hooks";
 import { Contract } from "crossbell.js";
 
-import Image from "@/components/common/Image";
+import { Image } from "~/shared/components/image"
 import { openBorderlessModal } from "@/components/common/Modal";
 import {
 	getPlatformDisplayName,

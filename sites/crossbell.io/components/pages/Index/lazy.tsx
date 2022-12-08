@@ -1,7 +1,7 @@
 import { m, useMotionTemplate, useTime, useTransform } from "framer-motion";
 import { useMediaQuery } from "@mantine/hooks";
 
-import Image from "@/components/common/Image";
+import { Image } from "~/shared/components/image"
 
 // images
 import syncImage from "@/public/images/pages/index/resources/sync.webp";

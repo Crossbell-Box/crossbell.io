@@ -1,6 +1,6 @@
 import { NoteMetadata } from "crossbell.js";
 import { Carousel, Embla } from "@mantine/carousel";
-import Image from "../Image";
+import { Image } from "~/shared/components/image";
 import { MouseEvent, useCallback, useEffect, useState } from "react";
 import { Modal, Space } from "@mantine/core";
 import classNames from "classnames";

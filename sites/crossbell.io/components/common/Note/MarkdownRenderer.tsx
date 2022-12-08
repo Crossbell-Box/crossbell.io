@@ -9,7 +9,6 @@ import {
 	Text,
 	Title,
 } from "@mantine/core";
-import Image from "./../Image";
 import ReactMarkdown from "react-markdown";
 import { ipfsLinkToHttpLink } from "@crossbell/util-ipfs";
 import { useElementSize } from "@mantine/hooks";

@@ -1,4 +1,4 @@
-import Image from "@/components/common/Image";
+import { Image } from "~/shared/components/image"
 import { PropsWithChildren } from "react";
 import BaseSection from "./BaseSection";
 

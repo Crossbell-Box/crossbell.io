@@ -3,32 +3,10 @@ import {
 	type ImageLoader,
 	type ImageProps,
 } from "next/image";
-import { PropsWithChildren, useEffect, useState, memo } from "react";
+import React, { PropsWithChildren, useEffect, useState, memo } from "react";
 
 import { ipfsLinkToHttpLink } from "@crossbell/util-ipfs";
 import { getOrigin } from "~/shared/url";
-
-// Pixel GIF code adapted from https://stackoverflow.com/a/33919020/266535
-const keyStr =
-	"ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789+/=";
-
-const triplet = (e1: number, e2: number, e3: number) =>
-	keyStr.charAt(e1 >> 2) +
-	keyStr.charAt(((e1 & 3) << 4) | (e2 >> 4)) +
-	keyStr.charAt(((e2 & 15) << 2) | (e3 >> 6)) +
-	keyStr.charAt(e3 & 63);
-
-const rgbDataURL = (r: number, g: number, b: number) =>
-	`data:image/gif;base64,R0lGODlhAQABAPAA${
-		triplet(0, r, g) + triplet(b, 255, 255)
-	}/yH5BAAAAAAALAAAAAABAAEAAAICRAEAOw==`;
-
-const randomColor = () => {
-	const r = Math.floor(Math.random() * 256);
-	const g = Math.floor(Math.random() * 256);
-	const b = Math.floor(Math.random() * 256);
-	return rgbDataURL(r, g, b);
-};
 
 const shimmer = (w = "100%", h = "100%") => `
 <svg width="${w}" height="${h}" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
@@ -55,7 +33,7 @@ const isLocalImage = (s: ImageProps["src"]) =>
 			(s.startsWith("/") && !s.startsWith("/ipfs/" /* ipfs sw */)))) ||
 	typeof s === "object"; // StaticImport
 
-export default memo(function Image({
+export const Image = memo(function _Image({
 	src,
 	alt,
 	fill,
@@ -69,7 +47,7 @@ export default memo(function Image({
 		src = ipfsLinkToHttpLink(src, { origin: null });
 	}
 
-	const thumborLoader: ImageLoader = ({ src, width, quality }) => {
+	const thumborLoader: ImageLoader = ({ src, width }) => {
 		if (isLocalImage(src)) {
 			return src;
 		}

@@ -1,4 +1,4 @@
-import Image from "@/components/common/Image";
+import { Image } from "~/shared/components/image"
 import { Text } from "@mantine/core";
 import classNames from "classnames";
 import { m } from "framer-motion";

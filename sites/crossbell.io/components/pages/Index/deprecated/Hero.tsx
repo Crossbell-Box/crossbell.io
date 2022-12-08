@@ -4,7 +4,7 @@ import Link from "next/link";
 import TypeIt from "typeit-react";
 
 import VideoPlayer from "@/components/common/Note/VideoPlayer";
-import Image from "@/components/common/Image";
+import { Image } from "~/shared/components/image"
 
 export default function IndexHero() {
 	return (

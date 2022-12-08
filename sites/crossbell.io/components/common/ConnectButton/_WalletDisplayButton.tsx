@@ -8,7 +8,7 @@ import { truncateAddress } from "@crossbell/util-ethers";
 
 import { ConnectButtonProps } from "./index";
 import BaseButton from "./_BaseButton";
-import Image from "../Image";
+import { Image } from "~/shared/components/image";
 import ArrowIcon from "./arrow-icon.svg";
 
 import {

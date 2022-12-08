@@ -1,6 +1,6 @@
 import React from "react";
 
-import Image from "@/components/common/Image";
+import { Image } from "~/shared/components/image"
 
 import { SceneConfig } from "../types";
 

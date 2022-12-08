@@ -3,7 +3,7 @@ import { getCurrentAddress } from "@/utils/wallet/provider";
 import { Space, Text, Button } from "@mantine/core";
 import { closeAllModals, closeModal, openModal } from "@mantine/modals";
 import Link from "next/link";
-import Image from "@/components/common/Image";
+import { Image } from "~/shared/components/image"
 import { Tooltip } from "~/shared/components/tooltip";
 import { openBorderlessModal } from "../Modal";
 

@@ -3,7 +3,7 @@ import Link from "next/link";
 import { Text } from "@mantine/core";
 import { useIsomorphicEffect } from "@mantine/hooks";
 
-import Image from "@/components/common/Image";
+import { Image } from "~/shared/components/image"
 
 import imageUrl from "@/public/images/sync/promotion/banner.png";
 

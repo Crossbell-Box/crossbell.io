@@ -3,7 +3,7 @@ import { Text } from "@mantine/core";
 import { closeAllModals } from "@mantine/modals";
 
 import { openBorderlessModal } from "@/components/common/Modal";
-import Image from "@/components/common/Image";
+import { Image } from "~/shared/components/image"
 
 import {
 	CircleBtn,

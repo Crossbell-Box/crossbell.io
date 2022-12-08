@@ -1,6 +1,6 @@
 import React from "react";
 
-import Image from "@/components/common/Image";
+import { Image } from "~/shared/components/image"
 
 export const SNSIcons = React.memo(function Bg() {
 	return (
