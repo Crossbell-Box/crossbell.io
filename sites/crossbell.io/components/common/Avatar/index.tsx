@@ -1,5 +1,5 @@
 import { useCharacter } from "@crossbell/indexer";
-import { stringToInteger } from "@/utils/helpers";
+import { stringToInteger } from "~/helpers";
 import { ipfsLinkToHttpLink } from "@crossbell/util-ipfs";
 import { extractCharacterAvatar } from "@crossbell/util-metadata";
 import { Avatar as Avatar_, AvatarProps } from "@mantine/core";
