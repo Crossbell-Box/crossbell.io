@@ -13,12 +13,12 @@ import { NextPage } from "next/types";
 import Head from "next/head";
 import { LazyMotion } from "framer-motion";
 
-import WalletProvider from "@/components/providers/WalletProvider";
-import ThemeProvider from "@/components/providers/ThemeProvider";
-import QueryProvider from "@/components/providers/QueryProvider";
-import NotificationsProvider from "@/components/providers/NotificationsProvider";
-import ModalsProvider from "@/components/providers/ModalsProvider";
-import { RouterTransition } from "@/components/providers/RouterTransition";
+import WalletProvider from "~/shared/providers/WalletProvider";
+import ThemeProvider from "~/shared/providers/ThemeProvider";
+import QueryProvider from "~/shared/providers/QueryProvider";
+import NotificationsProvider from "~/shared/providers/NotificationsProvider";
+import ModalsProvider from "~/shared/providers/ModalsProvider";
+import { RouterTransition } from "~/shared/providers/RouterTransition";
 import {
 	openFaucetHintModel,
 	openMintNewCharacterModel,

@@ -6,8 +6,8 @@ import Document, {
 	Main,
 	NextScript,
 } from "next/document";
-import { ServerStyles, createStylesServer } from "@mantine/next";
-import { emotionCache } from "@/components/providers/ThemeProvider";
+import { createStylesServer } from "@mantine/next";
+import { emotionCache } from "~/shared/providers/ThemeProvider";
 
 const stylesServer = createStylesServer(emotionCache);
 

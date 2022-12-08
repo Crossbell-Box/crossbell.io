@@ -4,7 +4,7 @@ import {
 	Tuple,
 	DefaultMantineColor,
 } from "@mantine/core";
-import { PropsWithChildren } from "react";
+import React, { PropsWithChildren } from "react";
 
 export const emotionCache = createEmotionCache({
 	key: "mantine",

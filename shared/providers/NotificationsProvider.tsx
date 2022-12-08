@@ -1,4 +1,4 @@
-import { PropsWithChildren } from "react";
+import React, { PropsWithChildren } from "react";
 import { NotificationsProvider as MantineNotificationsProvider } from "@mantine/notifications";
 
 export default function NotificationsProvider({ children }: PropsWithChildren) {

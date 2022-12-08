@@ -1,4 +1,4 @@
-import { PropsWithChildren } from "react";
+import React, { PropsWithChildren } from "react";
 import { WagmiConfig } from "wagmi";
 
 import { wagmiClient } from "~/shared/wallet/provider";

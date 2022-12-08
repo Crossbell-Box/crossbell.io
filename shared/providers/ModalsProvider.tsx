@@ -1,4 +1,4 @@
-import { PropsWithChildren } from "react";
+import React, { PropsWithChildren } from "react";
 import { ModalsProvider as MantineModalsProvider } from "@mantine/modals";
 
 export default function ModalsProvider({ children }: PropsWithChildren) {
