@@ -220,11 +220,15 @@ importers:
 
   packages/ui:
     specifiers:
+      '@crossbell/connect-kit': workspace:*
+      '@crossbell/indexer': workspace:*
       '@types/facepaint': ^1.2.1
       facepaint: ^1.2.1
     dependencies:
       facepaint: 1.2.1
     devDependencies:
+      '@crossbell/connect-kit': link:../connect-kit
+      '@crossbell/indexer': link:../indexer
       '@types/facepaint': 1.2.2
 
   packages/util-ethers:
@@ -251,6 +255,9 @@ importers:
     specifiers: {}
 
   sites/crossbell.io:
+    specifiers: {}
+
+  sites/x-sync:
     specifiers: {}
 
 packages:

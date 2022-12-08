@@ -30,6 +30,9 @@
 	"dependencies": {
 		"facepaint": "^1.2.1"
 	},
+	"peerDependencies": {
+		"react": "18.x.x"
+	},
 	"devDependencies": {
 		"@types/facepaint": "^1.2.1"
 	}

@@ -1,0 +1,31 @@
+{
+	"compilerOptions": {
+		"declaration": true,
+		"declarationMap": true,
+		"strict": true,
+		"noUnusedParameters": true,
+		"noUnusedLocals": true,
+		"noImplicitAny": true,
+		"noImplicitReturns": true,
+		"esModuleInterop": true,
+		"moduleResolution": "node",
+		"skipLibCheck": true,
+		"target": "ESNext",
+		"jsx": "react",
+		"baseUrl": ".",
+		"paths": {
+			"@crossbell/*": ["packages/*/src"]
+		}
+	},
+	"references": [
+		{ "path": "packages/connect-kit/tsconfig.json" },
+		{ "path": "packages/contract/tsconfig.json" },
+		{ "path": "packages/indexer/tsconfig.json" },
+		{ "path": "packages/ui/tsconfig.json" },
+		{ "path": "packages/util-ethers/tsconfig.json" },
+		{ "path": "packages/util-hooks/tsconfig.json" },
+		{ "path": "packages/util-ipfs/tsconfig.json" },
+		{ "path": "packages/util-metadata/tsconfig.json" },
+		{ "path": "packages/util-validators/tsconfig.json" }
+	]
+}
