@@ -16,6 +16,7 @@
 		"incremental": true,
 		"baseUrl": ".",
 		"paths": {
+			"~/*": ["../shared/src/*"],
 			"@/components/*": ["components/*"],
 			"@/pages/*": ["pages/*"],
 			"@/styles/*": ["styles/*"],
