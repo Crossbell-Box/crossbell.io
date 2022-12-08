@@ -2,7 +2,7 @@ import React from "react";
 import { Button, Tooltip } from "@mantine/core";
 import confetti from "canvas-confetti";
 
-import { composeScanTxHref } from "~/url";
+import { composeScanTxHref } from "~/shared/url";
 import {
 	AchievementInfo,
 	AchievementLevelStatus,

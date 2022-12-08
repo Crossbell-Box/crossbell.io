@@ -15,7 +15,7 @@ import {
 	composeCharacterHref,
 	composeWalletCharacterEditHref,
 	WalletCharacterNewHref,
-} from "~/url";
+} from "~/shared/url";
 import {
 	useAccountCharacters,
 	useAccountState,

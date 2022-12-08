@@ -22,6 +22,7 @@ const nextConfig = {
 	},
 	experimental: {
 		scrollRestoration: true,
+		externalDir: true,
 	},
 	compiler: {
 		// removeConsole: { exclude: ["error"] },

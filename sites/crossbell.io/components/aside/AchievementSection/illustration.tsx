@@ -3,7 +3,7 @@ import Link from "next/link";
 import Image, { StaticImageData } from "next/image";
 import { Button, Text } from "@mantine/core";
 
-import { useCharacterRouterQuery } from "~/url";
+import { useCharacterRouterQuery } from "~/shared/url";
 import BaseSection from "@/components/aside/BaseSection";
 
 export type IllustrationProps = {

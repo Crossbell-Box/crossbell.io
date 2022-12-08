@@ -6,7 +6,7 @@ import {
 	composeScanTxHref,
 	decomposeNoteId,
 	composeScanAddressHref,
-} from "~/url";
+} from "~/shared/url";
 import {
 	SourceType,
 	formatSources,

@@ -3,7 +3,7 @@ import {
 	extractPlainTextFromNote,
 	getValidAttachments,
 } from "@crossbell/util-metadata";
-import { composeNoteHref } from "~/url";
+import { composeNoteHref } from "~/shared/url";
 import { Group, Skeleton, Space, Text } from "@mantine/core";
 import { NoteEntity } from "crossbell.js";
 import Link from "next/link";

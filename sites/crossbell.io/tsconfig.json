@@ -16,20 +16,13 @@
 		"incremental": true,
 		"baseUrl": ".",
 		"paths": {
-			"~/*": ["../shared/src/*"],
 			"@/components/*": ["components/*"],
 			"@/pages/*": ["pages/*"],
 			"@/styles/*": ["styles/*"],
 			"@/utils/*": ["utils/*"],
 			"@/public/*": ["public/*"],
-			"@crossbell/util-hooks": ["../../packages/util-hooks/src"],
-			"@crossbell/indexer": ["../../packages/indexer/src"],
-			"@crossbell/contract": ["../../packages/contract/src"],
-			"@crossbell/util-ethers": ["../../packages/util-ethers/src"],
-			"@crossbell/util-ipfs": ["../../packages/util-ipfs/src"],
-			"@crossbell/util-metadata": ["../../packages/util-metadata/src"],
-			"@crossbell/util-validators": ["../../packages/util-validators/src"],
-			"@crossbell/connect-kit": ["../../packages/connect-kit/src"]
+			"@crossbell/*": ["../../packages/*/src"],
+			"~/shared/*": ["../../shared/*"]
 		}
 	},
 	"include": ["next-env.d.ts", "**/*.ts", "**/*.tsx"],

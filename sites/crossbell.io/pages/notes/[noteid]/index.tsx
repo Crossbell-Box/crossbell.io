@@ -18,7 +18,7 @@ import {
 	decomposeNoteId,
 	getOrigin,
 	useNoteRouterQuery,
-} from "~/url";
+} from "~/shared/url";
 import { CharacterEntity, NoteEntity } from "crossbell.js";
 import type { GetServerSideProps } from "next";
 import { Divider } from "@mantine/core";

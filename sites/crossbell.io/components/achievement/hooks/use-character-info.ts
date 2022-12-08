@@ -1,5 +1,5 @@
 import { useCharacterByHandle } from "@crossbell/indexer";
-import { useCharacterRouterQuery } from "~/url";
+import { useCharacterRouterQuery } from "~/shared/url";
 import { useAccountCharacter } from "@crossbell/connect-kit";
 
 export function useCharacterInfos() {

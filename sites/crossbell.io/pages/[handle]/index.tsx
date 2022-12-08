@@ -19,7 +19,7 @@ import {
 	composeCharacterHref,
 	getOrigin,
 	useCharacterRouterQuery,
-} from "~/url";
+} from "~/shared/url";
 import { Space } from "@mantine/core";
 import { CharacterEntity } from "crossbell.js";
 import { GetServerSideProps } from "next";

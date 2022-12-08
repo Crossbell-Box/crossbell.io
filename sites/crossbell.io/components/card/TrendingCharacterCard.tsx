@@ -10,7 +10,7 @@ import {
 import { ipfsLinkToHttpLink } from "@crossbell/util-ipfs";
 import { useCharacterFollowRelation } from "@crossbell/indexer";
 import { extractCharacterAvatar, extractCharacterName } from "@crossbell/util-metadata";
-import { composeCharacterHref } from "~/url";
+import { composeCharacterHref } from "~/shared/url";
 
 import Avatar from "../common/Avatar";
 import CharacterIdBadge from "../common/Character/CharacterIdBadge";

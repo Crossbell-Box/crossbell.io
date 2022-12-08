@@ -1,6 +1,6 @@
 import { operatorSyncApi } from "@crossbell/connect-kit";
 
-import config from "~/config";
+import config from "~/shared/config";
 
 if (config.operatorSync.endpoint) {
 	operatorSyncApi.endpoint = config.operatorSync.endpoint;

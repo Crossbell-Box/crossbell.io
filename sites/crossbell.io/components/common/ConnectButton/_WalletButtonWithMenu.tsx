@@ -7,7 +7,7 @@ import { useIntervalMemo } from "@crossbell/util-hooks";
 import {
 	ExportCrossbellDataHref,
 	WalletCharacterManageHref,
-} from "~/url";
+} from "~/shared/url";
 import {
 	useDisconnectModal,
 	useAccountBalance,

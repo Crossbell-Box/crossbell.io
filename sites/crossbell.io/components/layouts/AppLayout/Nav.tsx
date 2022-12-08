@@ -9,7 +9,7 @@ import classNames from "classnames";
 import ConnectButton from "@/components/common/ConnectButton";
 import Image from "@/components/common/Image";
 import { useAccountCharacter } from "@crossbell/connect-kit";
-import { composeTreasuresWalletsHref } from "~/url";
+import { composeTreasuresWalletsHref } from "~/shared/url";
 
 import MoreMenu from "./MoreMenu";
 

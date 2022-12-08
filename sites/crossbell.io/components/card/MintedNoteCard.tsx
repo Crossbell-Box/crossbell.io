@@ -2,7 +2,7 @@ import { Text } from "@mantine/core";
 import type { NoteEntity } from "crossbell.js";
 import { ipfsLinkToHttpLink } from "@crossbell/util-ipfs";
 import Link from "next/link";
-import { composeNoteHref, composeNoteId } from "~/url";
+import { composeNoteHref, composeNoteId } from "~/shared/url";
 import { useCharacter, useNoteMintedCount } from "@crossbell/indexer";
 import {
 	extractCharacterAvatar,

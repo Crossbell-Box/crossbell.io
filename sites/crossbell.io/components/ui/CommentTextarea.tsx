@@ -2,7 +2,7 @@ import { Button, Space } from "@mantine/core";
 import { NoteEntity } from "crossbell.js";
 import { useState } from "react";
 
-import { getOrigin } from "~/url";
+import { getOrigin } from "~/shared/url";
 import { composeNoteMetadata } from "@crossbell/util-metadata";
 import EmojiPicker from "@/components/common/Input/EmojiPicker";
 import {

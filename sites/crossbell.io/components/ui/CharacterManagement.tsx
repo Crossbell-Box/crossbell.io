@@ -20,7 +20,7 @@ import { PropsWithChildren, useEffect, useState } from "react";
 import { useCharacter, useCharacterByHandle } from "@crossbell/indexer";
 import { ipfsLinkToHttpLink, uploadToIpfs } from "@crossbell/util-ipfs";
 import { extractCharacterName } from "@crossbell/util-metadata";
-import { composeCharacterHref } from "~/url";
+import { composeCharacterHref } from "~/shared/url";
 import { BizError } from "@crossbell/contract";
 import {
 	useAccountState,
