@@ -1,6 +1,6 @@
 import "uno.css";
-import "@/styles/globals.css";
 
+import "~/shared/styles/globals.css";
 import "~/shared/crossbell.js/setup-indexer";
 import "~/shared/crossbell.js/setup-operator-sync";
 
