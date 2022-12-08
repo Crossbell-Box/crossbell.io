@@ -1,4 +1,4 @@
-import { type PropsWithChildren } from "react";
+import React, { type PropsWithChildren } from "react";
 import {
 	Modal as Modal_,
 	Text,
@@ -8,7 +8,7 @@ import {
 } from "@mantine/core";
 import { openModal } from "@mantine/modals";
 
-export default function Modal({
+export function Modal({
 	children,
 	confirmText,
 	confirmType,

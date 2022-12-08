@@ -9,7 +9,7 @@ import {
 	useAccountCharacter,
 	useToggleCharacterOperator,
 } from "@crossbell/connect-kit";
-import { openBorderlessModal } from "@/components/common/Modal";
+import { openBorderlessModal } from "~/shared/components/modal";
 import { Image } from "~/shared/components/image"
 import {
 	OPERATOR_ADDRESS,

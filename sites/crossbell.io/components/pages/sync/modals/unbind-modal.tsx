@@ -6,7 +6,7 @@ import { useClickOutside } from "@mantine/hooks";
 import { Contract } from "crossbell.js";
 
 import { Image } from "~/shared/components/image"
-import { openBorderlessModal } from "@/components/common/Modal";
+import { openBorderlessModal } from "~/shared/components/modal";
 import {
 	getPlatformDisplayName,
 	getVeriHandle,

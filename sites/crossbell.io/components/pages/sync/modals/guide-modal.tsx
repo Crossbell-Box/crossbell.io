@@ -2,7 +2,7 @@ import React from "react";
 import { Text } from "@mantine/core";
 import { closeAllModals } from "@mantine/modals";
 
-import { openBorderlessModal } from "@/components/common/Modal";
+import { openBorderlessModal } from "~/shared/components/modal";
 import { Image } from "~/shared/components/image"
 
 import {

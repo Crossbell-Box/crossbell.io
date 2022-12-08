@@ -1,11 +1,11 @@
 import { WalletCharacterNewHref } from "~/shared/url";
 import { getCurrentAddress } from "@/utils/wallet/provider";
 import { Space, Text, Button } from "@mantine/core";
-import { closeAllModals, closeModal, openModal } from "@mantine/modals";
+import { closeAllModals, openModal } from "@mantine/modals";
 import Link from "next/link";
-import { Image } from "~/shared/components/image"
+import { Image } from "~/shared/components/image";
 import { Tooltip } from "~/shared/components/tooltip";
-import { openBorderlessModal } from "../Modal";
+import { openBorderlessModal } from "~/shared/components/modal";
 
 export function openConnectWalletHintModel() {
 	openModal({

@@ -14,7 +14,7 @@ import classNames from "classnames";
 import { Contract } from "crossbell.js";
 
 import { Image } from "~/shared/components/image"
-import { openBorderlessModal } from "@/components/common/Modal";
+import { openBorderlessModal } from "~/shared/components/modal";
 import {
 	getPlatformDisplayName,
 	getPlatformIdentityKind,
