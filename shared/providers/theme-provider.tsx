@@ -11,7 +11,7 @@ export const emotionCache = createEmotionCache({
 	prepend: true, // https://github.com/mantinedev/mantine/issues/823#issuecomment-1065833889
 });
 
-export default function ThemeProvider({ children }: PropsWithChildren) {
+export function ThemeProvider({ children }: PropsWithChildren) {
 	return (
 		<MantineProvider
 			withGlobalStyles

@@ -4,7 +4,7 @@ import { ReactQueryDevtools } from "@tanstack/react-query-devtools";
 
 const queryClient = new QueryClient();
 
-export default function QueryProvider({ children }: PropsWithChildren) {
+export function QueryProvider({ children }: PropsWithChildren) {
 	return (
 		<QueryClientProvider client={queryClient}>
 			<ReactQueryDevtools position="bottom-right" />

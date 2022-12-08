@@ -3,6 +3,6 @@ import { WagmiConfig } from "wagmi";
 
 import { wagmiClient } from "~/shared/wallet/provider";
 
-export default function WalletProvider({ children }: PropsWithChildren) {
+export function WalletProvider({ children }: PropsWithChildren) {
 	return <WagmiConfig client={wagmiClient}>{children}</WagmiConfig>;
 }
