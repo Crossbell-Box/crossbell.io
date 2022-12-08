@@ -7,15 +7,5 @@
 		"analyze": "ANALYZE=true npm run build",
 		"start": "next start",
 		"lint": "next lint"
-	},
-	"dependencies": {
-		"@crossbell/util-hooks": "workspace:*",
-		"@crossbell/indexer": "workspace:*",
-		"@crossbell/contract": "workspace:*",
-		"@crossbell/util-ethers": "workspace:*",
-		"@crossbell/util-ipfs": "workspace:*",
-		"@crossbell/util-metadata": "workspace:*",
-		"@crossbell/util-validators": "workspace:*",
-		"@crossbell/connect-kit": "workspace:*"
 	}
 }
