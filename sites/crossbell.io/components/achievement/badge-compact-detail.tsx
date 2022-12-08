@@ -1,7 +1,7 @@
 import React from "react";
 import { Tooltip } from "@mantine/core";
 
-import { composeScanTxHref } from "@/utils/url";
+import { composeScanTxHref } from "~/url";
 
 import { BadgeIcon } from "./badge-icon";
 import { BadgeLevels } from "./badge-levels";

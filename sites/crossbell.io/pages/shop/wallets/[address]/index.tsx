@@ -4,7 +4,7 @@ import MintedNoteCard from "@/components/card/MintedNoteCard";
 import { LoadingOverlay, Divider } from "@mantine/core";
 import { useMintedNotesOfAddress } from "@crossbell/indexer";
 import Header from "@/components/layouts/Header";
-import { useAddressRouterQuery } from "@/utils/url";
+import { useAddressRouterQuery } from "~/url";
 import { Fragment } from "react";
 
 const TreasuresList = () => {

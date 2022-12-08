@@ -15,7 +15,7 @@ import {
 import BaseSection from "@/components/aside/BaseSection";
 import { BadgeCompactDetail, BadgeIcon } from "@/components/achievement";
 import headerBgUrl from "@/public/images/achievement/header-bg.png";
-import { useCharacterRouterQuery } from "@/utils/url";
+import { useCharacterRouterQuery } from "~/url";
 
 export type BadgesProps = {
 	achievements: AchievementInfo[];

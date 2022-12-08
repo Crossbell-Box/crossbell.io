@@ -1,4 +1,4 @@
-import { WalletCharacterNewHref } from "@/utils/url";
+import { WalletCharacterNewHref } from "~/url";
 import { getCurrentAddress } from "@/utils/wallet/provider";
 import { Space, Text, Button } from "@mantine/core";
 import { closeAllModals, closeModal, openModal } from "@mantine/modals";

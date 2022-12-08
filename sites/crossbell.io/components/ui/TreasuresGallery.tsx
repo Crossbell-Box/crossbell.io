@@ -5,7 +5,7 @@ import {
 	extractCoverImageFromNote,
 	extractPlainTextFromNote,
 } from "@crossbell/util-metadata";
-import { composeNoteHref, composeTreasuresWalletsHref } from "@/utils/url";
+import { composeNoteHref, composeTreasuresWalletsHref } from "~/url";
 import { Space, Text } from "@mantine/core";
 import Link from "next/link";
 import { NoteEntity } from "crossbell.js";

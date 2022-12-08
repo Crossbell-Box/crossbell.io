@@ -1,6 +1,6 @@
 import { useCharacter, useCharacterByHandle } from "@crossbell/indexer";
 import { extractCharacterName } from "@crossbell/util-metadata";
-import { composeCharacterHref } from "@/utils/url";
+import { composeCharacterHref } from "~/url";
 import { Text, TextProps } from "@mantine/core";
 import { CharacterEntity } from "crossbell.js";
 import classNames from "classnames";

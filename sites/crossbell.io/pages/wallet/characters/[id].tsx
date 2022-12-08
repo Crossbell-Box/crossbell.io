@@ -2,7 +2,7 @@ import { getLayout } from "@/components/layouts/AppLayout";
 import Header from "@/components/layouts/Header";
 import CharacterManagement from "@/components/ui/CharacterManagement";
 import type { NextPageWithLayout } from "@/pages/_app";
-import { useEditCharacterRouterQuery } from "@/utils/url";
+import { useEditCharacterRouterQuery } from "~/url";
 
 const Page: NextPageWithLayout = () => {
 	const { characterId } = useEditCharacterRouterQuery();

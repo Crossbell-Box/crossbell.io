@@ -12,7 +12,7 @@ import {
 	useSearchingCharacters,
 	useSearchingNotes,
 } from "@crossbell/indexer";
-import { composeSearchHref, useSearchRouterQuery } from "@/utils/url";
+import { composeSearchHref, useSearchRouterQuery } from "~/url";
 import { Title, Text, Container } from "@mantine/core";
 import { useElementSize } from "@mantine/hooks";
 import Head from "next/head";

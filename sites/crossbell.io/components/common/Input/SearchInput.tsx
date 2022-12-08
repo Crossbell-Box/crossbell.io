@@ -1,5 +1,5 @@
 import React from "react";
-import { composeSearchHref, useSearchRouterQuery } from "@/utils/url";
+import { composeSearchHref, useSearchRouterQuery } from "~/url";
 import {
 	createPolymorphicComponent,
 	Text,

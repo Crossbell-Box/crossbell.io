@@ -12,7 +12,7 @@ import {
 	useMintNote,
 } from "@crossbell/connect-kit";
 import { useCharacter, useNote, useNoteStatus } from "@crossbell/indexer";
-import { composeNoteHref, getOrigin, useNoteRouterQuery } from "@/utils/url";
+import { composeNoteHref, getOrigin, useNoteRouterQuery } from "~/url";
 import { copyToClipboard } from "@/utils/other";
 import { getValidAttachments } from "@crossbell/util-metadata";
 import { useLoginChecker } from "@/utils/wallet/hooks";

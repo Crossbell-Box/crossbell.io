@@ -1,5 +1,5 @@
 import { useTrending } from "@/utils/apis/trending";
-import { composeCharacterHref } from "@/utils/url";
+import { composeCharacterHref } from "~/url";
 import { Group, Skeleton, Space } from "@mantine/core";
 import { CharacterEntity } from "crossbell.js";
 import Link from "next/link";

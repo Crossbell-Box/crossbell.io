@@ -24,7 +24,7 @@ import {
 import {
 	composeCharacterFollowHref,
 	composeWalletCharacterEditHref,
-} from "@/utils/url";
+} from "~/url";
 
 import Tooltip from "../common/Tooltip";
 import Avatar from "../common/Avatar";

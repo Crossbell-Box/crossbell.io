@@ -4,7 +4,7 @@ import Header from "@/components/layouts/Header";
 import type { NextPageWithLayout } from "@/pages/_app";
 import { useCharacterByHandle } from "@crossbell/indexer";
 import { extractCharacterName } from "@crossbell/util-metadata";
-import { useCharacterRouterQuery } from "@/utils/url";
+import { useCharacterRouterQuery } from "~/url";
 import { Fragment } from "react";
 import { useRouter } from "next/router";
 import FollowCharacterCard, {

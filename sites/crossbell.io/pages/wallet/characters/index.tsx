@@ -15,7 +15,7 @@ import {
 	composeCharacterHref,
 	composeWalletCharacterEditHref,
 	WalletCharacterNewHref,
-} from "@/utils/url";
+} from "~/url";
 import {
 	useAccountCharacters,
 	useAccountState,

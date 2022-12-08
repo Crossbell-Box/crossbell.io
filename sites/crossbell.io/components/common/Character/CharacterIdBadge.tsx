@@ -1,4 +1,4 @@
-import { composeScanTxHref } from "@/utils/url";
+import { composeScanTxHref } from "~/url";
 import { Badge, BadgeProps, useMantineTheme } from "@mantine/core";
 import { CharacterEntity } from "crossbell.js";
 import Link from "next/link";

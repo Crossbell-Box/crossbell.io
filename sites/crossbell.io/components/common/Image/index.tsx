@@ -6,7 +6,7 @@ import {
 import { PropsWithChildren, useEffect, useState, memo } from "react";
 
 import { ipfsLinkToHttpLink } from "@crossbell/util-ipfs";
-import { getOrigin } from "@/utils/url";
+import { getOrigin } from "~/url";
 
 // Pixel GIF code adapted from https://stackoverflow.com/a/33919020/266535
 const keyStr =
