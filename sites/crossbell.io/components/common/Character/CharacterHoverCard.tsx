@@ -4,7 +4,7 @@ import { CharacterHandle, CharacterName } from ".";
 import Avatar from "@/components/common/Avatar";
 import { useCharacterFollowStats } from "@crossbell/indexer";
 import { useState } from "react";
-import FollowButton from "../FollowButton";
+import { FollowButton } from "~/shared/components/follow-button";
 
 export default function CharacterHoverCard({
 	character,

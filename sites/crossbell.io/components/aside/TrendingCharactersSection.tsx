@@ -6,7 +6,7 @@ import Link from "next/link";
 import { useRouter } from "next/router";
 import Avatar from "../common/Avatar";
 import { CharacterHandle, CharacterName } from "../common/Character";
-import FollowButton from "../common/FollowButton";
+import { FollowButton } from "~/shared/components/follow-button";
 import BaseSection from "./BaseSection";
 
 export default function TrendingCharactersSection() {

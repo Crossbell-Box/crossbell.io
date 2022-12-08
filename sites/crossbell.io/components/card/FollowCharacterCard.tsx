@@ -4,7 +4,7 @@ import Avatar from "../common/Avatar";
 import { CharacterName } from "../common/Character";
 import { composeCharacterHref } from "~/shared/url";
 import { useRouter } from "next/router";
-import FollowButton from "../common/FollowButton";
+import { FollowButton } from "~/shared/components/follow-button";
 
 const FollowCharacterCard = ({ character }: { character: CharacterEntity }) => {
 	const router = useRouter();

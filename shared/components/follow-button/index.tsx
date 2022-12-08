@@ -1,3 +1,4 @@
+import React from "react";
 import { Button, ButtonProps } from "@mantine/core";
 import { useModals } from "@mantine/modals";
 import { CharacterEntity } from "crossbell.js";
@@ -9,7 +10,7 @@ import {
 	useUnfollowCharacter,
 } from "@crossbell/connect-kit";
 
-export default function FollowButton({
+export function FollowButton({
 	character,
 	...props
 }: {
