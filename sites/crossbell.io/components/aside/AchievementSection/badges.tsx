@@ -10,7 +10,7 @@ import {
 	AchievementLevelStatus,
 	getHighestLevel,
 	useFilterAchievements,
-} from "@/utils/apis/achievement";
+} from "~/shared/apis/achievement";
 
 import BaseSection from "@/components/aside/BaseSection";
 import { BadgeCompactDetail, BadgeIcon } from "@/components/achievement";

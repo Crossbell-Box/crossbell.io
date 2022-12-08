@@ -24,7 +24,7 @@ import {
 	useBindAccount,
 } from "@crossbell/connect-kit";
 import { useAccountCharacter } from "@crossbell/connect-kit";
-import { copyToClipboard } from "@/utils/other";
+import { copyToClipboard } from "~/shared/other";
 import { ContractProvider } from "@crossbell/contract";
 
 import DoneImage from "@/public/images/sync/congrats.svg";

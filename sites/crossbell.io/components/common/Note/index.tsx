@@ -13,7 +13,7 @@ import {
 } from "@crossbell/connect-kit";
 import { useCharacter, useNote, useNoteStatus } from "@crossbell/indexer";
 import { composeNoteHref, getOrigin, useNoteRouterQuery } from "~/shared/url";
-import { copyToClipboard } from "@/utils/other";
+import { copyToClipboard } from "~/shared/other";
 import { getValidAttachments } from "@crossbell/util-metadata";
 import { useLoginChecker } from "@/utils/wallet/hooks";
 import { useRefCallback } from "@crossbell/util-hooks";

@@ -7,7 +7,7 @@ import {
 	AchievementInfo,
 	AchievementLevelStatus,
 	useMintAchievement,
-} from "@/utils/apis/achievement";
+} from "~/shared/apis/achievement";
 
 import { BadgeIcon } from "./badge-icon";
 import { BadgeLevels } from "./badge-levels";

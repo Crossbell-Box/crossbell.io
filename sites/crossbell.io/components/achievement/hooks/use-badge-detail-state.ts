@@ -1,6 +1,6 @@
 import React from "react";
 
-import { AchievementLevel } from "@/utils/apis/achievement";
+import { AchievementLevel } from "~/shared/apis/achievement";
 
 import { getPreferredLevel } from "./use-preferred-level";
 

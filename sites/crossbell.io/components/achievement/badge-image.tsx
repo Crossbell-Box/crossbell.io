@@ -6,7 +6,7 @@ import { useWeb2Url } from "@crossbell/ipfs-react";
 import {
 	AchievementLevel,
 	AchievementLevelStatus,
-} from "@/utils/apis/achievement";
+} from "~/shared/apis/achievement";
 
 export type BadgeImageProps = React.HTMLAttributes<HTMLDivElement> & {
 	level: AchievementLevel;

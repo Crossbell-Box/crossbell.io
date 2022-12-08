@@ -24,7 +24,7 @@ import {
 	openUnbindingModal,
 } from "@/components/pages/sync/modals";
 import Image from "@/components/common/Image";
-import { formatDate } from "@/utils/time";
+import { formatDate } from "~/shared/time";
 import { useContract } from "@crossbell/contract";
 
 import bindIllustration from "@/public/images/sync/bind-illustration.png";

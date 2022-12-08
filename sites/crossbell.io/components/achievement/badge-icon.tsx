@@ -7,7 +7,7 @@ import dayjs from "dayjs";
 import { FlipBox } from "@/components/common/FlipBox";
 import logoUrl from "@/public/images/logo.svg";
 
-import { AchievementLevel } from "@/utils/apis/achievement";
+import { AchievementLevel } from "~/shared/apis/achievement";
 
 import { BadgeImage } from "./badge-image";
 import styles from "./badge-icon.module.css";

@@ -1,8 +1,8 @@
 import React from "react";
 import classNames from "classnames";
 
-import type { AchievementLevel } from "@/utils/apis/achievement";
-import { AchievementLevelStatus } from "@/utils/apis/achievement";
+import type { AchievementLevel } from "~/shared/apis/achievement";
+import { AchievementLevelStatus } from "~/shared/apis/achievement";
 
 import { BadgeImage } from "./badge-image";
 

@@ -6,7 +6,7 @@ import {
 	AchievementsStatus,
 	useAchievementGroups,
 	useAchievementsStatus,
-} from "@/utils/apis/achievement";
+} from "~/shared/apis/achievement";
 import { useCharacterRouterQuery } from "~/shared/url";
 import exploreImgUrl from "@/public/images/achievement/explore.png";
 import mintImgUrl from "@/public/images/achievement/mint.png";

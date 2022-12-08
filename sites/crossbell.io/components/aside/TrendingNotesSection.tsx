@@ -1,4 +1,4 @@
-import { useTrending } from "@/utils/apis/trending";
+import { useTrending } from "~/shared/apis/trending";
 import {
 	extractPlainTextFromNote,
 	getValidAttachments,

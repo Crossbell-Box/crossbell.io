@@ -2,7 +2,7 @@ import { IpfsLink } from "@crossbell/ipfs-react";
 import { Text } from "@mantine/core";
 import React from "react";
 
-import { copyToClipboard } from "@/utils/other";
+import { copyToClipboard } from "~/shared/other";
 
 import styles from "./block-section.module.css";
 

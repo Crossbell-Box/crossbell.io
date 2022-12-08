@@ -30,7 +30,7 @@ import {
 } from "@crossbell/util-metadata";
 import { ipfsLinkToHttpLink } from "@crossbell/util-ipfs";
 import { useScrollIntoView } from "@mantine/hooks";
-import { cacheRequest } from "@/utils/server";
+import { cacheRequest } from "~/shared/server";
 
 const SEO = ({
 	note,

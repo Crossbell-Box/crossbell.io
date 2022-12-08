@@ -1,7 +1,7 @@
 import React from "react";
 import classNames from "classnames";
 
-import type { AchievementLevel } from "@/utils/apis/achievement";
+import type { AchievementLevel } from "~/shared/apis/achievement";
 import { BadgeLevelsItem, BadgeLevelsItemProps } from "./badge-levels.item";
 
 export type BadgeLevelsProps = {

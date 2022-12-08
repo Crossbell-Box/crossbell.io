@@ -4,7 +4,7 @@ import {
 	AchievementLevel,
 	AchievementLevelStatus,
 	getHighestLevel,
-} from "@/utils/apis/achievement";
+} from "~/shared/apis/achievement";
 
 export function usePreferredLevel(
 	levels: AchievementLevel[],

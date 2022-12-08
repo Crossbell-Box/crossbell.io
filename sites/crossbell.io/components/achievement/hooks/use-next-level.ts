@@ -1,5 +1,5 @@
 import React from "react";
-import { AchievementLevel } from "@/utils/apis/achievement";
+import { AchievementLevel } from "~/shared/apis/achievement";
 
 export function useNextLevel(
 	currentLevel: AchievementLevel,

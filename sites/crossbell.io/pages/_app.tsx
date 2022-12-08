@@ -1,8 +1,8 @@
 import "uno.css";
 import "@/styles/globals.css";
 
-import "@/utils/crossbell.js/setup-indexer";
-import "@/utils/crossbell.js/setup-operator-sync";
+import "~/shared/crossbell.js/setup-indexer";
+import "~/shared/crossbell.js/setup-operator-sync";
 
 import { IpfsGatewayContext } from "@crossbell/ipfs-react";
 import { InitContractProvider } from "@crossbell/contract";
@@ -41,7 +41,7 @@ type AppPropsWithLayout = AppProps & {
 };
 
 const loadFeatures = () =>
-	import("@/utils/framer/features").then((res) => res.default);
+	import("~/shared/framer/features").then((res) => res.default);
 
 export default function App({ Component, pageProps }: AppPropsWithLayout) {
 	const getLayout = Component.getLayout ?? ((page) => page);

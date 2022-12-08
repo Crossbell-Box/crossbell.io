@@ -15,7 +15,7 @@ import {
 	useAchievementGroups,
 	AchievementInfo,
 	AchievementGroup,
-} from "@/utils/apis/achievement";
+} from "~/shared/apis/achievement";
 import { extractCharacterName } from "@crossbell/util-metadata";
 import Header from "@/components/layouts/Header";
 import {

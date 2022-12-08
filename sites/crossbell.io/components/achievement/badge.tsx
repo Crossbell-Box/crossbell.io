@@ -1,7 +1,7 @@
 import React from "react";
 
-import type { AchievementInfo } from "@/utils/apis/achievement";
-import { AchievementLevelStatus } from "@/utils/apis/achievement";
+import type { AchievementInfo } from "~/shared/apis/achievement";
+import { AchievementLevelStatus } from "~/shared/apis/achievement";
 
 import { BadgeIcon } from "./badge-icon";
 import { useNextLevel, usePreferredLevel } from "./hooks";

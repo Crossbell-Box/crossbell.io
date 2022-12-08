@@ -1,6 +1,6 @@
 import TrendingCharacters from "@/components/pages/Index/deprecated/Trending/Characters";
 import TrendingTreasures from "@/components/pages/Index/deprecated/Trending/Treasures";
-import { useTrending } from "@/utils/apis/trending";
+import { useTrending } from "~/shared/apis/trending";
 
 const IndexTrending = () => {
 	const { data } = useTrending();

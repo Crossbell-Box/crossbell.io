@@ -1,4 +1,4 @@
-import { formatDate, formatDateFromNow, formatToISO } from "@/utils/time";
+import { formatDate, formatDateFromNow, formatToISO } from "~/shared/time";
 import { Tooltip, Text, TextProps } from "@mantine/core";
 import Link from "next/link";
 import { useEffect, useState } from "react";

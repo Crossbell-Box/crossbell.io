@@ -1,4 +1,4 @@
-import { useTrending } from "@/utils/apis/trending";
+import { useTrending } from "~/shared/apis/trending";
 import { composeCharacterHref } from "~/shared/url";
 import { Group, Skeleton, Space } from "@mantine/core";
 import { CharacterEntity } from "crossbell.js";

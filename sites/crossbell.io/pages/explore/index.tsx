@@ -3,7 +3,7 @@ import { Note, NoteSkeleton } from "@/components/common/Note";
 import { getLayout } from "@/components/layouts/AppLayout";
 import Header from "@/components/layouts/Header";
 import type { NextPageWithLayout } from "@/pages/_app";
-import { useTrending } from "@/utils/apis/trending";
+import { useTrending } from "~/shared/apis/trending";
 import { FeedTabs } from "../feed";
 
 const Page: NextPageWithLayout = () => {
