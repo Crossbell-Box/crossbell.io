@@ -1,6 +1,6 @@
 import React from "react";
 
-import { openMintNewCharacterModel } from "@/components/common/NewUserGuide";
+import { openMintNewCharacterModel } from "~/shared/components/new-user-guide";
 import {
 	useAccountState,
 	useConnectModal,

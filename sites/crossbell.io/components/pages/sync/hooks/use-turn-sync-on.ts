@@ -10,7 +10,7 @@ import {
 	useActivateCharacter,
 	useCharacterActivation,
 } from "@crossbell/connect-kit";
-import { useLoginChecker } from "@/utils/wallet/hooks";
+import { useLoginChecker } from "~/shared/wallet/hooks";
 import { useRefCallback } from "@crossbell/util-hooks";
 
 export function useTurnSyncOn() {

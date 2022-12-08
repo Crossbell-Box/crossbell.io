@@ -1,5 +1,4 @@
-import React from "react";
-import { createClient, createStorage } from "wagmi";
+import { createClient, createStorage, WagmiConfigProps } from "wagmi";
 
 import { chains, provider, connectors } from "./config";
 
@@ -14,7 +13,8 @@ const noopStorage: Storage = {
 const storage = createStorage({
 	storage: typeof window !== "undefined" ? window.localStorage : noopStorage,
 }); // https://wagmi.sh/docs/client#storage-optional
-const wagmiClient = createClient({
+
+const wagmiClient: WagmiConfigProps["client"] = createClient({
 	autoConnect: true,
 	connectors,
 	provider,

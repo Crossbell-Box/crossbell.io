@@ -1,3 +1,4 @@
+import type { ClientConfig } from "@wagmi/core";
 import { Chain, configureChains } from "wagmi";
 import { jsonRpcProvider } from "wagmi/providers/jsonRpc";
 import { MetaMaskConnector } from "wagmi/connectors/metaMask";
@@ -29,11 +30,14 @@ const crossbellChain: Chain = {
 	testnet: false,
 };
 
-export const { chains, provider } = configureChains(
+const configuredChains = configureChains(
 	[crossbellChain],
 	[jsonRpcProvider({ rpc: (chain) => ({ http: chain.rpcUrls.default }) })],
 	{ pollingInterval: 1_000 }
 );
+
+export const chains = configuredChains.chains;
+export const provider: ClientConfig["provider"] = configuredChains.provider;
 
 export const connectors = [
 	new MetaMaskConnector({

@@ -15,7 +15,7 @@ import { useCharacter, useNote, useNoteStatus } from "@crossbell/indexer";
 import { composeNoteHref, getOrigin, useNoteRouterQuery } from "~/shared/url";
 import { copyToClipboard } from "~/shared/other";
 import { getValidAttachments } from "@crossbell/util-metadata";
-import { useLoginChecker } from "@/utils/wallet/hooks";
+import { useLoginChecker } from "~/shared/wallet/hooks";
 import { useRefCallback } from "@crossbell/util-hooks";
 
 import { CharacterHandle, CharacterName } from "~/shared/components/character";

@@ -22,7 +22,7 @@ import { RouterTransition } from "@/components/providers/RouterTransition";
 import {
 	openFaucetHintModel,
 	openMintNewCharacterModel,
-} from "@/components/common/NewUserGuide";
+} from "~/shared/components/new-user-guide";
 import {
 	ConnectKitProvider,
 	useAccountState,

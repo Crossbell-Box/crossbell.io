@@ -1,5 +1,6 @@
+import React from "react";
 import { WalletCharacterNewHref } from "~/shared/url";
-import { getCurrentAddress } from "@/utils/wallet/provider";
+import { getCurrentAddress } from "~/shared/wallet/provider";
 import { Space, Text, Button } from "@mantine/core";
 import { closeAllModals, openModal } from "@mantine/modals";
 import Link from "next/link";
