@@ -10,7 +10,7 @@ import {
 } from "@crossbell/connect-kit";
 
 import { useAccountCharacter } from "@crossbell/connect-kit";
-import LoadingOverlay from "@/components/common/LoadingOverlay";
+import { LoadingOverlay } from "~/shared/components/loading-overlay";
 
 import LogoMedium from "@/public/images/sync/platform-icons/medium.svg";
 import LogoTiktok from "@/public/images/sync/platform-icons/tiktok.svg";

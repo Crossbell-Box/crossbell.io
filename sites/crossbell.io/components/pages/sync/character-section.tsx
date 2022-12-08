@@ -7,7 +7,7 @@ import { Avatar } from "~/shared/components/avatar";
 import { useAccountState, useAccountCharacter } from "@crossbell/connect-kit";
 import { useCharacterMediaUsage } from "@crossbell/connect-kit";
 import { extractCharacterName } from "@crossbell/util-metadata";
-import LoadingOverlay from "@/components/common/LoadingOverlay";
+import { LoadingOverlay } from "~/shared/components/loading-overlay";
 
 import { openGuideModal } from "./modals";
 import { useToggleOperator } from "./hooks";

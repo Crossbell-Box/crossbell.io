@@ -2,7 +2,7 @@ import { useSyncMetadataOfNote } from "@crossbell/indexer";
 import { copyToClipboard } from "~/shared/other";
 import { ActionIcon, Menu, Text } from "@mantine/core";
 import { showNotification } from "@mantine/notifications";
-import LoadingOverlay from "../LoadingOverlay";
+import { LoadingOverlay } from "~/shared/components/loading-overlay";
 
 export default function MetadataContentUpdater({
 	uri,

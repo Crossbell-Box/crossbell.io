@@ -30,7 +30,7 @@ import {
 	useUpdateCharacterMetadata,
 } from "@crossbell/connect-kit";
 
-import LoadingOverlay from "../common/LoadingOverlay";
+import { LoadingOverlay } from "~/shared/components/loading-overlay";
 
 export default function CharacterManagement({
 	characterId,

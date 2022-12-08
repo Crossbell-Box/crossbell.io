@@ -6,9 +6,9 @@ import {
 	Text,
 } from "@mantine/core";
 import classNames from "classnames";
-import { type PropsWithChildren, useEffect } from "react";
+import React, { type PropsWithChildren } from "react";
 
-export default function LoadingOverlay({
+export function LoadingOverlay({
 	description,
 	global = false,
 	...props

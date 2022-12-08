@@ -19,7 +19,7 @@ import { useLoginChecker } from "~/shared/wallet/hooks";
 import { useRefCallback } from "@crossbell/util-hooks";
 
 import { CharacterHandle, CharacterName } from "~/shared/components/character";
-import LoadingOverlay from "../LoadingOverlay";
+import { LoadingOverlay } from "~/shared/components/loading-overlay";
 import { Tooltip } from "~/shared/components/tooltip";
 import Time from "../Time";
 import MetadataContentUpdater from "../MetadataContentUpdater";
