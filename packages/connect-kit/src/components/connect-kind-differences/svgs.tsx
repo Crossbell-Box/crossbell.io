@@ -16,7 +16,7 @@ export function EmailSvg(props: React.SVGAttributes<SVGSVGElement>) {
 					transform="matrix(.89858354 .43880249 -.43880249 .89858354 25.0117 0)"
 				/>
 			</clipPath>
-			<g clip-path="url(#connect-kind-differences-email-svg-a)">
+			<g clipPath="url(#connect-kind-differences-email-svg-a)">
 				<path
 					d="m22.9854 14.9745s2.1905-4.2692 6.4161-2.2058c4.2256 2.0635 34.1035 16.6537 34.1035 16.6537s4.2469 2.0739 2.1731 6.3208l-12.4955 25.5883s-2.0791 4.2576-6.3367 2.1785c0 0-34.1303-16.68-34.1355-16.6693s-4.26504-2.0801-2.1828-6.3441z"
 					fill="#ffb74d"
