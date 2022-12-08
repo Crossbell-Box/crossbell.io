@@ -1,6 +1,6 @@
 import facepaint from "facepaint";
 
-import { breakpoints } from "../../../utils/unocss/breakpoints";
+import { breakpoints } from "../../../scripts/unocss/breakpoints";
 
 export const breakpoint = {
 	xs: `@media (min-width: ${breakpoints.xs}px)`,

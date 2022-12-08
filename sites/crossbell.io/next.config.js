@@ -3,7 +3,9 @@ const { withIpfsGateway } = require("@crossbell/ipfs-gateway-next");
 const withBundleAnalyzer = require("@next/bundle-analyzer")({
 	enabled: process.env.ANALYZE === "true",
 });
-const { withLocalPackages } = require("../../utils/nextjs/with-local-packages");
+const {
+	withLocalPackages,
+} = require("../../scripts/nextjs/with-local-packages");
 
 /** @type {import('next').NextConfig} */
 const nextConfig = {

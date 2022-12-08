@@ -1,1 +1,1 @@
-export * from "../../utils/unocss/unocss.config";
+export * from "../../scripts/unocss/unocss.config";
