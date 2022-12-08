@@ -1,12 +1,12 @@
 import { Tooltip as Tooltip_, TooltipProps, Text } from "@mantine/core";
-import { PropsWithChildren } from "react";
+import React from "react";
 
-export default function Tooltip({
+export function Tooltip({
 	children,
 	label,
 	helpText,
 	...props
-}: PropsWithChildren<TooltipProps> & {
+}: React.PropsWithChildren<TooltipProps> & {
 	/** if true, the text passed in will be rendered as a hoverable help text */
 	helpText?: boolean;
 }) {

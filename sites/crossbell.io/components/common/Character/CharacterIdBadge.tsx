@@ -2,7 +2,7 @@ import { composeScanTxHref } from "~/shared/url";
 import { Badge, BadgeProps, useMantineTheme } from "@mantine/core";
 import { CharacterEntity } from "crossbell.js";
 import Link from "next/link";
-import Tooltip from "../Tooltip";
+import { Tooltip } from "~/shared/components/tooltip";
 
 export default function CharacterIdBadge({
 	character,

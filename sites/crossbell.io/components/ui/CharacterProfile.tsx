@@ -26,7 +26,7 @@ import {
 	composeWalletCharacterEditHref,
 } from "~/shared/url";
 
-import Tooltip from "../common/Tooltip";
+import { Tooltip } from "~/shared/components/tooltip";
 import Avatar from "../common/Avatar";
 
 // used in character page to display the profile

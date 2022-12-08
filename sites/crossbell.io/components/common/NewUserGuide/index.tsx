@@ -4,7 +4,7 @@ import { Space, Text, Button } from "@mantine/core";
 import { closeAllModals, closeModal, openModal } from "@mantine/modals";
 import Link from "next/link";
 import Image from "@/components/common/Image";
-import Tooltip from "@/components/common/Tooltip";
+import { Tooltip } from "~/shared/components/tooltip";
 import { openBorderlessModal } from "../Modal";
 
 export function openConnectWalletHintModel() {

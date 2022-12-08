@@ -20,7 +20,7 @@ import { useRefCallback } from "@crossbell/util-hooks";
 
 import { CharacterHandle, CharacterName } from "../Character";
 import LoadingOverlay from "../LoadingOverlay";
-import Tooltip from "../Tooltip";
+import { Tooltip } from "~/shared/components/tooltip";
 import Time from "../Time";
 import MetadataContentUpdater from "../MetadataContentUpdater";
 
