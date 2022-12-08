@@ -1,4 +1,4 @@
-import path from "path";
+import * as path from "path";
 import {
 	defineConfig,
 	presetAttributify,
@@ -7,6 +7,8 @@ import {
 } from "unocss";
 
 import { FileSystemIconLoader } from "@iconify/utils/lib/loader/node-loaders";
+
+import { breakpoints } from "./breakpoints";
 
 export default defineConfig({
 	presets: [
@@ -58,11 +60,11 @@ export default defineConfig({
 		},
 		breakpoints: {
 			// https://mantine.dev/styles/responsive/#configure-breakpoints
-			xs: "576px",
-			sm: "768px",
-			md: "992px",
-			lg: "1200px",
-			xl: "1440px",
+			xs: `${breakpoints.xs}px`,
+			sm: `${breakpoints.sm}px`,
+			md: `${breakpoints.md}px`,
+			lg: `${breakpoints.lg}px`,
+			xl: `${breakpoints.xl}px`,
 		},
 	},
 });
