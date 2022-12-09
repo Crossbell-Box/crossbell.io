@@ -11,6 +11,7 @@ import { useTurnSyncOn } from "./hooks";
 import CharacterSection from "./character-section";
 import OperatorSyncWelcome from "./operator-sync-welcome";
 import PlatformsSection from "./platforms-section";
+import { Sidebar } from "./components";
 
 export default function OperatorSyncMain() {
 	const characterInfo = useCharacterInfo();
@@ -24,10 +25,15 @@ export default function OperatorSyncMain() {
 
 		if (characterInfo.isActivated) {
 			return (
-				<div className="px-32.5px">
-					<CharacterSection />
-					<hr className="my-24px border-none h-1px w-full bg-[#E1E8F7]" />
-					<PlatformsSection />
+				<div className="flex">
+					<div className="border-r-1 border-[#E1E8F7]">
+						<Sidebar />
+					</div>
+					<div className="pl-32px pr-64px flex-1">
+						<CharacterSection />
+						<hr className="my-24px border-none h-1px w-full bg-[#E1E8F7]" />
+						<PlatformsSection />
+					</div>
 				</div>
 			);
 		}

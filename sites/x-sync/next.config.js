@@ -12,7 +12,6 @@ const nextConfig = {
 	},
 	webpack: (config) => {
 		config.plugins.push(UnoCSS());
-		config.cache = false;
 		return config;
 	},
 };
