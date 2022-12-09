@@ -1,7 +1,7 @@
 import React from "react";
 
+import { Scenes } from "../components";
 import { SNSIcons } from "./sns-icons";
-import { Scenes } from "../scenes";
 
 export type OperatorSyncWelcomeProps = {
 	onStart: () => void;

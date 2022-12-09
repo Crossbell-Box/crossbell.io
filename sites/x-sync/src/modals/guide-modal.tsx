@@ -6,8 +6,8 @@ import { closeAllModals } from "@mantine/modals";
 import { openBorderlessModal } from "~/shared/components/modal";
 import { Image } from "~/shared/components/image";
 
-import { CircleBtn, Arrow } from "@/src/components/scenes/components";
-import { useScenes, useSceneState } from "@/src/components/scenes/hooks";
+import { CircleBtn, Arrow } from "@/components/scenes/components";
+import { useScenes, useSceneState } from "@/components/scenes/hooks";
 
 const closeModals = () => closeAllModals();
 

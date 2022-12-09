@@ -3,15 +3,17 @@ import classNames from "classnames";
 import prettyBytes from "pretty-bytes";
 import { Text, Switch } from "@mantine/core";
 
-import { Avatar } from "~/shared/components/avatar";
 import { useAccountState, useAccountCharacter } from "@crossbell/connect-kit";
 import { useCharacterMediaUsage } from "@crossbell/connect-kit";
 import { extractCharacterName } from "@crossbell/util-metadata";
+
+import { Avatar } from "~/shared/components/avatar";
 import { LoadingOverlay } from "~/shared/components/loading-overlay";
 
-import { openGuideModal } from "./modals";
-import { useToggleOperator } from "./hooks";
-import styles from "./character-section.module.css";
+import { openGuideModal } from "@/modals";
+import { useToggleOperator } from "@/hooks";
+
+import styles from "./index.module.css";
 
 export default function CharacterSection() {
 	const account = useAccountState((s) => s.computed.account);

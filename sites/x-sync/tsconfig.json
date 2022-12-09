@@ -16,8 +16,8 @@
 		"incremental": true,
 		"baseUrl": ".",
 		"paths": {
+			"@/*": ["src/*"],
 			"@/public/*": ["public/*"],
-			"@/src/*": ["src/*"],
 			"@crossbell/*": ["../../packages/*/src"],
 			"~/shared/*": ["../../shared/*"]
 		}

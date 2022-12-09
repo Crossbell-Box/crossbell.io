@@ -1,6 +1,6 @@
 import React from "react";
 
-import { openGuideModal } from "../modals";
+import { openGuideModal } from "../../modals";
 
 const style: React.CSSProperties = {
 	background:

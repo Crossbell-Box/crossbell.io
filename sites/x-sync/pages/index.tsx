@@ -1,6 +1,10 @@
 import React from "react";
-import Sync from "@/src/index";
+
+import { OperatorSyncWelcome } from "@/welcome";
+import { useTurnSyncOn } from "@/hooks";
 
 export default function Index() {
-	return <Sync />;
+	const turnSyncOn = useTurnSyncOn();
+
+	return <OperatorSyncWelcome onStart={turnSyncOn} />;
 }

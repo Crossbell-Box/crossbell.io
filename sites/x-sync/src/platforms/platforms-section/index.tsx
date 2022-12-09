@@ -21,7 +21,7 @@ import LogoPinterest from "@/public/images/sync/platform-icons/pinterest.svg";
 import LogoSubstack from "@/public/images/sync/platform-icons/substack.svg";
 import LogoJike from "@/public/images/sync/platform-icons/jike.svg";
 
-import { sumUpMediaUsage } from "../utils";
+import { sumUpMediaUsage } from "../../utils";
 
 import { PlatformCard, PlatformCardProps } from "./platform-card";
 import { Welcome } from "./welcome";

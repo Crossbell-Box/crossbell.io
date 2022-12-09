@@ -14,11 +14,13 @@ import { useLoginChecker } from "~/shared/wallet/hooks";
 import { useRefCallback } from "@crossbell/util-hooks";
 
 import { X_SYNC_OPERATOR_PERMISSIONS } from "./const";
+import { useRouter } from "next/router";
 
 export function useTurnSyncOn() {
 	const account = useAccountState((s) => s.computed.account);
 	const characterId = account?.characterId;
 	const activate = useActivateCharacter(characterId);
+	const { data: isActivated } = useCharacterActivation(characterId);
 	const [{ toggleOperator }] = useToggleCharacterOperator(
 		OPERATOR_ADDRESS,
 		X_SYNC_OPERATOR_PERMISSIONS
@@ -28,6 +30,7 @@ export function useTurnSyncOn() {
 		X_SYNC_OPERATOR_PERMISSIONS
 	);
 	const { validate } = useLoginChecker();
+	const router = useRouter();
 
 	const turnSyncOn = useRefCallback(async () => {
 		await activate.mutateAsync();
@@ -35,12 +38,16 @@ export function useTurnSyncOn() {
 		if (!hasOperator) {
 			await toggleOperator();
 		}
+
+		router.push("/platforms");
 	});
 
 	const { needAutoTurnOnAfterConnect } = useAutoTurnOn(characterId, turnSyncOn);
 
 	return useRefCallback(async () => {
-		if (validate()) {
+		if (isActivated) {
+			router.push("/platforms");
+		} else if (validate()) {
 			turnSyncOn();
 		} else {
 			needAutoTurnOnAfterConnect();

@@ -18,15 +18,15 @@ import {
 	SupportedPlatform,
 	useSyncAccount,
 } from "@crossbell/connect-kit";
-import { getPlatformSite } from "@/src/utils";
-import { openBindingModal, openUnbindingModal } from "@/src/modals";
+import { getPlatformSite } from "@/utils";
+import { openBindingModal, openUnbindingModal } from "@/modals";
 import { Image } from "~/shared/components/image";
 import { formatDate } from "~/shared/time";
 import { useContract } from "@crossbell/contract";
 
 import bindIllustration from "@/public/images/sync/bind-illustration.png";
 
-import { X_SYNC_OPERATOR_PERMISSIONS } from "../hooks/const";
+import { X_SYNC_OPERATOR_PERMISSIONS } from "../../hooks/const";
 
 export type PlatformCardProps = {
 	isBound: boolean;

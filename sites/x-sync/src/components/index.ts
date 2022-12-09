@@ -1,2 +1,3 @@
+export * from "./logo";
 export * from "./sidebar";
-export * from "./welcome";
+export * from "./scenes";
