@@ -29,6 +29,8 @@ import { useContract } from "@/utils/crossbell.js";
 
 import bindIllustration from "@/public/images/sync/bind-illustration.png";
 
+import { X_SYNC_OPERATOR_PERMISSIONS } from "../hooks";
+
 export type PlatformCardProps = {
 	isBound: boolean;
 	platform: SupportedPlatform;
@@ -63,7 +65,10 @@ export function PlatformCard({
 	lastUpdatedAt,
 }: PlatformCardProps) {
 	const character = useAccountCharacter();
-	const hasOperator = useCharacterHasOperator(OPERATOR_ADDRESS);
+	const hasOperator = useCharacterHasOperator(
+		OPERATOR_ADDRESS,
+		X_SYNC_OPERATOR_PERMISSIONS
+	);
 	const contract = useContract();
 
 	const syncAccount = useSyncAccount(

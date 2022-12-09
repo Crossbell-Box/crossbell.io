@@ -19,6 +19,8 @@ import { ContractProvider } from "@/utils/crossbell.js";
 
 import seeYouImage from "@/public/images/sync/see-you-later.svg";
 
+import { X_SYNC_OPERATOR_PERMISSIONS } from "../hooks";
+
 export async function openRemoveOperatorModal(contract: Contract) {
 	return new Promise<void>((resolve) =>
 		openBorderlessModal({
@@ -54,7 +56,7 @@ export function RemoveOperatorModal() {
 	const [scene, setScene] = React.useState(Scene.wannaRemoveTips);
 
 	const [{ toggleOperator }, { isLoading: isRemoving }] =
-		useToggleCharacterOperator(OPERATOR_ADDRESS);
+		useToggleCharacterOperator(OPERATOR_ADDRESS, X_SYNC_OPERATOR_PERMISSIONS);
 
 	const removeOperator = React.useCallback(() => {
 		if (!isRemoving && character?.characterId) {
