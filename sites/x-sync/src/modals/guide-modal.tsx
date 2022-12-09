@@ -1,16 +1,13 @@
 import React from "react";
+import classNames from "classnames";
 import { Text } from "@mantine/core";
 import { closeAllModals } from "@mantine/modals";
 
 import { openBorderlessModal } from "~/shared/components/modal";
 import { Image } from "~/shared/components/image";
 
-import { CircleBtn, Arrow } from "@/src/components/welcome/scenes/components";
-import {
-	useScenes,
-	useSceneState,
-} from "@/src/components/welcome/scenes/hooks";
-import classNames from "classnames";
+import { CircleBtn, Arrow } from "@/src/components/scenes/components";
+import { useScenes, useSceneState } from "@/src/components/scenes/hooks";
 
 const closeModals = () => closeAllModals();
 
