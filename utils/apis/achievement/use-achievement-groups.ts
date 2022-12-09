@@ -128,7 +128,7 @@ export function useAchievementGroups(
 
 	const { data, status } = useQuery(
 		SCOPE_KEY_ACHIEVEMENT_GROUP(characterId),
-		() => indexer.getAchievement(characterId!),
+		() => indexer.getAchievements(characterId!),
 		{ enabled: !!characterId }
 	);
 
@@ -141,7 +141,7 @@ export function useAchievementGroups(
 }
 
 function formatData(
-	data?: Awaited<ReturnType<Indexer["getAchievement"]>> | null,
+	data?: Awaited<ReturnType<Indexer["getAchievements"]>> | null,
 	character?: CharacterEntity | null
 ): AchievementGroup[] {
 	return (

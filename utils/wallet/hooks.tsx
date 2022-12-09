@@ -1,35 +1,41 @@
+import React from "react";
+
 import { openMintNewCharacterModel } from "@/components/common/NewUserGuide";
-import { useConnectModal } from "@rainbow-me/rainbowkit";
-import { useCallback } from "react";
-import { useAccount } from "wagmi";
-import { useCurrentCharacter } from "../apis/indexer";
+import {
+	useAccountState,
+	useConnectModal,
+	useUpgradeAccountModal,
+} from "@/components/connectkit";
 
 export function useLoginChecker() {
-	const { address, isConnected } = useAccount();
-	const { characterId } = useCurrentCharacter();
-	const { openConnectModal } = useConnectModal();
+	const account = useAccountState((s) => s.computed.account);
+	const connectModal = useConnectModal();
+	const upgradeAccountModal = useUpgradeAccountModal();
 
-	const hasCharacter = Boolean(characterId);
+	return React.useMemo(
+		() => ({
+			validate({ walletRequired }: { walletRequired?: boolean } = {}) {
+				switch (account?.type) {
+					case "email":
+						if (walletRequired) {
+							upgradeAccountModal.show();
+							return false;
+						} else {
+							return true;
+						}
+					case "wallet":
+						if (account.characterId) {
+							return true;
+						} else {
+							openMintNewCharacterModel();
+							return false;
+						}
+				}
 
-	const validate = useCallback(() => {
-		if (!isConnected) {
-			openConnectModal?.();
-			return false;
-		}
-
-		if (!hasCharacter) {
-			openMintNewCharacterModel();
-			return false;
-		}
-
-		return true;
-	}, [address, isConnected, characterId]);
-
-	return {
-		address,
-		isConnected,
-		hasCharacter,
-		currentCharacterId: characterId,
-		validate,
-	};
+				connectModal.show();
+				return false;
+			},
+		}),
+		[account, connectModal, upgradeAccountModal]
+	);
 }

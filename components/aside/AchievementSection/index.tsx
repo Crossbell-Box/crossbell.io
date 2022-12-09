@@ -1,14 +1,12 @@
 import React from "react";
 
+import { useAccountCharacter } from "@/components/connectkit";
+import { useCharacterByHandle } from "@/utils/apis/indexer";
 import {
 	AchievementsStatus,
 	useAchievementGroups,
 	useAchievementsStatus,
 } from "@/utils/apis/achievement";
-import {
-	useCharacterByHandle,
-	useCurrentCharacter,
-} from "@/utils/apis/indexer";
 import { useCharacterRouterQuery } from "@/utils/url";
 import exploreImgUrl from "@/public/images/achievement/explore.png";
 import mintImgUrl from "@/public/images/achievement/mint.png";
@@ -53,13 +51,13 @@ export function AchievementSection() {
 }
 
 function useCharacterInfos() {
-	const connectedCharacter = useCurrentCharacter();
+	const character = useAccountCharacter();
 	const { handle } = useCharacterRouterQuery();
 	const { data } = useCharacterByHandle(handle);
 
 	return {
 		handle,
-		isConnectedCharacter: data?.characterId === connectedCharacter.characterId,
+		isConnectedCharacter: data?.characterId === character?.characterId,
 		character: data,
 	};
 }

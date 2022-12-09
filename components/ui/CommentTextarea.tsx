@@ -1,19 +1,25 @@
-import { usePostNoteForNote } from "@/utils/apis/contract";
-import { useCurrentCharacter } from "@/utils/apis/indexer";
-import { composeNoteMetadata } from "@/utils/metadata";
 import { Button, Space } from "@mantine/core";
 import { NoteEntity } from "crossbell.js";
 import { useState } from "react";
+
+import { composeNoteMetadata } from "@/utils/metadata";
+import EmojiPicker from "@/components/common/Input/EmojiPicker";
+import {
+	useAccountCharacter,
+	useConnectModal,
+	usePostNoteForNote,
+} from "@/components/connectkit";
+
 import Avatar from "../common/Avatar";
 import Textarea from "../common/Input/Textarea";
-import EmojiPicker from "@/components/common/Input/EmojiPicker";
 
 export function CommentTextarea({ note }: { note: NoteEntity }) {
-	const { data: character } = useCurrentCharacter();
+	const character = useAccountCharacter();
+	const connectModal = useConnectModal();
 
 	const [value, setValue] = useState("");
 
-	const postNoteForNote = usePostNoteForNote(note.characterId, note.noteId);
+	const postNoteForNote = usePostNoteForNote();
 
 	return (
 		<div className="px-3 py-3">
@@ -50,12 +56,18 @@ export function CommentTextarea({ note }: { note: NoteEntity }) {
 			<div className="flex justify-end">
 				<Button
 					disabled={value.length === 0}
-					onClick={() => {
-						const metadata = composeNoteMetadata({ content: value });
-						postNoteForNote.mutate(metadata, {
-							onSuccess: () => setValue(""),
-						});
-					}}
+					onClick={
+						character
+							? () => {
+									const metadata = composeNoteMetadata({ content: value });
+
+									postNoteForNote.mutate(
+										{ metadata, note },
+										{ onSuccess: () => setValue("") }
+									);
+							  }
+							: connectModal.show
+					}
 					loading={postNoteForNote.isLoading}
 				>
 					Comment

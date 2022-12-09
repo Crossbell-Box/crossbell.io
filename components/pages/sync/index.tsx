@@ -1,42 +1,24 @@
 import { Loader } from "@mantine/core";
-
 import React from "react";
-import { useIsFirstMount } from "@/utils/hooks/use-is-first-mount";
 
+import { useAccountCharacterId } from "@/components/connectkit";
 import {
-	useCharacterOperator,
-	useCurrentCharacter,
-} from "@/utils/apis/indexer";
-import {
-	OPERATOR_ADDRESS,
 	useCharacterActivation,
 	useCharacterBoundAccounts,
 } from "@/utils/apis/operator-sync";
-import { isAddressEqual } from "@/utils/ethers";
 
+import { useTurnSyncOn } from "./hooks";
 import CharacterSection from "./character-section";
 import OperatorSyncWelcome from "./operator-sync-welcome";
 import PlatformsSection from "./platforms-section";
-import { CharacterEntity } from "crossbell.js";
 
 export default function OperatorSyncMain() {
 	const characterInfo = useCharacterInfo();
-	const operatorInfo = useOperatorInfo(characterInfo.character?.characterId);
-	const boundAccounts = useCharacterBoundAccounts(
-		characterInfo.character?.characterId
-	);
-	const isFirstMount = useIsFirstMount();
+	const boundAccounts = useCharacterBoundAccounts(characterInfo.characterId);
+	const turnSyncOn = useTurnSyncOn();
 
-	if (characterInfo.hasCharacterId && isFirstMount) {
-		return renderLoading();
-	}
-
-	if (characterInfo.hasCharacterId) {
-		if (
-			characterInfo.isLoading ||
-			operatorInfo.isLoading ||
-			boundAccounts.isLoading
-		) {
+	if (characterInfo.characterId) {
+		if (characterInfo.isLoading || boundAccounts.isLoading) {
 			return renderLoading();
 		}
 
@@ -51,38 +33,25 @@ export default function OperatorSyncMain() {
 		}
 	}
 
-	return <OperatorSyncWelcome />;
-}
-
-function useOperatorInfo(
-	characterId: CharacterEntity["characterId"] | undefined
-) {
-	const { data, isLoading } = useCharacterOperator(characterId);
-
-	return React.useMemo(
-		() => ({
-			isLoading,
-			operator: data,
-			hasOperator: isAddressEqual(data, OPERATOR_ADDRESS),
-		}),
-		[data, isLoading]
+	return characterInfo.ssrReady ? (
+		<OperatorSyncWelcome onStart={turnSyncOn} />
+	) : (
+		renderLoading()
 	);
 }
 
 function useCharacterInfo() {
-	const { data: character, characterId } = useCurrentCharacter();
-	const { data: isActivated, isLoading } = useCharacterActivation(
-		character?.characterId
-	);
+	const { characterId, ssrReady } = useAccountCharacterId();
+	const { data: isActivated, isLoading } = useCharacterActivation(characterId);
 
 	return React.useMemo(
 		() => ({
+			ssrReady,
 			isLoading,
-			character,
-			hasCharacterId: !!characterId || !!character?.characterId,
+			characterId,
 			isActivated,
 		}),
-		[isLoading, isActivated, character, characterId]
+		[ssrReady, isLoading, characterId, isActivated]
 	);
 }
 

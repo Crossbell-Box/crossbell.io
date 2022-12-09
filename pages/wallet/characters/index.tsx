@@ -1,28 +1,30 @@
+import { Grid, Menu, Title, Text, ActionIcon } from "@mantine/core";
+import { showNotification } from "@mantine/notifications";
+import { CharacterEntity } from "crossbell.js";
+import Link from "next/link";
+
 import Avatar from "@/components/common/Avatar";
 import LoadingOverlay from "@/components/common/LoadingOverlay";
 import LoadMore from "@/components/common/LoadMore";
 import { getLayout } from "@/components/layouts/AppLayout";
 import Header from "@/components/layouts/Header";
 import { NextPageWithLayout } from "@/pages/_app";
-import { useSetPrimaryCharacterId } from "@/utils/apis/contract";
-import { useCharacterFollowStats, useCharacters } from "@/utils/apis/indexer";
+import { useCharacterFollowStats } from "@/utils/apis/indexer";
 import { extractCharacterName } from "@/utils/metadata";
 import {
 	composeCharacterHref,
 	composeWalletCharacterEditHref,
 	WalletCharacterNewHref,
 } from "@/utils/url";
-import { Grid, Menu, Title, Text, Skeleton, ActionIcon } from "@mantine/core";
-import { showNotification } from "@mantine/notifications";
-import { CharacterEntity } from "crossbell.js";
-import Link from "next/link";
-import { Fragment } from "react";
-import { useAccount } from "wagmi";
+import {
+	useAccountCharacters,
+	useAccountState,
+	useSetPrimaryCharacter,
+} from "@/components/connectkit";
 
 const Page: NextPageWithLayout = () => {
-	const { address } = useAccount();
-	const { isLoading, data, hasNextPage, fetchNextPage, isFetchingNextPage } =
-		useCharacters(address);
+	const { characters, hasNextPage, fetchNextPage, isFetchingNextPage } =
+		useAccountCharacters();
 
 	return (
 		<div>
@@ -30,15 +32,8 @@ const Page: NextPageWithLayout = () => {
 
 			<div className="mt-4">
 				<Grid justify="space-around" gutter="xs">
-					{data?.pages.map((page, i) => (
-						<Fragment key={i}>
-							{page?.list.map((character) => (
-								<CharacterCard
-									key={character.characterId}
-									character={character}
-								/>
-							))}
-						</Fragment>
+					{characters.map((character) => (
+						<CharacterCard key={character.characterId} character={character} />
 					))}
 
 					<LoadMore
@@ -74,13 +69,15 @@ const Page: NextPageWithLayout = () => {
 };
 
 function CharacterCard({ character }: { character: CharacterEntity }) {
-	const { data: followingStats, isLoading: isLoadingFollowingStats } =
-		useCharacterFollowStats(character.characterId);
+	const { data: followingStats } = useCharacterFollowStats(
+		character.characterId
+	);
+	const account = useAccountState((s) => s.computed.account);
 
-	const setPrimary = useSetPrimaryCharacterId(character.characterId);
+	const setPrimary = useSetPrimaryCharacter();
 
 	const handleSetPrimary = () => {
-		setPrimary.mutate(undefined, {
+		setPrimary.mutate(character, {
 			onSuccess: () => {
 				showNotification({
 					message: `Character @${character.handle} is now your primary character.`,
@@ -161,9 +158,14 @@ function CharacterCard({ character }: { character: CharacterEntity }) {
 							Edit
 						</Menu.Item>
 
-						<Menu.Item onClick={handleSetPrimary} disabled={character.primary}>
-							Set as primary
-						</Menu.Item>
+						{account?.type === "wallet" && (
+							<Menu.Item
+								onClick={handleSetPrimary}
+								disabled={character.primary}
+							>
+								Set as primary
+							</Menu.Item>
+						)}
 					</Menu.Dropdown>
 				</Menu>
 			</Link>

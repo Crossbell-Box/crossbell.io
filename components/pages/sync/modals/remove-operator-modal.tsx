@@ -3,20 +3,33 @@ import compact from "lodash.compact";
 import { closeAllModals } from "@mantine/modals";
 import { Button, LoadingOverlay, Text } from "@mantine/core";
 import { useClickOutside } from "@mantine/hooks";
+import { Contract } from "crossbell.js";
 
+import {
+	useAccountCharacter,
+	useToggleCharacterOperator,
+} from "@/components/connectkit";
 import { openBorderlessModal } from "@/components/common/Modal";
 import Image from "@/components/common/Image";
-import { useToggleSyncOperator } from "@/utils/apis/contract";
-import { NIL_ADDRESS } from "@/utils/ethers";
-import { useCurrentCharacter } from "@/utils/apis/indexer";
-import { useCharacterBoundAccounts } from "@/utils/apis/operator-sync";
+import {
+	OPERATOR_ADDRESS,
+	useCharacterBoundAccounts,
+} from "@/utils/apis/operator-sync";
+import { ContractProvider } from "@/utils/crossbell.js";
+
 import seeYouImage from "@/public/images/sync/see-you-later.svg";
 
-export async function openRemoveOperatorModal() {
+import { X_SYNC_OPERATOR_PERMISSIONS } from "../hooks";
+
+export async function openRemoveOperatorModal(contract: Contract) {
 	return new Promise<void>((resolve) =>
 		openBorderlessModal({
 			zIndex: 10000,
-			children: <RemoveOperatorModal />,
+			children: (
+				<ContractProvider contract={contract}>
+					<RemoveOperatorModal />
+				</ContractProvider>
+			),
 			classNames: { modal: "rounded-28px overflow-hidden w-auto" },
 			closeOnEscape: false,
 			closeOnClickOutside: false,
@@ -36,24 +49,22 @@ enum Scene {
 const closeModals = () => closeAllModals();
 
 export function RemoveOperatorModal() {
-	const { data: character } = useCurrentCharacter();
+	const character = useAccountCharacter();
 	const { data: boundAccounts = [] } = useCharacterBoundAccounts(
 		character?.characterId
 	);
 	const [scene, setScene] = React.useState(Scene.wannaRemoveTips);
 
-	const { mutate: removeOperator_, isLoading: isRemoving } =
-		useToggleSyncOperator("remove");
+	const [{ toggleOperator }, { isLoading: isRemoving }] =
+		useToggleCharacterOperator(OPERATOR_ADDRESS, X_SYNC_OPERATOR_PERMISSIONS);
 
 	const removeOperator = React.useCallback(() => {
 		if (!isRemoving && character?.characterId) {
-			removeOperator_(character.characterId, {
-				onSuccess() {
-					setScene(Scene.removed);
-				},
+			toggleOperator().then(() => {
+				setScene(Scene.removed);
 			});
 		}
-	}, [removeOperator_, isRemoving, character]);
+	}, [toggleOperator, isRemoving, character]);
 
 	const ref = useClickOutside(() => {
 		if (!isRemoving) {

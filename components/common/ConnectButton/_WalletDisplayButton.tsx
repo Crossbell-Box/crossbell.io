@@ -1,32 +1,40 @@
-import { useCurrentCharacter } from "@/utils/apis/indexer";
-import { truncateAddress } from "@/utils/ethers";
 import { Text, Space, type ButtonProps, Group } from "@mantine/core";
 import { forwardRef } from "react";
-import { useAccount, useBalance } from "wagmi";
-import Avatar from "@/components/common/Avatar";
-import BaseButton from "./_BaseButton";
-import { extractCharacterName } from "@/utils/metadata";
-import ArrowIcon from "./arrow-icon.svg";
-import Logo from "@/components/common/Logo";
-import Image from "../Image";
 import classNames from "classnames";
-import { ConnectButtonProps } from "./index";
 
-type WalletDisplayButtonProps = ButtonProps &
-	Pick<ConnectButtonProps, "mode"> & { menuOpened: boolean };
+import Avatar from "@/components/common/Avatar";
+import Logo from "@/components/common/Logo";
+import { truncateAddress } from "@/utils/ethers";
+
+import { ConnectButtonProps } from "./index";
+import BaseButton from "./_BaseButton";
+import Image from "../Image";
+import ArrowIcon from "./arrow-icon.svg";
+
+import {
+	GeneralAccount,
+	useAccountBalance,
+	useAccountCharacter,
+} from "@/components/connectkit";
+
+type WalletDisplayButtonProps = ButtonProps & {
+	menuOpened: boolean;
+	mode: ConnectButtonProps["mode"];
+	account: GeneralAccount;
+};
+
 const WalletDisplayButton = forwardRef<
 	HTMLButtonElement,
 	WalletDisplayButtonProps
->(({ menuOpened, mode, ...props }, ref) => {
-	const { address } = useAccount();
-	const { data: character, isLoading: isLoadingCharacter } =
-		useCurrentCharacter();
+>(({ menuOpened, mode, account, ...props }, ref) => {
+	const character = useAccountCharacter();
 
-	const { data: balance, isLoading: isLoadingBalance } = useBalance({
-		addressOrName: address,
-	});
+	const { balance, isLoading: isLoadingBalance } = useAccountBalance();
 
-	const isLoading = isLoadingCharacter || isLoadingBalance;
+	const isLoading = isLoadingBalance;
+	const addressDisplay = truncateAddress(
+		account.type === "email" ? account.email : account.address
+	);
 
 	if (mode === "minimal") {
 		return (
@@ -47,7 +55,7 @@ const WalletDisplayButton = forwardRef<
 				) : (
 					<Group spacing="sm">
 						<Text className="font-600" size="sm">
-							{truncateAddress(address)}
+							{addressDisplay}
 						</Text>
 
 						<Avatar character={character} size={28} />
@@ -82,7 +90,7 @@ const WalletDisplayButton = forwardRef<
 					<div className="flex flex-row justify-between items-center">
 						{/* addr */}
 						<Text size="xs" className="font-400 leading-1em text-[#C1CFF0]">
-							{truncateAddress(address)}
+							{addressDisplay}
 						</Text>
 
 						<Space w={5} />
@@ -95,7 +103,7 @@ const WalletDisplayButton = forwardRef<
 								size="sm"
 								className="leading-1.5rem font-400 text-[#F2F2F2]"
 							>
-								{balance?.formatted ?? "0.00"}
+								{balance ?? "0.00"}
 							</Text>
 						</div>
 					</div>

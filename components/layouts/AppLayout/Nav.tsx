@@ -1,14 +1,15 @@
-import ConnectButton from "@/components/common/ConnectButton";
-import { useCurrentCharacter } from "@/utils/apis/indexer";
-import { composeTreasuresWalletsHref } from "@/utils/url";
 import { UnstyledButton, Text, Space, Title, Navbar } from "@mantine/core";
 import { useFocusWithin } from "@mantine/hooks";
-import Link from "next/link";
-import classNames from "classnames";
 import { useRouter } from "next/router";
+import Link from "next/link";
 import { useEffect, useState } from "react";
 import { useAccount } from "wagmi";
+import classNames from "classnames";
+
+import ConnectButton from "@/components/common/ConnectButton";
 import Image from "@/components/common/Image";
+import { useAccountCharacter } from "@/components/connectkit";
+import { composeTreasuresWalletsHref } from "@/utils/url";
 
 import MoreMenu from "./MoreMenu";
 
@@ -59,7 +60,7 @@ type NavLinkProps = {
 };
 
 function NavLinks() {
-	const { data: character } = useCurrentCharacter();
+	const character = useAccountCharacter();
 	const { address } = useAccount();
 
 	const [navLinks, setNavLinks] = useState<Record<string, NavLinkProps>>({

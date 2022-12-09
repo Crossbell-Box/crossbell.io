@@ -1,17 +1,15 @@
-import {
-	useCharacterByHandle,
-	useCurrentCharacter,
-} from "@/utils/apis/indexer";
+import { useCharacterByHandle } from "@/utils/apis/indexer";
 import { useCharacterRouterQuery } from "@/utils/url";
+import { useAccountCharacter } from "@/components/connectkit";
 
 export function useCharacterInfos() {
-	const connectedCharacter = useCurrentCharacter();
+	const character = useAccountCharacter();
 	const { handle } = useCharacterRouterQuery();
 	const { data, status } = useCharacterByHandle(handle);
 
 	return {
 		handle,
-		isConnectedCharacter: data?.characterId === connectedCharacter.characterId,
+		isConnectedCharacter: data?.characterId === character?.characterId,
 		character: data,
 		status,
 	};

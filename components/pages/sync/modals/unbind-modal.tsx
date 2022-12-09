@@ -1,4 +1,10 @@
 import React, { useState } from "react";
+import { Button, Card, Space, Text, LoadingOverlay } from "@mantine/core";
+import classNames from "classnames";
+import { openConfirmModal, closeAllModals } from "@mantine/modals";
+import { useClickOutside } from "@mantine/hooks";
+import { Contract } from "crossbell.js";
+
 import Image from "@/components/common/Image";
 import { openBorderlessModal } from "@/components/common/Modal";
 import {
@@ -7,20 +13,19 @@ import {
 	SupportedPlatform,
 	useUnbindAccount,
 } from "@/utils/apis/operator-sync";
-import { Button, Card, Space, Text, LoadingOverlay } from "@mantine/core";
-import classNames from "classnames";
-import { openConfirmModal, closeAllModals } from "@mantine/modals";
-import { useClickOutside } from "@mantine/hooks";
+import { useAccountCharacter } from "@/components/connectkit";
+import { ContractProvider } from "@/utils/crossbell.js";
 
 import seeYouImage from "@/public/images/sync/see-you-later.svg";
-import { useCurrentCharacter } from "@/utils/apis/indexer";
 
 import { getChangeBioUrl, openWindowToChangeBio } from "../utils";
+
 import { BIO_IMAGE_MAP } from "./binding-modal.images";
 
 export function openUnbindingModal(
 	platform: SupportedPlatform,
-	identity: string
+	identity: string,
+	contract: Contract
 ) {
 	openConfirmModal({
 		title: `Unbind`,
@@ -38,7 +43,11 @@ export function openUnbindingModal(
 			setTimeout(() => {
 				openBorderlessModal({
 					zIndex: 10000,
-					children: <UnbindingModal platform={platform} identity={identity} />,
+					children: (
+						<ContractProvider contract={contract}>
+							<UnbindingModal platform={platform} identity={identity} />
+						</ContractProvider>
+					),
 					classNames: { modal: "rounded-28px overflow-hidden" },
 					closeOnClickOutside: false,
 					closeOnEscape: false,
@@ -59,7 +68,7 @@ function UnbindingModal({ platform, identity }: UnbindingModalProps) {
 	// steps
 	const [step, setStep] = useState(0);
 
-	const { data: character } = useCurrentCharacter();
+	const character = useAccountCharacter();
 	const veriHandle = getVeriHandle(character?.handle!);
 
 	const unbindAccount = useUnbindAccount({

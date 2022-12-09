@@ -1,6 +1,3 @@
-import { useCharacters, useCurrentCharacterId } from "@/utils/apis/indexer";
-import { extractCharacterName } from "@/utils/metadata";
-import { composeCharacterHref } from "@/utils/url";
 import {
 	ScrollArea,
 	LoadingOverlay,
@@ -12,25 +9,32 @@ import { useDisclosure } from "@mantine/hooks";
 import { useModals } from "@mantine/modals";
 import { showNotification } from "@mantine/notifications";
 import { useRouter } from "next/router";
-import { Fragment } from "react";
-import { useAccount } from "wagmi";
+
+import { useAccountState, useAccountCharacters } from "@/components/connectkit";
+import { extractCharacterName } from "@/utils/metadata";
+import { composeCharacterHref } from "@/utils/url";
 import LoadMore from "@/components/common/LoadMore";
 import Avatar from "@/components/common/Avatar";
+
 import MenuItem from "./_MenuItem";
 
 export default function AccountList() {
-	const { address } = useAccount();
-	const { isLoading, data, hasNextPage, fetchNextPage, isFetchingNextPage } =
-		useCharacters(address);
-
-	const [curCid, setCurCid] = useCurrentCharacterId();
+	const account = useAccountState((s) => s.computed.account);
+	const switchCharacter = useAccountState((s) => s.switchCharacter);
+	const {
+		isLoading,
+		characters,
+		hasNextPage,
+		fetchNextPage,
+		isFetchingNextPage,
+	} = useAccountCharacters();
 
 	const modals = useModals();
 
 	const [shouldNavigate, shouldNavigateHandles] = useDisclosure(true); // FIXME: a closure bug?
 	const router = useRouter();
 
-	const hasNoResult = !isLoading && !data?.pages.some((page) => page.count > 0);
+	const hasNoResult = !isLoading && characters.length === 0;
 
 	return (
 		<ScrollArea.Autosize maxHeight="50vh">
@@ -39,78 +43,76 @@ export default function AccountList() {
 					<LoadingOverlay visible={isLoading} />
 				</div>
 			)}
-			{data?.pages.map((page, i) => (
-				<Fragment key={i}>
-					{page?.list.map((c) => (
-						<MenuItem
-							rightSection={
-								c.characterId === curCid ? (
-									<Text className="i-csb:tick" color="brand" />
-								) : null
-							}
-							key={c.characterId}
-							onClick={() => {
-								if (c.characterId === curCid) {
-									return;
-								}
-								modals.openConfirmModal({
-									title: `Switch to @${c.handle}?`,
-									children: (
-										<div>
-											Are you sure you want to switch to this character?
-											<Checkbox
-												label={
-													<Text color="dimmed">
-														Navigate to the character page after switching
-													</Text>
-												}
-												size="xs"
-												className="my-2"
-												checked={shouldNavigate}
-												onChange={(event) => {
-													if (event.currentTarget.checked) {
-														shouldNavigateHandles.open();
-													} else {
-														shouldNavigateHandles.close();
-													}
-												}}
-											/>
-										</div>
-									),
-									labels: { confirm: "Switch", cancel: "Cancel" },
-									onConfirm: () => {
-										setCurCid(c.characterId);
-										showNotification({ message: `Switched to @${c.handle}` });
-										if (shouldNavigate) {
-											setTimeout(() => {
-												router.push(composeCharacterHref(c.handle));
-											}, 1000);
+			{characters.map((character, i) => (
+				<MenuItem
+					rightSection={
+						character.characterId === account?.characterId ? (
+							<Text className="i-csb:tick" color="brand" />
+						) : null
+					}
+					key={character.characterId}
+					onClick={() => {
+						if (character.characterId === account?.characterId) {
+							return;
+						}
+						modals.openConfirmModal({
+							title: `Switch to @${character.handle}?`,
+							children: (
+								<div>
+									Are you sure you want to switch to this character?
+									<Checkbox
+										label={
+											<Text color="dimmed">
+												Navigate to the character page after switching
+											</Text>
 										}
-									},
-								});
-							}}
-						>
-							<div className="flex items-center" key={c.characterId}>
-								{/* avatar */}
-								{c && <Avatar size={32} character={c} />}
-
-								<Space w="xs" />
-
-								<div className="flex flex-col">
-									{/* name */}
-									<Text className="text-sm font-semibold overflow-hidden text-ellipsis max-w-8em">
-										{extractCharacterName(c, { fallbackToHandle: false })}
-									</Text>
-
-									{/* handle */}
-									<Text className="text-xs overflow-hidden text-ellipsis max-w-8em">
-										@{c.handle}
-									</Text>
+										size="xs"
+										className="my-2"
+										checked={shouldNavigate}
+										onChange={(event) => {
+											if (event.currentTarget.checked) {
+												shouldNavigateHandles.open();
+											} else {
+												shouldNavigateHandles.close();
+											}
+										}}
+									/>
 								</div>
-							</div>
-						</MenuItem>
-					))}
-				</Fragment>
+							),
+							labels: { confirm: "Switch", cancel: "Cancel" },
+							onConfirm: () => {
+								switchCharacter(character);
+								showNotification({
+									message: `Switched to @${character.handle}`,
+								});
+								if (shouldNavigate) {
+									setTimeout(() => {
+										router.push(composeCharacterHref(character.handle));
+									}, 1000);
+								}
+							},
+						});
+					}}
+				>
+					<div className="flex items-center" key={character.characterId}>
+						{/* avatar */}
+						{character && <Avatar size={32} character={character} />}
+
+						<Space w="xs" />
+
+						<div className="flex flex-col">
+							{/* name */}
+							<Text className="text-sm font-semibold overflow-hidden text-ellipsis max-w-8em">
+								{extractCharacterName(character, { fallbackToHandle: false })}
+							</Text>
+
+							{/* handle */}
+							<Text className="text-xs overflow-hidden text-ellipsis max-w-8em">
+								@{character.handle}
+							</Text>
+						</div>
+					</div>
+				</MenuItem>
 			))}
 
 			<LoadMore

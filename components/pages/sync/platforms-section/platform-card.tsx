@@ -5,12 +5,12 @@ import { Text } from "@mantine/core";
 import React from "react";
 import { StaticImageData } from "next/image";
 import { showNotification } from "@mantine/notifications";
+import dayjs from "dayjs";
 
-import { isAddressEqual } from "@/utils/ethers";
 import {
-	useCharacterOperator,
-	useCurrentCharacter,
-} from "@/utils/apis/indexer";
+	useAccountCharacter,
+	useCharacterHasOperator,
+} from "@/components/connectkit";
 import {
 	getPlatformDisplayName,
 	getPlatformUserProfileUrl,
@@ -25,8 +25,11 @@ import {
 } from "@/components/pages/sync/modals";
 import Image from "@/components/common/Image";
 import { formatDate } from "@/utils/time";
+import { useContract } from "@/utils/crossbell.js";
+
 import bindIllustration from "@/public/images/sync/bind-illustration.png";
-import dayjs from "dayjs";
+
+import { X_SYNC_OPERATOR_PERMISSIONS } from "../hooks";
 
 export type PlatformCardProps = {
 	isBound: boolean;
@@ -61,8 +64,12 @@ export function PlatformCard({
 	noteCount,
 	lastUpdatedAt,
 }: PlatformCardProps) {
-	const { data: character } = useCurrentCharacter();
-	const { data: operator } = useCharacterOperator(character?.characterId);
+	const character = useAccountCharacter();
+	const hasOperator = useCharacterHasOperator(
+		OPERATOR_ADDRESS,
+		X_SYNC_OPERATOR_PERMISSIONS
+	);
+	const contract = useContract();
 
 	const syncAccount = useSyncAccount(
 		character?.characterId!,
@@ -74,7 +81,6 @@ export function PlatformCard({
 		? getPlatformUserProfileUrl(platform, identity)
 		: getPlatformSite(platform);
 
-	const hasOperator = isAddressEqual(operator, OPERATOR_ADDRESS);
 	const disableBtn = !hasOperator && !isBound;
 
 	return (
@@ -85,7 +91,7 @@ export function PlatformCard({
 			<div
 				className={classNames(
 					"absolute z-1 top-40px -right-20px flex",
-					!hasOperator && "grayscale-80 brightness-160"
+					disableBtn && "grayscale-80 brightness-160"
 				)}
 			>
 				<button
@@ -102,9 +108,9 @@ export function PlatformCard({
 					disabled={disableBtn}
 					onClick={() => {
 						if (isBound) {
-							openUnbindingModal(platform, identity!);
+							openUnbindingModal(platform, identity!, contract);
 						} else {
-							openBindingModal(platform);
+							openBindingModal(platform, contract);
 						}
 					}}
 				>

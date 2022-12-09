@@ -1,5 +1,3 @@
-import { PropsWithChildren, useEffect, useState } from "react";
-import { useCharacter, useCharacterByHandle } from "@/utils/apis/indexer";
 import {
 	TextInput,
 	Button,
@@ -14,21 +12,25 @@ import {
 } from "@mantine/core";
 import { useForm } from "@mantine/form";
 import { Dropzone, IMAGE_MIME_TYPE } from "@mantine/dropzone";
-import { ipfsLinkToHttpLink, uploadToIpfs } from "@/utils/ipfs";
-import { extractCharacterName } from "@/utils/metadata";
 import { useDebouncedValue } from "@mantine/hooks";
-import {
-	useCreateCharacter,
-	useSetCharacterHandle,
-	useSetCharacterMetadata,
-} from "@/utils/apis/contract";
-import LoadingOverlay from "../common/LoadingOverlay";
-import { composeCharacterHref } from "@/utils/url";
 import { showNotification } from "@mantine/notifications";
 import Link from "next/link";
-import { useConnectModal } from "@rainbow-me/rainbowkit";
-import { useAccount } from "wagmi";
+import { PropsWithChildren, useEffect, useState } from "react";
+
+import { useCharacter, useCharacterByHandle } from "@/utils/apis/indexer";
+import { ipfsLinkToHttpLink, uploadToIpfs } from "@/utils/ipfs";
+import { extractCharacterName } from "@/utils/metadata";
+import { composeCharacterHref } from "@/utils/url";
 import { BizError } from "@/utils/errors";
+import {
+	useAccountState,
+	useConnectModal,
+	useCreateCharacter,
+	useUpdateCharacterHandle,
+	useUpdateCharacterMetadata,
+} from "@/components/connectkit";
+
+import LoadingOverlay from "../common/LoadingOverlay";
 
 export default function CharacterManagement({
 	characterId,
@@ -37,6 +39,7 @@ export default function CharacterManagement({
 }>) {
 	const { data: character, isLoading: isLoadingCharacter } =
 		useCharacter(characterId);
+	const isAbleToEditHandle = useAccountState((s) => !!s.wallet);
 
 	const [avatarLoading, setAvatarLoading] = useState(false);
 	const mode: "new" | "edit" = characterId ? "edit" : "new";
@@ -152,8 +155,8 @@ export default function CharacterManagement({
 	};
 
 	const createCharacter = useCreateCharacter();
-	const setHandle = useSetCharacterHandle(character?.characterId!);
-	const setMetadata = useSetCharacterMetadata(character?.characterId!);
+	const setHandle = useUpdateCharacterHandle();
+	const setMetadata = useUpdateCharacterMetadata();
 
 	const [loadingDescription, setLoadingDescription] = useState(
 		"Loading character..."
@@ -176,14 +179,15 @@ export default function CharacterManagement({
 				const currentName = extractCharacterName(character, {
 					fallbackToHandle: false,
 				});
-				const currentBio = character.metadata?.content?.bio;
-				const currentAvatar = character.metadata?.content?.avatars?.[0];
+				const currentBio = character.metadata?.content?.bio ?? "";
+				const currentAvatar = character.metadata?.content?.avatars?.[0] ?? "";
 
 				// task1: check if handle is changed
 				if (form.values.handle !== currentHandle) {
 					taskNames.push("Updating handle");
 					tasks.push(async () => {
 						await setHandle.mutateAsync({
+							characterId: character.characterId,
 							handle: form.values.handle,
 						});
 					});
@@ -198,6 +202,7 @@ export default function CharacterManagement({
 					taskNames.push("Updating metadata");
 					tasks.push(async () => {
 						await setMetadata.mutateAsync({
+							characterId: character.characterId,
 							metadata: {
 								name: form.values.name,
 								avatars: [form.values.avatar].filter((x) => Boolean(x)),
@@ -304,20 +309,22 @@ export default function CharacterManagement({
 					<Space h={15} />
 
 					{/* handle */}
-					<Group>
-						<TextInput
-							className="flex-1"
-							placeholder="A globally unique handle (ID) for your character"
-							label="Handle"
-							required
-							size="md"
-							maxLength={31}
-							rightSection={
-								isFetchingExistingHandle ? <Loader size="xs" /> : null
-							}
-							{...form.getInputProps("handle")}
-						/>
-					</Group>
+					{isAbleToEditHandle && (
+						<Group>
+							<TextInput
+								className="flex-1"
+								placeholder="A globally unique handle (ID) for your character"
+								label="Handle"
+								required
+								size="md"
+								maxLength={31}
+								rightSection={
+									isFetchingExistingHandle ? <Loader size="xs" /> : null
+								}
+								{...form.getInputProps("handle")}
+							/>
+						</Group>
+					)}
 
 					<Space h={15} />
 
@@ -408,14 +415,17 @@ export default function CharacterManagement({
 
 // This will keep popping up if the user is not logged in.
 function LoginPopup() {
-	const { isConnected } = useAccount();
+	const { account, ssrReady } = useAccountState((s) => ({
+		account: s.computed.account,
+		ssrReady: s.ssrReady,
+	}));
 	const connectModal = useConnectModal();
 
 	useEffect(() => {
-		if (!isConnected) {
-			connectModal.openConnectModal?.();
+		if (ssrReady && !account && !connectModal.isActive) {
+			connectModal.show();
 		}
-	});
+	}, [account, ssrReady, connectModal]);
 
 	return <></>;
 }

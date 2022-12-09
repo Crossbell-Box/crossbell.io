@@ -1,8 +1,7 @@
 import { showNotification } from "@mantine/notifications";
 import { useMutation, useQuery, useQueryClient } from "@tanstack/react-query";
 
-import { useContract } from "@/utils/crossbell.js";
-import { deepMerge } from "@/utils/metadata";
+import { useChangeCharacterMetadata } from "@/components/connectkit";
 
 import OperatorSyncApi from "./api";
 import { SupportedPlatform } from "./consts";
@@ -88,21 +87,19 @@ export function useBindAccount({
 	startTime,
 }: UseBindAccountParams) {
 	const client = useQueryClient();
-	const contract = useContract();
+	const changeCharacterMetadata = useChangeCharacterMetadata();
 
 	return useMutation(
 		async () => {
-			await contract.changeCharacterMetadata(characterId, (oMetadata) => {
-				const connectedAccountSet = new Set([
-					...(oMetadata?.connected_accounts ?? []),
-					csbAccountURI(identity, platform),
-				]);
+			await changeCharacterMetadata((draft) => {
+				const accountURI = csbAccountURI(identity, platform);
 
-				const connected_accounts = Array.from(connectedAccountSet);
-
-				return oMetadata
-					? deepMerge(oMetadata, { connected_accounts })
-					: { connected_accounts };
+				if (!draft.connected_accounts?.includes(accountURI)) {
+					draft.connected_accounts = [
+						...(draft.connected_accounts ?? []),
+						accountURI,
+					];
+				}
 			});
 
 			return api.bindAccount(characterId!, platform, identity, startTime);
@@ -139,19 +136,17 @@ export function useUnbindAccount({
 	identity,
 }: UseUnbindAccountParams) {
 	const client = useQueryClient();
-	const contract = useContract();
+	const changeCharacterMetadata = useChangeCharacterMetadata();
 
 	return useMutation(
 		async () => {
-			await contract.changeCharacterMetadata(characterId, (oMetadata) => {
-				const connected_accounts =
-					oMetadata?.connected_accounts?.filter(
-						(account) => account !== csbAccountURI(identity, platform)
-					) ?? [];
+			await changeCharacterMetadata((draft) => {
+				const accountURI = csbAccountURI(identity, platform);
+				const index = draft.connected_accounts?.indexOf(accountURI) ?? -1;
 
-				return oMetadata
-					? deepMerge(oMetadata, { connected_accounts })
-					: { connected_accounts };
+				if (index > -1) {
+					draft.connected_accounts?.splice(index, 1);
+				}
 			});
 
 			return api.unbindAccount(characterId!, platform!, identity);

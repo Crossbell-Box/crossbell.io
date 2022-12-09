@@ -1,9 +1,7 @@
 import { useInfiniteQuery, useQuery } from "@tanstack/react-query";
 import { indexer } from "@/utils/crossbell.js";
-import { useLocalStorage } from "@mantine/hooks";
-import { useEffect } from "react";
-import { useAccount } from "wagmi";
-import { LinkTypes } from "../contract";
+
+import { CharacterLinkType } from "./types";
 
 const SCOPE_KEY = ["indexer", "characters"];
 
@@ -96,66 +94,6 @@ export function useCharacterHandleExists(handle?: string) {
 export const SCOPE_KEY_PRIMARY_CHARACTER = (address?: string) => {
 	return [...SCOPE_KEY, "primary", address];
 };
-export function usePrimaryCharacter<T>(address?: string) {
-	return useQuery(
-		SCOPE_KEY_PRIMARY_CHARACTER(address),
-		() => indexer.getPrimaryCharacter(address!),
-		{ enabled: Boolean(address) }
-	);
-}
-
-// get the current character of the user
-
-const CurrentCharacterIdKey = "currentCharacterId";
-export function getCurrentCharacterId() {
-	return localStorage.getItem(CurrentCharacterIdKey);
-}
-export function useCurrentCharacterId() {
-	return useLocalStorage<number>({
-		key: CurrentCharacterIdKey,
-		serialize: (cid) => cid.toString(),
-		getInitialValueInEffect: true, // must be true otherwise hydrate will not work
-	});
-}
-export function useDisconnectCurrentCharacter() {
-	const disconnect = () => {
-		localStorage.removeItem(CurrentCharacterIdKey);
-	};
-	return { disconnect };
-}
-
-export function useCurrentCharacter() {
-	const { address } = useAccount();
-	const [cid, setCid] = useCurrentCharacterId();
-
-	const query = cid ? useCharacter(cid) : usePrimaryCharacter(address);
-
-	useEffect(() => {
-		if (!localStorage.getItem(CurrentCharacterIdKey)) {
-			if (query.data?.characterId) {
-				setCid(query.data?.characterId);
-			}
-		}
-	}, [query.data]);
-
-	return {
-		...query,
-		characterId: cid,
-	};
-}
-
-// check if the current user has a character
-export function useHasCharacter() {
-	const { data, status, fetchStatus } = useCurrentCharacter();
-	const isLoadingCharacter = status === "loading" && fetchStatus !== "idle";
-	const hasCharacter = Boolean(data);
-
-	return {
-		hasCharacter,
-		isLoadingCharacter,
-		currentCharacter: data,
-	};
-}
 
 // get the following status of a character
 
@@ -173,13 +111,13 @@ export function useCharacterFollowStats(
 				indexer
 					.getLinks(characterId!, {
 						limit: 0,
-						linkType: LinkTypes.follow,
+						linkType: CharacterLinkType.follow,
 					})
 					.then((links) => links.count),
 				indexer
 					.getBacklinksOfCharacter(characterId!, {
 						limit: 0,
-						linkType: LinkTypes.follow,
+						linkType: CharacterLinkType.follow,
 					})
 					.then((links) => links.count),
 			]);
@@ -210,14 +148,14 @@ export function useCharacterFollowRelation(
 			const [isFollowing, isFollowed] = await Promise.all([
 				indexer
 					.getLinks(fromCharacterId!, {
-						linkType: LinkTypes.follow,
+						linkType: CharacterLinkType.follow,
 						limit: 0,
 						toCharacterId: toCharacterID,
 					})
 					.then((links) => links.count > 0),
 				indexer
 					.getLinks(toCharacterID!, {
-						linkType: LinkTypes.follow,
+						linkType: CharacterLinkType.follow,
 						limit: 0,
 						toCharacterId: fromCharacterId,
 					})

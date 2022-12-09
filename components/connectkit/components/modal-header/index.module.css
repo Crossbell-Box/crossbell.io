@@ -1,0 +1,3 @@
+.container button:focus {
+	outline: none;
+}

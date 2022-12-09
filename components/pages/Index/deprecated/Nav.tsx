@@ -1,12 +1,13 @@
 import Link from "next/link";
-import Logo from "@/components/common/Logo";
 import { Menu, Button, Title, Text } from "@mantine/core";
+
+import Logo from "@/components/common/Logo";
 import ConnectButton from "@/components/common/ConnectButton";
-import { useCurrentCharacter } from "@/utils/apis/indexer";
 import SearchInput from "@/components/common/Input/SearchInput";
+import { useAccountCharacter } from "@/components/connectkit";
 
 const NavLinks = () => {
-	const { data: character } = useCurrentCharacter();
+	const character = useAccountCharacter();
 
 	const navLinks = [
 		{ href: "/feed", title: "Feed" },

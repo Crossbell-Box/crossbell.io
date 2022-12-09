@@ -1,4 +1,3 @@
-import React from "react";
 import {
 	Button,
 	Card,
@@ -9,8 +8,10 @@ import {
 } from "@mantine/core";
 import { useHotkeys } from "@mantine/hooks";
 import { closeAllModals } from "@mantine/modals";
-import classNames from "classnames";
 import { useClickOutside } from "@mantine/hooks";
+import React from "react";
+import classNames from "classnames";
+import { Contract } from "crossbell.js";
 
 import Image from "@/components/common/Image";
 import { openBorderlessModal } from "@/components/common/Modal";
@@ -22,9 +23,9 @@ import {
 	SupportedPlatform,
 	useBindAccount,
 } from "@/utils/apis/operator-sync";
-
-import { useCurrentCharacter } from "@/utils/apis/indexer";
+import { useAccountCharacter } from "@/components/connectkit";
 import { copyToClipboard } from "@/utils/other";
+import { ContractProvider } from "@/utils/crossbell.js";
 
 import DoneImage from "@/public/images/sync/congrats.svg";
 
@@ -39,10 +40,17 @@ const closeModals = () => closeAllModals();
 
 const modalZIndex = 10000;
 
-export function openBindingModal(platform: SupportedPlatform) {
+export function openBindingModal(
+	platform: SupportedPlatform,
+	contract: Contract
+) {
 	openBorderlessModal({
 		zIndex: modalZIndex,
-		children: <BindingModal platform={platform} />,
+		children: (
+			<ContractProvider contract={contract}>
+				<BindingModal platform={platform} />
+			</ContractProvider>
+		),
 		classNames: { modal: "rounded-24px overflow-hidden" },
 		closeOnClickOutside: false,
 		closeOnEscape: false,
@@ -57,7 +65,7 @@ enum Scene {
 function BindingModal({ platform }: { platform: SupportedPlatform }) {
 	const [scene, setScene] = React.useState(Scene.form);
 	const [username, setUsername] = React.useState("");
-	const { data: character } = useCurrentCharacter();
+	const character = useAccountCharacter();
 	const veriHandle = character?.handle && getVeriHandle(character.handle);
 	const profileUrl = username && getPlatformUserProfileUrl(platform, username);
 

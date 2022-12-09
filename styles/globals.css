@@ -18,3 +18,29 @@ a {
 *::after {
 	box-sizing: border-box;
 }
+
+.ux-overlay {
+	position: relative;
+	cursor: pointer;
+}
+
+.ux-overlay::after {
+	content: "";
+	position: absolute;
+	top: 0;
+	left: 0;
+	right: 0;
+	bottom: 0;
+	border-radius: inherit;
+	background: #000;
+	opacity: 0;
+	transition: opacity 0.2s;
+}
+
+.ux-overlay:hover::after {
+	opacity: 0.05;
+}
+
+.ux-overlay:active::after {
+	opacity: 0.15;
+}

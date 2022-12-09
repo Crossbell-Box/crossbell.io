@@ -1,3 +1,4 @@
+export * from "./types";
 export * from "./character";
 export * from "./mintednote";
 export * from "./note";
@@ -6,4 +7,3 @@ export * from "./link";
 export * from "./account";
 export * from "./search";
 export * from "./csb";
-export * from "./operator";

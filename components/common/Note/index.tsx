@@ -1,24 +1,33 @@
-import Avatar from "@/components/common/Avatar";
 import { Skeleton, Space, Text, Title } from "@mantine/core";
 import { CharacterEntity, NoteEntity } from "crossbell.js";
-import { useCharacter, useNote, useNoteStatus } from "@/utils/apis/indexer";
-import classNames from "classnames";
-import MediaCarousel from "./MediaCarousel";
 import { useRouter } from "next/router";
-import { composeNoteHref, getOrigin, useNoteRouterQuery } from "@/utils/url";
-import { useLikeNote, useMintNote, useUnlikeNote } from "@/utils/apis/contract";
-import { copyToClipboard } from "@/utils/other";
-import Tooltip from "../Tooltip";
-import LoadingOverlay from "../LoadingOverlay";
-import { MarkdownRenderer } from "./MarkdownRenderer";
 import { useAccount } from "wagmi";
-import { CharacterHandle, CharacterName } from "../Character";
-import Time from "../Time";
+import { useCallback } from "react";
+import classNames from "classnames";
+
+import Avatar from "@/components/common/Avatar";
+import {
+	useAccountCharacter,
+	useToggleLikeNote,
+} from "@/components/connectkit";
+import { useCharacter, useNote, useNoteStatus } from "@/utils/apis/indexer";
+import { composeNoteHref, getOrigin, useNoteRouterQuery } from "@/utils/url";
+import { useMintNote } from "@/utils/apis/contract";
+import { copyToClipboard } from "@/utils/other";
 import { getValidAttachments } from "@/utils/metadata";
+import { useLoginChecker } from "@/utils/wallet/hooks";
+import { useRefCallback } from "@/utils/hooks/use-ref-callback";
+
+import { CharacterHandle, CharacterName } from "../Character";
+import LoadingOverlay from "../LoadingOverlay";
+import Tooltip from "../Tooltip";
+import Time from "../Time";
+import MetadataContentUpdater from "../MetadataContentUpdater";
+
+import { MarkdownRenderer } from "./MarkdownRenderer";
+import MediaCarousel from "./MediaCarousel";
 import NoteSourceBadges from "./NoteSourceBadges";
 import NoteIdBadge from "./NoteIdBadge";
-import { useCallback } from "react";
-import MetadataContentUpdater from "../MetadataContentUpdater";
 
 function ActionButton({
 	text,
@@ -349,29 +358,41 @@ function NoteActions({
 	characterId: number;
 	noteId: number;
 }) {
-	const { data: status } = useNoteStatus(characterId, noteId);
+	const currentCharacter = useAccountCharacter();
+	const { data: status } = useNoteStatus(
+		characterId,
+		noteId,
+		currentCharacter ?? null
+	);
 
-	const likeNote = useLikeNote(characterId, noteId);
-	const unlikeNote = useUnlikeNote(characterId, noteId);
+	const {
+		isLiked,
+		isLoading: isToggleLikeNoteLoading,
+		likeCount,
+		toggleLike,
+	} = useToggleLikeNote({
+		characterId,
+		noteId,
+		status,
+	});
 
 	const { address } = useAccount();
 	const mintNote = useMintNote(characterId, noteId, address!);
 
 	const { navigate } = useNavigateToNote(characterId, noteId);
+	const { validate } = useLoginChecker();
 
-	const handleLike = useCallback(() => {
-		if (status?.isLiked) {
-			unlikeNote.mutate();
-		} else {
-			likeNote.mutate();
+	const handleLike = useRefCallback(() => {
+		if (validate()) {
+			toggleLike();
 		}
-	}, [status?.isLiked]);
+	});
 
-	const handleMint = useCallback(() => {
-		if (!status?.isMinted) {
+	const handleMint = useRefCallback(() => {
+		if (!status?.isMinted && validate({ walletRequired: true })) {
 			mintNote.mutate();
 		}
-	}, [status?.isMinted]);
+	});
 
 	const handleCopyToClipboard = useCallback(async () => {
 		await copyToClipboard(getOrigin() + composeNoteHref(characterId, noteId), {
@@ -382,9 +403,7 @@ function NoteActions({
 	return (
 		<div className="flex items-center justify-between">
 			<LoadingOverlay
-				visible={
-					likeNote.isLoading || unlikeNote.isLoading || mintNote.isLoading
-				}
+				visible={isToggleLikeNoteLoading || mintNote.isLoading}
 				description="Loading..."
 				global
 			/>
@@ -401,10 +420,10 @@ function NoteActions({
 
 			{/* like */}
 			<ActionButton
-				text={status?.likeCount ?? "..."}
+				text={likeCount ?? "..."}
 				label="Like"
-				icon={status?.isLiked ? "i-csb:like-filled" : "i-csb:like"}
-				color={status?.isLiked ? "text-red" : "text-dimmed"}
+				icon={isLiked ? "i-csb:like-filled" : "i-csb:like"}
+				color={isLiked ? "text-red" : "text-dimmed"}
 				bgHoverColor="group-hover:bg-red/10"
 				textHoverColor="group-hover:text-red"
 				onClick={handleLike}

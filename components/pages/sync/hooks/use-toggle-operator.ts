@@ -1,28 +1,28 @@
 import React from "react";
+import { showNotification } from "@mantine/notifications";
 
-import { useToggleSyncOperator } from "@/utils/apis/contract";
-import { isAddressEqual } from "@/utils/ethers";
 import { OPERATOR_ADDRESS } from "@/utils/apis/operator-sync";
 import {
-	useCharacterOperator,
-	useCurrentCharacter,
-} from "@/utils/apis/indexer";
-import { showNotification } from "@mantine/notifications";
+	useAccountCharacter,
+	useToggleCharacterOperator,
+} from "@/components/connectkit";
+import { useContract } from "@/utils/crossbell.js";
 
 import { openRemoveOperatorModal } from "../modals";
 
-export function useToggleOperator() {
-	const { data: character } = useCurrentCharacter();
-	const { data: operator } = useCharacterOperator(character?.characterId);
-	const [isTogglingOperator, setIsTogglingOperator] = React.useState(false);
+import { X_SYNC_OPERATOR_PERMISSIONS } from "./const";
 
-	const setOperator = useToggleSyncOperator("add");
+export function useToggleOperator() {
+	const character = useAccountCharacter();
+	const [{ toggleOperator, hasOperator }] = useToggleCharacterOperator(
+		OPERATOR_ADDRESS,
+		X_SYNC_OPERATOR_PERMISSIONS
+	);
+	const [isTogglingOperator, setIsTogglingOperator] = React.useState(false);
+	const contract = useContract();
 
 	return React.useMemo(() => {
-		const hasOperator = isAddressEqual(operator, OPERATOR_ADDRESS);
-
 		return {
-			operator,
 			hasOperator,
 			isTogglingOperator,
 			async toggleOperator() {
@@ -32,15 +32,13 @@ export function useToggleOperator() {
 					setIsTogglingOperator(true);
 
 					if (hasOperator) {
-						await openRemoveOperatorModal();
+						await openRemoveOperatorModal(contract);
 					} else {
-						await setOperator.mutateAsync(character.characterId, {
-							onSuccess() {
-								showNotification({
-									message: "Successfully authorized the operator",
-									color: "green",
-								});
-							},
+						await toggleOperator();
+
+						showNotification({
+							message: "Successfully authorized the operator",
+							color: "green",
 						});
 					}
 				} finally {
@@ -48,11 +46,5 @@ export function useToggleOperator() {
 				}
 			},
 		};
-	}, [
-		operator,
-		character,
-		setOperator,
-		isTogglingOperator,
-		setIsTogglingOperator,
-	]);
+	}, [character?.characterId, hasOperator, isTogglingOperator, toggleOperator]);
 }

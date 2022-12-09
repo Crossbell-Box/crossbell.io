@@ -1,8 +1,9 @@
 import { indexer } from "@/utils/crossbell.js";
 import { useQuery, useInfiniteQuery } from "@tanstack/react-query";
 import { useAccount } from "wagmi";
-import { LinkTypes } from "../contract";
-import { useCurrentCharacter } from "./character";
+import { CharacterEntity } from "crossbell.js";
+
+import { NoteLinkType } from "./types";
 
 const SCOPE_KEY = ["indexer", "notes"];
 
@@ -95,8 +96,11 @@ export function useNote(
 export const SCOPE_KEY_NOTE_STATUS = (characterId: number, noteId: number) => {
 	return [...SCOPE_KEY, "status", characterId, noteId];
 };
-export function useNoteStatus(characterId: number, noteId: number) {
-	const { data: currentCharacter } = useCurrentCharacter();
+export function useNoteStatus(
+	characterId: number,
+	noteId: number,
+	currentCharacter: CharacterEntity | null
+) {
 	const { address } = useAccount();
 
 	return useQuery(
@@ -112,7 +116,7 @@ export function useNoteStatus(characterId: number, noteId: number) {
 					}),
 					// like count
 					indexer.getBacklinksOfNote(characterId, noteId, {
-						linkType: LinkTypes.like,
+						linkType: NoteLinkType.like,
 						limit: 0,
 					}),
 					// mint count
@@ -123,7 +127,7 @@ export function useNoteStatus(characterId: number, noteId: number) {
 					currentCharacter?.characterId
 						? indexer
 								.getLinks(currentCharacter?.characterId, {
-									linkType: LinkTypes.like,
+									linkType: NoteLinkType.like,
 									toCharacterId: characterId,
 									toNoteId: noteId,
 									limit: 0,

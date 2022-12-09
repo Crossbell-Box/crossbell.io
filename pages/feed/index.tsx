@@ -1,20 +1,21 @@
+import { Fragment, useEffect } from "react";
+import { Button, Text } from "@mantine/core";
+import Link from "next/link";
+import { useRouter } from "next/router";
+
+import type { NextPageWithLayout } from "@/pages/_app";
 import { Promotion } from "@/components/pages/sync/promotion";
 import { Feed, FeedSkeleton } from "@/components/common/Feed";
 import LoadMore from "@/components/common/LoadMore";
 import Tabs from "@/components/common/Tabs";
 import { getLayout } from "@/components/layouts/AppLayout";
 import Header from "@/components/layouts/Header";
-import type { NextPageWithLayout } from "@/pages/_app";
-import {
-	useCurrentCharacter,
-	useFollowingFeedsOfCharacter,
-	useHasCharacter,
-} from "@/utils/apis/indexer";
-import { Fragment, useEffect } from "react";
-import { Button, Text } from "@mantine/core";
-import Link from "next/link";
-import { useRouter } from "next/router";
+import { useFollowingFeedsOfCharacter } from "@/utils/apis/indexer";
 import { useLoginChecker } from "@/utils/wallet/hooks";
+import {
+	useAccountCharacter,
+	useAccountHasCharacter,
+} from "@/components/connectkit";
 
 const Page: NextPageWithLayout = () => {
 	return (
@@ -41,13 +42,14 @@ export function FeedTabs() {
 	const { validate } = useLoginChecker();
 
 	// if no character, redirect to explore page
-	const { hasCharacter, isLoadingCharacter } = useHasCharacter();
+	const { hasCharacter, ssrReady } = useAccountHasCharacter();
 	const router = useRouter();
+
 	useEffect(() => {
-		if (router.asPath === "/feed" && !isLoadingCharacter && !hasCharacter) {
+		if (router.asPath === "/feed" && !hasCharacter && ssrReady) {
 			router.replace("/explore");
 		}
-	}, [isLoadingCharacter, hasCharacter]);
+	}, [hasCharacter, ssrReady, router]);
 
 	return (
 		<Tabs
@@ -71,7 +73,7 @@ function Home() {
 }
 
 function FeedList() {
-	const { data: character } = useCurrentCharacter();
+	const character = useAccountCharacter();
 	const { data, hasNextPage, fetchNextPage, isFetchingNextPage, isLoading } =
 		useFollowingFeedsOfCharacter(character?.characterId);
 
