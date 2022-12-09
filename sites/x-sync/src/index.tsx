@@ -9,9 +9,8 @@ import {
 
 import { useTurnSyncOn } from "./hooks";
 import CharacterSection from "./character-section";
-import OperatorSyncWelcome from "./operator-sync-welcome";
 import PlatformsSection from "./platforms-section";
-import { Sidebar } from "./components";
+import { Sidebar, OperatorSyncWelcome } from "./components";
 
 export default function OperatorSyncMain() {
 	const characterInfo = useCharacterInfo();

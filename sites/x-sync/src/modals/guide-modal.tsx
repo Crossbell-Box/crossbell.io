@@ -3,16 +3,13 @@ import { Text } from "@mantine/core";
 import { closeAllModals } from "@mantine/modals";
 
 import { openBorderlessModal } from "~/shared/components/modal";
-import { Image } from "~/shared/components/image"
+import { Image } from "~/shared/components/image";
 
-import {
-	CircleBtn,
-	Arrow,
-} from "@/src/operator-sync-welcome/scenes/components";
+import { CircleBtn, Arrow } from "@/src/components/welcome/scenes/components";
 import {
 	useScenes,
 	useSceneState,
-} from "@/src/operator-sync-welcome/scenes/hooks";
+} from "@/src/components/welcome/scenes/hooks";
 import classNames from "classnames";
 
 const closeModals = () => closeAllModals();
