@@ -5,7 +5,7 @@ import { useIsomorphicEffect } from "@mantine/hooks";
 
 import { Image } from "~/shared/components/image";
 
-import imageUrl from "@/public/images/sync/promotion/banner.png";
+import imageUrl from "./banner.png";
 
 const STORAGE_KEY = "promotion:sync-20221105-1";
 
