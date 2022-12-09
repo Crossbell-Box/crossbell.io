@@ -9,7 +9,7 @@ export type OperatorSyncWelcomeProps = {
 
 export function OperatorSyncWelcome({ onStart }: OperatorSyncWelcomeProps) {
 	return (
-		<div className="relative z-0 pt-70px pb-100px overflow-hidden">
+		<div className="relative z-0 min-h-100vh flex items-center justify-center overflow-hidden">
 			<SNSIcons />
 			<Scenes onStart={onStart} />
 		</div>

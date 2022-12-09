@@ -62,7 +62,7 @@ function useCharacterInfo() {
 
 function renderLoading() {
 	return (
-		<div className="w-full flex justify-center">
+		<div className="fixed inset-0 flex items-center justify-center">
 			<Loader />
 		</div>
 	);

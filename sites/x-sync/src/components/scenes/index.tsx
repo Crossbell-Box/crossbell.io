@@ -23,16 +23,19 @@ export function Scenes({ onStart }: ScenesProps) {
 	} = useSceneState(scenes);
 
 	return (
-		<div className="relative flex px-3vw">
-			<div className="flex-1" key={currentIndex}>
-				{currentScene.illustration}
+		<div>
+			<div className="relative flex w-760px max-w-100vw px-3vw py-3vh">
+				<div className="flex-1" key={currentIndex}>
+					{currentScene.illustration}
+				</div>
+				<div className="w-350px">
+					<Card index={currentIndex} total={total} onStart={onStart}>
+						{currentScene.description}
+					</Card>
+				</div>
 			</div>
-			<div className="w-350px">
-				<Card index={currentIndex} total={total} onStart={onStart}>
-					{currentScene.description}
-				</Card>
-			</div>
-			<div className="absolute top-1/2 left-0 right-0 flex items-center px-16px transform -translate-y-1/2">
+
+			<div className="absolute top-1/2 left-0 right-0 flex items-center px-16px transform -translate-y-1/2 max-w-1200px mx-auto">
 				<CircleBtn className="mr-auto" onClick={goPrev} hidden={isFirstIndex}>
 					<Arrow direction="left" />
 				</CircleBtn>
