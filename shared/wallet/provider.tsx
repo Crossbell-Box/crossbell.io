@@ -1,4 +1,4 @@
-import { createClient, createStorage, WagmiConfigProps } from "wagmi";
+import { createClient, createStorage, Client } from "wagmi";
 
 import { chains, provider, connectors } from "./config";
 
@@ -14,12 +14,12 @@ const storage = createStorage({
 	storage: typeof window !== "undefined" ? window.localStorage : noopStorage,
 }); // https://wagmi.sh/docs/client#storage-optional
 
-const wagmiClient: WagmiConfigProps["client"] = createClient({
+const wagmiClient: Client = createClient({
 	autoConnect: true,
 	connectors,
 	provider,
 	storage,
-});
+}) as Client;
 
 export function getCurrentAddress() {
 	let data = storage.getItem("store") as any;

@@ -34,6 +34,7 @@ importers:
       '@typescript-eslint/eslint-plugin': ^5.36.1
       '@typescript-eslint/parser': ^5.36.1
       '@unocss/webpack': 0.46.1
+      '@wagmi/core': ^0.6.12
       bumpp: ^8.2.1
       canvas-confetti: 1.6.0
       check-password-strength: 2.0.7
@@ -108,6 +109,7 @@ importers:
       '@next/bundle-analyzer': 13.0.0
       '@tanstack/react-query': 4.13.5_biqbaboplfbrettd7655fr4n2y
       '@tanstack/react-query-devtools': 4.13.5_i7kuhmcsnmccyzigx3mxdtc2mu
+      '@wagmi/core': 0.6.12_lxa6ojub67252hst6mbz6ku6nu
       canvas-confetti: 1.6.0
       check-password-strength: 2.0.7
       classnames: 2.3.2
@@ -2445,6 +2447,28 @@ packages:
     dependencies:
       '@coinbase/wallet-sdk': 3.6.2
       '@walletconnect/ethereum-provider': 1.8.0
+      abitype: 0.1.8_typescript@4.8.4
+      ethers: 5.7.2
+      eventemitter3: 4.0.7
+      zustand: 4.1.5_immer@9.0.16+react@18.2.0
+    transitivePeerDependencies:
+      - immer
+      - react
+      - typescript
+    dev: false
+
+  /@wagmi/core/0.6.12_lxa6ojub67252hst6mbz6ku6nu:
+    resolution: {integrity: sha512-RYwjfzFlZ8cljrlZ6+monaWKmtVQYALutlrESP/CYklGg+3DAjwv7n95EU5gS7Y9mvZbiLKZxg4XjFB3mVohfA==}
+    peerDependencies:
+      '@coinbase/wallet-sdk': '>=3.3.0'
+      '@walletconnect/ethereum-provider': '>=1.7.5'
+      ethers: '>=5.5.1'
+    peerDependenciesMeta:
+      '@coinbase/wallet-sdk':
+        optional: true
+      '@walletconnect/ethereum-provider':
+        optional: true
+    dependencies:
       abitype: 0.1.8_typescript@4.8.4
       ethers: 5.7.2
       eventemitter3: 4.0.7
