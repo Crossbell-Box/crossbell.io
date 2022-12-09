@@ -16,11 +16,8 @@
 		"incremental": true,
 		"baseUrl": ".",
 		"paths": {
-			"@/components/*": ["components/*"],
-			"@/pages/*": ["pages/*"],
-			"@/styles/*": ["styles/*"],
-			"@/utils/*": ["utils/*"],
 			"@/public/*": ["public/*"],
+			"@/src/*": ["src/*"],
 			"@crossbell/*": ["../../packages/*/src"],
 			"~/shared/*": ["../../shared/*"]
 		}

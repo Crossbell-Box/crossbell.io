@@ -9,6 +9,7 @@
 		"noImplicitReturns": true,
 		"esModuleInterop": true,
 		"moduleResolution": "node",
+		"module": "ESNext",
 		"skipLibCheck": true,
 		"target": "ESNext",
 		"jsx": "react",

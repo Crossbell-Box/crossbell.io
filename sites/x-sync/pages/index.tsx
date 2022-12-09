@@ -1,5 +1,6 @@
 import React from "react";
+import Sync from "@/src/index";
 
 export default function Index() {
-	return <div>xSync</div>;
+	return <Sync />;
 }

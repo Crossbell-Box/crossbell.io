@@ -18,12 +18,9 @@ import {
 	SupportedPlatform,
 	useSyncAccount,
 } from "@crossbell/connect-kit";
-import { getPlatformSite } from "@/components/pages/sync/utils";
-import {
-	openBindingModal,
-	openUnbindingModal,
-} from "@/components/pages/sync/modals";
-import { Image } from "~/shared/components/image"
+import { getPlatformSite } from "@/src/utils";
+import { openBindingModal, openUnbindingModal } from "@/src/modals";
+import { Image } from "~/shared/components/image";
 import { formatDate } from "~/shared/time";
 import { useContract } from "@crossbell/contract";
 

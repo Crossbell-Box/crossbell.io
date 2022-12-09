@@ -1,6 +1,5 @@
 import { getLayout } from "@/components/layouts/AppLayout";
 import Header from "@/components/layouts/Header";
-import OperatorSyncPage from "@/components/pages/sync";
 import type { NextPageWithLayout } from "@/pages/_app";
 import Head from "next/head";
 
@@ -14,7 +13,8 @@ const Page: NextPageWithLayout = () => {
 			<Header>xSync</Header>
 
 			<div className="my-5">
-				<OperatorSyncPage />
+				{/* FIXME: - redirect to new website */}
+				<h1>xSync</h1>
 			</div>
 		</div>
 	);

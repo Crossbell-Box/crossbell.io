@@ -8,11 +8,11 @@ import { Image } from "~/shared/components/image"
 import {
 	CircleBtn,
 	Arrow,
-} from "@/components/pages/sync/operator-sync-welcome/scenes/components";
+} from "@/src/operator-sync-welcome/scenes/components";
 import {
 	useScenes,
 	useSceneState,
-} from "@/components/pages/sync/operator-sync-welcome/scenes/hooks";
+} from "@/src/operator-sync-welcome/scenes/hooks";
 import classNames from "classnames";
 
 const closeModals = () => closeAllModals();
