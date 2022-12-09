@@ -1,7 +1,7 @@
 import React from "react";
 import { Text } from "@mantine/core";
 
-import { Image } from "~/shared/components/image"
+import { Image } from "~/shared/components/image";
 import classNames from "classnames";
 
 export type CardProps = {

@@ -13,7 +13,7 @@ import React from "react";
 import classNames from "classnames";
 import { Contract } from "crossbell.js";
 
-import { Image } from "~/shared/components/image"
+import { Image } from "~/shared/components/image";
 import { openBorderlessModal } from "~/shared/components/modal";
 import {
 	getPlatformDisplayName,
