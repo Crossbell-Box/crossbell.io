@@ -75,7 +75,6 @@ export function ConnectKindDifferences() {
 
 			{/* TODO: - add link */}
 			<a
-				href="@/components/connectkit/components/connect-kind-differences/index"
 				target="_blank"
 				rel="noreferrer"
 				className="flex mt-12px mx-24px mb-24px"
