@@ -17,76 +17,6 @@ import {
 	AchievementLevelStatus,
 } from "./types";
 
-// const levels: AchievementLevel[] = [
-// 	{
-// 		id: "base",
-// 		title: "Base",
-// 		img: "ipfs://bafkreihxutrvld37t4lxf2pjnmq5siajl52kv75pojooyx4pmwdjmi4pca",
-// 		description: "Require: 1 people follow",
-// 		unitDesc: "Being minted",
-// 		progressDesc: "1234/4535",
-// 		mintId: null,
-// 		mintedCount: 4324,
-// 		status: AchievementLevelStatus.minted,
-// 	},
-// 	{
-// 		id: "bronze",
-// 		title: "bronze",
-// 		img: "ipfs://bafkreiarfgti3xpv2oznl7rzanfbzm7gvklvcwn5poqb53wlhi3n4cwp2a",
-// 		description: "Require: 10 people follow",
-// 		unitDesc: "Being minted",
-// 		progressDesc: "1234/4535",
-// 		mintId: null,
-// 		mintedCount: 1234,
-// 		status: AchievementLevelStatus.ableToMint,
-// 	},
-// 	{
-// 		id: "silver",
-// 		title: "silver",
-// 		img: "ipfs://bafkreihxutrvld37t4lxf2pjnmq5siajl52kv75pojooyx4pmwdjmi4pca",
-// 		description: "Require: 100 people follow",
-// 		unitDesc: "Being minted",
-// 		progressDesc: "1234/4535",
-// 		mintId: 123,
-// 		mintedCount: 1234,
-// 		status: AchievementLevelStatus.unableToMint,
-// 	},
-// 	{
-// 		id: "gold",
-// 		title: "gold",
-// 		img: "ipfs://bafkreihxutrvld37t4lxf2pjnmq5siajl52kv75pojooyx4pmwdjmi4pca",
-// 		description: "Require: 1000 people follow",
-// 		unitDesc: "Being minted",
-// 		progressDesc: "1234/4535",
-// 		mintId: null,
-// 		mintedCount: 1234,
-// 		status: AchievementLevelStatus.unableToMint,
-// 	},
-// 	{
-// 		id: "special",
-// 		title: "special",
-// 		img: "ipfs://bafkreihxutrvld37t4lxf2pjnmq5siajl52kv75pojooyx4pmwdjmi4pca",
-// 		description: "Require: 10000 people follow",
-// 		unitDesc: "Being minted",
-// 		progressDesc: "1234/4535",
-// 		mintId: null,
-// 		mintedCount: 1234,
-// 		status: AchievementLevelStatus.unableToMint,
-// 	},
-// ];
-//
-// const achievements: AchievementInfo[] = [
-// 	{ title: "Influencer", id: "A", levels },
-// 	{ title: "Talking Point", id: "B", levels },
-// 	{ title: "Popular NFT", id: "C", levels },
-// 	{ title: "Put Notes", id: "D", levels },
-// 	{ title: "Mint NFT", id: "E", levels },
-// ];
-//
-// const achievementGroups: AchievementGroup[] = [
-// 	{ id: "beginner", title: "Beginner Journey", achievements },
-// ];
-
 const SCOPE_KEY = ["indexer", "achievement"];
 
 const SCOPE_KEY_ACHIEVEMENT_GROUP = (
@@ -128,7 +58,7 @@ export function useAchievementGroups(
 
 	const { data, status } = useQuery(
 		SCOPE_KEY_ACHIEVEMENT_GROUP(characterId),
-		() => indexer.getAchievement(characterId!),
+		() => indexer.getAchievements(characterId!),
 		{ enabled: !!characterId }
 	);
 
@@ -141,7 +71,7 @@ export function useAchievementGroups(
 }
 
 function formatData(
-	data?: Awaited<ReturnType<Indexer["getAchievement"]>> | null,
+	data?: Awaited<ReturnType<Indexer["getAchievements"]>> | null,
 	character?: CharacterEntity | null
 ): AchievementGroup[] {
 	return (

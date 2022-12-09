@@ -42,7 +42,7 @@ function useRemoveOperatorByContract() {
 	const contract = useContract();
 
 	return useRemoveOperator(({ characterId, operator }) =>
-		contract.removeOperator(characterId, operator)
+		contract.grantOperatorPermissionsForCharacter(characterId, operator, [])
 	);
 }
 

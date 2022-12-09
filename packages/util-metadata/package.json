@@ -33,7 +33,7 @@
 	"peerDependencies": {
 		"@crossbell/util-ipfs": "workspace:*",
 		"@crossbell/util-ethers": "workspace:*",
-		"crossbell.js": "0.11.x"
+		"crossbell.js": "0.13.x"
 	},
 	"devDependencies": {
 		"@crossbell/util-ipfs": "workspace:*",

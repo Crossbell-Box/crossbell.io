@@ -11,6 +11,7 @@ import { SCOPE_KEY_CHARACTER_OPERATOR } from "./const";
 type UpdateFn = (params: {
 	characterId: number;
 	operator: string;
+	permissions: string[];
 }) => Promise<unknown>;
 
 export function useAddCharacterOperator() {
@@ -41,8 +42,12 @@ function useAddOperatorByEmail() {
 function useAddOperatorByContract() {
 	const contract = useContract();
 
-	return useAddOperator(({ characterId, operator }) =>
-		contract.addOperator(characterId, operator)
+	return useAddOperator(({ characterId, operator, permissions }) =>
+		contract.grantOperatorPermissionsForCharacter(
+			characterId,
+			operator,
+			permissions
+		)
 	);
 }
 

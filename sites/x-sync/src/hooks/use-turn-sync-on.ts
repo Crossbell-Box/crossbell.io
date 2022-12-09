@@ -13,12 +13,20 @@ import {
 import { useLoginChecker } from "~/shared/wallet/hooks";
 import { useRefCallback } from "@crossbell/util-hooks";
 
+import { X_SYNC_OPERATOR_PERMISSIONS } from "./const";
+
 export function useTurnSyncOn() {
 	const account = useAccountState((s) => s.computed.account);
 	const characterId = account?.characterId;
 	const activate = useActivateCharacter(characterId);
-	const [{ toggleOperator }] = useToggleCharacterOperator(OPERATOR_ADDRESS);
-	const hasOperator = useCharacterHasOperator(OPERATOR_ADDRESS);
+	const [{ toggleOperator }] = useToggleCharacterOperator(
+		OPERATOR_ADDRESS,
+		X_SYNC_OPERATOR_PERMISSIONS
+	);
+	const hasOperator = useCharacterHasOperator(
+		OPERATOR_ADDRESS,
+		X_SYNC_OPERATOR_PERMISSIONS
+	);
 	const { validate } = useLoginChecker();
 
 	const turnSyncOn = useRefCallback(async () => {

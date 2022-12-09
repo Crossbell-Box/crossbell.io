@@ -6,9 +6,12 @@ import { useCharacterHasOperator } from "./use-character-has-operator";
 import { useAddCharacterOperator } from "./use-add-character-operator";
 import { useRemoveCharacterOperator } from "./use-remove-character-operator";
 
-export function useToggleCharacterOperator(operator: string) {
+export function useToggleCharacterOperator(
+	operator: string,
+	permissions: string[]
+) {
 	const characterId = useAccountState((s) => s.computed.account?.characterId);
-	const hasOperator = useCharacterHasOperator(operator);
+	const hasOperator = useCharacterHasOperator(operator, permissions);
 
 	const add = useAddCharacterOperator();
 	const remove = useRemoveCharacterOperator();
@@ -16,7 +19,7 @@ export function useToggleCharacterOperator(operator: string) {
 
 	const toggleOperator = React.useCallback(async () => {
 		if (characterId) {
-			await mutation.mutateAsync({ characterId, operator });
+			await mutation.mutateAsync({ characterId, operator, permissions });
 		}
 	}, [mutation, characterId, operator]);
 

@@ -40,7 +40,7 @@ importers:
       check-password-strength: 2.0.7
       classnames: 2.3.2
       commander: ^9.4.0
-      crossbell.js: 0.11.5
+      crossbell.js: 0.13.0
       dayjs: 1.11.6
       detect-browser: 5.3.0
       embla-carousel-react: 7.0.4
@@ -113,7 +113,7 @@ importers:
       canvas-confetti: 1.6.0
       check-password-strength: 2.0.7
       classnames: 2.3.2
-      crossbell.js: 0.11.5
+      crossbell.js: 0.13.0
       dayjs: 1.11.6
       detect-browser: 5.3.0
       embla-carousel-react: 7.0.4_react@18.2.0
@@ -3831,14 +3831,14 @@ packages:
       which: 2.0.2
     dev: true
 
-  /crossbell.js/0.11.5:
-    resolution: {integrity: sha512-25lvV2YVNpgb7mZapJAO429ToYuFvx7f2I4/MM13YP91YtvABWoiBrne/gHIyXlEb6QqclQNVRY1H63Vhdabrg==}
+  /crossbell.js/0.13.0:
+    resolution: {integrity: sha512-klynV3ocDhYO52h499ZX+OTGS0P3/6A+WUh7j02przsmC/cPei7SEFLzQIiN5e1tnTTrl26CKFB9A00opC36tg==}
     dependencies:
       async-retry: 1.3.3
       ethers: 5.7.2
       fetch-undici: 3.0.1
       is-ipfs: 6.0.2
-      query-string: 7.1.1
+      query-string: 7.1.3
       ts-mixer: 6.0.2
       web3-providers-ws: 1.8.1
     transitivePeerDependencies:
@@ -3943,8 +3943,8 @@ packages:
       character-entities: 2.0.2
     dev: false
 
-  /decode-uri-component/0.2.0:
-    resolution: {integrity: sha512-hjf+xovcEn31w/EUYdTXQh/8smFL/dzYjohQGEIgjyNavaJfBY2p5F527Bo1VPATxv0VYTUC2bOcXvqFwk78Og==}
+  /decode-uri-component/0.2.2:
+    resolution: {integrity: sha512-FqUYQ+8o158GyGTrMFJms9qh3CqTKvAqgqsTnkLI8sKu0028orqBhxNMFkFen0zGyg6epACD32pjVk58ngIErQ==}
     engines: {node: '>=0.10'}
     dev: false
 
@@ -8070,7 +8070,7 @@ packages:
     resolution: {integrity: sha512-svk3xg9qHR39P3JlHuD7g3nRnyay5mHbrPctEBDUxUkHRifPHXJDhBUycdCC0NBjXoDf44Gb+IsOZL1Uwn8M/Q==}
     engines: {node: '>=6'}
     dependencies:
-      decode-uri-component: 0.2.0
+      decode-uri-component: 0.2.2
       split-on-first: 1.1.0
       strict-uri-encode: 2.0.0
     dev: false
@@ -8079,7 +8079,17 @@ packages:
     resolution: {integrity: sha512-MplouLRDHBZSG9z7fpuAAcI7aAYjDLhtsiVZsevsfaHWDS2IDdORKbSd1kWUA+V4zyva/HZoSfpwnYMMQDhb0w==}
     engines: {node: '>=6'}
     dependencies:
-      decode-uri-component: 0.2.0
+      decode-uri-component: 0.2.2
+      filter-obj: 1.1.0
+      split-on-first: 1.1.0
+      strict-uri-encode: 2.0.0
+    dev: false
+
+  /query-string/7.1.3:
+    resolution: {integrity: sha512-hh2WYhq4fi8+b+/2Kg9CEge4fDPvHS534aOOvOZeQ3+Vf2mCFsaFBYj0i+iXcAq6I9Vzp5fjMFBlONvayDC1qg==}
+    engines: {node: '>=6'}
+    dependencies:
+      decode-uri-component: 0.2.2
       filter-obj: 1.1.0
       split-on-first: 1.1.0
       strict-uri-encode: 2.0.0
