@@ -75,7 +75,7 @@ export function useCharacterBoundAccounts(characterId?: number) {
 // bind an account to a character
 
 export type UseBindAccountParams = {
-	characterId: number;
+	characterId?: number;
 	platform: SupportedPlatform;
 	identity: string;
 	/** in RFC 3339 format */
@@ -93,6 +93,8 @@ export function useBindAccount({
 
 	return useMutation(
 		async () => {
+			if (!characterId) return;
+
 			await changeCharacterMetadata((draft) => {
 				const accountURI = csbAccountURI(identity, platform);
 
@@ -104,7 +106,7 @@ export function useBindAccount({
 				}
 			});
 
-			return api.bindAccount(characterId!, platform, identity, startTime);
+			return api.bindAccount(characterId, platform, identity, startTime);
 		},
 		{
 			onSuccess: () => {
@@ -127,7 +129,7 @@ export function useBindAccount({
 // unbind an account from a character
 
 export type UseUnbindAccountParams = {
-	characterId: number;
+	characterId?: number;
 	platform: SupportedPlatform;
 	identity: string;
 };
@@ -142,6 +144,8 @@ export function useUnbindAccount({
 
 	return useMutation(
 		async () => {
+			if (!characterId) return;
+
 			await changeCharacterMetadata((draft) => {
 				const accountURI = csbAccountURI(identity, platform);
 				const index = draft.connected_accounts?.indexOf(accountURI) ?? -1;
@@ -151,7 +155,7 @@ export function useUnbindAccount({
 				}
 			});
 
-			return api.unbindAccount(characterId!, platform!, identity);
+			return api.unbindAccount(characterId, platform!, identity);
 		},
 		{
 			onSuccess: () => {
@@ -174,24 +178,31 @@ export function useUnbindAccount({
 // sync a account manually
 
 export function useSyncAccount(
-	characterId: number,
+	characterId: number | undefined,
 	platform: SupportedPlatform,
 	identity: string
 ) {
 	const client = useQueryClient();
-	return useMutation(() => api.syncAccount(characterId!, platform!, identity), {
-		onSuccess: () => {
-			return Promise.all([
-				client.invalidateQueries(
-					SCOPE_KEY_CHARACTER_BOUND_ACCOUNTS(characterId!)
-				),
-			]);
+	return useMutation(
+		async () => {
+			if (!characterId) return;
+
+			return api.syncAccount(characterId, platform!, identity);
 		},
-		onError: (err: any) => {
-			showNotification({
-				message: err.message,
-				color: "red",
-			});
-		},
-	});
+		{
+			onSuccess: () => {
+				return Promise.all([
+					client.invalidateQueries(
+						SCOPE_KEY_CHARACTER_BOUND_ACCOUNTS(characterId!)
+					),
+				]);
+			},
+			onError: (err: any) => {
+				showNotification({
+					message: err.message,
+					color: "red",
+				});
+			},
+		}
+	);
 }

@@ -64,7 +64,7 @@ export function PlatformCard({
 	const contract = useContract();
 
 	const syncAccount = useSyncAccount(
-		character?.characterId!,
+		character?.characterId,
 		platform,
 		identity!
 	);
@@ -176,13 +176,15 @@ export function PlatformCard({
 									onClick={() => {
 										syncAccount.mutate(undefined, {
 											onSuccess: (data) => {
-												showNotification({
-													title: data.message,
-													message: `Next sync will be at ${formatDate(
-														data.result?.next_update
-													)}`,
-													color: "green",
-												});
+												if (data) {
+													showNotification({
+														title: data.message,
+														message: `Next sync will be at ${formatDate(
+															data.result?.next_update
+														)}`,
+														color: "green",
+													});
+												}
 											},
 										});
 									}}

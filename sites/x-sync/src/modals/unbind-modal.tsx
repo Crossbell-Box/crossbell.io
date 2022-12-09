@@ -69,10 +69,10 @@ function UnbindingModal({ platform, identity }: UnbindingModalProps) {
 	const [step, setStep] = useState(0);
 
 	const character = useAccountCharacter();
-	const veriHandle = getVeriHandle(character?.handle!);
+	const veriHandle = character?.handle && getVeriHandle(character?.handle);
 
 	const unbindAccount = useUnbindAccount({
-		characterId: character?.characterId!,
+		characterId: character?.characterId,
 		platform,
 		identity,
 	});

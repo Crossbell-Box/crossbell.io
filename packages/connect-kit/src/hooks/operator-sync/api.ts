@@ -17,7 +17,9 @@ export default class OperatorSyncApi {
 	async activateCharacter(characterId: number): Promise<boolean> {
 		const res = (await fetch(`${this.endpoint}/${characterId}`, {
 			method: "POST",
-		}).then((res) => res.json())) as OperatorSyncServerResponse<OperatorSyncCharacter>;
+		}).then((res) =>
+			res.json()
+		)) as OperatorSyncServerResponse<OperatorSyncCharacter>;
 
 		const isActivate =
 			res.result?.crossbell_character_id === characterId?.toString();
@@ -97,7 +99,9 @@ export default class OperatorSyncApi {
 		const res = (await fetch(
 			`${this.endpoint}/${characterId}/account/sync/${platform}/${username}`,
 			{ method: "POST" }
-		).then((res) => res.json())) as OperatorSyncServerResponse<OperatorSyncAccount>;
+		).then((res) =>
+			res.json()
+		)) as OperatorSyncServerResponse<OperatorSyncAccount>;
 
 		if (!(res.ok && res.result)) {
 			throw res;
@@ -114,16 +118,18 @@ interface BaseResponse {
 	message: string;
 }
 
-interface SucceedResponse<T> extends BaseResponse {
+export interface OperatorSyncServerSucceedResponse<T> extends BaseResponse {
 	// ok is true
 	result: T;
 }
-interface FailResponse extends BaseResponse {
+export interface OperatorSyncServerFailResponse extends BaseResponse {
 	// ok is false
 	result: never;
 }
 
-export type OperatorSyncServerResponse<T> = SucceedResponse<T> | FailResponse;
+export type OperatorSyncServerResponse<T> =
+	| OperatorSyncServerSucceedResponse<T>
+	| OperatorSyncServerFailResponse;
 
 export interface OperatorSyncCharacter {
 	crossbell_character_id: string;

@@ -70,7 +70,7 @@ function BindingModal({ platform }: { platform: SupportedPlatform }) {
 	const profileUrl = username && getPlatformUserProfileUrl(platform, username);
 
 	const bindAccount = useBindAccount({
-		characterId: character?.characterId!,
+		characterId: character?.characterId,
 		platform,
 		identity: username,
 	});

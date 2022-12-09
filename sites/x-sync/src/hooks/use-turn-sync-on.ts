@@ -22,8 +22,6 @@ export function useTurnSyncOn() {
 	const { validate } = useLoginChecker();
 
 	const turnSyncOn = useRefCallback(async () => {
-		console.log("turnSyncOn!!");
-
 		await activate.mutateAsync();
 
 		if (!hasOperator) {
