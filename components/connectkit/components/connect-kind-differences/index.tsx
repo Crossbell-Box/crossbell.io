@@ -73,8 +73,8 @@ export function ConnectKindDifferences() {
 				</div>
 			</div>
 
-			{/* TODO: - add link */}
 			<a
+				href="https://crossbell-blog.xlog.app/newbie-villa"
 				target="_blank"
 				rel="noreferrer"
 				className="flex mt-12px mx-24px mb-24px"
