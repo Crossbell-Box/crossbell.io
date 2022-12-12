@@ -77,7 +77,8 @@ const scenes: SceneConfig[] = [
 		title: "Web2 transition journey",
 		description:
 			"We also support email connection, and it’s more like a Newbie Valley to onboard and gives you a smooth transition journey.",
-		learnMoreLink: "https://crossbell-blog.xlog.app/newbie-villa",
+		// TODO: add link
+		learnMoreLink: "",
 		illustration: (
 			<div className="flex items-center relative">
 				<Email />
