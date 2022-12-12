@@ -7,9 +7,10 @@ import { useAccount } from "wagmi";
 import classNames from "classnames";
 
 import ConnectButton from "@/components/common/ConnectButton";
-import { Image } from "~/shared/components/image"
+import { Image } from "~/shared/components/image";
 import { useAccountCharacter } from "@crossbell/connect-kit";
 import { composeTreasuresWalletsHref } from "~/shared/url";
+import config from "~/shared/config";
 
 import MoreMenu from "./MoreMenu";
 
@@ -84,7 +85,7 @@ function NavLinks() {
 		// },
 		sync: {
 			index: 2,
-			href: "/sync",
+			href: config.xSync.domain,
 			title: "xSync",
 			icon: "i-csb:sync",
 			iconColor: "text-blue-primary/20",
@@ -162,6 +163,7 @@ function NavLink({
 			ref={ref}
 			component={Link}
 			href={href}
+			target={href.startsWith("/") ? "_self" : "_blank"}
 			className={classNames(
 				"relative block py-3 px-4 my-4 rounded-12px",
 				"transition-colors",

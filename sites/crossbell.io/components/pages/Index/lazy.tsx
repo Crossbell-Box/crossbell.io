@@ -1,7 +1,8 @@
 import { m, useMotionTemplate, useTime, useTransform } from "framer-motion";
 import { useMediaQuery } from "@mantine/hooks";
 
-import { Image } from "~/shared/components/image"
+import { Image } from "~/shared/components/image";
+import config from "~/shared/config";
 
 // images
 import syncImage from "@/public/images/pages/index/resources/sync.webp";
@@ -68,7 +69,7 @@ export default function LazyIndex() {
 					description="Sync your social media content on Crossbell. Go from a user to an owner."
 					btnText="Sync now"
 					btnHoverClassName="hover:bg-blue"
-					link="/sync"
+					link={config.xSync.domain}
 					image={syncImage}
 				/>
 				{/* 2 */}

@@ -1,9 +1,11 @@
 import { Badge } from "@mantine/core";
 import { NoteMetadata } from "crossbell.js";
 import { TinyColor, random, mostReadable } from "@ctrl/tinycolor";
-import { stringToInteger } from "~/shared/helpers";
 import Link from "next/link";
 import { ReactNode } from "react";
+
+import { stringToInteger } from "~/shared/helpers";
+import config from "~/shared/config";
 
 const builtInColorMap = {
 	["crossbell.io"]: ["#E1BE60", "#000"],
@@ -93,7 +95,7 @@ function getLinkForSource(source: string, noteMetadata: NoteMetadata) {
 
 	if (isBuiltInSource(s)) {
 		if (["operatorsync", "sync", "xsync"].includes(s)) {
-			return "/sync";
+			return config.xSync.domain;
 		}
 
 		if (s === "xlog") {

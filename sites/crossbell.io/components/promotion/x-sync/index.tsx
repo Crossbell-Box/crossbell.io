@@ -4,6 +4,7 @@ import { Text } from "@mantine/core";
 import { useIsomorphicEffect } from "@mantine/hooks";
 
 import { Image } from "~/shared/components/image";
+import config from "~/shared/config";
 
 import imageUrl from "./banner.png";
 
@@ -32,7 +33,8 @@ export function Promotion() {
 
 	return (
 		<Link
-			href="/sync"
+			href={config.xSync.domain}
+			target="_blank"
 			className="block mt-12px mb-24px mx-16px cursor-pointer relative aspect-728/120"
 			onClick={() => hidePromotion({ hideImmediately: false })}
 		>

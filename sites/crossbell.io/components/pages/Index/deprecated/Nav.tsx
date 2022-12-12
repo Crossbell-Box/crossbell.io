@@ -6,13 +6,15 @@ import ConnectButton from "@/components/common/ConnectButton";
 import SearchInput from "@/components/common/Input/SearchInput";
 import { useAccountCharacter } from "@crossbell/connect-kit";
 
+import config from "~/shared/config";
+
 const NavLinks = () => {
 	const character = useAccountCharacter();
 
 	const navLinks = [
 		{ href: "/feed", title: "Feed" },
 		// { href: "/shop", title: "Shop" },
-		{ href: "/sync", title: "xSync" },
+		{ href: config.xSync.domain, title: "xSync" },
 		{
 			href: character ? `/@${character.handle}` : "/character",
 			title: "Character",
@@ -57,7 +59,7 @@ const MobileMenu = () => (
 			<Menu.Item
 				icon={<Text className="i-csb:sync" />}
 				component={Link}
-				href="/sync"
+				href={config.xSync.domain}
 			>
 				xSync
 			</Menu.Item>

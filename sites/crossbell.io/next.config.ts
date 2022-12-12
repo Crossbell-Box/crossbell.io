@@ -4,6 +4,7 @@ import { withIpfsGateway } from "@crossbell/ipfs-gateway-next";
 import nextBundleAnalyzer from "@next/bundle-analyzer";
 
 import { withLocalPackages } from "~/scripts/nextjs/with-local-packages";
+import config from "~/shared/config";
 
 const withBundleAnalyzer = nextBundleAnalyzer({
 	enabled: process.env.ANALYZE === "true",
@@ -49,6 +50,11 @@ const nextConfig: NextConfig = {
 				source: "/treasures/:slug*",
 				destination: "/shop/:slug*",
 				permanent: true,
+			},
+			{
+				source: "/sync",
+				destination: config.xSync.domain,
+				permanent: false,
 			},
 		];
 	},

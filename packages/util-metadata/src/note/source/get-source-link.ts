@@ -1,15 +1,17 @@
 import { NoteMetadata } from "crossbell.js";
 
+import config from "~/shared/config";
+
 import { KnownSource } from "./types";
 import { getKnownSource } from "./get-known-source";
 
 const map: Record<KnownSource, (externalUrls: string[]) => string | null> = {
 	[KnownSource.operatorSync]: () => {
-		return "/sync";
+		return config.xSync.domain;
 	},
 
 	[KnownSource.sync]: () => {
-		return "/sync";
+		return config.xSync.domain;
 	},
 
 	[KnownSource.crossSync]: () => {
