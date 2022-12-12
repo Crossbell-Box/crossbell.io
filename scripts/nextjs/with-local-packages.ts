@@ -5,15 +5,15 @@ const nextTranspileModules = require("next-transpile-modules");
 const PACKAGES_DIR = path.join(__dirname, "../../packages");
 const SITES_DIR = path.join(__dirname, "../../sites");
 
-exports.withLocalPackages = nextTranspileModules([
+export const withLocalPackages = nextTranspileModules([
 	...getPackages(PACKAGES_DIR),
 	...getPackages(SITES_DIR),
 ]);
 
-function getPackages(rootPath) {
+function getPackages(rootPath: string) {
 	return fs
 		.readdirSync(rootPath)
-		.map((dir) => {
+		.map((dir: string) => {
 			const pkgDir = path.join(rootPath, dir);
 			const pkgDirStat = fs.lstatSync(pkgDir);
 

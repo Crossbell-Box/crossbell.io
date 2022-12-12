@@ -22,7 +22,8 @@
 			"@/utils/*": ["utils/*"],
 			"@/public/*": ["public/*"],
 			"@crossbell/*": ["../../packages/*/src"],
-			"~/shared/*": ["../../shared/*"]
+			"~/shared/*": ["../../shared/*"],
+			"~/scripts/*": ["../../scripts/*"]
 		}
 	},
 	"include": ["next-env.d.ts", "**/*.ts", "**/*.tsx"],

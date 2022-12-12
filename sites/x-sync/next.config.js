@@ -1,19 +1,3 @@
-const { default: UnoCSS } = require("@unocss/webpack");
-const { withIpfsGateway } = require("@crossbell/ipfs-gateway-next");
-const {
-	withLocalPackages,
-} = require("../../scripts/nextjs/with-local-packages");
+require("../../scripts/ts-register");
 
-/** @type {import('next').NextConfig} */
-const nextConfig = {
-	reactStrictMode: true,
-	experimental: {
-		externalDir: true,
-	},
-	webpack: (config) => {
-		config.plugins.push(UnoCSS());
-		return config;
-	},
-};
-
-module.exports = withIpfsGateway(withLocalPackages(nextConfig));
+module.exports = require("./next.config.ts");
