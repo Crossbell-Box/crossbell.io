@@ -6,6 +6,7 @@ import { useContract } from "@/utils/crossbell.js";
 import { useAccountState } from "@/components/connectkit";
 
 import { removeOperator } from "../../apis";
+
 import { SCOPE_KEY_CHARACTER_OPERATOR } from "./const";
 
 type UpdateFn = (params: {
@@ -42,7 +43,7 @@ function useRemoveOperatorByContract() {
 	const contract = useContract();
 
 	return useRemoveOperator(({ characterId, operator }) =>
-		contract.grantOperatorPermissionsForCharacter(characterId, operator, [])
+		contract.removeOperator(characterId, operator)
 	);
 }
 

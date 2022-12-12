@@ -10,14 +10,10 @@ import { useContract } from "@/utils/crossbell.js";
 
 import { openRemoveOperatorModal } from "../modals";
 
-import { X_SYNC_OPERATOR_PERMISSIONS } from "./const";
-
 export function useToggleOperator() {
 	const character = useAccountCharacter();
-	const [{ toggleOperator, hasOperator }] = useToggleCharacterOperator(
-		OPERATOR_ADDRESS,
-		X_SYNC_OPERATOR_PERMISSIONS
-	);
+	const [{ toggleOperator, hasOperator }] =
+		useToggleCharacterOperator(OPERATOR_ADDRESS);
 	const [isTogglingOperator, setIsTogglingOperator] = React.useState(false);
 	const contract = useContract();
 
