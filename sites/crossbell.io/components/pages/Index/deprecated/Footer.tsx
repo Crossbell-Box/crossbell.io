@@ -100,7 +100,7 @@ function IndexFooter() {
 				</Group>
 
 				{/* right - follow button */}
-				<Link href={composeCharacterHref("crossbell")}>
+				<Link href={composeCharacterHref("crossbell")} target="_blank">
 					<div>
 						<Image
 							src={FollowBtn}

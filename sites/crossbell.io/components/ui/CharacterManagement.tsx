@@ -385,6 +385,7 @@ export default function CharacterManagement({
 					size="lg"
 					component={Link}
 					href={composeCharacterHref(form.values.handle)}
+					target="_blank"
 				>
 					My Character Page
 				</Button>

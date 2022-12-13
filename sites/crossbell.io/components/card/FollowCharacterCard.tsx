@@ -7,13 +7,11 @@ import { useRouter } from "next/router";
 import { FollowButton } from "~/shared/components/follow-button";
 
 const FollowCharacterCard = ({ character }: { character: CharacterEntity }) => {
-	const router = useRouter();
-
 	return (
 		<div
 			className="flex flex-row w-full items-start gap-4 p-4 bg-hover cursor-pointer overflow-hidden"
 			onClick={() => {
-				router.push(composeCharacterHref(character.handle));
+				window.open(composeCharacterHref(character.handle), "_blank");
 			}}
 		>
 			{/* left - avatar */}

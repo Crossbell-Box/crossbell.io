@@ -99,7 +99,7 @@ function NavLinks() {
 		if (character) {
 			oldNavLinks.character = {
 				index: 3,
-				href: character ? `/@${character.handle}` : "#",
+				href: character ? `${config.xChar.domain}/${character.handle}` : "#",
 				title: "xCharacter",
 				icon: "i-csb:character",
 				iconColor: "text-green-primary/20",

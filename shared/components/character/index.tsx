@@ -37,7 +37,8 @@ export function CharacterName({
 				color="dark"
 				weight="bolder"
 				component={Link}
-				href={composeCharacterHref(data?.handle!)}
+				href={composeCharacterHref(data?.handle)}
+				target="_blank"
 				variant="link"
 				onClick={(e: any) => e.stopPropagation()}
 				inline
@@ -93,6 +94,7 @@ export function CharacterHandle({
 				})}
 				component={Link}
 				href={composeCharacterHref(characterHandle)}
+				target="_blank"
 				variant="link"
 				onClick={(e: any) => e.stopPropagation()}
 				inline

@@ -72,7 +72,7 @@ const SEO = ({
 				article: {
 					publishedTime: note?.createdAt,
 					modifiedTime: note?.updatedAt,
-					authors: [origin + composeCharacterHref(character?.handle!)],
+					authors: [composeCharacterHref(character?.handle!)],
 					tags: note?.metadata?.content?.tags,
 				},
 				images: images.map((i) => ({

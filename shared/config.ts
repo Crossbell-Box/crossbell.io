@@ -16,4 +16,8 @@ export default {
 	xSync: {
 		domain: process.env.X_SYNC_WEBSITE || "https://xsync.app",
 	},
+
+	xChar: {
+		domain: process.env.X_CHAR_WEBSITE || "https://xchar.app",
+	},
 } as const;

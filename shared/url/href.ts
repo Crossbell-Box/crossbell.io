@@ -27,16 +27,12 @@ export const composeNoteHref = (characterId: number, noteId: number) => {
 /**
  * @example "song" -> "/@song"
  */
-export const composeCharacterHref = (handle: string) => {
+export const composeCharacterHref = (handle?: string) => {
 	if (handle) {
-		if (!handle.startsWith("@")) {
-			handle = `@${handle}`;
-		}
-
-		return `/${handle}`;
+		return `${config.xChar.domain}/${handle.replace(/^@/, "")}`;
 	}
 
-	return "/character";
+	return config.xChar.domain;
 };
 
 export const composeCharacterFollowHref = (

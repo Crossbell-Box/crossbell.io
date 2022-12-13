@@ -30,10 +30,9 @@ export default function TrendingCharactersSection() {
 }
 
 function CharacterListItem({ character }: { character: CharacterEntity }) {
-	const router = useRouter();
-
-	const handlePushCharacter = () =>
-		router.push(composeCharacterHref(character.handle));
+	const handlePushCharacter = () => {
+		window.open(composeCharacterHref(character.handle), "_blank");
+	};
 
 	return (
 		<div

@@ -148,7 +148,7 @@ function Seo({ character }: { character?: CharacterEntity | null }) {
 				type: "profile",
 				title,
 				description,
-				url: getOrigin() + composeCharacterHref(character?.handle ?? handle),
+				url: composeCharacterHref(character?.handle ?? handle),
 				profile: {
 					firstName: extractCharacterName(character),
 					username: character?.handle,

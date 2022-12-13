@@ -58,7 +58,7 @@ export const TrendingCharacterCard = ({
 	character: CharacterEntity;
 }) => {
 	return (
-		<Link href={composeCharacterHref(character.handle)}>
+		<Link href={composeCharacterHref(character.handle)} target="_blank">
 			<div
 				className="flex flex-col rounded-lg text-white p-4 w-full h-full justify-between bg-cover bg-center cursor-pointer transition ease-in-out hover:-translate-y-1"
 				style={{

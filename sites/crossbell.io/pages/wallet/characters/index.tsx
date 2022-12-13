@@ -90,6 +90,7 @@ function CharacterCard({ character }: { character: CharacterEntity }) {
 		<Grid.Col md={4} lg={3} p={0}>
 			<Link
 				href={composeCharacterHref(character.handle)}
+				target="_blank"
 				key={character.characterId}
 				className="flex items-center justify-center min-h-full px-4 py-7 m-2 border cursor-pointer align-middle rounded-xl flex-col text-center relative overflow-hidden border-dark/10 shadow-sm bg-white hover:shadow-md transition-shadow"
 			>

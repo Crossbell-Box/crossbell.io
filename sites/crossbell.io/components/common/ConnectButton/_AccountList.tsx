@@ -31,9 +31,6 @@ export default function AccountList() {
 
 	const modals = useModals();
 
-	const [shouldNavigate, shouldNavigateHandles] = useDisclosure(true); // FIXME: a closure bug?
-	const router = useRouter();
-
 	const hasNoResult = !isLoading && characters.length === 0;
 
 	return (
@@ -58,26 +55,7 @@ export default function AccountList() {
 						modals.openConfirmModal({
 							title: `Switch to @${character.handle}?`,
 							children: (
-								<div>
-									Are you sure you want to switch to this character?
-									<Checkbox
-										label={
-											<Text color="dimmed">
-												Navigate to the character page after switching
-											</Text>
-										}
-										size="xs"
-										className="my-2"
-										checked={shouldNavigate}
-										onChange={(event) => {
-											if (event.currentTarget.checked) {
-												shouldNavigateHandles.open();
-											} else {
-												shouldNavigateHandles.close();
-											}
-										}}
-									/>
-								</div>
+								<div>Are you sure you want to switch to this character?</div>
 							),
 							labels: { confirm: "Switch", cancel: "Cancel" },
 							onConfirm: () => {
@@ -85,11 +63,6 @@ export default function AccountList() {
 								showNotification({
 									message: `Switched to @${character.handle}`,
 								});
-								if (shouldNavigate) {
-									setTimeout(() => {
-										router.push(composeCharacterHref(character.handle));
-									}, 1000);
-								}
 							},
 						});
 					}}
