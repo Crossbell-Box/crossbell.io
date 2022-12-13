@@ -1,5 +1,5 @@
 import { Fragment, useEffect } from "react";
-import LoadMore from "@/components/common/LoadMore";
+import { LoadMore } from "~/shared/components/load-more";
 import { Note, NoteSkeleton } from "@/components/common/Note";
 import { getLayout } from "@/components/layouts/AppLayout";
 import Header, { useHeaderSize } from "@/components/layouts/Header";

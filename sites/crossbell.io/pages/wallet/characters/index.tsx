@@ -5,7 +5,7 @@ import Link from "next/link";
 
 import { Avatar } from "~/shared/components/avatar";
 import { LoadingOverlay } from "~/shared/components/loading-overlay";
-import LoadMore from "@/components/common/LoadMore";
+import { LoadMore } from "~/shared/components/load-more";
 import { getLayout } from "@/components/layouts/AppLayout";
 import Header from "@/components/layouts/Header";
 import { NextPageWithLayout } from "@/pages/_app";

@@ -6,7 +6,7 @@ import { useRouter } from "next/router";
 import type { NextPageWithLayout } from "@/pages/_app";
 import { Promotion } from "@/components/promotion/x-sync";
 import { Feed, FeedSkeleton } from "@/components/common/Feed";
-import LoadMore from "@/components/common/LoadMore";
+import { LoadMore } from "~/shared/components/load-more";
 import Tabs from "@/components/common/Tabs";
 import { getLayout } from "@/components/layouts/AppLayout";
 import Header from "@/components/layouts/Header";

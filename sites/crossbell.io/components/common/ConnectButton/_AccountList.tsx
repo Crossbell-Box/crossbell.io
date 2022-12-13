@@ -13,7 +13,7 @@ import { useRouter } from "next/router";
 import { useAccountState, useAccountCharacters } from "@crossbell/connect-kit";
 import { extractCharacterName } from "@crossbell/util-metadata";
 import { composeCharacterHref } from "~/shared/url";
-import LoadMore from "@/components/common/LoadMore";
+import { LoadMore } from "~/shared/components/load-more";
 import { Avatar } from "~/shared/components/avatar";
 
 import MenuItem from "./_MenuItem";

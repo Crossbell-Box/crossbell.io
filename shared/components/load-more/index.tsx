@@ -1,7 +1,8 @@
+import React from "react";
 import { LoadingOverlay } from "@mantine/core";
 import { InView } from "react-intersection-observer";
 
-export default function LoadMore({
+export function LoadMore({
 	hasNextPage,
 	children,
 	onLoadMore,
@@ -26,7 +27,7 @@ export default function LoadMore({
 						}
 					}}
 				>
-					{({ inView, ref, entry }) => (
+					{({ ref }) => (
 						<div
 							ref={ref}
 							style={{ width: "100%", height: 200, position: "relative" }}

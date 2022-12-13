@@ -2,7 +2,7 @@ import FollowCharacterCard, {
 	FollowCharacterSkeleton,
 } from "@/components/card/FollowCharacterCard";
 import SearchInput from "@/components/common/Input/SearchInput";
-import LoadMore from "@/components/common/LoadMore";
+import { LoadMore } from "~/shared/components/load-more";
 import { Note, NoteSkeleton } from "@/components/common/Note";
 import Tabs from "@/components/common/Tabs";
 import { getLayout } from "@/components/layouts/AppLayout";
