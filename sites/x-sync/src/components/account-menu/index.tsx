@@ -4,17 +4,17 @@ import { useDisconnectModal } from "@crossbell/connect-kit";
 
 import { AccountList } from "~/shared/components/account-list";
 
-export type AccountDropdownProps = {
+export type AccountMenuProps = {
 	children: React.ReactNode;
 	width?: number;
 	offset?: number;
 };
 
-export function AccountDropdown({
+export function AccountMenu({
 	children,
 	width = 200,
 	offset,
-}: AccountDropdownProps) {
+}: AccountMenuProps) {
 	const disconnectModal = useDisconnectModal();
 
 	return (

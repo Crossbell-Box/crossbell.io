@@ -6,7 +6,7 @@ import { useAccountCharacter } from "@crossbell/connect-kit";
 import { extractCharacterName } from "@crossbell/util-metadata";
 
 import { Logo } from "@/components/logo";
-import { AccountDropdown } from "@/components/account-dropdown";
+import { AccountMenu } from "@/components/account-menu";
 
 import { Avatar } from "~/shared/components/avatar";
 
@@ -33,7 +33,7 @@ export function Sidebar() {
 
 			<div className="flex-1" />
 
-			<AccountDropdown width={257} offset={12}>
+			<AccountMenu width={257} offset={12}>
 				<button className="flex items-center justify-center w-full p-10px bg-[#5B89F7] text-[#FFF] rounded-12px gap-[10px] border-none ux-overlay">
 					<Avatar
 						size={24}
@@ -44,7 +44,7 @@ export function Sidebar() {
 						{extractCharacterName(character)}
 					</Text>
 				</button>
-			</AccountDropdown>
+			</AccountMenu>
 		</div>
 	);
 }

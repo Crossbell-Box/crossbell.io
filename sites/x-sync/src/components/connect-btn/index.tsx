@@ -8,7 +8,7 @@ import { extractCharacterAvatar } from "@crossbell/util-metadata";
 import { ipfsLinkToHttpLink } from "@crossbell/util-ipfs";
 
 import { getDefaultAvatar } from "~/shared/avatar";
-import { AccountDropdown } from "../account-dropdown";
+import { AccountMenu } from "../account-menu";
 
 export function ConnectBtn() {
 	const [account, ssrReady] = useAccountState((s) => [
@@ -29,7 +29,7 @@ export function ConnectBtn() {
 				: truncateAddress(account.address);
 
 		return (
-			<AccountDropdown>
+			<AccountMenu>
 				<button className="outline-none border-1 border-[#D1D9F0] text-[#082135] text-18px font-600 bg-[#FFF] rounded-12px py-8px px-16px flex items-center gap-[8px] cursor-pointer transform active:translate-y-1px">
 					{address}
 					<Avatar
@@ -39,7 +39,7 @@ export function ConnectBtn() {
 						size={34}
 					/>
 				</button>
-			</AccountDropdown>
+			</AccountMenu>
 		);
 	} else {
 		return (
