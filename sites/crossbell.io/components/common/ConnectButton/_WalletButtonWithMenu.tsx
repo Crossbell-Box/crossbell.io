@@ -1,7 +1,6 @@
 import { Menu, Text, Button, Tooltip } from "@mantine/core";
 import { useDisclosure } from "@mantine/hooks";
 import Link from "next/link";
-import classNames from "classnames";
 
 import { useIntervalMemo } from "@crossbell/util-hooks";
 import {
@@ -14,10 +13,10 @@ import {
 	GeneralAccount,
 	useAccountState,
 } from "@crossbell/connect-kit";
+import { AccountList } from "~/shared/components/account-list";
 
 import { ConnectButtonProps } from "./index";
 import WalletDisplayButton from "./_WalletDisplayButton";
-import AccountList from "./_AccountList";
 import MenuItem from "./_MenuItem";
 
 export type WalletButtonWithMenuProps = {
@@ -108,7 +107,7 @@ export default function WalletButtonWithMenu({
 				<Menu.Divider />
 
 				<Menu.Label>Characters</Menu.Label>
-				<AccountList />
+				<AccountList itemClassName="p-3 cursor-pointer bg-hover" />
 
 				<Menu.Divider />
 

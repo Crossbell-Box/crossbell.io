@@ -1,24 +1,18 @@
-import {
-	ScrollArea,
-	LoadingOverlay,
-	Checkbox,
-	Space,
-	Text,
-} from "@mantine/core";
-import { useDisclosure } from "@mantine/hooks";
+import React from "react";
+import { ScrollArea, LoadingOverlay, Space, Text, Menu } from "@mantine/core";
 import { useModals } from "@mantine/modals";
 import { showNotification } from "@mantine/notifications";
-import { useRouter } from "next/router";
 
 import { useAccountState, useAccountCharacters } from "@crossbell/connect-kit";
 import { extractCharacterName } from "@crossbell/util-metadata";
-import { composeCharacterHref } from "~/shared/url";
 import { LoadMore } from "~/shared/components/load-more";
 import { Avatar } from "~/shared/components/avatar";
 
-import MenuItem from "./_MenuItem";
+export type AccountListProps = {
+	itemClassName?: string;
+};
 
-export default function AccountList() {
+export function AccountList({ itemClassName }: AccountListProps) {
 	const account = useAccountState((s) => s.computed.account);
 	const switchCharacter = useAccountState((s) => s.switchCharacter);
 	const {
@@ -40,8 +34,9 @@ export default function AccountList() {
 					<LoadingOverlay visible={isLoading} />
 				</div>
 			)}
-			{characters.map((character, i) => (
-				<MenuItem
+			{characters.map((character) => (
+				<Menu.Item
+					className={itemClassName}
 					rightSection={
 						character.characterId === account?.characterId ? (
 							<Text className="i-csb:tick" color="brand" />
@@ -85,7 +80,7 @@ export default function AccountList() {
 							</Text>
 						</div>
 					</div>
-				</MenuItem>
+				</Menu.Item>
 			))}
 
 			<LoadMore
@@ -101,9 +96,9 @@ export default function AccountList() {
 			</LoadMore>
 
 			{hasNoResult && (
-				<MenuItem>
+				<Menu.Item className={itemClassName}>
 					<Text color="dimmed">No characters</Text>
-				</MenuItem>
+				</Menu.Item>
 			)}
 		</ScrollArea.Autosize>
 	);
