@@ -33,7 +33,9 @@ export function useTurnSyncOn() {
 	const router = useRouter();
 
 	const turnSyncOn = useRefCallback(async () => {
-		await activate.mutateAsync();
+		if (!isActivated) {
+			await activate.mutateAsync();
+		}
 
 		if (!hasOperator) {
 			await toggleOperator();
@@ -70,10 +72,7 @@ function useAutoTurnOn(
 	React.useEffect(() => {
 		if (characterId && autoTurnOnRef.current && !isActivationLoading) {
 			autoTurnOnRef.current = false;
-
-			if (!isActivated) {
-				turnSyncOn();
-			}
+			turnSyncOn();
 		}
 	}, [characterId, isActivated, isActivationLoading, turnSyncOn]);
 
