@@ -24,6 +24,13 @@ export function Scenes({ onStart }: ScenesProps) {
 
 	return (
 		<div>
+			{/* Preload illustrations */}
+			<div className="hidden">
+				{scenes.map((s) => (
+					<div key={s.id}>{s.illustration}</div>
+				))}
+			</div>
+
 			<div className="relative flex w-760px max-w-100vw px-3vw py-3vh">
 				<div className="flex-1" key={currentIndex}>
 					{currentScene.illustration}
