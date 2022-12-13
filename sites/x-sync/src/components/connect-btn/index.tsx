@@ -11,6 +11,8 @@ import { truncateAddress } from "@crossbell/util-ethers";
 import { extractCharacterAvatar } from "@crossbell/util-metadata";
 import { ipfsLinkToHttpLink } from "@crossbell/util-ipfs";
 
+import { getDefaultAvatar } from "~/shared/avatar";
+
 export function ConnectBtn() {
 	const [account, ssrReady] = useAccountState((s) => [
 		s.computed.account,
@@ -21,7 +23,8 @@ export function ConnectBtn() {
 
 	if (account) {
 		const avatar = ipfsLinkToHttpLink(
-			extractCharacterAvatar(account.character) ?? ""
+			extractCharacterAvatar(account.character) ??
+				getDefaultAvatar(account.character?.handle)
 		);
 
 		const address =
@@ -37,7 +40,6 @@ export function ConnectBtn() {
 						<Avatar
 							src={avatar}
 							alt="Avatar"
-							color="indigo"
 							className="rounded-full"
 							size={34}
 						/>
