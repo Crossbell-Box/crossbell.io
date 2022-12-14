@@ -7,6 +7,7 @@ import { useAccountCharacter } from "@crossbell/connect-kit";
 import { extractCharacterName } from "@crossbell/util-metadata";
 
 import { AccountMenu } from "@/components/account-menu";
+import { SwitchAppsBtn } from "@/components/switch-apps-btn";
 
 import { Avatar } from "~/shared/components/avatar";
 
@@ -40,7 +41,7 @@ export function Sidebar() {
 			<div className="flex-1" />
 
 			<AccountMenu width={257} offset={12}>
-				<button className="flex items-center justify-center w-full p-10px bg-[#5B89F7] text-[#FFF] rounded-12px gap-[10px] border-none ux-overlay">
+				<button className="flex items-center justify-center w-full p-10px bg-[#5B89F7] text-[#FFF] rounded-12px gap-[10px] border-none ux-overlay mb-16px">
 					<Avatar
 						size={24}
 						character={character}
@@ -51,6 +52,8 @@ export function Sidebar() {
 					</Text>
 				</button>
 			</AccountMenu>
+
+			<SwitchAppsBtn />
 		</div>
 	);
 }

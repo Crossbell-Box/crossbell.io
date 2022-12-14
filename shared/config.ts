@@ -20,4 +20,12 @@ export default {
 	xChar: {
 		domain: process.env.X_CHAR_WEBSITE || "https://xchar.app",
 	},
+
+	xFeed: {
+		domain: process.env.X_FEED_WEBSITE || "https://crossbell.io/feed",
+	},
+
+	xShop: {
+		domain: process.env.X_SHOP_WEBSITE || "https://crossbell.io/shop",
+	},
 } as const;
