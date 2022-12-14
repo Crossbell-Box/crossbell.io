@@ -1,11 +1,13 @@
 import React from "react";
 import { AnimatePresence, m } from "framer-motion";
 
+import { usePreloadImgs } from "@crossbell/util-hooks";
+
 import { Card } from "./components/card";
 import { Arrow } from "./components/arrow";
 import { CircleBtn } from "./components/circle-btn";
 import { Background } from "./components/background";
-import { useScenes } from "./hooks/use-scenes";
+import { useScenes, illustrations } from "./hooks/use-scenes";
 import { useSceneState } from "./hooks/use-scene-state";
 
 export type ScenesProps = {
@@ -24,16 +26,11 @@ export function Scenes({ onStart }: ScenesProps) {
 		goPrev,
 	} = useSceneState(scenes);
 
+	usePreloadImgs(illustrations);
+
 	return (
 		<div>
 			<Background isActive={currentIndex !== 0} />
-
-			{/* Preload illustrations */}
-			<div className="hidden">
-				{scenes.map((s) => (
-					<div key={s.id}>{s.illustration}</div>
-				))}
-			</div>
 
 			<div className="relative flex w-760px max-w-100vw px-3vw py-3vh">
 				<AnimatePresence>

@@ -3,11 +3,17 @@ import classNames from "classnames";
 import { Text } from "@mantine/core";
 import { closeAllModals } from "@mantine/modals";
 
+import { usePreloadImgs } from "@crossbell/util-hooks";
+
 import { openBorderlessModal } from "~/shared/components/modal";
 import { Image } from "~/shared/components/image";
 
 import { CircleBtn, Arrow } from "@/components/scenes/components";
-import { useScenes, useSceneState } from "@/components/scenes/hooks";
+import {
+	modalIllustrations,
+	useScenes,
+	useSceneState,
+} from "@/components/scenes/hooks";
 
 const closeModals = () => closeAllModals();
 
@@ -23,15 +29,10 @@ export function GuideModal() {
 	const scenes = useScenes();
 	const state = useSceneState(scenes);
 
+	usePreloadImgs(modalIllustrations);
+
 	return (
 		<div className="relative bg-white flex min-h-335px">
-			{/* Preload illustrations */}
-			<div className="hidden">
-				{scenes.map((s) => (
-					<img key={s.id} src={s.modalIllustration} />
-				))}
-			</div>
-
 			<div className="relative basis-0 flex-grow min-h-full">
 				<Image
 					fill={true}

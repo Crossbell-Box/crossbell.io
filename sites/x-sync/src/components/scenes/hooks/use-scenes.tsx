@@ -4,22 +4,38 @@ import { Image } from "~/shared/components/image";
 
 import { SceneConfig } from "../types";
 
+export const illustrations = [
+	"/images/sync/process1.png",
+	"/images/sync/process2.png",
+	"/images/sync/process3.png",
+	"/images/sync/process4.png",
+	"/images/sync/process5.png",
+];
+
+export const modalIllustrations = [
+	"/images/sync/modal-process-1.png",
+	"/images/sync/modal-process-2.png",
+	"/images/sync/modal-process-3.png",
+	"/images/sync/modal-process-4.png",
+	"/images/sync/modal-process-5.png",
+];
+
 export function getScenes(): SceneConfig[] {
 	return [
 		{
 			id: "1",
-			modalIllustration: "/images/sync/modal-process-1.png",
+			modalIllustration: modalIllustrations[0],
 			illustration: <div />,
 			description:
 				"xSync is a function that helps you sync all your social media content onto Crossbell, where your data belongs to\nY❤️U.",
 		},
 		{
 			id: "2",
-			modalIllustration: "/images/sync/modal-process-2.png",
+			modalIllustration: modalIllustrations[1],
 			illustration: (
 				<div className="absolute left-2vw top-1/2 transform -translate-y-1/2">
 					<Image
-						src="/images/sync/process2.png"
+						src={illustrations[1]}
 						className="object-contain"
 						placeholder="empty"
 						width={313}
@@ -32,11 +48,11 @@ export function getScenes(): SceneConfig[] {
 		},
 		{
 			id: "3",
-			modalIllustration: "/images/sync/modal-process-3.png",
+			modalIllustration: modalIllustrations[2],
 			illustration: (
 				<div className="absolute left-2vw top-1/2 transform -translate-y-1/2">
 					<Image
-						src="/images/sync/process3.png"
+						src={illustrations[2]}
 						className="object-contain"
 						placeholder="empty"
 						width={309.1}
@@ -49,11 +65,11 @@ export function getScenes(): SceneConfig[] {
 		},
 		{
 			id: "4",
-			modalIllustration: "/images/sync/modal-process-4.png",
+			modalIllustration: modalIllustrations[3],
 			illustration: (
 				<div className="absolute left-2vw top-1/2 transform -translate-y-1/2">
 					<Image
-						src="/images/sync/process4.png"
+						src={illustrations[3]}
 						className="object-contain"
 						placeholder="empty"
 						width={313}
@@ -65,11 +81,11 @@ export function getScenes(): SceneConfig[] {
 		},
 		{
 			id: "5",
-			modalIllustration: "/images/sync/modal-process-5.png",
+			modalIllustration: modalIllustrations[4],
 			illustration: (
 				<div className="absolute left-2vw top-1/2 transform -translate-y-1/2">
 					<Image
-						src="/images/sync/process5.png"
+						src={illustrations[4]}
 						className="object-contain"
 						placeholder="empty"
 						width={313}
