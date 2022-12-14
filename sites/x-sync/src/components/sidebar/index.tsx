@@ -2,10 +2,10 @@ import React from "react";
 import Link from "next/link";
 import { Text } from "@mantine/core";
 
+import { XSyncLogo } from "@crossbell/ui";
 import { useAccountCharacter } from "@crossbell/connect-kit";
 import { extractCharacterName } from "@crossbell/util-metadata";
 
-import { Logo } from "@/components/logo";
 import { AccountMenu } from "@/components/account-menu";
 
 import { Avatar } from "~/shared/components/avatar";
@@ -16,7 +16,13 @@ export function Sidebar() {
 	return (
 		<div className="w-280px sticky top-0 px-24px pt-25px pb-16px min-h-100vh flex flex-col items-center">
 			<Link href="/" className="mb-100px w-full">
-				<Logo />
+				<div className="font-deca text-[#000] flex items-center gap-[8px]">
+					<XSyncLogo className="w-48px h-48px" />
+					<div className="flex flex-col items-start">
+						<div className="text-24px font-700 leading-[29px]">xSync</div>
+						<div className="text-16px font-400 leading-[19px]">Crossbell</div>
+					</div>
+				</div>
 			</Link>
 
 			<ul className="flex flex-col items-center list-none p-0 m-0">
