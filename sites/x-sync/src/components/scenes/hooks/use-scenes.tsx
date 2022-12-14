@@ -9,17 +9,7 @@ export function getScenes(): SceneConfig[] {
 		{
 			id: "1",
 			modalIllustration: "/images/sync/modal-process-1.png",
-			illustration: (
-				<div className="absolute left-15px top-1/2 transform -translate-y-1/2">
-					<Image
-						src="/images/sync/process1.png"
-						className="object-contain"
-						placeholder="empty"
-						width={401}
-						height={277}
-					/>
-				</div>
-			),
+			illustration: <div />,
 			description:
 				"xSync is a function that helps you sync all your social media content onto Crossbell, where your data belongs to\nY❤️U.",
 		},
