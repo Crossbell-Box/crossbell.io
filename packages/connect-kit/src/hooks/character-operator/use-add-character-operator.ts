@@ -1,3 +1,4 @@
+import { CharacterPermissionKey } from "crossbell.js";
 import { showNotification } from "@mantine/notifications";
 import { useMutation, useQueryClient } from "@tanstack/react-query";
 import React from "react";
@@ -11,7 +12,7 @@ import { SCOPE_KEY_CHARACTER_OPERATOR } from "./const";
 type UpdateFn = (params: {
 	characterId: number;
 	operator: string;
-	permissions: string[];
+	permissions: CharacterPermissionKey[];
 }) => Promise<unknown>;
 
 export function useAddCharacterOperator() {

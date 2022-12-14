@@ -1,4 +1,5 @@
 import React from "react";
+import { CharacterPermissionKey } from "crossbell.js";
 
 import { useAccountState } from "../account-state";
 
@@ -8,7 +9,7 @@ import { useRemoveCharacterOperator } from "./use-remove-character-operator";
 
 export function useToggleCharacterOperator(
 	operator: string,
-	permissions: string[]
+	permissions: CharacterPermissionKey[]
 ) {
 	const characterId = useAccountState((s) => s.computed.account?.characterId);
 	const hasOperator = useCharacterHasOperator(operator, permissions);

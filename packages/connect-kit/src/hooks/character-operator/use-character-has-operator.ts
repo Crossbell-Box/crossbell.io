@@ -1,10 +1,11 @@
 import React from "react";
+import { CharacterPermissionKey } from "crossbell.js";
 
 import { useCharacterOperator } from "./use-character-operator";
 
 export function useCharacterHasOperator(
 	operatorAddress: string,
-	permissions: string[]
+	permissions: CharacterPermissionKey[]
 ) {
 	const { data: operator } = useCharacterOperator(operatorAddress);
 	const permissionMap = React.useMemo(
