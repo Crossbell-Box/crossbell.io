@@ -32,7 +32,7 @@ export function AccountMenu({
 			</div>
 			<hr className="border-none h-1px bg-[#E1E8F7]" />
 			<button
-				className="flex items-center gap-[8px] w-full border-none bg-transparent p-12px ux-overlay mb-14px text-14px font-400"
+				className="flex items-center gap-[8px] w-full border-none bg-transparent p-12px ux-overlay mb-14px text-14px font-400 text-[#000]"
 				onClick={disconnectModal.show}
 			>
 				<Text className="i-csb:exit text-16px ml-12px" />
