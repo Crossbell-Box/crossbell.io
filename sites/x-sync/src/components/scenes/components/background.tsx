@@ -13,7 +13,7 @@ export const Background = ({ isActive }: BackgroundProps) => (
 				animate={
 					isActive
 						? {
-								top: percentage(125 / 900),
+								top: 150,
 								left: -49,
 								rotate: "24.95deg",
 								borderRadius: 54,
@@ -41,7 +41,7 @@ export const Background = ({ isActive }: BackgroundProps) => (
 				animate={
 					isActive
 						? {
-								top: percentage(85 / 900),
+								top: 110,
 								left: percentage(1221 / 1440),
 								rotate: "15deg",
 								borderRadius: 36,

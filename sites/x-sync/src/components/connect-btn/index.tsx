@@ -30,8 +30,8 @@ export function ConnectBtn() {
 
 		return (
 			<AccountMenu>
-				<button className="outline-none border-1 border-[#D1D9F0] text-[#082135] text-18px font-600 bg-[#FFF] rounded-12px py-8px px-16px flex items-center gap-[8px] cursor-pointer transform active:translate-y-1px">
-					{address}
+				<button className="flex-shrink-1 overflow-hidden outline-none border-1 border-[#D1D9F0] text-[#082135] text-18px font-600 bg-[#FFF] rounded-12px py-8px px-16px flex items-center gap-[8px] cursor-pointer transform active:translate-y-1px">
+					<span className="truncate flex-shrink-1">{address}</span>
 					<Avatar
 						src={avatar}
 						alt="Avatar"
