@@ -2,7 +2,6 @@ import React from "react";
 import { Text, Menu, Modal, CloseButton } from "@mantine/core";
 import { useDisclosure } from "@mantine/hooks";
 import classNames from "classnames";
-import { useAccount } from "wagmi";
 
 import {
 	XSyncLogo,
@@ -12,18 +11,19 @@ import {
 	breakpoints,
 } from "@crossbell/ui";
 import config from "~/shared/config";
+import { showComingSoonModal } from "~/shared/components/coming-soon-modal";
+
 import { useMediaQuery } from "@mantine/hooks";
 
 const cls = {
 	app: classNames(
-		"flex flex-col items-center px-2 py-1 rounded-md hover:underline"
+		"flex flex-col items-center px-2 py-1 rounded-md hover:underline cursor-pointer"
 	),
 	logo: classNames("w-36px h-36px"),
 	logoTitle: classNames("font-deca font-600 text-14px truncate"),
 };
 
 export function SwitchAppsBtn() {
-	const { address } = useAccount();
 	const isSM = useMediaQuery(`(min-width: ${breakpoints.sm}px)`);
 	const [isModalOpened, modal] = useDisclosure(false);
 	const btn = (
@@ -65,8 +65,15 @@ export function SwitchAppsBtn() {
 
 				<a
 					className={cls.app}
-					href={`${config.xShop.domain}/wallet/${address}`}
-					target="_blank"
+					onClick={() =>
+						showComingSoonModal({
+							content: (
+								<p className="m-0 text-14px font-400 text-[#49454F] text-center max-w-252px">
+									The xShop will be released soon, thank you for your patience.
+								</p>
+							),
+						})
+					}
 				>
 					<XShopLogo className={cls.logo} />
 					<div className={cls.logoTitle}>xShop</div>
