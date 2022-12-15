@@ -89,7 +89,7 @@ export default function LazyIndex() {
 					description="All about your character can be managed and shown in xCharacter."
 					btnText="Search now"
 					btnHoverClassName="hover:bg-green"
-					link="/search"
+					link={config.xChar.domain}
 					image={characterImage}
 				/>
 				{/* 4 */}

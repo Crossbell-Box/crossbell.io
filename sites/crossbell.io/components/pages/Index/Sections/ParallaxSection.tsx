@@ -4,7 +4,7 @@ import { Text, Title, UnstyledButton } from "@mantine/core";
 import BaseSection from "./BaseSection";
 import Padding from "./Padding";
 import handImage from "@/public/images/pages/index/resources/hand.webp";
-import { Image } from "~/shared/components/image"
+import { Image } from "~/shared/components/image";
 import Link from "next/link";
 import classNames from "classnames";
 
@@ -66,6 +66,7 @@ export default function ParallaxSection({
 						<UnstyledButton
 							component={Link}
 							href={link}
+							target={link.startsWith("/") ? "_self" : "_blank"}
 							className={classNames(
 								"mt-50px relative flex flex-row items-center justify-center space-x-10px w-300px h-60px rounded-md bg-black transition-colors group",
 								btnHoverClassName
