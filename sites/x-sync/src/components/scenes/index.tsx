@@ -58,14 +58,14 @@ export function Scenes({ onStart }: ScenesProps) {
 						]}
 					</AnimatePresence>
 				)}
-				<div className="w-350px max-w-90vw mx-auto sm:mx-0 transform -translate-y-1/5 sm:translate-y-0">
+				<div className="w-350px max-w-90vw mx-auto sm:mx-0">
 					<Card index={currentIndex} total={total} onStart={onStart}>
 						{currentScene.description}
 					</Card>
 				</div>
 			</div>
 
-			<div className="absolute top-7/10 sm:top-1/2 left-0 right-0 flex items-center px-16px transform -translate-y-1/2 max-w-1200px mx-auto">
+			<div className="sm:absolute sm:top-1/2 left-0 right-0 flex items-center px-16px transform sm:-translate-y-1/2 max-w-1200px mx-auto mt-5.5vh sm:mt-0">
 				<CircleBtn className="mr-auto" onClick={goPrev} hidden={isFirstIndex}>
 					<Arrow direction="left" />
 				</CircleBtn>
