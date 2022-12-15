@@ -33,6 +33,17 @@ export function Platforms() {
 
 	return (
 		<Sidebar>
+			<div className="h-90px hidden sm:block">
+				<h3
+					className="absolute top-0 left-0 w-full m-0 p-32px font-600 text-24px -z-1"
+					style={{
+						background:
+							"linear-gradient(transparent, transparent 50%, #FFF), url('/images/header-texture.svg')",
+					}}
+				>
+					Platforms
+				</h3>
+			</div>
 			<div className="mr-16px md:mr-32px">
 				<CharacterSection />
 				<hr className="my-24px border-none h-1px w-full bg-[#E1E8F7]" />

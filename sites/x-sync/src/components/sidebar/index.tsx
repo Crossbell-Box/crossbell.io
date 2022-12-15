@@ -18,7 +18,7 @@ export function Sidebar({ children }: SidebarProps) {
 				<PCSidebar />
 			</div>
 
-			<div className="px-20px sm:px-32px flex-1">{children}</div>
+			<div className="px-20px sm:px-32px flex-1 relative z-0">{children}</div>
 		</div>
 	);
 }
