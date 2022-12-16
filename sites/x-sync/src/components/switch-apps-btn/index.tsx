@@ -104,6 +104,7 @@ export function SwitchAppsBtn() {
 					}}
 					opened={isModalOpened}
 					onClose={modal.close}
+					zIndex={11}
 				>
 					{apps}
 				</Modal>

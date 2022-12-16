@@ -3,15 +3,19 @@ import { openModal } from "@mantine/modals";
 
 export type ShowComingSoonModalConfig = {
 	content: React.ReactNode;
+	zIndex?: number;
 };
 
-export function showComingSoonModal({ content }: ShowComingSoonModalConfig) {
+export function showComingSoonModal({
+	content,
+	zIndex,
+}: ShowComingSoonModalConfig) {
 	openModal({
 		padding: 0,
 		radius: 0,
+		zIndex,
 		classNames: {
-			modal:
-				"mt-auto sm:mb-auto rounded-t-28px sm:rounded-b-28px w-full sm:w-auto overflow-hidden",
+			modal: "my-auto rounded-28px w-auto overflow-hidden",
 			inner: "p-0",
 		},
 		children: (
