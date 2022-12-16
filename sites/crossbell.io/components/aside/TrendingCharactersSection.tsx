@@ -9,24 +9,40 @@ import { FollowButton } from "~/shared/components/follow-button";
 import BaseSection from "./BaseSection";
 
 export default function TrendingCharactersSection() {
-	const { data, isLoading } = useTrending(["character"]);
+	const { data, isLoading } = useTrending("character");
 
-	const notes = data?.character?.slice(0, 5);
+	const characters =
+		data?.pages.flatMap(
+			({ items }) =>
+				items?.map((character) => (
+					<CharacterListItem
+						character={character}
+						key={character.characterId}
+					/>
+				)) ?? []
+		) ?? [];
 
-	return (
-		<BaseSection title="Trending Characters">
-			{isLoading
-				? Array(5)
-						.fill(0)
-						.map((_, i) => <CharacterListItemSkeleton key={i} />)
-				: notes?.map((character, i) => (
-						<CharacterListItem
-							character={character}
-							key={character.characterId}
-						/>
-				  ))}
-		</BaseSection>
-	);
+	if (isLoading) {
+		return (
+			<BaseSection title="Trending Characters">
+				{Array(5)
+					.fill(0)
+					.map((_, i) => (
+						<CharacterListItemSkeleton key={i} />
+					))}
+			</BaseSection>
+		);
+	}
+
+	if (characters.length > 0) {
+		return (
+			<BaseSection title="Trending Characters">
+				{characters.slice(0, 5)}
+			</BaseSection>
+		);
+	}
+
+	return null;
 }
 
 function CharacterListItem({ character }: { character: CharacterEntity }) {

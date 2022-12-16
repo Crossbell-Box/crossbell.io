@@ -14,24 +14,38 @@ import Time from "../common/Time";
 import BaseSection from "./BaseSection";
 
 export default function TrendingNotesSection() {
-	const { data, isLoading } = useTrending(["note"]);
+	const { data, isLoading } = useTrending("note");
 
-	const notes = data?.note?.slice(0, 5);
+	const items =
+		data?.pages?.flatMap(
+			({ items }) =>
+				items?.map((note) => (
+					<NoteListItem
+						note={note}
+						key={`${note.characterId}-${note.noteId}`}
+					/>
+				)) ?? []
+		) ?? [];
 
-	return (
-		<BaseSection title="Trending Notes">
-			{isLoading
-				? Array(5)
-						.fill(0)
-						.map((_, i) => <NoteListItemSkeleton key={i} />)
-				: notes?.map((note, i) => (
-						<NoteListItem
-							note={note}
-							key={`${note.characterId}-${note.noteId}`}
-						/>
-				  ))}
-		</BaseSection>
-	);
+	if (isLoading) {
+		return (
+			<BaseSection title="Trending Notes">
+				{Array(5)
+					.fill(0)
+					.map((_, i) => (
+						<NoteListItemSkeleton key={i} />
+					))}
+			</BaseSection>
+		);
+	}
+
+	if (items.length > 0) {
+		return (
+			<BaseSection title="Trending Notes">{items.slice(0, 5)}</BaseSection>
+		);
+	}
+
+	return null;
 }
 
 function NoteListItem({ note }: { note: NoteEntity }) {
