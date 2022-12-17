@@ -71,7 +71,7 @@
 		"@iconify/utils": "2.0.1",
 		"@types/canvas-confetti": "1.4.3",
 		"@types/lodash.compact": "3.0.7",
-		"@types/node": "18.11.8",
+		"@types/node": "18.11.17",
 		"@types/qrcode": "1.5.0",
 		"@types/react": "18.0.24",
 		"@types/react-dom": "18.0.8",
