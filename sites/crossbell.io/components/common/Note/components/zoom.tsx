@@ -1,6 +1,6 @@
 import Zoom_ from "react-medium-image-zoom";
 import "react-medium-image-zoom/dist/styles.css";
-// import styles from "./Zoom.module.css";
+// import styles from "./zoom.module.css";
 
 export default function Zoom({ children }: { children: React.ReactNode }) {
 	return (

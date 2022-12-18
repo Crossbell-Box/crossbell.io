@@ -21,8 +21,8 @@ import rehypeSanitize, { defaultSchema } from "rehype-sanitize";
 import { Button } from "@mantine/core";
 import { CharacterHandle } from "~/shared/components/character";
 import { useCharacterHandleExists } from "@crossbell/indexer";
-import Zoom from "./Zoom";
-import VideoPlayer from "./VideoPlayer";
+import Zoom from "./zoom";
+import VideoPlayer from "./video-player";
 
 export function MarkdownRenderer({
 	children,
