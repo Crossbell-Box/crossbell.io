@@ -1,10 +1,5 @@
 import * as path from "path";
-import {
-	defineConfig,
-	presetAttributify,
-	presetIcons,
-	presetUno,
-} from "unocss";
+import { defineConfig, presetIcons, presetUno } from "unocss";
 
 import { FileSystemIconLoader } from "@iconify/utils/lib/loader/node-loaders";
 
@@ -12,7 +7,6 @@ import { breakpoints } from "./breakpoints";
 
 export default defineConfig({
 	presets: [
-		presetAttributify(),
 		presetIcons({
 			collections: {
 				csb: FileSystemIconLoader(

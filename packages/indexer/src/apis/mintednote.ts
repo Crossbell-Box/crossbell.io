@@ -23,13 +23,20 @@ export const SCOPE_KEY_MINTED_NOTE_OF_ADDRESS = (
 ) => {
 	return [...SCOPE_KEY, "address", address, options];
 };
-export function useMintedNotesOfAddress(address?: string, { limit = 20 } = {}) {
+export type UseMintedNotesOfAddressConfig = Parameters<
+	typeof indexer.getMintedNotesOfAddress
+>[1];
+export function useMintedNotesOfAddress(
+	address?: string,
+	{ limit = 20, ...config }: UseMintedNotesOfAddressConfig = {}
+) {
 	return useInfiniteQuery(
 		SCOPE_KEY_MINTED_NOTE_OF_ADDRESS(address!, { limit }),
 		({ pageParam }) =>
 			indexer.getMintedNotesOfAddress(address!, {
 				cursor: pageParam,
 				limit,
+				...config,
 			}),
 		{
 			enabled: Boolean(address),

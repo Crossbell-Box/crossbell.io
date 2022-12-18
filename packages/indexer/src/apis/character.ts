@@ -96,7 +96,6 @@ export const SCOPE_KEY_PRIMARY_CHARACTER = (address?: string) => {
 };
 
 export function usePrimaryCharacter(address?: string) {
-	console.log("usePrimaryCharacter", address);
 	return useQuery(
 		SCOPE_KEY_PRIMARY_CHARACTER(address),
 		() => indexer.getPrimaryCharacter(address!),

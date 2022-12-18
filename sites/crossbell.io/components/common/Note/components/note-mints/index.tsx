@@ -1,8 +1,6 @@
-import dayjs from "dayjs";
 import React from "react";
 import {
 	ScrollArea,
-	Text,
 	Avatar as BaseAvatar,
 	Modal,
 	CloseButton,
@@ -10,14 +8,15 @@ import {
 import { useDisclosure } from "@mantine/hooks";
 
 import { useNoteMints, usePrimaryCharacter } from "@crossbell/indexer";
-import { extractCharacterName } from "@crossbell/util-metadata";
 import { HooksRenderer } from "@crossbell/ui";
 
-import config from "~/shared/config";
 import { Avatar } from "~/shared/components/avatar";
 import { LoadMore } from "~/shared/components/load-more";
-import { FollowButton } from "~/shared/components/follow-button";
-import { composeScanTxHref } from "~/shared/url";
+
+import { Item } from "./item";
+import { ItemTop3 } from "./item.top3";
+import { ItemTop1 } from "./item.top1";
+import { CurrentRank } from "./current-rank";
 
 export type NoteMintsProps = {
 	characterId: number;
@@ -29,15 +28,19 @@ export function NoteMints({ characterId, noteId }: NoteMintsProps) {
 		characterId,
 		noteId
 	);
-	const items = React.useMemo(
-		() => data?.pages.flatMap(({ list }) => list) ?? [],
-		[data?.pages]
-	);
+	const items = React.useMemo(() => {
+		return (
+			data?.pages
+				.flatMap(({ list }) => list)
+				.sort((a, b) => a.tokenId - b.tokenId) ?? []
+		);
+	}, [data?.pages]);
 
 	const total = data?.pages[0]?.count ?? 0;
+	const highlightMode = total > 3 ? "top-3" : "top-1";
 	const thumbnailCount = total > 3 ? 3 : total;
 	const remainingCount = total - thumbnailCount;
-	const [isModalOpened, modal] = useDisclosure(true);
+	const [isModalOpened, modal] = useDisclosure(false);
 
 	if (total === 0) return null;
 
@@ -97,79 +100,56 @@ export function NoteMints({ characterId, noteId }: NoteMintsProps) {
 				</div>
 
 				<ScrollArea.Autosize maxHeight="80vh">
-					<div className="px-24px pt-12px pb-24px">
-						{items.map(({ tokenId, createdAt, owner, transactionHash }) => (
-							<HooksRenderer
-								key={tokenId}
-								hooks={usePrimaryCharacter}
-								params={[owner]}
-							>
-								{({ data: character }) => {
-									if (!character) return null;
-
-									const bio = character.metadata?.content?.bio;
-									const link = `${config.xChar.domain}/${character.handle}`;
-									const characterName = extractCharacterName(character);
-
-									return (
-										<div
-											key={tokenId}
-											className="flex items-center gap-[8px] py-12px"
-										>
-											<a href={link} target="_blank" rel="noreferrer">
-												<Avatar size={48} radius="xl" character={character} />
-											</a>
-											<div className="flex-1 w-0 self-start">
-												<div className="mb-2px truncate">
-													<a
-														href={link}
-														target="_blank"
-														rel="noreferrer"
-														className="hover:underline text-14px font-500"
-														title={characterName}
-													>
-														{characterName}
-													</a>
-												</div>
-												{bio && (
-													<div
-														className="text-12px font-400 truncate leading-16px mb-2px"
-														title={bio}
-													>
-														{bio}
-													</div>
-												)}
-												<div
-													className="text-11px font-500 text-[#687792]"
-													title={createdAt}
-												>
-													Minted {dayjs(createdAt).fromNow()} on
-													<a
-														href={composeScanTxHref(transactionHash)}
-														target="_blank"
-														rel="noreferrer"
-														className="hover:underline text-[#F6C549]"
-													>
-														<Text className="i-csb:logo inline-block transform translate-y-1/7 ml-4px mr-2px" />
-														Crossbell Chain
-													</a>
-												</div>
-											</div>
-											<FollowButton character={character} />
+					{((): JSX.Element => {
+						switch (highlightMode) {
+							case "top-1": {
+								const [first, ...restItems] = items;
+								return (
+									<div>
+										<div className="px-24px py-12px">
+											<ItemTop1 entity={first} />
 										</div>
-									);
-								}}
-							</HooksRenderer>
-						))}
 
-						<LoadMore
-							onLoadMore={() => fetchNextPage()}
-							hasNextPage={!!hasNextPage}
-							isLoading={isFetchingNextPage}
-						>
-							<p className="text-center">Loading...</p>
-						</LoadMore>
-					</div>
+										<CurrentRank characterId={characterId} noteId={noteId} />
+
+										<div className="px-24px pt-12px pb-24px">
+											{restItems.map((item) => (
+												<Item key={item.tokenId} entity={item} />
+											))}
+										</div>
+									</div>
+								);
+							}
+							case "top-3": {
+								const [first, second, third, ...restItems] = items;
+								return (
+									<div>
+										<div className="flex justify-between w-450px max-w-3/4 mx-auto">
+											<ItemTop3 entity={second} />
+											<ItemTop3 entity={first} />
+											<ItemTop3 entity={third} />
+										</div>
+
+										<CurrentRank characterId={characterId} noteId={noteId} />
+
+										<div className="px-24px pt-12px pb-24px">
+											{restItems.map((item) => (
+												<Item key={item.tokenId} entity={item} />
+											))}
+										</div>
+									</div>
+								);
+							}
+						}
+					})()}
+
+					<LoadMore
+						onLoadMore={() => fetchNextPage()}
+						hasNextPage={!!hasNextPage}
+						isLoading={isFetchingNextPage}
+					>
+						<p className="text-center">Loading...</p>
+					</LoadMore>
 				</ScrollArea.Autosize>
 			</Modal>
 		</>
