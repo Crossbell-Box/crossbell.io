@@ -15,6 +15,8 @@ import { MarkdownRenderer } from "../components/markdown-renderer";
 import MediaCarousel from "../components/media-carousel";
 import NoteSourceBadges from "../components/note-source-badges";
 import NoteIdBadge from "../components/note-id-badge";
+import { NoteLikes } from "../components/note-likes";
+import { NoteMints } from "../components/note-mints";
 import { NoteActions } from "../components/note-actions";
 
 import { useNavigateToNote } from "../hooks/use-navigate-to-note";
@@ -199,6 +201,11 @@ export function MainNote({
 				{renderBottomInfo()}
 
 				<Space h={10} />
+
+				<div className="flex items-center gap-[16px] mb-10px">
+					<NoteLikes characterId={note.characterId} noteId={note.noteId} />
+					<NoteMints characterId={note.characterId} noteId={note.noteId} />
+				</div>
 
 				{/* actions */}
 				<NoteActions characterId={note.characterId!} noteId={note.noteId!} />

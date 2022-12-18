@@ -181,3 +181,40 @@ export function useNoteMintedCount(characterId: number, noteId: number) {
 		}
 	);
 }
+
+export const SCOPE_KEY_NOTE_LIKES = (characterId: number, noteId: number) => {
+	return [...SCOPE_KEY, "likes", characterId, noteId];
+};
+export function useNoteLikes(characterId: number, noteId: number) {
+	return useInfiniteQuery(
+		SCOPE_KEY_NOTE_LIKES(characterId, noteId),
+		({ pageParam }) =>
+			indexer.getBacklinksOfNote(characterId, noteId, {
+				linkType: NoteLinkType.like,
+				limit: 20,
+				cursor: pageParam,
+			}),
+		{
+			enabled: Boolean(characterId && noteId),
+			getNextPageParam: (lastPage) => lastPage.cursor,
+		}
+	);
+}
+
+export const SCOPE_KEY_NOTE_MINTS = (characterId: number, noteId: number) => {
+	return [...SCOPE_KEY, "mints", characterId, noteId];
+};
+export function useNoteMints(characterId: number, noteId: number) {
+	return useInfiniteQuery(
+		SCOPE_KEY_NOTE_MINTS(characterId, noteId),
+		({ pageParam }) =>
+			indexer.getMintedNotesOfNote(characterId, noteId, {
+				limit: 20,
+				cursor: pageParam,
+			}),
+		{
+			enabled: Boolean(characterId && noteId),
+			getNextPageParam: (lastPage) => lastPage.cursor,
+		}
+	);
+}

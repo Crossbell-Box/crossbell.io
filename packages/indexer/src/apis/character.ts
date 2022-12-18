@@ -95,6 +95,15 @@ export const SCOPE_KEY_PRIMARY_CHARACTER = (address?: string) => {
 	return [...SCOPE_KEY, "primary", address];
 };
 
+export function usePrimaryCharacter(address?: string) {
+	console.log("usePrimaryCharacter", address);
+	return useQuery(
+		SCOPE_KEY_PRIMARY_CHARACTER(address),
+		() => indexer.getPrimaryCharacter(address!),
+		{ enabled: Boolean(address) }
+	);
+}
+
 // get the following status of a character
 
 export const SCOPE_KEY_CHARACTER_FOLLOW_STATS = (characterId?: number) => {
