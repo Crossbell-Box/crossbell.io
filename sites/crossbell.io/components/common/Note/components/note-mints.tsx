@@ -87,6 +87,7 @@ export function NoteMints({ characterId, noteId }: NoteMintsProps) {
 				opened={isModalOpened}
 				onClose={modal.close}
 				classNames={{ modal: "w-600px max-w-90vw" }}
+				zIndex={11}
 			>
 				<div className="flex items-center gap-[8px] px-24px pt-24px">
 					<MintIcon className="text-24px" />

@@ -10,6 +10,8 @@ import {
 	useUnfollowCharacter,
 } from "@crossbell/connect-kit";
 
+import { useLoginChecker } from "~/shared/wallet/hooks";
+
 export function FollowButton({
 	character,
 	...props
@@ -17,6 +19,7 @@ export function FollowButton({
 	character: CharacterEntity;
 } & ButtonProps) {
 	const currentCharacter = useAccountCharacter();
+	const { validate } = useLoginChecker();
 
 	const isSelf = currentCharacter?.characterId === character.characterId;
 
@@ -30,7 +33,11 @@ export function FollowButton({
 	const unfollow = useUnfollowCharacter();
 
 	const modals = useModals();
-	const handleFollow = () => follow.mutate(character);
+	const handleFollow = () => {
+		if (validate()) {
+			follow.mutate(character);
+		}
+	};
 	const handleUnfollow = () => {
 		modals.openConfirmModal({
 			title: `Unfollow @${character.handle}?`,

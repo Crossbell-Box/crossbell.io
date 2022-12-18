@@ -30,7 +30,7 @@ const AppLayout = withCachedMainWidth(
 				}}
 				classNames={{
 					root: "w-full",
-					body: "main-content",
+					body: "main-content z-0 relative",
 				}}
 				navbarOffsetBreakpoint="sm"
 				asideOffsetBreakpoint="sm"
