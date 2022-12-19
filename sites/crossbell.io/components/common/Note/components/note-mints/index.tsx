@@ -38,8 +38,7 @@ export function NoteMints({ characterId, noteId }: NoteMintsProps) {
 
 	const total = data?.pages[0]?.count ?? 0;
 	const highlightMode = total > 3 ? "top-3" : "top-1";
-	const thumbnailCount = total > 3 ? 3 : total;
-	const remainingCount = total - thumbnailCount;
+	const thumbnailCount = total > 4 ? 4 : total;
 	const [isModalOpened, modal] = useDisclosure(false);
 
 	if (total === 0) return null;
@@ -55,30 +54,29 @@ export function NoteMints({ characterId, noteId }: NoteMintsProps) {
 					<span className="text-16px font-400">{total}</span>
 				</div>
 				<div>
-					<BaseAvatar.Group spacing="sm">
-						{items.slice(0, thumbnailCount).map(({ tokenId, owner }) => {
-							return (
-								<HooksRenderer
-									key={tokenId}
-									hooks={usePrimaryCharacter}
-									params={[owner]}
-								>
-									{({ data: character }) => (
-										<Avatar
-											size={24}
-											radius="xl"
-											key={tokenId}
-											character={character}
-										/>
-									)}
-								</HooksRenderer>
-							);
-						})}
-						{remainingCount > 0 && (
-							<BaseAvatar radius="xl" size={24}>
-								+{remainingCount}
-							</BaseAvatar>
-						)}
+					<BaseAvatar.Group spacing="sm" className="flex-row-reverse">
+						{items
+							.slice(0, thumbnailCount)
+							.reverse()
+							.map(({ tokenId, owner }) => {
+								return (
+									<HooksRenderer
+										key={tokenId}
+										hooks={usePrimaryCharacter}
+										params={[owner]}
+									>
+										{({ data: character }) => (
+											<Avatar
+												size={24}
+												radius="xl"
+												key={tokenId}
+												character={character}
+												className="border-none"
+											/>
+										)}
+									</HooksRenderer>
+								);
+							})}
 					</BaseAvatar.Group>
 				</div>
 			</div>

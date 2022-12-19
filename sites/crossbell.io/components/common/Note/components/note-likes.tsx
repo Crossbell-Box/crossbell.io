@@ -51,9 +51,10 @@ export function NoteLikes({ characterId, noteId }: NoteLikesProps) {
 					<span className="text-16px font-400">{total}</span>
 				</div>
 				<div>
-					<BaseAvatar.Group spacing="sm">
+					<BaseAvatar.Group spacing="sm" className="flex-row-reverse">
 						{items
 							.slice(0, thumbnailCount)
+							.reverse()
 							.map(({ linklistId, fromCharacter }) => {
 								return (
 									<Avatar
@@ -61,14 +62,10 @@ export function NoteLikes({ characterId, noteId }: NoteLikesProps) {
 										radius="xl"
 										key={linklistId}
 										character={fromCharacter}
+										className="border-none"
 									/>
 								);
 							})}
-						{remainingCount > 0 && (
-							<BaseAvatar radius="xl" size={24}>
-								+{remainingCount}
-							</BaseAvatar>
-						)}
 					</BaseAvatar.Group>
 				</div>
 			</div>
