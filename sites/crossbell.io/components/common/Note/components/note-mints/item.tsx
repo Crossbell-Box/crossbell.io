@@ -26,9 +26,14 @@ export function Item({ entity }: ItemProps) {
 
 	return (
 		<div key={entity.tokenId} className="flex items-center gap-[8px] py-12px">
-			<div className="text-14px font-700 px-10px h-20px flex items-center rounded-8px bg-[#262626] text-[#FFF]">
+			<a
+				href={composeScanTxHref(entity.transactionHash)}
+				target="_blank"
+				rel="noreferrer"
+				className="text-14px font-700 px-10px h-20px flex items-center rounded-8px bg-[#262626] text-[#FFF]"
+			>
 				#{entity.tokenId}
-			</div>
+			</a>
 			<a href={link} target="_blank" rel="noreferrer">
 				<Avatar size={48} radius="xl" character={character} />
 			</a>

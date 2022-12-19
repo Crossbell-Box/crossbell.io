@@ -23,22 +23,17 @@ export function ItemTop3({ entity }: NoteMintsItemProps) {
 
 	return (
 		<div className="flex flex-col items-center gap-[12px] py-24px w-100px">
-			<a
-				className="h-100px flex items-end"
-				href={link}
-				target="_blank"
-				rel="noreferrer"
-			>
+			<div className="h-100px flex items-end">
 				<HighlightAvatar
 					character={character}
-					rank={entity.tokenId}
+					entity={entity}
 					size={isTop1 ? 100 : 60}
 				>
 					{isTop1 && (
 						<HighlightCircle className="absolute text-157px left-1/2 top-1/2 transform -translate-x-1/2 -translate-y-1/2 -z-1 pointer-events-none" />
 					)}
 				</HighlightAvatar>
-			</a>
+			</div>
 
 			<a
 				href={link}

@@ -29,7 +29,7 @@ export function ItemTop1({ entity }: ItemTop1Props) {
 	return (
 		<div key={entity.tokenId} className="flex items-center gap-[8px] py-12px">
 			<a href={link} target="_blank" rel="noreferrer">
-				<HighlightAvatar size={96} rank={entity.tokenId} character={character}>
+				<HighlightAvatar size={96} entity={entity} character={character}>
 					<HighlightCircle className="absolute text-135px left-1/2 top-1/2 transform -translate-x-1/2 -translate-y-1/2 -z-1 pointer-events-none" />
 				</HighlightAvatar>
 			</a>
