@@ -1,6 +1,8 @@
 import React from "react";
+import { useQueryClient } from "@tanstack/react-query";
 
 import { useRefCallback } from "@crossbell/util-hooks";
+import { SCOPE_KEY_NOTE_STATUS } from "@crossbell/indexer";
 
 import { useAccountState } from "./account-state";
 import { useLikeNote, useUnlikeNote } from "./link-note";
@@ -55,6 +57,7 @@ function useToggleByEmail(
 	{ likeNote, unlikeNote }: InternalConfig
 ): UseToggleLikeNoteResult {
 	const noop = () => {};
+	const queryClient = useQueryClient();
 	const [mutation, setMutation] = React.useState({ run: noop });
 	const [isLiked, setIsLiked] = React.useState<boolean | undefined>();
 	const [likeCount, setLikeCount] = React.useState<number | undefined>();
@@ -91,6 +94,10 @@ function useToggleByEmail(
 							characterId,
 							noteId,
 						});
+
+						await queryClient.invalidateQueries([
+							SCOPE_KEY_NOTE_STATUS(characterId, noteId),
+						]);
 					} catch (e) {
 						setIsLiked(isLiked);
 						setLikeCount(likeCount);
