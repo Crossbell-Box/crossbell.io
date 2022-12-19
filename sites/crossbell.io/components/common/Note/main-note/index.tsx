@@ -20,6 +20,7 @@ import { NoteMints } from "../components/note-mints";
 import { NoteActions } from "../components/note-actions";
 
 import { useNavigateToNote } from "../hooks/use-navigate-to-note";
+import { useNoteModel } from "@/components/common/Note/hooks/use-note-model";
 
 export function MainNote({
 	note: initialNote,
@@ -48,6 +49,8 @@ export function MainNote({
 		note.characterId!,
 		note.noteId!
 	);
+
+	const model = useNoteModel(note);
 
 	const renderAvatar = () => {
 		return (
@@ -208,7 +211,7 @@ export function MainNote({
 				</div>
 
 				{/* actions */}
-				<NoteActions characterId={note.characterId!} noteId={note.noteId!} />
+				<NoteActions model={model} />
 			</div>
 		</div>
 	);

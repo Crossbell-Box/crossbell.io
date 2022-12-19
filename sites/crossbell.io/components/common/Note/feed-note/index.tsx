@@ -17,6 +17,7 @@ import NoteIdBadge from "../components/note-id-badge";
 import { NoteActions } from "../components/note-actions";
 
 import { useNavigateToNote } from "../hooks/use-navigate-to-note";
+import { useNoteModel } from "../hooks/use-note-model";
 
 export function FeedNote({
 	note: initialNote,
@@ -45,6 +46,8 @@ export function FeedNote({
 		note.characterId!,
 		note.noteId!
 	);
+
+	const model = useNoteModel(note);
 
 	const renderAvatar = () => {
 		return (
@@ -198,7 +201,7 @@ export function FeedNote({
 				<Space h={10} />
 
 				{/* actions */}
-				<NoteActions characterId={note.characterId!} noteId={note.noteId!} />
+				<NoteActions model={model} />
 			</div>
 		</div>
 	);

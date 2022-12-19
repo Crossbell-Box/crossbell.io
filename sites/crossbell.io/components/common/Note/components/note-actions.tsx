@@ -1,84 +1,37 @@
 import { Space, Text } from "@mantine/core";
-import { useAccount } from "wagmi";
-import { useCallback } from "react";
 import classNames from "classnames";
 
-import {
-	useAccountCharacter,
-	useToggleLikeNote,
-	useMintNote,
-} from "@crossbell/connect-kit";
-import { useNoteStatus } from "@crossbell/indexer";
-import { composeNoteHref, getOrigin } from "~/shared/url";
-import { copyToClipboard } from "~/shared/other";
-import { useLoginChecker } from "~/shared/wallet/hooks";
 import { useRefCallback } from "@crossbell/util-hooks";
 
+import { composeNoteHref, getOrigin } from "~/shared/url";
+import { copyToClipboard } from "~/shared/other";
 import { LoadingOverlay } from "~/shared/components/loading-overlay";
 import { Tooltip } from "~/shared/components/tooltip";
 
 import { useNavigateToNote } from "../hooks/use-navigate-to-note";
+import { NoteModel } from "../hooks/use-note-model";
 
-export function NoteActions({
-	characterId,
-	noteId,
-}: {
-	characterId: number;
-	noteId: number;
-}) {
-	const currentCharacter = useAccountCharacter();
-	const { data: status } = useNoteStatus(
-		characterId,
-		noteId,
-		currentCharacter ?? null
-	);
+export function NoteActions({ model }: { model: NoteModel }) {
+	const { navigate } = useNavigateToNote(model.characterId, model.noteId);
 
-	const {
-		isLiked,
-		isLoading: isToggleLikeNoteLoading,
-		likeCount,
-		toggleLike,
-	} = useToggleLikeNote({
-		characterId,
-		noteId,
-		status,
+	const handleCopyToClipboard = useRefCallback(async () => {
+		await copyToClipboard(
+			getOrigin() + composeNoteHref(model.characterId, model.noteId),
+			{ showNotification: true }
+		);
 	});
-
-	const { address } = useAccount();
-	const mintNote = useMintNote(characterId, noteId, address!);
-
-	const { navigate } = useNavigateToNote(characterId, noteId);
-	const { validate } = useLoginChecker();
-
-	const handleLike = useRefCallback(() => {
-		if (validate()) {
-			toggleLike();
-		}
-	});
-
-	const handleMint = useRefCallback(() => {
-		if (!status?.isMinted && validate({ walletRequired: true })) {
-			mintNote.mutate();
-		}
-	});
-
-	const handleCopyToClipboard = useCallback(async () => {
-		await copyToClipboard(getOrigin() + composeNoteHref(characterId, noteId), {
-			showNotification: true,
-		});
-	}, [characterId, noteId]);
 
 	return (
 		<div className="flex items-center justify-between">
 			<LoadingOverlay
-				visible={isToggleLikeNoteLoading || mintNote.isLoading}
+				visible={model.isLoading}
 				description="Loading..."
 				global
 			/>
 
 			{/* comment */}
 			<ActionButton
-				text={status?.commentCount ?? "..."}
+				text={model.commentCount ?? "..."}
 				label="Comment"
 				icon="i-csb:comment"
 				bgHoverColor="group-hover:bg-blue/10"
@@ -88,24 +41,24 @@ export function NoteActions({
 
 			{/* like */}
 			<ActionButton
-				text={likeCount ?? "..."}
+				text={model.likeCount ?? "..."}
 				label="Like"
-				icon={isLiked ? "i-csb:like-filled" : "i-csb:like"}
-				color={isLiked ? "text-red" : "text-dimmed"}
+				icon={model.isLiked ? "i-csb:like-filled" : "i-csb:like"}
+				color={model.isLiked ? "text-red" : "text-dimmed"}
 				bgHoverColor="group-hover:bg-red/10"
 				textHoverColor="group-hover:text-red"
-				onClick={handleLike}
+				onClick={model.like}
 			/>
 
 			{/* mint */}
 			<ActionButton
-				text={status?.mintCount ?? "..."}
+				text={model.mintCount ?? "..."}
 				label="Mint"
 				icon="i-csb:mint"
-				color={status?.isMinted ? "text-yellow" : "text-dimmed"}
+				color={model.isMinted ? "text-yellow" : "text-dimmed"}
 				bgHoverColor="group-hover:bg-yellow/10"
 				textHoverColor="group-hover:text-yellow"
-				onClick={handleMint}
+				onClick={model.mint}
 			/>
 
 			{/* share */}
