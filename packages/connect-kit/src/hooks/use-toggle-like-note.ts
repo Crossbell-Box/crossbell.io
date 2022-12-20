@@ -2,7 +2,10 @@ import React from "react";
 import { useQueryClient } from "@tanstack/react-query";
 
 import { useRefCallback } from "@crossbell/util-hooks";
-import { SCOPE_KEY_NOTE_STATUS } from "@crossbell/indexer";
+import {
+	SCOPE_KEY_NOTE_LIKES,
+	SCOPE_KEY_NOTE_STATUS,
+} from "@crossbell/indexer";
 
 import { useAccountState } from "./account-state";
 import { useLikeNote, useUnlikeNote } from "./link-note";
@@ -95,8 +98,14 @@ function useToggleByEmail(
 							noteId,
 						});
 
-						await queryClient.invalidateQueries([
-							SCOPE_KEY_NOTE_STATUS(characterId, noteId),
+						await Promise.all([
+							queryClient.invalidateQueries({
+								queryKey: SCOPE_KEY_NOTE_STATUS(characterId, noteId),
+							}),
+
+							queryClient.invalidateQueries({
+								queryKey: SCOPE_KEY_NOTE_LIKES(characterId, noteId),
+							}),
 						]);
 					} catch (e) {
 						setIsLiked(isLiked);

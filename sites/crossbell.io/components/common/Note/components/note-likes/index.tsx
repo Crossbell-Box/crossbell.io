@@ -139,7 +139,7 @@ export function NoteLikes({ model }: NoteLikesProps) {
 function useItems(
 	pages: ListResponse<LinkEntity>[] | undefined,
 	currentCharacter: CharacterEntity | undefined,
-	{ isLiked }: NoteModel
+	model: NoteModel
 ): [LinkEntity[], LocalItemStatus] {
 	return React.useMemo(() => {
 		const items: LinkEntity[] = [];
@@ -155,15 +155,15 @@ function useItems(
 			});
 		});
 
-		if (isLiked && currentCharacterIndex === -1) {
+		if (model.isLiked && currentCharacterIndex === -1) {
 			return [items, LocalItemStatus.showCurrentCharacter];
 		}
 
-		if (!isLiked && currentCharacterIndex !== -1) {
+		if (!model.isLiked && currentCharacterIndex !== -1) {
 			items.splice(currentCharacterIndex, 1);
 			return [items, LocalItemStatus.common];
 		}
 
 		return [items, LocalItemStatus.common];
-	}, [pages, isLiked, currentCharacter]);
+	}, [pages, model, currentCharacter]);
 }
