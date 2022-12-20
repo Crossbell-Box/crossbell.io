@@ -1,10 +1,7 @@
 import React from "react";
 import { AnimatePresence, m } from "framer-motion";
-import { useMediaQuery } from "@mantine/hooks";
 
 import { usePreloadImgs } from "@crossbell/util-hooks";
-
-import { breakpoints } from "~/scripts/unocss/breakpoints";
 
 import { Card } from "./components/card";
 import { Arrow } from "./components/arrow";
@@ -20,7 +17,6 @@ export type ScenesProps = {
 
 export function Scenes({ onStart }: ScenesProps) {
 	const scenes = useScenes();
-	const isSM = useMediaQuery(`(min-width: ${breakpoints.sm}px)`);
 	const {
 		total,
 		currentScene,
@@ -35,29 +31,29 @@ export function Scenes({ onStart }: ScenesProps) {
 
 	return (
 		<div>
-			{isSM ? (
+			<div className="hidden sm:block">
 				<Background isActive={currentIndex !== 0} />
-			) : (
+			</div>
+
+			<div className="block sm:hidden">
 				<MobileBackground />
-			)}
+			</div>
 
 			<div className="relative flex w-760px max-w-100vw px-3vw py-3vh">
-				{isSM && (
-					<AnimatePresence>
-						{[
-							<m.div
-								className="flex-1"
-								key={currentIndex}
-								transition={{ duration: 0.3 }}
-								initial={{ opacity: 0 }}
-								animate={{ opacity: 1 }}
-								exit={{ opacity: 0 }}
-							>
-								{currentScene.illustration}
-							</m.div>,
-						]}
-					</AnimatePresence>
-				)}
+				<AnimatePresence>
+					{[
+						<m.div
+							className="flex-1 hidden sm:block"
+							key={currentIndex}
+							transition={{ duration: 0.3 }}
+							initial={{ opacity: 0 }}
+							animate={{ opacity: 1 }}
+							exit={{ opacity: 0 }}
+						>
+							{currentScene.illustration}
+						</m.div>,
+					]}
+				</AnimatePresence>
 				<div className="w-350px max-w-90vw mx-auto sm:mx-0">
 					<Card index={currentIndex} total={total} onStart={onStart}>
 						{currentScene.description}
