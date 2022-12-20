@@ -16,7 +16,13 @@ import { Avatar } from "~/shared/components/avatar";
 import { LoadMore } from "~/shared/components/load-more";
 
 import { NoteModel } from "../../hooks/use-note-model";
+
 import { Item } from "./item";
+import {
+	AvatarsPlaceholder,
+	avatarStyles,
+	maxThumbnailCount,
+} from "./avatars-placeholder";
 
 export type NoteLikesProps = {
 	model: NoteModel;
@@ -37,14 +43,12 @@ export function NoteLikes({ model }: NoteLikesProps) {
 
 	const total = model.likeCount ?? 0;
 	const thumbnailCount =
-		total > 4
+		total > maxThumbnailCount
 			? status === LocalItemStatus.showCurrentCharacter
-				? 3
-				: 4
+				? maxThumbnailCount - 1
+				: maxThumbnailCount
 			: total;
 	const [isModalOpened, modal] = useDisclosure(false);
-
-	if (total === 0) return null;
 
 	return (
 		<>
@@ -57,30 +61,27 @@ export function NoteLikes({ model }: NoteLikesProps) {
 					<span className="text-16px font-400">{total}</span>
 				</div>
 				<div>
-					<BaseAvatar.Group spacing="sm" className="flex-row-reverse">
-						{items
-							.slice(0, thumbnailCount)
-							.reverse()
-							.map(({ linklistId, fromCharacter }) => {
-								return (
-									<Avatar
-										size={24}
-										radius="xl"
-										key={linklistId}
-										character={fromCharacter}
-										className="border-none"
-									/>
-								);
-							})}
-						{status === LocalItemStatus.showCurrentCharacter && (
-							<Avatar
-								size={24}
-								radius="xl"
-								character={currentCharacter}
-								className="border-none"
-							/>
-						)}
-					</BaseAvatar.Group>
+					{total === 0 ? (
+						<AvatarsPlaceholder />
+					) : (
+						<BaseAvatar.Group spacing="sm" className="flex-row-reverse">
+							{items
+								.slice(0, thumbnailCount)
+								.reverse()
+								.map(({ linklistId, fromCharacter }) => {
+									return (
+										<Avatar
+											{...avatarStyles}
+											key={linklistId}
+											character={fromCharacter}
+										/>
+									);
+								})}
+							{status === LocalItemStatus.showCurrentCharacter && (
+								<Avatar {...avatarStyles} character={currentCharacter} />
+							)}
+						</BaseAvatar.Group>
+					)}
 				</div>
 			</div>
 
@@ -133,7 +134,7 @@ export function NoteLikes({ model }: NoteLikesProps) {
 function useItems(
 	pages: ListResponse<LinkEntity>[] | undefined,
 	currentCharacter: CharacterEntity | undefined,
-	{ isLiked, isLoading }: NoteModel
+	{ isLiked }: NoteModel
 ): [LinkEntity[], LocalItemStatus] {
 	return React.useMemo(() => {
 		const items: LinkEntity[] = [];
@@ -159,5 +160,5 @@ function useItems(
 		}
 
 		return [items, LocalItemStatus.common];
-	}, [pages, isLiked, currentCharacter, isLoading]);
+	}, [pages, isLiked, currentCharacter]);
 }

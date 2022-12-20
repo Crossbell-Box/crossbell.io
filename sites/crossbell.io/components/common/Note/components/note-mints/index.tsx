@@ -18,6 +18,11 @@ import { ItemTop3 } from "./item.top3";
 import { ItemTop1 } from "./item.top1";
 import { CurrentRank } from "./current-rank";
 
+import {
+	AvatarsPlaceholder,
+	maxThumbnailCount,
+} from "../note-likes/avatars-placeholder";
+
 export type NoteMintsProps = {
 	characterId: number;
 	noteId: number;
@@ -38,10 +43,8 @@ export function NoteMints({ characterId, noteId }: NoteMintsProps) {
 
 	const total = data?.pages[0]?.count ?? 0;
 	const highlightMode = total > 3 ? "top-3" : "top-1";
-	const thumbnailCount = total > 4 ? 4 : total;
+	const thumbnailCount = total > maxThumbnailCount ? maxThumbnailCount : total;
 	const [isModalOpened, modal] = useDisclosure(false);
-
-	if (total === 0) return null;
 
 	return (
 		<>
@@ -54,30 +57,34 @@ export function NoteMints({ characterId, noteId }: NoteMintsProps) {
 					<span className="text-16px font-400">{total}</span>
 				</div>
 				<div>
-					<BaseAvatar.Group spacing="sm" className="flex-row-reverse">
-						{items
-							.slice(0, thumbnailCount)
-							.reverse()
-							.map(({ tokenId, owner }) => {
-								return (
-									<HooksRenderer
-										key={tokenId}
-										hooks={usePrimaryCharacter}
-										params={[owner]}
-									>
-										{({ data: character }) => (
-											<Avatar
-												size={24}
-												radius="xl"
-												key={tokenId}
-												character={character}
-												className="border-none"
-											/>
-										)}
-									</HooksRenderer>
-								);
-							})}
-					</BaseAvatar.Group>
+					{total === 0 ? (
+						<AvatarsPlaceholder />
+					) : (
+						<BaseAvatar.Group spacing="sm" className="flex-row-reverse">
+							{items
+								.slice(0, thumbnailCount)
+								.reverse()
+								.map(({ tokenId, owner }) => {
+									return (
+										<HooksRenderer
+											key={tokenId}
+											hooks={usePrimaryCharacter}
+											params={[owner]}
+										>
+											{({ data: character }) => (
+												<Avatar
+													size={24}
+													radius="xl"
+													key={tokenId}
+													character={character}
+													className="border-none"
+												/>
+											)}
+										</HooksRenderer>
+									);
+								})}
+						</BaseAvatar.Group>
+					)}
 				</div>
 			</div>
 
