@@ -1,4 +1,5 @@
 import React from "react";
+import { useRouter } from "next/router";
 
 import {
 	useAccountState,
@@ -14,7 +15,6 @@ import { useLoginChecker } from "~/shared/wallet/hooks";
 import { useRefCallback } from "@crossbell/util-hooks";
 
 import { X_SYNC_OPERATOR_PERMISSIONS } from "./const";
-import { useRouter } from "next/router";
 
 export function useTurnSyncOn() {
 	const account = useAccountState((s) => s.computed.account);
@@ -30,7 +30,6 @@ export function useTurnSyncOn() {
 		X_SYNC_OPERATOR_PERMISSIONS
 	);
 	const { validate } = useLoginChecker();
-	const router = useRouter();
 
 	const turnSyncOn = useRefCallback(async () => {
 		if (!isActivated) {
@@ -40,16 +39,14 @@ export function useTurnSyncOn() {
 		if (!hasOperator) {
 			await toggleOperator();
 		}
-
-		router.push("/platforms");
 	});
 
 	const { needAutoTurnOnAfterConnect } = useAutoTurnOn(characterId, turnSyncOn);
 
+	useAutoRedirect(!!isActivated);
+
 	return useRefCallback(async () => {
-		if (isActivated) {
-			router.push("/platforms");
-		} else if (validate()) {
+		if (validate()) {
 			turnSyncOn();
 		} else {
 			needAutoTurnOnAfterConnect();
@@ -79,4 +76,12 @@ function useAutoTurnOn(
 	return {
 		needAutoTurnOnAfterConnect,
 	};
+}
+
+function useAutoRedirect(isActivated: boolean) {
+	const router = useRouter();
+
+	if (isActivated) {
+		router.replace("/platforms");
+	}
 }
