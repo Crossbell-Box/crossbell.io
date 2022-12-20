@@ -17,6 +17,7 @@ import { Item } from "./item";
 import { ItemTop3 } from "./item.top3";
 import { ItemTop1 } from "./item.top1";
 import { CurrentRank } from "./current-rank";
+import { EmptyPlaceholder } from "./empty-placeholder";
 
 import {
 	AvatarsPlaceholder,
@@ -104,58 +105,62 @@ export function NoteMints({ characterId, noteId }: NoteMintsProps) {
 					<CloseButton size={28} className="ml-auto" onClick={modal.close} />
 				</div>
 
-				<ScrollArea.Autosize maxHeight="80vh">
-					{((): JSX.Element => {
-						switch (highlightMode) {
-							case "top-1": {
-								const [first, ...restItems] = items;
-								return (
-									<div>
-										<div className="px-24px py-12px">
-											<ItemTop1 entity={first} />
-										</div>
+				{total === 0 ? (
+					<EmptyPlaceholder />
+				) : (
+					<ScrollArea.Autosize maxHeight="80vh">
+						{((): JSX.Element => {
+							switch (highlightMode) {
+								case "top-1": {
+									const [first, ...restItems] = items;
+									return (
+										<div>
+											<div className="px-24px py-12px">
+												<ItemTop1 entity={first} />
+											</div>
 
-										<CurrentRank characterId={characterId} noteId={noteId} />
+											<CurrentRank characterId={characterId} noteId={noteId} />
 
-										<div className="px-24px pt-12px pb-24px">
-											{restItems.map((item) => (
-												<Item key={item.tokenId} entity={item} />
-											))}
+											<div className="px-24px pt-12px pb-24px">
+												{restItems.map((item) => (
+													<Item key={item.tokenId} entity={item} />
+												))}
+											</div>
 										</div>
-									</div>
-								);
+									);
+								}
+								case "top-3": {
+									const [first, second, third, ...restItems] = items;
+									return (
+										<div>
+											<div className="flex justify-between w-450px max-w-3/4 mx-auto">
+												<ItemTop3 entity={second} />
+												<ItemTop3 entity={first} />
+												<ItemTop3 entity={third} />
+											</div>
+
+											<CurrentRank characterId={characterId} noteId={noteId} />
+
+											<div className="px-24px pt-12px pb-24px">
+												{restItems.map((item) => (
+													<Item key={item.tokenId} entity={item} />
+												))}
+											</div>
+										</div>
+									);
+								}
 							}
-							case "top-3": {
-								const [first, second, third, ...restItems] = items;
-								return (
-									<div>
-										<div className="flex justify-between w-450px max-w-3/4 mx-auto">
-											<ItemTop3 entity={second} />
-											<ItemTop3 entity={first} />
-											<ItemTop3 entity={third} />
-										</div>
+						})()}
 
-										<CurrentRank characterId={characterId} noteId={noteId} />
-
-										<div className="px-24px pt-12px pb-24px">
-											{restItems.map((item) => (
-												<Item key={item.tokenId} entity={item} />
-											))}
-										</div>
-									</div>
-								);
-							}
-						}
-					})()}
-
-					<LoadMore
-						onLoadMore={() => fetchNextPage()}
-						hasNextPage={!!hasNextPage}
-						isLoading={isFetchingNextPage}
-					>
-						<p className="text-center">Loading...</p>
-					</LoadMore>
-				</ScrollArea.Autosize>
+						<LoadMore
+							onLoadMore={() => fetchNextPage()}
+							hasNextPage={!!hasNextPage}
+							isLoading={isFetchingNextPage}
+						>
+							<p className="text-center">Loading...</p>
+						</LoadMore>
+					</ScrollArea.Autosize>
+				)}
 			</Modal>
 		</>
 	);

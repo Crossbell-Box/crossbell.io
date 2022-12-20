@@ -17,6 +17,7 @@ import { LoadMore } from "~/shared/components/load-more";
 
 import { NoteModel } from "../../hooks/use-note-model";
 
+import { EmptyPlaceholder } from "./empty-placeholder";
 import { Item } from "./item";
 import {
 	AvatarsPlaceholder,
@@ -100,32 +101,36 @@ export function NoteLikes({ model }: NoteLikesProps) {
 					<CloseButton size={28} className="ml-auto" onClick={modal.close} />
 				</div>
 
-				<ScrollArea.Autosize maxHeight="80vh">
-					<div className="px-24px pt-12px pb-24px">
-						{status === LocalItemStatus.showCurrentCharacter && (
-							<Item character={currentCharacter} />
-						)}
+				{total === 0 ? (
+					<EmptyPlaceholder />
+				) : (
+					<ScrollArea.Autosize maxHeight="80vh">
+						<div className="px-24px pt-12px pb-24px">
+							{status === LocalItemStatus.showCurrentCharacter && (
+								<Item character={currentCharacter} />
+							)}
 
-						{items.map(
-							({ linklistId, fromCharacter, createdAt, transactionHash }) => (
-								<Item
-									key={linklistId}
-									character={fromCharacter}
-									transactionHash={transactionHash}
-									createdAt={createdAt}
-								/>
-							)
-						)}
+							{items.map(
+								({ linklistId, fromCharacter, createdAt, transactionHash }) => (
+									<Item
+										key={linklistId}
+										character={fromCharacter}
+										transactionHash={transactionHash}
+										createdAt={createdAt}
+									/>
+								)
+							)}
 
-						<LoadMore
-							onLoadMore={() => fetchNextPage()}
-							hasNextPage={!!hasNextPage}
-							isLoading={isFetchingNextPage}
-						>
-							<p className="text-center">Loading...</p>
-						</LoadMore>
-					</div>
-				</ScrollArea.Autosize>
+							<LoadMore
+								onLoadMore={() => fetchNextPage()}
+								hasNextPage={!!hasNextPage}
+								isLoading={isFetchingNextPage}
+							>
+								<p className="text-center">Loading...</p>
+							</LoadMore>
+						</div>
+					</ScrollArea.Autosize>
+				)}
 			</Modal>
 		</>
 	);
