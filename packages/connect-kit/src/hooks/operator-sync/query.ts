@@ -128,22 +128,18 @@ export function useBindAccount({
 
 // unbind an account from a character
 
-export type UseUnbindAccountParams = {
-	characterId?: number;
-	platform: SupportedPlatform;
-	identity: string;
-};
-
-export function useUnbindAccount({
-	characterId,
-	platform,
-	identity,
-}: UseUnbindAccountParams) {
+export function useUnbindAccount(characterId?: number) {
 	const client = useQueryClient();
 	const changeCharacterMetadata = useChangeCharacterMetadata();
 
 	return useMutation(
-		async () => {
+		async ({
+			platform,
+			identity,
+		}: {
+			platform: SupportedPlatform;
+			identity: string;
+		}) => {
 			if (!characterId) return;
 
 			await changeCharacterMetadata((draft) => {

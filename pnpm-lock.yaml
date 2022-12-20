@@ -91,6 +91,7 @@ importers:
       typescript: 4.8.4
       unocss: 0.46.1
       wagmi: 0.7.9
+      zustand: ^4.1.5
     dependencies:
       '@crossbell/ipfs-gateway': 0.0.15
       '@crossbell/ipfs-react': 0.0.15_3cuac2dr7yf6nu67tvbbs2j6ry
@@ -180,6 +181,7 @@ importers:
       turbo: 1.4.4
       typescript: 4.8.4
       unocss: 0.46.1_@unocss+webpack@0.46.1
+      zustand: 4.1.5_immer@9.0.16+react@18.2.0
 
   packages/connect-kit:
     specifiers:
@@ -6016,7 +6018,6 @@ packages:
 
   /immer/9.0.16:
     resolution: {integrity: sha512-qenGE7CstVm1NrHQbMh8YaSzTZTFNP3zPqr3YU0S0UY441j4bJTg4A2Hh5KAhwgaiU6ZZ1Ar6y/2f4TblnMReQ==}
-    dev: false
 
   /import-fresh/2.0.0:
     resolution: {integrity: sha512-eZ5H8rcgYazHbKC3PG4ClHNykCSxtAhxSSEM+2mb+7evD2CKF5V7c0dNum7AdpDh0ZdICwZY9sRSn8f+KH96sg==}
@@ -10498,7 +10499,6 @@ packages:
       immer: 9.0.16
       react: 18.2.0
       use-sync-external-store: 1.2.0_react@18.2.0
-    dev: false
 
   /zwitch/2.0.4:
     resolution: {integrity: sha512-bXE4cR/kVZhKZX/RjPEflHaKVhUVl85noU3v6b8apfQEc1x4A+zBxjZ4lN8LqGd6WZ3dl98pY4o717VFmoPp+A==}

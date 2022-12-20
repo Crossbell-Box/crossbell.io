@@ -105,7 +105,7 @@ export function PlatformCard({
 					disabled={disableBtn}
 					onClick={() => {
 						if (isBound) {
-							openUnbindingModal(platform, identity!, contract);
+							openUnbindingModal(platform, identity!);
 						} else {
 							openBindingModal(platform, contract);
 						}
