@@ -33,7 +33,10 @@ export function AccountList() {
 			)}
 			{characters.map((character) => {
 				const isSelected = character.characterId === account?.characterId;
-
+				const characterName = extractCharacterName(character, {
+					fallbackToHandle: false,
+				});
+				const handle = `@${character.handle}`;
 				return (
 					<button
 						className="flex items-center border-none w-full bg-transparent py-8px px-12px ux-overlay"
@@ -76,13 +79,19 @@ export function AccountList() {
 								/>
 							</div>
 
-							<div className="font-roboto text-start">
-								<div className="text-14px font-500 truncate">
-									{extractCharacterName(character, { fallbackToHandle: false })}
+							<div className="font-roboto text-start flex-1 w-0 overflow-hidden">
+								<div
+									title={characterName}
+									className="text-14px font-500 truncate"
+								>
+									{characterName}
 								</div>
 
-								<div className="text-14px font-500 truncate mt-2px">
-									@{character.handle}
+								<div
+									title={handle}
+									className="text-14px font-500 truncate mt-2px"
+								>
+									{handle}
 								</div>
 							</div>
 

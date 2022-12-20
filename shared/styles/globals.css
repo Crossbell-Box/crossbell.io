@@ -35,6 +35,7 @@ a {
 	background: #000;
 	opacity: 0;
 	transition: opacity 0.2s;
+	pointer-events: none;
 }
 
 .ux-overlay:hover::after {
