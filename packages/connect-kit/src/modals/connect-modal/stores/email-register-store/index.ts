@@ -1,15 +1,13 @@
 import { showNotification } from "@mantine/notifications";
 import create from "zustand";
 
-import { isEmail } from "@crossbell/util-validators";
-
 import {
 	registerSendCodeToEmail,
 	registerByEmail,
 	registerVerifyEmailCode,
 } from "../../../../apis";
 import { useAccountState } from "../../../../hooks";
-import { createContextStore } from "../../../../utils";
+import { createContextStore, isEmail } from "../../../../utils";
 
 import { createEmailSlice, EmailSlice } from "./email";
 import { createPasswordSlice, PasswordSlice } from "./password";

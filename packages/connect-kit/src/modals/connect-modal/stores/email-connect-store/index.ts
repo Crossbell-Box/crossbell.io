@@ -1,11 +1,9 @@
 import { showNotification } from "@mantine/notifications";
 import create from "zustand";
 
-import { isEmail } from "@crossbell/util-validators";
-
 import { useAccountState } from "../../../../hooks";
 import { connectByEmail } from "../../../../apis";
-import { createContextStore } from "../../../../utils";
+import { createContextStore, isEmail } from "../../../../utils";
 
 import { useModalStore } from "../modal-store";
 

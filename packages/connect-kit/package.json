@@ -41,7 +41,6 @@
 		"@crossbell/indexer": "workspace:*",
 		"@crossbell/util-hooks": "workspace:*",
 		"@crossbell/util-metadata": "workspace:*",
-		"@crossbell/util-validators": "workspace:*",
 		"@tanstack/react-query": "4.x.x",
 		"ethers": "5.x.x",
 		"wagmi": "0.7.x",
@@ -54,7 +53,6 @@
 		"@crossbell/contract": "workspace:*",
 		"@crossbell/indexer": "workspace:*",
 		"@crossbell/util-hooks": "workspace:*",
-		"@crossbell/util-metadata": "workspace:*",
-		"@crossbell/util-validators": "workspace:*"
+		"@crossbell/util-metadata": "workspace:*"
 	}
 }

@@ -1,6 +1,4 @@
-import { isEmail } from "@crossbell/util-validators";
-
-import { SliceFn } from "../../../../utils";
+import { SliceFn, isEmail } from "../../../../utils";
 
 export interface EmailSlice {
 	email: string;
