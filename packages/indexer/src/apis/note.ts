@@ -211,6 +211,7 @@ export function useNoteMints(characterId: number, noteId: number) {
 			indexer.getMintedNotesOfNote(characterId, noteId, {
 				limit: 20,
 				cursor: pageParam,
+				order: "asc",
 			}),
 		{
 			enabled: Boolean(characterId && noteId),
