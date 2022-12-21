@@ -16,6 +16,9 @@
       "dependsOn": ["build"],
       "outputs": []
     },
+    "start": {
+      "outputs": []
+    },
     "clean": {
       "outputs": []
     }
