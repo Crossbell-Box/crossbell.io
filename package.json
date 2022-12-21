@@ -63,7 +63,7 @@
 		"sticky-sidebar-v2": "1.1.1",
 		"type-fest": "3.1.0",
 		"typeit-react": "2.6.0",
-		"wagmi": "0.7.9",
+		"wagmi": "0.9.5",
 		"zustand": "4.1.4"
 	},
 	"devDependencies": {
