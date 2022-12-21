@@ -9,7 +9,7 @@
 	"author": "Natural Selection Labs",
 	"keywords": [],
 	"scripts": {
-		"build": "turbo run build",
+		"build": "turbo run build --filter='crossbell.io'",
 		"build:pkgs": "turbo run build --filter=@crossbell/*",
 		"build:release": "turbo run build:release --force",
 		"start": "turbo run start --filter='crossbell.io'",
