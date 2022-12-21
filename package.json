@@ -12,7 +12,7 @@
 		"build": "turbo run build --filter='crossbell.io'",
 		"build:pkgs": "turbo run build --filter=@crossbell/*",
 		"build:release": "turbo run build:release --force",
-		"start": "pnpm --filter='crossbell.io' run start",
+		"start": "cd sites/crossbell.io && npm run start",
 		"bump-version": "bumpp package.json packages/*/package.json sites/*/package.json",
 		"clean": "turbo run clean",
 		"format": "run-p format:code format:package",
