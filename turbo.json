@@ -4,10 +4,6 @@
     "build": {
       "dependsOn": ["^build"]
     },
-    "build:release": {
-      "dependsOn": ["clean", "build", "test", "lint"],
-      "outputs": []
-    },
     "test": {
       "dependsOn": ["build"],
       "outputs": []
