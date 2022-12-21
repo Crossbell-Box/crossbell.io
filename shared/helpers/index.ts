@@ -14,7 +14,7 @@ export function stringToInteger(
 	} = {}
 ) {
 	let total = 0;
-	for (var i = 0; i !== string.length; i++) {
+	for (let i = 0; i !== string.length; i++) {
 		if (total >= Number.MAX_SAFE_INTEGER) break;
 		total += string.charCodeAt(i);
 	}

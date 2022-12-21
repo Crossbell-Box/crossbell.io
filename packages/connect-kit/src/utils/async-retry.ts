@@ -8,7 +8,7 @@ const sleep = (ms: number) => new Promise((resolve) => setTimeout(resolve, ms));
 
 export async function asyncRetry<T>(
 	callback: AsyncRetryCallback<T>,
-	delayMs: number = 1000
+	delayMs = 1000
 ): Promise<T> {
 	while (true) {
 		const result = await callback(RETRY_SYMBOL);

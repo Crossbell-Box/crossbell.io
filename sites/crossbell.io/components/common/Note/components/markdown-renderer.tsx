@@ -355,7 +355,7 @@ export function MarkdownRenderer({
 	return Memoed;
 }
 
-function collapseText(text: string, maxLength: number = 1000) {
+function collapseText(text: string, maxLength = 1000) {
 	if (text.length <= maxLength) {
 		return text;
 	}

@@ -23,7 +23,6 @@ export function InputEmailToResetPassword1() {
 	const store = useResetPasswordStore();
 	const refreshSize = useRefreshDynamicContainer();
 
-	// eslint-disable-next-line react-hooks/exhaustive-deps
 	React.useEffect(refreshSize, [store.isCodeSent]);
 
 	const verifyCode = React.useCallback(() => {

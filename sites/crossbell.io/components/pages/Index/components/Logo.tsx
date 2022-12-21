@@ -1,4 +1,4 @@
-import { Image } from "~/shared/components/image"
+import { Image } from "~/shared/components/image";
 import classNames from "classnames";
 import { AnimatePresence, m } from "framer-motion";
 import { useId } from "react";

@@ -1,6 +1,6 @@
 type LogoProps = {
 	size?: number;
-}
+};
 
 export default function Logo({ size = 30 }: LogoProps) {
 	return (

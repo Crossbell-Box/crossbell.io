@@ -1,6 +1,6 @@
 import type { getLinkPreview } from "link-preview-js";
 import { Skeleton, Space, Text } from "@mantine/core";
-import { Image } from "~/shared/components/image"
+import { Image } from "~/shared/components/image";
 
 interface LinkPreviewCardProps {
 	data: Awaited<ReturnType<typeof getLinkPreview>>;

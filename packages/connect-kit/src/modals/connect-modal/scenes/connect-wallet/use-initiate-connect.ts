@@ -8,6 +8,5 @@ export function useInitiateConnect(callback: () => void) {
 			callback();
 			isFirstTimeConnectRef.current = false;
 		}
-		// eslint-disable-next-line react-hooks/exhaustive-deps
 	}, []);
 }

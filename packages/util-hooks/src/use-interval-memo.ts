@@ -12,6 +12,5 @@ export function useIntervalMemo<T>(
 		return () => clearInterval(interval);
 	}, [ms]);
 
-	// eslint-disable-next-line react-hooks/exhaustive-deps
 	return React.useMemo(factory, [times, ...deps]);
 }

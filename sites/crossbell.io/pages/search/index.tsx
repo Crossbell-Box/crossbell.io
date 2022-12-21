@@ -8,10 +8,7 @@ import Tabs from "@/components/common/Tabs";
 import { getLayout } from "@/components/layouts/AppLayout";
 import Header from "@/components/layouts/Header";
 import type { NextPageWithLayout } from "@/pages/_app";
-import {
-	useSearchingCharacters,
-	useSearchingNotes,
-} from "@crossbell/indexer";
+import { useSearchingCharacters, useSearchingNotes } from "@crossbell/indexer";
 import { composeSearchHref, useSearchRouterQuery } from "~/shared/url";
 import { Title, Text, Container } from "@mantine/core";
 import { useElementSize } from "@mantine/hooks";

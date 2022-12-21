@@ -90,7 +90,7 @@ export function extractPlainTextFromNote(
 // and added support for striping front matter
 // may need to extract it to a separate package
 function removeMd(
-	md: string = "",
+	md = "",
 	{
 		listUnicodeChar = false,
 		stripListHeaders = false,

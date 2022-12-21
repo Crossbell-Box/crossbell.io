@@ -23,7 +23,6 @@ export function InputEmailToRegister1() {
 	const store = useEmailRegisterStore();
 	const refreshSize = useRefreshDynamicContainer();
 
-	// eslint-disable-next-line react-hooks/exhaustive-deps
 	React.useEffect(refreshSize, [store.isCodeSent]);
 
 	const verifyCode = React.useCallback(() => {

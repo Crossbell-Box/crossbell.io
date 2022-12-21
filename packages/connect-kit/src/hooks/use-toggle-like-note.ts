@@ -75,7 +75,6 @@ function useToggleByEmail(
 			setIsLiked(status.isLiked);
 		}
 		// Update only if `status.isLiked` changed
-		// eslint-disable-next-line react-hooks/exhaustive-deps
 	}, [status?.isLiked]);
 
 	React.useEffect(() => {
@@ -83,7 +82,6 @@ function useToggleByEmail(
 			setLikeCount(status.likeCount);
 		}
 		// Update only if `status.likeCount` changed
-		// eslint-disable-next-line react-hooks/exhaustive-deps
 	}, [status?.likeCount]);
 
 	const toggleLike = useRefCallback(() => {
