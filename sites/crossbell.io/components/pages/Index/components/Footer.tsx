@@ -14,6 +14,7 @@ const linksGroup: { title: string; list: { text: string; href: string }[] }[] =
 		{
 			title: "Resources",
 			list: [
+				{ text: "ToS & Policy", href: "https://legal.xlog.app/Privacy-Policy" },
 				{ text: "Indexer", href: "https://indexer.crossbell.io/docs" },
 				{
 					text: "Wiki",
