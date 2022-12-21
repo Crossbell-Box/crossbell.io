@@ -46,7 +46,15 @@ export const createWalletAccountSlice: SliceFn<WalletAccountSlice> = (
 				});
 				return true;
 			} else {
-				set({ wallet: null });
+				set({
+					wallet: {
+						address,
+						type: "wallet",
+						handle: undefined,
+						characterId: undefined,
+						character: undefined,
+					},
+				});
 				return false;
 			}
 		} else {
