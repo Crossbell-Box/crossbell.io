@@ -11,6 +11,8 @@ import {
 	SCOPE_KEY_PRIMARY_CHARACTER,
 } from "@crossbell/indexer";
 
+import { useAccountState } from "./account-state";
+
 export function useCreateCharacter() {
 	const { address } = useAccount();
 	const contract = useContract();
@@ -33,6 +35,7 @@ export function useCreateCharacter() {
 					queryClient.invalidateQueries(SCOPE_KEY_CHARACTERS(address)),
 					queryClient.invalidateQueries(SCOPE_KEY_PRIMARY_CHARACTER(address)),
 					queryClient.invalidateQueries(SCOPE_KEY_CHARACTER_BY_HANDLE(handle)),
+					useAccountState.getState().refreshWallet(),
 				]);
 			},
 			onError: (err: any) => {
