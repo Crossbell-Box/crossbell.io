@@ -50,7 +50,7 @@ Crossbell is a platform for owning your social activities, composed of [an EVM-c
 [Crossbell.io](https://crossbell.io) is an ecosystem app for Crossbell. You may also want to check out other ecosystem apps:
 
 - Blog free on [xLog](https://xlog.app)
-- Sync tweets with [CrossSync](https://crosssync.app)
+- Sync tweets with [xSync](https://xsync.app)
 - ... (pull requests are welcome to tell us your apps)
 
 ## 💬 Community
