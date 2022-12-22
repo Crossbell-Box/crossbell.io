@@ -4,6 +4,7 @@ import {
 	Avatar as BaseAvatar,
 	Modal,
 	CloseButton,
+	LoadingOverlay,
 } from "@mantine/core";
 import { useDisclosure } from "@mantine/hooks";
 
@@ -12,6 +13,8 @@ import { HooksRenderer } from "@crossbell/ui";
 
 import { Avatar } from "~/shared/components/avatar";
 import { LoadMore } from "~/shared/components/load-more";
+
+import { NoteModel } from "../../hooks/use-note-model";
 
 import { Item } from "./item";
 import { ItemTop3 } from "./item.top3";
@@ -25,14 +28,13 @@ import {
 } from "../note-likes/avatars-placeholder";
 
 export type NoteMintsProps = {
-	characterId: number;
-	noteId: number;
+	model: NoteModel;
 };
 
-export function NoteMints({ characterId, noteId }: NoteMintsProps) {
+export function NoteMints({ model }: NoteMintsProps) {
 	const { data, fetchNextPage, hasNextPage, isFetchingNextPage } = useNoteMints(
-		characterId,
-		noteId
+		model.characterId,
+		model.noteId
 	);
 	const items = React.useMemo(() => {
 		return (
@@ -95,7 +97,7 @@ export function NoteMints({ characterId, noteId }: NoteMintsProps) {
 				withCloseButton={false}
 				opened={isModalOpened}
 				onClose={modal.close}
-				classNames={{ modal: "w-600px max-w-90vw" }}
+				classNames={{ modal: "w-600px max-w-90vw overflow-hidden" }}
 				zIndex={11}
 			>
 				<div className="flex items-center gap-[8px] px-24px pt-24px">
@@ -106,7 +108,10 @@ export function NoteMints({ characterId, noteId }: NoteMintsProps) {
 				</div>
 
 				{total === 0 ? (
-					<EmptyPlaceholder />
+					<div>
+						<EmptyPlaceholder onMint={model.mint} />
+						<LoadingOverlay visible={model.isLoading} />
+					</div>
 				) : (
 					<ScrollArea.Autosize maxHeight="80vh">
 						{((): JSX.Element => {
@@ -119,7 +124,10 @@ export function NoteMints({ characterId, noteId }: NoteMintsProps) {
 												<ItemTop1 entity={first} />
 											</div>
 
-											<CurrentRank characterId={characterId} noteId={noteId} />
+											<CurrentRank
+												characterId={model.characterId}
+												noteId={model.noteId}
+											/>
 
 											<div className="px-24px pt-12px pb-24px">
 												{restItems.map((item) => (
@@ -139,7 +147,10 @@ export function NoteMints({ characterId, noteId }: NoteMintsProps) {
 												<ItemTop3 entity={third} />
 											</div>
 
-											<CurrentRank characterId={characterId} noteId={noteId} />
+											<CurrentRank
+												characterId={model.characterId}
+												noteId={model.noteId}
+											/>
 
 											<div className="px-24px pt-12px pb-24px">
 												{restItems.map((item) => (

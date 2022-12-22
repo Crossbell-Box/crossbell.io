@@ -5,6 +5,7 @@ import {
 	Avatar as BaseAvatar,
 	Modal,
 	CloseButton,
+	LoadingOverlay,
 } from "@mantine/core";
 import { useDisclosure } from "@mantine/hooks";
 import { ListResponse, LinkEntity, CharacterEntity } from "crossbell.js";
@@ -92,7 +93,9 @@ export function NoteLikes({ model }: NoteLikesProps) {
 				withCloseButton={false}
 				opened={isModalOpened}
 				onClose={modal.close}
-				classNames={{ modal: "w-600px max-w-90vw" }}
+				closeOnClickOutside={!model.isLoading}
+				closeOnEscape={!model.isLoading}
+				classNames={{ modal: "w-600px max-w-90vw overflow-hidden" }}
 			>
 				<div className="flex items-center gap-[8px] px-24px pt-24px">
 					<Text className="i-csb:favorite-fill text-24px text-[#E65040]" />
@@ -102,7 +105,10 @@ export function NoteLikes({ model }: NoteLikesProps) {
 				</div>
 
 				{total === 0 ? (
-					<EmptyPlaceholder />
+					<div>
+						<LoadingOverlay visible={model.isLoading} />
+						<EmptyPlaceholder onLike={model.like} />
+					</div>
 				) : (
 					<ScrollArea.Autosize maxHeight="80vh">
 						<div className="px-24px pt-12px pb-24px">

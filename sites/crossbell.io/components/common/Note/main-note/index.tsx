@@ -207,7 +207,7 @@ export function MainNote({
 
 				<div className="flex items-center gap-[16px] mb-10px">
 					<NoteLikes model={model} />
-					<NoteMints characterId={note.characterId} noteId={note.noteId} />
+					<NoteMints model={model} />
 				</div>
 
 				{/* actions */}
