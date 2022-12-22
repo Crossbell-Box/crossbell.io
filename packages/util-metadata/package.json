@@ -10,14 +10,6 @@
 	"main": "dist/index.js",
 	"module": "dist/index.mjs",
 	"typings": "dist/index.d.ts",
-	"exports": {
-		".": {
-			"import": "./dist/index.mjs",
-			"require": "./dist/index.js",
-			"types": "./dist/index.d.ts"
-		},
-		"./package.json": "./package.json"
-	},
 	"sideEffects": false,
 	"files": [
 		"dist",
@@ -27,13 +19,21 @@
 		"build": "npm run clean && tsup",
 		"clean": "rm -rf ./dist"
 	},
+	"exports": {
+		".": {
+			"import": "./dist/index.mjs",
+			"require": "./dist/index.js",
+			"types": "./dist/index.d.ts"
+		},
+		"./package.json": "./package.json"
+	},
 	"dependencies": {
 		"@fastify/deepmerge": "1.1.0"
 	},
 	"peerDependencies": {
 		"@crossbell/util-ipfs": "workspace:*",
 		"@crossbell/util-ethers": "workspace:*",
-		"crossbell.js": "0.14.x"
+		"crossbell.js": "0.15.x"
 	},
 	"devDependencies": {
 		"@crossbell/util-ipfs": "workspace:*",

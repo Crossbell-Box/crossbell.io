@@ -10,14 +10,6 @@
 	"main": "dist/index.js",
 	"module": "dist/index.mjs",
 	"typings": "dist/index.d.ts",
-	"exports": {
-		".": {
-			"import": "./dist/index.mjs",
-			"require": "./dist/index.js",
-			"types": "./dist/index.d.ts"
-		},
-		"./package.json": "./package.json"
-	},
 	"sideEffects": false,
 	"files": [
 		"dist",
@@ -27,10 +19,18 @@
 		"build": "npm run clean && tsup",
 		"clean": "rm -rf ./dist"
 	},
+	"exports": {
+		".": {
+			"import": "./dist/index.mjs",
+			"require": "./dist/index.js",
+			"types": "./dist/index.d.ts"
+		},
+		"./package.json": "./package.json"
+	},
 	"peerDependencies": {
 		"@crossbell/util-hooks": "workspace:*",
 		"@crossbell/indexer": "workspace:*",
-		"crossbell.js": "0.14.x",
+		"crossbell.js": "0.15.x",
 		"ethers": "5.x.x",
 		"wagmi": "0.7.x",
 		"react": "18.x.x"
