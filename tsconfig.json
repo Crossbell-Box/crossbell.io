@@ -1,28 +1,33 @@
 {
 	"compilerOptions": {
-		"target": "es5",
-		"lib": ["dom", "dom.iterable", "esnext"],
-		"allowJs": true,
-		"skipLibCheck": true,
+		"declaration": true,
+		"declarationMap": true,
 		"strict": true,
-		"forceConsistentCasingInFileNames": true,
-		"noEmit": true,
+		"noUnusedParameters": true,
+		"noUnusedLocals": true,
+		"noImplicitAny": true,
+		"noImplicitReturns": true,
 		"esModuleInterop": true,
-		"module": "esnext",
 		"moduleResolution": "node",
-		"resolveJsonModule": true,
-		"isolatedModules": true,
-		"jsx": "preserve",
-		"incremental": true,
+		"module": "ESNext",
+		"skipLibCheck": true,
+		"target": "ESNext",
+		"jsx": "react",
 		"baseUrl": ".",
 		"paths": {
-			"@/components/*": ["components/*"],
-			"@/pages/*": ["pages/*"],
-			"@/styles/*": ["styles/*"],
-			"@/utils/*": ["utils/*"],
-			"@/public/*": ["public/*"]
+			"~/shared/*": ["shared/*"],
+			"~/scripts/*": ["scripts/*"],
+			"@crossbell/*": ["packages/*/src"]
 		}
 	},
-	"include": ["next-env.d.ts", "**/*.ts", "**/*.tsx"],
-	"exclude": ["node_modules"]
+	"references": [
+		{ "path": "packages/connect-kit/tsconfig.json" },
+		{ "path": "packages/contract/tsconfig.json" },
+		{ "path": "packages/indexer/tsconfig.json" },
+		{ "path": "packages/ui/tsconfig.json" },
+		{ "path": "packages/util-ethers/tsconfig.json" },
+		{ "path": "packages/util-hooks/tsconfig.json" },
+		{ "path": "packages/util-ipfs/tsconfig.json" },
+		{ "path": "packages/util-metadata/tsconfig.json" }
+	]
 }

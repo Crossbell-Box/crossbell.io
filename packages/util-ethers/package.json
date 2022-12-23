@@ -1,0 +1,30 @@
+{
+	"name": "@crossbell/util-ethers",
+	"version": "0.0.1",
+	"license": "MIT",
+	"repository": "github:Crossbell-Box/crossbell-universe",
+	"bugs": "https://github.com/Crossbell-Box/crossbell-universe/issues",
+	"homepage": "https://github.com/Crossbell-Box/crossbell-universe#readme",
+	"author": "Natural Selection Labs",
+	"keywords": [],
+	"main": "dist/index.js",
+	"module": "dist/index.mjs",
+	"typings": "dist/index.d.ts",
+	"exports": {
+		".": {
+			"import": "./dist/index.mjs",
+			"require": "./dist/index.js",
+			"types": "./dist/index.d.ts"
+		},
+		"./package.json": "./package.json"
+	},
+	"sideEffects": false,
+	"files": [
+		"dist",
+		"package.json"
+	],
+	"scripts": {
+		"build": "npm run clean && tsup",
+		"clean": "rm -rf ./dist"
+	}
+}

@@ -1,0 +1,11 @@
+{
+	"name": "crossbell.io",
+	"private": true,
+	"scripts": {
+		"dev": "rm -rf .next && next dev",
+		"build": "rm -rf .next && next build",
+		"analyze": "ANALYZE=true npm run build",
+		"start": "next start",
+		"lint": "next lint"
+	}
+}

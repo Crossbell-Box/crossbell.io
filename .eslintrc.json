@@ -1,3 +1,70 @@
 {
-  "extends": "next/core-web-vitals"
+	"plugins": ["@typescript-eslint", "prettier"],
+	"parser": "@typescript-eslint/parser",
+	"extends": ["plugin:@typescript-eslint/recommended", "prettier"],
+	"globals": {
+		"Atomics": "readonly",
+		"SharedArrayBuffer": "readonly"
+	},
+	"rules": {
+		"prettier/prettier": "error",
+		"@typescript-eslint/explicit-member-accessibility": [
+			"error",
+			{
+				"accessibility": "no-public",
+				"overrides": {
+					"parameterProperties": "explicit"
+				}
+			}
+		],
+		"@typescript-eslint/no-unused-vars": [
+			"error",
+			{
+				"args": "all",
+				"argsIgnorePattern": "^_",
+				"varsIgnorePattern": "^_"
+			}
+		],
+		"@typescript-eslint/ban-ts-ignore": "off",
+		"@typescript-eslint/no-empty-function": "off",
+		"@typescript-eslint/no-non-null-assertion": "off",
+		"@typescript-eslint/explicit-function-return-type": "off",
+		"@typescript-eslint/no-parameter-properties": "off",
+		"@typescript-eslint/no-use-before-define": [
+			"error",
+			{ "functions": false, "classes": false }
+		],
+		"@typescript-eslint/no-explicit-any": "off",
+		"@typescript-eslint/no-var-requires": "off",
+		"no-console": ["error", { "allow": ["warn", "error"] }]
+	},
+	"reportUnusedDisableDirectives": true,
+	"env": {
+		"es6": true
+	},
+	"parserOptions": {
+		"extraFileExtensions": [".html"],
+		"ecmaFeatures": {
+			"jsx": true
+		},
+		"ecmaVersion": 2018,
+		"sourceType": "module"
+	},
+	"overrides": [
+		{
+			"files": ["sites/crossbell.io/**/*.ts", "sites/crossbell.io/**/*.tsx"],
+			"extends": "next/core-web-vitals",
+			"rules": {
+				"@typescript-eslint/no-unused-vars": "warn",
+				"@typescript-eslint/no-use-before-define": "warn",
+				"@typescript-eslint/ban-ts-comment": "warn",
+				"@typescript-eslint/no-non-null-asserted-optional-chain": "warn",
+				"@typescript-eslint/ban-types": "warn",
+				"@typescript-eslint/no-inferrable-types": "warn",
+				"prefer-const": "warn",
+				"no-console": ["warn", { "allow": ["warn", "error"] }],
+				"prettier/prettier": "warn"
+			}
+		}
+	]
 }

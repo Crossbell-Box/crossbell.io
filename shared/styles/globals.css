@@ -1,0 +1,47 @@
+html,
+body {
+	padding: 0;
+	margin: 0;
+	font-family: "Open Sans", -apple-system, BlinkMacSystemFont, Segoe UI, Roboto,
+		Oxygen, Ubuntu, Cantarell, Fira Sans, Droid Sans, Helvetica Neue, sans-serif;
+	overscroll-behavior: none;
+	background: #fafcff;
+}
+
+a {
+	color: inherit;
+	text-decoration: none;
+}
+
+*,
+*::before,
+*::after {
+	box-sizing: border-box;
+}
+
+.ux-overlay {
+	position: relative;
+	cursor: pointer;
+}
+
+.ux-overlay::after {
+	content: "";
+	position: absolute;
+	top: 0;
+	left: 0;
+	right: 0;
+	bottom: 0;
+	border-radius: inherit;
+	background: #000;
+	opacity: 0;
+	transition: opacity 0.2s;
+	pointer-events: none;
+}
+
+.ux-overlay:hover::after {
+	opacity: 0.05;
+}
+
+.ux-overlay:active::after {
+	opacity: 0.15;
+}
