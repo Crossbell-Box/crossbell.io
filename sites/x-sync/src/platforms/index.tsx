@@ -3,8 +3,10 @@ import { Loader } from "@mantine/core";
 import { useRouter } from "next/router";
 
 import {
+	OPERATOR_ADDRESS,
 	useAccountCharacterId,
 	useCharacterBoundAccounts,
+	useCharacterOperatorPermissions,
 } from "@crossbell/connect-kit";
 
 import { Sidebar } from "@/components";
@@ -16,6 +18,8 @@ export function Platforms() {
 	const { characterId, ssrReady } = useAccountCharacterId();
 	const boundAccounts = useCharacterBoundAccounts(characterId);
 	const router = useRouter();
+	const characterOperatorPermissions =
+		useCharacterOperatorPermissions(OPERATOR_ADDRESS);
 
 	React.useEffect(() => {
 		if (ssrReady && !characterId) {
@@ -23,7 +27,7 @@ export function Platforms() {
 		}
 	}, [ssrReady, characterId, router]);
 
-	if (boundAccounts.isLoading) {
+	if (boundAccounts.isLoading || characterOperatorPermissions.isLoading) {
 		return (
 			<div className="fixed inset-0 flex items-center justify-center">
 				<Loader />

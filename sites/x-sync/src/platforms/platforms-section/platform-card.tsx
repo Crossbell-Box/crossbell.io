@@ -9,7 +9,7 @@ import dayjs from "dayjs";
 
 import {
 	useAccountCharacter,
-	useCharacterHasOperator,
+	useCharacterOperatorHasPermissions,
 } from "@crossbell/connect-kit";
 import {
 	getPlatformDisplayName,
@@ -62,7 +62,7 @@ export function PlatformCard({
 	lastUpdatedAt,
 }: PlatformCardProps) {
 	const character = useAccountCharacter();
-	const hasOperator = useCharacterHasOperator(
+	const hasPermissions = useCharacterOperatorHasPermissions(
 		OPERATOR_ADDRESS,
 		X_SYNC_OPERATOR_PERMISSIONS
 	);
@@ -78,7 +78,7 @@ export function PlatformCard({
 		? getPlatformUserProfileUrl(platform, identity)
 		: getPlatformSite(platform);
 
-	const disableBtn = !hasOperator && !isBound;
+	const disableBtn = !hasPermissions && !isBound;
 
 	return (
 		<div

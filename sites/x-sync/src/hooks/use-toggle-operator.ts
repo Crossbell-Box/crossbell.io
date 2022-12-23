@@ -14,7 +14,7 @@ import { X_SYNC_OPERATOR_PERMISSIONS } from "./const";
 
 export function useToggleOperator() {
 	const character = useAccountCharacter();
-	const [{ toggleOperator, hasOperator }] = useToggleCharacterOperator(
+	const [{ toggleOperator, hasPermissions }] = useToggleCharacterOperator(
 		OPERATOR_ADDRESS,
 		X_SYNC_OPERATOR_PERMISSIONS
 	);
@@ -23,7 +23,7 @@ export function useToggleOperator() {
 
 	return React.useMemo(() => {
 		return {
-			hasOperator,
+			hasPermissions,
 			isTogglingOperator,
 			async toggleOperator() {
 				if (isTogglingOperator || !character?.characterId) return;
@@ -31,7 +31,7 @@ export function useToggleOperator() {
 				try {
 					setIsTogglingOperator(true);
 
-					if (hasOperator) {
+					if (hasPermissions) {
 						await openRemoveOperatorModal(contract);
 					} else {
 						await toggleOperator();
@@ -46,5 +46,10 @@ export function useToggleOperator() {
 				}
 			},
 		};
-	}, [character?.characterId, hasOperator, isTogglingOperator, toggleOperator]);
+	}, [
+		character?.characterId,
+		hasPermissions,
+		isTogglingOperator,
+		toggleOperator,
+	]);
 }

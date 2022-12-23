@@ -3,7 +3,6 @@ import { useRouter } from "next/router";
 
 import {
 	useAccountState,
-	useCharacterHasOperator,
 	useToggleCharacterOperator,
 } from "@crossbell/connect-kit";
 import {
@@ -21,11 +20,7 @@ export function useTurnSyncOn() {
 	const characterId = account?.characterId;
 	const activate = useActivateCharacter(characterId);
 	const { data: isActivated } = useCharacterActivation(characterId);
-	const [{ toggleOperator }] = useToggleCharacterOperator(
-		OPERATOR_ADDRESS,
-		X_SYNC_OPERATOR_PERMISSIONS
-	);
-	const hasOperator = useCharacterHasOperator(
+	const [{ toggleOperator, hasPermissions }] = useToggleCharacterOperator(
 		OPERATOR_ADDRESS,
 		X_SYNC_OPERATOR_PERMISSIONS
 	);
@@ -36,7 +31,7 @@ export function useTurnSyncOn() {
 			await activate.mutateAsync();
 		}
 
-		if (!hasOperator) {
+		if (!hasPermissions) {
 			await toggleOperator();
 		}
 	});

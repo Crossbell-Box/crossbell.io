@@ -3,7 +3,7 @@ import { CharacterPermissionKey } from "crossbell.js";
 
 import { useAccountState } from "../account-state";
 
-import { useCharacterHasOperator } from "./use-character-has-operator";
+import { useCharacterOperatorHasPermissions } from "./use-character-operator-has-permissions";
 import { useAddCharacterOperator } from "./use-add-character-operator";
 import { useRemoveCharacterOperator } from "./use-remove-character-operator";
 
@@ -12,11 +12,14 @@ export function useToggleCharacterOperator(
 	permissions: CharacterPermissionKey[]
 ) {
 	const characterId = useAccountState((s) => s.computed.account?.characterId);
-	const hasOperator = useCharacterHasOperator(operator, permissions);
+	const hasPermissions = useCharacterOperatorHasPermissions(
+		operator,
+		permissions
+	);
 
 	const add = useAddCharacterOperator();
 	const remove = useRemoveCharacterOperator();
-	const mutation = hasOperator ? remove : add;
+	const mutation = hasPermissions ? remove : add;
 
 	const toggleOperator = React.useCallback(async () => {
 		if (characterId) {
@@ -24,5 +27,5 @@ export function useToggleCharacterOperator(
 		}
 	}, [mutation, characterId, operator]);
 
-	return [{ hasOperator, toggleOperator }, mutation] as const;
+	return [{ hasPermissions, toggleOperator }, mutation] as const;
 }

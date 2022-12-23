@@ -24,7 +24,7 @@ export default function CharacterSection() {
 		[character]
 	);
 
-	const { toggleOperator, hasOperator, isTogglingOperator } =
+	const { toggleOperator, hasPermissions, isTogglingOperator } =
 		useToggleOperator();
 
 	return (
@@ -47,7 +47,7 @@ export default function CharacterSection() {
 				</button>
 				<Switch
 					disabled={account?.type === "email"}
-					checked={hasOperator}
+					checked={hasPermissions}
 					onChange={toggleOperator}
 					className={styles.switch}
 					onLabel="ON"
