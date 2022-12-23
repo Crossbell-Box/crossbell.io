@@ -1,0 +1,55 @@
+.container {
+	display: flex;
+	align-items: center;
+	gap: 8px;
+	padding: 12px 0;
+}
+
+.avatar {
+	position: relative;
+}
+
+.avatar[data-is-read="true"]::after {
+	display: none;
+}
+
+.avatar::after {
+	content: "";
+	position: absolute;
+	top: 1.5px;
+	right: -1.5px;
+	width: 9px;
+	height: 9px;
+	border-radius: 9px;
+	background: #e65040;
+}
+
+.main {
+	font-size: 12px;
+}
+
+.main > *:not(:first-child) {
+	margin-left: 0.5ch;
+}
+
+.characterName {
+	font-weight: 500;
+}
+
+.transactionHash {
+	color: #f6c549;
+}
+
+.transactionHash:hover {
+	text-decoration: underline;
+}
+
+.transactionHash svg {
+	display: inline-block;
+	transform: translateY(14%);
+	margin: 0 2px 0 4px;
+}
+
+.actionDesc a:hover {
+	text-decoration: underline;
+}

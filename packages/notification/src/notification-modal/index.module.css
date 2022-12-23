@@ -1,0 +1,30 @@
+.modal {
+	width: 600px;
+	max-width: 90vw;
+	overflow: hidden;
+}
+
+.header {
+	display: flex;
+	align-items: center;
+	gap: 8px;
+	margin-bottom: 12px;
+}
+
+.headerBell {
+	font-size: 24px;
+}
+
+.headerTitle {
+	font-size: 22px;
+	font-weight: 500;
+	margin-right: auto;
+}
+
+.loader,
+.noNotificationTips {
+	height: 100px;
+	display: flex;
+	align-items: center;
+	justify-content: center;
+}

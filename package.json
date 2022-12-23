@@ -28,6 +28,7 @@
 		"@crossbell/ipfs-react": "0.0.15",
 		"@ctrl/tinycolor": "3.4.1",
 		"@emoji-mart/react": "1.0.1",
+		"@emotion/cache": "11.10.5",
 		"@emotion/core": "11.0.0",
 		"@emotion/react": "11.10.5",
 		"@emotion/server": "11.10.0",
@@ -76,7 +77,8 @@
 		"sticky-sidebar-v2": "1.1.1",
 		"type-fest": "3.1.0",
 		"typeit-react": "2.6.0",
-		"wagmi": "0.7.9"
+		"wagmi": "0.7.9",
+		"zustand": "^4.1.5"
 	},
 	"devDependencies": {
 		"@crossbell/ipfs-gateway-next": "0.0.15",
@@ -93,6 +95,7 @@
 		"bumpp": "^8.2.1",
 		"commander": "^9.4.0",
 		"esbuild": "^0.15.6",
+		"esbuild-css-modules-plugin": "2.6.3",
 		"esbuild-register": "3.4.1",
 		"eslint": "8.26.0",
 		"eslint-config-next": "13.0.0",
@@ -105,6 +108,8 @@
 		"msw": "^0.46.1",
 		"next-transpile-modules": "^10.0.0",
 		"npm-run-all": "^4.1.5",
+		"postcss": "8.4.20",
+		"postcss-modules": "6.0.0",
 		"prettier": "^2.7.1",
 		"tsconfig-paths": "4.1.1",
 		"tsd": "^0.23.0",
@@ -112,7 +117,6 @@
 		"tsup": "6.5.0",
 		"turbo": "^1.4.4",
 		"typescript": "4.8.4",
-		"unocss": "0.46.1",
-		"zustand": "^4.1.5"
+		"unocss": "0.46.1"
 	}
 }

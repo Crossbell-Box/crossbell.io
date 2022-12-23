@@ -10,9 +10,14 @@ import { AppProps } from "next/app";
 import { NextPage } from "next/types";
 import Head from "next/head";
 
+import { NotificationModal } from "@crossbell/notification";
+
 import { MainProvider } from "~/shared/providers";
 
-export type NextPageWithLayout<P = {}, IP = P> = NextPage<P, IP> & {
+export type NextPageWithLayout<P = Record<string, unknown>, IP = P> = NextPage<
+	P,
+	IP
+> & {
 	getLayout?: (page: ReactElement) => ReactNode;
 };
 
@@ -49,7 +54,10 @@ export default function App({ Component, pageProps }: AppPropsWithLayout) {
 				}}
 			/>
 
-			<MainProvider>{getLayout(<Component {...pageProps} />)}</MainProvider>
+			<MainProvider>
+				<NotificationModal />
+				{getLayout(<Component {...pageProps} />)}
+			</MainProvider>
 		</>
 	);
 }

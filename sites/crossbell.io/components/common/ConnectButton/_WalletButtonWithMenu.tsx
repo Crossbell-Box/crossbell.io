@@ -14,6 +14,7 @@ import {
 	useAccountState,
 } from "@crossbell/connect-kit";
 import { AccountList } from "~/shared/components/account-list";
+import { useShowNotificationModal } from "@crossbell/notification";
 
 import { ConnectButtonProps } from "./index";
 import WalletDisplayButton from "./_WalletDisplayButton";
@@ -45,6 +46,7 @@ export default function WalletButtonWithMenu({
 			checkIsAbleToRefillEmailBalance(),
 			getRefillEmailBalanceStatus(),
 		]);
+	const showNotificationModal = useShowNotificationModal();
 
 	return (
 		<Menu
@@ -110,6 +112,13 @@ export default function WalletButtonWithMenu({
 				<AccountList itemClassName="p-3 cursor-pointer bg-hover" />
 
 				<Menu.Divider />
+
+				<MenuItem
+					onClick={showNotificationModal}
+					icon={<Text className="i-csb:like" />}
+				>
+					Notifications
+				</MenuItem>
 
 				{account.type === "wallet" && (
 					<MenuItem component={Link} href={WalletCharacterManageHref}>
