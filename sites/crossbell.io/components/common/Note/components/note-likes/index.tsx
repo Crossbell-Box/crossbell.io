@@ -90,6 +90,7 @@ export function NoteLikes({ model }: NoteLikesProps) {
 			<Modal
 				radius={28}
 				padding={0}
+				zIndex={11}
 				withCloseButton={false}
 				opened={isModalOpened}
 				onClose={modal.close}
