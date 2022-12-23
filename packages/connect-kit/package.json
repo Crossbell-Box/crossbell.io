@@ -45,7 +45,7 @@
 		"ethers": "5.x.x",
 		"wagmi": "0.7.x",
 		"@wagmi/core": "^0.6.8",
-		"crossbell.js": "0.15.x",
+		"crossbell.js": "0.16.x",
 		"framer-motion": "7.x.x",
 		"react": "18.x.x"
 	},

@@ -40,7 +40,7 @@ importers:
       check-password-strength: 2.0.7
       classnames: 2.3.2
       commander: ^9.4.0
-      crossbell.js: 0.15.0
+      crossbell.js: 0.16.0
       dayjs: 1.11.6
       detect-browser: 5.3.0
       embla-carousel-react: 7.0.4
@@ -116,7 +116,7 @@ importers:
       canvas-confetti: 1.6.0
       check-password-strength: 2.0.7
       classnames: 2.3.2
-      crossbell.js: 0.15.0
+      crossbell.js: 0.16.0
       dayjs: 1.11.6
       detect-browser: 5.3.0
       embla-carousel-react: 7.0.4_react@18.2.0
@@ -3832,8 +3832,8 @@ packages:
       which: 2.0.2
     dev: true
 
-  /crossbell.js/0.15.0:
-    resolution: {integrity: sha512-ZVHQjDfk51+/oqGLpBWKMIGEZMHDoNrBC7q4Q0vi9oAvHjoVAdgv/+PQIu2/mmmAJUCnxzy1Oi+buLg+u9mmTw==}
+  /crossbell.js/0.16.0:
+    resolution: {integrity: sha512-wwU4KVK8J+c36P7aJfK6/oeu5TqDfPrfog9tiQYQcHVYNfnvk8279Q/GYquRTtnPfqEpYKeGi0vuADinC2zSTQ==}
     dependencies:
       async-retry: 1.3.3
       ethers: 5.7.2
