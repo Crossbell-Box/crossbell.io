@@ -7,19 +7,15 @@ import { Contract } from "crossbell.js";
 
 import {
 	useAccountCharacter,
-	useToggleCharacterOperator,
+	useToggleCharacterSyncOperator,
 } from "@crossbell/connect-kit";
-import { openBorderlessModal } from "~/shared/components/modal";
-import { Image } from "~/shared/components/image";
-import {
-	OPERATOR_ADDRESS,
-	useCharacterBoundAccounts,
-} from "@crossbell/connect-kit";
+import { useCharacterBoundAccounts } from "@crossbell/connect-kit";
 import { ContractProvider } from "@crossbell/contract";
 
-import seeYouImage from "@/public/images/sync/see-you-later.svg";
+import { openBorderlessModal } from "~/shared/components/modal";
+import { Image } from "~/shared/components/image";
 
-import { X_SYNC_OPERATOR_PERMISSIONS } from "../hooks/const";
+import seeYouImage from "@/public/images/sync/see-you-later.svg";
 
 export async function openRemoveOperatorModal(contract: Contract) {
 	return new Promise<void>((resolve) =>
@@ -56,7 +52,7 @@ export function RemoveOperatorModal() {
 	const [scene, setScene] = React.useState(Scene.wannaRemoveTips);
 
 	const [{ toggleOperator }, { isLoading: isRemoving }] =
-		useToggleCharacterOperator(OPERATOR_ADDRESS, X_SYNC_OPERATOR_PERMISSIONS);
+		useToggleCharacterSyncOperator();
 
 	const removeOperator = React.useCallback(() => {
 		if (!isRemoving && character?.characterId) {

@@ -1,23 +1,17 @@
 import React from "react";
 import { showNotification } from "@mantine/notifications";
 
-import { OPERATOR_ADDRESS } from "@crossbell/connect-kit";
 import {
 	useAccountCharacter,
-	useToggleCharacterOperator,
+	useToggleCharacterSyncOperator,
 } from "@crossbell/connect-kit";
 import { useContract } from "@crossbell/contract";
 
 import { openRemoveOperatorModal } from "../modals";
 
-import { X_SYNC_OPERATOR_PERMISSIONS } from "./const";
-
 export function useToggleOperator() {
 	const character = useAccountCharacter();
-	const [{ toggleOperator, hasPermissions }] = useToggleCharacterOperator(
-		OPERATOR_ADDRESS,
-		X_SYNC_OPERATOR_PERMISSIONS
-	);
+	const [{ toggleOperator, hasPermissions }] = useToggleCharacterSyncOperator();
 	const [isTogglingOperator, setIsTogglingOperator] = React.useState(false);
 	const contract = useContract();
 
