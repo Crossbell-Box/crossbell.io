@@ -3,27 +3,21 @@ import { useRouter } from "next/router";
 
 import {
 	useAccountState,
-	useToggleCharacterOperator,
+	useToggleCharacterSyncOperator,
 } from "@crossbell/connect-kit";
 import {
-	OPERATOR_ADDRESS,
 	useActivateCharacter,
 	useCharacterActivation,
 } from "@crossbell/connect-kit";
 import { useLoginChecker } from "~/shared/wallet/hooks";
 import { useRefCallback } from "@crossbell/util-hooks";
 
-import { X_SYNC_OPERATOR_PERMISSIONS } from "./const";
-
 export function useTurnSyncOn() {
 	const account = useAccountState((s) => s.computed.account);
 	const characterId = account?.characterId;
 	const activate = useActivateCharacter(characterId);
 	const { data: isActivated } = useCharacterActivation(characterId);
-	const [{ toggleOperator, hasPermissions }] = useToggleCharacterOperator(
-		OPERATOR_ADDRESS,
-		X_SYNC_OPERATOR_PERMISSIONS
-	);
+	const [{ toggleOperator, hasPermissions }] = useToggleCharacterSyncOperator();
 	const { validate } = useLoginChecker();
 
 	const turnSyncOn = useRefCallback(async () => {

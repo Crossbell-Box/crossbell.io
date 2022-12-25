@@ -9,12 +9,11 @@ import dayjs from "dayjs";
 
 import {
 	useAccountCharacter,
-	useCharacterOperatorHasPermissions,
+	useCharacterSyncOperatorHasPermissions,
 } from "@crossbell/connect-kit";
 import {
 	getPlatformDisplayName,
 	getPlatformUserProfileUrl,
-	OPERATOR_ADDRESS,
 	SupportedPlatform,
 	useSyncAccount,
 } from "@crossbell/connect-kit";
@@ -25,8 +24,6 @@ import { formatDate } from "~/shared/time";
 import { useContract } from "@crossbell/contract";
 
 import bindIllustration from "@/public/images/sync/bind-illustration.png";
-
-import { X_SYNC_OPERATOR_PERMISSIONS } from "../../hooks/const";
 
 export type PlatformCardProps = {
 	isBound: boolean;
@@ -62,10 +59,7 @@ export function PlatformCard({
 	lastUpdatedAt,
 }: PlatformCardProps) {
 	const character = useAccountCharacter();
-	const hasPermissions = useCharacterOperatorHasPermissions(
-		OPERATOR_ADDRESS,
-		X_SYNC_OPERATOR_PERMISSIONS
-	);
+	const hasPermissions = useCharacterSyncOperatorHasPermissions();
 	const contract = useContract();
 
 	const syncAccount = useSyncAccount(
