@@ -26,7 +26,10 @@ export function injectContractChecker({
 	return new Proxy(contract, {
 		get: (target, prop) => {
 			return async (...args: any[]) => {
-				const noNeedTxMethods: (string | symbol)[] = ["then"];
+				const noNeedTxMethods: (string | symbol)[] = [
+					"then",
+					"getOperatorPermissionsForCharacter",
+				];
 
 				const address = getCurrentAddress();
 				if (!noNeedTxMethods.includes(prop)) {
