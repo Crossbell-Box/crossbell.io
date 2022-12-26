@@ -51,7 +51,7 @@ export function AccountList() {
 										</div>
 									),
 									labels: { confirm: "Switch", cancel: "Cancel" },
-									zIndex: 20,
+									zIndex: 11,
 									onConfirm: () => {
 										switchCharacter(character);
 										showNotification({

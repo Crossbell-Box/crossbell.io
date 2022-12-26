@@ -20,7 +20,7 @@ import seeYouImage from "@/public/images/sync/see-you-later.svg";
 export async function openRemoveOperatorModal(contract: Contract) {
 	return new Promise<void>((resolve) =>
 		openBorderlessModal({
-			zIndex: 10000,
+			zIndex: 11,
 			children: (
 				<ContractProvider contract={contract}>
 					<RemoveOperatorModal />

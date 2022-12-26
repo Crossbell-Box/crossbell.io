@@ -67,7 +67,7 @@ export function UnbindingModal() {
 		<Modal
 			opened={isActive}
 			onClose={hide}
-			zIndex={10000}
+			zIndex={11}
 			padding={0}
 			classNames={{ modal: "rounded-28px overflow-hidden" }}
 			withCloseButton={false}
