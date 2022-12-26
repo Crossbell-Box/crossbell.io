@@ -38,7 +38,7 @@ import { BIO_IMAGE_MAP, NAME_IMAGE_MAP } from "./binding-modal.images";
 
 const closeModals = () => closeAllModals();
 
-const modalZIndex = 10000;
+const modalZIndex = 11;
 
 export function openBindingModal(
 	platform: SupportedPlatform,
