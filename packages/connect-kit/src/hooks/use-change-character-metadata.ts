@@ -38,7 +38,9 @@ export function useChangeCharacterMetadata() {
 					case "wallet":
 						await contract.setCharacterMetadata(
 							account.character.characterId,
-							newMetadata
+							// crossbell.js will try to modify the object internally,
+							// here the immutable object is converted to mutable object to avoid errors.
+							JSON.parse(JSON.stringify(newMetadata))
 						);
 						await useAccountState.getState().refresh();
 						return true;

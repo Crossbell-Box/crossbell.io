@@ -1,9 +1,12 @@
 import React from "react";
-import { WalletCharacterNewHref } from "~/shared/url";
-import { getCurrentAddress } from "~/shared/wallet/provider";
 import { Space, Text, Button } from "@mantine/core";
 import { closeAllModals, openModal } from "@mantine/modals";
 import Link from "next/link";
+
+import { ipfsLinkToHttpLink } from "@crossbell/util-ipfs";
+
+import { WalletCharacterNewHref } from "~/shared/url";
+import { getCurrentAddress } from "~/shared/wallet/provider";
 import { Image } from "~/shared/components/image";
 import { Tooltip } from "~/shared/components/tooltip";
 import { openBorderlessModal } from "~/shared/components/modal";
@@ -70,11 +73,13 @@ export function openMintNewCharacterModel() {
 				{/* close btn */}
 				<div className="absolute top-0 right-0 w-100px h-100px cursor-pointer"></div>
 				{/* mint btn */}
-				<Link href={WalletCharacterNewHref}>
+				<Link href={WalletCharacterNewHref} target="_blank" rel="noreferrer">
 					<div className="absolute bottom-0 left-0 right-0 h-100px cursor-pointer"></div>
 				</Link>
 				<Image
-					src="/images/mint-character-guide-card.png"
+					src={ipfsLinkToHttpLink(
+						"ipfs://bafybeicmexu5ncudvbujeviyyjbmzl2if46wd5lupfiom7rewla7rzfoke"
+					)}
 					width={400}
 					height={600}
 				/>
