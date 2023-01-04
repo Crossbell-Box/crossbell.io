@@ -67,7 +67,7 @@ export function NotificationModal() {
 						<Loader />
 					</div>
 				) : total > 0 ? (
-					<>
+					<div>
 						{notifications.map((notification) => (
 							<Item
 								notification={notification}
@@ -85,7 +85,7 @@ export function NotificationModal() {
 								<Loader />
 							</div>
 						</LoadMore>
-					</>
+					</div>
 				) : (
 					<div className={styles.noNotificationTips}>No notification yet</div>
 				)}

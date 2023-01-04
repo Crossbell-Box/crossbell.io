@@ -15,6 +15,7 @@ import {
 } from "~/shared/url";
 
 import styles from "./item.module.css";
+import config from "~/shared/config";
 
 dayjs.extend(relativeTime);
 
@@ -27,6 +28,7 @@ export function Item({ notification, isRead }: ItemProps) {
 	if (!notification) return null;
 
 	const character = notification.fromCharacter;
+	const titleInfo = getTitleInfo(notification);
 
 	return (
 		<div className={styles.container}>
@@ -40,20 +42,29 @@ export function Item({ notification, isRead }: ItemProps) {
 				</Indicator>
 			</a>
 			<div className={styles.main}>
-				<a
-					className={styles.characterName}
-					href={composeCharacterHref(character.handle)}
-					target="_blank"
-					rel="noreferrer"
-				>
-					{extractCharacterName(character)}
-				</a>
+				<div className={styles.description}>
+					<a
+						className={styles.characterName}
+						href={composeCharacterHref(character.handle)}
+						target="_blank"
+						rel="noreferrer"
+					>
+						{extractCharacterName(character)}
+					</a>
 
-				<span className={styles.actionDesc}>{actionDesc(notification)}</span>
+					<span className={styles.actionDesc}>{actionDesc(notification)}</span>
 
-				<span>{timeDiff(notification)}</span>
+					<span>{timeDiff(notification)}</span>
 
-				<span>on {renderTransactionHash(notification.transactionHash)}</span>
+					<span>on {renderTransactionHash(notification.transactionHash)}</span>
+				</div>
+				{titleInfo && (
+					<div className={styles.title}>
+						<a href={titleInfo.url} target="_blank" rel="noreferrer">
+							{titleInfo.title}
+						</a>
+					</div>
+				)}
 			</div>
 		</div>
 	);
@@ -86,37 +97,37 @@ function actionDesc(notification: ParsedNotification) {
 					>
 						commented
 					</a>
-					{" your "}
-					<a
-						href={`/notes/${composeNoteId(
-							notification.originNote.characterId,
-							notification.originNote.noteId
-						)}`}
-						target="_blank"
-						rel="noreferrer"
-					>
-						Note
-					</a>
+					{" your Note"}
 				</span>
 			);
 		case "like":
-			return (
-				<span>
-					{"liked your "}
-					<a
-						href={`/notes/${composeNoteId(
-							notification.originNote.characterId,
-							notification.originNote.noteId
-						)}`}
-						target="_blank"
-						rel="noreferrer"
-					>
-						Note
-					</a>
-				</span>
-			);
+			return <span>liked your Note</span>;
 		case "follow":
-			return <span>follows you</span>;
+			return <span>followed your Character</span>;
+	}
+
+	return null;
+}
+
+function getTitleInfo(notification: ParsedNotification) {
+	switch (notification.type) {
+		case "like":
+		case "comment":
+			return {
+				title:
+					(notification.originNote.metadata?.content?.title ??
+						notification.originNote.metadata?.content?.content) ||
+					"Note",
+				url: `${config.domain}/notes/${composeNoteId(
+					notification.originNote.characterId,
+					notification.originNote.noteId
+				)}`,
+			};
+		case "follow":
+			return {
+				title: extractCharacterName(notification.toCharacter),
+				url: composeCharacterHref(notification.toCharacter.handle),
+			};
 	}
 
 	return null;
