@@ -89,21 +89,35 @@ function actionDesc(notification: ParsedNotification) {
 		case "comment":
 			return (
 				<span>
+					{"commented your "}
 					<a
 						href={`/notes/${composeNoteId(
-							notification.commentNote?.characterId,
-							notification.commentNote?.noteId
+							notification.originNote.characterId,
+							notification.originNote.noteId
 						)}`}
+						title={notification.originNote.metadata?.content?.content}
 					>
-						commented
+						Note
 					</a>
-					{" your Note"}
 				</span>
 			);
 		case "like":
-			return <span>liked your Note</span>;
+			return (
+				<span>
+					{"liked your "}
+					<a
+						href={`/notes/${composeNoteId(
+							notification.originNote.characterId,
+							notification.originNote.noteId
+						)}`}
+						title={notification.originNote.metadata?.content?.content}
+					>
+						Note
+					</a>
+				</span>
+			);
 		case "follow":
-			return <span>followed your Character</span>;
+			return <span>followed you</span>;
 	}
 
 	return null;
@@ -111,22 +125,16 @@ function actionDesc(notification: ParsedNotification) {
 
 function getTitleInfo(notification: ParsedNotification) {
 	switch (notification.type) {
-		case "like":
 		case "comment":
 			return {
 				title:
-					(notification.originNote.metadata?.content?.title ??
-						notification.originNote.metadata?.content?.content) ||
+					(notification.commentNote.metadata?.content?.title ??
+						notification.commentNote.metadata?.content?.content) ||
 					"Note",
 				url: `${config.domain}/notes/${composeNoteId(
-					notification.originNote.characterId,
-					notification.originNote.noteId
+					notification.commentNote.characterId,
+					notification.commentNote.noteId
 				)}`,
-			};
-		case "follow":
-			return {
-				title: extractCharacterName(notification.toCharacter),
-				url: composeCharacterHref(notification.toCharacter.handle),
 			};
 	}
 
