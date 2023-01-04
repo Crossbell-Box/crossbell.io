@@ -11,7 +11,6 @@ export type LikeNotification = BaseNotification<
 	{
 		originNote: NoteEntity;
 		fromCharacter: CharacterEntity;
-		toCharacter: CharacterEntity;
 	}
 >;
 

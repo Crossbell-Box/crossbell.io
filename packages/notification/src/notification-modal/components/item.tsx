@@ -77,8 +77,24 @@ function actionDesc(notification: ParsedNotification) {
 					{" your "}
 					<a
 						href={`/notes/${composeNoteId(
-							notification.originNote?.characterId,
-							notification.originNote?.noteId
+							notification.originNote.characterId,
+							notification.originNote.noteId
+						)}`}
+						target="_blank"
+						rel="noreferrer"
+					>
+						Note
+					</a>
+				</span>
+			);
+		case "like":
+			return (
+				<span>
+					{"liked your "}
+					<a
+						href={`/notes/${composeNoteId(
+							notification.originNote.characterId,
+							notification.originNote.noteId
 						)}`}
 						target="_blank"
 						rel="noreferrer"

@@ -25,6 +25,21 @@ export async function parseNotificationEntity(
 				};
 			}
 
+			if (
+				link?.linkType === "like" &&
+				link.linkItemType === "Note" &&
+				link.fromCharacter &&
+				link.toNote
+			) {
+				return {
+					transactionHash: entity.transactionHash,
+					type: "like",
+					createdAt: dayjs(entity.createdAt).valueOf(),
+					fromCharacter: link.fromCharacter,
+					originNote: link.toNote,
+				};
+			}
+
 			return null;
 		}
 		case "NOTE_POSTED":
