@@ -8,7 +8,11 @@ import { CrossbellChainLogo } from "@crossbell/ui";
 import { extractCharacterName } from "@crossbell/util-metadata";
 
 import { Avatar } from "~/shared/components/avatar";
-import { composeNoteId, composeScanTxHref } from "~/shared/url";
+import {
+	composeCharacterHref,
+	composeNoteId,
+	composeScanTxHref,
+} from "~/shared/url";
 
 import styles from "./item.module.css";
 
@@ -26,13 +30,21 @@ export function Item({ notification, isRead }: ItemProps) {
 
 	return (
 		<div className={styles.container}>
-			<Indicator size={9} disabled={isRead} color="red" offset={4.5}>
-				<Avatar character={character} />
-			</Indicator>
+			<a
+				href={composeCharacterHref(character.handle)}
+				target="_blank"
+				rel="noreferrer"
+			>
+				<Indicator size={9} disabled={isRead} color="red" offset={4.5}>
+					<Avatar character={character} />
+				</Indicator>
+			</a>
 			<div className={styles.main}>
 				<a
 					className={styles.characterName}
-					href="packages/notification/src/notification-modal"
+					href={composeCharacterHref(character.handle)}
+					target="_blank"
+					rel="noreferrer"
 				>
 					{extractCharacterName(character)}
 				</a>

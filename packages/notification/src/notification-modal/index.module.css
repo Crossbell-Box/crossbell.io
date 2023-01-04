@@ -2,6 +2,7 @@
 	width: 600px;
 	max-width: 90vw;
 	overflow: hidden;
+	padding: 24px 0;
 }
 
 .header {
@@ -9,6 +10,7 @@
 	align-items: center;
 	gap: 8px;
 	margin-bottom: 12px;
+	padding: 0 24px;
 }
 
 .headerBell {
@@ -27,4 +29,8 @@
 	display: flex;
 	align-items: center;
 	justify-content: center;
+}
+
+.scrollArea {
+	padding: 0px 24px;
 }

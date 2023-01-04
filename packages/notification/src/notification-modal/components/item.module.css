@@ -40,6 +40,7 @@
 	color: #f6c549;
 }
 
+.characterName:hover,
 .transactionHash:hover {
 	text-decoration: underline;
 }

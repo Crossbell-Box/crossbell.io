@@ -45,7 +45,7 @@ export function NotificationModal() {
 		<Modal
 			withCloseButton={false}
 			radius={28}
-			padding={24}
+			padding={0}
 			onClose={hideModal}
 			opened={isModalActive}
 			classNames={{ modal: styles.modal }}
@@ -58,7 +58,10 @@ export function NotificationModal() {
 				<CloseButton size={28} onClick={hideModal} />
 			</div>
 
-			<ScrollArea.Autosize maxHeight="80vh">
+			<ScrollArea.Autosize
+				maxHeight="80vh"
+				classNames={{ root: styles.scrollArea }}
+			>
 				{isLoading ? (
 					<div className={styles.loader}>
 						<Loader />
@@ -78,7 +81,9 @@ export function NotificationModal() {
 							hasNextPage={Boolean(hasNextPage)}
 							isLoading={isFetchingNextPage}
 						>
-							Loading...
+							<div className={styles.loader}>
+								<Loader />
+							</div>
 						</LoadMore>
 					</>
 				) : (
