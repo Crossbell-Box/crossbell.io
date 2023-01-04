@@ -1,4 +1,4 @@
-import { Menu, Text, Button, Tooltip } from "@mantine/core";
+import { Menu, Text, Button, Tooltip, Indicator } from "@mantine/core";
 import { useDisclosure } from "@mantine/hooks";
 import Link from "next/link";
 
@@ -14,7 +14,11 @@ import {
 	useAccountState,
 } from "@crossbell/connect-kit";
 import { AccountList } from "~/shared/components/account-list";
-import { useShowNotificationModal } from "@crossbell/notification";
+import { BellIcon, ExitIcon, ExportIcon, UsersIcon } from "@crossbell/ui";
+import {
+	useShowNotificationModal,
+	useNotifications,
+} from "@crossbell/notification";
 
 import { ConnectButtonProps } from "./index";
 import WalletDisplayButton from "./_WalletDisplayButton";
@@ -47,6 +51,7 @@ export default function WalletButtonWithMenu({
 			getRefillEmailBalanceStatus(),
 		]);
 	const showNotificationModal = useShowNotificationModal();
+	const { isAllRead } = useNotifications();
 
 	return (
 		<Menu
@@ -115,13 +120,21 @@ export default function WalletButtonWithMenu({
 
 				<MenuItem
 					onClick={showNotificationModal}
-					icon={<Text className="i-csb:like" />}
+					icon={
+						<Indicator color="red" size={6} offset={3} disabled={isAllRead}>
+							<BellIcon className="text-16px" />
+						</Indicator>
+					}
 				>
 					Notifications
 				</MenuItem>
 
 				{account.type === "wallet" && (
-					<MenuItem component={Link} href={WalletCharacterManageHref}>
+					<MenuItem
+						icon={<UsersIcon className="text-16px" />}
+						component={Link}
+						href={WalletCharacterManageHref}
+					>
 						Manage Characters
 					</MenuItem>
 				)}
@@ -130,10 +143,17 @@ export default function WalletButtonWithMenu({
 					component={Link}
 					href={ExportCrossbellDataHref}
 					target="_blank"
+					icon={<ExportIcon className="text-16px" />}
 				>
 					Export Your Data
 				</MenuItem>
-				<MenuItem onClick={disconnectModal.show}>Disconnect</MenuItem>
+
+				<MenuItem
+					icon={<ExitIcon className="text-16px" />}
+					onClick={disconnectModal.show}
+				>
+					Disconnect
+				</MenuItem>
 			</Menu.Dropdown>
 		</Menu>
 	);

@@ -15,7 +15,7 @@ const types: NotificationTypeKey[] = [
 ];
 
 export function useNotifications() {
-	const { isRead } = useReadingState();
+	const { isRead, cache } = useReadingState();
 	const character = useAccountCharacter();
 	const { data, ...queryResult } = useCharacterNotification(
 		character?.characterId,
@@ -31,7 +31,7 @@ export function useNotifications() {
 
 	const isAllRead = React.useMemo(
 		() => notifications.every(isRead),
-		[notifications]
+		[notifications, cache]
 	);
 
 	return { notifications, total, isAllRead, ...queryResult };

@@ -7,7 +7,7 @@ export type ModalState = {
 };
 
 export const useModalState = create<ModalState>((set) => ({
-	isModalActive: true,
+	isModalActive: false,
 
 	showModal() {
 		set({ isModalActive: true });
