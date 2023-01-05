@@ -10,12 +10,11 @@ import { extractCharacterName } from "@crossbell/util-metadata";
 import { Avatar } from "~/shared/components/avatar";
 import {
 	composeCharacterHref,
-	composeNoteId,
+	composeNoteHref,
 	composeScanTxHref,
 } from "~/shared/url";
 
 import styles from "./item.module.css";
-import config from "~/shared/config";
 
 dayjs.extend(relativeTime);
 
@@ -91,10 +90,10 @@ function actionDesc(notification: ParsedNotification) {
 				<span>
 					{"commented your "}
 					<a
-						href={`/notes/${composeNoteId(
+						href={composeNoteHref(
 							notification.originNote.characterId,
 							notification.originNote.noteId
-						)}`}
+						)}
 						title={notification.originNote.metadata?.content?.content}
 					>
 						Note
@@ -102,20 +101,7 @@ function actionDesc(notification: ParsedNotification) {
 				</span>
 			);
 		case "like":
-			return (
-				<span>
-					{"liked your "}
-					<a
-						href={`/notes/${composeNoteId(
-							notification.originNote.characterId,
-							notification.originNote.noteId
-						)}`}
-						title={notification.originNote.metadata?.content?.content}
-					>
-						Note
-					</a>
-				</span>
-			);
+			return <span>liked your Note</span>;
 		case "follow":
 			return <span>followed you</span>;
 	}
@@ -131,10 +117,21 @@ function getTitleInfo(notification: ParsedNotification) {
 					(notification.commentNote.metadata?.content?.title ??
 						notification.commentNote.metadata?.content?.content) ||
 					"Note",
-				url: `${config.domain}/notes/${composeNoteId(
+				url: composeNoteHref(
 					notification.commentNote.characterId,
 					notification.commentNote.noteId
-				)}`,
+				),
+			};
+		case "like":
+			return {
+				title:
+					(notification.originNote.metadata?.content?.title ??
+						notification.originNote.metadata?.content?.content) ||
+					"Note",
+				url: composeNoteHref(
+					notification.originNote.characterId,
+					notification.originNote.noteId
+				),
 			};
 	}
 

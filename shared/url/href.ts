@@ -21,7 +21,7 @@ export const getOrigin = ({
  * @example "/note/10-38"
  */
 export const composeNoteHref = (characterId: number, noteId: number) => {
-	return `/notes/${composeNoteId(characterId, noteId)}`;
+	return `${config.domain}/notes/${composeNoteId(characterId, noteId)}`;
 };
 
 /**
