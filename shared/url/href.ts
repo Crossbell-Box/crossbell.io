@@ -29,10 +29,10 @@ export const composeNoteHref = (characterId: number, noteId: number) => {
  */
 export const composeCharacterHref = (handle?: string) => {
 	if (handle) {
-		return `${config.xChar.domain}/${handle.replace(/^@/, "")}`;
+		return `/${handle.replace(/^([^@])/, "@$1")}`;
 	}
 
-	return config.xChar.domain;
+	return "/wallet/characters";
 };
 
 export const composeCharacterFollowHref = (
