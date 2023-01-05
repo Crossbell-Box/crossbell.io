@@ -1,5 +1,7 @@
 import { defineConfig } from "tsup";
 
+import { plugins } from "~/scripts/esbuild";
+
 export default defineConfig({
 	clean: true,
 	dts: true,
@@ -11,4 +13,6 @@ export default defineConfig({
 	tsconfig: "tsconfig.json",
 	splitting: true,
 	sourcemap: true,
+	metafile: true,
+	esbuildPlugins: plugins,
 });
