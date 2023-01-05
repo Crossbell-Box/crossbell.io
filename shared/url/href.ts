@@ -35,6 +35,14 @@ export const composeCharacterHref = (handle?: string) => {
 	return "/wallet/characters";
 };
 
+export const composeXCharHref = (handle?: string) => {
+	if (handle) {
+		return `${config.xChar.domain}/${handle.replace(/^@/, "")}`;
+	}
+
+	return config.xChar.domain;
+};
+
 export const composeCharacterFollowHref = (
 	handle: string,
 	type: "following" | "followers"
