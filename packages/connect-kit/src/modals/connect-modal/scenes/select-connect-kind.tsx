@@ -8,6 +8,8 @@ import { useScenesStore } from "../stores";
 import { Header } from "../components/header";
 import { Selections } from "../components/selections";
 
+import styles from "./select-connect-kind.module.css";
+
 export function SelectConnectKind() {
 	const goToScene = useScenesStore(({ goTo }) => goTo);
 
@@ -17,37 +19,34 @@ export function SelectConnectKind() {
 				title="Connect"
 				leftNode={
 					<Button
-						className="h-auto p-5px text-22px"
+						className={styles.backBtn}
 						variant="subtle"
 						color="gray"
 						compact
 						size="sm"
 					>
 						<Text
-							className="i-csb:circle-help"
+							className={styles.backIcon}
 							onClick={() => goToScene(SceneKind.aboutWallets)}
 						/>
 					</Button>
 				}
 			/>
 
-			<div
-				data-animation="scale-fade-in"
-				className="sm:w-312px mx-24px pb-18px"
-			>
+			<div data-animation="scale-fade-in" className={styles.container}>
 				<Selections
 					items={[
 						{
 							id: SceneKind.selectWalletToConnect,
 							title: "Connect Wallet",
-							icon: <WalletIcon className="w-36px h-36px" />,
+							icon: <WalletIcon className={styles.walletIcon} />,
 							onClick: () => goToScene(SceneKind.selectWalletToConnect),
 						},
 
 						{
 							id: SceneKind.inputEmailToConnect,
 							title: "Connect Email",
-							icon: <EmailIcon className="w-36px h-36px text-[#FFB74D]" />,
+							icon: <EmailIcon className={styles.emailIcon} />,
 							onClick: () => goToScene(SceneKind.inputEmailToConnect),
 						},
 					]}
@@ -57,8 +56,8 @@ export function SelectConnectKind() {
 					variant="subtle"
 					color="gray"
 					fullWidth
-					className="mt-16px font-400 text-14px h-42px"
-					leftIcon={<Text className="i-csb:light-bulb text-24px" />}
+					className={styles.differenceBtn}
+					leftIcon={<Text className={styles.differenceIcon} />}
 					onClick={() => goToScene(SceneKind.connectKindDifferences)}
 				>
 					What’s the difference

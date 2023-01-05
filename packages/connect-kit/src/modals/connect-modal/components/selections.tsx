@@ -1,4 +1,7 @@
 import React from "react";
+import classNames from "classnames";
+
+import styles from "./selections.module.css";
 
 export type Selection = {
 	id: string;
@@ -14,17 +17,15 @@ export type SelectionsProps = {
 
 export function Selections({ items }: SelectionsProps) {
 	return (
-		<div className="flex flex-col gap-12px">
+		<div className={styles.container}>
 			{items.map((item) => (
 				<div
 					key={item.id}
-					className="flex items-center bg-[#F7F7F7] py-14px px-20px w-full rounded-12px transition ux-overlay"
+					className={classNames(styles.item, "ux-overlay")}
 					style={item.style}
 					onClick={item.onClick}
 				>
-					<span className="mr-auto text-16px leading-24px font-500">
-						{item.title}
-					</span>
+					<span className={styles.itemTitle}>{item.title}</span>
 					{item.icon}
 				</div>
 			))}

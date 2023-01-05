@@ -16,7 +16,8 @@
 		"package.json"
 	],
 	"scripts": {
-		"build": "npm run clean && tsup",
+		"build": "run-s clean build:ts",
+		"build:ts": "tsup",
 		"clean": "rm -rf ./dist"
 	},
 	"exports": {

@@ -4,6 +4,8 @@ import React from "react";
 import { Chain, Wallet } from "../../../wallets";
 import { CoinbaseIcon } from "../../../components";
 
+import styles from "./index.module.css";
+
 export interface CoinbaseWalletOptions {
 	chains: Chain[];
 	appName: string;
@@ -16,7 +18,7 @@ export const coinbaseWallet = ({
 	return {
 		id: "coinbaseWallet",
 		name: "Coinbase Wallet",
-		icon: <CoinbaseIcon className="absolute top-0 left-0 w-full h-full" />,
+		icon: <CoinbaseIcon className={styles.icon} />,
 		installed: isCoinbaseWallet(),
 		createConnector: () => {
 			const connector = new CoinbaseWalletConnector({

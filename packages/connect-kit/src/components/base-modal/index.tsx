@@ -1,6 +1,8 @@
 import React from "react";
 import { Modal } from "@mantine/core";
 
+import styles from "./index.module.css";
+
 export type BaseModalProps = {
 	isActive: boolean;
 	onClose: () => void;
@@ -17,9 +19,8 @@ export function BaseModal({ isActive, children, onClose }: BaseModalProps) {
 			padding={0}
 			radius={0}
 			classNames={{
-				modal:
-					"mt-auto sm:mb-auto rounded-t-28px sm:rounded-b-28px w-full sm:w-auto overflow-hidden",
-				inner: "p-0",
+				modal: styles.modal,
+				inner: styles.inner,
 			}}
 		>
 			{children}

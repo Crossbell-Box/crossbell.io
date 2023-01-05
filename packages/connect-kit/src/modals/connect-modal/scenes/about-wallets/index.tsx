@@ -1,5 +1,4 @@
 import React from "react";
-import classNames from "classnames";
 import { Carousel, Embla } from "@mantine/carousel";
 
 import { Header } from "../../components/header";
@@ -25,23 +24,14 @@ const scenes: SceneConfig[] = [
 		learnMoreLink:
 			"https://docs.ethhub.io/using-ethereum/wallets/intro-to-ethereum-wallets/",
 		illustration: (
-			<div className="relative w-full h-full">
-				<div
-					className="w-76px h-76px rounded-full bg-[#6366F1] absolute left-25% top-50% z-0 transform -translate-x-1/2 -translate-y-1/2 flex items-center justify-center"
-					style={{ boxShadow: "0px 2px 10px rgba(99, 102, 241, 0.3)" }}
-				>
+			<div className={styles.scene1Illustration}>
+				<div className={styles.scene1IllustrationArrowDown}>
 					<ArrowDown />
 				</div>
-				<div
-					className="w-112px h-112px rounded-full absolute left-50% top-50% z-1 transform -translate-x-1/2 -translate-y-1/2 bg-white flex items-center justify-center"
-					style={{ boxShadow: "0px 3px 15px rgba(0, 0, 0, 0.1)" }}
-				>
+				<div className={styles.scene1IllustrationWallet}>
 					<Wallet />
 				</div>
-				<div
-					className="w-76px h-76px rounded-full bg-[#3897FB] absolute right-25% top-50% z-0 transform translate-x-1/2 -translate-y-1/2 flex items-center justify-center"
-					style={{ boxShadow: "0px 2px 10px rgba(56, 151, 251, 0.3)" }}
-				>
+				<div className={styles.scene1IllustrationAirplane}>
 					<Airplane />
 				</div>
 			</div>
@@ -56,18 +46,12 @@ const scenes: SceneConfig[] = [
 			"https://docs.ethhub.io/using-ethereum/wallets/intro-to-ethereum-wallets/",
 		illustration: (
 			<div>
-				<div
-					className="p-12px rounded-16px flex items-center relative"
-					style={{ boxShadow: "0px 2px 9px rgba(0, 0, 0, 0.07)" }}
-				>
-					<div
-						className="w-32px h-32px mr-12px bg-white flex items-center justify-center rounded-full"
-						style={{ boxShadow: "0px 2px 5px rgba(37, 41, 46, 0.16)" }}
-					>
-						<Wallet className="w-16px h14px" />
+				<div className={styles.scene2Illustration}>
+					<div className={styles.scene2IllustrationWalletContainer}>
+						<Wallet className={styles.scene2IllustrationWallet} />
 					</div>
-					<span className="mr-40px font-500 text-18px">0x2a06...84AD</span>
-					<Key className="absolute -top-18px -right-28px" />
+					<span className={styles.scene2IllustrationHash}>0x2a06...84AD</span>
+					<Key className={styles.scene2IllustrationKey} />
 				</div>
 			</div>
 		),
@@ -79,7 +63,7 @@ const scenes: SceneConfig[] = [
 			"We also support email connection, and it’s more like a Newbie Valley to onboard and gives you a smooth transition journey.",
 		learnMoreLink: "https://crossbell-blog.xlog.app/newbie-villa",
 		illustration: (
-			<div className="flex items-center relative">
+			<div className={styles.scene3Illustration}>
 				<Email />
 			</div>
 		),
@@ -118,7 +102,7 @@ export function AboutWallets() {
 		<div>
 			<Header title={currentScene.headerTitle} />
 			<div
-				className="px-24px pb-27px"
+				className={styles.container}
 				data-animation="scale-fade-in"
 				onAnimationEnd={() => embla?.reInit()}
 			>
@@ -128,25 +112,18 @@ export function AboutWallets() {
 					withControls={false}
 					withIndicators
 					classNames={{
-						indicator: classNames(
-							"w-16px h-3px flex-shrink-0",
-							styles.indicator
-						),
-						indicators: classNames("gap-4px items-center", styles.indicators),
+						indicator: styles.indicator,
+						indicators: styles.indicators,
 					}}
 				>
 					{scenes.map((scene) => (
-						<Carousel.Slide key={scene.title} className="w-full text-center">
-							<div className="pb-52px">
-								<div className="h-217px flex items-center justify-center">
+						<Carousel.Slide key={scene.title} className={styles.slide}>
+							<div className={styles.slideLayout}>
+								<div className={styles.slideIllustration}>
 									{scene.illustration}
 								</div>
-								<h3 className="mt-0 mb-8px text-16px font-500">
-									{scene.title}
-								</h3>
-								<p className="m-0 text-14px font-400 text-[#999]">
-									{scene.description}
-								</p>
+								<h3 className={styles.slideTitle}>{scene.title}</h3>
+								<p className={styles.slideDesc}>{scene.description}</p>
 							</div>
 						</Carousel.Slide>
 					))}
@@ -156,11 +133,9 @@ export function AboutWallets() {
 					href={currentScene.learnMoreLink}
 					target="_blank"
 					rel="noreferrer"
-					className="flex"
+					className={styles.learnMoreLink}
 				>
-					<button className="w-full h-48px bg-[#F6F7F9] text-black text-14px font-500 border-none cursor-pointer rounded-16px font-roboto">
-						Learn More
-					</button>
+					<button className={styles.learnMoreBtn}>Learn More</button>
 				</a>
 			</div>
 		</div>

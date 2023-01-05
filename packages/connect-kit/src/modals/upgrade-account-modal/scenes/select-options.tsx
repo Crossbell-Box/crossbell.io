@@ -8,6 +8,8 @@ import { useScenesStore, useModalStore } from "../stores";
 import { Header } from "../components/header";
 import { Selections } from "../../connect-modal/components/selections";
 
+import styles from "./select-options.module.css";
+
 export function SelectOptions() {
 	const goToScene = useScenesStore(({ goTo }) => goTo);
 	const hideModal = useModalStore((s) => s.hide);
@@ -16,14 +18,11 @@ export function SelectOptions() {
 		<>
 			<Header title="Upgrade Account" leftNode={false} />
 
-			<div
-				data-animation="scale-fade-in"
-				className="sm:w-312px mx-24px pb-18px"
-			>
-				<p className="text-14px font-400 text-[#999] my-10px text-center">
+			<div data-animation="scale-fade-in" className={styles.container}>
+				<p className={styles.tips}>
 					{`Email account can't mint because a wallet is required to keep your assets. `}
 					<a
-						className="text-[#6AD991]"
+						className={styles.tipsBtn}
 						href=""
 						target="_blank"
 						rel="noreferrer"
@@ -37,14 +36,14 @@ export function SelectOptions() {
 							id: SceneKind.upgradeToWallet,
 							title: "Upgrade to Wallet",
 							style: { background: "#6AD991", color: "#FFF" },
-							icon: <WalletIcon className="w-36px h-36px" />,
+							icon: <WalletIcon className={styles.walletIcon} />,
 							onClick: () => goToScene(SceneKind.upgradeToWallet),
 						},
 
 						{
 							id: "keep-email-login",
 							title: "Keep Email Login",
-							icon: <EmailIcon className="w-36px h-36px text-[#FFB74D]" />,
+							icon: <EmailIcon className={styles.emailIcon} />,
 							onClick: hideModal,
 						},
 					]}
@@ -54,8 +53,8 @@ export function SelectOptions() {
 					variant="subtle"
 					color="gray"
 					fullWidth
-					className="mt-16px font-400 text-14px h-42px"
-					leftIcon={<Text className="i-csb:light-bulb text-24px" />}
+					className={styles.differenceBtn}
+					leftIcon={<Text className={styles.differenceIcon} />}
 					onClick={() => goToScene(SceneKind.connectKindDifferences)}
 				>
 					What’s the difference

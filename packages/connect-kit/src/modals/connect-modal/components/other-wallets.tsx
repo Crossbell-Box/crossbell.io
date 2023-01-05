@@ -1,6 +1,8 @@
 import React from "react";
 import classNames from "classnames";
 
+import styles from "./other-wallets.module.css";
+
 const WalletConnect = (props: React.SVGAttributes<SVGSVGElement>) => (
 	<svg
 		{...props}
@@ -83,30 +85,24 @@ export const OtherWallets = ({
 	className,
 	...props
 }: React.HTMLAttributes<HTMLDivElement>) => {
-	const rowClassName = classNames("flex");
-	const cellClassName = classNames("relative flex-1 py-1/4 overflow-hidden");
-	const iconClassName = classNames(
-		"absolute top-0 left-0 w-full h-full rounded-[27.5%] transform scale-90"
-	);
-
 	return (
 		<div {...props} className={className}>
-			<div className={rowClassName}>
-				<div className={cellClassName}>
+			<div className={styles.row}>
+				<div className={styles.cell}>
 					<WalletConnect
-						className={classNames(iconClassName, "bg-[#3B99FC] text-white")}
+						className={classNames(styles.icon, styles.walletConnect)}
 					/>
 				</div>
-				<div className={cellClassName}>
-					<Zerion className={iconClassName} />
+				<div className={styles.cell}>
+					<Zerion className={styles.icon} />
 				</div>
 			</div>
-			<div className={rowClassName}>
-				<div className={cellClassName}>
-					<Rainbow className={iconClassName} />
+			<div className={styles.row}>
+				<div className={styles.cell}>
+					<Rainbow className={styles.icon} />
 				</div>
-				<div className={cellClassName}>
-					<ImToken className={iconClassName} />
+				<div className={styles.cell}>
+					<ImToken className={styles.icon} />
 				</div>
 			</div>
 		</div>

@@ -17,6 +17,7 @@ import {
 	useEmailConnectStore,
 	useEmailRegisterStore,
 } from "../stores";
+import styles from "./input-email-to-connect.module.css";
 
 export function InputEmailToConnect() {
 	const goTo = useScenesStore(({ goTo }) => goTo);
@@ -30,24 +31,21 @@ export function InputEmailToConnect() {
 			<Header title="Connect Email" />
 			<div
 				data-animation="scale-fade-in"
-				className="sm:w-362px p-24px"
+				className={styles.container}
 				onAnimationEnd={tooltip.markReady}
 			>
 				<Field
 					title="Email Address"
 					icon={
 						<EmailIcon
-							className={classNames(
-								"transition",
-								emailConnectStore.emailErrorMsg
-									? "text-[#E65040]"
-									: "text-[#FFB74D]"
-							)}
+							style={{
+								color: emailConnectStore.emailErrorMsg ? "#E65040" : "#FFB74D",
+							}}
 						/>
 					}
-					className="mb-24px"
+					className={classNames(styles.field, styles.emailField)}
 					tips={
-						<span className="text-[#E65040]">
+						<span className={styles.emailTips}>
 							{emailConnectStore.emailErrorMsg}
 						</span>
 					}
@@ -70,12 +68,12 @@ export function InputEmailToConnect() {
 
 				<Field
 					title="Password"
-					icon={<PasswordIcon className="text-[#FFB74D]" />}
+					icon={<PasswordIcon className={styles.passwordIcon} />}
 					tips={
 						<Button
 							variant="subtle"
 							color="gray"
-							className="font-400"
+							className={styles.forgotBtn}
 							compact={true}
 							tabIndex={1}
 							onClick={() => goTo(SceneKind.inputEmailToResetPassword1)}
@@ -102,7 +100,7 @@ export function InputEmailToConnect() {
 					/>
 				</Field>
 
-				<div className="flex justify-between mt-48px">
+				<div className={styles.actions}>
 					<Tooltip
 						label="Register First!"
 						withArrow={true}
@@ -116,7 +114,7 @@ export function InputEmailToConnect() {
 								emailRegisterStore.sendCode();
 								goTo(SceneKind.inputEmailToRegister1);
 							}}
-							className="transition text-[#999] hover:text-[#111] bg-transparent border-none text-14px font-400 flex items-center justify-center px-15px py-14px font-roboto gap-12px cursor-pointer"
+							className={styles.registerBtn}
 						>
 							Don’t have account?
 						</button>
@@ -141,17 +139,15 @@ function useTooltipState() {
 	const [isActive, { open, close }] = useDisclosure(false);
 
 	React.useEffect(() => {
-		if (isReady) {
-			console.log("!isReady");
-			const timeout = setTimeout(() => {
-				console.log("timeout!!");
-				if (needAutoDisplayTooltipRef.current) {
-					open();
-				}
-			}, 300);
+		if (!isReady) return;
 
-			return () => clearTimeout(timeout);
-		}
+		const timeout = setTimeout(() => {
+			if (needAutoDisplayTooltipRef.current) {
+				open();
+			}
+		}, 300);
+
+		return () => clearTimeout(timeout);
 	}, [isReady]);
 
 	return React.useMemo(

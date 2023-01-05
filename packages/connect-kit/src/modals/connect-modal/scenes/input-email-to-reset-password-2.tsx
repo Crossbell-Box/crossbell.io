@@ -12,6 +12,8 @@ import { NextStepButton } from "../components/next-step-button";
 import { SceneKind } from "../types";
 import { useResetPasswordStore, useScenesStore } from "../stores";
 
+import styles from "./input-email-to-reset-password-2.module.css";
+
 export function InputEmailToResetPassword2() {
 	const store = useResetPasswordStore();
 	const scene = useScenesStore();
@@ -20,16 +22,11 @@ export function InputEmailToResetPassword2() {
 	return (
 		<>
 			<Header title="Reset Password" />
-			<div data-animation="scale-fade-in" className="sm:w-362px p-24px">
+			<div data-animation="scale-fade-in" className={styles.container}>
 				<Field
 					title="New Password"
-					className="mb-24px"
-					icon={
-						<PasswordIcon
-							className={classNames("transition")}
-							style={{ color: store.passwordMsg.color }}
-						/>
-					}
+					className={classNames(styles.passwordField, styles.field)}
+					icon={<PasswordIcon style={{ color: store.passwordMsg.color }} />}
 					tips={
 						<span style={{ color: store.passwordMsg.color }}>
 							{store.passwordMsg.value}
@@ -47,12 +44,8 @@ export function InputEmailToResetPassword2() {
 
 				<Field
 					title="Confirm Password"
-					icon={
-						<PasswordIcon
-							className={classNames("transition")}
-							style={{ color: store.password2Msg.color }}
-						/>
-					}
+					className={styles.field}
+					icon={<PasswordIcon style={{ color: store.password2Msg.color }} />}
 					tips={
 						<span style={{ color: store.password2Msg.color }}>
 							{store.password2Msg.value}
@@ -68,7 +61,7 @@ export function InputEmailToResetPassword2() {
 					/>
 				</Field>
 
-				<div className="flex justify-end mt-48px">
+				<div className={styles.actions}>
 					<NextStepButton
 						disabled={!store.computed.canReset}
 						onClick={() =>

@@ -1,6 +1,8 @@
 import React from "react";
 import classNames from "classnames";
 
+import styles from "./code-input.module.css";
+
 type InputStateParams = {
 	size?: number;
 	value: string;
@@ -30,10 +32,7 @@ export function CodeInput({
 	});
 
 	return (
-		<div
-			{...props}
-			className={classNames(className, "flex items-center justify-between")}
-		>
+		<div {...props} className={classNames(className, styles.container)}>
 			{state.list.map((value, index) => (
 				<input
 					key={index}
@@ -57,7 +56,7 @@ export function CodeInput({
 					onChange={(event: React.ChangeEvent<HTMLInputElement>) => {
 						state.onChange(event.currentTarget.value, index);
 					}}
-					className="selection:bg-transparent rounded-12px p-0 font-500 text-22px text-center leading-1 border-none bg-[#1C1B1F] bg-opacity-4 font-mono outline-[#6AD991]"
+					className={styles.input}
 				/>
 			))}
 		</div>

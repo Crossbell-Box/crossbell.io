@@ -4,6 +4,7 @@ import { Text, Button } from "@mantine/core";
 import { ModalHeaderProps, ModalHeader } from "../../../components";
 
 import { useModalStore, useScenesStore } from "../stores";
+import styles from "./header.module.css";
 
 export type HeaderProps = ModalHeaderProps;
 
@@ -20,27 +21,27 @@ export function Header({ title, leftNode, rightNode }: HeaderProps) {
 			leftNode={
 				leftNode || (
 					<Button
-						className="h-auto p-5px text-22px"
+						className={styles.btn}
 						variant="subtle"
 						color="gray"
 						compact
 						onClick={goBack}
 						disabled={isAbleToGoBack}
 					>
-						<Text className="i-csb:back transform translate-x-1/4" />
+						<Text className={styles.backIcon} />
 					</Button>
 				)
 			}
 			rightNode={
 				rightNode || (
 					<Button
-						className="h-auto p-5px text-22px"
+						className={styles.btn}
 						variant="subtle"
 						color="gray"
 						compact
 						onClick={hide}
 					>
-						<Text className="i-csb:close" />
+						<Text className={styles.closeIcon} />
 					</Button>
 				)
 			}

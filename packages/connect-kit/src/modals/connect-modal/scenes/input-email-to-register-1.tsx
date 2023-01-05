@@ -18,6 +18,8 @@ import { TipsSection } from "../components/tips-section";
 import { SceneKind } from "../types";
 import { useEmailRegisterStore, useScenesStore } from "../stores";
 
+import styles from "./input-email-to-register-1.module.css";
+
 export function InputEmailToRegister1() {
 	const goTo = useScenesStore(({ goTo }) => goTo);
 	const store = useEmailRegisterStore();
@@ -38,19 +40,18 @@ export function InputEmailToRegister1() {
 	return (
 		<>
 			<Header title="Register Email Account 1/2" />
-			<div data-animation="scale-fade-in" className="sm:w-362px p-24px">
+			<div data-animation="scale-fade-in" className={styles.container}>
 				<Field
 					title="Email Address"
 					icon={
 						<EmailIcon
-							className={classNames(
-								"transition",
-								store.emailErrorMsg ? "text-[#E65040]" : "text-[#FFB74D]"
-							)}
+							style={{
+								color: store.emailErrorMsg ? "#E65040" : "#FFB74D",
+							}}
 						/>
 					}
-					className="mb-24px"
-					tips={<span className="text-[#E65040]">{store.emailErrorMsg}</span>}
+					className={classNames(styles.field, styles.emailField)}
+					tips={<span className={styles.fieldTips}>{store.emailErrorMsg}</span>}
 				>
 					<TextInput
 						name="email"
@@ -68,19 +69,18 @@ export function InputEmailToRegister1() {
 						}}
 						onChange={(e) => store.updateEmail(e.currentTarget.value)}
 						disabled={store.computed.isPending}
-						className="pr-108px"
+						className={styles.emailInput}
 						rightSection={
 							<button
 								disabled={!store.computed.canSendCode}
-								className={classNames(
-									store.computed.isPending
-										? "cursor-progress"
+								className={styles.sendEmailBtn}
+								style={{
+									cursor: store.computed.isPending
+										? "progress"
 										: store.computed.canSendCode
-										? "cursor-pointer"
-										: "cursor-not-allowed",
-									!store.computed.canSendCode && "bg-opacity-50",
-									"transition whitespace-nowrap h-full w-100px flex items-center justify-center font-roboto font-500 text-14px text-white bg-[#6AD991] border-none rounded-r-12px"
-								)}
+										? "pointer"
+										: "not-allowed",
+								}}
 								onClick={() => store.sendCode()}
 							>
 								{store.isCodeSent ? "Try Again" : "Verify"}
@@ -93,25 +93,26 @@ export function InputEmailToRegister1() {
 				</Field>
 
 				{store.isCodeSent && (
-					<TipsSection className="-mt-14px mb-24px">
-						{
-							"We've sent a verification email to you. Please check your email inbox and enter the Verification Code. If you didn't receive the email after a while, please check your spam or junk mail folder or contact us."
-						}
+					<TipsSection className={styles.codeSentTips}>
+						We've sent a verification email to you. Please check your email
+						inbox and enter the Verification Code. If you didn't receive the
+						email after a while, please check your spam or junk mail folder or
+						contact us.
 					</TipsSection>
 				)}
 
 				<Field
 					title="Verification Code"
+					className={styles.field}
 					icon={
 						<PasswordIcon
-							className={classNames(
-								"transition",
-								store.codeErrorMsg ? "text-[#E65040]" : "text-[#FFB74D]"
-							)}
+							style={{
+								color: store.codeErrorMsg ? "#E65040" : "#FFB74D",
+							}}
 						/>
 					}
 					tips={
-						<span className="text-[#E65040]" title={store.codeErrorMsg}>
+						<span className={styles.fieldTips} title={store.codeErrorMsg}>
 							{store.codeErrorMsg}
 						</span>
 					}
@@ -125,11 +126,11 @@ export function InputEmailToRegister1() {
 					/>
 				</Field>
 
-				<div className="flex justify-between mt-48px">
+				<div className={styles.actions}>
 					<button
 						disabled={store.computed.isPending}
 						onClick={() => goTo(SceneKind.inputEmailToConnect)}
-						className="transition text-[#999] hover:text-[#111] bg-transparent border-none text-14px font-400 flex items-center justify-center px-0 py-14px font-roboto gap-12px cursor-pointer"
+						className={styles.goToEmailLoginBtn}
 					>
 						Have an account already?
 					</button>

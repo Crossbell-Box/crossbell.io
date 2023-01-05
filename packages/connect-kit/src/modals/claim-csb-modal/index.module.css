@@ -1,0 +1,55 @@
+.container {
+	width: 360px;
+}
+
+.closeBtn {
+	height: auto;
+	padding: 5px;
+	font-size: 22px;
+}
+
+.closeIcon {
+	--un-icon: url("data:image/svg+xml;utf8,%3Csvg xmlns='http://www.w3.org/2000/svg' width='24' height='24' fill='none' viewBox='0 0 24 24'%3E%3Cpath fill='currentColor' d='m6.2249 18.9749-1.2-1.2 5.775-5.775-5.775-5.775 1.2-1.2 5.775 5.775 5.775-5.775 1.2 1.2-5.775 5.775 5.775 5.775-1.2 1.2-5.775-5.775z'/%3E%3C/svg%3E");
+	mask: var(--un-icon) no-repeat;
+	mask-size: 100% 100%;
+	-webkit-mask: var(--un-icon) no-repeat;
+	-webkit-mask-size: 100% 100%;
+	background-color: currentColor;
+	width: 1em;
+	height: 1em;
+}
+
+.main {
+	display: flex;
+	flex-direction: column;
+	align-items: center;
+	grid-gap: 15px;
+	gap: 15px;
+	padding-left: 24px;
+	padding-right: 24px;
+}
+
+.tipsContainer {
+	width: 74px;
+}
+
+.tipsLayout {
+	position: relative;
+	aspect-ratio: 74/111;
+}
+
+.tipsImg {
+	position: absolute;
+	left: 0;
+	top: 0;
+	height: 100%;
+	width: 100%;
+}
+
+.msg {
+	margin: 0 0 24px;
+	text-align: center;
+	font-size: 14px;
+	font-weight: 400;
+	color: #49454f;
+}

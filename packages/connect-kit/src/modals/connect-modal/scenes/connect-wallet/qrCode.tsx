@@ -10,6 +10,7 @@ import { Wallet, WalletConnector } from "../../../../wallets";
 
 import { Header } from "../../components/header";
 import { useInitiateConnect } from "./use-initiate-connect";
+import styles from "./qrCode.module.css";
 
 type QRCodeWalletConnector = RequireAtLeastOne<WalletConnector, "qrCode">;
 
@@ -51,13 +52,13 @@ export function ConnectWithQRCode({
 		<>
 			<Header title={`Scan with ${wallet.name}`} />
 
-			<div data-animation="scale-fade-in" className="px-24px pb-24px">
-				<div className="sm:w-295px h-295px mx-auto relative flex items-center justify-center border rounded-24px border-[#f7f6f8] p-14px">
+			<div data-animation="scale-fade-in" className={styles.container}>
+				<div className={styles.layout}>
 					{connectorUri ? (
 						<>
 							<QRCode
 								uri={connectorUri}
-								className="w-full h-full"
+								className={styles.qrCode}
 								size={288}
 								ecl="M"
 								dotColor="#000"
@@ -65,9 +66,7 @@ export function ConnectWithQRCode({
 								clearArea={true}
 							/>
 
-							<div className="absolute left-1/2 top-1/2 w-28% h-28% transform -translate-x-1/2 -translate-y-1/2">
-								{wallet.icon}
-							</div>
+							<div className={styles.walletIcon}>{wallet.icon}</div>
 						</>
 					) : (
 						<Loader size="md" />

@@ -1,0 +1,28 @@
+.btn {
+	height: auto;
+	padding: 5px;
+	font-size: 22px;
+}
+
+.backIcon {
+	--un-icon: url("data:image/svg+xml;utf8,%3Csvg width='1em' height='1em' xmlns='http://www.w3.org/2000/svg' xmlns:xlink='http://www.w3.org/1999/xlink' id='图层_1' x='0' y='0' version='1.1' viewBox='0 0 48 48' xml:space='preserve' style='enable-background:new 0 0 48 48'%3E%3Cpath fill='currentColor' d='M20,44L0,24L20,4l2.8,2.8L5.7,24l17.1,17.2L20,44z'/%3E%3C/svg%3E");
+	mask: var(--un-icon) no-repeat;
+	mask-size: 100% 100%;
+	-webkit-mask: var(--un-icon) no-repeat;
+	-webkit-mask-size: 100% 100%;
+	background-color: currentColor;
+	width: 1em;
+	height: 1em;
+	transform: translateX(25%);
+}
+
+.closeIcon {
+	--un-icon: url("data:image/svg+xml;utf8,%3Csvg xmlns='http://www.w3.org/2000/svg' width='24' height='24' fill='none' viewBox='0 0 24 24'%3E%3Cpath fill='currentColor' d='m6.2249 18.9749-1.2-1.2 5.775-5.775-5.775-5.775 1.2-1.2 5.775 5.775 5.775-5.775 1.2 1.2-5.775 5.775 5.775 5.775-1.2 1.2-5.775-5.775z'/%3E%3C/svg%3E");
+	mask: var(--un-icon) no-repeat;
+	mask-size: 100% 100%;
+	-webkit-mask: var(--un-icon) no-repeat;
+	-webkit-mask-size: 100% 100%;
+	background-color: currentColor;
+	width: 1em;
+	height: 1em;
+}

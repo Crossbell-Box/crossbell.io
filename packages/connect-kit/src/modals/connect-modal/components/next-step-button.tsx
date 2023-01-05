@@ -1,6 +1,8 @@
 import React from "react";
 import classNames from "classnames";
 
+import styles from "./next-step-button.module.css";
+
 export type NextStepButtonProps = React.ButtonHTMLAttributes<HTMLButtonElement>;
 
 export function NextStepButton({
@@ -10,13 +12,7 @@ export function NextStepButton({
 }: NextStepButtonProps) {
 	return (
 		<button
-			className={classNames(
-				"transition text-black px-36px py-14px border-none rounded-16px text-14px font-500 font-roboto",
-				disabled
-					? "cursor-not-allowed bg-[#F6F7F9] text-[#000]"
-					: "cursor-pointer bg-[#6AD991] text-[#FFF]",
-				className
-			)}
+			className={classNames(styles.btn, disabled && styles.disabled, className)}
 			disabled={disabled}
 			{...props}
 		/>
