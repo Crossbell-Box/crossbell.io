@@ -15,6 +15,7 @@ import { useElementSize } from "@mantine/hooks";
 import classNames from "classnames";
 import rehypeRaw from "rehype-raw";
 import remarkGfm from "remark-gfm";
+import remarkBreaks from "remark-breaks";
 import remarkEmoji from "remark-emoji";
 import remarkFrontmatter from "remark-frontmatter";
 import rehypeSanitize, { defaultSchema } from "rehype-sanitize";
@@ -336,6 +337,7 @@ export function MarkdownRenderer({
 						remarkPlugins={[
 							remarkGfm,
 							remarkEmoji,
+							remarkBreaks,
 							[remarkFrontmatter, ["yaml", "toml"]],
 						]}
 					>
