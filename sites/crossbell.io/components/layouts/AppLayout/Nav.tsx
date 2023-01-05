@@ -9,7 +9,10 @@ import classNames from "classnames";
 import ConnectButton from "@/components/common/ConnectButton";
 import { Image } from "~/shared/components/image";
 import { useAccountCharacter } from "@crossbell/connect-kit";
-import { composeTreasuresWalletsHref } from "~/shared/url";
+import {
+	composeCharacterHref,
+	composeTreasuresWalletsHref,
+} from "~/shared/url";
 import config from "~/shared/config";
 
 import MoreMenu from "./MoreMenu";
@@ -99,7 +102,7 @@ function NavLinks() {
 		if (character) {
 			oldNavLinks.character = {
 				index: 3,
-				href: character ? `${config.xChar.domain}/${character.handle}` : "#",
+				href: character ? composeCharacterHref(character.handle) : "#",
 				title: "xCharacter",
 				icon: "i-csb:character",
 				iconColor: "text-green-primary/20",

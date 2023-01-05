@@ -6,10 +6,9 @@ import { MintedNoteEntity } from "crossbell.js";
 import { usePrimaryCharacter } from "@crossbell/indexer";
 import { extractCharacterName } from "@crossbell/util-metadata";
 
-import config from "~/shared/config";
 import { Avatar } from "~/shared/components/avatar";
 import { FollowButton } from "~/shared/components/follow-button";
-import { composeScanTxHref } from "~/shared/url";
+import { composeCharacterHref, composeScanTxHref } from "~/shared/url";
 
 export type ItemProps = {
 	entity: MintedNoteEntity;
@@ -21,7 +20,7 @@ export function Item({ entity }: ItemProps) {
 	if (!character) return null;
 
 	const bio = character.metadata?.content?.bio;
-	const link = `${config.xChar.domain}/${character.handle}`;
+	const link = composeCharacterHref(character.handle);
 	const characterName = extractCharacterName(character);
 
 	return (

@@ -5,8 +5,7 @@ import { CharacterEntity } from "crossbell.js";
 
 import { extractCharacterName } from "@crossbell/util-metadata";
 
-import config from "~/shared/config";
-import { composeScanTxHref } from "~/shared/url";
+import { composeCharacterHref, composeScanTxHref } from "~/shared/url";
 import { Avatar } from "~/shared/components/avatar";
 import { FollowButton } from "~/shared/components/follow-button";
 
@@ -20,7 +19,7 @@ export function Item({ character, createdAt, transactionHash }: ItemProps) {
 	if (!character) return null;
 
 	const bio = character.metadata?.content?.bio;
-	const link = `${config.xChar.domain}/${character.handle}`;
+	const link = composeCharacterHref(character.handle);
 	const characterName = extractCharacterName(character);
 
 	return (
