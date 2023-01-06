@@ -21,13 +21,21 @@ export const getOrigin = ({
  * @example "/note/10-38"
  */
 export const composeNoteHref = (characterId: number, noteId: number) => {
-	return `/notes/${composeNoteId(characterId, noteId)}`;
+	return `${config.domain}/notes/${composeNoteId(characterId, noteId)}`;
 };
 
 /**
  * @example "song" -> "/@song"
  */
 export const composeCharacterHref = (handle?: string) => {
+	if (handle) {
+		return `/${handle.replace(/^([^@])/, "@$1")}`;
+	}
+
+	return "/wallet/characters";
+};
+
+export const composeXCharHref = (handle?: string) => {
 	if (handle) {
 		return `${config.xChar.domain}/${handle.replace(/^@/, "")}`;
 	}

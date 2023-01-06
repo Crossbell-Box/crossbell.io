@@ -1,4 +1,4 @@
-import { Text, Space, type ButtonProps, Group } from "@mantine/core";
+import { Text, Space, type ButtonProps, Group, Indicator } from "@mantine/core";
 import { forwardRef } from "react";
 import classNames from "classnames";
 
@@ -16,6 +16,7 @@ import {
 	useAccountBalance,
 	useAccountCharacter,
 } from "@crossbell/connect-kit";
+import { useNotifications } from "@crossbell/notification";
 
 type WalletDisplayButtonProps = ButtonProps & {
 	menuOpened: boolean;
@@ -28,6 +29,7 @@ const WalletDisplayButton = forwardRef<
 	WalletDisplayButtonProps
 >(({ menuOpened, mode, account, ...props }, ref) => {
 	const character = useAccountCharacter();
+	const { isAllRead } = useNotifications();
 
 	const { balance, isLoading: isLoadingBalance } = useAccountBalance();
 
@@ -131,15 +133,17 @@ const WalletDisplayButton = forwardRef<
 						</Group>
 
 						{/* arrow icon */}
-						<Image
-							src={ArrowIcon}
-							width={24}
-							height={24}
-							className={classNames("transition-transform-150 m-4px", {
-								"rotate-90": menuOpened,
-							})}
-							placeholder="empty"
-						/>
+						<Indicator color="red" size={6} offset={5} disabled={isAllRead}>
+							<Image
+								src={ArrowIcon}
+								width={24}
+								height={24}
+								className={classNames("transition-transform-150 m-4px", {
+									"rotate-90": menuOpened,
+								})}
+								placeholder="empty"
+							/>
+						</Indicator>
 					</div>
 				</div>
 			)}

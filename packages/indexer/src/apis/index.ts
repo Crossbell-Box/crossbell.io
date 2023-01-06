@@ -8,3 +8,4 @@ export * from "./character";
 export * from "./metadata";
 export * from "./feed";
 export * from "./link";
+export * from "./notification";

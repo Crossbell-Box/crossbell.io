@@ -5,9 +5,9 @@ import { extractCharacterName } from "@crossbell/util-metadata";
 import { usePrimaryCharacter } from "@crossbell/indexer";
 
 import { FollowButton } from "~/shared/components/follow-button";
+import { composeCharacterHref } from "~/shared/url";
 
 import { HighlightAvatar } from "./highlight-avatar";
-import config from "~/shared/config";
 
 export type NoteMintsItemProps = {
 	entity: MintedNoteEntity;
@@ -19,7 +19,7 @@ export function ItemTop3({ entity }: NoteMintsItemProps) {
 	if (!character) return null;
 
 	const isTop1 = entity.tokenId === 1;
-	const link = `${config.xChar.domain}/${character.handle}`;
+	const link = composeCharacterHref(character.handle);
 
 	return (
 		<div className="flex flex-col items-center gap-[12px] py-24px w-100px">

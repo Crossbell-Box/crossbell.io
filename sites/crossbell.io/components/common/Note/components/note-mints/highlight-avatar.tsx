@@ -3,8 +3,7 @@ import { CharacterEntity, MintedNoteEntity } from "crossbell.js";
 
 import { Avatar } from "~/shared/components/avatar";
 import classNames from "classnames";
-import { composeScanTxHref } from "~/shared/url";
-import config from "~/shared/config";
+import { composeCharacterHref, composeScanTxHref } from "~/shared/url";
 
 export type HighlightAvatarProps = {
 	character: CharacterEntity;
@@ -40,7 +39,7 @@ export function HighlightAvatar({
 			</a>
 
 			<a
-				href={`${config.xChar.domain}/${character.handle}`}
+				href={composeCharacterHref(character.handle)}
 				target="_blank"
 				rel="noreferrer"
 			>

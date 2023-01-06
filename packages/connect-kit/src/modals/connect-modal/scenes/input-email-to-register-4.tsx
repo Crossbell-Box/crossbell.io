@@ -4,6 +4,7 @@ import confetti from "canvas-confetti";
 import { Congrats } from "../components/congrats";
 import { useModalStore } from "../stores";
 import { useAccountCharacter } from "../../../hooks";
+import { composeCharacterHref } from "~/shared/url";
 
 export function InputEmailToRegister4() {
 	const { hide: hideModal } = useModalStore();
@@ -21,7 +22,7 @@ export function InputEmailToRegister4() {
 			onClose={hideModal}
 			onClickBtn={() => {
 				if (character) {
-					window.open(`https://xchar.app/${character.handle}`, "_blank");
+					window.open(composeCharacterHref(character.handle), "_blank");
 				}
 				hideModal();
 			}}

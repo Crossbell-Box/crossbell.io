@@ -56,11 +56,6 @@ const nextConfig: NextConfig = {
 				destination: config.xSync.domain,
 				permanent: false,
 			},
-			{
-				source: "/@:slug",
-				destination: `${config.xChar.domain}/:slug`,
-				permanent: false,
-			},
 		];
 	},
 };
