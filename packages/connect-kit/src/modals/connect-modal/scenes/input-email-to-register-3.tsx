@@ -1,5 +1,6 @@
 import React from "react";
-import { LoadingOverlay, Text, Tooltip } from "@mantine/core";
+import { LoadingOverlay, Tooltip } from "@mantine/core";
+import { CircleHelpIcon } from "@crossbell/ui";
 
 import {
 	CheckIcon,
@@ -87,7 +88,7 @@ export function InputEmailToRegister3() {
 								transition="pop-bottom-left"
 								withArrow={true}
 							>
-								<Text className={styles.circleHelpIcon} />
+								<CircleHelpIcon className={styles.circleHelpIcon} />
 							</Tooltip>
 						</span>
 					}

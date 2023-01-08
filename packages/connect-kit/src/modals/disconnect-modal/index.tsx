@@ -1,6 +1,7 @@
 import React from "react";
 import classNames from "classnames";
-import { Button, Text } from "@mantine/core";
+import { Button } from "@mantine/core";
+import { CloseIcon, LightBulbIcon } from "@crossbell/ui";
 
 import { ModalHeader, BaseModal } from "../../components";
 import { useDisconnectAccount } from "../../hooks";
@@ -29,7 +30,7 @@ export function DisconnectModal() {
 							compact
 							onClick={hide}
 						>
-							<Text className={styles.closeIcon} />
+							<CloseIcon />
 						</Button>
 					}
 				/>
@@ -47,7 +48,7 @@ export function DisconnectModal() {
 					</button>
 
 					<div className={styles.tips}>
-						<Text className={styles.tipsIcon} />
+						<LightBulbIcon className={styles.tipsIcon} />
 						<span className={styles.tipsContent}>
 							you can always log back in at any time.
 						</span>

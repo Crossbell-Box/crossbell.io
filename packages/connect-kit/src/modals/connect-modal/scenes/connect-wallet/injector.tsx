@@ -1,6 +1,7 @@
 import React from "react";
-import { Popover, Text } from "@mantine/core";
+import { Popover } from "@mantine/core";
 import classNames from "classnames";
+import { RefreshFilledIcon } from "@crossbell/ui";
 
 import { Wallet, WalletConnector } from "../../../../wallets";
 
@@ -71,7 +72,7 @@ export function ConnectWithInjector({
 									onClick={state.connect}
 									disabled={!state.isShowTryAgain}
 								>
-									<Text className={styles.tryAgainIcon} />
+									<RefreshFilledIcon className={styles.tryAgainIcon} />
 								</button>
 							</Popover.Target>
 

@@ -1,5 +1,6 @@
 import React from "react";
-import { Button, Text } from "@mantine/core";
+import { Button } from "@mantine/core";
+import { CloseIcon } from "@crossbell/ui";
 
 import { ModalHeader, BaseModal } from "../../components";
 
@@ -24,7 +25,7 @@ export function ClaimCSBModal() {
 							compact
 							onClick={hide}
 						>
-							<Text className={styles.closeIcon} />
+							<CloseIcon />
 						</Button>
 					}
 				/>

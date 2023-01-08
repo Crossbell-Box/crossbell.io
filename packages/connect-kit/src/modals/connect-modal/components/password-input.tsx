@@ -1,7 +1,7 @@
 import React from "react";
 import classNames from "classnames";
 
-import { Text } from "@mantine/core";
+import { EyeOpenIcon, EyeCloseIcon } from "@crossbell/ui";
 
 import styles from "./password-input.module.css";
 
@@ -31,15 +31,9 @@ export function PasswordInput({
 			/>
 			<div className={styles.action}>
 				{visible ? (
-					<Text
-						className={styles.visibleIcon}
-						onClick={() => onVisibleChange(false)}
-					/>
+					<EyeCloseIcon onClick={() => onVisibleChange(false)} />
 				) : (
-					<Text
-						className={styles.invisibleIcon}
-						onClick={() => onVisibleChange(true)}
-					/>
+					<EyeOpenIcon onClick={() => onVisibleChange(true)} />
 				)}
 			</div>
 		</div>

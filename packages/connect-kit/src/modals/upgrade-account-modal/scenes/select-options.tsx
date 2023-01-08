@@ -1,5 +1,6 @@
 import React from "react";
-import { Button, Text } from "@mantine/core";
+import { Button } from "@mantine/core";
+import { LightBulbIcon } from "@crossbell/ui";
 
 import { WalletIcon, EmailIcon } from "../../../components";
 
@@ -54,7 +55,7 @@ export function SelectOptions() {
 					color="gray"
 					fullWidth
 					className={styles.differenceBtn}
-					leftIcon={<Text className={styles.differenceIcon} />}
+					leftIcon={<LightBulbIcon className={styles.differenceIcon} />}
 					onClick={() => goToScene(SceneKind.connectKindDifferences)}
 				>
 					What’s the difference

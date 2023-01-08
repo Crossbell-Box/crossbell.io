@@ -1,5 +1,6 @@
 import React from "react";
-import { Text } from "@mantine/core";
+
+import { CloseIcon } from "@crossbell/ui";
 
 import styles from "./congrats.module.css";
 
@@ -38,7 +39,7 @@ export function Congrats({
 				<p className={styles.tips}>{tips}</p>
 
 				<button className={styles.closeBtn} onClick={onClose}>
-					<Text className={styles.closeIcon} />
+					<CloseIcon className={styles.closeIcon} />
 				</button>
 			</div>
 

@@ -1,5 +1,6 @@
 import React from "react";
-import { Text, Button } from "@mantine/core";
+import { Button } from "@mantine/core";
+import { BackIcon, CloseIcon } from "@crossbell/ui";
 
 import { ModalHeaderProps, ModalHeader } from "../../../components";
 
@@ -28,7 +29,7 @@ export function Header({ title, leftNode, rightNode }: HeaderProps) {
 						onClick={goBack}
 						disabled={isAbleToGoBack}
 					>
-						<Text className={styles.backIcon} />
+						<BackIcon className={styles.backIcon} />
 					</Button>
 				)
 			}
@@ -41,7 +42,7 @@ export function Header({ title, leftNode, rightNode }: HeaderProps) {
 						compact
 						onClick={hide}
 					>
-						<Text className={styles.closeIcon} />
+						<CloseIcon />
 					</Button>
 				)
 			}
