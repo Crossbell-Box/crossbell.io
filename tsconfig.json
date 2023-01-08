@@ -6,7 +6,6 @@
 		"noUnusedParameters": true,
 		"noUnusedLocals": true,
 		"noImplicitAny": true,
-		"noImplicitReturns": true,
 		"esModuleInterop": true,
 		"moduleResolution": "node",
 		"module": "ESNext",
