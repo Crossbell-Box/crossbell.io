@@ -10,6 +10,17 @@
 	"main": "dist/index.js",
 	"module": "dist/index.mjs",
 	"typings": "dist/index.d.ts",
+	"sideEffects": false,
+	"files": [
+		"dist",
+		"package.json"
+	],
+	"scripts": {
+		"build": "run-s clean build:icons build:ts",
+		"build:icons": "svgr --typescript --ref --icon --filename-case kebab --index-template svgr-index-template.js --out-dir src/icons/svgr  ../../scripts/unocss/icons",
+		"build:ts": "tsup",
+		"clean": "rm -rf ./dist"
+	},
 	"exports": {
 		".": {
 			"import": "./dist/index.mjs",
@@ -18,15 +29,6 @@
 		},
 		"./package.json": "./package.json"
 	},
-	"sideEffects": false,
-	"files": [
-		"dist",
-		"package.json"
-	],
-	"scripts": {
-		"build": "npm run clean && tsup",
-		"clean": "rm -rf ./dist"
-	},
 	"dependencies": {
 		"facepaint": "^1.2.1"
 	},
@@ -34,6 +36,8 @@
 		"react": "18.x.x"
 	},
 	"devDependencies": {
-		"@types/facepaint": "^1.2.1"
+		"@svgr/cli": "6.5.1",
+		"@types/facepaint": "^1.2.1",
+		"pascal-case": "^3.1.2"
 	}
 }
