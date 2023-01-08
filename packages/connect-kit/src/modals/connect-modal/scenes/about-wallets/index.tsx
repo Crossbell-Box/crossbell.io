@@ -141,26 +141,3 @@ export function AboutWallets() {
 		</div>
 	);
 }
-
-export function useSceneState(scenes: SceneConfig[]) {
-	const [currentIndex, setCurrentIndex] = React.useState(0);
-
-	return React.useMemo(() => {
-		const move = (direction: number) => {
-			const nextIndex =
-				(scenes.length + currentIndex + direction) % scenes.length;
-
-			setCurrentIndex(nextIndex);
-		};
-
-		return {
-			currentIndex,
-			currentScene: scenes[currentIndex],
-			goNext: () => move(1),
-			goPrev: () => move(-1),
-			goTo: (nextIndex: number) => {
-				setCurrentIndex(Math.min(Math.max(0, nextIndex), scenes.length - 1));
-			},
-		};
-	}, [scenes, currentIndex]);
-}
