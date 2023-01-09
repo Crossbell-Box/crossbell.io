@@ -235,7 +235,18 @@ importers:
       lru-cache: 7.14.0
 
   packages/notification:
-    specifiers: {}
+    specifiers:
+      '@crossbell/connect-kit': workspace:*
+      '@crossbell/indexer': workspace:*
+      '@crossbell/ui': workspace:*
+      '@crossbell/util-hooks': workspace:*
+      '@crossbell/util-metadata': workspace:*
+    devDependencies:
+      '@crossbell/connect-kit': link:../connect-kit
+      '@crossbell/indexer': link:../indexer
+      '@crossbell/ui': link:../ui
+      '@crossbell/util-hooks': link:../util-hooks
+      '@crossbell/util-metadata': link:../util-metadata
 
   packages/ui:
     specifiers:
