@@ -21,8 +21,7 @@ const scenes: SceneConfig[] = [
 		title: "For your digital assets",
 		description:
 			"Wallets let you send, receive, store, and interact with digital assets like NFTs and other Ethereum tokens.",
-		learnMoreLink:
-			"https://docs.ethhub.io/using-ethereum/wallets/intro-to-ethereum-wallets/",
+		learnMoreLink: "https://ethereum.org/wallets/",
 		illustration: (
 			<div className={styles.scene1Illustration}>
 				<div className={styles.scene1IllustrationArrowDown}>
@@ -42,8 +41,7 @@ const scenes: SceneConfig[] = [
 		title: "A better way to login",
 		description:
 			"With modern apps, your wallet can be used as an easy way to login, instead of having to remember a password.",
-		learnMoreLink:
-			"https://docs.ethhub.io/using-ethereum/wallets/intro-to-ethereum-wallets/",
+		learnMoreLink: "https://ethereum.org/wallets/",
 		illustration: (
 			<div>
 				<div className={styles.scene2Illustration}>
