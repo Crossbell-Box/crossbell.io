@@ -5,6 +5,7 @@ import { Wallet } from "../types";
 
 import { metaMaskWallet } from "./meta-mask-wallet";
 import { coinbaseWallet } from "./coinbase-wallet";
+import { braveWallet } from "./brave-wallet";
 
 export function useWalletConnectors() {
 	const { connectors } = useClient();
@@ -29,6 +30,14 @@ export function useWalletConnectors() {
 						appName: "Crossbell.io",
 					})
 				);
+			}
+
+			if (connector.id === "injected") {
+				const brave = braveWallet(connector);
+
+				if (brave.installed) {
+					walletConnectors.push(brave);
+				}
 			}
 		});
 
