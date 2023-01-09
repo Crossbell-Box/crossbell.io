@@ -1,6 +1,6 @@
 import React from "react";
 import classNames from "classnames";
-import { useIsomorphicEffect } from "@mantine/hooks";
+import { useIsomorphicEffect } from "@crossbell/util-hooks";
 import { m, AnimatePresence } from "framer-motion";
 
 import { DynamicContainerContext } from "./context";

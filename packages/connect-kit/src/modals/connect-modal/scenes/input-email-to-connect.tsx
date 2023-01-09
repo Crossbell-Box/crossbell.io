@@ -1,5 +1,5 @@
 import { Button, Tooltip, LoadingOverlay } from "@mantine/core";
-import { useDisclosure } from "@mantine/hooks";
+import { useDisclosure } from "@crossbell/util-hooks";
 import classNames from "classnames";
 import React from "react";
 

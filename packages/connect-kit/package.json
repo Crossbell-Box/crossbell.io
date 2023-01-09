@@ -32,7 +32,6 @@
 	"dependencies": {
 		"qrcode": "^1.5.1",
 		"@mantine/notifications": "^5.6.3",
-		"@mantine/hooks": "^5.6.3",
 		"@mantine/core": "^5.6.3",
 		"classnames": "^2.3.2",
 		"canvas-confetti": "^1.6.0"

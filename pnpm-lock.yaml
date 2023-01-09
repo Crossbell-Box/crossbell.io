@@ -200,15 +200,13 @@ importers:
       '@crossbell/util-hooks': workspace:*
       '@crossbell/util-metadata': workspace:*
       '@mantine/core': ^5.6.3
-      '@mantine/hooks': ^5.6.3
       '@mantine/notifications': ^5.6.3
       canvas-confetti: ^1.6.0
       classnames: ^2.3.2
       qrcode: ^1.5.1
     dependencies:
-      '@mantine/core': 5.6.3_@mantine+hooks@5.6.3
-      '@mantine/hooks': 5.6.3
-      '@mantine/notifications': 5.6.3_uiajga6tgfzhy7kh75ldxu4dgq
+      '@mantine/core': 5.6.3
+      '@mantine/notifications': 5.6.3_@mantine+core@5.6.3
       canvas-confetti: 1.6.0
       classnames: 2.3.2
       qrcode: 1.5.1
@@ -1346,6 +1344,23 @@ packages:
       react: 18.2.0
     dev: false
 
+  /@mantine/core/5.6.3:
+    resolution: {integrity: sha512-joEeRblARR/faeOjOeETY4l4osYEFfgZV0+i8BO7TyalZ+ONMUurYWJp0a5iX4Gf3M6uNO9lbBLlsOy2vDnNew==}
+    peerDependencies:
+      '@mantine/hooks': 5.6.3
+      react: '>=16.8.0'
+      react-dom: '>=16.8.0'
+    dependencies:
+      '@floating-ui/react-dom-interactions': 0.10.3
+      '@mantine/styles': 5.6.3
+      '@mantine/utils': 5.6.3
+      '@radix-ui/react-scroll-area': 1.0.0
+      react-textarea-autosize: 8.3.4
+    transitivePeerDependencies:
+      - '@emotion/react'
+      - '@types/react'
+    dev: false
+
   /@mantine/core/5.6.3_4md2hhxmujtaycbumrxkp2e5ju:
     resolution: {integrity: sha512-joEeRblARR/faeOjOeETY4l4osYEFfgZV0+i8BO7TyalZ+ONMUurYWJp0a5iX4Gf3M6uNO9lbBLlsOy2vDnNew==}
     peerDependencies:
@@ -1361,24 +1376,6 @@ packages:
       react: 18.2.0
       react-dom: 18.2.0_react@18.2.0
       react-textarea-autosize: 8.3.4_bbvjflvjoibwhtpmedigb26h6y
-    transitivePeerDependencies:
-      - '@emotion/react'
-      - '@types/react'
-    dev: false
-
-  /@mantine/core/5.6.3_@mantine+hooks@5.6.3:
-    resolution: {integrity: sha512-joEeRblARR/faeOjOeETY4l4osYEFfgZV0+i8BO7TyalZ+ONMUurYWJp0a5iX4Gf3M6uNO9lbBLlsOy2vDnNew==}
-    peerDependencies:
-      '@mantine/hooks': 5.6.3
-      react: '>=16.8.0'
-      react-dom: '>=16.8.0'
-    dependencies:
-      '@floating-ui/react-dom-interactions': 0.10.3
-      '@mantine/hooks': 5.6.3
-      '@mantine/styles': 5.6.3
-      '@mantine/utils': 5.6.3
-      '@radix-ui/react-scroll-area': 1.0.0
-      react-textarea-autosize: 8.3.4
     transitivePeerDependencies:
       - '@emotion/react'
       - '@types/react'
@@ -1408,12 +1405,6 @@ packages:
       fast-deep-equal: 3.1.3
       klona: 2.0.5
       react: 18.2.0
-    dev: false
-
-  /@mantine/hooks/5.6.3:
-    resolution: {integrity: sha512-de3Fm7Z2MrWms8Ah/YbG9fr6CLLtAfz5LCwtqnRXgOetqbu38ZERYNi7TMFxnhGdZko90QjdIpiQRJBsfVax+g==}
-    peerDependencies:
-      react: '>=16.8.0'
     dev: false
 
   /@mantine/hooks/5.6.3_react@18.2.0:
@@ -1456,6 +1447,19 @@ packages:
       - '@emotion/server'
     dev: false
 
+  /@mantine/notifications/5.6.3_@mantine+core@5.6.3:
+    resolution: {integrity: sha512-YL+gqKDCakQ2NCh16w8zkwxD80xUTCmpLEwYXvJoLZix0jmt62pmwG+n/kIcZL4Bn04YYmLROOXKga1aiIFF/A==}
+    peerDependencies:
+      '@mantine/core': 5.6.3
+      '@mantine/hooks': 5.6.3
+      react: '>=16.8.0'
+      react-dom: '>=16.8.0'
+    dependencies:
+      '@mantine/core': 5.6.3
+      '@mantine/utils': 5.6.3
+      react-transition-group: 4.4.2
+    dev: false
+
   /@mantine/notifications/5.6.3_hliqdvg4trnmlenfv3ync25tfa:
     resolution: {integrity: sha512-YL+gqKDCakQ2NCh16w8zkwxD80xUTCmpLEwYXvJoLZix0jmt62pmwG+n/kIcZL4Bn04YYmLROOXKga1aiIFF/A==}
     peerDependencies:
@@ -1470,20 +1474,6 @@ packages:
       react: 18.2.0
       react-dom: 18.2.0_react@18.2.0
       react-transition-group: 4.4.2_biqbaboplfbrettd7655fr4n2y
-    dev: false
-
-  /@mantine/notifications/5.6.3_uiajga6tgfzhy7kh75ldxu4dgq:
-    resolution: {integrity: sha512-YL+gqKDCakQ2NCh16w8zkwxD80xUTCmpLEwYXvJoLZix0jmt62pmwG+n/kIcZL4Bn04YYmLROOXKga1aiIFF/A==}
-    peerDependencies:
-      '@mantine/core': 5.6.3
-      '@mantine/hooks': 5.6.3
-      react: '>=16.8.0'
-      react-dom: '>=16.8.0'
-    dependencies:
-      '@mantine/core': 5.6.3_@mantine+hooks@5.6.3
-      '@mantine/hooks': 5.6.3
-      '@mantine/utils': 5.6.3
-      react-transition-group: 4.4.2
     dev: false
 
   /@mantine/nprogress/5.6.3_hliqdvg4trnmlenfv3ync25tfa:
