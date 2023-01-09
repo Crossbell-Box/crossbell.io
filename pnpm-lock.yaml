@@ -197,6 +197,7 @@ importers:
     specifiers:
       '@crossbell/contract': workspace:*
       '@crossbell/indexer': workspace:*
+      '@crossbell/ui': workspace:*
       '@crossbell/util-hooks': workspace:*
       '@crossbell/util-metadata': workspace:*
       '@mantine/core': ^5.6.3
@@ -216,6 +217,7 @@ importers:
     devDependencies:
       '@crossbell/contract': link:../contract
       '@crossbell/indexer': link:../indexer
+      '@crossbell/ui': link:../ui
       '@crossbell/util-hooks': link:../util-hooks
       '@crossbell/util-metadata': link:../util-metadata
       '@types/react-transition-group': 4.4.5

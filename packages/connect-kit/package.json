@@ -54,6 +54,7 @@
 	"devDependencies": {
 		"@crossbell/contract": "workspace:*",
 		"@crossbell/indexer": "workspace:*",
+		"@crossbell/ui": "workspace:*",
 		"@crossbell/util-hooks": "workspace:*",
 		"@crossbell/util-metadata": "workspace:*",
 		"@types/react-transition-group": "^4"
