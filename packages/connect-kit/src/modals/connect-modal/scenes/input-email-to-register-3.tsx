@@ -8,6 +8,7 @@ import {
 	EmailIcon,
 	MemberIcon,
 } from "../../../components";
+import { useWeb2Url, IMAGES } from "../../../utils";
 
 import { Header } from "../components/header";
 import { TextInput } from "../components/text-input";
@@ -18,14 +19,11 @@ import { SceneKind } from "../types";
 import { useEmailRegisterStore, useScenesStore } from "../stores";
 
 import styles from "./input-email-to-register-3.module.css";
-import { useWeb2Url } from "../../../utils";
 
 export function InputEmailToRegister3() {
 	const store = useEmailRegisterStore();
 	const scene = useScenesStore();
-	const imgUrl = useWeb2Url(
-		"ipfs://bafkreihz5hygddvnohnui3nxtsr3a4u7pjbs5paqnheazkdfekhksqwym4"
-	);
+	const imgUrl = useWeb2Url(IMAGES.whatIsCharacterImg);
 
 	const register = React.useCallback(() => {
 		if (store.computed.canRegister) {

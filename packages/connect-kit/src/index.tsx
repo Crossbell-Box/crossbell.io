@@ -2,7 +2,7 @@ import React from "react";
 import { useAccount } from "wagmi";
 
 import { useAccountState } from "./hooks";
-import { UseWeb2UrlContext, GetWeb2Url } from "./utils";
+import { UseWeb2UrlContext, GetWeb2Url, usePreloadAllImgs } from "./utils";
 import { ClaimCSBModal } from "./modals/claim-csb-modal";
 import {
 	ConnectModal,
@@ -41,6 +41,8 @@ export function ConnectKitProvider({
 		accountStore.refresh();
 		accountStore.markSSRReady();
 	}, []);
+
+	usePreloadAllImgs();
 
 	return (
 		<UseWeb2UrlContext.Provider value={ipfsLinkToHttpLink ?? null}>

@@ -1,14 +1,12 @@
 import React from "react";
 
+import { useWeb2Url, IMAGES } from "../../../utils";
 import { Header } from "../components/header";
 
 import styles from "./upgrade-to-wallet.module.css";
-import { useWeb2Url } from "../../../utils";
 
 export function UpgradeToWallet() {
-	const imgUrl = useWeb2Url(
-		"ipfs://bafkreieoo25l4ls4hcrdmzogc6muntbxc4mikzm66vzawk5rdfpaz3xw4a"
-	);
+	const imgUrl = useWeb2Url(IMAGES.upgradeToWalletIllustration);
 
 	return (
 		<>

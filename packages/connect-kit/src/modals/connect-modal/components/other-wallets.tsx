@@ -1,8 +1,9 @@
 import React from "react";
 import classNames from "classnames";
 
+import { useWeb2Url, IMAGES } from "../../../utils";
+
 import styles from "./other-wallets.module.css";
-import { useWeb2Url } from "../../../utils";
 
 const WalletConnect = (props: React.SVGAttributes<SVGSVGElement>) => (
 	<svg
@@ -39,9 +40,8 @@ const ImToken = (props: React.SVGAttributes<SVGSVGElement>) => (
 );
 
 const Rainbow = (props: React.SVGAttributes<SVGSVGElement>) => {
-	const img = useWeb2Url(
-		"ipfs://bafkreih3hn6aelxug72owjb6wtknikcmadjk7yslwizrdjct4fdpghtyn4"
-	);
+	const img = useWeb2Url(IMAGES.rainbowIcon);
+
 	return (
 		<svg
 			{...props}

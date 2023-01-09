@@ -2,7 +2,7 @@ import React from "react";
 
 import { CloseIcon } from "@crossbell/ui";
 
-import { useWeb2Url } from "../../../utils";
+import { useWeb2Url, IMAGES } from "../../../utils";
 
 import styles from "./congrats.module.css";
 
@@ -25,13 +25,8 @@ export function Congrats({
 	onClose,
 	timeout,
 }: CongratsProps) {
-	const illustrationUrl = useWeb2Url(
-		"ipfs://bafkreias276ycc75tns2fgzeewc2moqza3yycatr5dwf7suonocuxxgqdy"
-	);
-
-	const bgUrl = useWeb2Url(
-		"ipfs://bafkreieaqqcfyung4wz7njitlqtucdbh7rcgpctltapxts3n6dpcmsehoa"
-	);
+	const illustrationUrl = useWeb2Url(IMAGES.congratsImg);
+	const bgUrl = useWeb2Url(IMAGES.congratsBg);
 
 	return (
 		<div className={styles.container}>
