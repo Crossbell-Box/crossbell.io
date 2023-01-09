@@ -18,6 +18,8 @@ import { TipsSection } from "../components/tips-section";
 import { SceneKind } from "../types";
 import { useResetPasswordStore, useScenesStore } from "../stores";
 
+import styles from "./input-email-to-reset-password-1.module.css";
+
 export function InputEmailToResetPassword1() {
 	const goTo = useScenesStore(({ goTo }) => goTo);
 	const store = useResetPasswordStore();
@@ -38,19 +40,16 @@ export function InputEmailToResetPassword1() {
 	return (
 		<>
 			<Header title="Reset Password" />
-			<div data-animation="scale-fade-in" className="sm:w-362px p-24px">
+			<div data-animation="scale-fade-in" className={styles.container}>
 				<Field
 					title="Email Address"
 					icon={
 						<EmailIcon
-							className={classNames(
-								"transition",
-								store.emailErrorMsg ? "text-[#E65040]" : "text-[#FFB74D]"
-							)}
+							style={{ color: store.emailErrorMsg ? "#E65040" : "#FFB74D" }}
 						/>
 					}
-					className="mb-24px"
-					tips={<span className="text-[#E65040]">{store.emailErrorMsg}</span>}
+					className={classNames(styles.field, styles.emailField)}
+					tips={<span className={styles.tips}>{store.emailErrorMsg}</span>}
 				>
 					<TextInput
 						type="text"
@@ -61,15 +60,14 @@ export function InputEmailToResetPassword1() {
 						rightSection={
 							<button
 								disabled={!store.computed.canSendCode}
-								className={classNames(
-									store.computed.isPending
-										? "cursor-progress"
+								className={styles.sendCodeBtn}
+								style={{
+									cursor: store.computed.isPending
+										? "progress"
 										: store.computed.canSendCode
-										? "cursor-pointer"
-										: "cursor-not-allowed",
-									!store.computed.canSendCode && "bg-opacity-50",
-									"transition whitespace-nowrap h-full w-100px flex items-center justify-center font-roboto font-500 text-14px text-white bg-[#6AD991] border-none rounded-r-12px"
-								)}
+										? "pointer"
+										: "not-allowed",
+								}}
 								onClick={() => store.sendCode()}
 							>
 								{store.isCodeSent ? "Try Again" : "Verify"}
@@ -82,10 +80,11 @@ export function InputEmailToResetPassword1() {
 				</Field>
 
 				{store.isCodeSent && (
-					<TipsSection className="-mt-14px mb-24px">
-						{
-							"We've sent an email to you for password reset. Please check your email inbox and enter the Verification Code. If you didn't receive the email after a while, please check your spam or junk mail folder or contact us."
-						}
+					<TipsSection className={styles.sentTips}>
+						We've sent an email to you for password reset. Please check your
+						email inbox and enter the Verification Code. If you didn't receive
+						the email after a while, please check your spam or junk mail folder
+						or contact us.
 					</TipsSection>
 				)}
 
@@ -93,13 +92,11 @@ export function InputEmailToResetPassword1() {
 					title="Verification Code"
 					icon={
 						<PasswordIcon
-							className={classNames(
-								"transition",
-								store.codeErrorMsg ? "text-[#E65040]" : "text-[#FFB74D]"
-							)}
+							style={{ color: store.codeErrorMsg ? "#E65040" : "#FFB74D" }}
 						/>
 					}
-					tips={<span className="text-[#E65040]">{store.codeErrorMsg}</span>}
+					className={styles.field}
+					tips={<span className={styles.tips}>{store.codeErrorMsg}</span>}
 				>
 					<CodeInput
 						size={44}
@@ -110,7 +107,7 @@ export function InputEmailToResetPassword1() {
 					/>
 				</Field>
 
-				<div className="flex justify-end mt-48px">
+				<div className={styles.actions}>
 					<NextStepButton
 						disabled={!store.computed.canVerifyCode}
 						onClick={verifyCode}

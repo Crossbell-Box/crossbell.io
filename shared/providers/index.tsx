@@ -3,7 +3,7 @@ import { LazyMotion } from "framer-motion";
 
 import { IpfsGatewayContext } from "@crossbell/ipfs-react";
 import { InitContractProvider } from "@crossbell/contract";
-import { ipfsGateway } from "@crossbell/util-ipfs";
+import { ipfsGateway, ipfsLinkToHttpLink } from "@crossbell/util-ipfs";
 import { useRefCallback } from "@crossbell/util-hooks";
 import {
 	ConnectKitProvider,
@@ -55,7 +55,9 @@ export function MainProvider({ children }: React.PropsWithChildren) {
 										}
 										getCurrentCharacterId={getCurrentCharacterId}
 									>
-										<ConnectKitProvider>{children}</ConnectKitProvider>
+										<ConnectKitProvider ipfsLinkToHttpLink={ipfsLinkToHttpLink}>
+											{children}
+										</ConnectKitProvider>
 									</InitContractProvider>
 								</IpfsGatewayContext.Provider>
 							</NotificationsProvider>

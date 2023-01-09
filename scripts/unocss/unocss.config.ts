@@ -1,11 +1,11 @@
 import * as path from "path";
-import { defineConfig, presetIcons, presetUno } from "unocss";
+import { presetIcons, presetUno, UserConfig } from "unocss";
 
 import { FileSystemIconLoader } from "@iconify/utils/lib/loader/node-loaders";
 
 import { breakpoints } from "./breakpoints";
 
-export default defineConfig({
+export default {
 	presets: [
 		presetIcons({
 			collections: {
@@ -61,4 +61,4 @@ export default defineConfig({
 			xl: `${breakpoints.xl}px`,
 		},
 	},
-});
+} as UserConfig;

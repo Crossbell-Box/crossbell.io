@@ -1,7 +1,11 @@
 import React from "react";
 import classNames from "classnames";
-import { useIsomorphicEffect } from "@mantine/hooks";
-import { m, AnimatePresence } from "framer-motion";
+import { useIsomorphicEffect } from "@crossbell/util-hooks";
+import {
+	TransitionGroup,
+	Transition,
+	TransitionStatus,
+} from "react-transition-group";
 
 import { DynamicContainerContext } from "./context";
 
@@ -34,6 +38,21 @@ export function DynamicContainer({
 	);
 }
 
+const duration = 100;
+
+const defaultStyle = {
+	transition: `opacity ${duration}ms ease-in-out`,
+	opacity: 0,
+};
+
+const transitionStyles: Record<TransitionStatus, React.CSSProperties> = {
+	entering: { opacity: 1 },
+	entered: { opacity: 1 },
+	exiting: { opacity: 0 },
+	exited: { opacity: 0 },
+	unmounted: { opacity: 0 },
+};
+
 export function DynamicContainerContent({
 	id,
 	children,
@@ -44,19 +63,22 @@ export function DynamicContainerContent({
 	const { updateElm } = React.useContext(DynamicContainerContext);
 
 	return (
-		<AnimatePresence>
-			{[
-				<m.div
-					className={styles.content}
-					ref={updateElm}
-					key={id}
-					transition={{ duration: 0.1 }}
-					exit={{ opacity: 0 }}
-				>
-					{children}
-				</m.div>,
-			]}
-		</AnimatePresence>
+		<TransitionGroup>
+			<Transition key={id} timeout={duration}>
+				{(state) => (
+					<div
+						className={styles.content}
+						style={{
+							...defaultStyle,
+							...transitionStyles[state],
+						}}
+						ref={updateElm}
+					>
+						{children}
+					</div>
+				)}
+			</Transition>
+		</TransitionGroup>
 	);
 }
 

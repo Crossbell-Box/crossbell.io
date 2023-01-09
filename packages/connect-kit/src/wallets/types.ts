@@ -14,6 +14,5 @@ export type Wallet = {
 	name: string;
 	installed: boolean;
 	icon: React.ReactNode;
-	ConnectStatus?: React.ComponentType;
 	createConnector: () => WalletConnector;
 };

@@ -1,7 +1,9 @@
 import React from "react";
 import classNames from "classnames";
 
-import { Text } from "@mantine/core";
+import { EyeOpenIcon, EyeCloseIcon } from "@crossbell/ui";
+
+import styles from "./password-input.module.css";
 
 export type PasswordInputProps = Omit<
 	React.InputHTMLAttributes<HTMLInputElement>,
@@ -18,28 +20,20 @@ export function PasswordInput({
 	...props
 }: PasswordInputProps) {
 	return (
-		<div className={classNames(className, "h-44px relative")}>
+		<div className={classNames(className, styles.container)}>
 			<input
-				className={
-					"transition h-full w-full rounded-12px border-none px-12px bg-[#1C1B1F] bg-opacity-4 focus:bg-opacity-6 outline-none"
-				}
+				className={styles.input}
 				type={visible ? "text" : "password"}
 				spellCheck="false"
 				autoCorrect="off"
 				autoCapitalize="off"
 				{...props}
 			/>
-			<div className="transition absolute cursor-pointer right-8px p-8px top-1/2 transform -translate-y-1/2 text-16px text-[#999] hover:text-[#000]">
+			<div className={styles.action}>
 				{visible ? (
-					<Text
-						className="i-csb:eye-close"
-						onClick={() => onVisibleChange(false)}
-					/>
+					<EyeCloseIcon onClick={() => onVisibleChange(false)} />
 				) : (
-					<Text
-						className="i-csb:eye-open"
-						onClick={() => onVisibleChange(true)}
-					/>
+					<EyeOpenIcon onClick={() => onVisibleChange(true)} />
 				)}
 			</div>
 		</div>

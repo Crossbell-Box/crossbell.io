@@ -1,0 +1,15 @@
+.backBtn {
+	height: auto;
+	padding: 5px;
+	font-size: 22px;
+}
+
+.backIcon {
+	transform: translateX(25%);
+}
+
+.closeBtn {
+	height: auto;
+	padding: 5px;
+	font-size: 22px;
+}

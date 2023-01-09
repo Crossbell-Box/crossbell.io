@@ -1,5 +1,4 @@
 import React from "react";
-import classNames from "classnames";
 
 import styles from "./index.module.css";
 
@@ -11,15 +10,10 @@ export type ModalHeaderProps = {
 
 export function ModalHeader({ title, leftNode, rightNode }: ModalHeaderProps) {
 	return (
-		<div
-			data-animation="fade-in"
-			className={classNames("pb-10px px-21px pt-23px", styles.container)}
-		>
-			<div className="flex items-center justify-between gap-1 relative">
+		<div data-animation="fade-in" className={styles.container}>
+			<div className={styles.main}>
 				<div>{leftNode}</div>
-				<div className="mx-auto text-16px font-500 absolute left-1/2 top-1/2 transform -translate-x-1/2 -translate-y-1/2 whitespace-nowrap">
-					{title}
-				</div>
+				<div className={styles.title}>{title}</div>
 				<div>{rightNode}</div>
 			</div>
 		</div>

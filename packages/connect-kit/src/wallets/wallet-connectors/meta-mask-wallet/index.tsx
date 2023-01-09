@@ -5,8 +5,7 @@ import { MetamaskIcon } from "../../../components";
 import { isAndroid, isMobile } from "../../../utils";
 import { Chain, Wallet } from "../../types";
 import { getWalletConnectConnector } from "../get-wallet-connect-connector";
-
-import { ConnectStatus } from "./connect-status";
+import styles from "../coinbase-wallet/index.module.css";
 
 export interface MetaMaskWalletOptions {
 	chains: Chain[];
@@ -56,8 +55,7 @@ export const metaMaskWallet = ({
 		id: "metaMask",
 		name: "MetaMask",
 		installed: isMetaMaskInjected,
-		icon: <MetamaskIcon className="absolute top-0 left-0 w-full h-full" />,
-		ConnectStatus,
+		icon: <MetamaskIcon className={styles.icon} />,
 		createConnector: () => {
 			if (shouldUseWalletConnect) {
 				const connector = getWalletConnectConnector({ chains });

@@ -12,6 +12,8 @@ import { NextStepButton } from "../components/next-step-button";
 import { SceneKind } from "../types";
 import { useScenesStore, useEmailRegisterStore } from "../stores";
 
+import styles from "./input-email-to-register-2.module.css";
+
 export function InputEmailToRegister2() {
 	const goTo = useScenesStore(({ goTo }) => goTo);
 	const store = useEmailRegisterStore();
@@ -21,16 +23,11 @@ export function InputEmailToRegister2() {
 	return (
 		<>
 			<Header title="Register Email Account 2/2" />
-			<div data-animation="scale-fade-in" className="sm:w-362px p-24px">
+			<div data-animation="scale-fade-in" className={styles.container}>
 				<Field
 					title="Password"
-					className="mb-24px"
-					icon={
-						<PasswordIcon
-							className={classNames("transition")}
-							style={{ color: store.passwordMsg.color }}
-						/>
-					}
+					className={classNames(styles.field, styles.passwordField)}
+					icon={<PasswordIcon style={{ color: store.passwordMsg.color }} />}
 					tips={
 						<span style={{ color: store.passwordMsg.color }}>
 							{store.passwordMsg.value}
@@ -50,12 +47,8 @@ export function InputEmailToRegister2() {
 
 				<Field
 					title="Confirm Password"
-					icon={
-						<PasswordIcon
-							className={classNames("transition")}
-							style={{ color: store.password2Msg.color }}
-						/>
-					}
+					className={styles.field}
+					icon={<PasswordIcon style={{ color: store.password2Msg.color }} />}
 					tips={
 						<span style={{ color: store.password2Msg.color }}>
 							{store.password2Msg.value}
@@ -74,25 +67,24 @@ export function InputEmailToRegister2() {
 				</Field>
 
 				<Checkbox
-					className="mt-12px"
+					className={styles.checkbox}
 					checked={store.isPolicyChecked}
 					onChange={store.toggleCheckPolicy}
 					classNames={{
-						inner: "w-12px h-12px flex-shrink-0 mt-4px",
-						input: "w-full h-full",
-						body: "flex items-start gap-6px",
-						label: "pl-0 text-12px text-[#999]",
-						labelWrapper: "flex-1",
+						inner: styles.checkboxInner,
+						input: styles.checkboxInput,
+						body: styles.checkboxBody,
+						label: styles.checkboxLabel,
+						labelWrapper: styles.checkboxLabelWrapper,
 					}}
 					color="green"
 					label={
-						<span className="whitespace-pre-wrap">
+						<span className={styles.checkboxLabelContent}>
 							{"I have read and agree to the "}
 							<a
 								href="https://legal.xlog.app/Terms-of-Service"
 								target="_blank"
 								rel="noreferrer"
-								className="text-[#F6C549]"
 							>
 								Terms of Service
 							</a>
@@ -101,7 +93,6 @@ export function InputEmailToRegister2() {
 								href="https://legal.xlog.app/Privacy-Policy"
 								target="_blank"
 								rel="noreferrer"
-								className="text-[#F6C549]"
 							>
 								Privacy Policy
 							</a>
@@ -111,10 +102,10 @@ export function InputEmailToRegister2() {
 					radius="xs"
 				/>
 
-				<div className="flex justify-between mt-48px">
+				<div className={styles.actions}>
 					<button
 						onClick={() => goTo(SceneKind.inputEmailToConnect)}
-						className="transition text-[#999] hover:text-[#111] bg-transparent border-none text-14px font-400 flex items-center justify-center px-0 py-14px font-roboto gap-12px cursor-pointer"
+						className={styles.goToEmailLogin}
 					>
 						Have an account already?
 					</button>

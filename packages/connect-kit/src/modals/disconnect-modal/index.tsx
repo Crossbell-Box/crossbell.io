@@ -1,17 +1,17 @@
 import React from "react";
 import classNames from "classnames";
-import { Button, Text } from "@mantine/core";
+import { Button } from "@mantine/core";
+import { CloseIcon, LightBulbIcon } from "@crossbell/ui";
 
 import { ModalHeader, BaseModal } from "../../components";
 import { useDisconnectAccount } from "../../hooks";
 
+import styles from "./index.module.css";
 import { useModalStore } from "./stores";
 
 export { useModalStore };
 
-const buttonCls = classNames(
-	"h-64px w-full border-none rounded-12px text-16px font-500 font-roboto ux-overlay"
-);
+const buttonCls = classNames(styles.btn, "ux-overlay");
 
 export function DisconnectModal() {
 	const { isActive, hide } = useModalStore();
@@ -19,25 +19,25 @@ export function DisconnectModal() {
 
 	return (
 		<BaseModal isActive={isActive} onClose={hide}>
-			<div className="sm:w-360px">
+			<div className={styles.container}>
 				<ModalHeader
 					title="Disconnect Wallet"
 					rightNode={
 						<Button
-							className="h-auto p-5px text-22px"
+							className={styles.closeBtn}
 							variant="subtle"
 							color="gray"
 							compact
 							onClick={hide}
 						>
-							<Text className="i-csb:close" />
+							<CloseIcon />
 						</Button>
 					}
 				/>
 
-				<div className="px-24px flex flex-col gap-12px">
+				<div className={styles.main}>
 					<button
-						className={classNames(buttonCls, "bg-red-primary text-white")}
+						className={classNames(buttonCls, styles.disconnectBtn)}
 						onClick={disconnectAccount}
 					>
 						Disconnect
@@ -47,9 +47,9 @@ export function DisconnectModal() {
 						Cancel
 					</button>
 
-					<div className="flex items-center justify-center text-[#999] mt-12px mb-27px">
-						<Text className="i-csb:light-bulb text-24px mr-4px" />
-						<span className="text-14px font-400">
+					<div className={styles.tips}>
+						<LightBulbIcon className={styles.tipsIcon} />
+						<span className={styles.tipsContent}>
 							you can always log back in at any time.
 						</span>
 					</div>

@@ -1,5 +1,6 @@
 import React from "react";
-import classNames from "classnames";
+
+import styles from "./field.module.css";
 
 export type FieldProps = {
 	title: React.ReactNode;
@@ -7,27 +8,18 @@ export type FieldProps = {
 	tips?: React.ReactNode;
 } & Omit<React.HTMLAttributes<HTMLDivElement>, "title">;
 
-export function Field({
-	tips,
-	title,
-	icon,
-	children,
-	className,
-	...props
-}: FieldProps) {
+export function Field({ tips, title, icon, children, ...props }: FieldProps) {
 	return (
-		<div {...props} className={classNames(className, "")}>
-			<div className="flex items-center gap-8px mb-6px whitespace-nowrap">
-				<div className="flex items-center gap-8px">
+		<div {...props}>
+			<div className={styles.header}>
+				<div className={styles.title}>
 					{icon}
-					<span className="font-500 text-16px text-[#49454F]">{title}</span>
+					<span className={styles.titleContent}>{title}</span>
 				</div>
-				<div className="ml-auto text-12px flex-grow-0 text-ellipsis overflow-hidden">
-					{tips}
-				</div>
+				<div className={styles.tips}>{tips}</div>
 			</div>
 
-			<div className="w-full">{children}</div>
+			<div className={styles.children}>{children}</div>
 		</div>
 	);
 }

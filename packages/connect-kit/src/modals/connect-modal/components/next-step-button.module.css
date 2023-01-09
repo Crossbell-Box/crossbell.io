@@ -1,0 +1,22 @@
+.btn {
+	border-radius: 16px;
+	border-style: none;
+	padding: 14px 36px;
+	font-size: 14px;
+	font-weight: 500;
+	transition-property: color, background-color, border-color,
+		text-decoration-color, fill, stroke, opacity, box-shadow, transform, filter,
+		backdrop-filter;
+	transition-timing-function: cubic-bezier(0.4, 0, 0.2, 1);
+	transition-duration: 150ms;
+	font-family: "Roboto", sans-serif;
+	cursor: pointer;
+	background-color: #6ad991;
+	color: #fff;
+}
+
+.btn.disabled {
+	cursor: not-allowed;
+	background-color: #f6f7f9;
+	color: #000;
+}

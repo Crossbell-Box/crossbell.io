@@ -2,6 +2,7 @@ import React from "react";
 import { useAccount } from "wagmi";
 
 import { useAccountState } from "./hooks";
+import { UseWeb2UrlContext, GetWeb2Url, usePreloadAllImgs } from "./utils";
 import { ClaimCSBModal } from "./modals/claim-csb-modal";
 import {
 	ConnectModal,
@@ -20,7 +21,15 @@ export * from "./hooks";
 
 export { useConnectModal, useDisconnectModal, useUpgradeAccountModal };
 
-export function ConnectKitProvider({ children }: React.PropsWithChildren) {
+export type ConnectKitProviderProps = {
+	children: React.ReactNode;
+	ipfsLinkToHttpLink?: GetWeb2Url;
+};
+
+export function ConnectKitProvider({
+	children,
+	ipfsLinkToHttpLink,
+}: ConnectKitProviderProps) {
 	const accountStore = useAccountState();
 	const account = useAccount();
 
@@ -33,13 +42,15 @@ export function ConnectKitProvider({ children }: React.PropsWithChildren) {
 		accountStore.markSSRReady();
 	}, []);
 
+	usePreloadAllImgs();
+
 	return (
-		<>
+		<UseWeb2UrlContext.Provider value={ipfsLinkToHttpLink ?? null}>
 			<ConnectModal />
 			<DisconnectModal />
 			<UpgradeAccountModal />
 			<ClaimCSBModal />
 			{children}
-		</>
+		</UseWeb2UrlContext.Provider>
 	);
 }

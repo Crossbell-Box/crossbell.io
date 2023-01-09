@@ -1,5 +1,47 @@
+.container {
+	padding-left: 24px;
+	padding-right: 24px;
+}
+
+@media (min-width: 768px) {
+	.container {
+		width: 312px;
+	}
+}
+
+.walletIcon {
+	position: relative;
+	margin-left: auto;
+	height: 32px;
+	width: 32px;
+}
+
+.otherWalletsIcon {
+	width: 32px;
+}
+
 .tipsBtn {
+	margin-top: 16px;
+	margin-bottom: 16px;
+	height: 42px;
+	width: 100%;
+	display: inline-flex;
+	cursor: pointer;
+	align-items: center;
+	justify-content: center;
+	grid-gap: 10px;
+	gap: 10px;
+	border-style: none;
+	background-color: transparent;
+	padding: 0 16px;
+	font-size: 15px;
+	font-weight: 500;
+	color: #999;
 	transition: color 200ms ease, transform 100ms ease;
+}
+
+.tipsBtn:hover {
+	color: #111;
 }
 
 .tipsBtn svg {

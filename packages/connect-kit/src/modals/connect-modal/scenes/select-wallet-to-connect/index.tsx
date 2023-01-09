@@ -1,5 +1,4 @@
 import React from "react";
-import classNames from "classnames";
 
 import {
 	useDefaultWalletConnect,
@@ -23,17 +22,13 @@ export function SelectWalletToConnect() {
 		<>
 			<Header title="Connect Wallet" />
 
-			<div data-animation="scale-fade-in" className="sm:w-312px px-24px">
+			<div data-animation="scale-fade-in" className={styles.container}>
 				<Selections
 					items={walletConnectors
 						.map((wallet) => ({
 							id: wallet.id,
 							title: wallet.name,
-							icon: (
-								<div className="relative w-32px h-32px ml-auto">
-									{wallet.icon}
-								</div>
-							),
+							icon: <div className={styles.walletIcon}>{wallet.icon}</div>,
 							onClick() {
 								goTo({ kind: SceneKind.connectWallet, wallet });
 							},
@@ -41,16 +36,13 @@ export function SelectWalletToConnect() {
 						.concat({
 							id: "other-wallets",
 							title: "Other Wallets",
-							icon: <OtherWallets className="w-32px" />,
+							icon: <OtherWallets className={styles.otherWalletsIcon} />,
 							onClick: openDefaultWalletConnect,
 						})}
 				/>
 
 				<button
-					className={classNames(
-						"cursor-pointer inline-flex items-center justify-center gap-10px h-42px my-16px py-0 px-16px bg-transparent text-[#999] hover:text-[#111] text-15px font-500 border-none w-full",
-						styles.tipsBtn
-					)}
+					className={styles.tipsBtn}
 					onClick={() => goTo(SceneKind.inputEmailToRegister1)}
 				>
 					<div>
