@@ -1,6 +1,5 @@
 import { Contract } from "crossbell.js";
-import { BigNumber } from "ethers";
-import { parseEther } from "ethers/lib/utils";
+import { BigNumber, utils } from "ethers";
 
 import { getCsbBalance } from "@crossbell/indexer";
 
@@ -74,6 +73,6 @@ export function injectContractChecker({
 }
 
 function hasEnoughCsb(amount: BigNumber) {
-	const threshold = parseEther("0.0001");
+	const threshold = utils.parseEther("0.0001");
 	return amount.gte(threshold);
 }
