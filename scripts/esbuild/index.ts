@@ -1,3 +1,3 @@
-import { makeAllPackagesExternalPlugin, cssModulePlugin } from "./plugins";
+import { cssModulePlugin } from "./plugins";
 
-export const plugins = [makeAllPackagesExternalPlugin, cssModulePlugin];
+export const plugins = [cssModulePlugin];

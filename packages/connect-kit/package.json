@@ -30,12 +30,16 @@
 		"./index.css": "./dist/index.css"
 	},
 	"dependencies": {
-		"@mantine/core": "^5.6.3",
-		"@mantine/notifications": "^5.6.3",
-		"canvas-confetti": "^1.6.0",
-		"classnames": "^2.3.2",
-		"qrcode": "^1.5.1",
-		"react-transition-group": "^4.4.5"
+		"@mantine/carousel": "^5",
+		"@mantine/core": "^5",
+		"@mantine/notifications": "^5",
+		"canvas-confetti": "^1",
+		"classnames": "^2",
+		"qrcode": "^1",
+		"check-password-strength": "^2",
+		"react-transition-group": "^4",
+		"immer": "^9",
+		"detect-browser": "^5"
 	},
 	"peerDependencies": {
 		"@crossbell/contract": "workspace:*",

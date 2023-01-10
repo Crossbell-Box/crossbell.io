@@ -4,7 +4,7 @@ import confetti from "canvas-confetti";
 import { Congrats } from "../components/congrats";
 import { useModalStore } from "../stores";
 import { useAccountCharacter } from "../../../hooks";
-import { composeCharacterHref } from "~/shared/url";
+import { composeCharacterHref } from "~/shared/url/href";
 
 export function InputEmailToRegister4() {
 	const { hide: hideModal } = useModalStore();
