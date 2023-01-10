@@ -1,7 +1,5 @@
 import { useBalance } from "wagmi";
-import { BigNumber } from "ethers";
-
-import { formatUnits } from "ethers/lib/utils";
+import { BigNumber, utils } from "ethers";
 
 import { useAccountState } from "./account-state";
 
@@ -20,7 +18,7 @@ export function useAccountBalance(): UseAccountBalanceResult {
 	switch (account?.type) {
 		case "email":
 			return {
-				balance: formatUnits(BigNumber.from(account.csb), 18),
+				balance: utils.formatUnits(BigNumber.from(account.csb), 18),
 				isLoading: false,
 			};
 		case "wallet":
