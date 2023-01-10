@@ -60,11 +60,14 @@ export function DynamicContainerContent({
 	id: React.Key;
 	children: React.ReactNode;
 }) {
+	const ref = React.useRef<HTMLDivElement>(null);
 	const { updateElm } = React.useContext(DynamicContainerContext);
+
+	useIsomorphicEffect(() => updateElm(ref.current), [updateElm, id]);
 
 	return (
 		<TransitionGroup>
-			<Transition key={id} timeout={duration}>
+			<Transition key={id} nodeRef={ref} timeout={duration}>
 				{(state) => (
 					<div
 						className={styles.content}
@@ -72,7 +75,7 @@ export function DynamicContainerContent({
 							...defaultStyle,
 							...transitionStyles[state],
 						}}
-						ref={updateElm}
+						ref={ref}
 					>
 						{children}
 					</div>
