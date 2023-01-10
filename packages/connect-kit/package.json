@@ -38,7 +38,6 @@
 		"qrcode": "^1",
 		"check-password-strength": "^2",
 		"react-transition-group": "^4",
-		"immer": "^9",
 		"detect-browser": "^5"
 	},
 	"peerDependencies": {
@@ -53,6 +52,7 @@
 		"ethers": "*",
 		"react": "^18",
 		"wagmi": "*",
+		"immer": "^9",
 		"zustand": "^4"
 	},
 	"devDependencies": {
