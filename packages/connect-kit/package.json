@@ -32,12 +32,15 @@
 	"dependencies": {
 		"@mantine/carousel": "^5",
 		"@mantine/core": "^5",
+		"@mantine/hooks": "^5",
 		"@mantine/notifications": "^5",
+		"@emotion/react": "^11",
 		"canvas-confetti": "^1",
 		"classnames": "^2",
 		"qrcode": "^1",
 		"check-password-strength": "^2",
 		"react-transition-group": "^4",
+		"embla-carousel-react": "^7",
 		"detect-browser": "^5"
 	},
 	"peerDependencies": {
