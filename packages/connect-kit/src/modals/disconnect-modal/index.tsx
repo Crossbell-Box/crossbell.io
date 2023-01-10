@@ -3,6 +3,7 @@ import classNames from "classnames";
 import { Button } from "@mantine/core";
 import { CloseIcon, LightBulbIcon } from "@crossbell/ui";
 
+import commonStyles from "../../styles.module.css";
 import { ModalHeader, BaseModal } from "../../components";
 import { useDisconnectAccount } from "../../hooks";
 
@@ -11,7 +12,7 @@ import { useModalStore } from "./stores";
 
 export { useModalStore };
 
-const buttonCls = classNames(styles.btn, "ux-overlay");
+const buttonCls = classNames(styles.btn, commonStyles.uxOverlay);
 
 export function DisconnectModal() {
 	const { isActive, hide } = useModalStore();

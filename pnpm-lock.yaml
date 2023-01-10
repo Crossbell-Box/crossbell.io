@@ -38,7 +38,6 @@ importers:
       '@wagmi/core': ^0.6.12
       bumpp: ^8.2.1
       canvas-confetti: 1.6.0
-      check-password-strength: 2.0.7
       classnames: 2.3.2
       commander: ^9.4.0
       crossbell.js: 0.16.1
@@ -120,7 +119,6 @@ importers:
       '@tanstack/react-query-devtools': 4.13.5_i7kuhmcsnmccyzigx3mxdtc2mu
       '@wagmi/core': 0.6.12_lxa6ojub67252hst6mbz6ku6nu
       canvas-confetti: 1.6.0
-      check-password-strength: 2.0.7
       classnames: 2.3.2
       crossbell.js: 0.16.1
       dayjs: 1.11.6
@@ -200,18 +198,26 @@ importers:
       '@crossbell/ui': workspace:*
       '@crossbell/util-hooks': workspace:*
       '@crossbell/util-metadata': workspace:*
-      '@mantine/core': ^5.6.3
-      '@mantine/notifications': ^5.6.3
+      '@mantine/carousel': ^5
+      '@mantine/core': ^5
+      '@mantine/notifications': ^5
       '@types/react-transition-group': ^4
-      canvas-confetti: ^1.6.0
-      classnames: ^2.3.2
-      qrcode: ^1.5.1
-      react-transition-group: ^4.4.5
+      canvas-confetti: ^1
+      check-password-strength: ^2
+      classnames: ^2
+      detect-browser: ^5
+      immer: ^9
+      qrcode: ^1
+      react-transition-group: ^4
     dependencies:
+      '@mantine/carousel': 5.6.3_@mantine+core@5.6.3
       '@mantine/core': 5.6.3
       '@mantine/notifications': 5.6.3_@mantine+core@5.6.3
       canvas-confetti: 1.6.0
+      check-password-strength: 2.0.7
       classnames: 2.3.2
+      detect-browser: 5.3.0
+      immer: 9.0.16
       qrcode: 1.5.1
       react-transition-group: 4.4.5
     devDependencies:
@@ -1344,6 +1350,18 @@ packages:
     dependencies:
       '@json-rpc-tools/types': 1.7.6
       '@pedrouid/environment': 1.0.1
+    dev: false
+
+  /@mantine/carousel/5.6.3_@mantine+core@5.6.3:
+    resolution: {integrity: sha512-mBa8AvPrHE5uT5bbAqBjEzoTUaOYWAhRTq8pp/+dVEtjbHOmpnpfw5rMy9hC4R9S/M+hHPjtGZPJmFNc0TgNjQ==}
+    peerDependencies:
+      '@mantine/core': 5.6.3
+      '@mantine/hooks': 5.6.3
+      embla-carousel-react: ^7.0.0
+      react: '>=16.8.0'
+    dependencies:
+      '@mantine/core': 5.6.3
+      '@mantine/utils': 5.6.3
     dev: false
 
   /@mantine/carousel/5.6.3_ivlikz7x5r2hqlgolnas4aupji:

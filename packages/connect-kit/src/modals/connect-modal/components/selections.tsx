@@ -1,6 +1,7 @@
 import React from "react";
 import classNames from "classnames";
 
+import commonStyles from "../../../styles.module.css";
 import styles from "./selections.module.css";
 
 export type Selection = {
@@ -21,7 +22,7 @@ export function Selections({ items }: SelectionsProps) {
 			{items.map((item) => (
 				<div
 					key={item.id}
-					className={classNames(styles.item, "ux-overlay")}
+					className={classNames(styles.item, commonStyles.uxOverlay)}
 					style={item.style}
 					onClick={item.onClick}
 				>

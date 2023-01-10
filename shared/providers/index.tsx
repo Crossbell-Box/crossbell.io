@@ -1,9 +1,10 @@
 import React from "react";
 import { LazyMotion } from "framer-motion";
+import { IpfsGateway } from "@crossbell/ipfs-gateway";
 
 import { IpfsGatewayContext } from "@crossbell/ipfs-react";
 import { InitContractProvider } from "@crossbell/contract";
-import { ipfsGateway, ipfsLinkToHttpLink } from "@crossbell/util-ipfs";
+import { ipfsLinkToHttpLink } from "@crossbell/util-ipfs";
 import { useRefCallback } from "@crossbell/util-hooks";
 import {
 	ConnectKitProvider,
@@ -26,6 +27,8 @@ import { RouterTransition } from "./router-transition";
 
 const loadFeatures = () =>
 	import("~/shared/framer/features").then((res) => res.default);
+
+const ipfsGateway = new IpfsGateway();
 
 export function MainProvider({ children }: React.PropsWithChildren) {
 	const connectModal = useConnectModal();

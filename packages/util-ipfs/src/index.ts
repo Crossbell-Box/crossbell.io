@@ -1,7 +1,3 @@
-import { IpfsGateway, isIpfsUrl } from "@crossbell/ipfs-gateway";
-
-export const ipfsGateway = new IpfsGateway();
-
 export const ipfsLinkToHttpLink = (
 	rawLink: string,
 	config?: { origin?: string | null }
@@ -11,7 +7,7 @@ export const ipfsLinkToHttpLink = (
 	}
 
 	const origin = config?.origin ?? null;
-	const link = isIpfsUrl(rawLink) ? ipfsGateway.getSwWeb2Url(rawLink) : rawLink;
+	const link = rawLink.replace(/^ipfs:\/\//, "/ipfs/");
 
 	if (origin === null) {
 		return link;
