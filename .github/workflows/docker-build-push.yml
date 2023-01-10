@@ -2,11 +2,11 @@
 name: Build & Deploy
 
 on:
-  release:
-    types: [published]
   push:
     branches:
       - "main"
+    tags:
+      - "v*"
 
 concurrency:
   group: ${{ github.ref }}
