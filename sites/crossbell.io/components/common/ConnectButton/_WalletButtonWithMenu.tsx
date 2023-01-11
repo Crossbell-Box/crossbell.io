@@ -78,7 +78,7 @@ export default function WalletButtonWithMenu({
 					<div className="flex items-center">
 						<Text className="i-csb:logo text-20px text-[#F6C549]" />
 						<Text className="font-400 text-16px ml-5px text-[#082135]">
-							{isLoadingBalance ? "..." : balance}
+							{isLoadingBalance ? "..." : balance?.formatted}
 						</Text>
 						{account.type === "email" &&
 							(() => {

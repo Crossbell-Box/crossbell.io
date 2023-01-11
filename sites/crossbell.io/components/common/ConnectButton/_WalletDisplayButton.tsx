@@ -105,7 +105,7 @@ const WalletDisplayButton = forwardRef<
 								size="sm"
 								className="leading-1.5rem font-400 text-[#F2F2F2]"
 							>
-								{balance ?? "0.00"}
+								{balance?.formatted ?? "0.00"}
 							</Text>
 						</div>
 					</div>
