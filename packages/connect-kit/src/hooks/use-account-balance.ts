@@ -1,10 +1,11 @@
 import { useBalance } from "wagmi";
 import { BigNumber, utils } from "ethers";
+import React from "react";
 
 import { useAccountState } from "./account-state";
 
 export type UseAccountBalanceResult = {
-	balance: string | null;
+	balance: ReturnType<typeof useBalance>["data"] | null;
 	isLoading: boolean;
 };
 
@@ -15,15 +16,26 @@ export function useAccountBalance(): UseAccountBalanceResult {
 		addressOrName: account?.address,
 	});
 
-	switch (account?.type) {
-		case "email":
-			return {
-				balance: utils.formatUnits(BigNumber.from(account.csb), 18),
-				isLoading: false,
-			};
-		case "wallet":
-			return { balance: balance?.formatted ?? null, isLoading };
-	}
+	return React.useMemo((): UseAccountBalanceResult => {
+		switch (account?.type) {
+			case "email": {
+				const decimals = 18;
+				const value = BigNumber.from(account.csb);
 
-	return { balance: null, isLoading: true };
+				return {
+					balance: {
+						decimals,
+						formatted: utils.formatUnits(value, decimals),
+						symbol: "CSB",
+						value,
+					},
+					isLoading: false,
+				};
+			}
+			case "wallet":
+				return { balance, isLoading };
+		}
+
+		return { balance: null, isLoading: true };
+	}, [account, balance, isLoading]);
 }
