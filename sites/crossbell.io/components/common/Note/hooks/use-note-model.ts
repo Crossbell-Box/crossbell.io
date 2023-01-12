@@ -1,4 +1,3 @@
-import { useAccount } from "wagmi";
 import React from "react";
 
 import {
@@ -49,8 +48,7 @@ export function useNoteModel({ characterId, noteId }: UseNoteActionsConfig) {
 		status,
 	});
 
-	const { address } = useAccount();
-	const mintNote = useMintNote(characterId, noteId, address!);
+	const mintNote = useMintNote();
 
 	const { validate } = useLoginChecker();
 
@@ -74,7 +72,7 @@ export function useNoteModel({ characterId, noteId }: UseNoteActionsConfig) {
 			mintCount: status?.mintCount,
 			mint() {
 				if (!status?.isMinted && validate({ walletRequired: true })) {
-					mintNote.mutate();
+					mintNote.mutate({ characterId, noteId });
 				}
 			},
 		}),
