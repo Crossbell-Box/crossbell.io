@@ -1,5 +1,9 @@
 import { showNotification } from "@mantine/notifications";
-import { useMutation, useQueryClient } from "@tanstack/react-query";
+import {
+	useMutation,
+	UseMutationOptions,
+	useQueryClient,
+} from "@tanstack/react-query";
 import { NoteEntity, NoteMetadata } from "crossbell.js";
 import React from "react";
 
@@ -13,20 +17,27 @@ import { putNote } from "../apis";
 
 import { useAccountState } from "./account-state";
 
-type UpdateFn = (params: {
-	note: NoteEntity;
+type UpdateFnParams = {
+	note: Pick<NoteEntity, "characterId" | "noteId">;
 	metadata: NoteMetadata;
-}) => Promise<unknown>;
+};
+type UpdateFn = (params: UpdateFnParams) => Promise<unknown>;
 
-export function usePostNoteForNote() {
+export type UsePostNoteForNoteOptions = UseMutationOptions<
+	unknown,
+	unknown,
+	UpdateFnParams
+>;
+
+export function usePostNoteForNote(options?: UsePostNoteForNoteOptions) {
 	const account = useAccountState((s) => s.computed.account);
-	const postByContract = usePostByContract();
-	const postByEmail = usePostByEmail();
+	const postByContract = usePostByContract(options ?? null);
+	const postByEmail = usePostByEmail(options ?? null);
 
 	return account?.type === "email" ? postByEmail : postByContract;
 }
 
-function usePostByEmail() {
+function usePostByEmail(options: UsePostNoteForNoteOptions | null) {
 	const account = useAccountState((s) => s.email);
 
 	const updateFn: UpdateFn = React.useCallback(
@@ -45,10 +56,10 @@ function usePostByEmail() {
 		[account]
 	);
 
-	return useBasePostNoteForNote(updateFn);
+	return useBasePostNoteForNote(updateFn, options);
 }
 
-function usePostByContract() {
+function usePostByContract(options: UsePostNoteForNoteOptions | null) {
 	const contract = useContract();
 	const account = useAccountState((s) => s.wallet);
 
@@ -68,17 +79,26 @@ function usePostByContract() {
 		[contract, account]
 	);
 
-	return useBasePostNoteForNote(updateFn);
+	return useBasePostNoteForNote(updateFn, options);
 }
 
-function useBasePostNoteForNote(updateFn: UpdateFn) {
+function useBasePostNoteForNote(
+	updateFn: UpdateFn,
+	options: UsePostNoteForNoteOptions | null
+) {
 	const queryClient = useQueryClient();
 
 	return useMutation(
 		async (params: Parameters<UpdateFn>[0]) => updateFn(params),
 		{
-			onSuccess: (_, { note }) => {
+			...options,
+
+			onSuccess: (...params) => {
+				const { note } = params[1];
+
 				return Promise.all([
+					options?.onSuccess?.(...params),
+
 					queryClient.invalidateQueries(
 						SCOPE_KEY_NOTES_OF_NOTE(note.characterId, note.noteId)
 					),
@@ -87,10 +107,14 @@ function useBasePostNoteForNote(updateFn: UpdateFn) {
 					),
 				]);
 			},
-			onError: (err) => {
+			onError: (...params) => {
+				const err = params[0];
+
+				options?.onError?.(...params);
+
 				showNotification({
 					title: "Error while posting note",
-					message: `${err}`,
+					message: err instanceof Error ? err.message : `${err}`,
 					color: "red",
 				});
 			},
