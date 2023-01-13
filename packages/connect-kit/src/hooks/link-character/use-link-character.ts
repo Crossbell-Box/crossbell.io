@@ -47,7 +47,7 @@ function useLinkByEmail(
 		[account, linkType]
 	);
 
-	return useBaseLinkCharacter(linkType, updateFn, config);
+	return useBaseLinkCharacter(updateFn, config);
 }
 
 function useLinkByContract(
@@ -72,11 +72,10 @@ function useLinkByContract(
 		[account, contract, linkType]
 	);
 
-	return useBaseLinkCharacter(linkType, updateFn, config);
+	return useBaseLinkCharacter(updateFn, config);
 }
 
 function useBaseLinkCharacter(
-	linkType: CharacterLinkType,
 	updateFn: UpdateFn,
 	config: LinkCharacterOptions
 ) {

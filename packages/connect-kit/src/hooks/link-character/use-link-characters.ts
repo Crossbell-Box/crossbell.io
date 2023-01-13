@@ -5,40 +5,44 @@ import React from "react";
 import { useContract } from "@crossbell/contract";
 import { CharacterLinkType } from "@crossbell/indexer";
 
-import { unlinkCharacter } from "../../apis";
+import { linkCharacters } from "../../apis";
 import { useAccountState } from "../account-state";
 
-type UpdateFn = (params: { characterId: number }) => Promise<unknown>;
+type UpdateFn = (params: {
+	characterIds?: number[];
+	addresses?: string[];
+}) => Promise<unknown>;
 
-export type UnlinkCharacterOptions = UseMutationOptions<
+export type LinkCharactersOptions = UseMutationOptions<
 	unknown,
 	unknown,
 	Parameters<UpdateFn>[0]
 >;
 
-export function useUnlinkCharacter(
+export function useLinkCharacters(
 	linkType: CharacterLinkType,
-	options: UnlinkCharacterOptions
+	config: LinkCharactersOptions
 ) {
 	const account = useAccountState((s) => s.computed.account);
-	const unlinkByContract = useUnlinkByContract(linkType, options);
-	const unlinkByEmail = useUnlinkByEmail(linkType, options);
+	const linkByContract = useLinkByContract(linkType, config);
+	const linkByEmail = useLinkByEmail(linkType, config);
 
-	return account?.type === "email" ? unlinkByEmail : unlinkByContract;
+	return account?.type === "email" ? linkByEmail : linkByContract;
 }
 
-function useUnlinkByEmail(
+function useLinkByEmail(
 	linkType: CharacterLinkType,
-	options: UnlinkCharacterOptions
+	config: LinkCharactersOptions
 ) {
 	const account = useAccountState((s) => s.email);
 
 	const updateFn: UpdateFn = React.useCallback(
-		async ({ characterId }) => {
+		async ({ characterIds, addresses }) => {
 			if (account) {
-				return unlinkCharacter({
+				return linkCharacters({
 					token: account.token,
-					toCharacterId: characterId,
+					toCharacterIds: characterIds ?? [],
+					toAddresses: addresses ?? [],
 					linkType,
 				});
 			} else {
@@ -48,22 +52,23 @@ function useUnlinkByEmail(
 		[account, linkType]
 	);
 
-	return useBaseUnlinkNote(updateFn, options);
+	return useBaseLinkCharacter(updateFn, config);
 }
 
-function useUnlinkByContract(
+function useLinkByContract(
 	linkType: CharacterLinkType,
-	options: UnlinkCharacterOptions
+	config: LinkCharactersOptions
 ) {
 	const contract = useContract();
 	const account = useAccountState((s) => s.wallet);
 
 	const updateFn: UpdateFn = React.useCallback(
-		async ({ characterId }) => {
+		async ({ characterIds, addresses }) => {
 			if (account?.characterId) {
-				return contract.unlinkCharacter(
+				return contract.linkCharactersInBatch(
 					account.characterId,
-					characterId,
+					characterIds ?? [],
+					addresses ?? [],
 					linkType
 				);
 			} else {
@@ -73,17 +78,17 @@ function useUnlinkByContract(
 		[account, contract, linkType]
 	);
 
-	return useBaseUnlinkNote(updateFn, options);
+	return useBaseLinkCharacter(updateFn, config);
 }
 
-function useBaseUnlinkNote(
+function useBaseLinkCharacter(
 	updateFn: UpdateFn,
-	options: UnlinkCharacterOptions
+	config: LinkCharactersOptions
 ) {
 	return useMutation((params: Parameters<UpdateFn>[0]) => updateFn(params), {
-		...options,
+		...config,
 		onError: (err, ...others) => {
-			options.onError?.(err, ...others);
+			config.onError?.(err, ...others);
 
 			showNotification({
 				title: "Error while linking character",

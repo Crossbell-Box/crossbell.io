@@ -241,6 +241,26 @@ export async function linkCharacter({
 	);
 }
 
+export async function linkCharacters({
+	token,
+	toCharacterIds,
+	toAddresses,
+	linkType,
+	data,
+}: {
+	token: string;
+	toCharacterIds: number[];
+	toAddresses: string[];
+	linkType: string;
+	data?: string;
+}): Promise<{ transactionHash: string; data: string }> {
+	return request(`/newbie/contract/links/characters`, {
+		method: "PUT",
+		token,
+		body: { data, linkType, toCharacterIds, toAddresses },
+	});
+}
+
 export async function unlinkCharacter({
 	token,
 	toCharacterId,

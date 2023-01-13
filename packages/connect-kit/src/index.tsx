@@ -1,5 +1,6 @@
 import React from "react";
 import { useAccount } from "wagmi";
+import { NotificationsProvider } from "@mantine/notifications";
 
 import { useAccountState } from "./hooks";
 import { UseWeb2UrlContext, GetWeb2Url, usePreloadAllImgs } from "./utils";
@@ -24,11 +25,13 @@ export { useConnectModal, useDisconnectModal, useUpgradeAccountModal };
 export type ConnectKitProviderProps = {
 	children: React.ReactNode;
 	ipfsLinkToHttpLink?: GetWeb2Url;
+	withoutNotificationsProvider?: boolean;
 };
 
 export function ConnectKitProvider({
 	children,
 	ipfsLinkToHttpLink,
+	withoutNotificationsProvider,
 }: ConnectKitProviderProps) {
 	const accountStore = useAccountState();
 	const account = useAccount();
@@ -44,7 +47,7 @@ export function ConnectKitProvider({
 
 	usePreloadAllImgs();
 
-	return (
+	const node = (
 		<UseWeb2UrlContext.Provider value={ipfsLinkToHttpLink ?? null}>
 			<ConnectModal />
 			<DisconnectModal />
@@ -52,5 +55,13 @@ export function ConnectKitProvider({
 			<ClaimCSBModal />
 			{children}
 		</UseWeb2UrlContext.Provider>
+	);
+
+	return withoutNotificationsProvider ? (
+		node
+	) : (
+		<NotificationsProvider position="bottom-center" zIndex={99999}>
+			{node}
+		</NotificationsProvider>
 	);
 }
