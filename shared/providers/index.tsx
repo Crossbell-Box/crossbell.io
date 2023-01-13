@@ -58,7 +58,10 @@ export function MainProvider({ children }: React.PropsWithChildren) {
 										}
 										getCurrentCharacterId={getCurrentCharacterId}
 									>
-										<ConnectKitProvider ipfsLinkToHttpLink={ipfsLinkToHttpLink}>
+										<ConnectKitProvider
+											withoutNotificationsProvider={true}
+											ipfsLinkToHttpLink={ipfsLinkToHttpLink}
+										>
 											{children}
 										</ConnectKitProvider>
 									</InitContractProvider>
