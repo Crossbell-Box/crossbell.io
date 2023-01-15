@@ -12,6 +12,7 @@ import {
 	useAccountBalance,
 	GeneralAccount,
 	useAccountState,
+	useTurnOnOperatorSign,
 } from "@crossbell/connect-kit";
 import { AccountList } from "~/shared/components/account-list";
 import { BellIcon, ExitIcon, ExportIcon, UsersIcon } from "@crossbell/ui";
@@ -52,6 +53,7 @@ export default function WalletButtonWithMenu({
 		]);
 	const showNotificationModal = useShowNotificationModal();
 	const { isAllRead } = useNotifications();
+	const turnOnOperatorSign = useTurnOnOperatorSign();
 
 	return (
 		<Menu
@@ -128,6 +130,12 @@ export default function WalletButtonWithMenu({
 				>
 					Notifications
 				</MenuItem>
+
+				{account.type === "wallet" && (
+					<MenuItem onClick={turnOnOperatorSign} icon={"hmm"}>
+						turnOnOperatorSign
+					</MenuItem>
+				)}
 
 				{account.type === "wallet" && (
 					<MenuItem

@@ -1,8 +1,16 @@
 import { CharacterEntity } from "crossbell.js";
-
+import { Signer } from "ethers";
 import { indexer } from "@crossbell/indexer";
 
+import { isAddressEqual } from "@crossbell/util-ethers";
+
 import { SliceFn } from "../../utils";
+import { siweGetAccount, siweGetBalance, siweSignIn } from "../../apis";
+
+export type SiweInfo = {
+	csb: string;
+	token: string;
+};
 
 export type WalletAccount = {
 	type: "wallet";
@@ -10,6 +18,7 @@ export type WalletAccount = {
 	characterId: number | undefined;
 	handle: string | undefined;
 	address: string;
+	siwe: SiweInfo | undefined;
 };
 
 export type WalletAccountSlice = {
@@ -18,6 +27,9 @@ export type WalletAccountSlice = {
 	connectWallet(address: string | null): Promise<boolean>;
 	refreshWallet(): Promise<boolean>;
 	switchCharacter(character: CharacterEntity): void;
+
+	siweSignIn(signer: Signer): Promise<boolean>;
+	siweRefresh(token: string): Promise<boolean>;
 };
 
 export const createWalletAccountSlice: SliceFn<WalletAccountSlice> = (
@@ -29,14 +41,21 @@ export const createWalletAccountSlice: SliceFn<WalletAccountSlice> = (
 	async connectWallet(address) {
 		if (address) {
 			const { wallet } = get();
-			const character =
+			const [character] = await Promise.all([
 				wallet?.address === address && wallet.characterId
-					? await indexer.getCharacter(wallet.characterId)
-					: await indexer.getPrimaryCharacter(address);
+					? indexer.getCharacter(wallet.characterId)
+					: indexer.getPrimaryCharacter(address),
+				wallet?.address === address && wallet.siwe
+					? get().siweRefresh(wallet.siwe.token)
+					: false,
+			]);
+
+			const siwe = get().wallet?.siwe;
 
 			if (character) {
 				set({
 					wallet: {
+						siwe,
 						address,
 						type: "wallet",
 						handle: character.handle,
@@ -48,6 +67,7 @@ export const createWalletAccountSlice: SliceFn<WalletAccountSlice> = (
 			} else {
 				set({
 					wallet: {
+						siwe,
 						address,
 						type: "wallet",
 						handle: undefined,
@@ -67,7 +87,7 @@ export const createWalletAccountSlice: SliceFn<WalletAccountSlice> = (
 		const { wallet } = get();
 
 		if (wallet?.address) {
-			return this.connectWallet(wallet.address);
+			return get().connectWallet(wallet.address);
 		} else {
 			return false;
 		}
@@ -75,10 +95,12 @@ export const createWalletAccountSlice: SliceFn<WalletAccountSlice> = (
 
 	switchCharacter(character: CharacterEntity) {
 		const address = get().wallet?.address;
+		const siwe = get().wallet?.siwe;
 
 		if (address) {
 			set({
 				wallet: {
+					siwe,
 					address,
 					type: "wallet",
 					handle: character.handle,
@@ -90,4 +112,56 @@ export const createWalletAccountSlice: SliceFn<WalletAccountSlice> = (
 
 		return true;
 	},
+
+	async siweSignIn(signer) {
+		const address = get().wallet?.address;
+
+		if (address) {
+			const { token } = await siweSignIn(signer);
+
+			if (token) {
+				return get().siweRefresh(token);
+			} else {
+				return false;
+			}
+		} else {
+			return false;
+		}
+	},
+
+	async siweRefresh(token) {
+		const wallet = get().wallet;
+
+		if (!wallet || !token) return false;
+
+		const siwe = await getSiweInfo({
+			token,
+			address: wallet.address,
+		});
+
+		set({ wallet: { ...wallet, siwe } });
+
+		return !!siwe;
+	},
 });
+
+async function getSiweInfo({
+	address,
+	token,
+}: {
+	address: string;
+	token: string;
+}): Promise<WalletAccount["siwe"]> {
+	if (!token) return undefined;
+
+	const [account, { balance: csb }] = await Promise.all([
+		siweGetAccount(token),
+		siweGetBalance(token),
+	]);
+
+	if (csb && isAddressEqual(account.address, address)) {
+		return { token, csb };
+	} else {
+		return undefined;
+	}
+}

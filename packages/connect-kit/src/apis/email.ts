@@ -5,26 +5,7 @@ import {
 	LinkItemNote,
 } from "crossbell.js";
 
-import { indexer } from "@crossbell/indexer";
-
-type RequestConfig = {
-	method: string;
-	body?: Record<string, unknown>;
-	token?: string;
-};
-const request = (url: `/${string}`, { body, method, token }: RequestConfig) => {
-	const headers = new Headers({ "Content-Type": "application/json" });
-
-	if (token) {
-		headers.set("Authorization", `Bearer ${token}`);
-	}
-
-	return fetch(indexer.endpoint + url, {
-		method,
-		headers,
-		body: body && JSON.stringify(body),
-	}).then(async (res) => res.json());
-};
+import { request } from "./utils";
 
 export async function registerSendCodeToEmail(
 	email: string
