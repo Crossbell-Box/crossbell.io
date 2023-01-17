@@ -27,10 +27,19 @@
 		},
 		"./package.json": "./package.json"
 	},
+	"dependencies": {
+		"@emotion/react": "^11",
+		"@mantine/core": "^5",
+		"@mantine/modals": "^5",
+		"@mantine/hooks": "^5",
+		"classnames": "^2",
+		"react-intersection-observer": "^9"
+	},
 	"peerDependencies": {
 		"@crossbell/connect-kit": "workspace:*",
 		"@crossbell/util-metadata": "workspace:*",
 		"@crossbell/util-hooks": "workspace:*",
+		"@crossbell/util-ipfs": "workspace:*",
 		"@crossbell/indexer": "workspace:*",
 		"@crossbell/ui": "workspace:*",
 		"react": "18.x.x",

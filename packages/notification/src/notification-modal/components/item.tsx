@@ -1,18 +1,16 @@
 import React from "react";
 import dayjs from "dayjs";
-import relativeTime from "dayjs/plugin/relativeTime";
-import { Indicator } from "@mantine/core";
+// https://github.com/iamkun/dayjs/issues/1167
+import relativeTime from "dayjs/plugin/relativeTime.js";
+import { Indicator, Avatar } from "@mantine/core";
 
 import { ParsedNotification } from "@crossbell/indexer";
 import { CrossbellChainLogo } from "@crossbell/ui";
 import { extractCharacterName } from "@crossbell/util-metadata";
 
-import { Avatar } from "~/shared/components/avatar";
-import {
-	composeCharacterHref,
-	composeNoteHref,
-	composeScanTxHref,
-} from "~/shared/url";
+import { useCharacterAvatar } from "~/shared/components/avatar/use-character-avatar";
+import { composeCharacterHref, composeNoteHref } from "~/shared/url/href";
+import { composeScanTxHref } from "~/shared/url/href-external";
 
 import styles from "./item.module.css";
 
@@ -24,10 +22,12 @@ export type ItemProps = {
 };
 
 export function Item({ notification, isRead }: ItemProps) {
-	if (!notification) return null;
-
 	const character = notification.fromCharacter;
 	const titleInfo = getTitleInfo(notification);
+
+	const avatar = useCharacterAvatar(character);
+
+	if (!notification) return null;
 
 	return (
 		<div className={styles.container}>
@@ -37,7 +37,7 @@ export function Item({ notification, isRead }: ItemProps) {
 				rel="noreferrer"
 			>
 				<Indicator size={9} disabled={isRead} color="red" offset={4.5}>
-					<Avatar character={character} />
+					<Avatar radius="xl" src={avatar.src} />
 				</Indicator>
 			</a>
 			<div className={styles.main}>

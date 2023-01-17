@@ -253,6 +253,19 @@ importers:
       '@crossbell/ui': workspace:*
       '@crossbell/util-hooks': workspace:*
       '@crossbell/util-metadata': workspace:*
+      '@emotion/react': ^11
+      '@mantine/core': ^5
+      '@mantine/hooks': ^5
+      '@mantine/modals': ^5
+      classnames: ^2
+      react-intersection-observer: ^9
+    dependencies:
+      '@emotion/react': 11.10.5
+      '@mantine/core': 5.6.3_q6cspdo5br6t73sdlwkgn5i3um
+      '@mantine/hooks': 5.6.3
+      '@mantine/modals': 5.6.3_uiajga6tgfzhy7kh75ldxu4dgq
+      classnames: 2.3.2
+      react-intersection-observer: 9.4.0
     devDependencies:
       '@crossbell/connect-kit': link:../connect-kit
       '@crossbell/indexer': link:../indexer
@@ -1504,6 +1517,19 @@ packages:
       '@mantine/utils': 5.6.3_react@18.2.0
       react: 18.2.0
       react-dom: 18.2.0_react@18.2.0
+    dev: false
+
+  /@mantine/modals/5.6.3_uiajga6tgfzhy7kh75ldxu4dgq:
+    resolution: {integrity: sha512-eiS3nuDzltkHBryNL5XYyPXKUOo4kB2K5hhR/yHbzoWshM8nqDS+VpNaf6iABMzK/Bb+6OnjrQCSoMjN2rP//Q==}
+    peerDependencies:
+      '@mantine/core': 5.6.3
+      '@mantine/hooks': 5.6.3
+      react: '>=16.8.0'
+      react-dom: '>=16.8.0'
+    dependencies:
+      '@mantine/core': 5.6.3_q6cspdo5br6t73sdlwkgn5i3um
+      '@mantine/hooks': 5.6.3
+      '@mantine/utils': 5.6.3
     dev: false
 
   /@mantine/next/5.6.3_ae6fqzw2xsl3x7be62hhoqcim4:
@@ -8881,6 +8907,12 @@ packages:
 
   /react-fast-compare/3.2.0:
     resolution: {integrity: sha512-rtGImPZ0YyLrscKI9xTpV8psd6I8VAtjKCzQDlzyDvqJA8XOW78TXYQwNRNd8g8JZnDu8q9Fu/1v4HPAVwVdHA==}
+    dev: false
+
+  /react-intersection-observer/9.4.0:
+    resolution: {integrity: sha512-v0403CmomOVlzhqFXlzOxg0ziLcVq8mfbP0AwAcEQWgZmR2OulOT79Ikznw4UlB3N+jlUYqLMe4SDHUOyp0t2A==}
+    peerDependencies:
+      react: ^15.0.0 || ^16.0.0 || ^17.0.0|| ^18.0.0
     dev: false
 
   /react-intersection-observer/9.4.0_react@18.2.0:
