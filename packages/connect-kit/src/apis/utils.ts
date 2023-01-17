@@ -20,5 +20,13 @@ export function request<T = any>(
 		method,
 		headers,
 		body: body && JSON.stringify(body),
-	}).then(async (res) => res.json());
+	}).then(async (res) => {
+		const result = await res.json();
+
+		if (!res.ok) {
+			throw new Error(result.message);
+		}
+
+		return result;
+	});
 }
