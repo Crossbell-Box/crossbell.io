@@ -15,6 +15,5 @@ export * from "./use-mint-note";
 export * from "./use-post-note-for-note";
 export * from "./use-set-primary-character";
 export * from "./use-toggle-like-note";
-export * from "./use-turn-on-operator-sign";
 export * from "./use-update-character-handle";
 export * from "./use-update-character-metadata";

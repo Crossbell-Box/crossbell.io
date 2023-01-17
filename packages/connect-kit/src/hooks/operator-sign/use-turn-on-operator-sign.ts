@@ -1,7 +1,7 @@
 import { useSigner } from "wagmi";
 import { useRefCallback } from "@crossbell/util-hooks";
 
-import { useAccountState } from "./account-state";
+import { useAccountState } from "../account-state";
 
 export function useTurnOnOperatorSign() {
 	const siweSignIn = useAccountState((s) => s.siweSignIn);
