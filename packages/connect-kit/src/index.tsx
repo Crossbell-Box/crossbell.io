@@ -49,7 +49,7 @@ export function ConnectKitProvider({
 	}, [account.address]);
 
 	React.useEffect(() => {
-		accountStore.refresh();
+		accountStore.refreshEmail();
 		accountStore.markSSRReady();
 	}, []);
 
