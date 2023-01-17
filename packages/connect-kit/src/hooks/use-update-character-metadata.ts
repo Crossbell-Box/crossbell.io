@@ -1,6 +1,5 @@
 import { produce, Draft } from "immer";
 import { CharacterMetadata } from "crossbell.js";
-import { showNotification } from "@mantine/notifications";
 import {
 	useMutation,
 	UseMutationOptions,
@@ -9,8 +8,9 @@ import {
 import { useContract } from "@crossbell/contract";
 import { SCOPE_KEY_CHARACTER } from "@crossbell/indexer";
 
-import { updateCharactersMetadata } from "../apis";
+import { siweUpdateMetadata, updateCharactersMetadata } from "../apis";
 import { useAccountState } from "./account-state";
+import { useHandleError } from "./use-handle-error";
 
 type UpdateFn = (draft: Draft<CharacterMetadata>) => void;
 
@@ -26,6 +26,7 @@ export function useUpdateCharacterMetadata(
 	const contract = useContract();
 	const queryClient = useQueryClient();
 	const characterId = useAccountState((s) => s.computed.account?.characterId);
+	const handleError = useHandleError("Error while setting character metadata");
 
 	return useMutation(
 		async (update: UpdateFn) => {
@@ -49,12 +50,20 @@ export function useUpdateCharacterMetadata(
 					});
 					return;
 				case "wallet":
-					await contract.setCharacterMetadata(
-						account.character.characterId,
-						// crossbell.js will try to modify the object internally,
-						// here the immutable object is converted to mutable object to avoid errors.
-						JSON.parse(JSON.stringify(newMetadata))
-					);
+					if (account.siwe) {
+						await siweUpdateMetadata({
+							token: account.siwe.token,
+							characterId: account.character.characterId,
+							metadata: newMetadata,
+						});
+					} else {
+						await contract.setCharacterMetadata(
+							account.character.characterId,
+							// crossbell.js will try to modify the object internally,
+							// here the immutable object is converted to mutable object to avoid errors.
+							JSON.parse(JSON.stringify(newMetadata))
+						);
+					}
 					return;
 			}
 		},
@@ -70,15 +79,8 @@ export function useUpdateCharacterMetadata(
 			},
 
 			onError: (...params) => {
-				const err = params[0];
-
 				options?.onError?.(...params);
-
-				showNotification({
-					title: "Error while setting character metadata",
-					message: err instanceof Error ? err.message : `${err}`,
-					color: "red",
-				});
+				handleError(params[0]);
 			},
 		}
 	);
