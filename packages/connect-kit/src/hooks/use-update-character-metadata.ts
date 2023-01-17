@@ -1,82 +1,82 @@
-import { useMutation, useQueryClient } from "@tanstack/react-query";
-import { showNotification } from "@mantine/notifications";
+import { produce, Draft } from "immer";
 import { CharacterMetadata } from "crossbell.js";
-import React from "react";
-
+import { showNotification } from "@mantine/notifications";
+import {
+	useMutation,
+	UseMutationOptions,
+	useQueryClient,
+} from "@tanstack/react-query";
 import { useContract } from "@crossbell/contract";
-import { deepMerge } from "@crossbell/util-metadata";
 import { SCOPE_KEY_CHARACTER } from "@crossbell/indexer";
 
-import { updateMetadata } from "../apis";
-
+import { updateCharactersMetadata } from "../apis";
 import { useAccountState } from "./account-state";
 
-type UpdateFn = (params: {
-	characterId: number;
-	metadata: CharacterMetadata;
-}) => Promise<unknown>;
+type UpdateFn = (draft: Draft<CharacterMetadata>) => void;
 
-export function useUpdateCharacterMetadata() {
-	const account = useAccountState((s) => s.computed.account);
-	const updateByContract = useUpdateByContract();
-	const updateByEmail = useUpdateByEmail();
+export type UseUpdateCharacterMetadataOptions = UseMutationOptions<
+	unknown,
+	unknown,
+	UpdateFn
+>;
 
-	return account?.type === "email" ? updateByEmail : updateByContract;
-}
-
-function useUpdateByEmail() {
-	const account = useAccountState((s) => s.email);
-	const refreshEmail = useAccountState((s) => s.refreshEmail.bind(s));
-	const updateFn: UpdateFn = React.useCallback(
-		async ({ characterId, metadata }) => {
-			if (account?.characterId === characterId) {
-				return updateMetadata(account?.token, metadata);
-			} else {
-				return false;
-			}
-		},
-		[account]
-	);
-
-	return useUpdateMetadata(updateFn, refreshEmail);
-}
-
-function useUpdateByContract() {
-	const contract = useContract();
-	const updateFn: UpdateFn = React.useCallback(
-		({ characterId, metadata }) =>
-			contract.changeCharacterMetadata(characterId, (oMetadata) => {
-				if (oMetadata) {
-					return deepMerge(oMetadata, metadata);
-				} else {
-					return metadata;
-				}
-			}),
-		[contract]
-	);
-
-	return useUpdateMetadata(updateFn);
-}
-
-function useUpdateMetadata(
-	updateFn: UpdateFn,
-	onSuccess?: () => Promise<unknown>
+export function useUpdateCharacterMetadata(
+	options?: UseUpdateCharacterMetadataOptions
 ) {
+	const contract = useContract();
 	const queryClient = useQueryClient();
+	const characterId = useAccountState((s) => s.computed.account?.characterId);
 
 	return useMutation(
-		async (params: Parameters<UpdateFn>[0]) => updateFn(params),
+		async (update: UpdateFn) => {
+			// Make sure character metadata is up-to-date.
+			await useAccountState.getState().refresh();
+			const account = useAccountState.getState().computed.account;
+
+			if (!account?.character) return;
+
+			const oldMetadata = account.character.metadata?.content ?? {};
+			const newMetadata = produce(oldMetadata, update);
+
+			// Skips redundant requests and just return success status directly.
+			if (oldMetadata === newMetadata) return;
+
+			switch (account.type) {
+				case "email":
+					await updateCharactersMetadata({
+						token: account.token,
+						metadata: newMetadata,
+					});
+					return;
+				case "wallet":
+					await contract.setCharacterMetadata(
+						account.character.characterId,
+						// crossbell.js will try to modify the object internally,
+						// here the immutable object is converted to mutable object to avoid errors.
+						JSON.parse(JSON.stringify(newMetadata))
+					);
+					return;
+			}
+		},
 		{
-			onSuccess(_, { characterId }) {
+			...options,
+
+			onSuccess(...params) {
 				return Promise.all([
+					options?.onSuccess?.(...params),
+					useAccountState.getState().refresh(),
 					queryClient.invalidateQueries(SCOPE_KEY_CHARACTER(characterId)),
-					onSuccess?.(),
 				]);
 			},
-			onError(err) {
+
+			onError: (...params) => {
+				const err = params[0];
+
+				options?.onError?.(...params);
+
 				showNotification({
 					title: "Error while setting character metadata",
-					message: `${err}`,
+					message: err instanceof Error ? err.message : `${err}`,
 					color: "red",
 				});
 			},

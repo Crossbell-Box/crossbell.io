@@ -158,17 +158,6 @@ export async function updateHandle(
 	});
 }
 
-export async function updateMetadata(
-	token: string,
-	metadata: CharacterMetadata
-): Promise<{ transactionHash: string; data: string }> {
-	return request("/newbie/contract/characters/me/metadata", {
-		method: "POST",
-		token,
-		body: { metadata },
-	});
-}
-
 export async function linkNote({
 	token,
 	toNoteId,

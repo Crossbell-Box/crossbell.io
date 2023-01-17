@@ -1,7 +1,7 @@
 import { showNotification } from "@mantine/notifications";
 import { useMutation, useQuery, useQueryClient } from "@tanstack/react-query";
 
-import { useChangeCharacterMetadata } from "../use-change-character-metadata";
+import { useUpdateCharacterMetadata } from "../use-update-character-metadata";
 
 import OperatorSyncApi from "./api";
 import { SupportedPlatform } from "./consts";
@@ -89,13 +89,13 @@ export function useBindAccount({
 	startTime,
 }: UseBindAccountParams) {
 	const client = useQueryClient();
-	const changeCharacterMetadata = useChangeCharacterMetadata();
+	const changeCharacterMetadata = useUpdateCharacterMetadata();
 
 	return useMutation(
 		async () => {
 			if (!characterId) return;
 
-			await changeCharacterMetadata((draft) => {
+			await changeCharacterMetadata.mutateAsync((draft) => {
 				const accountURI = csbAccountURI(identity, platform);
 
 				if (!draft.connected_accounts?.includes(accountURI)) {
@@ -130,7 +130,7 @@ export function useBindAccount({
 
 export function useUnbindAccount(characterId?: number) {
 	const client = useQueryClient();
-	const changeCharacterMetadata = useChangeCharacterMetadata();
+	const changeCharacterMetadata = useUpdateCharacterMetadata();
 
 	return useMutation(
 		async ({
@@ -142,7 +142,7 @@ export function useUnbindAccount(characterId?: number) {
 		}) => {
 			if (!characterId) return;
 
-			await changeCharacterMetadata((draft) => {
+			await changeCharacterMetadata.mutateAsync((draft) => {
 				const accountURI = csbAccountURI(identity, platform);
 				const index = draft.connected_accounts?.indexOf(accountURI) ?? -1;
 

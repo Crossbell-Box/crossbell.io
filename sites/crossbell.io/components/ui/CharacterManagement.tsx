@@ -201,13 +201,11 @@ export default function CharacterManagement({
 				) {
 					taskNames.push("Updating metadata");
 					tasks.push(async () => {
-						await setMetadata.mutateAsync({
-							characterId: character.characterId,
-							metadata: {
-								name: form.values.name,
-								avatars: [form.values.avatar].filter((x) => Boolean(x)),
-								bio: form.values.bio,
-							},
+						await setMetadata.mutateAsync((metadata) => {
+							metadata.type = metadata.type ?? "character";
+							metadata.name = form.values.name;
+							metadata.avatars = [form.values.avatar].filter(Boolean);
+							metadata.bio = form.values.bio;
 						});
 					});
 				}
