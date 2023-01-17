@@ -13,7 +13,7 @@ import {
 	SCOPE_KEY_NOTE_STATUS,
 } from "@crossbell/indexer";
 
-import { putNote } from "../apis";
+import { putNote, siwePutNote } from "../apis";
 
 import { useAccountState } from "./account-state";
 
@@ -65,13 +65,23 @@ function usePostByContract(options: UsePostNoteForNoteOptions | null) {
 
 	const updateFn: UpdateFn = React.useCallback(
 		async ({ metadata, note }) => {
-			if (typeof account?.characterId === "number") {
-				return contract.postNoteForNote(
-					account.characterId,
-					metadata,
-					note.characterId,
-					note.noteId
-				);
+			if (account?.characterId) {
+				if (account.siwe) {
+					return siwePutNote({
+						characterId: account.characterId,
+						token: account.siwe.token,
+						metadata,
+						linkItemType: "Note",
+						linkItem: { characterId: note.characterId, noteId: note.noteId },
+					});
+				} else {
+					return contract.postNoteForNote(
+						account.characterId,
+						metadata,
+						note.characterId,
+						note.noteId
+					);
+				}
 			} else {
 				return null;
 			}
