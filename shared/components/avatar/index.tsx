@@ -1,13 +1,11 @@
 import React from "react";
-import { useCharacter } from "@crossbell/indexer";
-import { ipfsLinkToHttpLink } from "@crossbell/util-ipfs";
-import { extractCharacterAvatar } from "@crossbell/util-metadata";
 import { Avatar as Avatar_, AvatarProps } from "@mantine/core";
 import { CharacterEntity } from "crossbell.js";
 import { PropsWithChildren } from "react";
 
 import CharacterHoverCard from "~/shared/components/character/character-hover-card";
-import { getDefaultAvatar } from "~/shared/avatar";
+
+import { useCharacterAvatar } from "./use-character-avatar";
 
 export function Avatar({
 	characterId,
@@ -30,29 +28,17 @@ export function Avatar({
 		showHoverCard?: boolean;
 	} & AvatarProps
 >) {
-	const { isLoading, data: character } = useCharacter(
-		characterId ?? initialCharacter?.characterId,
-		{
-			enabled: Boolean(characterId) && !src,
-			initialData: initialCharacter,
-		}
-	);
-
-	let src_ =
-		src ??
-		extractCharacterAvatar(character) ??
-		(isLoading
-			? getDefaultAvatar()
-			: extractCharacterAvatar(character) ??
-			  getDefaultAvatar(character?.handle));
-
-	src_ = ipfsLinkToHttpLink(src_);
+	const { src: avatarSrc, character } = useCharacterAvatar({
+		character: initialCharacter,
+		characterId,
+		disabled: !!src,
+	});
 
 	return (
 		<CharacterHoverCard character={character} showHoverCard={showHoverCard}>
 			<Avatar_
 				className="bg-coolgray-100"
-				src={src_}
+				src={src ?? avatarSrc}
 				alt={alt}
 				radius="xl"
 				{...props}
