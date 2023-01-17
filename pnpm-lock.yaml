@@ -252,6 +252,7 @@ importers:
       '@crossbell/indexer': workspace:*
       '@crossbell/ui': workspace:*
       '@crossbell/util-hooks': workspace:*
+      '@crossbell/util-ipfs': workspace:*
       '@crossbell/util-metadata': workspace:*
       '@emotion/react': ^11
       '@mantine/core': ^5
@@ -271,6 +272,7 @@ importers:
       '@crossbell/indexer': link:../indexer
       '@crossbell/ui': link:../ui
       '@crossbell/util-hooks': link:../util-hooks
+      '@crossbell/util-ipfs': link:../util-ipfs
       '@crossbell/util-metadata': link:../util-metadata
 
   packages/ui:
