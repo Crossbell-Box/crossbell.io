@@ -3,13 +3,13 @@ import {
 	UseMutationOptions,
 	useQueryClient,
 } from "@tanstack/react-query";
-import { showNotification } from "@mantine/notifications";
 import React from "react";
 
 import { useContract } from "@crossbell/contract";
 import { NoteLinkType, SCOPE_KEY_NOTE_STATUS } from "@crossbell/indexer";
 
-import { unlinkNote } from "../../apis";
+import { unlinkNote, siweUnlinkNote } from "../../apis";
+import { useHandleError } from "../use-handle-error";
 import { useAccountState } from "../account-state";
 
 type UpdateFnParams = { characterId: number; noteId: number };
@@ -67,12 +67,22 @@ function useUnlinkByContract(
 	const updateFn: UpdateFn = React.useCallback(
 		async ({ characterId, noteId }) => {
 			if (account?.characterId) {
-				return contract.unlinkNote(
-					account.characterId,
-					characterId,
-					noteId,
-					linkType
-				);
+				if (account.siwe) {
+					return siweUnlinkNote({
+						token: account.siwe.token,
+						characterId: account.characterId,
+						toCharacterId: characterId,
+						toNoteId: noteId,
+						linkType: linkType,
+					});
+				} else {
+					return contract.unlinkNote(
+						account.characterId,
+						characterId,
+						noteId,
+						linkType
+					);
+				}
 			} else {
 				return false;
 			}
@@ -88,6 +98,7 @@ function useBaseUnlinkNote(
 	options: UseUnlinkNoteOptions | null
 ) {
 	const queryClient = useQueryClient();
+	const handleError = useHandleError("Error while unlinking note");
 
 	return useMutation((params: Parameters<UpdateFn>[0]) => updateFn(params), {
 		...options,
@@ -104,15 +115,8 @@ function useBaseUnlinkNote(
 			]);
 		},
 		onError: (...params) => {
-			const err = params[0];
-
 			options?.onError?.(...params);
-
-			showNotification({
-				title: "Error while unlinking note",
-				message: err instanceof Error ? err.message : `${err}`,
-				color: "red",
-			});
+			handleError(params[0]);
 		},
 	});
 }
