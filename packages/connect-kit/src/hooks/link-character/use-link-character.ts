@@ -1,12 +1,13 @@
 import { useMutation, UseMutationOptions } from "@tanstack/react-query";
-import { showNotification } from "@mantine/notifications";
 import React from "react";
 
 import { useContract } from "@crossbell/contract";
 import { CharacterLinkType } from "@crossbell/indexer";
 
-import { linkCharacter } from "../../apis";
+import { linkCharacter, siweLinkCharacter } from "../../apis";
 import { useAccountState } from "../account-state";
+import { useHandleError } from "../use-handle-error";
+
 type UpdateFn = (params: { characterId: number }) => Promise<unknown>;
 
 export type LinkCharacterOptions = UseMutationOptions<
@@ -60,11 +61,20 @@ function useLinkByContract(
 	const updateFn: UpdateFn = React.useCallback(
 		async ({ characterId }) => {
 			if (account?.characterId) {
-				return contract.linkCharacter(
-					account.characterId,
-					characterId,
-					linkType
-				);
+				if (account.siwe) {
+					return siweLinkCharacter({
+						characterId: account.characterId,
+						token: account.siwe.token,
+						toCharacterId: characterId,
+						linkType,
+					});
+				} else {
+					return contract.linkCharacter(
+						account.characterId,
+						characterId,
+						linkType
+					);
+				}
 			} else {
 				return false;
 			}
@@ -79,16 +89,13 @@ function useBaseLinkCharacter(
 	updateFn: UpdateFn,
 	config: LinkCharacterOptions
 ) {
+	const handleError = useHandleError("Error while linking character");
+
 	return useMutation((params: Parameters<UpdateFn>[0]) => updateFn(params), {
 		...config,
-		onError: (err, ...others) => {
-			config.onError?.(err, ...others);
-
-			showNotification({
-				title: "Error while linking character",
-				message: `${err}`,
-				color: "red",
-			});
+		onError: (...params) => {
+			config.onError?.(...params);
+			handleError(params[0]);
 		},
 	});
 }

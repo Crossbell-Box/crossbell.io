@@ -5,7 +5,7 @@ import React from "react";
 import { useContract } from "@crossbell/contract";
 import { CharacterLinkType } from "@crossbell/indexer";
 
-import { unlinkCharacter } from "../../apis";
+import { unlinkCharacter, siweUnlinkCharacter } from "../../apis";
 import { useAccountState } from "../account-state";
 
 type UpdateFn = (params: { characterId: number }) => Promise<unknown>;
@@ -61,11 +61,20 @@ function useUnlinkByContract(
 	const updateFn: UpdateFn = React.useCallback(
 		async ({ characterId }) => {
 			if (account?.characterId) {
-				return contract.unlinkCharacter(
-					account.characterId,
-					characterId,
-					linkType
-				);
+				if (account.siwe) {
+					return siweUnlinkCharacter({
+						characterId: account.characterId,
+						token: account.siwe.token,
+						toCharacterId: characterId,
+						linkType,
+					});
+				} else {
+					return contract.unlinkCharacter(
+						account.characterId,
+						characterId,
+						linkType
+					);
+				}
 			} else {
 				return false;
 			}
