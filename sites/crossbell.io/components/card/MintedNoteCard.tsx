@@ -16,7 +16,10 @@ const MintedNoteCard = ({ note }: { note: NoteEntity }) => {
 	const noteId = composeNoteId(note.characterId, note.noteId);
 
 	const noteText = extractPlainTextFromNote(note.metadata?.content);
-	const noteImage = extractCoverImageFromNote(note.metadata?.content);
+	const noteImage = extractCoverImageFromNote(
+		ipfsLinkToHttpLink,
+		note.metadata?.content
+	);
 
 	// get character
 	const { data: character } = useCharacter(note.characterId);

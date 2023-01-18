@@ -31,12 +31,10 @@
 		"@fastify/deepmerge": "1.1.0"
 	},
 	"peerDependencies": {
-		"@crossbell/util-ipfs": "workspace:*",
 		"@crossbell/util-ethers": "workspace:*",
 		"crossbell.js": "0.16.x"
 	},
 	"devDependencies": {
-		"@crossbell/util-ipfs": "workspace:*",
 		"@crossbell/util-ethers": "workspace:*"
 	}
 }

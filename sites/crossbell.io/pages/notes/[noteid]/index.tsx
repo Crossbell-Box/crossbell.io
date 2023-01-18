@@ -41,6 +41,7 @@ const SEO = ({
 }) => {
 	const origin = getOrigin();
 	const images = getValidAttachments(note?.metadata?.content?.attachments, {
+		ipfsLinkToHttpLink,
 		allowedMediaTypes: ["image"],
 		allowedContentTypes: ["address"],
 	});

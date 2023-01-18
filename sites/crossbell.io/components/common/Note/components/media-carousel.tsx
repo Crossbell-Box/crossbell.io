@@ -26,6 +26,7 @@ export default function MediaCarousel({
 	const [overlayOpened, setOverlayOpened] = useState(false);
 
 	const validAttachments = getValidAttachments(attachments, {
+		ipfsLinkToHttpLink,
 		allowedContentTypes: ["address"],
 		allowedMediaTypes: ["image", "video"],
 	});
