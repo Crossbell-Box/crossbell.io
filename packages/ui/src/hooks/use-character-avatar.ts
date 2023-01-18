@@ -4,7 +4,7 @@ import { useCharacter } from "@crossbell/indexer";
 import { extractCharacterAvatar } from "@crossbell/util-metadata";
 
 import { getDefaultAvatarIpfsUrl } from "../utils";
-import { useWeb2Url } from "@crossbell/ui";
+import { useWeb2Url } from "../ipfs";
 
 export type UseCharacterAvatarParams = {
 	characterId?: number | null;

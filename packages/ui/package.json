@@ -33,7 +33,12 @@
 		"facepaint": "^1.2.1"
 	},
 	"peerDependencies": {
-		"react": "18.x.x"
+		"@crossbell/indexer": "workspace:*",
+		"@crossbell/util-hooks": "workspace:*",
+		"@crossbell/util-metadata": "workspace:*",
+		"@tanstack/react-query": "*",
+		"react": "18.x.x",
+		"crossbell.js": "^0.16"
 	},
 	"devDependencies": {
 		"@svgr/cli": "6.5.1",
