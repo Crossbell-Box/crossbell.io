@@ -1,8 +1,6 @@
 import React from "react";
 
-type IpfsUrl = `ipfs://${string}`;
-
-export type GetWeb2Url = (ipfs: IpfsUrl) => string;
+export type GetWeb2Url = (ipfs: string) => string;
 
 export const UseWeb2UrlContext = React.createContext<GetWeb2Url | null>(null);
 
@@ -14,12 +12,12 @@ export function useGetWeb2Url() {
 	return React.useContext(UseWeb2UrlContext) ?? defaultFn;
 }
 
-export const useWeb2Url = (ipfs: IpfsUrl) => {
+export const useWeb2Url = (ipfs: string) => {
 	const getWeb2Url = useGetWeb2Url();
 	return React.useMemo(() => getWeb2Url(ipfs), [getWeb2Url, ipfs]);
 };
 
-export function useWeb2Urls(ipfsList: IpfsUrl[]): string[] {
+export function useWeb2Urls(ipfsList: string[]): string[] {
 	const getWeb2Url = useGetWeb2Url();
 
 	return React.useMemo(

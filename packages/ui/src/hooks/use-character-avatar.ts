@@ -1,10 +1,10 @@
+import React from "react";
+import { CharacterEntity } from "crossbell.js";
 import { useCharacter } from "@crossbell/indexer";
 import { extractCharacterAvatar } from "@crossbell/util-metadata";
-import { ipfsLinkToHttpLink } from "@crossbell/util-ipfs";
-import { CharacterEntity } from "crossbell.js";
 
-import { getDefaultAvatar } from "~/shared/avatar";
-import React from "react";
+import { getDefaultAvatarIpfsUrl } from "../utils";
+import { useWeb2Url } from "@crossbell/ui";
 
 export type UseCharacterAvatarParams = {
 	characterId?: number | null;
@@ -25,16 +25,17 @@ export function useCharacterAvatar({
 		}
 	);
 
-	return React.useMemo(
-		() => ({
-			src: ipfsLinkToHttpLink(
-				extractCharacterAvatar(data) ??
-					(isLoading
-						? getDefaultAvatar()
-						: extractCharacterAvatar(data) ?? getDefaultAvatar(data?.handle))
-			),
-			character: data,
-		}),
+	const rawSrc = React.useMemo(
+		() =>
+			extractCharacterAvatar(data) ??
+			(isLoading
+				? getDefaultAvatarIpfsUrl()
+				: extractCharacterAvatar(data) ??
+				  getDefaultAvatarIpfsUrl(data?.handle)),
 		[data, isLoading]
 	);
+
+	const src = useWeb2Url(rawSrc);
+
+	return React.useMemo(() => ({ src, character: data }), [src, data]);
 }

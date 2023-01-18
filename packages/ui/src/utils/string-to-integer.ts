@@ -1,5 +1,3 @@
-// some helper functions
-
 /**
  * Converts a string to an integer (as a seeded random number).
  */
