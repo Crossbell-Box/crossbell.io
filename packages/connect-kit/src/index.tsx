@@ -1,7 +1,12 @@
 import React from "react";
 import { useAccount } from "wagmi";
 import { NotificationsProvider } from "@mantine/notifications";
-import { UseWeb2UrlContext, GetWeb2Url } from "@crossbell/ui";
+import {
+	UseWeb2UrlContext,
+	GetWeb2Url,
+	UrlComposerContext,
+	UrlComposer,
+} from "@crossbell/ui";
 
 import { usePreloadAllImgs } from "./utils";
 import { useAccountState } from "./hooks";
@@ -27,12 +32,14 @@ export type ConnectKitProviderProps = {
 	children: React.ReactNode;
 	ipfsLinkToHttpLink?: GetWeb2Url;
 	withoutNotificationsProvider?: boolean;
+	urlComposer?: Partial<UrlComposer>;
 };
 
 export function ConnectKitProvider({
 	children,
 	ipfsLinkToHttpLink,
 	withoutNotificationsProvider,
+	urlComposer,
 }: ConnectKitProviderProps) {
 	const accountStore = useAccountState();
 	const account = useAccount();
@@ -50,11 +57,13 @@ export function ConnectKitProvider({
 
 	const node = (
 		<UseWeb2UrlContext.Provider value={ipfsLinkToHttpLink ?? null}>
-			<ConnectModal />
-			<DisconnectModal />
-			<UpgradeAccountModal />
-			<ClaimCSBModal />
-			{children}
+			<UrlComposerContext.Provider value={urlComposer ?? null}>
+				<ConnectModal />
+				<DisconnectModal />
+				<UpgradeAccountModal />
+				<ClaimCSBModal />
+				{children}
+			</UrlComposerContext.Provider>
 		</UseWeb2UrlContext.Provider>
 	);
 

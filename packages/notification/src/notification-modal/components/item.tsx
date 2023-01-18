@@ -5,11 +5,13 @@ import relativeTime from "dayjs/plugin/relativeTime.js";
 import { Indicator, Avatar } from "@mantine/core";
 
 import { ParsedNotification } from "@crossbell/indexer";
-import { CrossbellChainLogo, useCharacterAvatar } from "@crossbell/ui";
+import {
+	CrossbellChainLogo,
+	useCharacterAvatar,
+	useUrlComposer,
+	UrlComposer,
+} from "@crossbell/ui";
 import { extractCharacterName } from "@crossbell/util-metadata";
-
-import { composeCharacterHref, composeNoteHref } from "~/shared/url/href";
-import { composeScanTxHref } from "~/shared/url/href-external";
 
 import styles from "./item.module.css";
 
@@ -21,9 +23,9 @@ export type ItemProps = {
 };
 
 export function Item({ notification, isRead }: ItemProps) {
+	const urlComposer = useUrlComposer();
 	const character = notification.fromCharacter;
-	const titleInfo = getTitleInfo(notification);
-
+	const titleInfo = getTitleInfo(notification, urlComposer);
 	const avatar = useCharacterAvatar(character);
 
 	if (!notification) return null;
@@ -31,7 +33,7 @@ export function Item({ notification, isRead }: ItemProps) {
 	return (
 		<div className={styles.container}>
 			<a
-				href={composeCharacterHref(character.handle)}
+				href={urlComposer.characterUrl(character)}
 				target="_blank"
 				rel="noreferrer"
 			>
@@ -43,18 +45,23 @@ export function Item({ notification, isRead }: ItemProps) {
 				<div className={styles.description}>
 					<a
 						className={styles.characterName}
-						href={composeCharacterHref(character.handle)}
+						href={urlComposer.characterUrl(character)}
 						target="_blank"
 						rel="noreferrer"
 					>
 						{extractCharacterName(character)}
 					</a>
 
-					<span className={styles.actionDesc}>{actionDesc(notification)}</span>
+					<span className={styles.actionDesc}>
+						{actionDesc(notification, urlComposer)}
+					</span>
 
 					<span>{timeDiff(notification)}</span>
 
-					<span>on {renderTransactionHash(notification.transactionHash)}</span>
+					<span>
+						on{" "}
+						{renderTransactionHash(notification.transactionHash, urlComposer)}
+					</span>
 				</div>
 				{titleInfo && (
 					<div className={styles.title}>
@@ -68,10 +75,13 @@ export function Item({ notification, isRead }: ItemProps) {
 	);
 }
 
-function renderTransactionHash(transactionHash: string) {
+function renderTransactionHash(
+	transactionHash: string,
+	urlComposer: UrlComposer
+) {
 	return (
 		<a
-			href={composeScanTxHref(transactionHash)}
+			href={urlComposer.scanTxUrl({ txHash: transactionHash })}
 			target="_blank"
 			rel="noreferrer"
 			className={styles.transactionHash}
@@ -82,17 +92,17 @@ function renderTransactionHash(transactionHash: string) {
 	);
 }
 
-function actionDesc(notification: ParsedNotification) {
+function actionDesc(
+	notification: ParsedNotification,
+	urlComposer: UrlComposer
+) {
 	switch (notification.type) {
 		case "comment":
 			return (
 				<span>
 					{"commented your "}
 					<a
-						href={composeNoteHref(
-							notification.originNote.characterId,
-							notification.originNote.noteId
-						)}
+						href={urlComposer.noteUrl(notification.originNote)}
 						title={notification.originNote.metadata?.content?.content}
 					>
 						Note
@@ -108,7 +118,10 @@ function actionDesc(notification: ParsedNotification) {
 	return null;
 }
 
-function getTitleInfo(notification: ParsedNotification) {
+function getTitleInfo(
+	notification: ParsedNotification,
+	urlComposer: UrlComposer
+) {
 	switch (notification.type) {
 		case "comment":
 			return {
@@ -116,10 +129,7 @@ function getTitleInfo(notification: ParsedNotification) {
 					(notification.commentNote.metadata?.content?.title ??
 						notification.commentNote.metadata?.content?.content) ||
 					"Note",
-				url: composeNoteHref(
-					notification.commentNote.characterId,
-					notification.commentNote.noteId
-				),
+				url: urlComposer.noteUrl(notification.commentNote),
 			};
 		case "like":
 			return {
@@ -127,10 +137,7 @@ function getTitleInfo(notification: ParsedNotification) {
 					(notification.originNote.metadata?.content?.title ??
 						notification.originNote.metadata?.content?.content) ||
 					"Note",
-				url: composeNoteHref(
-					notification.originNote.characterId,
-					notification.originNote.noteId
-				),
+				url: urlComposer.noteUrl(notification.originNote),
 			};
 	}
 
