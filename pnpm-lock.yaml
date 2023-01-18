@@ -277,6 +277,9 @@ importers:
 
   packages/ui:
     specifiers:
+      '@crossbell/indexer': workspace:*
+      '@crossbell/util-hooks': workspace:*
+      '@crossbell/util-metadata': workspace:*
       '@svgr/cli': 6.5.1
       '@types/facepaint': ^1.2.1
       facepaint: ^1.2.1
@@ -284,6 +287,9 @@ importers:
     dependencies:
       facepaint: 1.2.1
     devDependencies:
+      '@crossbell/indexer': link:../indexer
+      '@crossbell/util-hooks': link:../util-hooks
+      '@crossbell/util-metadata': link:../util-metadata
       '@svgr/cli': 6.5.1
       '@types/facepaint': 1.2.2
       pascal-case: 3.1.2

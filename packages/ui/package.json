@@ -41,6 +41,9 @@
 		"crossbell.js": "^0.16"
 	},
 	"devDependencies": {
+		"@crossbell/indexer": "workspace:*",
+		"@crossbell/util-hooks": "workspace:*",
+		"@crossbell/util-metadata": "workspace:*",
 		"@svgr/cli": "6.5.1",
 		"@types/facepaint": "^1.2.1",
 		"pascal-case": "^3.1.2"
