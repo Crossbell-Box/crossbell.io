@@ -95,15 +95,18 @@ export function useBindAccount({
 		async () => {
 			if (!characterId) return;
 
-			await changeCharacterMetadata.mutateAsync((draft) => {
-				const accountURI = csbAccountURI(identity, platform);
+			await changeCharacterMetadata.mutateAsync({
+				characterId,
+				edit(draft) {
+					const accountURI = csbAccountURI(identity, platform);
 
-				if (!draft.connected_accounts?.includes(accountURI)) {
-					draft.connected_accounts = [
-						...(draft.connected_accounts ?? []),
-						accountURI,
-					];
-				}
+					if (!draft.connected_accounts?.includes(accountURI)) {
+						draft.connected_accounts = [
+							...(draft.connected_accounts ?? []),
+							accountURI,
+						];
+					}
+				},
 			});
 
 			return api.bindAccount(characterId, platform, identity, startTime);
@@ -142,13 +145,16 @@ export function useUnbindAccount(characterId?: number) {
 		}) => {
 			if (!characterId) return;
 
-			await changeCharacterMetadata.mutateAsync((draft) => {
-				const accountURI = csbAccountURI(identity, platform);
-				const index = draft.connected_accounts?.indexOf(accountURI) ?? -1;
+			await changeCharacterMetadata.mutateAsync({
+				characterId,
+				edit(draft) {
+					const accountURI = csbAccountURI(identity, platform);
+					const index = draft.connected_accounts?.indexOf(accountURI) ?? -1;
 
-				if (index > -1) {
-					draft.connected_accounts?.splice(index, 1);
-				}
+					if (index > -1) {
+						draft.connected_accounts?.splice(index, 1);
+					}
+				},
 			});
 
 			return api.unbindAccount(characterId, platform!, identity);

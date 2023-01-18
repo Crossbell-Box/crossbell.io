@@ -6,18 +6,18 @@ import {
 	useQueryClient,
 } from "@tanstack/react-query";
 import { useContract } from "@crossbell/contract";
-import { SCOPE_KEY_CHARACTER } from "@crossbell/indexer";
+import { indexer, SCOPE_KEY_CHARACTER } from "@crossbell/indexer";
 
 import { siweUpdateMetadata, updateCharactersMetadata } from "../apis";
 import { useAccountState } from "./account-state";
 import { useHandleError } from "./use-handle-error";
 
-type UpdateFn = (draft: Draft<CharacterMetadata>) => void;
+type EditFn = (draft: Draft<CharacterMetadata>) => void;
 
 export type UseUpdateCharacterMetadataOptions = UseMutationOptions<
 	unknown,
 	unknown,
-	UpdateFn
+	{ edit: EditFn; characterId: number }
 >;
 
 export function useUpdateCharacterMetadata(
@@ -25,19 +25,19 @@ export function useUpdateCharacterMetadata(
 ) {
 	const contract = useContract();
 	const queryClient = useQueryClient();
-	const characterId = useAccountState((s) => s.computed.account?.characterId);
 	const handleError = useHandleError("Error while setting character metadata");
 
 	return useMutation(
-		async (update: UpdateFn) => {
+		async ({ characterId, edit }) => {
 			// Make sure character metadata is up-to-date.
 			await useAccountState.getState().refresh();
 			const account = useAccountState.getState().computed.account;
+			const character = await indexer.getCharacter(characterId);
 
-			if (!account?.character) return;
+			if (!account || !character) return;
 
-			const oldMetadata = account.character.metadata?.content ?? {};
-			const newMetadata = produce(oldMetadata, update);
+			const oldMetadata = character.metadata?.content ?? {};
+			const newMetadata = produce(oldMetadata, edit);
 
 			// Skips redundant requests and just return success status directly.
 			if (oldMetadata === newMetadata) return;
@@ -52,13 +52,13 @@ export function useUpdateCharacterMetadata(
 				case "wallet":
 					if (account.siwe) {
 						await siweUpdateMetadata({
+							characterId,
 							token: account.siwe.token,
-							characterId: account.character.characterId,
 							metadata: newMetadata,
 						});
 					} else {
 						await contract.setCharacterMetadata(
-							account.character.characterId,
+							characterId,
 							// crossbell.js will try to modify the object internally,
 							// here the immutable object is converted to mutable object to avoid errors.
 							JSON.parse(JSON.stringify(newMetadata))
@@ -71,6 +71,8 @@ export function useUpdateCharacterMetadata(
 			...options,
 
 			onSuccess(...params) {
+				const { characterId } = params[1];
+
 				return Promise.all([
 					options?.onSuccess?.(...params),
 					useAccountState.getState().refresh(),
