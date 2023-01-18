@@ -1,5 +1,5 @@
 import { useCharacter, useMintedNotesOfAddress } from "@crossbell/indexer";
-import { ipfsLinkToHttpLink } from "@crossbell/util-ipfs";
+import { ipfsLinkToHttpLink } from "~/shared/ipfs";
 import {
 	extractCharacterAvatar,
 	extractCoverImageFromNote,

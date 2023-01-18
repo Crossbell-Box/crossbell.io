@@ -4,7 +4,7 @@ import classNames from "classnames";
 
 import { useCharacter, useNote } from "@crossbell/indexer";
 import { getValidAttachments } from "@crossbell/util-metadata";
-import { ipfsLinkToHttpLink } from "@crossbell/util-ipfs";
+import { ipfsLinkToHttpLink } from "~/shared/ipfs";
 
 import { Avatar } from "~/shared/components/avatar";
 import { CharacterHandle, CharacterName } from "~/shared/components/character";

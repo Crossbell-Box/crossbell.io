@@ -28,7 +28,7 @@ import {
 	extractPlainTextFromNote,
 	getValidAttachments,
 } from "@crossbell/util-metadata";
-import { ipfsLinkToHttpLink } from "@crossbell/util-ipfs";
+import { ipfsLinkToHttpLink } from "~/shared/ipfs";
 import { useScrollIntoView } from "@mantine/hooks";
 import { cacheRequest } from "~/shared/server";
 

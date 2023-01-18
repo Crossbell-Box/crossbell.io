@@ -10,7 +10,7 @@ import {
 } from "@crossbell/util-metadata";
 import { useElementSize, useHotkeys } from "@mantine/hooks";
 import VideoPlayer from "./video-player";
-import { ipfsLinkToHttpLink } from "@crossbell/util-ipfs";
+import { ipfsLinkToHttpLink } from "~/shared/ipfs";
 
 export default function MediaCarousel({
 	attachments = [],

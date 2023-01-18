@@ -7,7 +7,7 @@ import {
 	useAccountCharacter,
 	useFollowCharacter,
 } from "@crossbell/connect-kit";
-import { ipfsLinkToHttpLink } from "@crossbell/util-ipfs";
+import { ipfsLinkToHttpLink } from "~/shared/ipfs";
 import { useCharacterFollowRelation } from "@crossbell/indexer";
 import {
 	extractCharacterAvatar,

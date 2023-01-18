@@ -1,6 +1,6 @@
 import { Text } from "@mantine/core";
 import type { NoteEntity } from "crossbell.js";
-import { ipfsLinkToHttpLink } from "@crossbell/util-ipfs";
+import { ipfsLinkToHttpLink } from "~/shared/ipfs";
 import Link from "next/link";
 import { composeNoteHref, composeNoteId } from "~/shared/url";
 import { useCharacter, useNoteMintedCount } from "@crossbell/indexer";

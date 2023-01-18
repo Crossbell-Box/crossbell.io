@@ -12,7 +12,7 @@ import { CharacterName } from "~/shared/components/character";
 import { Image } from "~/shared/components/image";
 import Time from "../common/Time";
 import BaseSection from "./BaseSection";
-import { ipfsLinkToHttpLink } from "@crossbell/util-ipfs";
+import { ipfsLinkToHttpLink } from "~/shared/ipfs";
 
 export default function TrendingNotesSection() {
 	const { data, isLoading } = useTrending("note");
