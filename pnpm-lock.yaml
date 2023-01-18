@@ -242,8 +242,10 @@ importers:
 
   packages/indexer:
     specifiers:
+      lodash.compact: ^3
       lru-cache: 7.14.0
     dependencies:
+      lodash.compact: 3.0.1
       lru-cache: 7.14.0
 
   packages/notification:
