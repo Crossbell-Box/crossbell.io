@@ -5,10 +5,9 @@ import relativeTime from "dayjs/plugin/relativeTime.js";
 import { Indicator, Avatar } from "@mantine/core";
 
 import { ParsedNotification } from "@crossbell/indexer";
-import { CrossbellChainLogo } from "@crossbell/ui";
+import { CrossbellChainLogo, useCharacterAvatar } from "@crossbell/ui";
 import { extractCharacterName } from "@crossbell/util-metadata";
 
-import { useCharacterAvatar } from "~/shared/components/avatar/use-character-avatar";
 import { composeCharacterHref, composeNoteHref } from "~/shared/url/href";
 import { composeScanTxHref } from "~/shared/url/href-external";
 

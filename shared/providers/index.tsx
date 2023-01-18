@@ -4,7 +4,7 @@ import { IpfsGateway } from "@crossbell/ipfs-gateway";
 
 import { IpfsGatewayContext } from "@crossbell/ipfs-react";
 import { InitContractProvider } from "@crossbell/contract";
-import { ipfsLinkToHttpLink } from "@crossbell/util-ipfs";
+import { ipfsLinkToHttpLink } from "~/shared/ipfs";
 import { useRefCallback } from "@crossbell/util-hooks";
 import {
 	ConnectKitProvider,

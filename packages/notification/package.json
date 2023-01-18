@@ -39,7 +39,6 @@
 		"@crossbell/connect-kit": "workspace:*",
 		"@crossbell/util-metadata": "workspace:*",
 		"@crossbell/util-hooks": "workspace:*",
-		"@crossbell/util-ipfs": "workspace:*",
 		"@crossbell/indexer": "workspace:*",
 		"@crossbell/ui": "workspace:*",
 		"react": "18.x.x",
@@ -50,7 +49,6 @@
 		"@crossbell/connect-kit": "workspace:*",
 		"@crossbell/util-metadata": "workspace:*",
 		"@crossbell/util-hooks": "workspace:*",
-		"@crossbell/util-ipfs": "workspace:*",
 		"@crossbell/indexer": "workspace:*",
 		"@crossbell/ui": "workspace:*"
 	}

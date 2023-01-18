@@ -27,7 +27,6 @@
 		{ "path": "packages/ui/tsconfig.json" },
 		{ "path": "packages/util-ethers/tsconfig.json" },
 		{ "path": "packages/util-hooks/tsconfig.json" },
-		{ "path": "packages/util-ipfs/tsconfig.json" },
 		{ "path": "packages/util-metadata/tsconfig.json" }
 	]
 }

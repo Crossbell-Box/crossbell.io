@@ -1,5 +1,5 @@
 import { useCharacter, useMintedNotesOfAddress } from "@crossbell/indexer";
-import { ipfsLinkToHttpLink } from "@crossbell/util-ipfs";
+import { ipfsLinkToHttpLink } from "~/shared/ipfs";
 import {
 	extractCharacterAvatar,
 	extractCoverImageFromNote,
@@ -73,7 +73,10 @@ export default function TreasuresGallery({ address }: { address?: string }) {
 }
 
 function NoteCover({ note }: { note?: NoteEntity | null }) {
-	let cover = extractCoverImageFromNote(note?.metadata?.content);
+	let cover = extractCoverImageFromNote(
+		ipfsLinkToHttpLink,
+		note?.metadata?.content
+	);
 	const { data: character } = useCharacter(note?.characterId, {
 		enabled: !cover,
 	});

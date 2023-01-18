@@ -1,6 +1,6 @@
 import { Text } from "@mantine/core";
 import type { NoteEntity } from "crossbell.js";
-import { ipfsLinkToHttpLink } from "@crossbell/util-ipfs";
+import { ipfsLinkToHttpLink } from "~/shared/ipfs";
 import Link from "next/link";
 import { composeNoteHref, composeNoteId } from "~/shared/url";
 import { useCharacter, useNoteMintedCount } from "@crossbell/indexer";
@@ -16,7 +16,10 @@ const MintedNoteCard = ({ note }: { note: NoteEntity }) => {
 	const noteId = composeNoteId(note.characterId, note.noteId);
 
 	const noteText = extractPlainTextFromNote(note.metadata?.content);
-	const noteImage = extractCoverImageFromNote(note.metadata?.content);
+	const noteImage = extractCoverImageFromNote(
+		ipfsLinkToHttpLink,
+		note.metadata?.content
+	);
 
 	// get character
 	const { data: character } = useCharacter(note.characterId);

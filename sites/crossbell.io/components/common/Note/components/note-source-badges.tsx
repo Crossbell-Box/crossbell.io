@@ -4,7 +4,7 @@ import { TinyColor, random, mostReadable } from "@ctrl/tinycolor";
 import Link from "next/link";
 import { ReactNode } from "react";
 
-import { stringToInteger } from "~/shared/helpers";
+import { stringToInteger } from "@crossbell/ui";
 import config from "~/shared/config";
 
 const builtInColorMap = {

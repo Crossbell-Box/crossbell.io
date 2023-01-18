@@ -1,6 +1,4 @@
-import { ipfsLinkToHttpLink } from "@crossbell/util-ipfs";
-
-import { stringToInteger } from "~/shared/helpers";
+import { stringToInteger } from "./string-to-integer";
 
 const defaultAvatars = [
 	"ipfs://bafkreia6kekd3r7zz7vtc5np4kiglar2z2ua5ocnhzf4ulmfub5ailyffi", // black
@@ -12,18 +10,14 @@ const defaultAvatars = [
 	"ipfs://bafkreiab4v45chjq4bx4jq5lafc5pa5oxxbs3udmvujeoirui3yj5ktd6q", // yellow
 ];
 
-export function getDefaultAvatar(handle?: string) {
-	const avatarIpfs = (() => {
-		if (!handle || (handle.startsWith("0x") && handle.length === 42)) {
-			return "ipfs://bafkreie4xfsyflffgdbmscmkb3avuhmwad5dfecbwpbzbelti6n3qmrcqi"; // default
-		}
+export function getDefaultAvatarIpfsUrl(handle?: string) {
+	if (!handle || (handle.startsWith("0x") && handle.length === 42)) {
+		return "ipfs://bafkreie4xfsyflffgdbmscmkb3avuhmwad5dfecbwpbzbelti6n3qmrcqi"; // default
+	}
 
-		const seededRandomIndex = stringToInteger(handle, {
-			min: 0,
-			max: defaultAvatars.length - 1,
-		});
-		return defaultAvatars[seededRandomIndex];
-	})();
-
-	return ipfsLinkToHttpLink(avatarIpfs);
+	const seededRandomIndex = stringToInteger(handle, {
+		min: 0,
+		max: defaultAvatars.length - 1,
+	});
+	return defaultAvatars[seededRandomIndex];
 }

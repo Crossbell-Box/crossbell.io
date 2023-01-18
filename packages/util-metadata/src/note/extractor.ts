@@ -2,6 +2,7 @@ import { NoteMetadata } from "crossbell.js";
 import { getValidAttachments } from "./attachment";
 
 export function extractCoverImageFromNote(
+	ipfsLinkToHttpLink: (url: string) => string,
 	note?: NoteMetadata | null
 ): string | undefined {
 	if (!note) {
@@ -9,6 +10,7 @@ export function extractCoverImageFromNote(
 	}
 
 	const attachments = getValidAttachments(note.attachments, {
+		ipfsLinkToHttpLink,
 		allowedContentTypes: ["address"],
 	});
 

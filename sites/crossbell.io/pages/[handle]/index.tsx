@@ -11,7 +11,7 @@ import {
 	useCharacterByHandle,
 	useNotesOfCharacter,
 } from "@crossbell/indexer";
-import { ipfsLinkToHttpLink } from "@crossbell/util-ipfs";
+import { ipfsLinkToHttpLink } from "~/shared/ipfs";
 import {
 	extractCharacterAvatars,
 	extractCharacterName,

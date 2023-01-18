@@ -5,7 +5,7 @@ import { PropsWithChildren } from "react";
 
 import CharacterHoverCard from "~/shared/components/character/character-hover-card";
 
-import { useCharacterAvatar } from "./use-character-avatar";
+import { useCharacterAvatar } from "@crossbell/ui";
 
 export function Avatar({
 	characterId,

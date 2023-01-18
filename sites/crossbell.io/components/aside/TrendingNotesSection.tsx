@@ -12,6 +12,7 @@ import { CharacterName } from "~/shared/components/character";
 import { Image } from "~/shared/components/image";
 import Time from "../common/Time";
 import BaseSection from "./BaseSection";
+import { ipfsLinkToHttpLink } from "~/shared/ipfs";
 
 export default function TrendingNotesSection() {
 	const { data, isLoading } = useTrending("note");
@@ -50,6 +51,7 @@ export default function TrendingNotesSection() {
 
 function NoteListItem({ note }: { note: NoteEntity }) {
 	const image = getValidAttachments(note.metadata?.content?.attachments, {
+		ipfsLinkToHttpLink,
 		allowedMediaTypes: ["image"],
 		allowedContentTypes: ["address"],
 	})[0]?.address;

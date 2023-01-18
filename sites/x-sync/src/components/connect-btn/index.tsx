@@ -5,9 +5,9 @@ import classNames from "classnames";
 import { useAccountState, useConnectModal } from "@crossbell/connect-kit";
 import { truncateAddress } from "@crossbell/util-ethers";
 import { extractCharacterAvatar } from "@crossbell/util-metadata";
-import { ipfsLinkToHttpLink } from "@crossbell/util-ipfs";
+import { ipfsLinkToHttpLink } from "~/shared/ipfs";
+import { getDefaultAvatarIpfsUrl } from "@crossbell/ui";
 
-import { getDefaultAvatar } from "~/shared/avatar";
 import { AccountMenu } from "../account-menu";
 
 export function ConnectBtn() {
@@ -20,7 +20,7 @@ export function ConnectBtn() {
 	if (account) {
 		const avatar = ipfsLinkToHttpLink(
 			extractCharacterAvatar(account.character) ??
-				getDefaultAvatar(account.character?.handle)
+				getDefaultAvatarIpfsUrl(account.character?.handle)
 		);
 
 		const address =

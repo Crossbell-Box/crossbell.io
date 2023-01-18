@@ -1,6 +1,6 @@
 import { ComponentProps } from "react";
 import dynamic from "next/dynamic";
-import { ipfsLinkToHttpLink } from "@crossbell/util-ipfs";
+import { ipfsLinkToHttpLink } from "~/shared/ipfs";
 const ReactPlayer = dynamic(() => import("react-player/lazy"), { ssr: false });
 
 export default function VideoPlayer({

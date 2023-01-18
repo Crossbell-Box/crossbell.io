@@ -1,6 +1,5 @@
 import { usePreloadImgs } from "@crossbell/util-hooks";
-
-import { useWeb2Urls } from "./ipfs";
+import { useWeb2Urls } from "@crossbell/ui";
 
 export const IMAGES = {
 	upgradeToWalletIllustration:

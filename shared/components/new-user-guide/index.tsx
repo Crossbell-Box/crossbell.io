@@ -3,7 +3,7 @@ import { Space, Text, Button } from "@mantine/core";
 import { closeAllModals, openModal } from "@mantine/modals";
 import Link from "next/link";
 
-import { ipfsLinkToHttpLink } from "@crossbell/util-ipfs";
+import { ipfsLinkToHttpLink } from "~/shared/ipfs";
 
 import { WalletCharacterNewHref } from "~/shared/url";
 import { getCurrentAddress } from "~/shared/wallet/provider";

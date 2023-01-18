@@ -1,7 +1,8 @@
 import React from "react";
 import classNames from "classnames";
+import { useWeb2Url } from "@crossbell/ui";
 
-import { useWeb2Url, IMAGES } from "../../../utils";
+import { IMAGES } from "../../../utils";
 
 import styles from "./other-wallets.module.css";
 

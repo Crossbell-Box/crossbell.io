@@ -10,7 +10,7 @@ import {
 	Title,
 } from "@mantine/core";
 import ReactMarkdown from "react-markdown";
-import { ipfsLinkToHttpLink } from "@crossbell/util-ipfs";
+import { ipfsLinkToHttpLink } from "~/shared/ipfs";
 import { useElementSize } from "@mantine/hooks";
 import classNames from "classnames";
 import rehypeRaw from "rehype-raw";

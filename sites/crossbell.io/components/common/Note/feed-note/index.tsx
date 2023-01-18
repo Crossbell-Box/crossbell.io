@@ -3,6 +3,7 @@ import { CharacterEntity, NoteEntity } from "crossbell.js";
 
 import { useCharacter, useNote } from "@crossbell/indexer";
 import { getValidAttachments } from "@crossbell/util-metadata";
+import { ipfsLinkToHttpLink } from "~/shared/ipfs";
 
 import { Avatar } from "~/shared/components/avatar";
 import { CharacterHandle, CharacterName } from "~/shared/components/character";
@@ -157,7 +158,8 @@ export function FeedNote({
 	};
 
 	const validAttachments = getValidAttachments(
-		note.metadata?.content?.attachments
+		note.metadata?.content?.attachments,
+		{ ipfsLinkToHttpLink }
 	);
 
 	return (

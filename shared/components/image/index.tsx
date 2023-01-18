@@ -5,7 +5,7 @@ import {
 } from "next/image";
 import React, { PropsWithChildren, useEffect, useState, memo } from "react";
 
-import { ipfsLinkToHttpLink } from "@crossbell/util-ipfs";
+import { ipfsLinkToHttpLink } from "~/shared/ipfs";
 import { getOrigin } from "~/shared/url";
 
 const shimmer = (w = "100%", h = "100%") => `
