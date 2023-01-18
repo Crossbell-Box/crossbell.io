@@ -1,4 +1,6 @@
 import React from "react";
+import { CharacterEntity, NoteEntity } from "crossbell.js";
+
 import { composeCharacterHref, composeNoteHref } from "~/shared/url/href";
 import {
 	composeScanTxHref,
@@ -8,8 +10,8 @@ import {
 type ComposerFn<T> = (params: T) => string;
 
 export type UrlComposer = {
-	characterUrl: ComposerFn<{ handle: string }>;
-	noteUrl: ComposerFn<{ characterId: number; noteId: number }>;
+	characterUrl: ComposerFn<CharacterEntity>;
+	noteUrl: ComposerFn<NoteEntity>;
 	scanTxUrl: ComposerFn<{ txHash: string }>;
 	scanAddressUrl: ComposerFn<{ addressHash: string }>;
 };
