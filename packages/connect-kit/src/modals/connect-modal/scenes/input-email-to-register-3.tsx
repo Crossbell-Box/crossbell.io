@@ -1,6 +1,6 @@
 import React from "react";
 import { LoadingOverlay, Tooltip } from "@mantine/core";
-import { CircleHelpIcon } from "@crossbell/ui";
+import { useWeb2Url, CircleHelpIcon } from "@crossbell/ui";
 
 import {
 	CheckIcon,
@@ -8,7 +8,7 @@ import {
 	EmailIcon,
 	MemberIcon,
 } from "../../../components";
-import { useWeb2Url, IMAGES } from "../../../utils";
+import { IMAGES } from "../../../utils";
 
 import { Header } from "../components/header";
 import { TextInput } from "../components/text-input";

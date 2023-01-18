@@ -1,9 +1,9 @@
 import React from "react";
 import { Button } from "@mantine/core";
-import { CloseIcon } from "@crossbell/ui";
+import { useWeb2Url, CloseIcon } from "@crossbell/ui";
 
 import { ModalHeader, BaseModal } from "../../components";
-import { useWeb2Url, IMAGES } from "../../utils";
+import { IMAGES } from "../../utils";
 
 import styles from "./index.module.css";
 import { useClaimCSBModal } from "./stores";

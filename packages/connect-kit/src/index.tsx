@@ -1,9 +1,10 @@
 import React from "react";
 import { useAccount } from "wagmi";
 import { NotificationsProvider } from "@mantine/notifications";
+import { UseWeb2UrlContext, GetWeb2Url } from "@crossbell/ui";
 
+import { usePreloadAllImgs } from "./utils";
 import { useAccountState } from "./hooks";
-import { UseWeb2UrlContext, GetWeb2Url, usePreloadAllImgs } from "./utils";
 import { ClaimCSBModal } from "./modals/claim-csb-modal";
 import {
 	ConnectModal,
