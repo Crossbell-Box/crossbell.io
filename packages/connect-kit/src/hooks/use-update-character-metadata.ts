@@ -1,89 +1,72 @@
 import { produce, Draft } from "immer";
 import { CharacterMetadata } from "crossbell.js";
-import {
-	useMutation,
-	UseMutationOptions,
-	useQueryClient,
-} from "@tanstack/react-query";
-import { useContract } from "@crossbell/contract";
 import { indexer, SCOPE_KEY_CHARACTER } from "@crossbell/indexer";
 
 import { siweUpdateMetadata, updateCharactersMetadata } from "../apis";
 import { useAccountState } from "./account-state";
-import { useHandleError } from "./use-handle-error";
+import { createAccountTypeBasedMutationHooks } from "./account-type-based-hooks";
 
 type EditFn = (draft: Draft<CharacterMetadata>) => void;
+type Variables = { edit: EditFn; characterId: number };
 
-export type UseUpdateCharacterMetadataOptions = UseMutationOptions<
-	unknown,
-	unknown,
-	{ edit: EditFn; characterId: number }
->;
+export const useUpdateCharacterMetadata = createAccountTypeBasedMutationHooks<
+	void,
+	Variables
+>({ actionDesc: "setting character metadata", withParams: false }, () => {
+	async function prepareData({ edit, characterId }: Variables) {
+		// Make sure character metadata is up-to-date.
+		await useAccountState.getState().refresh();
+		const account = useAccountState.getState().computed.account;
+		const character = await indexer.getCharacter(characterId);
 
-export function useUpdateCharacterMetadata(
-	options?: UseUpdateCharacterMetadataOptions
-) {
-	const contract = useContract();
-	const queryClient = useQueryClient();
-	const handleError = useHandleError("Error while setting character metadata");
+		if (!account || !character) return null;
 
-	return useMutation(
-		async ({ characterId, edit }) => {
-			// Make sure character metadata is up-to-date.
-			await useAccountState.getState().refresh();
-			const account = useAccountState.getState().computed.account;
-			const character = await indexer.getCharacter(characterId);
+		const oldMetadata = character.metadata?.content ?? {};
+		const newMetadata = produce(oldMetadata, edit);
 
-			if (!account || !character) return;
+		// Skips redundant requests and just return success status directly.
+		if (oldMetadata === newMetadata) return null;
 
-			const oldMetadata = character.metadata?.content ?? {};
-			const newMetadata = produce(oldMetadata, edit);
+		return newMetadata;
+	}
 
-			// Skips redundant requests and just return success status directly.
-			if (oldMetadata === newMetadata) return;
+	return {
+		async email(variables, { account }) {
+			const metadata = await prepareData(variables);
 
-			switch (account.type) {
-				case "email":
-					await updateCharactersMetadata({
-						token: account.token,
-						metadata: newMetadata,
-					});
-					return;
-				case "wallet":
-					if (account.siwe) {
-						await siweUpdateMetadata({
-							characterId,
-							token: account.siwe.token,
-							metadata: newMetadata,
-						});
-					} else {
-						await contract.setCharacterMetadata(
-							characterId,
-							// crossbell.js will try to modify the object internally,
-							// here the immutable object is converted to mutable object to avoid errors.
-							JSON.parse(JSON.stringify(newMetadata))
-						);
-					}
-					return;
+			if (metadata) {
+				await updateCharactersMetadata({ token: account.token, metadata });
 			}
 		},
-		{
-			...options,
 
-			onSuccess(...params) {
-				const { characterId } = params[1];
+		async contract(variables, { account, contract }) {
+			const metadata = await prepareData(variables);
 
-				return Promise.all([
-					options?.onSuccess?.(...params),
-					useAccountState.getState().refresh(),
-					queryClient.invalidateQueries(SCOPE_KEY_CHARACTER(characterId)),
-				]);
-			},
+			if (metadata) {
+				if (account.siwe) {
+					await siweUpdateMetadata({
+						characterId: variables.characterId,
+						token: account.siwe.token,
+						metadata,
+					});
+				} else {
+					await contract.setCharacterMetadata(
+						variables.characterId,
+						// crossbell.js will try to modify the object internally,
+						// here the immutable object is converted to mutable object to avoid errors.
+						JSON.parse(JSON.stringify(metadata))
+					);
+				}
+			}
+		},
 
-			onError: (...params) => {
-				options?.onError?.(...params);
-				handleError(params[0]);
-			},
-		}
-	);
-}
+		onSuccess({ variables, queryClient }) {
+			return Promise.all([
+				useAccountState.getState().refresh(),
+				queryClient.invalidateQueries(
+					SCOPE_KEY_CHARACTER(variables.characterId)
+				),
+			]);
+		},
+	};
+});
