@@ -1,11 +1,13 @@
 import { CharacterLinkType } from "@crossbell/indexer";
 
 import { linkCharacter, siweLinkCharacter } from "../../apis";
-import { createAccountTypeBasedMutationHooks } from "../account-type-based-hooks";
+import {
+	AccountTypeBasedMutationOptions,
+	createAccountTypeBasedMutationHooks,
+} from "../account-type-based-hooks";
 
-export type LinkCharacterOptions = Exclude<
-	Parameters<typeof useLinkCharacter>[1],
-	undefined
+export type LinkCharacterOptions = AccountTypeBasedMutationOptions<
+	typeof useLinkCharacter
 >;
 
 export const useLinkCharacter = createAccountTypeBasedMutationHooks<

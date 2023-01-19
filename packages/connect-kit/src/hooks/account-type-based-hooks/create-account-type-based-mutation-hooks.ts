@@ -41,6 +41,12 @@ export type AccountTypeBasedMutationHooks<
 	? AccountTypeBasedMutationHooksWithoutParams<Variables, Data>
 	: AccountTypeBasedMutationHooksWithParams<Params, Variables, Data>;
 
+export type AccountTypeBasedMutationOptions<
+	T extends AccountTypeBasedMutationHooks<any, any, any>
+> = T extends AccountTypeBasedMutationHooks<any, infer Variables, infer Data>
+	? Options<Data, Variables>
+	: never;
+
 export function createAccountTypeBasedMutationHooks<
 	Params = void,
 	Variables = void,

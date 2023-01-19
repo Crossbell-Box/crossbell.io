@@ -1,7 +1,14 @@
 import { NoteLinkType, SCOPE_KEY_NOTE_STATUS } from "@crossbell/indexer";
 
 import { unlinkNote, siweUnlinkNote } from "../../apis";
-import { createAccountTypeBasedMutationHooks } from "../account-type-based-hooks";
+import {
+	createAccountTypeBasedMutationHooks,
+	AccountTypeBasedMutationOptions,
+} from "../account-type-based-hooks";
+
+export type UseUnlinkNoteOptions = AccountTypeBasedMutationOptions<
+	typeof useUnlinkNote
+>;
 
 export const useUnlinkNote = createAccountTypeBasedMutationHooks<
 	NoteLinkType,
