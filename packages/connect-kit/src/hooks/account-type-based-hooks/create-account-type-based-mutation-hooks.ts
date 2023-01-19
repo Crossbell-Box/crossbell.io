@@ -68,9 +68,21 @@ export function createAccountTypeBasedMutationHooks<
 			async (variable) => {
 				switch (account?.type) {
 					case "email":
-						return factory.email(variable, { contract, indexer, account });
+						return (
+							factory.email?.(variable, {
+								contract,
+								indexer,
+								account,
+							}) ?? null
+						);
 					case "wallet":
-						return factory.contract(variable, { contract, indexer, account });
+						return (
+							factory.contract?.(variable, {
+								contract,
+								indexer,
+								account,
+							}) ?? null
+						);
 					default:
 						return null;
 				}

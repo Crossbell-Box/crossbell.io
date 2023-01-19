@@ -263,33 +263,6 @@ export async function putNote({
 	});
 }
 
-export async function addOperator({
-	token,
-	...body
-}: {
-	token: string;
-	operator: string;
-}): Promise<{ transactionHash: string; data: string }> {
-	return request(`/newbie/contract/characters/me/operators`, {
-		method: "PUT",
-		token,
-		body,
-	});
-}
-
-export async function removeOperator({
-	token,
-	operator,
-}: {
-	token: string;
-	operator: string;
-}): Promise<{ transactionHash: string; data: string }> {
-	return request(`/newbie/contract/characters/me/operators/${operator}`, {
-		method: "DELETE",
-		token,
-	});
-}
-
 export async function refillBalance({
 	token,
 }: {

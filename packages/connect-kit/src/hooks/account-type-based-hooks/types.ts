@@ -7,12 +7,12 @@ export type Context<T> = { contract: Contract; indexer: Indexer } & T;
 export type AccountTypeBasedHooksFactory<Params, Variables, Data> = (
 	params: Params
 ) => {
-	email: (
+	email?: (
 		v: Variables,
 		context: Context<{ account: EmailAccount }>
 	) => Promise<Data>;
 
-	contract: (
+	contract?: (
 		v: Variables,
 		context: Context<{ account: WalletAccount }>
 	) => Promise<Data>;
