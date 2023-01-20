@@ -1,25 +1,18 @@
 import create from "zustand";
 
-export interface ModalStore {
+import { modalSlice, ModalSlice } from "../../../utils/store/modal-slice";
+
+export type ModalStore = Omit<ModalSlice, "show"> & {
 	msg: string;
-	isActive: boolean;
-	hide: () => void;
 	show: (msg: string) => void;
-}
+};
 
 export const useClaimCSBModal = create<ModalStore>((set, get) => ({
+	...modalSlice(set, get),
+
 	msg: "",
-	isActive: false,
 
-	hide: () => {
-		const { isActive } = get();
-
-		if (isActive) {
-			set({ isActive: false });
-		}
-	},
-
-	show: (msg: string) => {
+	show(msg: string) {
 		const { isActive } = get();
 
 		if (!isActive) {

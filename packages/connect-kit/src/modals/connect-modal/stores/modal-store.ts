@@ -1,15 +1,15 @@
 import create from "zustand";
 
-export interface ModalStore {
-	isActive: boolean;
+import { modalSlice, ModalSlice } from "../../../utils/store/modal-slice";
+
+export type ModalStore = ModalSlice & {
 	canHide: boolean;
-	hide: () => void;
-	show: () => void;
 	setCanHide: (canHide: boolean) => void;
-}
+};
 
 export const useModalStore = create<ModalStore>((set, get) => ({
-	isActive: false,
+	...modalSlice(set, get),
+
 	canHide: true,
 
 	hide: () => {
@@ -17,14 +17,6 @@ export const useModalStore = create<ModalStore>((set, get) => ({
 
 		if (isActive && canHide) {
 			set({ isActive: false });
-		}
-	},
-
-	show: () => {
-		const { isActive } = get();
-
-		if (!isActive) {
-			set({ isActive: true });
 		}
 	},
 
