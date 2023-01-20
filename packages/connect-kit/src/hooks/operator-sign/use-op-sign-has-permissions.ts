@@ -6,12 +6,19 @@ import {
 	OP_SIGN_OPERATOR_PERMISSIONS,
 } from "./consts";
 
-export function useOpSignHasPermissions() {
+export type UseOpSignHasPermissionsOptions = {
+	characterId: number | null | undefined;
+};
+
+export function useOpSignHasPermissions({
+	characterId,
+}: UseOpSignHasPermissionsOptions) {
 	const isEmail = useAccountState((s) => s.computed.account?.type === "email");
-	const hasPermissions = useCharacterOperatorHasPermissions(
-		OP_SIGN_OPERATOR_ADDRESS,
-		OP_SIGN_OPERATOR_PERMISSIONS
-	);
+	const hasPermissions = useCharacterOperatorHasPermissions({
+		operatorAddress: OP_SIGN_OPERATOR_ADDRESS,
+		permissions: OP_SIGN_OPERATOR_PERMISSIONS,
+		characterId,
+	});
 
 	return isEmail ? true : hasPermissions;
 }

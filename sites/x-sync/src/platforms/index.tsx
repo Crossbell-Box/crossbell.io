@@ -18,8 +18,10 @@ export function Platforms() {
 	const { characterId, ssrReady } = useAccountCharacterId();
 	const boundAccounts = useCharacterBoundAccounts(characterId);
 	const router = useRouter();
-	const characterOperatorPermissions =
-		useCharacterOperatorPermissions(OPERATOR_ADDRESS);
+	const characterOperatorPermissions = useCharacterOperatorPermissions({
+		operatorAddress: OPERATOR_ADDRESS,
+		characterId,
+	});
 
 	React.useEffect(() => {
 		if (ssrReady && !characterId) {
