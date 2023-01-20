@@ -1,0 +1,15 @@
+.container {
+	display: flex;
+	align-items: center;
+	gap: 8px;
+}
+
+.actions {
+	margin-left: auto;
+}
+
+.name {
+	color: #082135;
+	font-weight: 500;
+	font-size: 14px;
+}

@@ -12,7 +12,7 @@ import {
 	useAccountBalance,
 	GeneralAccount,
 	useAccountState,
-	useTurnOnOperatorSign,
+	useCsbDetailModal,
 } from "@crossbell/connect-kit";
 import { AccountList } from "~/shared/components/account-list";
 import { BellIcon, ExitIcon, ExportIcon, UsersIcon } from "@crossbell/ui";
@@ -53,7 +53,7 @@ export default function WalletButtonWithMenu({
 		]);
 	const showNotificationModal = useShowNotificationModal();
 	const { isAllRead } = useNotifications();
-	const turnOnOperatorSign = useTurnOnOperatorSign();
+	const csbDetailModal = useCsbDetailModal();
 
 	return (
 		<Menu
@@ -75,8 +75,8 @@ export default function WalletButtonWithMenu({
 			</Menu.Target>
 
 			<Menu.Dropdown className="w-full">
-				<Menu.Label>$CSB Balance</Menu.Label>
-				<Menu.Label>
+				<Menu.Label onClick={csbDetailModal.show}>$CSB Balance</Menu.Label>
+				<Menu.Label onClick={csbDetailModal.show}>
 					<div className="flex items-center">
 						<Text className="i-csb:logo text-20px text-[#F6C549]" />
 						<Text className="font-400 text-16px ml-5px text-[#082135]">
@@ -130,12 +130,6 @@ export default function WalletButtonWithMenu({
 				>
 					Notifications
 				</MenuItem>
-
-				{account.type === "wallet" && (
-					<MenuItem onClick={turnOnOperatorSign} icon={"hmm"}>
-						turnOnOperatorSign
-					</MenuItem>
-				)}
 
 				{account.type === "wallet" && (
 					<MenuItem

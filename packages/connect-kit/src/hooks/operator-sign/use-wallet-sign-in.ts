@@ -1,15 +1,15 @@
 import { useSigner } from "wagmi";
-import { useRefCallback } from "@crossbell/util-hooks";
 
 import { useAccountState } from "../account-state";
+import { useMutation } from "@tanstack/react-query";
 
-export function useTurnOnOperatorSign() {
+export function useWalletSignIn() {
 	const siweSignIn = useAccountState((s) => s.siweSignIn);
 	const { data: signer } = useSigner();
 
-	return useRefCallback(() => {
+	return useMutation(async () => {
 		if (signer) {
-			siweSignIn(signer);
+			await siweSignIn(signer);
 		}
 	});
 }

@@ -17,13 +17,9 @@ export function useCharacterAvatar({
 	characterId,
 	disabled,
 }: UseCharacterAvatarParams) {
-	const { isLoading, data } = useCharacter(
-		characterId ?? character?.characterId,
-		{
-			enabled: !!characterId && !disabled,
-			initialData: character,
-		}
-	);
+	const { isLoading, data = character } = useCharacter(characterId, {
+		enabled: !!characterId && !disabled && !character,
+	});
 
 	const rawSrc = React.useMemo(
 		() =>

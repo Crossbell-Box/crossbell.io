@@ -6,7 +6,7 @@ export const IMAGES = {
 		"ipfs://bafkreieoo25l4ls4hcrdmzogc6muntbxc4mikzm66vzawk5rdfpaz3xw4a",
 	claimCSBImg:
 		"ipfs://bafkreihjx5itbdah5rlo5qs3afwnmangtwnwsz3fnnfpgxyyskskoo6ote",
-	congratsImg:
+	addBtnImg:
 		"ipfs://bafkreias276ycc75tns2fgzeewc2moqza3yycatr5dwf7suonocuxxgqdy",
 	congratsBg:
 		"ipfs://bafkreieaqqcfyung4wz7njitlqtucdbh7rcgpctltapxts3n6dpcmsehoa",

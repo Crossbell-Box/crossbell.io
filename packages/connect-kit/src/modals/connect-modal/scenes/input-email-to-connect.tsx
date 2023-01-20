@@ -3,11 +3,10 @@ import { useDisclosure } from "@crossbell/util-hooks";
 import classNames from "classnames";
 import React from "react";
 
-import { EmailIcon, PasswordIcon, TextInput } from "../../../components";
+import { EmailIcon, PasswordIcon, TextInput, Field } from "../../../components";
 
 import { Header } from "../components/header";
 import { PasswordInput } from "../components/password-input";
-import { Field } from "../components/field";
 import { NextStepButton } from "../components/next-step-button";
 
 import { SceneKind } from "../types";

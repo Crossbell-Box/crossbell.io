@@ -2,13 +2,13 @@ import React from "react";
 import { useAccount } from "wagmi";
 
 import {
+	BaseModal,
 	DynamicContainer,
 	DynamicContainerContent,
-	BaseModal,
 } from "../../components";
 
 import { SceneKind } from "./types";
-import { useScenesStore, useModalStore, StoresProvider } from "./stores";
+import { StoresProvider, useModalStore, useScenesStore } from "./stores";
 
 import { AboutWallets } from "./scenes/about-wallets";
 import { ConnectKindDifferences } from "./scenes/connect-kind-differences";
@@ -24,19 +24,16 @@ import { InputEmailToResetPassword2 } from "./scenes/input-email-to-reset-passwo
 import { InputEmailToResetPassword3 } from "./scenes/input-email-to-reset-password-3";
 import { SelectConnectKind } from "./scenes/select-connect-kind";
 import { SelectWalletToConnect } from "./scenes/select-wallet-to-connect";
+import { SignInWithWallet } from "./scenes/sign-in-with-wallet";
+import { SelectCharacters } from "./scenes/select-characters";
+import { MintCharacter } from "./scenes/mint-character";
+import { MintCharacterQuickly } from "./scenes/mint-character-quickly";
 
 export { useModalStore };
 
 export function ConnectModal() {
 	const { isActive, hide } = useModalStore();
-	const { isConnected } = useAccount();
 	const storeKey = useResetStore();
-
-	React.useEffect(() => {
-		if (isConnected) {
-			hide();
-		}
-	}, [isConnected, hide]);
 
 	return (
 		<BaseModal isActive={isActive} onClose={hide}>
@@ -50,7 +47,17 @@ export function ConnectModal() {
 }
 
 function Main() {
-	const currentScene = useScenesStore(({ computed }) => computed.currentScene);
+	const [currentScene, goTo] = useScenesStore((s) => [
+		s.computed.currentScene,
+		s.goTo,
+	]);
+	const { isConnected } = useAccount();
+
+	React.useEffect(() => {
+		if (isConnected) {
+			goTo({ kind: SceneKind.signInWithWallet });
+		}
+	}, [isConnected, goTo]);
 
 	return (
 		<DynamicContainerContent id={currentScene.kind}>
@@ -68,6 +75,14 @@ function Main() {
 						return <DoNotHaveWallet />;
 					case SceneKind.connectWallet:
 						return <ConnectWallet {...currentScene} />;
+					case SceneKind.signInWithWallet:
+						return <SignInWithWallet />;
+					case SceneKind.selectCharacters:
+						return <SelectCharacters />;
+					case SceneKind.mintCharacter:
+						return <MintCharacter />;
+					case SceneKind.mintCharacterQuickly:
+						return <MintCharacterQuickly />;
 					case SceneKind.inputEmailToConnect:
 						return <InputEmailToConnect />;
 					case SceneKind.inputEmailToRegister1:

@@ -1,0 +1,19 @@
+.main {
+	padding: 0 24px 24px;
+}
+
+.tips {
+	font-weight: 400;
+	font-size: 14px;
+	color: #999;
+	margin-bottom: 22px;
+}
+
+.item span {
+	margin: 0 auto;
+}
+
+.signInItem {
+	color: #fff;
+	background: #6ad991;
+}

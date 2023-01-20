@@ -25,7 +25,7 @@ export function Congrats({
 	onClose,
 	timeout,
 }: CongratsProps) {
-	const illustrationUrl = useWeb2Url(IMAGES.congratsImg);
+	const illustrationUrl = useWeb2Url(IMAGES.addBtnImg);
 	const bgUrl = useWeb2Url(IMAGES.congratsBg);
 
 	return (

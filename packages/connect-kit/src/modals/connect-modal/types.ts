@@ -8,6 +8,10 @@ export enum SceneKind {
 	selectWalletToConnect = "selectWalletToConnect",
 	doNotHaveWallet = "doNotHaveWallet",
 	connectWallet = "connectWallet",
+	signInWithWallet = "signInWithWallet",
+	selectCharacters = "selectCharacters",
+	mintCharacter = "mintCharacter",
+	mintCharacterQuickly = "mintCharacterQuickly",
 
 	inputEmailToConnect = "inputEmailToConnect",
 
@@ -21,7 +25,7 @@ export enum SceneKind {
 	inputEmailToResetPassword3 = "inputEmailToResetPassword3",
 }
 
-export type SceneType<K extends SceneKind, Context = {}> = {
+export type SceneType<K extends SceneKind, Context = unknown> = {
 	kind: K;
 } & Context;
 

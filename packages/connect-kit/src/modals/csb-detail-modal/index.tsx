@@ -1,63 +1,60 @@
 import React from "react";
-import { CloseIcon, LogoIcon } from "@crossbell/ui";
-import { useAccountBalance, useAccountState } from "@crossbell/connect-kit";
 
-import { ModalHeader, BaseModal, IconBtn, ActionBtn } from "../../components";
-import { useOpSignBalance } from "../../hooks";
+import {
+	DynamicContainer,
+	DynamicContainerContent,
+	BaseModal,
+} from "../../components";
 
-import styles from "./index.module.css";
-import { useModalStore } from "./stores";
+import { SceneKind } from "./types";
+import { useScenesStore, useModalStore, StoresProvider } from "./stores";
+
+import { Balance } from "./scenes/balance";
+import { ClaimCSB } from "./scenes/claim-csb";
 
 export { useModalStore };
 
 export function CsbDetailModal() {
 	const { isActive, hide } = useModalStore();
-	const account = useAccountState((s) => s.wallet);
-	const { balance } = useAccountBalance();
-	const opBalance = useOpSignBalance();
-
-	if (!account) return null;
+	const storeKey = useResetStore();
 
 	return (
 		<BaseModal isActive={isActive} onClose={hide}>
-			<div className={styles.container}>
-				<ModalHeader
-					title="$CSB Balance"
-					rightNode={
-						<IconBtn onClick={hide}>
-							<CloseIcon />
-						</IconBtn>
-					}
-				/>
-
-				<div className={styles.section}>
-					<div className={styles.address}>
-						Your address: {formatAddress(account.address)}
-					</div>
-
-					<div className={styles.balance}>
-						<LogoIcon />
-						{balance?.formatted}
-						<ActionBtn color="yellow" height="32px" minWidth="85px">
-							Claim
-						</ActionBtn>
-					</div>
-				</div>
-
-				{account.siwe && (
-					<div className={styles.section}>
-						<div className={styles.operatorAccount}>
-							Operator Account
-							<LogoIcon />
-							{opBalance?.formatted}
-						</div>
-					</div>
-				)}
-			</div>
+			<DynamicContainer>
+				<StoresProvider key={storeKey}>
+					<Main />
+				</StoresProvider>
+			</DynamicContainer>
 		</BaseModal>
 	);
 }
 
-function formatAddress(address: string): string {
-	return address.toLowerCase().replace(/^(\w{8})\w+(\w{9})$/, "$1...$2");
+function Main() {
+	const currentScene = useScenesStore(({ computed }) => computed.currentScene);
+
+	return (
+		<DynamicContainerContent id={currentScene.kind}>
+			{((): JSX.Element => {
+				switch (currentScene.kind) {
+					case SceneKind.balance:
+						return <Balance />;
+					case SceneKind.claimCSB:
+						return <ClaimCSB />;
+				}
+			})()}
+		</DynamicContainerContent>
+	);
+}
+
+function useResetStore() {
+	const { isActive } = useModalStore();
+	const keyRef = React.useRef(0);
+
+	React.useMemo(() => {
+		if (isActive) {
+			keyRef.current += 1;
+		}
+	}, [isActive]);
+
+	return keyRef.current;
 }
