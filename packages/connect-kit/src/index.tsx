@@ -23,10 +23,19 @@ import {
 	UpgradeAccountModal,
 	useModalStore as useUpgradeAccountModal,
 } from "./modals/upgrade-account-modal";
+import {
+	CsbDetailModal,
+	useModalStore as useCsbDetailModal,
+} from "./modals/csb-detail-modal";
 
 export * from "./hooks";
 
-export { useConnectModal, useDisconnectModal, useUpgradeAccountModal };
+export {
+	useConnectModal,
+	useDisconnectModal,
+	useUpgradeAccountModal,
+	useCsbDetailModal,
+};
 
 export type ConnectKitProviderProps = {
 	children: React.ReactNode;
@@ -62,6 +71,7 @@ export function ConnectKitProvider({
 				<DisconnectModal />
 				<UpgradeAccountModal />
 				<ClaimCSBModal />
+				<CsbDetailModal />
 				{children}
 			</UrlComposerContext.Provider>
 		</UseWeb2UrlContext.Provider>

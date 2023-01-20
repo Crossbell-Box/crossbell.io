@@ -1,0 +1,51 @@
+.container {
+	width: 360px;
+	color: #082135;
+}
+
+.section {
+	padding: 0 24px;
+}
+
+.section:not(:last-child) {
+	border-bottom: 8px solid #f6f7f9;
+}
+
+.address {
+	font-weight: 500;
+	font-size: 14px;
+	margin-bottom: 12px;
+}
+
+.balance {
+	color: #082135;
+	font-weight: 500;
+	font-size: 22px;
+	display: flex;
+	align-items: center;
+	margin-bottom: 24px;
+}
+
+.balance svg {
+	color: #f6c549;
+	font-size: 18px;
+	margin-right: 6px;
+}
+
+.balance button {
+	margin-left: auto;
+}
+
+.operatorAccount {
+	display: flex;
+	align-items: center;
+	font-weight: 500;
+	font-size: 12px;
+	padding: 12px 0;
+}
+
+.operatorAccount svg {
+	color: #f6c549;
+	font-size: 14px;
+	margin: 0 8px 0 auto;
+}

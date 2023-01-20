@@ -1,0 +1,21 @@
+.btn {
+	display: flex;
+	align-items: center;
+	justify-content: center;
+	font-size: 12px;
+	border: none;
+	background: transparent;
+	outline: none;
+	border-radius: 6px;
+	font-weight: 500;
+}
+
+.gray {
+	color: #757f8d;
+	background: #fafafa;
+}
+
+.yellow {
+	color: #fff;
+	background: #f6c549;
+}
