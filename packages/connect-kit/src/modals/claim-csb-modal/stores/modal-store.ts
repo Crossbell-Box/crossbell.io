@@ -1,6 +1,6 @@
 import create from "zustand";
 
-import { modalSlice, ModalSlice } from "../../../utils/store/modal-slice";
+import { modalSlice, ModalSlice } from "../../../utils";
 
 export type ModalStore = Omit<ModalSlice, "show"> & {
 	msg: string;
