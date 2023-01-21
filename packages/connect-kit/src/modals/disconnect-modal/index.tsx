@@ -1,7 +1,6 @@
 import React from "react";
 import classNames from "classnames";
-import { Button } from "@mantine/core";
-import { CloseIcon, LightBulbIcon } from "@crossbell/ui";
+import { LightBulbIcon } from "@crossbell/ui";
 
 import commonStyles from "../../styles.module.css";
 import { ModalHeader, BaseModal } from "../../components";
@@ -21,20 +20,7 @@ export function DisconnectModal() {
 	return (
 		<BaseModal isActive={isActive} onClose={hide}>
 			<div className={styles.container}>
-				<ModalHeader
-					title="Disconnect Wallet"
-					rightNode={
-						<Button
-							className={styles.closeBtn}
-							variant="subtle"
-							color="gray"
-							compact
-							onClick={hide}
-						>
-							<CloseIcon />
-						</Button>
-					}
-				/>
+				<ModalHeader title="Disconnect Wallet" onClose={hide} />
 
 				<div className={styles.main}>
 					<button

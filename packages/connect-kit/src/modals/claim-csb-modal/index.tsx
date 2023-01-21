@@ -1,6 +1,5 @@
 import React from "react";
-import { Button } from "@mantine/core";
-import { useWeb2Url, CloseIcon } from "@crossbell/ui";
+import { useWeb2Url } from "@crossbell/ui";
 
 import { ModalHeader, BaseModal } from "../../components";
 import { IMAGES } from "../../utils";
@@ -17,20 +16,7 @@ export function ClaimCSBModal() {
 	return (
 		<BaseModal isActive={isActive} onClose={hide}>
 			<div className={styles.container}>
-				<ModalHeader
-					title="Claim"
-					rightNode={
-						<Button
-							className={styles.closeBtn}
-							variant="subtle"
-							color="gray"
-							compact
-							onClick={hide}
-						>
-							<CloseIcon />
-						</Button>
-					}
-				/>
+				<ModalHeader title="Claim" onClose={hide} />
 
 				<div className={styles.main}>
 					<div className={styles.tipsContainer}>

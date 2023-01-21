@@ -2,12 +2,6 @@
 	width: 360px;
 }
 
-.closeBtn {
-	height: auto;
-	padding: 5px;
-	font-size: 22px;
-}
-
 .main {
 	display: flex;
 	flex-direction: column;
