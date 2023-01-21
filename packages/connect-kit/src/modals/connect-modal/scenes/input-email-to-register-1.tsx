@@ -31,7 +31,7 @@ export function InputEmailToRegister1() {
 		if (store.computed.canVerifyCode) {
 			store.verifyCode().then((isCodeValid) => {
 				if (isCodeValid) {
-					goTo(SceneKind.inputEmailToRegister2);
+					goTo({ kind: SceneKind.inputEmailToRegister2 });
 				}
 			});
 		}
@@ -129,7 +129,7 @@ export function InputEmailToRegister1() {
 				<div className={styles.actions}>
 					<button
 						disabled={store.computed.isPending}
-						onClick={() => goTo(SceneKind.inputEmailToConnect)}
+						onClick={() => goTo({ kind: SceneKind.inputEmailToConnect })}
 						className={styles.goToEmailLoginBtn}
 					>
 						Have an account already?

@@ -31,7 +31,7 @@ export function InputEmailToResetPassword1() {
 		if (store.computed.canVerifyCode) {
 			store.verifyCode().then((isCodeValid) => {
 				if (isCodeValid) {
-					goTo(SceneKind.inputEmailToResetPassword2);
+					goTo({ kind: SceneKind.inputEmailToResetPassword2 });
 				}
 			});
 		}

@@ -38,7 +38,7 @@ export function SelectOptions() {
 							title: "Upgrade to Wallet",
 							style: { background: "#6AD991", color: "#FFF" },
 							icon: <WalletIcon className={styles.walletIcon} />,
-							onClick: () => goToScene(SceneKind.upgradeToWallet),
+							onClick: () => goToScene({ kind: SceneKind.upgradeToWallet }),
 						},
 
 						{
@@ -56,7 +56,7 @@ export function SelectOptions() {
 					fullWidth
 					className={styles.differenceBtn}
 					leftIcon={<LightBulbIcon className={styles.differenceIcon} />}
-					onClick={() => goToScene(SceneKind.connectKindDifferences)}
+					onClick={() => goToScene({ kind: SceneKind.connectKindDifferences })}
 				>
 					What’s the difference
 				</Button>

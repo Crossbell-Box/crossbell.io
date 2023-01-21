@@ -67,7 +67,7 @@ export function InputEmailToResetPassword2() {
 						onClick={() =>
 							store.resetPassword().then((ok) => {
 								if (ok) {
-									scene.goTo(SceneKind.inputEmailToResetPassword3);
+									scene.goTo({ kind: SceneKind.inputEmailToResetPassword3 });
 								}
 							})
 						}

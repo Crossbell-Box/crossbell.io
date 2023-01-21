@@ -29,7 +29,7 @@ export function InputEmailToRegister3() {
 		if (store.computed.canRegister) {
 			store.register().then((ok) => {
 				if (ok) {
-					scene.goTo(SceneKind.inputEmailToRegister4);
+					scene.goTo({ kind: SceneKind.inputEmailToRegister4 });
 				}
 			});
 		}

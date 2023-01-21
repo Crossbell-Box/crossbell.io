@@ -76,7 +76,9 @@ export function InputEmailToConnect() {
 							className={styles.forgotBtn}
 							compact={true}
 							tabIndex={1}
-							onClick={() => goTo(SceneKind.inputEmailToResetPassword1)}
+							onClick={() =>
+								goTo({ kind: SceneKind.inputEmailToResetPassword1 })
+							}
 						>
 							Forgot?
 						</Button>
@@ -112,7 +114,7 @@ export function InputEmailToConnect() {
 							onClick={() => {
 								emailRegisterStore.updateEmail(emailConnectStore.email);
 								emailRegisterStore.sendCode();
-								goTo(SceneKind.inputEmailToRegister1);
+								goTo({ kind: SceneKind.inputEmailToRegister1 });
 							}}
 							className={styles.registerBtn}
 						>

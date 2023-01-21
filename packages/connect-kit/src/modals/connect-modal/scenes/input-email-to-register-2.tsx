@@ -104,7 +104,7 @@ export function InputEmailToRegister2() {
 
 				<div className={styles.actions}>
 					<button
-						onClick={() => goTo(SceneKind.inputEmailToConnect)}
+						onClick={() => goTo({ kind: SceneKind.inputEmailToConnect })}
 						className={styles.goToEmailLogin}
 					>
 						Have an account already?
@@ -114,7 +114,9 @@ export function InputEmailToRegister2() {
 						disabled={!store.computed.canGoToStep3}
 						onClick={() => {
 							setIsWaiting(true);
-							wait(2000).then(() => goTo(SceneKind.inputEmailToRegister3));
+							wait(2000).then(() =>
+								goTo({ kind: SceneKind.inputEmailToRegister3 })
+							);
 						}}
 					>
 						Register
