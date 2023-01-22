@@ -6,5 +6,6 @@ export * from "./icons";
 export * from "./icon-btn";
 export * from "./modal-header";
 export * from "./option-list";
+export * from "./op-sign-icon";
 export * from "./qr-code";
 export * from "./text-input";
