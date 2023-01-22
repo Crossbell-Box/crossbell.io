@@ -2,12 +2,25 @@
 	display: flex;
 	align-items: center;
 	justify-content: center;
-	font-size: 12px;
 	border: none;
 	background: transparent;
 	outline: none;
-	border-radius: 6px;
 	font-weight: 500;
+}
+
+.sm {
+	border-radius: 6px;
+	font-size: 12px;
+}
+
+.md {
+	border-radius: 16px;
+	font-size: 14px;
+}
+
+.ghost {
+	color: #999;
+	background: transparent;
 }
 
 .gray {
@@ -18,4 +31,9 @@
 .yellow {
 	color: #fff;
 	background: #f6c549;
+}
+
+.green {
+	color: #fff;
+	background: #6ad991;
 }

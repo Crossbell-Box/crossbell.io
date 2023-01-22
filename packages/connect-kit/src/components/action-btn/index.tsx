@@ -5,7 +5,8 @@ import commonStyles from "../../styles.module.css";
 import styles from "./index.module.css";
 
 type BaseProps = {
-	color: keyof typeof colorMap;
+	size?: keyof typeof sizeMap;
+	color?: keyof typeof colorMap;
 	height?: string;
 	minWidth?: string;
 };
@@ -17,12 +18,19 @@ export type ActionBtnProps = Omit<
 	BaseProps;
 
 const colorMap = {
-	yellow: styles.yellow,
+	ghost: styles.ghost,
 	gray: styles.gray,
+	yellow: styles.yellow,
+	green: styles.green,
+};
+
+const sizeMap = {
+	sm: styles.sm,
+	md: styles.md,
 };
 
 export const ActionBtn = React.memo(
-	({ color, className, height, minWidth, ...props }: ActionBtnProps) => (
+	({ color, size, className, height, minWidth, ...props }: ActionBtnProps) => (
 		<button
 			{...props}
 			style={{ height, minWidth }}
@@ -30,7 +38,8 @@ export const ActionBtn = React.memo(
 				commonStyles.uxOverlay,
 				styles.btn,
 				className,
-				colorMap[color]
+				sizeMap[size ?? "sm"],
+				colorMap[color ?? "gray"]
 			)}
 		/>
 	)
