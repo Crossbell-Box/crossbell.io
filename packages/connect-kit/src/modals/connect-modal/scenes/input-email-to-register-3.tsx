@@ -7,11 +7,11 @@ import {
 	CrossbellIcon,
 	EmailIcon,
 	MemberIcon,
+	TextInput,
 } from "../../../components";
 import { IMAGES } from "../../../utils";
 
 import { Header } from "../components/header";
-import { TextInput } from "../components/text-input";
 import { Field } from "../components/field";
 import { NextStepButton } from "../components/next-step-button";
 

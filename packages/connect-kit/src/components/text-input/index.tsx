@@ -1,7 +1,7 @@
 import React from "react";
 import classNames from "classnames";
 
-import styles from "./text-input.module.css";
+import styles from "./index.module.css";
 
 export type TextInputProps = React.InputHTMLAttributes<HTMLInputElement> & {
 	rightSection?: React.ReactNode;

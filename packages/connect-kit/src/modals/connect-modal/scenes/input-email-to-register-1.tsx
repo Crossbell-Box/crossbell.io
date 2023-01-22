@@ -6,10 +6,10 @@ import {
 	useRefreshDynamicContainer,
 	EmailIcon,
 	PasswordIcon,
+	TextInput,
 } from "../../../components";
 
 import { Header } from "../components/header";
-import { TextInput } from "../components/text-input";
 import { Field } from "../components/field";
 import { NextStepButton } from "../components/next-step-button";
 import { CodeInput } from "../components/code-input";
