@@ -2,6 +2,7 @@ export * from "./action-btn";
 export * from "./base-modal";
 export * from "./connect-kind-differences";
 export * from "./dynamic-container";
+export * from "./field";
 export * from "./icons";
 export * from "./icon-btn";
 export * from "./modal-header";
