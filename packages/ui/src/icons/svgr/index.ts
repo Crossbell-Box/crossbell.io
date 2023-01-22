@@ -24,6 +24,7 @@ export { default as HouseFillIcon } from "./house-fill";
 export { default as LightBulbIcon } from "./light-bulb";
 export { default as LikeFilledIcon } from "./like-filled";
 export { default as LikeIcon } from "./like";
+export { default as LinkIcon } from "./link";
 export { default as LogoIcon } from "./logo";
 export { default as MintFillIcon } from "./mint-fill";
 export { default as MintIcon } from "./mint";
