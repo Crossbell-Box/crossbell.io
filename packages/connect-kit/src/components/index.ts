@@ -1,5 +1,6 @@
 export * from "./action-btn";
 export * from "./base-modal";
+export * from "./bottom-tips";
 export * from "./connect-kind-differences";
 export * from "./dynamic-container";
 export * from "./field";
