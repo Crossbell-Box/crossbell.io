@@ -6,6 +6,7 @@ export { default as ArrowRightIcon } from "./arrow-right";
 export { default as BackIcon } from "./back";
 export { default as BackgroundReplaceIcon } from "./background-replace";
 export { default as CharacterIcon } from "./character";
+export { default as CheckCircleFillIcon } from "./check-circle-fill";
 export { default as CircleHelpIcon } from "./circle-help";
 export { default as CircleMinusIcon } from "./circle-minus";
 export { default as CirclePlusIcon } from "./circle-plus";
