@@ -20,14 +20,15 @@ const colorMap = {
 };
 
 export const MainBtn = React.memo(
-	({ color, className, ...props }: MainBtnProps) => (
+	({ color, className, disabled, ...props }: MainBtnProps) => (
 		<button
 			{...props}
+			disabled={disabled}
 			className={classNames(
-				commonStyles.uxOverlay,
+				!disabled && commonStyles.uxOverlay,
 				styles.btn,
 				className,
-				colorMap[color]
+				disabled ? colorMap.gray : colorMap[color]
 			)}
 		/>
 	)

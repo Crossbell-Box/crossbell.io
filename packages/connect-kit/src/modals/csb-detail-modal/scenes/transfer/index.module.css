@@ -1,0 +1,37 @@
+.container {
+	width: 360px;
+	color: #082135;
+}
+
+.main {
+	padding: 24px;
+}
+
+.bell {
+	font-size: 18px;
+	color: #f6c549;
+}
+
+.error {
+	position: relative;
+	padding-left: 10px;
+	font-weight: 400;
+	font-size: 14px;
+	color: #999;
+	margin: 12px 0;
+}
+
+.error::before {
+	content: "";
+	position: absolute;
+	left: 0;
+	top: 0;
+	bottom: 0;
+	width: 3px;
+	border-radius: 100vh;
+	background: #e65040;
+}
+
+.mainBtn {
+	margin-top: 48px;
+}

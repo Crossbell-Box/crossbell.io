@@ -42,6 +42,7 @@
 	font-weight: 500;
 	font-size: 12px;
 	padding: 12px 0;
+	cursor: pointer;
 }
 
 .operatorAccount svg {

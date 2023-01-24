@@ -10,6 +10,11 @@
 	border-radius: 16px;
 	font-weight: 500;
 	height: 48px;
+	transition: color 0.2s, background-color 0.2s;
+}
+
+.btn:disabled {
+	cursor: not-allowed;
 }
 
 .gray {

@@ -1,11 +1,7 @@
 import React from "react";
 import { LogoIcon } from "@crossbell/ui";
 
-import {
-	ActionBtn,
-	ModalHeader,
-	useRefreshDynamicContainer,
-} from "../../../../components";
+import { ActionBtn, useRefreshDynamicContainer } from "../../../../components";
 import {
 	useAccountBalance,
 	useAccountCharacters,
@@ -13,14 +9,14 @@ import {
 	useOpSignBalance,
 } from "../../../../hooks";
 
-import { useCsbDetailModal, useScenesStore } from "../../stores";
-import { Characters } from "../../components";
+import { useScenesStore } from "../../stores";
+import { Characters, Header } from "../../components";
 import { SceneKind } from "../../types";
 
 import styles from "./index.module.css";
+import classNames from "classnames";
 
 export function Balance() {
-	const hide = useCsbDetailModal((s) => s.hide);
 	const account = useAccountState((s) => s.wallet);
 	const goTo = useScenesStore((s) => s.goTo);
 	const { balance } = useAccountBalance();
@@ -34,7 +30,7 @@ export function Balance() {
 
 	return (
 		<div className={styles.container}>
-			<ModalHeader title="$CSB Balance" onClose={hide} />
+			<Header title="$CSB Balance" />
 
 			<div className={styles.section}>
 				<div className={styles.address} title={account.address}>
@@ -57,7 +53,10 @@ export function Balance() {
 
 			{account.siwe && (
 				<div className={styles.section}>
-					<div className={styles.operatorAccount}>
+					<div
+						className={classNames(styles.operatorAccount)}
+						onClick={() => goTo({ kind: SceneKind.transfer })}
+					>
 						Operator Account
 						<LogoIcon />
 						{opBalance?.formatted}
