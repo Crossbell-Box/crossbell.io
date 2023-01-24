@@ -16,3 +16,4 @@ export * from "./text-input";
 export * from "./select-characters";
 export * from "./main-btn";
 export * from "./sign-in-with-wallet";
+export * from "./wallet-claim-csb";
