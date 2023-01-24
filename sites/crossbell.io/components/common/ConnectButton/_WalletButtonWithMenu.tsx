@@ -1,3 +1,4 @@
+import React from "react";
 import { Menu, Text, Button, Tooltip, Indicator } from "@mantine/core";
 import { useDisclosure } from "@mantine/hooks";
 import Link from "next/link";
@@ -13,6 +14,7 @@ import {
 	GeneralAccount,
 	useAccountState,
 	useCsbDetailModal,
+	useWalletClaimCSBModal,
 } from "@crossbell/connect-kit";
 import { AccountList } from "~/shared/components/account-list";
 import {
@@ -60,6 +62,7 @@ export default function WalletButtonWithMenu({
 	const showNotificationModal = useShowNotificationModal();
 	const { isAllRead } = useNotifications();
 	const csbDetailModal = useCsbDetailModal();
+	const walletClaimCSBModal = useWalletClaimCSBModal();
 
 	return (
 		<Menu
@@ -92,9 +95,26 @@ export default function WalletButtonWithMenu({
 				<Menu.Label onClick={csbDetailModal.show} className="cursor-pointer">
 					<div className="flex items-center">
 						<Text className="i-csb:logo text-20px text-[#F6C549]" />
-						<Text className="font-400 text-16px ml-5px text-[#082135]">
+
+						<Text className="font-400 text-16px ml-5px text-[#082135] mr-auto">
 							{isLoadingBalance ? "..." : balance?.formatted}
 						</Text>
+
+						{account.type === "wallet" && (
+							<Button
+								size="xs"
+								radius={6}
+								px={10}
+								className="h-24px"
+								onClick={(event: React.MouseEvent) => {
+									event.stopPropagation();
+									walletClaimCSBModal.show();
+								}}
+							>
+								Claim
+							</Button>
+						)}
+
 						{account.type === "email" &&
 							(() => {
 								const text = (
@@ -104,7 +124,7 @@ export default function WalletButtonWithMenu({
 								return isAbleToRefillEmailBalance ? (
 									<Button
 										size="xs"
-										className="ml-auto h-24px"
+										className="h-24px"
 										px={10}
 										radius={6}
 										onClick={refillEmailBalance}
