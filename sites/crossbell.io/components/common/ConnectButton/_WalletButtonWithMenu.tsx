@@ -15,7 +15,13 @@ import {
 	useCsbDetailModal,
 } from "@crossbell/connect-kit";
 import { AccountList } from "~/shared/components/account-list";
-import { BellIcon, ExitIcon, ExportIcon, UsersIcon } from "@crossbell/ui";
+import {
+	BellIcon,
+	ExitIcon,
+	ExportIcon,
+	UsersIcon,
+	BackIcon,
+} from "@crossbell/ui";
 import {
 	useShowNotificationModal,
 	useNotifications,
@@ -75,8 +81,15 @@ export default function WalletButtonWithMenu({
 			</Menu.Target>
 
 			<Menu.Dropdown className="w-full">
-				<Menu.Label onClick={csbDetailModal.show}>$CSB Balance</Menu.Label>
-				<Menu.Label onClick={csbDetailModal.show}>
+				<Menu.Label
+					onClick={csbDetailModal.show}
+					className="flex items-center cursor-pointer"
+				>
+					$CSB Balance
+					<BackIcon className="ml-auto rotate-180" />
+				</Menu.Label>
+
+				<Menu.Label onClick={csbDetailModal.show} className="cursor-pointer">
 					<div className="flex items-center">
 						<Text className="i-csb:logo text-20px text-[#F6C549]" />
 						<Text className="font-400 text-16px ml-5px text-[#082135]">

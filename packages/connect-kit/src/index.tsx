@@ -20,6 +20,7 @@ export { useConnectModal } from "./modals/connect-modal";
 export { useDisconnectModal } from "./modals/disconnect-modal";
 export { useUpgradeAccountModal } from "./modals/upgrade-account-modal";
 export { useCsbDetailModal } from "./modals/csb-detail-modal";
+export { OpSignIcon } from "./components";
 export * from "./hooks";
 
 export type ConnectKitProviderProps = {

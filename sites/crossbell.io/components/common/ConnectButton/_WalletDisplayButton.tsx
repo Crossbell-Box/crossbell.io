@@ -13,10 +13,12 @@ import ArrowIcon from "./arrow-icon.svg";
 
 import {
 	GeneralAccount,
+	OpSignIcon,
 	useAccountBalance,
 	useAccountCharacter,
 } from "@crossbell/connect-kit";
 import { useNotifications } from "@crossbell/notification";
+import { extractCharacterName } from "@crossbell/util-metadata";
 
 type WalletDisplayButtonProps = ButtonProps & {
 	menuOpened: boolean;
@@ -78,7 +80,7 @@ const WalletDisplayButton = forwardRef<
 			styles={{
 				root: {
 					background:
-						"linear-gradient(97.73deg, #4172DE -39.7%, #5B89F7 94.74%);",
+						"linear-gradient(97.66deg, #4172DE -4.94%, #5B89F7 105.67%)",
 				},
 			}}
 		>
@@ -123,12 +125,13 @@ const WalletDisplayButton = forwardRef<
 
 							<div className="z-1 flex flex-col justify-between">
 								{/* handle */}
-								<Text
-									size="md"
-									className="font-500 leading-1.5rem overflow-hidden text-ellipsis max-w-8em text-[#F2F2F2]"
-								>
-									{character?.handle ? "@" + character.handle : ""}
-								</Text>
+								<span className="font-500 leading-24px text-15px truncate max-w-8em text-[#F2F2F2]">
+									{extractCharacterName(character)}
+								</span>
+								<OpSignIcon
+									className="bg-[#FFFFFF]/80 p-1px rounded-2px text-12px"
+									characterId={character?.characterId}
+								/>
 							</div>
 						</Group>
 
