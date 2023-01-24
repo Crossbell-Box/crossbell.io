@@ -2,12 +2,12 @@ import React from "react";
 import confetti from "canvas-confetti";
 
 import { Congrats } from "../components/congrats";
-import { useModalStore } from "../stores";
+import { useConnectModal } from "../stores";
 import { useAccountCharacter } from "../../../hooks";
 import { composeCharacterHref } from "~/shared/url/href";
 
 export function InputEmailToRegister4() {
-	const { hide: hideModal } = useModalStore();
+	const { hide: hideModal } = useConnectModal();
 	const character = useAccountCharacter();
 
 	React.useEffect(showConfetti, []);

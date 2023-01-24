@@ -2,7 +2,7 @@ import React from "react";
 
 import { ModalHeaderProps, ModalHeader } from "../../../components";
 
-import { useModalStore, useScenesStore } from "../stores";
+import { useUpgradeAccountModal, useScenesStore } from "../stores";
 
 export type HeaderProps = ModalHeaderProps;
 
@@ -11,7 +11,7 @@ export function Header({ title, leftNode, rightNode }: HeaderProps) {
 		({ computed }) => computed.isAbleToGoBack
 	);
 	const goBack = useScenesStore(({ goBack }) => goBack);
-	const { hide } = useModalStore();
+	const { hide } = useUpgradeAccountModal();
 
 	return (
 		<ModalHeader

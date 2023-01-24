@@ -7,13 +7,13 @@ import {
 	useRefreshDynamicContainer,
 } from "../../../../components";
 import { Header } from "../../components/header";
-import { useModalStore, useScenesStore } from "../../stores";
+import { useConnectModal, useScenesStore } from "../../stores";
 import { SceneKind } from "../../types";
 
 import styles from "./index.module.css";
 
 export function SelectCharacters() {
-	const hide = useModalStore((s) => s.hide);
+	const hide = useConnectModal((s) => s.hide);
 	const goTo = useScenesStore((s) => s.goTo);
 	const { characters } = useAccountCharacters();
 

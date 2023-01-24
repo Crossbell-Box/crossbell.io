@@ -2,12 +2,12 @@ import create from "zustand";
 
 import { modalSlice, ModalSlice } from "../../../utils";
 
-export type ModalStore = ModalSlice & {
+export type ConnectModalStore = ModalSlice & {
 	canHide: boolean;
 	setCanHide: (canHide: boolean) => void;
 };
 
-export const useModalStore = create<ModalStore>((set, get) => ({
+export const useConnectModal = create<ConnectModalStore>((set, get) => ({
 	...modalSlice(set, get),
 
 	canHide: true,

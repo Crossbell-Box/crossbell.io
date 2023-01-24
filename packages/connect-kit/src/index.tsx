@@ -11,31 +11,16 @@ import {
 import { usePreloadAllImgs } from "./utils";
 import { useAccountState } from "./hooks";
 import { ClaimCSBModal } from "./modals/claim-csb-modal";
-import {
-	ConnectModal,
-	useModalStore as useConnectModal,
-} from "./modals/connect-modal";
-import {
-	DisconnectModal,
-	useModalStore as useDisconnectModal,
-} from "./modals/disconnect-modal";
-import {
-	UpgradeAccountModal,
-	useModalStore as useUpgradeAccountModal,
-} from "./modals/upgrade-account-modal";
-import {
-	CsbDetailModal,
-	useModalStore as useCsbDetailModal,
-} from "./modals/csb-detail-modal";
+import { ConnectModal } from "./modals/connect-modal";
+import { DisconnectModal } from "./modals/disconnect-modal";
+import { UpgradeAccountModal } from "./modals/upgrade-account-modal";
+import { CsbDetailModal } from "./modals/csb-detail-modal";
 
+export { useConnectModal } from "./modals/connect-modal";
+export { useDisconnectModal } from "./modals/disconnect-modal";
+export { useUpgradeAccountModal } from "./modals/upgrade-account-modal";
+export { useCsbDetailModal } from "./modals/csb-detail-modal";
 export * from "./hooks";
-
-export {
-	useConnectModal,
-	useDisconnectModal,
-	useUpgradeAccountModal,
-	useCsbDetailModal,
-};
 
 export type ConnectKitProviderProps = {
 	children: React.ReactNode;

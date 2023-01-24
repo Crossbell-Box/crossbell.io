@@ -7,14 +7,14 @@ import { ModalHeader, BaseModal } from "../../components";
 import { useDisconnectAccount } from "../../hooks";
 
 import styles from "./index.module.css";
-import { useModalStore } from "./stores";
+import { useDisconnectModal } from "./stores";
 
-export { useModalStore };
+export { useDisconnectModal };
 
 const buttonCls = classNames(styles.btn, commonStyles.uxOverlay);
 
 export function DisconnectModal() {
-	const { isActive, hide } = useModalStore();
+	const { isActive, hide } = useDisconnectModal();
 	const disconnectAccount = useDisconnectAccount(hide);
 
 	return (

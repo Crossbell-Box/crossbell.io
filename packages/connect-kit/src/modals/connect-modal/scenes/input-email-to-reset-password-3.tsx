@@ -3,14 +3,14 @@ import React from "react";
 import { Congrats } from "../components/congrats";
 import {
 	useScenesStore,
-	useModalStore,
+	useConnectModal,
 	useResetResetPasswordStore,
 } from "../stores";
 import { SceneKind } from "../types";
 
 export function InputEmailToResetPassword3() {
 	const { resetScenes } = useScenesStore();
-	const { hide: hideModal } = useModalStore();
+	const { hide: hideModal } = useConnectModal();
 	const resetStore = useResetResetPasswordStore();
 
 	return (

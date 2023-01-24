@@ -4,12 +4,12 @@ import { LinkIcon, TwitterIcon } from "@crossbell/ui";
 import { ModalHeader, TextInput, MainBtn } from "../../../../components";
 import { useAccountState } from "../../../../hooks";
 
-import { useModalStore, useScenesStore } from "../../stores";
+import { useCsbDetailModal, useScenesStore } from "../../stores";
 import commonStyles from "../../../../styles.module.css";
 import styles from "./index.module.css";
 
 export function ClaimCSB() {
-	const hide = useModalStore((s) => s.hide);
+	const hide = useCsbDetailModal((s) => s.hide);
 	const [goBack, isAbleToGoBack] = useScenesStore((s) => [
 		s.goBack,
 		s.computed.isAbleToGoBack,

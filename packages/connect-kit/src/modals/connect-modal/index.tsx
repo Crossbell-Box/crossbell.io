@@ -8,7 +8,7 @@ import {
 } from "../../components";
 
 import { SceneKind } from "./types";
-import { StoresProvider, useModalStore, useScenesStore } from "./stores";
+import { StoresProvider, useConnectModal, useScenesStore } from "./stores";
 
 import { AboutWallets } from "./scenes/about-wallets";
 import { ConnectKindDifferences } from "./scenes/connect-kind-differences";
@@ -29,10 +29,10 @@ import { SelectCharacters } from "./scenes/select-characters";
 import { MintCharacter } from "./scenes/mint-character";
 import { MintCharacterQuickly } from "./scenes/mint-character-quickly";
 
-export { useModalStore };
+export { useConnectModal };
 
 export function ConnectModal() {
-	const { isActive, hide } = useModalStore();
+	const { isActive, hide } = useConnectModal();
 	const storeKey = useResetStore();
 
 	return (
@@ -106,7 +106,7 @@ function Main() {
 }
 
 function useResetStore() {
-	const { isActive } = useModalStore();
+	const { isActive } = useConnectModal();
 	const keyRef = React.useRef(0);
 
 	React.useMemo(() => {

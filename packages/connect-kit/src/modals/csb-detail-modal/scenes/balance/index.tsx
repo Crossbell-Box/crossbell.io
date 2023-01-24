@@ -13,14 +13,14 @@ import {
 	useOpSignBalance,
 } from "../../../../hooks";
 
-import { useModalStore, useScenesStore } from "../../stores";
+import { useCsbDetailModal, useScenesStore } from "../../stores";
 import { Characters } from "../../components";
 import { SceneKind } from "../../types";
 
 import styles from "./index.module.css";
 
 export function Balance() {
-	const hide = useModalStore((s) => s.hide);
+	const hide = useCsbDetailModal((s) => s.hide);
 	const account = useAccountState((s) => s.wallet);
 	const goTo = useScenesStore((s) => s.goTo);
 	const { balance } = useAccountBalance();

@@ -7,15 +7,15 @@ import {
 } from "../../components";
 
 import { SceneKind } from "./types";
-import { useScenesStore, useModalStore, StoresProvider } from "./stores";
+import { useScenesStore, useCsbDetailModal, StoresProvider } from "./stores";
 
 import { Balance } from "./scenes/balance";
 import { ClaimCSB } from "./scenes/claim-csb";
 
-export { useModalStore };
+export { useCsbDetailModal };
 
 export function CsbDetailModal() {
-	const { isActive, hide } = useModalStore();
+	const { isActive, hide } = useCsbDetailModal();
 	const storeKey = useResetStore();
 
 	return (
@@ -47,7 +47,7 @@ function Main() {
 }
 
 function useResetStore() {
-	const { isActive } = useModalStore();
+	const { isActive } = useCsbDetailModal();
 	const keyRef = React.useRef(0);
 
 	React.useMemo(() => {

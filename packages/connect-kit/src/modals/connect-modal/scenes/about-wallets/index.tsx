@@ -2,7 +2,7 @@ import React from "react";
 import { Carousel, Embla } from "@mantine/carousel";
 
 import { Header } from "../../components/header";
-import { useModalStore } from "../../stores";
+import { useConnectModal } from "../../stores";
 
 import { Airplane, ArrowDown, Wallet, Key, Email } from "./icons";
 import styles from "./index.module.css";
@@ -72,7 +72,7 @@ export function AboutWallets() {
 	const [embla, setEmbla] = React.useState<Embla | null>(null);
 	const [index, setIndex] = React.useState(0);
 	const currentScene = React.useMemo(() => scenes[index], [index]);
-	const setModalCanHide = useModalStore((s) => s.setCanHide);
+	const setModalCanHide = useConnectModal((s) => s.setCanHide);
 
 	React.useEffect(() => {
 		if (embla) {
