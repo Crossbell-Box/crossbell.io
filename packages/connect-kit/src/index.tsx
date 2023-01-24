@@ -15,11 +15,13 @@ import { ConnectModal } from "./modals/connect-modal";
 import { DisconnectModal } from "./modals/disconnect-modal";
 import { UpgradeAccountModal } from "./modals/upgrade-account-modal";
 import { CsbDetailModal } from "./modals/csb-detail-modal";
+import { WalletClaimCSBModal } from "./modals/wallet-claim-csb-modal";
 
 export { useConnectModal } from "./modals/connect-modal";
 export { useDisconnectModal } from "./modals/disconnect-modal";
 export { useUpgradeAccountModal } from "./modals/upgrade-account-modal";
 export { useCsbDetailModal } from "./modals/csb-detail-modal";
+export { useWalletClaimCSBModal } from "./modals/wallet-claim-csb-modal";
 export { OpSignIcon } from "./components";
 export * from "./hooks";
 
@@ -58,6 +60,7 @@ export function ConnectKitProvider({
 				<UpgradeAccountModal />
 				<NotEnoughCSBModal />
 				<CsbDetailModal />
+				<WalletClaimCSBModal />
 				{children}
 			</UrlComposerContext.Provider>
 		</UseWeb2UrlContext.Provider>
