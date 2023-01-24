@@ -4,7 +4,7 @@ import { BigNumber, utils } from "ethers";
 
 import { indexer } from "@crossbell/indexer";
 
-import { useClaimCSBModal } from "../../modals/claim-csb-modal";
+import { useNotEnoughCSBModal } from "../../modals/not-enough-csb-modal";
 import { asyncRetry, SliceFn } from "../../utils";
 import { fetchAccountInfo, refillBalance } from "../../apis";
 
@@ -123,7 +123,7 @@ export const createEmailAccountSlice: SliceFn<EmailAccountSlice> = (
 
 			if ("ok" in result) {
 				if (result.message) {
-					useClaimCSBModal.getState().show(result.message);
+					useNotEnoughCSBModal.getState().show(result.message);
 				}
 
 				return result.ok;
@@ -165,7 +165,7 @@ export const createEmailAccountSlice: SliceFn<EmailAccountSlice> = (
 			case RefillEmailBalanceStatusType.tooMuchCSB:
 			case RefillEmailBalanceStatusType.userNotConnected:
 				if (showTips) {
-					useClaimCSBModal.getState().show(status.msg);
+					useNotEnoughCSBModal.getState().show(status.msg);
 				}
 				return false;
 		}

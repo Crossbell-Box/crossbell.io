@@ -10,7 +10,7 @@ import {
 
 import { usePreloadAllImgs } from "./utils";
 import { useAccountState } from "./hooks";
-import { ClaimCSBModal } from "./modals/claim-csb-modal";
+import { NotEnoughCSBModal } from "./modals/not-enough-csb-modal";
 import { ConnectModal } from "./modals/connect-modal";
 import { DisconnectModal } from "./modals/disconnect-modal";
 import { UpgradeAccountModal } from "./modals/upgrade-account-modal";
@@ -56,7 +56,7 @@ export function ConnectKitProvider({
 				<ConnectModal />
 				<DisconnectModal />
 				<UpgradeAccountModal />
-				<ClaimCSBModal />
+				<NotEnoughCSBModal />
 				<CsbDetailModal />
 				{children}
 			</UrlComposerContext.Provider>
