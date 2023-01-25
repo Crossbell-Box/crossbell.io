@@ -27,7 +27,7 @@ export function SelectCharacters() {
 
 	return (
 		<div className={styles.container}>
-			<Header leftNode={false} title="Your Characters" />
+			<Header title="Your Characters" />
 
 			<div className={styles.main}>
 				<Main afterSelectCharacter={hide} onSelectNew={goToMintCharacter} />

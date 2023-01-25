@@ -81,7 +81,7 @@ export function MintCharacter({
 	);
 }
 
-function useMintCharacterModel({
+export function useMintCharacterModel({
 	afterSubmit,
 }: Pick<MintCharacterProps, "afterSubmit">) {
 	const [file, setFile] = React.useState<File | null>(null);
