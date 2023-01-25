@@ -6,3 +6,4 @@ export * from "./use-is-mounted";
 export * from "./use-isomorphic-effect";
 export * from "./use-preload-imgs";
 export * from "./use-ref-callback";
+export * from "./use-upload-to-ipfs";
