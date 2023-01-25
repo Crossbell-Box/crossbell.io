@@ -2,6 +2,9 @@ import React from "react";
 import { LoadingOverlay, Tooltip } from "@mantine/core";
 import { useWeb2Url, CircleHelpIcon } from "@crossbell/ui";
 
+import { composeCharacterHref } from "~/shared/url/href";
+
+import { useAccountState } from "../../../hooks";
 import {
 	CheckIcon,
 	CrossbellIcon,
@@ -16,7 +19,11 @@ import { Field } from "../components/field";
 import { NextStepButton } from "../components/next-step-button";
 
 import { SceneKind } from "../types";
-import { useEmailRegisterStore, useScenesStore } from "../stores";
+import {
+	useConnectModal,
+	useEmailRegisterStore,
+	useScenesStore,
+} from "../stores";
 
 import styles from "./input-email-to-register-3.module.css";
 
@@ -24,12 +31,30 @@ export function InputEmailToRegister3() {
 	const store = useEmailRegisterStore();
 	const scene = useScenesStore();
 	const imgUrl = useWeb2Url(IMAGES.whatIsCharacterImg);
+	const { hide: hideModal } = useConnectModal();
 
 	const register = React.useCallback(() => {
 		if (store.computed.canRegister) {
 			store.register().then((ok) => {
 				if (ok) {
-					scene.goTo({ kind: SceneKind.inputEmailToRegister4 });
+					const character =
+						useAccountState.getState().computed.account?.character;
+
+					scene.goTo({
+						kind: SceneKind.congrats,
+						title: "Congrats!",
+						desc: "Now you can return into the feed and enjoy Crossbell.",
+						tips: "Welcome to new Crossbell",
+						timeout: "15s",
+						btnText: character ? "Check Character" : "Close",
+						onClose: hideModal,
+						onClickBtn: () => {
+							if (character) {
+								window.open(composeCharacterHref(character.handle), "_blank");
+							}
+							hideModal();
+						},
+					});
 				}
 			});
 		}

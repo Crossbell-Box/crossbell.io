@@ -5,6 +5,7 @@ import {
 	BaseModal,
 	DynamicContainer,
 	DynamicContainerContent,
+	Congrats,
 } from "../../components";
 
 import { SceneKind } from "./types";
@@ -18,10 +19,8 @@ import { InputEmailToConnect } from "./scenes/input-email-to-connect";
 import { InputEmailToRegister1 } from "./scenes/input-email-to-register-1";
 import { InputEmailToRegister2 } from "./scenes/input-email-to-register-2";
 import { InputEmailToRegister3 } from "./scenes/input-email-to-register-3";
-import { InputEmailToRegister4 } from "./scenes/input-email-to-register-4";
 import { InputEmailToResetPassword1 } from "./scenes/input-email-to-reset-password-1";
 import { InputEmailToResetPassword2 } from "./scenes/input-email-to-reset-password-2";
-import { InputEmailToResetPassword3 } from "./scenes/input-email-to-reset-password-3";
 import { SelectConnectKind } from "./scenes/select-connect-kind";
 import { SelectWalletToConnect } from "./scenes/select-wallet-to-connect";
 import { SignInWithWallet } from "./scenes/sign-in-with-wallet";
@@ -63,6 +62,8 @@ function Main() {
 		<DynamicContainerContent id={currentScene.kind}>
 			{((): JSX.Element => {
 				switch (currentScene.kind) {
+					case SceneKind.congrats:
+						return <Congrats {...currentScene} />;
 					case SceneKind.selectConnectKind:
 						return <SelectConnectKind />;
 					case SceneKind.aboutWallets:
@@ -91,14 +92,10 @@ function Main() {
 						return <InputEmailToRegister2 />;
 					case SceneKind.inputEmailToRegister3:
 						return <InputEmailToRegister3 />;
-					case SceneKind.inputEmailToRegister4:
-						return <InputEmailToRegister4 />;
 					case SceneKind.inputEmailToResetPassword1:
 						return <InputEmailToResetPassword1 />;
 					case SceneKind.inputEmailToResetPassword2:
 						return <InputEmailToResetPassword2 />;
-					case SceneKind.inputEmailToResetPassword3:
-						return <InputEmailToResetPassword3 />;
 				}
 			})()}
 		</DynamicContainerContent>

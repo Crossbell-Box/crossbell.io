@@ -1,6 +1,9 @@
 import { Wallet } from "../../wallets";
+import { CongratsProps } from "../../components";
 
 export enum SceneKind {
+	congrats = "congrats",
+
 	selectConnectKind = "selectConnectKind",
 	aboutWallets = "aboutWallets",
 	connectKindDifferences = "connectKindDifferences",
@@ -18,21 +21,18 @@ export enum SceneKind {
 	inputEmailToRegister1 = "inputEmailToRegister1",
 	inputEmailToRegister2 = "inputEmailToRegister2",
 	inputEmailToRegister3 = "inputEmailToRegister3",
-	inputEmailToRegister4 = "inputEmailToRegister4",
 
 	inputEmailToResetPassword1 = "inputEmailToResetPassword1",
 	inputEmailToResetPassword2 = "inputEmailToResetPassword2",
-	inputEmailToResetPassword3 = "inputEmailToResetPassword3",
 }
 
 export type SceneType<K extends SceneKind, Context = unknown> = {
 	kind: K;
 } & Context;
 
-export type SceneWithContext = SceneType<
-	SceneKind.connectWallet,
-	{ wallet: Wallet }
->;
+export type SceneWithContext =
+	| SceneType<SceneKind.connectWallet, { wallet: Wallet }>
+	| SceneType<SceneKind.congrats, CongratsProps>;
 
 export type SceneWithoutContext = SceneType<
 	Exclude<SceneKind, SceneWithContext["kind"]>

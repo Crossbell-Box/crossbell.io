@@ -1,10 +1,11 @@
 import React from "react";
+import confetti from "canvas-confetti";
 
 import { useWeb2Url, CloseIcon } from "@crossbell/ui";
 
-import { IMAGES } from "../../../utils";
+import { IMAGES } from "../../utils";
 
-import styles from "./congrats.module.css";
+import styles from "./index.module.css";
 
 export type CongratsProps = {
 	btnText: string;
@@ -27,6 +28,8 @@ export function Congrats({
 }: CongratsProps) {
 	const illustrationUrl = useWeb2Url(IMAGES.addBtnImg);
 	const bgUrl = useWeb2Url(IMAGES.congratsBg);
+
+	React.useEffect(showConfetti, []);
 
 	return (
 		<div className={styles.container}>
@@ -64,4 +67,36 @@ export function Congrats({
 			</button>
 		</div>
 	);
+}
+
+function showConfetti() {
+	const end = Date.now() + 100;
+	const config: confetti.Options = {
+		particleCount: 25,
+		startVelocity: 90,
+		angle: 60,
+		spread: 60,
+		origin: { x: 0, y: 1 },
+		zIndex: 300,
+		gravity: 1.5,
+		colors: ["#6AD991", "#F6C549", "#E65040", "#5B89F7", "#9688F2"],
+	};
+
+	(function frame() {
+		confetti({
+			...config,
+			angle: 60,
+			origin: { x: 0, y: 1 },
+		});
+
+		confetti({
+			...config,
+			angle: 120,
+			origin: { x: 1, y: 1 },
+		});
+
+		if (Date.now() < end) {
+			requestAnimationFrame(frame);
+		}
+	})();
 }
