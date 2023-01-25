@@ -1,0 +1,21 @@
+.container {
+	position: relative;
+	padding-left: 10px;
+	font-weight: 400;
+	font-size: 14px;
+	color: #999;
+	margin: 12px 0;
+	--field-tips-color: #000;
+}
+
+.container::before {
+	content: "";
+	position: absolute;
+	left: 0;
+	top: 0;
+	bottom: 0;
+	width: 3px;
+	border-radius: 100vh;
+	transition: background-color 0.2s;
+	background-color: var(--field-tips-color);
+}

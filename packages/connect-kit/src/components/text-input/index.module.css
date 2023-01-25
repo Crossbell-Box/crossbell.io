@@ -9,15 +9,9 @@
 	border-radius: 12px;
 	border-style: none;
 	background-color: rgba(28, 27, 31, 0.04);
-	padding-left: 12px;
-	padding-right: 12px;
-	outline: 2px solid transparent;
-	outline-offset: 2px;
-	transition-property: color, background-color, border-color,
-		text-decoration-color, fill, stroke, opacity, box-shadow, transform, filter,
-		backdrop-filter;
-	transition-timing-function: cubic-bezier(0.4, 0, 0.2, 1);
-	transition-duration: 150ms;
+	padding: 0 12px;
+	outline: none;
+	transition: color 0.2s;
 }
 
 .input:focus {

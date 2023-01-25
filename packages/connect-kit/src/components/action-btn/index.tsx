@@ -30,16 +30,25 @@ const sizeMap = {
 };
 
 export const ActionBtn = React.memo(
-	({ color, size, className, height, minWidth, ...props }: ActionBtnProps) => (
+	({
+		color,
+		size,
+		className,
+		height,
+		minWidth,
+		disabled,
+		...props
+	}: ActionBtnProps) => (
 		<button
 			{...props}
+			disabled={disabled}
 			style={{ height, minWidth }}
 			className={classNames(
-				commonStyles.uxOverlay,
+				!disabled && commonStyles.uxOverlay,
 				styles.btn,
 				className,
 				sizeMap[size ?? "sm"],
-				colorMap[color ?? "gray"]
+				disabled ? colorMap.gray : colorMap[color ?? "gray"]
 			)}
 		/>
 	)

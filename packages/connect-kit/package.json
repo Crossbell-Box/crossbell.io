@@ -41,15 +41,16 @@
 		"detect-browser": "^5",
 		"embla-carousel-react": "^7",
 		"qrcode": "^1",
+		"react-dropzone": "14.2.3",
 		"react-transition-group": "^4"
 	},
 	"peerDependencies": {
 		"@crossbell/contract": "workspace:*",
 		"@crossbell/indexer": "workspace:*",
 		"@crossbell/ui": "workspace:*",
+		"@crossbell/util-ethers": "workspace:*",
 		"@crossbell/util-hooks": "workspace:*",
 		"@crossbell/util-metadata": "workspace:*",
-		"@crossbell/util-ethers": "workspace:*",
 		"@tanstack/react-query": "*",
 		"@wagmi/core": "*",
 		"crossbell.js": "^0.16",
@@ -63,9 +64,9 @@
 		"@crossbell/contract": "workspace:*",
 		"@crossbell/indexer": "workspace:*",
 		"@crossbell/ui": "workspace:*",
+		"@crossbell/util-ethers": "workspace:*",
 		"@crossbell/util-hooks": "workspace:*",
 		"@crossbell/util-metadata": "workspace:*",
-		"@crossbell/util-ethers": "workspace:*",
 		"@types/react-transition-group": "^4"
 	}
 }

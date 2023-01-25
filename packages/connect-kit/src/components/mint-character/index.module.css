@@ -20,3 +20,9 @@
 .actions button:first-of-type {
 	flex: 1 1 0px;
 }
+
+.tips {
+	display: flex;
+	align-items: center;
+	gap: 8px;
+}
