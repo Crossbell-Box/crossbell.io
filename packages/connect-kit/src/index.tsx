@@ -8,7 +8,11 @@ import {
 	UrlComposer,
 } from "@crossbell/ui";
 
-import { usePreloadAllImgs } from "./utils";
+import {
+	usePreloadAllImgs,
+	ReCAPTCHAContext,
+	ReCAPTCHAContextType,
+} from "./utils";
 import { useAccountState } from "./hooks";
 import { NotEnoughCSBModal } from "./modals/not-enough-csb-modal";
 import { ConnectModal } from "./modals/connect-modal";
@@ -30,6 +34,7 @@ export type ConnectKitProviderProps = {
 	ipfsLinkToHttpLink?: GetWeb2Url;
 	withoutNotificationsProvider?: boolean;
 	urlComposer?: Partial<UrlComposer>;
+	reCAPTCHA?: ReCAPTCHAContextType;
 };
 
 export function ConnectKitProvider({
@@ -37,6 +42,7 @@ export function ConnectKitProvider({
 	ipfsLinkToHttpLink,
 	withoutNotificationsProvider,
 	urlComposer,
+	reCAPTCHA,
 }: ConnectKitProviderProps) {
 	const accountStore = useAccountState();
 	const account = useAccount();
@@ -55,13 +61,15 @@ export function ConnectKitProvider({
 	const node = (
 		<UseWeb2UrlContext.Provider value={ipfsLinkToHttpLink ?? null}>
 			<UrlComposerContext.Provider value={urlComposer ?? null}>
-				<ConnectModal />
-				<DisconnectModal />
-				<UpgradeAccountModal />
-				<NotEnoughCSBModal />
-				<CsbDetailModal />
-				<WalletClaimCSBModal />
-				{children}
+				<ReCAPTCHAContext.Provider value={reCAPTCHA ?? null}>
+					<ConnectModal />
+					<DisconnectModal />
+					<UpgradeAccountModal />
+					<NotEnoughCSBModal />
+					<CsbDetailModal />
+					<WalletClaimCSBModal />
+					{children}
+				</ReCAPTCHAContext.Provider>
 			</UrlComposerContext.Provider>
 		</UseWeb2UrlContext.Provider>
 	);

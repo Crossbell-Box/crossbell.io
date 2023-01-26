@@ -47,6 +47,10 @@
 	padding: 4px 12px;
 }
 
+.reCaptcha > div:not(:empty) {
+	margin: 24px 0 -24px;
+}
+
 .mainBtn {
 	margin-top: 48px;
 }

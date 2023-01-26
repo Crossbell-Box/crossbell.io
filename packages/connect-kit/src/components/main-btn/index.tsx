@@ -17,6 +17,7 @@ export type MainBtnProps = Omit<
 const colorMap = {
 	yellow: styles.yellow,
 	gray: styles.gray,
+	green: styles.green,
 };
 
 export const MainBtn = React.memo(

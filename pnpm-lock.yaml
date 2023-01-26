@@ -204,6 +204,7 @@ importers:
       '@mantine/core': ^5
       '@mantine/hooks': ^5
       '@mantine/notifications': ^5
+      '@types/react-google-recaptcha': 2.1.5
       '@types/react-transition-group': ^4
       canvas-confetti: ^1
       check-password-strength: ^2
@@ -212,6 +213,7 @@ importers:
       embla-carousel-react: ^7
       qrcode: ^1
       react-dropzone: 14.2.3
+      react-google-recaptcha: 2.1.0
       react-transition-group: ^4
     dependencies:
       '@emotion/react': 11.10.5
@@ -226,6 +228,7 @@ importers:
       embla-carousel-react: 7.0.4
       qrcode: 1.5.1
       react-dropzone: 14.2.3
+      react-google-recaptcha: 2.1.0
       react-transition-group: 4.4.5
     devDependencies:
       '@crossbell/contract': link:../contract
@@ -234,6 +237,7 @@ importers:
       '@crossbell/util-ethers': link:../util-ethers
       '@crossbell/util-hooks': link:../util-hooks
       '@crossbell/util-metadata': link:../util-metadata
+      '@types/react-google-recaptcha': 2.1.5
       '@types/react-transition-group': 4.4.5
 
   packages/contract:
@@ -2521,6 +2525,12 @@ packages:
 
   /@types/react-dom/18.0.8:
     resolution: {integrity: sha512-C3GYO0HLaOkk9dDAz3Dl4sbe4AKUGTCfFIZsz3n/82dPNN8Du533HzKatDxeUYWu24wJgMP1xICqkWk1YOLOIw==}
+    dependencies:
+      '@types/react': 18.0.24
+    dev: true
+
+  /@types/react-google-recaptcha/2.1.5:
+    resolution: {integrity: sha512-iWTjmVttlNgp0teyh7eBXqNOQzVq2RWNiFROWjraOptRnb1OcHJehQnji0sjqIRAk9K0z8stjyhU+OLpPb0N6w==}
     dependencies:
       '@types/react': 18.0.24
     dev: true
@@ -8885,6 +8895,15 @@ packages:
       strip-json-comments: 2.0.1
     dev: false
 
+  /react-async-script/1.2.0:
+    resolution: {integrity: sha512-bCpkbm9JiAuMGhkqoAiC0lLkb40DJ0HOEJIku+9JDjxX3Rcs+ztEOG13wbrOskt3n2DTrjshhaQ/iay+SnGg5Q==}
+    peerDependencies:
+      react: '>=16.4.1'
+    dependencies:
+      hoist-non-react-statics: 3.3.2
+      prop-types: 15.8.1
+    dev: false
+
   /react-dom/18.2.0_react@18.2.0:
     resolution: {integrity: sha512-6IMTriUmvsjHUjNtEDudZfuDQUoWXVxKHhlEGSk81n4YFS+r/Kl99wXiwlVXtPBtJenozv2P+hxDsw9eA7Xo6g==}
     peerDependencies:
@@ -8919,6 +8938,15 @@ packages:
 
   /react-fast-compare/3.2.0:
     resolution: {integrity: sha512-rtGImPZ0YyLrscKI9xTpV8psd6I8VAtjKCzQDlzyDvqJA8XOW78TXYQwNRNd8g8JZnDu8q9Fu/1v4HPAVwVdHA==}
+    dev: false
+
+  /react-google-recaptcha/2.1.0:
+    resolution: {integrity: sha512-K9jr7e0CWFigi8KxC3WPvNqZZ47df2RrMAta6KmRoE4RUi7Ys6NmNjytpXpg4HI/svmQJLKR+PncEPaNJ98DqQ==}
+    peerDependencies:
+      react: '>=16.4.1'
+    dependencies:
+      prop-types: 15.8.1
+      react-async-script: 1.2.0
     dev: false
 
   /react-intersection-observer/9.4.0:
