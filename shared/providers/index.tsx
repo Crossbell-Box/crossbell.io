@@ -8,6 +8,7 @@ import { ipfsLinkToHttpLink } from "~/shared/ipfs";
 import { useRefCallback } from "@crossbell/util-hooks";
 import {
 	ConnectKitProvider,
+	ConnectKitProviderProps,
 	useAccountState,
 	useConnectModal,
 	useUpgradeAccountModal,
@@ -29,6 +30,9 @@ const loadFeatures = () =>
 	import("~/shared/framer/features").then((res) => res.default);
 
 const ipfsGateway = new IpfsGateway();
+const reCAPTCHA: ConnectKitProviderProps["reCAPTCHA"] = {
+	sitekey: process.env.RE_CAPTCHA_SITE_KEY ?? "",
+};
 
 export function MainProvider({ children }: React.PropsWithChildren) {
 	const connectModal = useConnectModal();
@@ -61,6 +65,7 @@ export function MainProvider({ children }: React.PropsWithChildren) {
 										<ConnectKitProvider
 											withoutNotificationsProvider={true}
 											ipfsLinkToHttpLink={ipfsLinkToHttpLink}
+											reCAPTCHA={reCAPTCHA}
 										>
 											{children}
 										</ConnectKitProvider>
