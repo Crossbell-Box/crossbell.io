@@ -20,12 +20,14 @@ import { DisconnectModal } from "./modals/disconnect-modal";
 import { UpgradeAccountModal } from "./modals/upgrade-account-modal";
 import { CsbDetailModal } from "./modals/csb-detail-modal";
 import { WalletClaimCSBModal } from "./modals/wallet-claim-csb-modal";
+import { OpSignSettingsModal } from "./modals/op-sign-settings-modal";
 
 export { useConnectModal } from "./modals/connect-modal";
 export { useDisconnectModal } from "./modals/disconnect-modal";
 export { useUpgradeAccountModal } from "./modals/upgrade-account-modal";
 export { useCsbDetailModal } from "./modals/csb-detail-modal";
 export { useWalletClaimCSBModal } from "./modals/wallet-claim-csb-modal";
+export { useOpSignSettingsModal } from "./modals/op-sign-settings-modal";
 export { OpSignIcon } from "./components";
 export * from "./hooks";
 
@@ -68,6 +70,7 @@ export function ConnectKitProvider({
 					<NotEnoughCSBModal />
 					<CsbDetailModal />
 					<WalletClaimCSBModal />
+					<OpSignSettingsModal />
 					{children}
 				</ReCAPTCHAContext.Provider>
 			</UrlComposerContext.Provider>

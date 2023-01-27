@@ -10,20 +10,24 @@ import styles from "./index.module.css";
 import classNames from "classnames";
 
 export type SignInWithWalletProps = {
-	afterSignIn: () => void;
+	afterSignIn?: () => void;
 	onSkip: () => void;
+	signInText?: React.ReactNode;
+	skipText?: React.ReactNode;
 };
 
 export function SignInWithWallet({
 	afterSignIn,
 	onSkip,
+	signInText,
+	skipText,
 }: SignInWithWalletProps) {
 	const signIn = useWalletSignIn();
 	const siwe = useAccountState((s) => s.wallet?.siwe);
 
 	React.useEffect(() => {
 		if (siwe) {
-			afterSignIn();
+			afterSignIn?.();
 		}
 	}, [siwe]);
 
@@ -42,14 +46,14 @@ export function SignInWithWallet({
 					{
 						id: "sign-in",
 						icon: null,
-						title: "Sign In( Recommended)",
+						title: signInText ?? "Sign In (Recommended)",
 						className: classNames(styles.item, styles.signInItem),
 						onClick: () => signIn.mutate(),
 					},
 					{
 						id: "skip",
 						icon: null,
-						title: "Skip",
+						title: skipText ?? "Skip",
 						className: classNames(styles.item),
 						onClick: onSkip,
 					},
