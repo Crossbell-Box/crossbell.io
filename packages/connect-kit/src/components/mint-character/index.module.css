@@ -26,3 +26,12 @@
 	align-items: center;
 	gap: 8px;
 }
+
+.filedTips {
+	color: #999;
+}
+
+.container input,
+.container textarea {
+	font-size: 14px;
+}

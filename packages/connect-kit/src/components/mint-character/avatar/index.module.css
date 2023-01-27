@@ -26,13 +26,6 @@
 	filter: blur(5px);
 }
 
-.tips {
-	font-size: 12px;
-	opacity: 0.5;
-	white-space: pre-wrap;
-	text-align: center;
-}
-
 .avatar {
 	height: 48px;
 	width: 48px;

@@ -35,12 +35,17 @@ export function MintCharacter({
 		<div className={styles.container}>
 			<LoadingOverlay visible={model.isSubmitting} />
 
-			<Field icon={<AvatarIcon />} title="Avatar" tips=" * Max size is 2MB.">
+			<Field
+				icon={<AvatarIcon />}
+				title="Avatar"
+				tips={<span className={styles.filedTips}> * Max size is 2MB.</span>}
+			>
 				<Avatar file={model.file} onSelect={model.setFile} />
 			</Field>
 
 			<Field icon={<NameIcon />} title="Name ＆ Handle">
 				<TextInput
+					placeholder="Unique name for your character"
 					value={model.username}
 					onInput={(e) => model.setUsername(e.currentTarget.value)}
 				/>
@@ -57,6 +62,7 @@ export function MintCharacter({
 
 			<Field icon={<BioIcon />} title="Bio">
 				<Textarea
+					placeholder="Tell more about yourself"
 					value={model.bio}
 					onInput={(e) => model.setBio(e.currentTarget.value)}
 				/>
