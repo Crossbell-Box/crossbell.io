@@ -14,7 +14,7 @@ import {
 	ReCAPTCHAContextType,
 } from "./utils";
 import { useAccountState } from "./hooks";
-import { NotEnoughCSBModal } from "./modals/not-enough-csb-modal";
+import { ClaimCSBTipsModal } from "./modals/claim-csb-tips-modal";
 import { ConnectModal } from "./modals/connect-modal";
 import { DisconnectModal } from "./modals/disconnect-modal";
 import { UpgradeAccountModal } from "./modals/upgrade-account-modal";
@@ -67,7 +67,7 @@ export function ConnectKitProvider({
 					<ConnectModal />
 					<DisconnectModal />
 					<UpgradeAccountModal />
-					<NotEnoughCSBModal />
+					<ClaimCSBTipsModal />
 					<CsbDetailModal />
 					<WalletClaimCSBModal />
 					<OpSignSettingsModal />

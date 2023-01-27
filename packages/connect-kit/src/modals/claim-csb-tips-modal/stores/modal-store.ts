@@ -7,7 +7,7 @@ export type ModalStore = Omit<ModalSlice, "show"> & {
 	show: (msg: string) => void;
 };
 
-export const useNotEnoughCSBModal = create<ModalStore>((set, get) => ({
+export const useClaimCSBTipsModal = create<ModalStore>((set, get) => ({
 	...modalSlice(set, get),
 
 	msg: "",

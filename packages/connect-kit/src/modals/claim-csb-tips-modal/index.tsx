@@ -5,12 +5,12 @@ import { ModalHeader, BaseModal } from "../../components";
 import { IMAGES } from "../../utils";
 
 import styles from "./index.module.css";
-import { useNotEnoughCSBModal } from "./stores";
+import { useClaimCSBTipsModal } from "./stores";
 
-export { useNotEnoughCSBModal };
+export { useClaimCSBTipsModal };
 
-export function NotEnoughCSBModal() {
-	const { isActive, hide, msg } = useNotEnoughCSBModal();
+export function ClaimCSBTipsModal() {
+	const { isActive, hide, msg } = useClaimCSBTipsModal();
 	const imgUrl = useWeb2Url(IMAGES.claimCSBImg);
 
 	return (
