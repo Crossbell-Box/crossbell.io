@@ -204,6 +204,7 @@ importers:
       '@mantine/core': ^5
       '@mantine/hooks': ^5
       '@mantine/notifications': ^5
+      '@types/lodash.debounce': 4.0.7
       '@types/react-google-recaptcha': 2.1.5
       '@types/react-transition-group': ^4
       canvas-confetti: ^1
@@ -211,6 +212,7 @@ importers:
       classnames: ^2
       detect-browser: ^5
       embla-carousel-react: ^7
+      lodash.debounce: 4.0.8
       qrcode: ^1
       react-dropzone: 14.2.3
       react-google-recaptcha: 2.1.0
@@ -226,6 +228,7 @@ importers:
       classnames: 2.3.2
       detect-browser: 5.3.0
       embla-carousel-react: 7.0.4
+      lodash.debounce: 4.0.8
       qrcode: 1.5.1
       react-dropzone: 14.2.3
       react-google-recaptcha: 2.1.0
@@ -237,6 +240,7 @@ importers:
       '@crossbell/util-ethers': link:../util-ethers
       '@crossbell/util-hooks': link:../util-hooks
       '@crossbell/util-metadata': link:../util-metadata
+      '@types/lodash.debounce': 4.0.7
       '@types/react-google-recaptcha': 2.1.5
       '@types/react-transition-group': 4.4.5
 
@@ -2469,6 +2473,12 @@ packages:
 
   /@types/lodash.compact/3.0.7:
     resolution: {integrity: sha512-yHP+S4QY9C/OLWc+Ei7A1rdwGcBgwFOaW20eZU8qA42dNRwUWnGltDAmKg5ICVGrgJKTokv0gsz1dsQl1gKA2w==}
+    dependencies:
+      '@types/lodash': 4.14.191
+    dev: true
+
+  /@types/lodash.debounce/4.0.7:
+    resolution: {integrity: sha512-X1T4wMZ+gT000M2/91SYj0d/7JfeNZ9PeeOldSNoE/lunLeQXKvkmIumI29IaKMotU/ln/McOIvgzZcQ/3TrSA==}
     dependencies:
       '@types/lodash': 4.14.191
     dev: true

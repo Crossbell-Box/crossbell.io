@@ -6,6 +6,7 @@ import {
 	SelectCharacters as Main,
 	useRefreshDynamicContainer,
 } from "../../../../components";
+import { useMintCharacterForm } from "../../../../hooks";
 import { Header } from "../../components/header";
 import { useConnectModal, useScenesStore } from "../../stores";
 import { SceneKind } from "../../types";
@@ -16,10 +17,12 @@ export function SelectCharacters() {
 	const hide = useConnectModal((s) => s.hide);
 	const goTo = useScenesStore((s) => s.goTo);
 	const { characters } = useAccountCharacters();
+	const resetForm = useMintCharacterForm((s) => s.reset);
 
-	const goToMintCharacter = useRefCallback(() =>
-		goTo({ kind: SceneKind.mintCharacter })
-	);
+	const goToMintCharacter = useRefCallback(() => {
+		resetForm();
+		goTo({ kind: SceneKind.mintCharacter });
+	});
 
 	const refreshDynamicContainer = useRefreshDynamicContainer();
 

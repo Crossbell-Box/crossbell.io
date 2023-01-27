@@ -2,6 +2,7 @@ export * from "./account-state";
 export * from "./character-operator";
 export * from "./link-character";
 export * from "./link-note";
+export * from "./mint-character";
 export * from "./operator-sign";
 export * from "./operator-sync";
 export * from "./faucet";

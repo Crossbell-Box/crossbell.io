@@ -1,9 +1,8 @@
 import React from "react";
 import { Loading, LoadingOverlay } from "@crossbell/ui";
-import { useCreateCharacter } from "@crossbell/connect-kit";
-import { useRefCallback, useUploadToIpfs } from "@crossbell/util-hooks";
+import { useRefCallback } from "@crossbell/util-hooks";
 
-import { useGenerateHandle } from "../../hooks/use-generate-handle";
+import { useMintCharacter, useMintCharacterForm } from "../../hooks";
 
 import { FiledTips } from "../filed-tips";
 import { Textarea } from "../textarea";
@@ -15,7 +14,6 @@ import { useRefreshDynamicContainer } from "../dynamic-container";
 import styles from "./index.module.css";
 import { Avatar } from "./avatar";
 import { AvatarIcon, BioIcon, NameIcon } from "./icons";
-import { useHandleError } from "../../hooks/use-handle-error";
 
 export type MintCharacterProps = {
 	onSwitchMode: () => void;
@@ -27,44 +25,46 @@ export function MintCharacter({
 	afterSubmit,
 }: MintCharacterProps) {
 	const refreshDynamicContainer = useRefreshDynamicContainer();
-	const model = useMintCharacterModel({ afterSubmit });
+	const mintCharacter = useMintCharacter({ onSuccess: afterSubmit });
+	const form = useMintCharacterForm();
+	const mint = useRefCallback(() => mintCharacter.mutate(form));
 
-	React.useEffect(refreshDynamicContainer, [model.handle, model.username]);
+	React.useEffect(refreshDynamicContainer, [form.handle, form.username]);
 
 	return (
 		<div className={styles.container}>
-			<LoadingOverlay visible={model.isSubmitting} />
+			<LoadingOverlay visible={mintCharacter.isLoading} />
 
 			<Field
 				icon={<AvatarIcon />}
 				title="Avatar"
 				tips={<span className={styles.filedTips}> * Max size is 2MB.</span>}
 			>
-				<Avatar file={model.file} onSelect={model.setFile} />
+				<Avatar file={form.avatar} onSelect={form.updateAvatar} />
 			</Field>
 
 			<Field icon={<NameIcon />} title="Name ＆ Handle">
 				<TextInput
 					placeholder="Unique name for your character"
-					value={model.username}
-					onInput={(e) => model.setUsername(e.currentTarget.value)}
+					value={form.username}
+					onInput={(e) => form.updateUsername(e.currentTarget.value)}
 				/>
 			</Field>
 
-			{model.username && (
+			{form.username && (
 				<FiledTips
 					className={styles.tips}
-					color={model.handle ? "#6AD991" : "#999"}
+					color={form.handle ? "#6AD991" : "#999"}
 				>
-					Your handle: {model.handle || <Loading />}
+					Your handle: {form.handle || <Loading />}
 				</FiledTips>
 			)}
 
 			<Field icon={<BioIcon />} title="Bio">
 				<Textarea
 					placeholder="Tell more about yourself"
-					value={model.bio}
-					onInput={(e) => model.setBio(e.currentTarget.value)}
+					value={form.bio}
+					onInput={(e) => form.updateBio(e.currentTarget.value)}
 				/>
 			</Field>
 
@@ -74,70 +74,15 @@ export function MintCharacter({
 				</ActionBtn>
 
 				<ActionBtn
-					disabled={!model.isAbleToSubmit}
+					disabled={!form.username || !form.handle}
 					color="green"
 					size="md"
 					minWidth="133px"
-					onClick={model.submit}
+					onClick={mint}
 				>
 					Mint
 				</ActionBtn>
 			</div>
 		</div>
 	);
-}
-
-export function useMintCharacterModel({
-	afterSubmit,
-}: Pick<MintCharacterProps, "afterSubmit">) {
-	const [file, setFile] = React.useState<File | null>(null);
-	const [username, setUsername] = React.useState("");
-	const handle = useGenerateHandle(username);
-	const [bio, setBio] = React.useState("");
-	const createCharacter = useCreateCharacter();
-	const uploadToIpfs = useUploadToIpfs();
-	const [isSubmitting, setIsSubmitting] = React.useState(false);
-	const handleError = useHandleError("Mint Character");
-
-	const submit = useRefCallback(async () => {
-		if (!handle || !username) return;
-
-		setIsSubmitting(true);
-
-		try {
-			const avatar = file && (await uploadToIpfs.mutateAsync(file));
-
-			await createCharacter.mutateAsync({
-				handle,
-				metadata: {
-					name: username,
-					avatars: [avatar].filter(Boolean) as string[],
-					bio,
-				},
-			});
-
-			afterSubmit();
-		} catch (error) {
-			handleError(error);
-		} finally {
-			setIsSubmitting(false);
-		}
-	});
-
-	return {
-		file,
-		setFile,
-
-		username,
-		setUsername,
-
-		handle,
-
-		bio,
-		setBio,
-
-		isAbleToSubmit: !!(username && handle),
-		isSubmitting,
-		submit,
-	};
 }

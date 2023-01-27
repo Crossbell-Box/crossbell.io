@@ -1,14 +1,16 @@
 import React from "react";
+import { LoadingOverlay } from "@crossbell/ui";
+import { useRefCallback } from "@crossbell/util-hooks";
+
+import { useMintCharacter, useMintCharacterForm } from "../../hooks";
 
 import { ActionBtn } from "../action-btn";
-
-import styles from "./index.module.css";
 import { Field } from "../field";
-import { NameIcon } from "./icons";
 import { TextInput } from "../text-input";
 import { useRefreshDynamicContainer } from "../dynamic-container";
-import { useMintCharacterModel } from "../mint-character";
-import { LoadingOverlay } from "@crossbell/ui";
+
+import styles from "./index.module.css";
+import { NameIcon } from "./icons";
 
 export type MintCharacterQuicklyProps = {
 	onSwitchMode: () => void;
@@ -20,19 +22,28 @@ export function MintCharacterQuickly({
 	afterSubmit,
 }: MintCharacterQuicklyProps) {
 	const refreshDynamicContainer = useRefreshDynamicContainer();
-	const model = useMintCharacterModel({ afterSubmit });
+	const mintCharacter = useMintCharacter({ onSuccess: afterSubmit });
+	const form = useMintCharacterForm();
+	const mint = useRefCallback(() =>
+		mintCharacter.mutate({
+			bio: "",
+			avatar: null,
+			handle: form.handle,
+			username: form.username,
+		})
+	);
 
-	React.useEffect(refreshDynamicContainer, [model.handle, model.username]);
+	React.useEffect(refreshDynamicContainer, [form.handle, form.username]);
 
 	return (
 		<div className={styles.container}>
-			<LoadingOverlay visible={model.isSubmitting} />
+			<LoadingOverlay visible={mintCharacter.isLoading} />
 
 			<div className={styles.container}>
 				<Field icon={<NameIcon />} title="Give your character a name">
 					<TextInput
-						value={model.username}
-						onInput={(e) => model.setUsername(e.currentTarget.value)}
+						value={form.username}
+						onInput={(e) => form.updateUsername(e.currentTarget.value)}
 					/>
 				</Field>
 			</div>
@@ -45,11 +56,11 @@ export function MintCharacterQuickly({
 				)}
 
 				<ActionBtn
-					disabled={!model.isAbleToSubmit}
+					disabled={!form.username || !form.handle}
 					color="green"
 					size="md"
 					minWidth="133px"
-					onClick={model.submit}
+					onClick={mint}
 				>
 					Mint
 				</ActionBtn>

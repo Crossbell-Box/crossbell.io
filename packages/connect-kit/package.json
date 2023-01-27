@@ -40,6 +40,7 @@
 		"classnames": "^2",
 		"detect-browser": "^5",
 		"embla-carousel-react": "^7",
+		"lodash.debounce": "4.0.8",
 		"qrcode": "^1",
 		"react-dropzone": "14.2.3",
 		"react-google-recaptcha": "2.1.0",
@@ -68,6 +69,7 @@
 		"@crossbell/util-ethers": "workspace:*",
 		"@crossbell/util-hooks": "workspace:*",
 		"@crossbell/util-metadata": "workspace:*",
+		"@types/lodash.debounce": "4.0.7",
 		"@types/react-google-recaptcha": "2.1.5",
 		"@types/react-transition-group": "^4"
 	}
