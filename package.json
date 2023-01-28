@@ -46,7 +46,7 @@
 		"@wagmi/core": "^0.6.12",
 		"canvas-confetti": "1.6.0",
 		"classnames": "2.3.2",
-		"crossbell.js": "0.16.2",
+		"crossbell.js": "0.16.3",
 		"dayjs": "1.11.6",
 		"detect-browser": "5.3.0",
 		"embla-carousel-react": "7.0.4",

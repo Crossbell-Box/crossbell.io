@@ -40,7 +40,7 @@ importers:
       canvas-confetti: 1.6.0
       classnames: 2.3.2
       commander: ^9.4.0
-      crossbell.js: 0.16.2
+      crossbell.js: 0.16.3
       dayjs: 1.11.6
       detect-browser: 5.3.0
       embla-carousel-react: 7.0.4
@@ -120,7 +120,7 @@ importers:
       '@wagmi/core': 0.6.12_lxa6ojub67252hst6mbz6ku6nu
       canvas-confetti: 1.6.0
       classnames: 2.3.2
-      crossbell.js: 0.16.2
+      crossbell.js: 0.16.3
       dayjs: 1.11.6
       detect-browser: 5.3.0
       embla-carousel-react: 7.0.4_react@18.2.0
@@ -4304,8 +4304,8 @@ packages:
       which: 2.0.2
     dev: true
 
-  /crossbell.js/0.16.2:
-    resolution: {integrity: sha512-Rgy1v6EmXy0ou9JVRezMHfUp3L9OHAub0d8jExoN3iJPQtvd0jopy0QNONL0ShvIJxTsiCwM1rg9SAA5sw6gZQ==}
+  /crossbell.js/0.16.3:
+    resolution: {integrity: sha512-gYnGQ8ZzF9xbiIoTwrsUFmRZkMg3/BhcXHlYkuK1jTGVR7I+JPyio0+qhCI8vEGeSZMe3kiGoaJZ8NOuYPQt8Q==}
     dependencies:
       async-retry: 1.3.3
       browser-or-node: 2.1.1
