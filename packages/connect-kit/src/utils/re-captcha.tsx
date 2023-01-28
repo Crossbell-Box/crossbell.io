@@ -1,16 +1,12 @@
 import React from "react";
 import ReCAPTCHA from "react-google-recaptcha";
 import { useRefCallback } from "@crossbell/util-hooks";
+import { useQuery } from "@tanstack/react-query";
 
-export type ReCAPTCHAContextType = {
-	sitekey: string;
-};
-
-export const ReCAPTCHAContext =
-	React.createContext<ReCAPTCHAContextType | null>(null);
+import { faucetGetSiteKey } from "../apis";
 
 export function useReCAPTCHA() {
-	const sitekey = React.useContext(ReCAPTCHAContext)?.sitekey;
+	const { data: siteKey } = useFaucetSiteKey();
 	const ref = React.useRef<ReCAPTCHA>(null);
 	const [token, setToken] = React.useState<string | null>(null);
 	const [isLoaded, setIsLoaded] = React.useState(false);
@@ -26,11 +22,11 @@ export function useReCAPTCHA() {
 
 		isLoaded,
 
-		node: !!sitekey && (
+		node: !!siteKey && (
 			<ReCAPTCHA
 				size="normal"
 				ref={ref}
-				sitekey={sitekey}
+				sitekey={siteKey}
 				onChange={setToken}
 				onExpired={handleReset}
 				onReset={handleReset}
@@ -38,4 +34,8 @@ export function useReCAPTCHA() {
 			/>
 		),
 	};
+}
+
+function useFaucetSiteKey() {
+	return useQuery(["faucet", "site-key"], faucetGetSiteKey);
 }

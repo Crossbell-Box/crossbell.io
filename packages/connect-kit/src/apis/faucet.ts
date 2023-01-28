@@ -82,3 +82,7 @@ export async function faucetGetTransaction(
 		method: "GET",
 	});
 }
+
+export function faucetGetSiteKey() {
+	return fetch(`${BASE_URL}/site_key`).then((res) => res.text());
+}
