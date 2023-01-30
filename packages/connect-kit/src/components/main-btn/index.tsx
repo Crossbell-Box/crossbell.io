@@ -18,6 +18,7 @@ const colorMap = {
 	yellow: styles.yellow,
 	gray: styles.gray,
 	green: styles.green,
+	none: "",
 };
 
 export const MainBtn = React.memo(
