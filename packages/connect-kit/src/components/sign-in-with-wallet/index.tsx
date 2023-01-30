@@ -1,5 +1,5 @@
 import React from "react";
-
+import classNames from "classnames";
 import { LoadingOverlay } from "@crossbell/ui";
 
 import { useAccountState, useWalletSignIn } from "../../hooks";
@@ -7,7 +7,6 @@ import { useAccountState, useWalletSignIn } from "../../hooks";
 import { Selections } from "../../modals/connect-modal/components/selections";
 
 import styles from "./index.module.css";
-import classNames from "classnames";
 
 export type SignInWithWalletProps = {
 	afterSignIn?: () => void;
@@ -34,9 +33,10 @@ export function SignInWithWallet({
 	return (
 		<div className={styles.main}>
 			<div className={styles.tips}>
-				<span title="(Sign In with Wallet)">SIWW</span> is for server-side apps,
-				where the data is not public to everyone. verify you are the owner & see
-				the data.
+				{
+					"By clicking Sign In, you will sign a message and prove you have your private key. The private key acts as the login password "
+				}
+				<strong>to our servers</strong>.
 			</div>
 
 			<LoadingOverlay visible={signIn.isLoading} />
