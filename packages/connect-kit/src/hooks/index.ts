@@ -13,6 +13,7 @@ export * from "./use-account-characters";
 export * from "./use-account-has-character";
 export * from "./use-create-character";
 export * from "./use-disconnect-account";
+export * from "./use-is-wallet-signed-in";
 export * from "./use-mint-note";
 export * from "./use-post-note-for-note";
 export * from "./use-set-primary-character";

@@ -13,12 +13,14 @@ export type ListProps = {
 	characters: CharacterEntity[];
 	onSelectNew: () => void;
 	afterSelectCharacter: () => void;
+	onClickOPSignIcon: (character: CharacterEntity) => void;
 };
 
 export function List({
 	characters,
 	onSelectNew,
 	afterSelectCharacter,
+	onClickOPSignIcon,
 }: ListProps) {
 	const [siwe, switchCharacter] = useAccountState((s) => [
 		s.wallet?.siwe,
@@ -51,7 +53,13 @@ export function List({
 							>
 								<CharacterAvatar character={character} size={32} />
 								<span>{extractCharacterName(character)}</span>
-								<OpSignIcon characterId={character.characterId} />
+								<OpSignIcon
+									onClick={(event) => {
+										event.stopPropagation();
+										onClickOPSignIcon(character);
+									}}
+									characterId={character.characterId}
+								/>
 							</OptionListItem>
 						</>
 					)}

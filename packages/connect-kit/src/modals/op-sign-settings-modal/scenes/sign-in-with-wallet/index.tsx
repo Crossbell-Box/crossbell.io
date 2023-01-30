@@ -14,7 +14,7 @@ export function SignInWithWallet() {
 		<div className={styles.container}>
 			<Header leftNode={false} title="Sign In with Wallet" />
 
-			<Main onSkip={hide} skipText="Close" signInText="Sign In" />
+			<Main onSkip={hide} skipText="Close" />
 		</div>
 	);
 }

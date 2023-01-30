@@ -46,7 +46,7 @@ export function SignInWithWallet({
 					{
 						id: "sign-in",
 						icon: null,
-						title: signInText ?? "Sign In (Recommended)",
+						title: signInText ?? "Sign In",
 						className: classNames(styles.item, styles.signInItem),
 						onClick: () => signIn.mutate(),
 					},

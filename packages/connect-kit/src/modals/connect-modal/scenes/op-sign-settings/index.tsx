@@ -1,19 +1,18 @@
 import React from "react";
 
 import {
-	SignInWithWallet as Main,
-	SignInWithWalletProps,
+	OPSignSettings as Main,
+	OPSignSettingsProps,
 } from "../../../../components";
 
 import { Header } from "../../components/header";
 
 import styles from "./index.module.css";
 
-export function SignInWithWallet(props: SignInWithWalletProps) {
+export function OPSignSettings(props: OPSignSettingsProps) {
 	return (
 		<div className={styles.container}>
-			<Header leftNode={false} title="Sign In with Wallet" />
-
+			<Header leftNode={false} title="Operator Sign Settings" />
 			<Main {...props} />
 		</div>
 	);

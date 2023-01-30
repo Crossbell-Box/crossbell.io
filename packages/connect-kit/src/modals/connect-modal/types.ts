@@ -1,5 +1,9 @@
 import { Wallet } from "../../wallets";
-import { CongratsProps } from "../../components";
+import {
+	CongratsProps,
+	OPSignSettingsProps,
+	SignInWithWalletProps,
+} from "../../components";
 
 export enum SceneKind {
 	congrats = "congrats",
@@ -13,6 +17,7 @@ export enum SceneKind {
 	connectWallet = "connectWallet",
 	signInWithWallet = "signInWithWallet",
 	selectCharacters = "selectCharacters",
+	opSignSettings = "opSignSettings",
 	mintCharacter = "mintCharacter",
 	mintCharacterQuickly = "mintCharacterQuickly",
 
@@ -32,7 +37,9 @@ export type SceneType<K extends SceneKind, Context = unknown> = {
 
 export type SceneWithContext =
 	| SceneType<SceneKind.connectWallet, { wallet: Wallet }>
-	| SceneType<SceneKind.congrats, CongratsProps>;
+	| SceneType<SceneKind.congrats, CongratsProps>
+	| SceneType<SceneKind.signInWithWallet, SignInWithWalletProps>
+	| SceneType<SceneKind.opSignSettings, OPSignSettingsProps>;
 
 export type SceneWithoutContext = SceneType<
 	Exclude<SceneKind, SceneWithContext["kind"]>
