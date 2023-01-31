@@ -31,11 +31,11 @@ export const useUnlinkNote = createAccountTypeBasedMutationHooks<
 			return true;
 		},
 
-		async contract({ noteId, characterId }, { account, contract }) {
+		async contract({ noteId, characterId }, { account, siwe, contract }) {
 			if (account.characterId) {
-				if (account.siwe) {
+				if (siwe) {
 					await siweUnlinkNote({
-						token: account.siwe.token,
+						siwe,
 						characterId: account.characterId,
 						toCharacterId: characterId,
 						toNoteId: noteId,

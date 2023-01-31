@@ -39,14 +39,14 @@ export const useUpdateCharacterMetadata = createAccountTypeBasedMutationHooks<
 			}
 		},
 
-		async contract(variables, { account, contract }) {
+		async contract(variables, { siwe, contract }) {
 			const metadata = await prepareData(variables);
 
 			if (metadata) {
-				if (account.siwe) {
+				if (siwe) {
 					await siweUpdateMetadata({
 						characterId: variables.characterId,
-						token: account.siwe.token,
+						siwe,
 						metadata,
 					});
 				} else {

@@ -8,7 +8,9 @@ import {
 
 import { request } from "./utils";
 
-export async function siweSignIn(signer: Signer) {
+type Siwe = { token: string };
+
+export async function siweSignIn(signer: Signer): Promise<Siwe> {
 	const address = await signer.getAddress();
 
 	const { message } = await request<{ message: string }>("/siwe/challenge", {
@@ -32,41 +34,41 @@ export async function siweSignIn(signer: Signer) {
 	return { token };
 }
 
-export function siweGetAccount(token: string): Promise<{ address: string }> {
-	return request(`/siwe/account`, { method: "GET", token });
+export function siweGetAccount(siwe: Siwe): Promise<{ address: string }> {
+	return request(`/siwe/account`, { method: "GET", token: siwe.token });
 }
 
-export function siweGetBalance(token: string): Promise<{ balance: string }> {
-	return request(`/siwe/account/balance`, { method: "GET", token });
+export function siweGetBalance(siwe: Siwe): Promise<{ balance: string }> {
+	return request(`/siwe/account/balance`, { method: "GET", token: siwe.token });
 }
 
 export async function siweUpdateMetadata({
-	token,
+	siwe,
 	mode = "merge",
 	characterId,
 	metadata,
 }: {
-	token: string;
+	siwe: Siwe;
 	characterId: number;
 	mode?: "merge" | "replace";
 	metadata: CharacterMetadata;
 }): Promise<{ transactionHash: string; data: string }> {
 	return request(`/siwe/contract/characters/${characterId}/metadata`, {
 		method: "POST",
-		token,
+		token: siwe.token,
 		body: { metadata, mode },
 	});
 }
 
 export async function siweLinkNote({
-	token,
+	siwe,
 	characterId,
 	toNoteId,
 	toCharacterId,
 	linkType,
 	data,
 }: {
-	token: string;
+	siwe: Siwe;
 	characterId: number;
 	toCharacterId: number;
 	toNoteId: number;
@@ -75,18 +77,18 @@ export async function siweLinkNote({
 }): Promise<{ transactionHash: string; data: string }> {
 	return request(
 		`/siwe/contract/characters/${characterId}/links/notes/${toCharacterId}/${toNoteId}/${linkType}`,
-		{ method: "PUT", token, body: { data } }
+		{ method: "PUT", token: siwe.token, body: { data } }
 	);
 }
 
 export async function siweUnlinkNote({
-	token,
+	siwe,
 	characterId,
 	toNoteId,
 	toCharacterId,
 	linkType,
 }: {
-	token: string;
+	siwe: Siwe;
 	characterId: number;
 	toCharacterId: number;
 	toNoteId: number;
@@ -94,18 +96,18 @@ export async function siweUnlinkNote({
 }): Promise<{ transactionHash: string; data: string }> {
 	return request(
 		`/siwe/contract/characters/${characterId}/links/notes/${toCharacterId}/${toNoteId}/${linkType}`,
-		{ method: "DELETE", token }
+		{ method: "DELETE", token: siwe.token }
 	);
 }
 
 export async function siweLinkCharacter({
-	token,
+	siwe,
 	characterId,
 	toCharacterId,
 	linkType,
 	data,
 }: {
-	token: string;
+	siwe: Siwe;
 	characterId: number;
 	toCharacterId: number;
 	linkType: string;
@@ -113,19 +115,19 @@ export async function siweLinkCharacter({
 }): Promise<{ transactionHash: string; data: string }> {
 	return request(
 		`/siwe/contract/characters/${characterId}/links/characters/${toCharacterId}/${linkType}`,
-		{ method: "PUT", token, body: { data } }
+		{ method: "PUT", token: siwe.token, body: { data } }
 	);
 }
 
 export async function siweLinkCharacters({
-	token,
+	siwe,
 	characterId,
 	toCharacterIds,
 	toAddresses,
 	linkType,
 	data,
 }: {
-	token: string;
+	siwe: Siwe;
 	characterId: number;
 	toCharacterIds: number[];
 	toAddresses: string[];
@@ -134,34 +136,34 @@ export async function siweLinkCharacters({
 }): Promise<{ transactionHash: string; data: string }> {
 	return request(`/siwe/contract/characters/${characterId}/links/characters`, {
 		method: "PUT",
-		token,
+		token: siwe.token,
 		body: { data, linkType, toCharacterIds, toAddresses },
 	});
 }
 
 export async function siweUnlinkCharacter({
-	token,
+	siwe,
 	characterId,
 	toCharacterId,
 	linkType,
 }: {
-	token: string;
+	siwe: Siwe;
 	characterId: number;
 	toCharacterId: number;
 	linkType: string;
 }): Promise<{ transactionHash: string; data: string }> {
 	return request(
 		`/siwe/contract/characters/${characterId}/links/characters/${toCharacterId}/${linkType}`,
-		{ method: "DELETE", token }
+		{ method: "DELETE", token: siwe.token }
 	);
 }
 
 export async function siwePutNote({
-	token,
+	siwe,
 	characterId,
 	...body
 }: {
-	token: string;
+	siwe: Siwe;
 	characterId: number;
 	metadata: NoteMetadata;
 	linkItemType: LinkItemType;
@@ -170,7 +172,7 @@ export async function siwePutNote({
 }): Promise<{ transactionHash: string; data: string }> {
 	return request(`/v1/siwe/contract/characters/${characterId}/notes`, {
 		method: "PUT",
-		token,
+		token: siwe.token,
 		body,
 	});
 }

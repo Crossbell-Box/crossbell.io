@@ -9,6 +9,8 @@ import { indexer } from "@crossbell/indexer";
 
 import { useAccountState } from "../account-state";
 import { useHandleError } from "../use-handle-error";
+import { useOPSignOperatorHasPermissions } from "../operator-sign";
+
 import { AccountTypeBasedHooksFactory } from "./types";
 
 type Options<Data, Variables> = UseMutationOptions<
@@ -69,6 +71,9 @@ export function createAccountTypeBasedMutationHooks<
 		const account = useAccountState((s) => s.computed.account);
 		const handleError = useHandleError(`Error while ${actionDesc}`);
 		const contract = useContract();
+		const opSignOperatorHasPermissions = useOPSignOperatorHasPermissions({
+			characterId: account?.characterId,
+		});
 
 		return useMutation(
 			async (variable) => {
@@ -87,6 +92,7 @@ export function createAccountTypeBasedMutationHooks<
 								contract,
 								indexer,
 								account,
+								siwe: opSignOperatorHasPermissions ? account.siwe : undefined,
 							}) ?? null
 						);
 					default:

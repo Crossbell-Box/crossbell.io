@@ -26,12 +26,12 @@ export const useLinkCharacters = createAccountTypeBasedMutationHooks<
 		});
 	},
 
-	async contract({ characterIds, addresses }, { account, contract }) {
+	async contract({ characterIds, addresses }, { account, siwe, contract }) {
 		if (account?.characterId) {
-			if (account.siwe) {
+			if (siwe) {
 				return siweLinkCharacters({
 					characterId: account.characterId,
-					token: account.siwe.token,
+					siwe,
 					toCharacterIds: characterIds ?? [],
 					toAddresses: addresses ?? [],
 					linkType,

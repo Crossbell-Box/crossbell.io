@@ -32,12 +32,12 @@ export const usePostNoteForNote = createAccountTypeBasedMutationHooks<
 			return true;
 		},
 
-		async contract({ metadata, note }, { account, contract }) {
+		async contract({ metadata, note }, { account, siwe, contract }) {
 			if (account?.characterId) {
-				if (account.siwe) {
+				if (siwe) {
 					await siwePutNote({
 						characterId: account.characterId,
-						token: account.siwe.token,
+						siwe,
 						metadata,
 						linkItemType: "Note",
 						linkItem: { characterId: note.characterId, noteId: note.noteId },

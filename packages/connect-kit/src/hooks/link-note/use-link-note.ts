@@ -30,11 +30,11 @@ export const useLinkNote = createAccountTypeBasedMutationHooks<
 		}
 	},
 
-	async contract({ characterId, noteId }, { account, contract }) {
+	async contract({ characterId, noteId }, { account, siwe, contract }) {
 		if (account?.characterId) {
-			if (account.siwe) {
+			if (siwe) {
 				await siweLinkNote({
-					token: account.siwe.token,
+					siwe,
 					characterId: account.characterId,
 					toCharacterId: characterId,
 					toNoteId: noteId,

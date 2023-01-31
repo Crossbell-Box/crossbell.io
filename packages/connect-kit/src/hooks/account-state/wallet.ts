@@ -155,8 +155,8 @@ async function getSiweInfo({
 	if (!token) return undefined;
 
 	const [account, { balance: csb }] = await Promise.all([
-		siweGetAccount(token),
-		siweGetBalance(token),
+		siweGetAccount({ token }),
+		siweGetBalance({ token }),
 	]);
 
 	if (csb && isAddressEqual(account.address, address)) {

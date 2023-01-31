@@ -22,12 +22,12 @@ export const useUnlinkCharacter = createAccountTypeBasedMutationHooks<
 		});
 	},
 
-	async contract({ characterId }, { account, contract }) {
+	async contract({ characterId }, { account, siwe, contract }) {
 		if (account?.characterId) {
-			if (account.siwe) {
+			if (siwe) {
 				return siweUnlinkCharacter({
 					characterId: account.characterId,
-					token: account.siwe.token,
+					siwe,
 					toCharacterId: characterId,
 					linkType,
 				});
