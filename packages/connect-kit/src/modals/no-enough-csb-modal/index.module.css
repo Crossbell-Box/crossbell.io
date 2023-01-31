@@ -1,0 +1,26 @@
+.container {
+	width: 360px;
+	background-color: #fff;
+	border-radius: 28px;
+	border: 1px solid rgba(0, 0, 0, 0.1);
+	box-sizing: content-box;
+}
+
+.main {
+	padding: 0 24px 24px;
+}
+
+.img {
+	display: block;
+	width: 141px;
+	height: 138px;
+	object-fit: contain;
+	margin: 13px auto 8px;
+}
+
+.msg {
+	font-size: 14px;
+	color: #49454f;
+	text-align: center;
+	margin-bottom: 48px;
+}
