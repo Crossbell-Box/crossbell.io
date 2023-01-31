@@ -28,6 +28,7 @@ export { useWalletClaimCSBModal } from "./modals/wallet-claim-csb-modal";
 export { useOpSignSettingsModal } from "./modals/op-sign-settings-modal";
 export { OpSignIcon } from "./components";
 export * from "./hooks";
+export * from "./contract-config";
 
 export type ConnectKitProviderProps = {
 	children: React.ReactNode;
@@ -42,16 +43,16 @@ export function ConnectKitProvider({
 	withoutNotificationsProvider,
 	urlComposer,
 }: ConnectKitProviderProps) {
-	const accountStore = useAccountState();
+	const accountState = useAccountState();
 	const account = useAccount();
 
 	React.useEffect(() => {
-		accountStore.connectWallet(account.address ?? null);
+		accountState.connectWallet(account.address ?? null);
 	}, [account.address]);
 
 	React.useEffect(() => {
-		accountStore.refreshEmail();
-		accountStore.markSSRReady();
+		accountState.refreshEmail();
+		accountState.markSSRReady();
 	}, []);
 
 	usePreloadAllImgs();

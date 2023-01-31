@@ -4,19 +4,10 @@ import { IpfsGateway } from "@crossbell/ipfs-gateway";
 
 import { IpfsGatewayContext } from "@crossbell/ipfs-react";
 import { InitContractProvider } from "@crossbell/contract";
-import { ipfsLinkToHttpLink } from "~/shared/ipfs";
-import { useRefCallback } from "@crossbell/util-hooks";
-import {
-	ConnectKitProvider,
-	useAccountState,
-	useConnectModal,
-	useUpgradeAccountModal,
-} from "@crossbell/connect-kit";
+import { ConnectKitProvider, contractConfig } from "@crossbell/connect-kit";
 
-import {
-	openFaucetHintModel,
-	openMintNewCharacterModel,
-} from "~/shared/components/new-user-guide";
+import { ipfsLinkToHttpLink } from "~/shared/ipfs";
+import { openMintNewCharacterModel } from "~/shared/components/new-user-guide";
 
 import { WalletProvider } from "./wallet-provider";
 import { ThemeProvider } from "./theme-provider";
@@ -31,14 +22,6 @@ const loadFeatures = () =>
 const ipfsGateway = new IpfsGateway();
 
 export function MainProvider({ children }: React.PropsWithChildren) {
-	const connectModal = useConnectModal();
-	const upgradeAccountModal = useUpgradeAccountModal();
-	const [isEmailConnected, characterId] = useAccountState((s) => [
-		!!s.email,
-		s.computed.account?.characterId,
-	]);
-	const getCurrentCharacterId = useRefCallback(() => characterId ?? null);
-
 	return (
 		<ThemeProvider>
 			<WalletProvider>
@@ -49,14 +32,8 @@ export function MainProvider({ children }: React.PropsWithChildren) {
 								<RouterTransition />
 								<IpfsGatewayContext.Provider value={ipfsGateway}>
 									<InitContractProvider
-										openFaucetHintModel={openFaucetHintModel}
+										{...contractConfig}
 										openMintNewCharacterModel={openMintNewCharacterModel}
-										openConnectModal={
-											isEmailConnected
-												? upgradeAccountModal.show
-												: connectModal.show
-										}
-										getCurrentCharacterId={getCurrentCharacterId}
 									>
 										<ConnectKitProvider
 											withoutNotificationsProvider={true}

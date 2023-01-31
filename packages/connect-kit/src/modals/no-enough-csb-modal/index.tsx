@@ -72,8 +72,8 @@ function TransferCSBToOperator() {
 				<img className={styles.img} src={coinsIcon} alt="Coins" />
 
 				<p className={styles.msg}>
-					The $CSB balance of your operator is not enough to support two other
-					interaction, please transfer to your operator.
+					Your current $CSB balance is not enough to send this transaction.
+					Please transfer to your operator.
 				</p>
 
 				<MainBtn
