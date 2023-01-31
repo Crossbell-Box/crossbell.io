@@ -6,24 +6,24 @@ import { CharacterEntity } from "crossbell.js";
 import { useAccountState, useToggleOpSignOperator } from "../../hooks";
 
 import { OptionList, OptionListItem } from "../option-list";
-import { OpSignIcon } from "../op-sign-icon";
 import styles from "./list.module.css";
 
 export type ListProps = {
 	characters: CharacterEntity[];
 	onSelectNew: () => void;
-	afterSelectCharacter: () => void;
-	onClickOPSignIcon: (character: CharacterEntity) => void;
+	afterSelectCharacter: (
+		character: CharacterEntity,
+		extraInfo: { opSignOperatorHasPermissions: boolean }
+	) => void;
 };
 
 export function List({
 	characters,
 	onSelectNew,
 	afterSelectCharacter,
-	onClickOPSignIcon,
 }: ListProps) {
-	const [siwe, switchCharacter] = useAccountState((s) => [
-		s.wallet?.siwe,
+	const [currentCharacterId, switchCharacter] = useAccountState((s) => [
+		s.computed.account?.characterId,
 		s.switchCharacter,
 	]);
 
@@ -35,31 +35,33 @@ export function List({
 					hooks={useToggleOpSignOperator}
 					params={[character]}
 				>
-					{([{ hasPermissions, toggleOperator }, { isLoading }]) => (
+					{([{ hasPermissions }, { isLoading }]) => (
 						<>
 							<LoadingOverlay visible={isLoading} />
 							<OptionListItem
-								color={character.primary ? "green" : "gray"}
+								color={
+									currentCharacterId === character.characterId
+										? "green"
+										: "gray"
+								}
 								className={styles.characterItem}
 								title={character.handle}
 								onClick={async () => {
-									if (siwe && !hasPermissions) {
-										await toggleOperator();
-									}
-
 									switchCharacter(character);
-									afterSelectCharacter();
+									afterSelectCharacter(character, {
+										opSignOperatorHasPermissions: hasPermissions,
+									});
 								}}
 							>
 								<CharacterAvatar character={character} size={32} />
-								<span>{extractCharacterName(character)}</span>
-								<OpSignIcon
-									onClick={(event) => {
-										event.stopPropagation();
-										onClickOPSignIcon(character);
-									}}
-									characterId={character.characterId}
-								/>
+								<div>
+									<div className={styles.characterName}>
+										{extractCharacterName(character)}
+									</div>
+									<div className={styles.characterHandle}>
+										@{character.handle}
+									</div>
+								</div>
 							</OptionListItem>
 						</>
 					)}

@@ -12,7 +12,7 @@ import styles from "./index.module.css";
 export function OPSignSettings(props: OPSignSettingsProps) {
 	return (
 		<div className={styles.container}>
-			<Header leftNode={false} title="Operator Sign Settings" />
+			<Header title="Suggested Function" />
 			<Main {...props} />
 		</div>
 	);

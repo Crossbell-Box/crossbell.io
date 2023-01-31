@@ -2,24 +2,31 @@
 	margin-bottom: 16px;
 }
 
-.characterItem {
+.characterItem,
+.mintItem {
 	display: flex;
 	align-items: center;
-	font-weight: 500;
-	font-size: 16px;
+	min-height: 64px;
 }
 
-.characterItem span {
-	margin: 0 6px 0 8px;
+.characterItem {
+	font-weight: 500;
+	line-height: 1.1;
+	gap: 8px;
 }
 
 .characterItem svg {
 	font-size: 24px;
 }
 
+.characterName {
+	font-size: 16px;
+}
+
+.characterHandle {
+	font-size: 12px;
+}
+
 .mintItem {
-	display: flex;
-	align-items: center;
 	justify-content: center;
-	margin: 0 auto;
 }
