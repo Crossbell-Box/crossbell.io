@@ -103,13 +103,12 @@ export function createAccountTypeBasedMutationHooks<
 			{
 				...options,
 
-				onSuccess(...params) {
+				async onSuccess(...params) {
 					const [data, variables] = params;
 
-					return Promise.all([
-						options?.onSuccess?.(...params),
-						factory.onSuccess?.({ data, variables, queryClient }),
-					]);
+					await factory.onSuccess?.({ data, variables, queryClient });
+
+					return options?.onSuccess?.(...params);
 				},
 
 				onError(...params) {

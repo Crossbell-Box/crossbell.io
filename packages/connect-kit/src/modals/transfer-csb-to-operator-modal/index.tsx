@@ -14,6 +14,7 @@ import {
 } from "./stores";
 
 import { Transfer } from "./scenes/transfer";
+import { TransferSuccess } from "./scenes/transfer-success";
 
 export { useTransferCSBToOperatorModal };
 
@@ -41,6 +42,8 @@ function Main() {
 				switch (currentScene.kind) {
 					case SceneKind.transfer:
 						return <Transfer />;
+					case SceneKind.transferSuccess:
+						return <TransferSuccess />;
 				}
 			})()}
 		</DynamicContainerContent>

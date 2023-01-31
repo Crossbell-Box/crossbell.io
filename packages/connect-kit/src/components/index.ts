@@ -21,4 +21,5 @@ export * from "./select-characters";
 export * from "./main-btn";
 export * from "./sign-in-with-wallet";
 export * from "./transfer-csb";
+export * from "./transfer-csb-success";
 export * from "./wallet-claim-csb";

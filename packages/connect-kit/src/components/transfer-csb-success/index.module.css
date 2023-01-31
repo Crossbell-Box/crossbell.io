@@ -1,0 +1,25 @@
+.container {
+	padding: 0 24px 24px;
+	color: #49454f;
+}
+
+.img {
+	display: block;
+	width: 141px;
+	height: 138px;
+	object-fit: contain;
+	margin: 13px auto 8px;
+}
+
+.balanceTips {
+	font-size: 14px;
+	text-align: center;
+	margin: 0 0 4px;
+}
+
+.balance {
+	font-weight: 500;
+	font-size: 22px;
+	text-align: center;
+	margin: 0 0 48px;
+}

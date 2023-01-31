@@ -1,23 +1,22 @@
-import { useContract } from "@crossbell/contract";
-import { useMutation, UseMutationOptions } from "@tanstack/react-query";
 import { BigNumber } from "ethers";
+
+import { createAccountTypeBasedMutationHooks } from "./account-type-based-hooks";
+import { useAccountState } from "@crossbell/connect-kit";
 
 export type UseTransferCSBParams = {
 	toAddress: string;
 	amount: BigNumber;
 };
 
-export type UseTransferCSBOptions = UseMutationOptions<
-	unknown,
-	unknown,
+export const useTransferCsb = createAccountTypeBasedMutationHooks<
+	void,
 	UseTransferCSBParams
->;
+>({ actionDesc: "transfer CSB", withParams: false }, () => ({
+	contract({ toAddress, amount }, { contract }) {
+		return contract.transferCsb(toAddress, amount);
+	},
 
-export function useTransferCsb(options?: UseTransferCSBOptions) {
-	const contract = useContract();
-
-	return useMutation(
-		({ toAddress, amount }) => contract.transferCsb(toAddress, amount),
-		options
-	);
-}
+	onSuccess() {
+		return Promise.all([useAccountState.getState().refresh()]);
+	},
+}));

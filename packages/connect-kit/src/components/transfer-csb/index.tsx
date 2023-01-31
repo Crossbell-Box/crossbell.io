@@ -25,14 +25,15 @@ enum NormalizeError {
 
 export type TransferCSBProps = {
 	toAddress: string;
+	onSuccess: () => void;
 };
 
-export function TransferCSB({ toAddress }: TransferCSBProps) {
+export function TransferCSB({ toAddress, onSuccess }: TransferCSBProps) {
 	const { balance } = useAccountBalance();
 	const [value, setValue] = React.useState("0.00");
 	const maxAmount = balance?.formatted ?? "0.00";
 	const amount = React.useMemo(() => normalizeNumber(value, balance), [value]);
-	const { isLoading, mutate: transferCsb } = useTransferCsb();
+	const { isLoading, mutate: transferCsb } = useTransferCsb({ onSuccess });
 	const refreshDynamicContainer = useRefreshDynamicContainer();
 
 	React.useEffect(refreshDynamicContainer, [amount]);
