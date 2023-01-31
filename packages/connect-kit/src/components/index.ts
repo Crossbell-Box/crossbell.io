@@ -20,4 +20,5 @@ export * from "./textarea";
 export * from "./select-characters";
 export * from "./main-btn";
 export * from "./sign-in-with-wallet";
+export * from "./transfer-csb";
 export * from "./wallet-claim-csb";

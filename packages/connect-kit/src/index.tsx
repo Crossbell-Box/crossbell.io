@@ -17,6 +17,7 @@ import { UpgradeAccountModal } from "./modals/upgrade-account-modal";
 import { CsbDetailModal } from "./modals/csb-detail-modal";
 import { WalletClaimCSBModal } from "./modals/wallet-claim-csb-modal";
 import { OpSignSettingsModal } from "./modals/op-sign-settings-modal";
+import { TransferCSBToOperatorModal } from "./modals/transfer-csb-to-operator-modal";
 
 export { useConnectModal } from "./modals/connect-modal";
 export { useDisconnectModal } from "./modals/disconnect-modal";
@@ -64,6 +65,7 @@ export function ConnectKitProvider({
 				<CsbDetailModal />
 				<WalletClaimCSBModal />
 				<OpSignSettingsModal />
+				<TransferCSBToOperatorModal />
 				{children}
 			</UrlComposerContext.Provider>
 		</UseWeb2UrlContext.Provider>
