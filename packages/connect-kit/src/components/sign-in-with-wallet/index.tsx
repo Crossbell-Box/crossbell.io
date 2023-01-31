@@ -3,6 +3,7 @@ import classNames from "classnames";
 import { LoadingOverlay } from "@crossbell/ui";
 
 import { useAccountState, useWalletSignIn } from "../../hooks";
+import { BottomTips } from "../bottom-tips";
 
 import { Selections } from "../../modals/connect-modal/components/selections";
 
@@ -33,10 +34,9 @@ export function SignInWithWallet({
 	return (
 		<div className={styles.main}>
 			<div className={styles.tips}>
-				{
-					"By clicking Sign In, you will sign a message and prove you have your private key. The private key acts as the login password "
-				}
-				<strong>to our servers</strong>.
+				By clicking Sign In, you will sign a message and prove you have your
+				private key. The private key acts as the login password *to our
+				servers*.
 			</div>
 
 			<LoadingOverlay visible={signIn.isLoading} />
@@ -59,6 +59,16 @@ export function SignInWithWallet({
 					},
 				]}
 			/>
+
+			<a
+				href="https://eips.ethereum.org/EIPS/eip-4361"
+				target="_blank"
+				rel="noreferrer"
+			>
+				<BottomTips className={styles.bottomTips}>
+					Learn more about Sign In
+				</BottomTips>
+			</a>
 		</div>
 	);
 }
