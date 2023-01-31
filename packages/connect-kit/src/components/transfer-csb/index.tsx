@@ -30,6 +30,7 @@ export type TransferCSBProps = {
 export function TransferCSB({ toAddress }: TransferCSBProps) {
 	const { balance } = useAccountBalance();
 	const [value, setValue] = React.useState("0.00");
+	const maxAmount = balance?.formatted ?? "0.00";
 	const amount = React.useMemo(() => normalizeNumber(value, balance), [value]);
 	const { isLoading, mutate: transferCsb } = useTransferCsb();
 	const refreshDynamicContainer = useRefreshDynamicContainer();
@@ -44,11 +45,20 @@ export function TransferCSB({ toAddress }: TransferCSBProps) {
 				<Field
 					icon={<LogoIcon className={styles.bell} />}
 					title="Amount"
-					tips={`Balance:${balance?.formatted}`}
+					tips={`Balance: ${balance?.formatted}`}
 				>
 					<TextInput
 						autoFocus={true}
 						value={value}
+						className={styles.input}
+						rightSection={
+							<div
+								className={styles.maxContainer}
+								onClick={() => setValue(maxAmount)}
+							>
+								<button className={styles.max}>Max</button>
+							</div>
+						}
 						onInput={(e) => {
 							setValue(e.currentTarget.value);
 						}}
@@ -56,7 +66,9 @@ export function TransferCSB({ toAddress }: TransferCSBProps) {
 				</Field>
 
 				{!BigNumber.isBigNumber(amount) && (
-					<div className={styles.error}>{normalizeErrorToMsg(amount)}</div>
+					<div className={styles.error}>
+						{normalizeErrorToMsg(amount, maxAmount)}
+					</div>
 				)}
 
 				<MainBtn
@@ -76,12 +88,17 @@ export function TransferCSB({ toAddress }: TransferCSBProps) {
 	);
 }
 
-function normalizeErrorToMsg(error: NormalizeError) {
+function normalizeErrorToMsg(error: NormalizeError, maxAmount: string) {
 	switch (error) {
 		case NormalizeError.invalidFormat:
 			return "Invalid number format";
 		case NormalizeError.outOfRange:
-			return "The transfer number should be between 0-0.02";
+			return (
+				<>
+					The transfer number should be between{" "}
+					<span className={styles.nowrap}>0 - {maxAmount}</span>
+				</>
+			);
 	}
 }
 

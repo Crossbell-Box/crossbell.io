@@ -8,6 +8,41 @@
 	color: #f6c549;
 }
 
+.input {
+	font-weight: 500;
+	font-size: 22px;
+	color: #5b89f7;
+	padding: 0 60px 0 16px;
+}
+
+.maxContainer {
+	width: 60px;
+	height: 100%;
+	display: flex;
+	align-items: center;
+	justify-content: center;
+}
+
+.max {
+	white-space: nowrap;
+	font-size: 14px;
+	border: none;
+	outline: none;
+	background-color: transparent;
+	color: #5b89f7;
+	cursor: pointer;
+	transition: color 0.2s;
+	padding: 6px;
+}
+
+.max:hover {
+	color: #466abf;
+}
+
+.max:active {
+	color: #365295;
+}
+
 .error {
 	position: relative;
 	padding-left: 10px;
@@ -30,4 +65,8 @@
 
 .mainBtn {
 	margin-top: 48px;
+}
+
+.nowrap {
+	white-space: nowrap;
 }
