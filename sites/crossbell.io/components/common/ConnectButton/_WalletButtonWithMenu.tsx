@@ -2,6 +2,7 @@ import React from "react";
 import { Menu, Text, Button, Tooltip, Indicator } from "@mantine/core";
 import { useDisclosure } from "@mantine/hooks";
 import Link from "next/link";
+import classNames from "classnames";
 
 import { useIntervalMemo } from "@crossbell/util-hooks";
 import {
@@ -63,6 +64,7 @@ export default function WalletButtonWithMenu({
 	const { isAllRead } = useNotifications();
 	const csbDetailModal = useCsbDetailModal();
 	const walletClaimCSBModal = useWalletClaimCSBModal();
+	const isWallet = account.type === "wallet";
 
 	return (
 		<Menu
@@ -85,14 +87,20 @@ export default function WalletButtonWithMenu({
 
 			<Menu.Dropdown className="w-full">
 				<Menu.Label
-					onClick={csbDetailModal.show}
-					className="flex items-center cursor-pointer"
+					onClick={isWallet ? csbDetailModal.show : undefined}
+					className={classNames(
+						"flex items-center",
+						isWallet && "cursor-pointer"
+					)}
 				>
 					$CSB Balance
-					<BackIcon className="ml-auto rotate-180" />
+					{isWallet && <BackIcon className="ml-auto rotate-180" />}
 				</Menu.Label>
 
-				<Menu.Label onClick={csbDetailModal.show} className="cursor-pointer">
+				<Menu.Label
+					onClick={isWallet ? csbDetailModal.show : undefined}
+					className={classNames(isWallet && "cursor-pointer")}
+				>
 					<div className="flex items-center">
 						<Text className="i-csb:logo text-20px text-[#F6C549]" />
 
