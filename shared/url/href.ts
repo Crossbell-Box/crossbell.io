@@ -11,7 +11,7 @@ export const getOrigin = ({
 	forceProductionOrigin?: boolean;
 } = {}) => {
 	if (forceProductionOrigin) {
-		return "https://crossbell.io";
+		return process.env.VERCEL_URL ?? "https://crossbell.io";
 	}
 
 	return config.domain;
