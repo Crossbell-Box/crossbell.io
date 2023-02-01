@@ -4,6 +4,7 @@ import {
 	DynamicContainer,
 	DynamicContainerContent,
 	BaseModal,
+	Congrats,
 } from "../../components";
 
 import { SceneKind } from "./types";
@@ -42,6 +43,8 @@ function Main() {
 						return <Balance />;
 					case SceneKind.claimCSB:
 						return <ClaimCSB />;
+					case SceneKind.congrats:
+						return <Congrats {...currentScene} />;
 					case SceneKind.transfer:
 						return <Transfer />;
 					case SceneKind.transferSuccess:

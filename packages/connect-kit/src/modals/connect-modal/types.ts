@@ -4,6 +4,7 @@ import {
 	OPSignSettingsProps,
 	SignInWithWalletProps,
 } from "../../components";
+import { SceneType } from "../../utils";
 
 export enum SceneKind {
 	congrats = "congrats",
@@ -30,10 +31,6 @@ export enum SceneKind {
 	inputEmailToResetPassword1 = "inputEmailToResetPassword1",
 	inputEmailToResetPassword2 = "inputEmailToResetPassword2",
 }
-
-export type SceneType<K extends SceneKind, Context = unknown> = {
-	kind: K;
-} & Context;
 
 export type SceneWithContext =
 	| SceneType<SceneKind.connectWallet, { wallet: Wallet }>

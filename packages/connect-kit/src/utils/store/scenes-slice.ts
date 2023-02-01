@@ -13,6 +13,10 @@ export interface ScenesSlice<S> {
 	};
 }
 
+export type SceneType<K, Context = unknown> = {
+	kind: K;
+} & Context;
+
 export const scenesSlice =
 	<S>(defaultScene: S): SliceFn<ScenesSlice<S>> =>
 	(set, get) => ({

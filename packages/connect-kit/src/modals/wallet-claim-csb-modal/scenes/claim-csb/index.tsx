@@ -2,12 +2,14 @@ import React from "react";
 
 import { ModalHeader, WalletClaimCSB } from "../../../../components";
 
+import { SceneKind } from "../../types";
 import { useWalletClaimCSBModal, useScenesStore } from "../../stores";
 import styles from "./index.module.css";
 
 export function ClaimCSB() {
 	const hide = useWalletClaimCSBModal((s) => s.hide);
-	const [goBack, isAbleToGoBack] = useScenesStore((s) => [
+	const [goTo, goBack, isAbleToGoBack] = useScenesStore((s) => [
+		s.goTo,
 		s.goBack,
 		s.computed.isAbleToGoBack,
 	]);
@@ -22,7 +24,20 @@ export function ClaimCSB() {
 			/>
 
 			<div className={styles.main}>
-				<WalletClaimCSB />
+				<WalletClaimCSB
+					onSuccess={() => {
+						goTo({
+							kind: SceneKind.congrats,
+							title: "Congrats!",
+							desc: "You have claimed 0.02$CSB.",
+							tips: "Welcome to new Crossbell",
+							timeout: "15s",
+							btnText: "Close",
+							onClose: hide,
+							onClickBtn: hide,
+						});
+					}}
+				/>
 			</div>
 		</div>
 	);

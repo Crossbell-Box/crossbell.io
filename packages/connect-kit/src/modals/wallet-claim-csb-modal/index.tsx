@@ -4,6 +4,7 @@ import {
 	DynamicContainer,
 	DynamicContainerContent,
 	BaseModal,
+	Congrats,
 } from "../../components";
 
 import { SceneKind } from "./types";
@@ -39,6 +40,8 @@ function Main() {
 		<DynamicContainerContent id={currentScene.kind}>
 			{((): JSX.Element => {
 				switch (currentScene.kind) {
+					case SceneKind.congrats:
+						return <Congrats {...currentScene} />;
 					case SceneKind.claimCSB:
 						return <ClaimCSB />;
 				}
