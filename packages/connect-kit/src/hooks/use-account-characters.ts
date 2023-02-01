@@ -13,13 +13,18 @@ export type UseAccountCharactersResult = {
 	fetchNextPage: () => void;
 };
 
+const noop = () => {};
+
 export function useAccountCharacters(): UseAccountCharactersResult {
 	const account = useAccountState((s) => s.computed.account);
 	const { isLoading, data, hasNextPage, fetchNextPage, isFetchingNextPage } =
 		useCharacters(account?.address);
 	const characters = React.useMemo(
-		() => data?.pages.flatMap((page) => page.list) ?? [],
-		[data]
+		() =>
+			account?.type === "email"
+				? [account.character]
+				: data?.pages.flatMap((page) => page.list) ?? [],
+		[data, account]
 	);
 
 	if (account?.type === "email") {
@@ -27,8 +32,8 @@ export function useAccountCharacters(): UseAccountCharactersResult {
 			isLoading: false,
 			hasNextPage: false,
 			isFetchingNextPage: false,
-			characters: [account.character],
-			fetchNextPage() {},
+			characters,
+			fetchNextPage: noop,
 		};
 	} else {
 		return {
