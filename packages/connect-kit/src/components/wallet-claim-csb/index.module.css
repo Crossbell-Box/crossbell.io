@@ -3,12 +3,17 @@
 	font-size: 16px;
 	display: flex;
 	align-items: center;
-	gap: 8px;
 	margin: 0 0 12px;
 }
 
-.title svg {
+.title svg:first-of-type {
 	font-size: 24px;
+	margin-right: 8px;
+}
+
+.title .circleHelp {
+	font-size: 16px;
+	transform: translateY(-50%);
 }
 
 .tips {
@@ -53,4 +58,15 @@
 
 .mainBtn {
 	margin-top: 48px;
+}
+
+.tooltip {
+	padding: 0;
+	background: transparent;
+}
+
+.copyLinkToTweetImg {
+	width: 360px;
+	height: 196px;
+	object-fit: cover;
 }

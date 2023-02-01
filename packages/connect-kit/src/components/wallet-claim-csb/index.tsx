@@ -1,6 +1,14 @@
 import React from "react";
-import { LinkIcon, LoadingOverlay, TwitterIcon } from "@crossbell/ui";
+import {
+	LinkIcon,
+	LoadingOverlay,
+	TwitterIcon,
+	CircleHelpIcon,
+	useWeb2Url,
+} from "@crossbell/ui";
 import { useRefCallback } from "@crossbell/util-hooks";
+import { Tooltip } from "@mantine/core";
+
 import { copyToClipboard } from "~/shared/other";
 
 import commonStyles from "../../styles.module.css";
@@ -14,7 +22,7 @@ import {
 	useIsEligibleToClaim,
 	useWalletClaimCsb,
 } from "../../hooks";
-import { useReCAPTCHA } from "../../utils";
+import { IMAGES, useReCAPTCHA } from "../../utils";
 
 import styles from "./index.module.css";
 
@@ -33,6 +41,7 @@ export function WalletClaimCSB({ onSuccess }: WalletClaimCSBProps) {
 	const isLoading = claimCsb.isLoading || isCheckingEligibility;
 	const isAbleToClaim = tweetLink && isEligibleToClaim;
 	const tweetContent = `Requesting $CSB funds from the Faucet on the #Crossbell blockchain. Address: ${account?.address}. https://faucet.crossbell.io/`;
+	const copyLinkToTweetImg = useWeb2Url(IMAGES.copyLinkToTweetImg);
 
 	React.useEffect(refreshDynamicContainer, [reCaptcha.isLoaded]);
 
@@ -79,6 +88,20 @@ export function WalletClaimCSB({ onSuccess }: WalletClaimCSBProps) {
 			<h4 className={styles.title}>
 				<LinkIcon />
 				Paste Tweet link
+				<Tooltip
+					withinPortal={true}
+					zIndex={201}
+					classNames={{ tooltip: styles.tooltip }}
+					label={
+						<img
+							className={styles.copyLinkToTweetImg}
+							src={copyLinkToTweetImg}
+							alt="Copy link to Tweet"
+						/>
+					}
+				>
+					<CircleHelpIcon className={styles.circleHelp} />
+				</Tooltip>
 			</h4>
 
 			<div className={styles.tips}>Copy your tweet link and paste here.</div>

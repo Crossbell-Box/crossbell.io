@@ -16,6 +16,9 @@ export const IMAGES = {
 		"ipfs://bafkreihz5hygddvnohnui3nxtsr3a4u7pjbs5paqnheazkdfekhksqwym4",
 	coinsIcon:
 		"ipfs://bafkreiblywb3pcwejypkdhf63tkuhxbth3ukwqr2ei3cscthsfjwyxy7eq",
+
+	copyLinkToTweetImg:
+		"ipfs://bafkreifpp64hj7tvaxiz3l3tu3bypyuan7vnrdzn7rbq3qctd42tusduqi",
 } as const;
 
 const imgs = Object.values(IMAGES);
