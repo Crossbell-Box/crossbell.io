@@ -10,8 +10,9 @@ import { SceneKind } from "./types";
 import { useScenesStore, useCsbDetailModal, StoresProvider } from "./stores";
 
 import { Balance } from "./scenes/balance";
-import { Transfer } from "./scenes/transfer";
 import { ClaimCSB } from "./scenes/claim-csb";
+import { Transfer } from "./scenes/transfer";
+import { TransferSuccess } from "./scenes/transfer-success";
 
 export { useCsbDetailModal };
 
@@ -39,10 +40,12 @@ function Main() {
 				switch (currentScene.kind) {
 					case SceneKind.balance:
 						return <Balance />;
-					case SceneKind.transfer:
-						return <Transfer />;
 					case SceneKind.claimCSB:
 						return <ClaimCSB />;
+					case SceneKind.transfer:
+						return <Transfer />;
+					case SceneKind.transferSuccess:
+						return <TransferSuccess />;
 				}
 			})()}
 		</DynamicContainerContent>

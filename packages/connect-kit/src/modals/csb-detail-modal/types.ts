@@ -1,6 +1,7 @@
 export enum SceneKind {
 	balance = "balance",
 	transfer = "transfer",
+	transferSuccess = "transferSuccess",
 	claimCSB = "claimCSB",
 }
 
