@@ -1,11 +1,14 @@
 import React from "react";
 import { LogoIcon } from "@crossbell/ui";
+import { Tooltip } from "@mantine/core";
+import classNames from "classnames";
 
 import { ActionBtn, useRefreshDynamicContainer } from "../../../../components";
 import {
 	useAccountBalance,
 	useAccountCharacters,
 	useAccountState,
+	useClaimCSBStatus,
 	useOpSignBalance,
 } from "../../../../hooks";
 
@@ -14,7 +17,6 @@ import { Characters, Header } from "../../components";
 import { SceneKind } from "../../types";
 
 import styles from "./index.module.css";
-import classNames from "classnames";
 
 export function Balance() {
 	const account = useAccountState((s) => s.wallet);
@@ -23,7 +25,7 @@ export function Balance() {
 	const opBalance = useOpSignBalance();
 	const { characters } = useAccountCharacters();
 	const refreshDynamicContainer = useRefreshDynamicContainer();
-
+	const claimCSBStatus = useClaimCSBStatus();
 	React.useEffect(refreshDynamicContainer, [characters]);
 
 	if (!account) return null;
@@ -40,14 +42,28 @@ export function Balance() {
 				<div className={styles.balance}>
 					<LogoIcon />
 					{balance?.formatted}
-					<ActionBtn
-						color="yellow"
-						height="32px"
-						minWidth="85px"
-						onClick={() => goTo({ kind: SceneKind.claimCSB })}
-					>
-						Claim
-					</ActionBtn>
+
+					{claimCSBStatus.isEligibleToClaim ? (
+						<ActionBtn
+							color="yellow"
+							height="32px"
+							minWidth="85px"
+							onClick={() => goTo({ kind: SceneKind.claimCSB })}
+						>
+							Claim
+						</ActionBtn>
+					) : (
+						<Tooltip zIndex={201} label={claimCSBStatus.errorMsg}>
+							<ActionBtn
+								disabled={true}
+								color="yellow"
+								height="32px"
+								minWidth="85px"
+							>
+								Claim
+							</ActionBtn>
+						</Tooltip>
+					)}
 				</div>
 			</div>
 

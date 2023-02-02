@@ -29,18 +29,11 @@ const sizeMap = {
 	md: styles.md,
 };
 
-export const ActionBtn = React.memo(
-	({
-		color,
-		size,
-		className,
-		height,
-		minWidth,
-		disabled,
-		...props
-	}: ActionBtnProps) => (
+export const ActionBtn = React.forwardRef<HTMLButtonElement, ActionBtnProps>(
+	({ color, size, className, height, minWidth, disabled, ...props }, ref) => (
 		<button
 			{...props}
+			ref={ref}
 			disabled={disabled}
 			style={{ height, minWidth }}
 			className={classNames(

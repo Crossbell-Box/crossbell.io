@@ -16,6 +16,7 @@ import {
 	useAccountState,
 	useCsbDetailModal,
 	useWalletClaimCSBModal,
+	useClaimCSBStatus,
 } from "@crossbell/connect-kit";
 import { AccountList } from "~/shared/components/account-list";
 import {
@@ -60,6 +61,7 @@ export default function WalletButtonWithMenu({
 			checkIsAbleToRefillEmailBalance(),
 			getRefillEmailBalanceStatus(),
 		]);
+	const claimCSBStatus = useClaimCSBStatus();
 	const showNotificationModal = useShowNotificationModal();
 	const { isAllRead } = useNotifications();
 	const csbDetailModal = useCsbDetailModal();
@@ -108,20 +110,27 @@ export default function WalletButtonWithMenu({
 							{isLoadingBalance ? "..." : balance?.formatted}
 						</Text>
 
-						{account.type === "wallet" && (
-							<Button
-								size="xs"
-								radius={6}
-								px={10}
-								className="h-24px"
-								onClick={(event: React.MouseEvent) => {
-									event.stopPropagation();
-									walletClaimCSBModal.show();
-								}}
-							>
-								Claim
-							</Button>
-						)}
+						{account.type === "wallet" &&
+							(claimCSBStatus.isEligibleToClaim ? (
+								<Button
+									size="xs"
+									radius={6}
+									px={10}
+									className="h-24px"
+									onClick={(event: React.MouseEvent) => {
+										event.stopPropagation();
+										walletClaimCSBModal.show();
+									}}
+								>
+									Claim
+								</Button>
+							) : (
+								<Tooltip label={claimCSBStatus.errorMsg}>
+									<button className="ml-auto h-24px border-none bg-gray/10 text-gray rounded-6px px-10px border-1 border-transparent cursor-not-allowed">
+										Claim
+									</button>
+								</Tooltip>
+							))}
 
 						{account.type === "email" &&
 							(() => {

@@ -18,7 +18,7 @@ import {
 } from "../../components";
 import {
 	useAccountState,
-	useIsEligibleToClaim,
+	useClaimCSBStatus,
 	useWalletClaimCsb,
 } from "../../hooks";
 import { IMAGES, useReCAPTCHA } from "../../utils";
@@ -39,7 +39,7 @@ export function WalletClaimCSB({
 	const refreshDynamicContainer = useRefreshDynamicContainer();
 	const [tweetLink, setTweetLink] = React.useState("");
 	const { isEligibleToClaim, isLoading: isCheckingEligibility } =
-		useIsEligibleToClaim();
+		useClaimCSBStatus();
 	const claimCsb = useWalletClaimCsb();
 	const isLoading = claimCsb.isLoading || isCheckingEligibility;
 	const isAbleToClaim = tweetLink && isEligibleToClaim;
