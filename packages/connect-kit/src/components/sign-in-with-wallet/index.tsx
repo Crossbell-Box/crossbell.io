@@ -35,8 +35,7 @@ export function SignInWithWallet({
 		<div className={styles.main}>
 			<div className={styles.tips}>
 				By clicking Sign In, you will sign a message and prove you have your
-				private key. The private key acts as the login password *to our
-				servers*.
+				private key.
 			</div>
 
 			<LoadingOverlay visible={signIn.isLoading} />
