@@ -50,15 +50,16 @@ type FaucetClaimResponse = {
 	transaction_hash: string;
 	error?: string;
 };
+export type FaucetClaimParams = {
+	address: string;
+	reCAPTCHAToken: string;
+	tweetId?: string;
+};
 export async function faucetClaim({
 	address,
 	reCAPTCHAToken,
 	tweetId,
-}: {
-	address: string;
-	reCAPTCHAToken: string;
-	tweetId?: string;
-}): Promise<FaucetClaimResponse> {
+}: FaucetClaimParams): Promise<FaucetClaimResponse> {
 	return request<FaucetClaimResponse>(`/claim`, {
 		method: "POST",
 		reCAPTCHAToken: reCAPTCHAToken,
