@@ -43,7 +43,7 @@
 		"@next/bundle-analyzer": "13.0.0",
 		"@tanstack/react-query": "4.13.5",
 		"@tanstack/react-query-devtools": "4.13.5",
-		"@wagmi/core": "^0.6.12",
+		"@wagmi/core": "^0.9.3",
 		"canvas-confetti": "1.6.0",
 		"classnames": "2.3.2",
 		"crossbell.js": "0.16.3",
@@ -76,7 +76,7 @@
 		"sticky-sidebar-v2": "1.1.1",
 		"type-fest": "3.1.0",
 		"typeit-react": "2.6.0",
-		"wagmi": "0.7.9",
+		"wagmi": "0.11.2",
 		"zustand": "^4.1.5"
 	},
 	"devDependencies": {

@@ -35,7 +35,7 @@
 		"@tanstack/react-query": "4.x",
 		"crossbell.js": "0.16.x",
 		"ethers": "5.x",
-		"wagmi": "0.7.x",
+		"wagmi": "0.11.x",
 		"dayjs": "^1.11.6"
 	}
 }
