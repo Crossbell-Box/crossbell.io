@@ -1,8 +1,6 @@
 import React from "react";
 import { LoadingOverlay, Tooltip } from "@mantine/core";
-import { useWeb2Url, CircleHelpIcon } from "@crossbell/ui";
-
-import { composeCharacterHref } from "~/shared/url/href";
+import { useWeb2Url, CircleHelpIcon, useUrlComposer } from "@crossbell/ui";
 
 import { useAccountState } from "../../../hooks";
 import {
@@ -28,6 +26,7 @@ import {
 import styles from "./input-email-to-register-3.module.css";
 
 export function InputEmailToRegister3() {
+	const urlComposer = useUrlComposer();
 	const store = useEmailRegisterStore();
 	const scene = useScenesStore();
 	const imgUrl = useWeb2Url(IMAGES.whatIsCharacterImg);
@@ -50,7 +49,7 @@ export function InputEmailToRegister3() {
 						onClose: hideModal,
 						onClickBtn: () => {
 							if (character) {
-								window.open(composeCharacterHref(character.handle), "_blank");
+								window.open(urlComposer.characterUrl(character), "_blank");
 							}
 							hideModal();
 						},
