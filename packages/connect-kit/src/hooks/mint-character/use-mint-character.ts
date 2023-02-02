@@ -8,10 +8,12 @@ import { useCreateCharacter } from "../use-create-character";
 
 import { MintCharacterForm } from "./use-mint-character-form";
 
+export type UseMintCharacterParams = OmitActions<MintCharacterForm>;
+
 export type UseMintCharacterParamsOptions = UseMutationOptions<
 	unknown,
 	unknown,
-	OmitActions<MintCharacterForm>
+	UseMintCharacterParams
 >;
 
 export function useMintCharacter(options?: UseMintCharacterParamsOptions) {

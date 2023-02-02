@@ -46,7 +46,7 @@ export function SelectCharacters() {
 					}}
 					onSelectNew={() => {
 						resetForm();
-						goTo({ kind: SceneKind.mintCharacter });
+						goTo({ kind: SceneKind.mintCharacter, mode: "form" });
 					}}
 				/>
 			</div>

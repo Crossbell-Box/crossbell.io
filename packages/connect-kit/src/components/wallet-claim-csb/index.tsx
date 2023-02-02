@@ -8,6 +8,7 @@ import {
 } from "@crossbell/ui";
 import { useRefCallback } from "@crossbell/util-hooks";
 import { Tooltip } from "@mantine/core";
+import { useBalance } from "wagmi";
 
 import commonStyles from "../../styles.module.css";
 import {
@@ -26,33 +27,44 @@ import styles from "./index.module.css";
 
 export type WalletClaimCSBProps = {
 	onSuccess: () => void;
+	claimBtnText?: React.ReactNode;
 };
 
-export function WalletClaimCSB({ onSuccess }: WalletClaimCSBProps) {
+export function WalletClaimCSB({
+	onSuccess,
+	claimBtnText,
+}: WalletClaimCSBProps) {
 	const account = useAccountState((s) => s.wallet);
 	const reCaptcha = useReCAPTCHA();
 	const refreshDynamicContainer = useRefreshDynamicContainer();
 	const [tweetLink, setTweetLink] = React.useState("");
 	const { isEligibleToClaim, isLoading: isCheckingEligibility } =
 		useIsEligibleToClaim();
-	const claimCsb = useWalletClaimCsb({ onSuccess });
+	const claimCsb = useWalletClaimCsb();
 	const isLoading = claimCsb.isLoading || isCheckingEligibility;
 	const isAbleToClaim = tweetLink && isEligibleToClaim;
 	const tweetContent = `Requesting $CSB funds from the Faucet on the #Crossbell blockchain. Address: ${account?.address}. https://faucet.crossbell.io/`;
 	const copyLinkToTweetImg = useWeb2Url(IMAGES.copyLinkToTweetImg);
+	const { refetch: refreshBalance } = useBalance({
+		address: account?.address as `0x${string}` | undefined,
+	});
 
 	React.useEffect(refreshDynamicContainer, [reCaptcha.isLoaded]);
 
-	const handleClaim = useRefCallback(() => {
+	const handleClaim = useRefCallback(async () => {
 		if (!account) return;
 
 		const tweetId = tweetLink.split("?").shift()?.split("/").pop();
 
-		claimCsb.mutate({
+		await claimCsb.mutateAsync({
 			tweetId,
 			address: account?.address,
 			reCAPTCHAToken: reCaptcha.token ?? "",
 		});
+
+		await refreshBalance();
+
+		onSuccess();
 	});
 
 	if (!account) return null;
@@ -118,7 +130,7 @@ export function WalletClaimCSB({ onSuccess }: WalletClaimCSBProps) {
 				disabled={!isAbleToClaim}
 				onClick={handleClaim}
 			>
-				Claim
+				{claimBtnText ?? "Claim"}
 			</MainBtn>
 		</div>
 	);

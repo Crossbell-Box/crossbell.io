@@ -98,9 +98,9 @@ function renderScene(scene: Scene) {
 		case SceneKind.opSignSettings:
 			return <OPSignSettings {...scene} />;
 		case SceneKind.mintCharacter:
-			return <MintCharacter />;
+			return <MintCharacter {...scene} />;
 		case SceneKind.mintCharacterQuickly:
-			return <MintCharacterQuickly />;
+			return <MintCharacterQuickly {...scene} />;
 		case SceneKind.inputEmailToConnect:
 			return <InputEmailToConnect />;
 		case SceneKind.inputEmailToRegister1:

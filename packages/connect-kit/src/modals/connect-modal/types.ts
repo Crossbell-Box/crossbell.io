@@ -5,6 +5,8 @@ import {
 	SignInWithWalletProps,
 } from "../../components";
 import { SceneType } from "../../utils";
+import { MintCharacterProps } from "./scenes/mint-character";
+import { MintCharacterQuicklyProps } from "./scenes/mint-character-quickly";
 
 export enum SceneKind {
 	congrats = "congrats",
@@ -36,7 +38,9 @@ export type SceneWithContext =
 	| SceneType<SceneKind.connectWallet, { wallet: Wallet }>
 	| SceneType<SceneKind.congrats, CongratsProps>
 	| SceneType<SceneKind.signInWithWallet, SignInWithWalletProps>
-	| SceneType<SceneKind.opSignSettings, OPSignSettingsProps>;
+	| SceneType<SceneKind.opSignSettings, OPSignSettingsProps>
+	| SceneType<SceneKind.mintCharacter, MintCharacterProps>
+	| SceneType<SceneKind.mintCharacterQuickly, MintCharacterQuicklyProps>;
 
 export type SceneWithoutContext = SceneType<
 	Exclude<SceneKind, SceneWithContext["kind"]>

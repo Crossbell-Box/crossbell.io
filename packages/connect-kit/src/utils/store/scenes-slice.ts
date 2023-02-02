@@ -4,6 +4,7 @@ export interface ScenesSlice<S> {
 	scenes: S[];
 	goTo: (scene: S) => void;
 	goBack: () => void;
+	updateLast: (scene: S) => void;
 	reset: () => void;
 	resetScenes: (scenes: S[]) => void;
 
@@ -30,6 +31,12 @@ export const scenesSlice =
 			const { scenes } = get();
 
 			set({ scenes: scenes.slice(0, scenes.length - 1) });
+		},
+
+		updateLast(scene) {
+			const { scenes } = get();
+
+			set({ scenes: [...scenes.slice(0, scenes.length - 1), scene] });
 		},
 
 		reset() {

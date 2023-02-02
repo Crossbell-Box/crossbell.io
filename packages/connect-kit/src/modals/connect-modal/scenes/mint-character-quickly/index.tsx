@@ -1,49 +1,67 @@
 import React from "react";
 import { useRefCallback } from "@crossbell/util-hooks";
+import { LoadingOverlay } from "@crossbell/ui";
 
-import { composeCharacterHref } from "~/shared/url/href";
+import {
+	MintCharacterQuickly as Main,
+	WalletClaimCSB,
+} from "../../../../components";
 
-import { useAccountState } from "../../../../hooks";
-import { MintCharacterQuickly as Main } from "../../../../components";
 import { Header } from "../../components/header";
-
-import styles from "./index.module.css";
-import { useConnectModal, useScenesStore } from "../../stores";
+import { useScenesStore } from "../../stores";
 import { SceneKind } from "../../types";
 
-export function MintCharacterQuickly() {
-	const { hide: hideModal } = useConnectModal();
-	const goTo = useScenesStore((s) => s.goTo);
+import { useMintModel, MintCharacterProps } from "../mint-character";
+
+import styles from "./index.module.css";
+
+export type MintCharacterQuicklyProps = MintCharacterProps;
+
+export function MintCharacterQuickly({ mode }: MintCharacterQuicklyProps) {
+	const [goTo, updateScene] = useScenesStore((s) => [s.goTo, s.updateLast]);
+	const onNotEnoughCSB = useRefCallback(() =>
+		updateScene({ kind: SceneKind.mintCharacterQuickly, mode: "claim-csb" })
+	);
 	const switchMode = useRefCallback(() =>
-		goTo({ kind: SceneKind.mintCharacter })
+		goTo({ kind: SceneKind.mintCharacter, mode: "form" })
 	);
 
-	const afterSubmit = useRefCallback(() => {
-		const character = useAccountState.getState().computed.account?.character;
-
-		goTo({
-			kind: SceneKind.congrats,
-			title: "Congrats!",
-			desc: "Now you can return into the feed and enjoy Crossbell.",
-			tips: "Welcome to new Crossbell",
-			timeout: "15s",
-			btnText: character ? "Check Character" : "Close",
-			onClose: hideModal,
-			onClickBtn: () => {
-				if (character) {
-					window.open(composeCharacterHref(character.handle), "_blank");
-				}
-				hideModal();
-			},
-		});
-	});
+	const { submit, form, hasEnoughCSB, isLoading } = useMintModel(
+		onNotEnoughCSB,
+		({ handle, username }) => ({
+			bio: "",
+			avatar: null,
+			handle,
+			username,
+		})
+	);
 
 	return (
 		<div className={styles.container}>
-			<Header title="Mint Character Quickly" />
+			<LoadingOverlay visible={isLoading} />
+			<Header
+				title={
+					mode === "form"
+						? hasEnoughCSB
+							? "Mint Character Quickly"
+							: "Mint Character Quickly (1/2)"
+						: "Claim $CSB (2/2)"
+				}
+			/>
 
 			<div className={styles.main}>
-				<Main onSwitchMode={switchMode} afterSubmit={afterSubmit} />
+				{mode === "form" && (
+					<Main
+						onSwitchMode={switchMode}
+						onSubmit={submit}
+						form={form}
+						submitBtnText={hasEnoughCSB ? "Mint" : "Next Step"}
+					/>
+				)}
+
+				{mode === "claim-csb" && (
+					<WalletClaimCSB onSuccess={submit} claimBtnText="Finish" />
+				)}
 			</div>
 		</div>
 	);

@@ -1,15 +1,13 @@
 import React from "react";
-import { Loading, LoadingOverlay } from "@crossbell/ui";
-import { useRefCallback } from "@crossbell/util-hooks";
+import { Loading } from "@crossbell/ui";
 
-import { useMintCharacter, useMintCharacterForm } from "../../hooks";
+import { MintCharacterForm } from "../../hooks";
 
 import { FiledTips } from "../filed-tips";
 import { Textarea } from "../textarea";
 import { ActionBtn } from "../action-btn";
 import { Field } from "../field";
 import { TextInput } from "../text-input";
-import { useRefreshDynamicContainer } from "../dynamic-container";
 
 import styles from "./index.module.css";
 import { Avatar } from "./avatar";
@@ -17,24 +15,19 @@ import { AvatarIcon, BioIcon, NameIcon } from "./icons";
 
 export type MintCharacterProps = {
 	onSwitchMode: () => void;
-	afterSubmit: () => void;
+	submitBtnText?: React.ReactNode;
+	onSubmit: () => void;
+	form: MintCharacterForm;
 };
 
 export function MintCharacter({
 	onSwitchMode,
-	afterSubmit,
+	submitBtnText,
+	onSubmit,
+	form,
 }: MintCharacterProps) {
-	const refreshDynamicContainer = useRefreshDynamicContainer();
-	const mintCharacter = useMintCharacter({ onSuccess: afterSubmit });
-	const form = useMintCharacterForm();
-	const mint = useRefCallback(() => mintCharacter.mutate(form));
-
-	React.useEffect(refreshDynamicContainer, [form.handle, form.username]);
-
 	return (
 		<div className={styles.container}>
-			<LoadingOverlay visible={mintCharacter.isLoading} />
-
 			<Field
 				icon={<AvatarIcon />}
 				title="Avatar"
@@ -78,9 +71,9 @@ export function MintCharacter({
 					color="green"
 					size="md"
 					minWidth="133px"
-					onClick={mint}
+					onClick={onSubmit}
 				>
-					Mint
+					{submitBtnText ?? "Mint"}
 				</ActionBtn>
 			</div>
 		</div>
