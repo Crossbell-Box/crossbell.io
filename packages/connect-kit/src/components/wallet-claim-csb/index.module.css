@@ -41,7 +41,7 @@
 	align-items: center;
 }
 
-.tweetContent button {
+.tweetContent a {
 	color: #fff;
 	background: #6ad991;
 	border-radius: 12px;

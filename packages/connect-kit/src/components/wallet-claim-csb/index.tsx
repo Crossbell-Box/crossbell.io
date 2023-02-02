@@ -9,8 +9,6 @@ import {
 import { useRefCallback } from "@crossbell/util-hooks";
 import { Tooltip } from "@mantine/core";
 
-import { copyToClipboard } from "~/shared/other";
-
 import commonStyles from "../../styles.module.css";
 import {
 	TextInput,
@@ -75,14 +73,15 @@ export function WalletClaimCSB({ onSuccess }: WalletClaimCSBProps) {
 
 			<div className={styles.tweetContent}>
 				{tweetContent}
-				<button
+				<a
 					className={commonStyles.uxOverlay}
-					onClick={() =>
-						copyToClipboard(tweetContent, { showNotification: true })
-					}
+					href={`https://twitter.com/intent/tweet?text=${encodeURIComponent(
+						tweetContent
+					)}`}
+					target="_blank"
 				>
-					Copy and Tweet
-				</button>
+					Click to Tweet
+				</a>
 			</div>
 
 			<h4 className={styles.title}>
@@ -96,7 +95,7 @@ export function WalletClaimCSB({ onSuccess }: WalletClaimCSBProps) {
 						<img
 							className={styles.copyLinkToTweetImg}
 							src={copyLinkToTweetImg}
-							alt="Copy link to Tweet"
+							alt="How to copy tweet link"
 						/>
 					}
 				>
