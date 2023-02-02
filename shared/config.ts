@@ -9,7 +9,9 @@ export default {
 				: "https://test-opsync.crossbell.io/v1",
 	},
 	domain:
-		process.env.DOMAIN_NAME ?? process.env.NODE_ENV == "production"
+		process.env.DOMAIN_NAME ??
+		process.env.VERCEL_URL ??
+		process.env.NODE_ENV == "production"
 			? "https://crossbell.io"
 			: "http://localhost:3000",
 
