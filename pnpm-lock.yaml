@@ -296,8 +296,10 @@ importers:
       '@types/facepaint': ^1.2.1
       facepaint: ^1.2.1
       pascal-case: ^3.1.2
+      react-intersection-observer: 9.4.1
     dependencies:
       facepaint: 1.2.1
+      react-intersection-observer: 9.4.1
     devDependencies:
       '@crossbell/indexer': link:../indexer
       '@crossbell/util-hooks': link:../util-hooks
@@ -9824,6 +9826,12 @@ packages:
       react: ^15.0.0 || ^16.0.0 || ^17.0.0|| ^18.0.0
     dependencies:
       react: 18.2.0
+    dev: false
+
+  /react-intersection-observer/9.4.1:
+    resolution: {integrity: sha512-IXpIsPe6BleFOEHKzKh5UjwRUaz/JYS0lT/HPsupWEQou2hDqjhLMStc5zyE3eQVT4Fk3FufM8Fw33qW1uyeiw==}
+    peerDependencies:
+      react: ^15.0.0 || ^16.0.0 || ^17.0.0 || ^18.0.0
     dev: false
 
   /react-is/16.13.1:
