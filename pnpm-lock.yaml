@@ -40,7 +40,7 @@ importers:
       canvas-confetti: 1.6.0
       classnames: 2.3.2
       commander: ^9.4.0
-      crossbell.js: 0.16.3
+      crossbell.js: 0.16.4
       dayjs: 1.11.6
       detect-browser: 5.3.0
       embla-carousel-react: 7.0.4
@@ -120,7 +120,7 @@ importers:
       '@wagmi/core': 0.9.3_bwjswvl2jzlimcp6gevknicprm
       canvas-confetti: 1.6.0
       classnames: 2.3.2
-      crossbell.js: 0.16.3
+      crossbell.js: 0.16.4
       dayjs: 1.11.6
       detect-browser: 5.3.0
       embla-carousel-react: 7.0.4_react@18.2.0
@@ -4960,8 +4960,8 @@ packages:
       which: 2.0.2
     dev: true
 
-  /crossbell.js/0.16.3:
-    resolution: {integrity: sha512-gYnGQ8ZzF9xbiIoTwrsUFmRZkMg3/BhcXHlYkuK1jTGVR7I+JPyio0+qhCI8vEGeSZMe3kiGoaJZ8NOuYPQt8Q==}
+  /crossbell.js/0.16.4:
+    resolution: {integrity: sha512-6I8Xd+ZjLQX1X/b4KLhiZKBTJN0LWD0rIYo1veWs5boCrhQRlS0K/Y5HzGUNO8SEeIt3hdt59v5vPZVTViqAKQ==}
     dependencies:
       async-retry: 1.3.3
       browser-or-node: 2.1.1
@@ -4969,7 +4969,7 @@ packages:
       fetch-undici: 3.0.1
       is-ipfs: 6.0.2
       ts-mixer: 6.0.2
-      web3-providers-ws: 1.8.1
+      web3-providers-ws: 1.8.2
     transitivePeerDependencies:
       - bufferutil
       - node-fetch
@@ -5075,7 +5075,7 @@ packages:
       supports-color:
         optional: true
     dependencies:
-      ms: 2.1.2
+      ms: 2.1.3
     dev: true
 
   /debug/4.3.4:
@@ -8774,7 +8774,6 @@ packages:
 
   /ms/2.1.3:
     resolution: {integrity: sha512-6FlzubTLZG3J2a/NVCAleEhjzq5oxgHyaCU9yYXvcLsvoVaHJq/s5xXI6/XXP6tz7R9xAOtHnSO/tXtF3WRTlA==}
-    dev: false
 
   /msw/0.46.1_typescript@4.8.4:
     resolution: {integrity: sha512-yEKJcHjUbee6oeD/RDakFdr+RcdMtiREH4U4m/8eJnKpsH2kIA5DSU2wvpR1VKOBVVPyvmAIaU/OrPke8jNdTQ==}
@@ -11867,35 +11866,35 @@ packages:
     resolution: {integrity: sha512-bKr1DkiNa2krS7qxNtdrtHAmzuYGFQLiQ13TsorsdT6ULTkPLKuu5+GsFpDlg6JFjUTwX2DyhMPG2be8uPrqsQ==}
     dev: false
 
-  /web3-core-helpers/1.8.1:
-    resolution: {integrity: sha512-ClzNO6T1S1gifC+BThw0+GTfcsjLEY8T1qUp6Ly2+w4PntAdNtKahxWKApWJ0l9idqot/fFIDXwO3Euu7I0Xqw==}
+  /web3-core-helpers/1.8.2:
+    resolution: {integrity: sha512-6B1eLlq9JFrfealZBomd1fmlq1o4A09vrCVQSa51ANoib/jllT3atZrRDr0zt1rfI7TSZTZBXdN/aTdeN99DWw==}
     engines: {node: '>=8.0.0'}
     dependencies:
-      web3-eth-iban: 1.8.1
-      web3-utils: 1.8.1
+      web3-eth-iban: 1.8.2
+      web3-utils: 1.8.2
     dev: false
 
-  /web3-eth-iban/1.8.1:
-    resolution: {integrity: sha512-DomoQBfvIdtM08RyMGkMVBOH0vpOIxSSQ+jukWk/EkMLGMWJtXw/K2c2uHAeq3L/VPWNB7zXV2DUEGV/lNE2Dg==}
+  /web3-eth-iban/1.8.2:
+    resolution: {integrity: sha512-h3vNblDWkWMuYx93Q27TAJz6lhzpP93EiC3+45D6xoz983p6si773vntoQ+H+5aZhwglBtoiBzdh7PSSOnP/xQ==}
     engines: {node: '>=8.0.0'}
     dependencies:
       bn.js: 5.2.1
-      web3-utils: 1.8.1
+      web3-utils: 1.8.2
     dev: false
 
-  /web3-providers-ws/1.8.1:
-    resolution: {integrity: sha512-TNefIDAMpdx57+YdWpYZ/xdofS0P+FfKaDYXhn24ie/tH9G+AB+UBSOKnjN0KSadcRSCMBwGPRiEmNHPavZdsA==}
+  /web3-providers-ws/1.8.2:
+    resolution: {integrity: sha512-3s/4K+wHgbiN+Zrp9YjMq2eqAF6QGABw7wFftPdx+m5hWImV27/MoIx57c6HffNRqZXmCHnfWWFCNHHsi7wXnA==}
     engines: {node: '>=8.0.0'}
     dependencies:
       eventemitter3: 4.0.4
-      web3-core-helpers: 1.8.1
+      web3-core-helpers: 1.8.2
       websocket: 1.0.34
     transitivePeerDependencies:
       - supports-color
     dev: false
 
-  /web3-utils/1.8.1:
-    resolution: {integrity: sha512-LgnM9p6V7rHHUGfpMZod+NST8cRfGzJ1BTXAyNo7A9cJX9LczBfSRxJp+U/GInYe9mby40t3v22AJdlELibnsQ==}
+  /web3-utils/1.8.2:
+    resolution: {integrity: sha512-v7j6xhfLQfY7xQDrUP0BKbaNrmZ2/+egbqP9q3KYmOiPpnvAfol+32slgL0WX/5n8VPvKCK5EZ1HGrAVICSToA==}
     engines: {node: '>=8.0.0'}
     dependencies:
       bn.js: 5.2.1
