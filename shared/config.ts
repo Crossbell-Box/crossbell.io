@@ -4,16 +4,18 @@ export default {
 	},
 	operatorSync: {
 		endpoint:
-			process.env.OPERATOR_SYNC_ENDPOINT ?? process.env.NODE_ENV == "production"
+			process.env.NEXT_PUBLIC_OPERATOR_SYNC_ENDPOINT ??
+			(process.env.NODE_ENV === "production"
 				? "https://opsync.crossbell.io/v1"
-				: "https://test-opsync.crossbell.io/v1",
+				: "https://test-opsync.crossbell.io/v1"),
 	},
 	domain:
 		process.env.DOMAIN_NAME ??
-		process.env.VERCEL_URL ??
-		process.env.NODE_ENV == "production"
+		(process.env.NEXT_PUBLIC_VERCEL_URL &&
+			`https://${process.env.NEXT_PUBLIC_VERCEL_URL}`) ??
+		(process.env.NODE_ENV == "production"
 			? "https://crossbell.io"
-			: "http://localhost:3000",
+			: "http://localhost:3000"),
 
 	xSync: {
 		domain: process.env.X_SYNC_WEBSITE || "https://xsync.app",
