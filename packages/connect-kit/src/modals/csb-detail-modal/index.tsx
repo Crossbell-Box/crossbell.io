@@ -1,11 +1,7 @@
 import React from "react";
+import { DynamicContainer, DynamicContainerContent } from "@crossbell/ui";
 
-import {
-	DynamicContainer,
-	DynamicContainerContent,
-	BaseModal,
-	Congrats,
-} from "../../components";
+import { BaseModal, Congrats } from "../../components";
 
 import { SceneKind } from "./types";
 import { useScenesStore, useCsbDetailModal, StoresProvider } from "./stores";

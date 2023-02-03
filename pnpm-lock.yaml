@@ -206,7 +206,6 @@ importers:
       '@mantine/notifications': ^5
       '@types/lodash.debounce': 4.0.7
       '@types/react-google-recaptcha': 2.1.5
-      '@types/react-transition-group': ^4
       canvas-confetti: ^1
       check-password-strength: ^2
       classnames: ^2
@@ -216,7 +215,6 @@ importers:
       qrcode: ^1
       react-dropzone: 14.2.3
       react-google-recaptcha: 2.1.0
-      react-transition-group: ^4
     dependencies:
       '@emotion/react': 11.10.5
       '@mantine/carousel': 5.6.3_fzoq45alvslrv3wqbruvadulha
@@ -232,7 +230,6 @@ importers:
       qrcode: 1.5.1
       react-dropzone: 14.2.3
       react-google-recaptcha: 2.1.0
-      react-transition-group: 4.4.5
     devDependencies:
       '@crossbell/contract': link:../contract
       '@crossbell/indexer': link:../indexer
@@ -242,7 +239,6 @@ importers:
       '@crossbell/util-metadata': link:../util-metadata
       '@types/lodash.debounce': 4.0.7
       '@types/react-google-recaptcha': 2.1.5
-      '@types/react-transition-group': 4.4.5
 
   packages/contract:
     specifiers:
@@ -294,12 +290,16 @@ importers:
       '@crossbell/util-metadata': workspace:*
       '@svgr/cli': 6.5.1
       '@types/facepaint': ^1.2.1
+      '@types/react-transition-group': ^4
       facepaint: ^1.2.1
       pascal-case: ^3.1.2
       react-intersection-observer: 9.4.1
+      react-transition-group: 4.4.5
     dependencies:
+      '@types/react-transition-group': 4.4.5
       facepaint: 1.2.1
       react-intersection-observer: 9.4.1
+      react-transition-group: 4.4.5
     devDependencies:
       '@crossbell/indexer': link:../indexer
       '@crossbell/util-hooks': link:../util-hooks
@@ -2792,7 +2792,7 @@ packages:
     resolution: {integrity: sha512-juKD/eiSM3/xZYzjuzH6ZwpP+/lejltmiS3QEzV/vmb/Q8+HfDmxu+Baga8UEMGBqV88Nbg4l2hY/K2DkyaLLA==}
     dependencies:
       '@types/react': 18.0.24
-    dev: true
+    dev: false
 
   /@types/react/18.0.24:
     resolution: {integrity: sha512-wRJWT6ouziGUy+9uX0aW4YOJxAY0bG6/AOk5AW5QSvZqI7dk6VBIbXvcVgIw/W5Jrl24f77df98GEKTJGOLx7Q==}

@@ -2,12 +2,7 @@ import React from "react";
 import { BigNumber, utils } from "ethers";
 import { LogoIcon, LoadingOverlay } from "@crossbell/ui";
 
-import {
-	MainBtn,
-	Field,
-	TextInput,
-	useRefreshDynamicContainer,
-} from "../../components";
+import { MainBtn, Field, TextInput } from "../../components";
 import {
 	useAccountBalance,
 	UseAccountBalanceResult,
@@ -34,9 +29,6 @@ export function TransferCSB({ toAddress, onSuccess }: TransferCSBProps) {
 	const maxAmount = balance?.formatted ?? "0.00";
 	const amount = React.useMemo(() => normalizeNumber(value, balance), [value]);
 	const { isLoading, mutate: transferCsb } = useTransferCsb({ onSuccess });
-	const refreshDynamicContainer = useRefreshDynamicContainer();
-
-	React.useEffect(refreshDynamicContainer, [amount]);
 
 	return (
 		<>

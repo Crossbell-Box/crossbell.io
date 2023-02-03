@@ -3,10 +3,9 @@ import { LogoIcon } from "@crossbell/ui";
 import { Tooltip } from "@mantine/core";
 import classNames from "classnames";
 
-import { ActionBtn, useRefreshDynamicContainer } from "../../../../components";
+import { ActionBtn } from "../../../../components";
 import {
 	useAccountBalance,
-	useAccountCharacters,
 	useAccountState,
 	useClaimCSBStatus,
 	useOpSignBalance,
@@ -23,10 +22,7 @@ export function Balance() {
 	const goTo = useScenesStore((s) => s.goTo);
 	const { balance } = useAccountBalance();
 	const opBalance = useOpSignBalance();
-	const { characters } = useAccountCharacters();
-	const refreshDynamicContainer = useRefreshDynamicContainer();
 	const claimCSBStatus = useClaimCSBStatus();
-	React.useEffect(refreshDynamicContainer, [characters]);
 
 	if (!account) return null;
 

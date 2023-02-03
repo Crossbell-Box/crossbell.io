@@ -1,12 +1,8 @@
 import React from "react";
 import { useAccount } from "wagmi";
+import { DynamicContainer, DynamicContainerContent } from "@crossbell/ui";
 
-import {
-	BaseModal,
-	Congrats,
-	DynamicContainer,
-	DynamicContainerContent,
-} from "../../components";
+import { BaseModal, Congrats } from "../../components";
 
 import { Scene, SceneKind } from "./types";
 import { StoresProvider, useConnectModal, useScenesStore } from "./stores";

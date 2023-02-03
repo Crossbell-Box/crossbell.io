@@ -9,11 +9,7 @@ import {
 	useMintCharacterForm,
 	UseMintCharacterParams,
 } from "../../../../hooks";
-import {
-	MintCharacter as Main,
-	useRefreshDynamicContainer,
-	WalletClaimCSB,
-} from "../../../../components";
+import { MintCharacter as Main, WalletClaimCSB } from "../../../../components";
 import { Header } from "../../components/header";
 import { useConnectModal, useScenesStore } from "../../stores";
 import { SceneKind } from "../../types";
@@ -97,9 +93,6 @@ export function useMintModel(
 			});
 		},
 	});
-	const refreshDynamicContainer = useRefreshDynamicContainer();
-
-	React.useEffect(refreshDynamicContainer, [form.handle, form.username]);
 
 	const submit = useRefCallback(() => {
 		if (hasEnoughCSB) {

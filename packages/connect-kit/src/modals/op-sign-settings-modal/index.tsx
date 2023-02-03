@@ -1,10 +1,7 @@
 import React from "react";
+import { DynamicContainer, DynamicContainerContent } from "@crossbell/ui";
 
-import {
-	BaseModal,
-	DynamicContainer,
-	DynamicContainerContent,
-} from "../../components";
+import { BaseModal } from "../../components";
 
 import { useOpSignSettingsModal } from "./stores";
 

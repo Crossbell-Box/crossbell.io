@@ -2,12 +2,7 @@ import React from "react";
 import classNames from "classnames";
 import { LoadingOverlay } from "@mantine/core";
 
-import {
-	useRefreshDynamicContainer,
-	EmailIcon,
-	PasswordIcon,
-	TextInput,
-} from "../../../components";
+import { EmailIcon, PasswordIcon, TextInput } from "../../../components";
 
 import { Header } from "../components/header";
 import { Field } from "../components/field";
@@ -23,9 +18,6 @@ import styles from "./input-email-to-register-1.module.css";
 export function InputEmailToRegister1() {
 	const goTo = useScenesStore(({ goTo }) => goTo);
 	const store = useEmailRegisterStore();
-	const refreshSize = useRefreshDynamicContainer();
-
-	React.useEffect(refreshSize, [store.isCodeSent]);
 
 	const verifyCode = React.useCallback(() => {
 		if (store.computed.canVerifyCode) {

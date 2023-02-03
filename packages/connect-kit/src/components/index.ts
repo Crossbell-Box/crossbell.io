@@ -3,7 +3,6 @@ export * from "./base-modal";
 export * from "./bottom-tips";
 export * from "./congrats";
 export * from "./connect-kind-differences";
-export * from "./dynamic-container";
 export * from "./field";
 export * from "./filed-tips";
 export * from "./icons";

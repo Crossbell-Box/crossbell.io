@@ -11,11 +11,7 @@ import { Tooltip } from "@mantine/core";
 import { useBalance } from "wagmi";
 
 import commonStyles from "../../styles.module.css";
-import {
-	TextInput,
-	MainBtn,
-	useRefreshDynamicContainer,
-} from "../../components";
+import { TextInput, MainBtn } from "../../components";
 import {
 	useAccountState,
 	useClaimCSBStatus,
@@ -36,7 +32,6 @@ export function WalletClaimCSB({
 }: WalletClaimCSBProps) {
 	const account = useAccountState((s) => s.wallet);
 	const reCaptcha = useReCAPTCHA();
-	const refreshDynamicContainer = useRefreshDynamicContainer();
 	const [tweetLink, setTweetLink] = React.useState("");
 	const { isEligibleToClaim, isLoading: isCheckingEligibility } =
 		useClaimCSBStatus();
@@ -48,8 +43,6 @@ export function WalletClaimCSB({
 	const { refetch: refreshBalance } = useBalance({
 		address: account?.address as `0x${string}` | undefined,
 	});
-
-	React.useEffect(refreshDynamicContainer, [reCaptcha.isLoaded]);
 
 	const handleClaim = useRefCallback(async () => {
 		if (!account) return;
