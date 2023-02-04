@@ -1,6 +1,11 @@
 .container {
-	width: 360px;
 	color: #082135;
+}
+
+@media (min-width: 768px) {
+	.container {
+		width: 360px;
+	}
 }
 
 .main {

@@ -1,3 +1,5 @@
-.container {
-	width: 360px;
+@media (min-width: 768px) {
+	.container {
+		width: 360px;
+	}
 }
