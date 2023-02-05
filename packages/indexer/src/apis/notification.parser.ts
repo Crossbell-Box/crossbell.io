@@ -1,11 +1,17 @@
 import { NotificationEntity } from "crossbell.js";
 import dayjs from "dayjs";
 
+import { indexer } from "../indexer";
 import { ParsedNotification } from "./notification.types";
 
 export async function parseNotificationEntity(
 	entity: NotificationEntity
 ): Promise<ParsedNotification | null> {
+	const baseInfo = {
+		transactionHash: entity.transactionHash,
+		createdAt: dayjs(entity.createdAt).valueOf(),
+	};
+
 	switch (entity.type) {
 		case "LINKED": {
 			const link = entity.feed?.link;
@@ -17,9 +23,8 @@ export async function parseNotificationEntity(
 				link.toCharacter
 			) {
 				return {
-					transactionHash: entity.transactionHash,
-					type: "follow",
-					createdAt: dayjs(entity.createdAt).valueOf(),
+					...baseInfo,
+					type: "follow-character",
 					fromCharacter: link.fromCharacter,
 					toCharacter: link.toCharacter,
 				};
@@ -32,9 +37,8 @@ export async function parseNotificationEntity(
 				link.toNote
 			) {
 				return {
-					transactionHash: entity.transactionHash,
-					type: "like",
-					createdAt: dayjs(entity.createdAt).valueOf(),
+					...baseInfo,
+					type: "like-note",
 					fromCharacter: link.fromCharacter,
 					originNote: link.toNote,
 				};
@@ -42,7 +46,7 @@ export async function parseNotificationEntity(
 
 			return null;
 		}
-		case "NOTE_POSTED":
+		case "NOTE_POSTED": {
 			const feed = entity.feed;
 
 			if (
@@ -51,9 +55,8 @@ export async function parseNotificationEntity(
 				feed.character
 			) {
 				return {
-					type: "comment",
-					transactionHash: entity.transactionHash,
-					createdAt: dayjs(entity.createdAt).valueOf(),
+					...baseInfo,
+					type: "comment-note",
 					fromCharacter: feed.character,
 					originNote: feed.note.toNote,
 					commentNote: feed.note,
@@ -61,6 +64,25 @@ export async function parseNotificationEntity(
 			}
 
 			return null;
+		}
+		case "NOTE_MINTED": {
+			const feed = entity.feed;
+
+			if (feed?.contractAddress && feed.mintedNote?.note) {
+				const fromAddress = feed.mintedNote.owner;
+				const fromCharacter = await indexer.getPrimaryCharacter(fromAddress);
+
+				return {
+					...baseInfo,
+					type: "mint-note",
+					originNote: feed.mintedNote.note,
+					fromAddress,
+					fromCharacter,
+				};
+			}
+
+			return null;
+		}
 	}
 	return null;
 }
