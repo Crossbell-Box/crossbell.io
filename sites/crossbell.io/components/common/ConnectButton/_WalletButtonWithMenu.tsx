@@ -1,6 +1,8 @@
+import React from "react";
 import { Menu, Text, Button, Tooltip, Indicator } from "@mantine/core";
 import { useDisclosure } from "@mantine/hooks";
 import Link from "next/link";
+import classNames from "classnames";
 
 import { useIntervalMemo } from "@crossbell/util-hooks";
 import {
@@ -12,9 +14,18 @@ import {
 	useAccountBalance,
 	GeneralAccount,
 	useAccountState,
+	useCsbDetailModal,
+	useWalletClaimCSBModal,
+	useClaimCSBStatus,
 } from "@crossbell/connect-kit";
 import { AccountList } from "~/shared/components/account-list";
-import { BellIcon, ExitIcon, ExportIcon, UsersIcon } from "@crossbell/ui";
+import {
+	BellIcon,
+	ExitIcon,
+	ExportIcon,
+	UsersIcon,
+	BackIcon,
+} from "@crossbell/ui";
 import {
 	useShowNotificationModal,
 	useNotifications,
@@ -50,8 +61,12 @@ export default function WalletButtonWithMenu({
 			checkIsAbleToRefillEmailBalance(),
 			getRefillEmailBalanceStatus(),
 		]);
+	const claimCSBStatus = useClaimCSBStatus();
 	const showNotificationModal = useShowNotificationModal();
 	const { isAllRead } = useNotifications();
+	const csbDetailModal = useCsbDetailModal();
+	const walletClaimCSBModal = useWalletClaimCSBModal();
+	const isWallet = account.type === "wallet";
 
 	return (
 		<Menu
@@ -73,13 +88,50 @@ export default function WalletButtonWithMenu({
 			</Menu.Target>
 
 			<Menu.Dropdown className="w-full">
-				<Menu.Label>$CSB Balance</Menu.Label>
-				<Menu.Label>
+				<Menu.Label
+					onClick={isWallet ? csbDetailModal.show : undefined}
+					className={classNames(
+						"flex items-center",
+						isWallet && "cursor-pointer"
+					)}
+				>
+					$CSB Balance
+					{isWallet && <BackIcon className="ml-auto rotate-180" />}
+				</Menu.Label>
+
+				<Menu.Label
+					onClick={isWallet ? csbDetailModal.show : undefined}
+					className={classNames(isWallet && "cursor-pointer")}
+				>
 					<div className="flex items-center">
 						<Text className="i-csb:logo text-20px text-[#F6C549]" />
-						<Text className="font-400 text-16px ml-5px text-[#082135]">
+
+						<Text className="font-400 text-16px ml-5px text-[#082135] mr-auto">
 							{isLoadingBalance ? "..." : balance?.formatted}
 						</Text>
+
+						{account.type === "wallet" &&
+							(claimCSBStatus.isEligibleToClaim ? (
+								<Button
+									size="xs"
+									radius={6}
+									px={10}
+									className="h-24px"
+									onClick={(event: React.MouseEvent) => {
+										event.stopPropagation();
+										walletClaimCSBModal.show();
+									}}
+								>
+									Claim
+								</Button>
+							) : (
+								<Tooltip label={claimCSBStatus.errorMsg}>
+									<button className="ml-auto h-24px border-none bg-gray/10 text-gray rounded-6px px-10px border-1 border-transparent cursor-not-allowed">
+										Claim
+									</button>
+								</Tooltip>
+							))}
+
 						{account.type === "email" &&
 							(() => {
 								const text = (
@@ -89,7 +141,7 @@ export default function WalletButtonWithMenu({
 								return isAbleToRefillEmailBalance ? (
 									<Button
 										size="xs"
-										className="ml-auto h-24px"
+										className="h-24px"
 										px={10}
 										radius={6}
 										onClick={refillEmailBalance}

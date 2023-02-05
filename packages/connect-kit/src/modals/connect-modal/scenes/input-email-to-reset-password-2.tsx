@@ -10,7 +10,12 @@ import { Field } from "../components/field";
 import { NextStepButton } from "../components/next-step-button";
 
 import { SceneKind } from "../types";
-import { useResetPasswordStore, useScenesStore } from "../stores";
+import {
+	useConnectModal,
+	useResetPasswordStore,
+	useResetResetPasswordStore,
+	useScenesStore,
+} from "../stores";
 
 import styles from "./input-email-to-reset-password-2.module.css";
 
@@ -18,6 +23,8 @@ export function InputEmailToResetPassword2() {
 	const store = useResetPasswordStore();
 	const scene = useScenesStore();
 	const [visible, setVisible] = React.useState(false);
+	const { hide: hideModal } = useConnectModal();
+	const resetStore = useResetResetPasswordStore();
 
 	return (
 		<>
@@ -67,7 +74,21 @@ export function InputEmailToResetPassword2() {
 						onClick={() =>
 							store.resetPassword().then((ok) => {
 								if (ok) {
-									scene.goTo(SceneKind.inputEmailToResetPassword3);
+									scene.goTo({
+										kind: SceneKind.congrats,
+										title: "Congrats!",
+										desc: "Your password has been reset successfully you need to connect again.",
+										tips: "Welcome to new Crossbell",
+										btnText: "Connect",
+										onClose: hideModal,
+										onClickBtn() {
+											resetStore();
+											scene.resetScenes([
+												{ kind: SceneKind.selectConnectKind },
+												{ kind: SceneKind.inputEmailToConnect },
+											]);
+										},
+									});
 								}
 							})
 						}

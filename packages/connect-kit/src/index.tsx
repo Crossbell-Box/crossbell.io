@@ -10,23 +10,25 @@ import {
 
 import { usePreloadAllImgs } from "./utils";
 import { useAccountState } from "./hooks";
-import { ClaimCSBModal } from "./modals/claim-csb-modal";
-import {
-	ConnectModal,
-	useModalStore as useConnectModal,
-} from "./modals/connect-modal";
-import {
-	DisconnectModal,
-	useModalStore as useDisconnectModal,
-} from "./modals/disconnect-modal";
-import {
-	UpgradeAccountModal,
-	useModalStore as useUpgradeAccountModal,
-} from "./modals/upgrade-account-modal";
+import { ClaimCSBTipsModal } from "./modals/claim-csb-tips-modal";
+import { ConnectModal } from "./modals/connect-modal";
+import { DisconnectModal } from "./modals/disconnect-modal";
+import { UpgradeAccountModal } from "./modals/upgrade-account-modal";
+import { CsbDetailModal } from "./modals/csb-detail-modal";
+import { WalletClaimCSBModal } from "./modals/wallet-claim-csb-modal";
+import { OpSignSettingsModal } from "./modals/op-sign-settings-modal";
+import { TransferCSBToOperatorModal } from "./modals/transfer-csb-to-operator-modal";
+import { NoEnoughCSBModal } from "./modals/no-enough-csb-modal";
 
+export { useConnectModal } from "./modals/connect-modal";
+export { useDisconnectModal } from "./modals/disconnect-modal";
+export { useUpgradeAccountModal } from "./modals/upgrade-account-modal";
+export { useCsbDetailModal } from "./modals/csb-detail-modal";
+export { useWalletClaimCSBModal } from "./modals/wallet-claim-csb-modal";
+export { useOpSignSettingsModal } from "./modals/op-sign-settings-modal";
+export { OpSignIcon } from "./components";
 export * from "./hooks";
-
-export { useConnectModal, useDisconnectModal, useUpgradeAccountModal };
+export * from "./contract-config";
 
 export type ConnectKitProviderProps = {
 	children: React.ReactNode;
@@ -41,16 +43,16 @@ export function ConnectKitProvider({
 	withoutNotificationsProvider,
 	urlComposer,
 }: ConnectKitProviderProps) {
-	const accountStore = useAccountState();
+	const accountState = useAccountState();
 	const account = useAccount();
 
 	React.useEffect(() => {
-		accountStore.connectWallet(account.address ?? null);
+		accountState.connectWallet(account.address ?? null);
 	}, [account.address]);
 
 	React.useEffect(() => {
-		accountStore.refresh();
-		accountStore.markSSRReady();
+		accountState.refreshEmail();
+		accountState.markSSRReady();
 	}, []);
 
 	usePreloadAllImgs();
@@ -61,7 +63,12 @@ export function ConnectKitProvider({
 				<ConnectModal />
 				<DisconnectModal />
 				<UpgradeAccountModal />
-				<ClaimCSBModal />
+				<ClaimCSBTipsModal />
+				<CsbDetailModal />
+				<WalletClaimCSBModal />
+				<OpSignSettingsModal />
+				<TransferCSBToOperatorModal />
+				<NoEnoughCSBModal />
 				{children}
 			</UrlComposerContext.Provider>
 		</UseWeb2UrlContext.Provider>

@@ -1,85 +1,72 @@
-import { useMutation, useQueryClient } from "@tanstack/react-query";
-import { showNotification } from "@mantine/notifications";
+import { produce, Draft } from "immer";
 import { CharacterMetadata } from "crossbell.js";
-import React from "react";
+import { indexer, SCOPE_KEY_CHARACTER } from "@crossbell/indexer";
 
-import { useContract } from "@crossbell/contract";
-import { deepMerge } from "@crossbell/util-metadata";
-import { SCOPE_KEY_CHARACTER } from "@crossbell/indexer";
-
-import { updateMetadata } from "../apis";
-
+import { siweUpdateMetadata, updateCharactersMetadata } from "../apis";
 import { useAccountState } from "./account-state";
+import { createAccountTypeBasedMutationHooks } from "./account-type-based-hooks";
 
-type UpdateFn = (params: {
-	characterId: number;
-	metadata: CharacterMetadata;
-}) => Promise<unknown>;
+type EditFn = (draft: Draft<CharacterMetadata>) => void;
+type Variables = { edit: EditFn; characterId: number };
 
-export function useUpdateCharacterMetadata() {
-	const account = useAccountState((s) => s.computed.account);
-	const updateByContract = useUpdateByContract();
-	const updateByEmail = useUpdateByEmail();
+export const useUpdateCharacterMetadata = createAccountTypeBasedMutationHooks<
+	void,
+	Variables
+>({ actionDesc: "setting character metadata", withParams: false }, () => {
+	async function prepareData({ edit, characterId }: Variables) {
+		// Make sure character metadata is up-to-date.
+		await useAccountState.getState().refresh();
+		const account = useAccountState.getState().computed.account;
+		const character = await indexer.getCharacter(characterId);
 
-	return account?.type === "email" ? updateByEmail : updateByContract;
-}
+		if (!account || !character) return null;
 
-function useUpdateByEmail() {
-	const account = useAccountState((s) => s.email);
-	const refreshEmail = useAccountState((s) => s.refreshEmail.bind(s));
-	const updateFn: UpdateFn = React.useCallback(
-		async ({ characterId, metadata }) => {
-			if (account?.characterId === characterId) {
-				return updateMetadata(account?.token, metadata);
-			} else {
-				return false;
+		const oldMetadata = character.metadata?.content ?? {};
+		const newMetadata = produce(oldMetadata, edit);
+
+		// Skips redundant requests and just return success status directly.
+		if (oldMetadata === newMetadata) return null;
+
+		return newMetadata;
+	}
+
+	return {
+		async email(variables, { account }) {
+			const metadata = await prepareData(variables);
+
+			if (metadata) {
+				await updateCharactersMetadata({ token: account.token, metadata });
 			}
 		},
-		[account]
-	);
 
-	return useUpdateMetadata(updateFn, refreshEmail);
-}
+		async contract(variables, { siwe, contract }) {
+			const metadata = await prepareData(variables);
 
-function useUpdateByContract() {
-	const contract = useContract();
-	const updateFn: UpdateFn = React.useCallback(
-		({ characterId, metadata }) =>
-			contract.changeCharacterMetadata(characterId, (oMetadata) => {
-				if (oMetadata) {
-					return deepMerge(oMetadata, metadata);
+			if (metadata) {
+				if (siwe) {
+					await siweUpdateMetadata({
+						characterId: variables.characterId,
+						siwe,
+						metadata,
+					});
 				} else {
-					return metadata;
+					await contract.setCharacterMetadata(
+						variables.characterId,
+						// crossbell.js will try to modify the object internally,
+						// here the immutable object is converted to mutable object to avoid errors.
+						JSON.parse(JSON.stringify(metadata))
+					);
 				}
-			}),
-		[contract]
-	);
+			}
+		},
 
-	return useUpdateMetadata(updateFn);
-}
-
-function useUpdateMetadata(
-	updateFn: UpdateFn,
-	onSuccess?: () => Promise<unknown>
-) {
-	const queryClient = useQueryClient();
-
-	return useMutation(
-		async (params: Parameters<UpdateFn>[0]) => updateFn(params),
-		{
-			onSuccess(_, { characterId }) {
-				return Promise.all([
-					queryClient.invalidateQueries(SCOPE_KEY_CHARACTER(characterId)),
-					onSuccess?.(),
-				]);
-			},
-			onError(err) {
-				showNotification({
-					title: "Error while setting character metadata",
-					message: `${err}`,
-					color: "red",
-				});
-			},
-		}
-	);
-}
+		onSuccess({ variables, queryClient }) {
+			return Promise.all([
+				useAccountState.getState().refresh(),
+				queryClient.invalidateQueries(
+					SCOPE_KEY_CHARACTER(variables.characterId)
+				),
+			]);
+		},
+	};
+});

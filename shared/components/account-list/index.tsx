@@ -1,10 +1,13 @@
 import React from "react";
-import { ScrollArea, LoadingOverlay, Space, Text, Menu } from "@mantine/core";
+import { ScrollArea, LoadingOverlay, Text, Menu } from "@mantine/core";
 import { useModals } from "@mantine/modals";
 import { showNotification } from "@mantine/notifications";
+import classNames from "classnames";
 
 import { useAccountState, useAccountCharacters } from "@crossbell/connect-kit";
 import { extractCharacterName } from "@crossbell/util-metadata";
+import { CheckCircleFillIcon } from "@crossbell/ui";
+
 import { LoadMore } from "~/shared/components/load-more";
 import { Avatar } from "~/shared/components/avatar";
 
@@ -39,7 +42,7 @@ export function AccountList({ itemClassName }: AccountListProps) {
 					className={itemClassName}
 					rightSection={
 						character.characterId === account?.characterId ? (
-							<Text className="i-csb:tick" color="brand" />
+							<CheckCircleFillIcon className="text-[#F6C549] text-24px" />
 						) : null
 					}
 					key={character.characterId}
@@ -62,22 +65,32 @@ export function AccountList({ itemClassName }: AccountListProps) {
 						});
 					}}
 				>
-					<div className="flex items-center" key={character.characterId}>
+					<div
+						className="flex items-center gap-[8px]"
+						key={character.characterId}
+					>
 						{/* avatar */}
-						{character && <Avatar size={32} character={character} />}
+						{character && (
+							<Avatar
+								size={40}
+								character={character}
+								className={classNames(
+									character.characterId === account?.characterId &&
+										"border-2px border-[#FFCF55]"
+								)}
+							/>
+						)}
 
-						<Space w="xs" />
-
-						<div className="flex flex-col">
+						<div className="flex flex-col gap-[2px]">
 							{/* name */}
-							<Text className="text-sm font-semibold overflow-hidden text-ellipsis max-w-8em">
+							<span className="text-14px font-500 truncate max-w-8em">
 								{extractCharacterName(character, { fallbackToHandle: false })}
-							</Text>
+							</span>
 
 							{/* handle */}
-							<Text className="text-xs overflow-hidden text-ellipsis max-w-8em">
+							<span className="text-12px truncate max-w-8em">
 								@{character.handle}
-							</Text>
+							</span>
 						</div>
 					</div>
 				</Menu.Item>

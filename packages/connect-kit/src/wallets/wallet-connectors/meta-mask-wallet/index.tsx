@@ -63,7 +63,7 @@ export const metaMaskWallet = ({
 				return {
 					connector,
 					async qrCode() {
-						const { uri } = (await connector.getProvider()).connector;
+						const { uri } = ((await connector.getProvider()) as any)?.connector;
 
 						return isAndroid()
 							? uri
@@ -72,7 +72,15 @@ export const metaMaskWallet = ({
 				};
 			} else {
 				return {
-					connector: new MetaMaskConnector({ chains, options }),
+					connector: new MetaMaskConnector({
+						chains,
+						options: {
+							shimDisconnect: true,
+							shimChainChangedDisconnect: false,
+							UNSTABLE_shimOnConnectSelectAccount: true,
+							...options,
+						},
+					}),
 				};
 			}
 		},

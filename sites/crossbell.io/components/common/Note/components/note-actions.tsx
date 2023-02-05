@@ -27,6 +27,7 @@ export function NoteActions({ model }: { model: NoteModel }) {
 				visible={model.isLoading}
 				description="Loading..."
 				global
+				onClick={(e) => e.stopPropagation()}
 			/>
 
 			{/* comment */}

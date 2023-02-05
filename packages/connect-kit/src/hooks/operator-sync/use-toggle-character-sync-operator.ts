@@ -6,9 +6,17 @@ import { OPERATOR_ADDRESS, X_SYNC_OPERATOR_PERMISSIONS } from "./consts";
 export function useToggleCharacterSyncOperator(): ReturnType<
 	typeof useToggleCharacterOperator
 > {
-	const isEmail = useAccountState((s) => s.computed.account?.type === "email");
+	const [isEmail, characterId] = useAccountState((s) => [
+		s.computed.account?.type === "email",
+		s.computed.account?.characterId,
+	]);
+
 	const [{ hasPermissions, toggleOperator }, mutation] =
-		useToggleCharacterOperator(OPERATOR_ADDRESS, X_SYNC_OPERATOR_PERMISSIONS);
+		useToggleCharacterOperator({
+			operatorAddress: OPERATOR_ADDRESS,
+			permissions: X_SYNC_OPERATOR_PERMISSIONS,
+			characterId,
+		});
 
 	return [
 		{

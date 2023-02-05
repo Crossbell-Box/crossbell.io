@@ -5,7 +5,7 @@ import { LightBulbIcon } from "@crossbell/ui";
 import { WalletIcon, EmailIcon } from "../../../components";
 
 import { SceneKind } from "../types";
-import { useScenesStore, useModalStore } from "../stores";
+import { useScenesStore, useUpgradeAccountModal } from "../stores";
 import { Header } from "../components/header";
 import { Selections } from "../../connect-modal/components/selections";
 
@@ -13,7 +13,7 @@ import styles from "./select-options.module.css";
 
 export function SelectOptions() {
 	const goToScene = useScenesStore(({ goTo }) => goTo);
-	const hideModal = useModalStore((s) => s.hide);
+	const hideModal = useUpgradeAccountModal((s) => s.hide);
 
 	return (
 		<>
@@ -38,7 +38,7 @@ export function SelectOptions() {
 							title: "Upgrade to Wallet",
 							style: { background: "#6AD991", color: "#FFF" },
 							icon: <WalletIcon className={styles.walletIcon} />,
-							onClick: () => goToScene(SceneKind.upgradeToWallet),
+							onClick: () => goToScene({ kind: SceneKind.upgradeToWallet }),
 						},
 
 						{
@@ -56,7 +56,7 @@ export function SelectOptions() {
 					fullWidth
 					className={styles.differenceBtn}
 					leftIcon={<LightBulbIcon className={styles.differenceIcon} />}
-					onClick={() => goToScene(SceneKind.connectKindDifferences)}
+					onClick={() => goToScene({ kind: SceneKind.connectKindDifferences })}
 				>
 					What’s the difference
 				</Button>

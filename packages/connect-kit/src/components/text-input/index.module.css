@@ -1,0 +1,27 @@
+.container {
+	position: relative;
+	height: 44px;
+}
+
+.input {
+	height: 100%;
+	width: 100%;
+	border-radius: 12px;
+	border-style: none;
+	background-color: rgba(28, 27, 31, 0.04);
+	padding: 0 12px;
+	outline: none;
+	transition: color 0.2s;
+}
+
+.input:focus {
+	background-color: rgba(28, 27, 31, 0.06);
+}
+
+.rightSection {
+	position: absolute;
+	right: 0;
+	top: 50%;
+	height: 100%;
+	transform: translateY(-50%);
+}

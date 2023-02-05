@@ -31,6 +31,7 @@ import {
 } from "@crossbell/connect-kit";
 
 import { LoadingOverlay } from "~/shared/components/loading-overlay";
+import { generateHandleFromName } from "~/shared/character/generate-handle-from-name";
 
 export default function CharacterManagement({
 	characterId,
@@ -203,10 +204,11 @@ export default function CharacterManagement({
 					tasks.push(async () => {
 						await setMetadata.mutateAsync({
 							characterId: character.characterId,
-							metadata: {
-								name: form.values.name,
-								avatars: [form.values.avatar].filter((x) => Boolean(x)),
-								bio: form.values.bio,
+							edit(metadata) {
+								metadata.type = metadata.type ?? "character";
+								metadata.name = form.values.name;
+								metadata.avatars = [form.values.avatar].filter(Boolean);
+								metadata.bio = form.values.bio;
 							},
 						});
 					});
@@ -429,18 +431,4 @@ function LoginPopup() {
 	}, [account, ssrReady, connectModal]);
 
 	return <></>;
-}
-
-function generateHandleFromName(name: string) {
-	const randomNumber = Math.floor(Math.random() * 10000);
-	return (
-		name
-			.trim()
-			.slice(0, 25)
-			.toLowerCase()
-			.replace(/\s/g, "-")
-			.replace(/[^a-z0-9-]/g, "") +
-		"-" +
-		randomNumber
-	);
 }

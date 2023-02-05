@@ -3,6 +3,7 @@ import { RequireAtLeastOne } from "type-fest";
 import { Loader } from "@mantine/core";
 import { showNotification } from "@mantine/notifications";
 import { useConnect } from "wagmi";
+import { crossbell } from "wagmi/chains";
 
 import { isMobile } from "../../../../utils";
 import { QRCode } from "../../../../components";
@@ -39,7 +40,7 @@ export function ConnectWithQRCode({
 			}
 		});
 
-		connectAsync(connector).catch((err) =>
+		connectAsync({ ...connector, chainId: crossbell.id }).catch((err) =>
 			showNotification({
 				title: `Error while connect to ${wallet.name}`,
 				message: err instanceof Error ? err.message : `${err}`,

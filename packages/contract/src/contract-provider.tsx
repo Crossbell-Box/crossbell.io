@@ -23,10 +23,12 @@ export function ContractProvider({
 	);
 }
 
-export type InitContractProviderProps = Omit<
+export type ContractConfig = Omit<
 	InjectContractCheckerConfig,
 	"contract" | "getCurrentAddress"
-> & {
+>;
+
+export type InitContractProviderProps = ContractConfig & {
 	children: React.ReactNode;
 };
 

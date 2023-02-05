@@ -1,0 +1,40 @@
+@media (min-width: 768px) {
+	.container {
+		width: 360px;
+	}
+}
+
+.main {
+	display: flex;
+	flex-direction: column;
+	align-items: center;
+	grid-gap: 15px;
+	gap: 15px;
+	padding-left: 24px;
+	padding-right: 24px;
+}
+
+.tipsContainer {
+	width: 74px;
+}
+
+.tipsLayout {
+	position: relative;
+	aspect-ratio: 74/111;
+}
+
+.tipsImg {
+	position: absolute;
+	left: 0;
+	top: 0;
+	height: 100%;
+	width: 100%;
+}
+
+.msg {
+	margin: 0 0 24px;
+	text-align: center;
+	font-size: 14px;
+	font-weight: 400;
+	color: #49454f;
+}

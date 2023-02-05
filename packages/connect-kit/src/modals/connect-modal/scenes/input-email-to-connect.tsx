@@ -3,12 +3,10 @@ import { useDisclosure } from "@crossbell/util-hooks";
 import classNames from "classnames";
 import React from "react";
 
-import { EmailIcon, PasswordIcon } from "../../../components";
+import { EmailIcon, PasswordIcon, TextInput, Field } from "../../../components";
 
 import { Header } from "../components/header";
-import { TextInput } from "../components/text-input";
 import { PasswordInput } from "../components/password-input";
-import { Field } from "../components/field";
 import { NextStepButton } from "../components/next-step-button";
 
 import { SceneKind } from "../types";
@@ -76,7 +74,9 @@ export function InputEmailToConnect() {
 							className={styles.forgotBtn}
 							compact={true}
 							tabIndex={1}
-							onClick={() => goTo(SceneKind.inputEmailToResetPassword1)}
+							onClick={() =>
+								goTo({ kind: SceneKind.inputEmailToResetPassword1 })
+							}
 						>
 							Forgot?
 						</Button>
@@ -112,7 +112,7 @@ export function InputEmailToConnect() {
 							onClick={() => {
 								emailRegisterStore.updateEmail(emailConnectStore.email);
 								emailRegisterStore.sendCode();
-								goTo(SceneKind.inputEmailToRegister1);
+								goTo({ kind: SceneKind.inputEmailToRegister1 });
 							}}
 							className={styles.registerBtn}
 						>

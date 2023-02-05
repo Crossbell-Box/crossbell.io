@@ -1,22 +1,23 @@
 import React from "react";
+import { DynamicContainer, DynamicContainerContent } from "@crossbell/ui";
 
-import {
-	DynamicContainer,
-	DynamicContainerContent,
-	BaseModal,
-} from "../../components";
+import { BaseModal } from "../../components";
 
 import { SceneKind } from "./types";
-import { useScenesStore, useModalStore, StoresProvider } from "./stores";
+import {
+	useScenesStore,
+	useUpgradeAccountModal,
+	StoresProvider,
+} from "./stores";
 
 import { ConnectKindDifferences } from "./scenes/connect-kind-differences";
 import { SelectOptions } from "./scenes/select-options";
 import { UpgradeToWallet } from "./scenes/upgrade-to-wallet";
 
-export { useModalStore };
+export { useUpgradeAccountModal };
 
 export function UpgradeAccountModal() {
-	const { isActive, hide } = useModalStore();
+	const { isActive, hide } = useUpgradeAccountModal();
 	const storeKey = useResetStore();
 
 	return (
@@ -50,7 +51,7 @@ function Main() {
 }
 
 function useResetStore() {
-	const { isActive } = useModalStore();
+	const { isActive } = useUpgradeAccountModal();
 	const keyRef = React.useRef(0);
 
 	React.useMemo(() => {

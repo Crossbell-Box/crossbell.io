@@ -26,7 +26,9 @@ export function SelectConnectKind() {
 						compact
 						size="sm"
 					>
-						<CircleHelpIcon onClick={() => goToScene(SceneKind.aboutWallets)} />
+						<CircleHelpIcon
+							onClick={() => goToScene({ kind: SceneKind.aboutWallets })}
+						/>
 					</Button>
 				}
 			/>
@@ -38,14 +40,15 @@ export function SelectConnectKind() {
 							id: SceneKind.selectWalletToConnect,
 							title: "Connect Wallet",
 							icon: <WalletIcon className={styles.walletIcon} />,
-							onClick: () => goToScene(SceneKind.selectWalletToConnect),
+							onClick: () =>
+								goToScene({ kind: SceneKind.selectWalletToConnect }),
 						},
 
 						{
 							id: SceneKind.inputEmailToConnect,
 							title: "Connect Email",
 							icon: <EmailIcon className={styles.emailIcon} />,
-							onClick: () => goToScene(SceneKind.inputEmailToConnect),
+							onClick: () => goToScene({ kind: SceneKind.inputEmailToConnect }),
 						},
 					]}
 				/>
@@ -56,7 +59,7 @@ export function SelectConnectKind() {
 					fullWidth
 					className={styles.differenceBtn}
 					leftIcon={<LightBulbIcon className={styles.differenceIcon} />}
-					onClick={() => goToScene(SceneKind.connectKindDifferences)}
+					onClick={() => goToScene({ kind: SceneKind.connectKindDifferences })}
 				>
 					What’s the difference
 				</Button>

@@ -35,6 +35,7 @@ export function CodeInput({
 		<div {...props} className={classNames(className, styles.container)}>
 			{state.list.map((value, index) => (
 				<input
+					type="number"
 					key={index}
 					style={{ width: `${size}px`, height: `${size}px` }}
 					value={value}

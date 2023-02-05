@@ -1,0 +1,36 @@
+.container {
+	height: 64px;
+	border-radius: 12px;
+	background: rgba(28, 27, 31, 0.04);
+	display: flex;
+	align-items: center;
+	justify-content: center;
+	cursor: pointer;
+	position: relative;
+	z-index: 0;
+	overflow: hidden;
+}
+
+.container.isActive {
+	outline: 3px solid #f6c549;
+}
+
+.bg {
+	position: absolute;
+	top: 0;
+	left: 0;
+	width: 100%;
+	height: 100%;
+	object-fit: cover;
+	z-index: -1;
+	filter: blur(5px);
+}
+
+.avatar {
+	height: 48px;
+	width: 48px;
+	border-radius: 100vh;
+	border: 2px solid #fff;
+	background: #fff;
+	box-sizing: content-box;
+}

@@ -1,4 +1,6 @@
 import { useAccount, useConnect } from "wagmi";
+import { crossbell } from "wagmi/chains";
+
 import React from "react";
 
 import { WalletConnector } from "../../../../wallets";
@@ -61,7 +63,10 @@ export function useConnectState(connector: WalletConnector) {
 
 	const connect = React.useCallback(() => {
 		if (!isConnected) {
-			connect_(connector);
+			connect_({
+				...connector,
+				chainId: crossbell.id,
+			});
 		}
 	}, [connect_, connector, isConnected]);
 

@@ -5,7 +5,7 @@ import { useAccountState } from "../../../../hooks";
 import { connectByEmail } from "../../../../apis";
 import { createContextStore, isEmail } from "../../../../utils";
 
-import { useModalStore } from "../modal-store";
+import { useConnectModal } from "../modal-store";
 
 import { EmailSlice, createEmailSlice } from "./email";
 import { PasswordSlice, createPasswordSlice } from "./password";
@@ -73,7 +73,7 @@ export const [EmailConnectStoreProvider, useEmailConnectStore] =
 							.then(() => {
 								set({ status: "connected", emailErrorMsg: "" });
 								notify.success(result.msg);
-								useModalStore.getState().hide();
+								useConnectModal.getState().hide();
 							});
 					} else {
 						if (result.msg.toLowerCase() === "user not found") {

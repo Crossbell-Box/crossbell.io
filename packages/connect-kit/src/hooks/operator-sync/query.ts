@@ -1,7 +1,7 @@
 import { showNotification } from "@mantine/notifications";
 import { useMutation, useQuery, useQueryClient } from "@tanstack/react-query";
 
-import { useChangeCharacterMetadata } from "../use-change-character-metadata";
+import { useUpdateCharacterMetadata } from "../use-update-character-metadata";
 
 import OperatorSyncApi from "./api";
 import { SupportedPlatform } from "./consts";
@@ -89,21 +89,24 @@ export function useBindAccount({
 	startTime,
 }: UseBindAccountParams) {
 	const client = useQueryClient();
-	const changeCharacterMetadata = useChangeCharacterMetadata();
+	const changeCharacterMetadata = useUpdateCharacterMetadata();
 
 	return useMutation(
 		async () => {
 			if (!characterId) return;
 
-			await changeCharacterMetadata((draft) => {
-				const accountURI = csbAccountURI(identity, platform);
+			await changeCharacterMetadata.mutateAsync({
+				characterId,
+				edit(draft) {
+					const accountURI = csbAccountURI(identity, platform);
 
-				if (!draft.connected_accounts?.includes(accountURI)) {
-					draft.connected_accounts = [
-						...(draft.connected_accounts ?? []),
-						accountURI,
-					];
-				}
+					if (!draft.connected_accounts?.includes(accountURI)) {
+						draft.connected_accounts = [
+							...(draft.connected_accounts ?? []),
+							accountURI,
+						];
+					}
+				},
 			});
 
 			return api.bindAccount(characterId, platform, identity, startTime);
@@ -130,7 +133,7 @@ export function useBindAccount({
 
 export function useUnbindAccount(characterId?: number) {
 	const client = useQueryClient();
-	const changeCharacterMetadata = useChangeCharacterMetadata();
+	const changeCharacterMetadata = useUpdateCharacterMetadata();
 
 	return useMutation(
 		async ({
@@ -142,13 +145,16 @@ export function useUnbindAccount(characterId?: number) {
 		}) => {
 			if (!characterId) return;
 
-			await changeCharacterMetadata((draft) => {
-				const accountURI = csbAccountURI(identity, platform);
-				const index = draft.connected_accounts?.indexOf(accountURI) ?? -1;
+			await changeCharacterMetadata.mutateAsync({
+				characterId,
+				edit(draft) {
+					const accountURI = csbAccountURI(identity, platform);
+					const index = draft.connected_accounts?.indexOf(accountURI) ?? -1;
 
-				if (index > -1) {
-					draft.connected_accounts?.splice(index, 1);
-				}
+					if (index > -1) {
+						draft.connected_accounts?.splice(index, 1);
+					}
+				},
 			});
 
 			return api.unbindAccount(characterId, platform!, identity);

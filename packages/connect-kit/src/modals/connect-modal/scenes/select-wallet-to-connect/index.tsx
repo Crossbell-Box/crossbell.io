@@ -43,7 +43,7 @@ export function SelectWalletToConnect() {
 
 				<button
 					className={styles.tipsBtn}
-					onClick={() => goTo(SceneKind.inputEmailToRegister1)}
+					onClick={() => goTo({ kind: SceneKind.inputEmailToRegister1 })}
 				>
 					<div>
 						<svg

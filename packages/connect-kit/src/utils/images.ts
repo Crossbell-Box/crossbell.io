@@ -6,7 +6,7 @@ export const IMAGES = {
 		"ipfs://bafkreieoo25l4ls4hcrdmzogc6muntbxc4mikzm66vzawk5rdfpaz3xw4a",
 	claimCSBImg:
 		"ipfs://bafkreihjx5itbdah5rlo5qs3afwnmangtwnwsz3fnnfpgxyyskskoo6ote",
-	congratsImg:
+	addBtnImg:
 		"ipfs://bafkreias276ycc75tns2fgzeewc2moqza3yycatr5dwf7suonocuxxgqdy",
 	congratsBg:
 		"ipfs://bafkreieaqqcfyung4wz7njitlqtucdbh7rcgpctltapxts3n6dpcmsehoa",
@@ -14,6 +14,11 @@ export const IMAGES = {
 		"ipfs://bafkreih3hn6aelxug72owjb6wtknikcmadjk7yslwizrdjct4fdpghtyn4",
 	whatIsCharacterImg:
 		"ipfs://bafkreihz5hygddvnohnui3nxtsr3a4u7pjbs5paqnheazkdfekhksqwym4",
+	coinsIcon:
+		"ipfs://bafkreiblywb3pcwejypkdhf63tkuhxbth3ukwqr2ei3cscthsfjwyxy7eq",
+
+	copyLinkToTweetImg:
+		"ipfs://bafkreifpp64hj7tvaxiz3l3tu3bypyuan7vnrdzn7rbq3qctd42tusduqi",
 } as const;
 
 const imgs = Object.values(IMAGES);

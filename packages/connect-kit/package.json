@@ -30,40 +30,45 @@
 		"./index.css": "./dist/index.css"
 	},
 	"dependencies": {
+		"@emotion/react": "^11",
 		"@mantine/carousel": "^5",
 		"@mantine/core": "^5",
 		"@mantine/hooks": "^5",
 		"@mantine/notifications": "^5",
-		"@emotion/react": "^11",
 		"canvas-confetti": "^1",
-		"classnames": "^2",
-		"qrcode": "^1",
 		"check-password-strength": "^2",
-		"react-transition-group": "^4",
+		"classnames": "^2",
+		"detect-browser": "^5",
 		"embla-carousel-react": "^7",
-		"detect-browser": "^5"
+		"lodash.debounce": "4.0.8",
+		"qrcode": "^1",
+		"react-dropzone": "14.2.3",
+		"react-google-recaptcha": "2.1.0"
 	},
 	"peerDependencies": {
 		"@crossbell/contract": "workspace:*",
 		"@crossbell/indexer": "workspace:*",
 		"@crossbell/ui": "workspace:*",
+		"@crossbell/util-ethers": "workspace:*",
 		"@crossbell/util-hooks": "workspace:*",
 		"@crossbell/util-metadata": "workspace:*",
 		"@tanstack/react-query": "*",
 		"@wagmi/core": "*",
 		"crossbell.js": "^0.16",
 		"ethers": "*",
+		"immer": "^9",
 		"react": "^18",
 		"wagmi": "*",
-		"immer": "^9",
 		"zustand": "^4"
 	},
 	"devDependencies": {
 		"@crossbell/contract": "workspace:*",
 		"@crossbell/indexer": "workspace:*",
 		"@crossbell/ui": "workspace:*",
+		"@crossbell/util-ethers": "workspace:*",
 		"@crossbell/util-hooks": "workspace:*",
 		"@crossbell/util-metadata": "workspace:*",
-		"@types/react-transition-group": "^4"
+		"@types/lodash.debounce": "4.0.7",
+		"@types/react-google-recaptcha": "2.1.5"
 	}
 }

@@ -1,11 +1,7 @@
-.container {
-	width: 360px;
-}
-
-.closeBtn {
-	height: auto;
-	padding: 5px;
-	font-size: 22px;
+@media (min-width: 768px) {
+	.container {
+		width: 360px;
+	}
 }
 
 .main {

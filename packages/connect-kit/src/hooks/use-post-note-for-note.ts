@@ -1,123 +1,73 @@
-import { showNotification } from "@mantine/notifications";
-import {
-	useMutation,
-	UseMutationOptions,
-	useQueryClient,
-} from "@tanstack/react-query";
 import { NoteEntity, NoteMetadata } from "crossbell.js";
-import React from "react";
-
-import { useContract } from "@crossbell/contract";
 import {
 	SCOPE_KEY_NOTES_OF_NOTE,
 	SCOPE_KEY_NOTE_STATUS,
 } from "@crossbell/indexer";
 
-import { putNote } from "../apis";
+import { putNote, siwePutNote } from "../apis";
 
-import { useAccountState } from "./account-state";
+import { createAccountTypeBasedMutationHooks } from "./account-type-based-hooks";
 
-type UpdateFnParams = {
-	note: Pick<NoteEntity, "characterId" | "noteId">;
-	metadata: NoteMetadata;
-};
-type UpdateFn = (params: UpdateFnParams) => Promise<unknown>;
+export const usePostNoteForNote = createAccountTypeBasedMutationHooks<
+	void,
+	{
+		note: Pick<NoteEntity, "characterId" | "noteId">;
+		metadata: NoteMetadata;
+	},
+	boolean
+>(
+	{
+		actionDesc: "",
+		withParams: false,
+	},
+	() => ({
+		async email({ metadata, note }, { account }) {
+			await putNote({
+				token: account.token,
+				metadata,
+				linkItemType: "Note",
+				linkItem: { characterId: note.characterId, noteId: note.noteId },
+			});
 
-export type UsePostNoteForNoteOptions = UseMutationOptions<
-	unknown,
-	unknown,
-	UpdateFnParams
->;
+			return true;
+		},
 
-export function usePostNoteForNote(options?: UsePostNoteForNoteOptions) {
-	const account = useAccountState((s) => s.computed.account);
-	const postByContract = usePostByContract(options ?? null);
-	const postByEmail = usePostByEmail(options ?? null);
+		async contract({ metadata, note }, { account, siwe, contract }) {
+			if (account?.characterId) {
+				if (siwe) {
+					await siwePutNote({
+						characterId: account.characterId,
+						siwe,
+						metadata,
+						linkItemType: "Note",
+						linkItem: { characterId: note.characterId, noteId: note.noteId },
+					});
+				} else {
+					await contract.postNoteForNote(
+						account.characterId,
+						metadata,
+						note.characterId,
+						note.noteId
+					);
+				}
 
-	return account?.type === "email" ? postByEmail : postByContract;
-}
-
-function usePostByEmail(options: UsePostNoteForNoteOptions | null) {
-	const account = useAccountState((s) => s.email);
-
-	const updateFn: UpdateFn = React.useCallback(
-		async ({ metadata, note }) => {
-			if (account) {
-				return putNote({
-					token: account.token,
-					metadata,
-					linkItemType: "Note",
-					linkItem: { characterId: note.characterId, noteId: note.noteId },
-				});
+				return true;
 			} else {
-				return null;
+				return false;
 			}
 		},
-		[account]
-	);
 
-	return useBasePostNoteForNote(updateFn, options);
-}
+		onSuccess({ variables, queryClient }) {
+			const { note } = variables;
 
-function usePostByContract(options: UsePostNoteForNoteOptions | null) {
-	const contract = useContract();
-	const account = useAccountState((s) => s.wallet);
-
-	const updateFn: UpdateFn = React.useCallback(
-		async ({ metadata, note }) => {
-			if (typeof account?.characterId === "number") {
-				return contract.postNoteForNote(
-					account.characterId,
-					metadata,
-					note.characterId,
-					note.noteId
-				);
-			} else {
-				return null;
-			}
+			return Promise.all([
+				queryClient.invalidateQueries(
+					SCOPE_KEY_NOTES_OF_NOTE(note.characterId, note.noteId)
+				),
+				queryClient.invalidateQueries(
+					SCOPE_KEY_NOTE_STATUS(note.characterId, note.noteId)
+				),
+			]);
 		},
-		[contract, account]
-	);
-
-	return useBasePostNoteForNote(updateFn, options);
-}
-
-function useBasePostNoteForNote(
-	updateFn: UpdateFn,
-	options: UsePostNoteForNoteOptions | null
-) {
-	const queryClient = useQueryClient();
-
-	return useMutation(
-		async (params: Parameters<UpdateFn>[0]) => updateFn(params),
-		{
-			...options,
-
-			onSuccess: (...params) => {
-				const { note } = params[1];
-
-				return Promise.all([
-					options?.onSuccess?.(...params),
-
-					queryClient.invalidateQueries(
-						SCOPE_KEY_NOTES_OF_NOTE(note.characterId, note.noteId)
-					),
-					queryClient.invalidateQueries(
-						SCOPE_KEY_NOTE_STATUS(note.characterId, note.noteId)
-					),
-				]);
-			},
-			onError: (...params) => {
-				const err = params[0];
-
-				options?.onError?.(...params);
-
-				showNotification({
-					title: "Error while posting note",
-					message: err instanceof Error ? err.message : `${err}`,
-					color: "red",
-				});
-			},
-		}
-	);
-}
+	})
+);

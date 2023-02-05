@@ -1,12 +1,8 @@
 import React from "react";
-import { Button } from "@mantine/core";
-
-import { BackIcon, CloseIcon } from "@crossbell/ui";
 
 import { ModalHeaderProps, ModalHeader } from "../../../components";
 
-import { useModalStore, useScenesStore } from "../stores";
-import styles from "./header.module.css";
+import { useConnectModal, useScenesStore } from "../stores";
 
 export type HeaderProps = ModalHeaderProps;
 
@@ -15,38 +11,16 @@ export function Header({ title, leftNode, rightNode }: HeaderProps) {
 		({ computed }) => computed.isAbleToGoBack
 	);
 	const goBack = useScenesStore(({ goBack }) => goBack);
-	const { hide } = useModalStore();
+	const { hide } = useConnectModal();
 
 	return (
 		<ModalHeader
 			title={title}
-			leftNode={
-				leftNode || (
-					<Button
-						className={styles.btn}
-						variant="subtle"
-						color="gray"
-						compact
-						onClick={goBack}
-						disabled={isAbleToGoBack}
-					>
-						<BackIcon className={styles.backIcon} />
-					</Button>
-				)
-			}
-			rightNode={
-				rightNode || (
-					<Button
-						className={styles.btn}
-						variant="subtle"
-						color="gray"
-						compact
-						onClick={hide}
-					>
-						<CloseIcon />
-					</Button>
-				)
-			}
+			isAbleToGoBack={isAbleToGoBack}
+			onGoBack={goBack}
+			onClose={hide}
+			leftNode={leftNode}
+			rightNode={rightNode}
 		/>
 	);
 }

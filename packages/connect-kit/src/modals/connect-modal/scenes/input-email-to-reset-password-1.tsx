@@ -2,14 +2,9 @@ import React from "react";
 import classNames from "classnames";
 import { LoadingOverlay } from "@mantine/core";
 
-import {
-	useRefreshDynamicContainer,
-	EmailIcon,
-	PasswordIcon,
-} from "../../../components";
+import { EmailIcon, PasswordIcon, TextInput } from "../../../components";
 
 import { Header } from "../components/header";
-import { TextInput } from "../components/text-input";
 import { Field } from "../components/field";
 import { NextStepButton } from "../components/next-step-button";
 import { CodeInput } from "../components/code-input";
@@ -23,15 +18,12 @@ import styles from "./input-email-to-reset-password-1.module.css";
 export function InputEmailToResetPassword1() {
 	const goTo = useScenesStore(({ goTo }) => goTo);
 	const store = useResetPasswordStore();
-	const refreshSize = useRefreshDynamicContainer();
-
-	React.useEffect(refreshSize, [store.isCodeSent]);
 
 	const verifyCode = React.useCallback(() => {
 		if (store.computed.canVerifyCode) {
 			store.verifyCode().then((isCodeValid) => {
 				if (isCodeValid) {
-					goTo(SceneKind.inputEmailToResetPassword2);
+					goTo({ kind: SceneKind.inputEmailToResetPassword2 });
 				}
 			});
 		}

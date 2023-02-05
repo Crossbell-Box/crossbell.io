@@ -1,0 +1,72 @@
+.container {
+	color: #082135;
+	padding: 24px;
+}
+
+.bell {
+	font-size: 18px;
+	color: #f6c549;
+}
+
+.input {
+	font-weight: 500;
+	font-size: 22px;
+	color: #5b89f7;
+	padding: 0 60px 0 16px;
+}
+
+.maxContainer {
+	width: 60px;
+	height: 100%;
+	display: flex;
+	align-items: center;
+	justify-content: center;
+}
+
+.max {
+	white-space: nowrap;
+	font-size: 14px;
+	border: none;
+	outline: none;
+	background-color: transparent;
+	color: #5b89f7;
+	cursor: pointer;
+	transition: color 0.2s;
+	padding: 6px;
+}
+
+.max:hover {
+	color: #466abf;
+}
+
+.max:active {
+	color: #365295;
+}
+
+.error {
+	position: relative;
+	padding-left: 10px;
+	font-weight: 400;
+	font-size: 14px;
+	color: #999;
+	margin: 12px 0;
+}
+
+.error::before {
+	content: "";
+	position: absolute;
+	left: 0;
+	top: 0;
+	bottom: 0;
+	width: 3px;
+	border-radius: 100vh;
+	background: #e65040;
+}
+
+.mainBtn {
+	margin-top: 48px;
+}
+
+.nowrap {
+	white-space: nowrap;
+}

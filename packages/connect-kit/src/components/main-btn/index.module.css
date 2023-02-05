@@ -1,0 +1,34 @@
+.btn {
+	display: flex;
+	align-items: center;
+	justify-content: center;
+	width: 100%;
+	font-size: 14px;
+	border: none;
+	background: transparent;
+	outline: none;
+	border-radius: 16px;
+	font-weight: 500;
+	height: 48px;
+	transition: color 0.2s, background-color 0.2s;
+	font-family: inherit;
+}
+
+.btn:disabled {
+	cursor: not-allowed;
+}
+
+.gray {
+	color: #000;
+	background: #f6f7f9;
+}
+
+.yellow {
+	color: #fff;
+	background: #f6c549;
+}
+
+.green {
+	color: #fff;
+	background: #6ad991;
+}

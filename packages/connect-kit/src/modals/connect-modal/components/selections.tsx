@@ -9,6 +9,7 @@ export type Selection = {
 	title: React.ReactNode;
 	icon: React.ReactNode;
 	style?: React.CSSProperties;
+	className?: string;
 	onClick: () => void;
 };
 
@@ -22,7 +23,11 @@ export function Selections({ items }: SelectionsProps) {
 			{items.map((item) => (
 				<div
 					key={item.id}
-					className={classNames(styles.item, commonStyles.uxOverlay)}
+					className={classNames(
+						styles.item,
+						commonStyles.uxOverlay,
+						item.className
+					)}
 					style={item.style}
 					onClick={item.onClick}
 				>

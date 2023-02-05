@@ -13,7 +13,7 @@ export function useAccountBalance(): UseAccountBalanceResult {
 	const account = useAccountState((s) => s.computed.account);
 
 	const { data: balance, isLoading } = useBalance({
-		addressOrName: account?.address,
+		address: account?.address as `0x${string}` | undefined,
 	});
 
 	return React.useMemo((): UseAccountBalanceResult => {

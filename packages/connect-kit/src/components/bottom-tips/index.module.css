@@ -1,0 +1,15 @@
+.container {
+	display: flex;
+	align-items: center;
+	justify-content: center;
+	gap: 4px;
+	font-weight: 400;
+	font-size: 14px;
+	color: #999;
+	height: 42px;
+	width: 100%;
+}
+
+.container svg {
+	font-size: 24px;
+}
