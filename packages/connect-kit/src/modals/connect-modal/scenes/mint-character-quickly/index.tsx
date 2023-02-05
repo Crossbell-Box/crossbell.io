@@ -26,15 +26,13 @@ export function MintCharacterQuickly({ mode }: MintCharacterQuicklyProps) {
 		goTo({ kind: SceneKind.mintCharacter, mode: "form" })
 	);
 
-	const { submit, form, hasEnoughCSB, isLoading } = useMintModel(
-		onNotEnoughCSB,
-		({ handle, username }) => ({
+	const { submit, form, hasEnoughCSB, isLoading, onClaimCSBSuccess } =
+		useMintModel(onNotEnoughCSB, ({ handle, username }) => ({
 			bio: "",
 			avatar: null,
 			handle,
 			username,
-		})
-	);
+		}));
 
 	return (
 		<div className={styles.container}>
@@ -60,7 +58,7 @@ export function MintCharacterQuickly({ mode }: MintCharacterQuicklyProps) {
 				)}
 
 				{mode === "claim-csb" && (
-					<WalletClaimCSB onSuccess={submit} claimBtnText="Finish" />
+					<WalletClaimCSB onSuccess={onClaimCSBSuccess} claimBtnText="Finish" />
 				)}
 			</div>
 		</div>

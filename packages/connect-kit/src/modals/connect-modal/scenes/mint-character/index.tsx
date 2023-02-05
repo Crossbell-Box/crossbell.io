@@ -1,6 +1,7 @@
 import React from "react";
 import { useRefCallback } from "@crossbell/util-hooks";
 import { LoadingOverlay, useUrlComposer } from "@crossbell/ui";
+import { utils } from "ethers";
 
 import {
 	useAccountBalance,
@@ -29,7 +30,7 @@ export function MintCharacter({ mode }: MintCharacterProps) {
 		goTo({ kind: SceneKind.mintCharacterQuickly, mode: "form" })
 	);
 
-	const { submit, form, hasEnoughCSB, isLoading } =
+	const { submit, form, hasEnoughCSB, isLoading, onClaimCSBSuccess } =
 		useMintModel(onNotEnoughCSB);
 
 	return (
@@ -56,7 +57,7 @@ export function MintCharacter({ mode }: MintCharacterProps) {
 				)}
 
 				{mode === "claim-csb" && (
-					<WalletClaimCSB onSuccess={submit} claimBtnText="Finish" />
+					<WalletClaimCSB onSuccess={onClaimCSBSuccess} claimBtnText="Finish" />
 				)}
 			</div>
 		</div>
@@ -102,8 +103,13 @@ export function useMintModel(
 		}
 	});
 
+	const onClaimCSBSuccess = useRefCallback(() => {
+		mintCharacter.mutate(formatForm?.(form) ?? form);
+	});
+
 	return {
 		submit,
+		onClaimCSBSuccess,
 		form,
 		hasEnoughCSB,
 		isLoading: mintCharacter.isLoading,
@@ -112,8 +118,9 @@ export function useMintModel(
 
 function useHasEnoughCSB() {
 	const { balance } = useAccountBalance();
+
 	return React.useMemo(
-		() => balance?.value.gte("1000000000000000" /* 0.001 */),
+		() => balance?.value.gte(utils.parseEther("0.001")),
 		[balance]
 	);
 }

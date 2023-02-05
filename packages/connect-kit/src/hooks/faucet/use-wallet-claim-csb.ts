@@ -1,4 +1,5 @@
 import { useMutation, UseMutationOptions } from "@tanstack/react-query";
+import { getCsbBalance } from "@crossbell/indexer";
 
 import {
 	faucetClaim,
@@ -22,11 +23,16 @@ export function useWalletClaimCsb(options?: UseWalletClaimCsbOptions) {
 			const claim = await faucetClaim(params);
 
 			if (claim.transaction_hash) {
-				await asyncRetry(
-					async (RETRY) =>
-						(await faucetGetTransaction(claim.transaction_hash)).is_pending &&
-						RETRY
-				);
+				await asyncRetry(async (RETRY) => {
+					const [transaction, balance] = await Promise.all([
+						faucetGetTransaction(claim.transaction_hash),
+						getCsbBalance(params.address, { noCache: true }),
+					]);
+
+					if (transaction.is_pending || balance.isZero()) return RETRY;
+
+					return true;
+				});
 			}
 
 			return claim;
