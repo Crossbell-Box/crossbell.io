@@ -7,7 +7,6 @@ import { InitContractProvider } from "@crossbell/contract";
 import { ConnectKitProvider, contractConfig } from "@crossbell/connect-kit";
 
 import { ipfsLinkToHttpLink } from "~/shared/ipfs";
-import { openMintNewCharacterModel } from "~/shared/components/new-user-guide";
 
 import { WalletProvider } from "./wallet-provider";
 import { ThemeProvider } from "./theme-provider";
@@ -31,10 +30,7 @@ export function MainProvider({ children }: React.PropsWithChildren) {
 							<NotificationsProvider>
 								<RouterTransition />
 								<IpfsGatewayContext.Provider value={ipfsGateway}>
-									<InitContractProvider
-										{...contractConfig}
-										openMintNewCharacterModel={openMintNewCharacterModel}
-									>
+									<InitContractProvider {...contractConfig}>
 										<ConnectKitProvider
 											withoutNotificationsProvider={true}
 											ipfsLinkToHttpLink={ipfsLinkToHttpLink}
