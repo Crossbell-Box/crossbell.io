@@ -19,6 +19,7 @@ import { WalletClaimCSBModal } from "./modals/wallet-claim-csb-modal";
 import { OpSignSettingsModal } from "./modals/op-sign-settings-modal";
 import { TransferCSBToOperatorModal } from "./modals/transfer-csb-to-operator-modal";
 import { NoEnoughCSBModal } from "./modals/no-enough-csb-modal";
+import { WalletMintNewCharacter } from "./modals/wallet-mint-new-character";
 
 export { useConnectModal } from "./modals/connect-modal";
 export { useDisconnectModal } from "./modals/disconnect-modal";
@@ -26,6 +27,7 @@ export { useUpgradeAccountModal } from "./modals/upgrade-account-modal";
 export { useCsbDetailModal } from "./modals/csb-detail-modal";
 export { useWalletClaimCSBModal } from "./modals/wallet-claim-csb-modal";
 export { useOpSignSettingsModal } from "./modals/op-sign-settings-modal";
+export { useWalletMintNewCharacterModal } from "./modals/wallet-mint-new-character";
 export { OpSignIcon } from "./components";
 export * from "./hooks";
 export * from "./contract-config";
@@ -69,6 +71,7 @@ export function ConnectKitProvider({
 				<OpSignSettingsModal />
 				<TransferCSBToOperatorModal />
 				<NoEnoughCSBModal />
+				<WalletMintNewCharacter />
 				{children}
 			</UrlComposerContext.Provider>
 		</UseWeb2UrlContext.Provider>

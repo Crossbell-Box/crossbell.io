@@ -6,16 +6,16 @@ type BaseNotification<T, V> = {
 	createdAt: number;
 } & V;
 
-export type LikeNotification = BaseNotification<
-	"like",
+export type LikeNoteNotification = BaseNotification<
+	"like-note",
 	{
 		originNote: NoteEntity;
 		fromCharacter: CharacterEntity;
 	}
 >;
 
-export type CommentNotification = BaseNotification<
-	"comment",
+export type CommentNoteNotification = BaseNotification<
+	"comment-note",
 	{
 		commentNote: NoteEntity;
 		originNote: NoteEntity;
@@ -23,18 +23,17 @@ export type CommentNotification = BaseNotification<
 	}
 >;
 
-export type MintNotification = BaseNotification<
-	"mint",
+export type MintNoteNotification = BaseNotification<
+	"mint-note",
 	{
 		originNote: NoteEntity;
 		fromAddress: string;
-		fromCharacter: CharacterEntity;
-		toCharacter: CharacterEntity;
+		fromCharacter: CharacterEntity | null;
 	}
 >;
 
-export type FollowNotification = BaseNotification<
-	"follow",
+export type FollowCharacterNotification = BaseNotification<
+	"follow-character",
 	{
 		fromCharacter: CharacterEntity;
 		toCharacter: CharacterEntity;
@@ -42,7 +41,7 @@ export type FollowNotification = BaseNotification<
 >;
 
 export type ParsedNotification =
-	| LikeNotification
-	| CommentNotification
-	| MintNotification
-	| FollowNotification;
+	| LikeNoteNotification
+	| CommentNoteNotification
+	| MintNoteNotification
+	| FollowCharacterNotification;

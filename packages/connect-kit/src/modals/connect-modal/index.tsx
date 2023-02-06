@@ -23,7 +23,6 @@ import { SignInWithWallet } from "./scenes/sign-in-with-wallet";
 import { SelectCharacters } from "./scenes/select-characters";
 import { OPSignSettings } from "./scenes/op-sign-settings";
 import { MintCharacter } from "./scenes/mint-character";
-import { MintCharacterQuickly } from "./scenes/mint-character-quickly";
 
 export { useConnectModal };
 
@@ -95,8 +94,6 @@ function renderScene(scene: Scene) {
 			return <OPSignSettings {...scene} />;
 		case SceneKind.mintCharacter:
 			return <MintCharacter {...scene} />;
-		case SceneKind.mintCharacterQuickly:
-			return <MintCharacterQuickly {...scene} />;
 		case SceneKind.inputEmailToConnect:
 			return <InputEmailToConnect />;
 		case SceneKind.inputEmailToRegister1:

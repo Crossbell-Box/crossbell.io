@@ -6,7 +6,6 @@ import {
 } from "../../components";
 import { SceneType } from "../../utils";
 import { MintCharacterProps } from "./scenes/mint-character";
-import { MintCharacterQuicklyProps } from "./scenes/mint-character-quickly";
 
 export enum SceneKind {
 	congrats = "congrats",
@@ -22,7 +21,6 @@ export enum SceneKind {
 	selectCharacters = "selectCharacters",
 	opSignSettings = "opSignSettings",
 	mintCharacter = "mintCharacter",
-	mintCharacterQuickly = "mintCharacterQuickly",
 
 	inputEmailToConnect = "inputEmailToConnect",
 
@@ -39,8 +37,7 @@ export type SceneWithContext =
 	| SceneType<SceneKind.congrats, CongratsProps>
 	| SceneType<SceneKind.signInWithWallet, SignInWithWalletProps>
 	| SceneType<SceneKind.opSignSettings, OPSignSettingsProps>
-	| SceneType<SceneKind.mintCharacter, MintCharacterProps>
-	| SceneType<SceneKind.mintCharacterQuickly, MintCharacterQuicklyProps>;
+	| SceneType<SceneKind.mintCharacter, MintCharacterProps>;
 
 export type SceneWithoutContext = SceneType<
 	Exclude<SceneKind, SceneWithContext["kind"]>

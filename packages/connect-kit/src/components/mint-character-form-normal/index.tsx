@@ -13,19 +13,19 @@ import styles from "./index.module.css";
 import { Avatar } from "./avatar";
 import { AvatarIcon, BioIcon, NameIcon } from "./icons";
 
-export type MintCharacterProps = {
+export type MintCharacterFormNormalProps = {
 	onSwitchMode: () => void;
 	submitBtnText?: React.ReactNode;
 	onSubmit: () => void;
 	form: MintCharacterForm;
 };
 
-export function MintCharacter({
+export function MintCharacterFormNormal({
 	onSwitchMode,
 	submitBtnText,
 	onSubmit,
 	form,
-}: MintCharacterProps) {
+}: MintCharacterFormNormalProps) {
 	return (
 		<div className={styles.container}>
 			<Field

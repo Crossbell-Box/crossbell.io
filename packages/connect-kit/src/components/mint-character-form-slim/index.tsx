@@ -3,19 +3,19 @@ import React from "react";
 import { ActionBtn } from "../action-btn";
 import { Field } from "../field";
 import { TextInput } from "../text-input";
-import { MintCharacterProps } from "../mint-character";
+import { MintCharacterFormNormalProps } from "../mint-character-form-normal";
 
 import styles from "./index.module.css";
 import { NameIcon } from "./icons";
 
-export type MintCharacterQuicklyProps = MintCharacterProps;
+export type MintCharacterFormSlimProps = MintCharacterFormNormalProps;
 
-export function MintCharacterQuickly({
+export function MintCharacterFormSlim({
 	onSwitchMode,
 	submitBtnText,
 	onSubmit,
 	form,
-}: MintCharacterQuicklyProps) {
+}: MintCharacterFormSlimProps) {
 	return (
 		<div className={styles.container}>
 			<div className={styles.container}>

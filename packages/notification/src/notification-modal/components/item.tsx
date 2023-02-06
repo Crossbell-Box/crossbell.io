@@ -24,16 +24,13 @@ export type ItemProps = {
 
 export function Item({ notification, isRead }: ItemProps) {
 	const urlComposer = useUrlComposer();
-	const character = notification.fromCharacter;
 	const titleInfo = getTitleInfo(notification, urlComposer);
-	const avatar = useCharacterAvatar(character);
-
-	if (!notification) return null;
+	const avatar = useCharacterAvatar(notification.fromCharacter ?? {});
 
 	return (
 		<div className={styles.container}>
 			<a
-				href={urlComposer.characterUrl(character)}
+				href={getCharacterUrl(notification, urlComposer)}
 				target="_blank"
 				rel="noreferrer"
 			>
@@ -45,11 +42,11 @@ export function Item({ notification, isRead }: ItemProps) {
 				<div className={styles.description}>
 					<a
 						className={styles.characterName}
-						href={urlComposer.characterUrl(character)}
+						href={getCharacterUrl(notification, urlComposer)}
 						target="_blank"
 						rel="noreferrer"
 					>
-						{extractCharacterName(character)}
+						{getCharacterName(notification)}
 					</a>
 
 					<span className={styles.actionDesc}>
@@ -59,7 +56,7 @@ export function Item({ notification, isRead }: ItemProps) {
 					<span>{timeDiff(notification)}</span>
 
 					<span>
-						on{" "}
+						on
 						{renderTransactionHash(notification.transactionHash, urlComposer)}
 					</span>
 				</div>
@@ -97,7 +94,7 @@ function actionDesc(
 	urlComposer: UrlComposer
 ) {
 	switch (notification.type) {
-		case "comment":
+		case "comment-note":
 			return (
 				<span>
 					{"commented your "}
@@ -109,9 +106,11 @@ function actionDesc(
 					</a>
 				</span>
 			);
-		case "like":
+		case "like-note":
 			return <span>liked your Note</span>;
-		case "follow":
+		case "mint-note":
+			return <span>minted your Note</span>;
+		case "follow-character":
 			return <span>followed you</span>;
 	}
 
@@ -123,7 +122,7 @@ function getTitleInfo(
 	urlComposer: UrlComposer
 ) {
 	switch (notification.type) {
-		case "comment":
+		case "comment-note":
 			return {
 				title:
 					(notification.commentNote.metadata?.content?.title ??
@@ -131,7 +130,8 @@ function getTitleInfo(
 					"Note",
 				url: urlComposer.noteUrl(notification.commentNote),
 			};
-		case "like":
+		case "like-note":
+		case "mint-note":
 			return {
 				title:
 					(notification.originNote.metadata?.content?.title ??
@@ -142,6 +142,31 @@ function getTitleInfo(
 	}
 
 	return null;
+}
+
+function getCharacterName(notification: ParsedNotification) {
+	switch (notification.type) {
+		case "mint-note":
+			return notification.fromCharacter
+				? extractCharacterName(notification.fromCharacter)
+				: notification.fromAddress;
+		default:
+			return extractCharacterName(notification.fromCharacter);
+	}
+}
+
+function getCharacterUrl(
+	notification: ParsedNotification,
+	urlComposer: UrlComposer
+): string | undefined {
+	switch (notification.type) {
+		case "mint-note":
+			return notification.fromCharacter
+				? urlComposer.characterUrl(notification.fromCharacter)
+				: undefined;
+		default:
+			return urlComposer.characterUrl(notification.fromCharacter);
+	}
 }
 
 function timeDiff(notification: ParsedNotification) {

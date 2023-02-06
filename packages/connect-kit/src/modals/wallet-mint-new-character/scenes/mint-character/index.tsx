@@ -10,7 +10,7 @@ import {
 	MintCharacterSceneMode,
 } from "../../../../scenes";
 import { Header } from "../../components/header";
-import { useConnectModal, useScenesStore } from "../../stores";
+import { useWalletMintNewCharacterModal, useScenesStore } from "../../stores";
 import { SceneKind } from "../../types";
 
 export type MintCharacterProps = Omit<
@@ -20,7 +20,7 @@ export type MintCharacterProps = Omit<
 
 export function MintCharacter(props: MintCharacterProps) {
 	const urlComposer = useUrlComposer();
-	const { hide: hideModal } = useConnectModal();
+	const { hide: hideModal } = useWalletMintNewCharacterModal();
 	const [goTo, updateScene] = useScenesStore((s) => [s.goTo, s.updateLast]);
 	const onSwitchSceneMode = useRefCallback(
 		(sceneMode: MintCharacterSceneMode) =>
