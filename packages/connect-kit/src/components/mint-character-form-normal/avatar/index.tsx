@@ -1,5 +1,5 @@
 import React from "react";
-import { useDropzone } from "react-dropzone";
+import * as Dropzone from "react-dropzone";
 import { useRefCallback } from "@crossbell/util-hooks";
 import classNames from "classnames";
 
@@ -20,7 +20,7 @@ export function Avatar({ file, onSelect }: AvatarProps) {
 		onSelect(file ?? null);
 	});
 
-	const { getRootProps, getInputProps, isDragActive } = useDropzone({
+	const { getRootProps, getInputProps, isDragActive } = Dropzone.useDropzone({
 		onDrop,
 		accept: IMAGE_MIME,
 		maxFiles: 1,
