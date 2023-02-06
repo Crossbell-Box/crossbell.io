@@ -37,7 +37,11 @@ export function SelectCharacters() {
 					}}
 					onSelectNew={() => {
 						resetForm();
-						goTo({ kind: SceneKind.mintCharacter, mode: "form" });
+						goTo({
+							kind: SceneKind.mintCharacter,
+							formMode: "normal",
+							sceneMode: "form",
+						});
 					}}
 				/>
 			</div>
