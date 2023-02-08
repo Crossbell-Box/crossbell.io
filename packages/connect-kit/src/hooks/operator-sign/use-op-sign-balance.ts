@@ -7,7 +7,14 @@ import { useAccountState } from "../account-state";
 export function useOpSignBalance():
 	| ReturnType<typeof useBalance>["data"]
 	| null {
-	const csb = useAccountState((s) => s.wallet?.siwe?.csb);
+	const [csb, refreshWallet] = useAccountState((s) => [
+		s.wallet?.siwe?.csb,
+		s.refreshWallet,
+	]);
+
+	React.useEffect(() => {
+		refreshWallet();
+	}, [refreshWallet]);
 
 	return React.useMemo(() => {
 		if (!csb) return null;
