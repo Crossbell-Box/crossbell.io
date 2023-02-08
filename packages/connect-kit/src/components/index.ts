@@ -13,6 +13,7 @@ export * from "./modal-header";
 export * from "./option-list";
 export * from "./op-sign-icon";
 export * from "./op-sign-settings";
+export * from "./other-wallets";
 export * from "./qr-code";
 export * from "./text-input";
 export * from "./textarea";

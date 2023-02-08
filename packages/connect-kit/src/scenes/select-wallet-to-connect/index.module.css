@@ -1,23 +1,11 @@
 .container {
-	padding-left: 24px;
-	padding-right: 24px;
+	padding: 0 24px;
 }
 
 @media (min-width: 768px) {
 	.container {
 		width: 312px;
 	}
-}
-
-.walletIcon {
-	position: relative;
-	margin-left: auto;
-	height: 32px;
-	width: 32px;
-}
-
-.otherWalletsIcon {
-	width: 32px;
 }
 
 .tipsBtn {
@@ -76,4 +64,15 @@
 
 .tipsBtn:active {
 	transform: scale(0.96);
+}
+
+.item {
+	font-weight: 500;
+}
+
+.itemIcon {
+	position: relative;
+	width: 32px;
+	height: 32px;
+	margin-left: auto;
 }
