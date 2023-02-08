@@ -1,6 +1,4 @@
-import React from "react";
-
-import { Wallet } from "../../../../wallets";
+import { Wallet } from "../../wallets";
 
 import { ConnectStatus } from "./types";
 

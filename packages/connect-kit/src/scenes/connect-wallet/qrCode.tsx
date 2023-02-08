@@ -5,22 +5,23 @@ import { showNotification } from "@mantine/notifications";
 import { useConnect } from "wagmi";
 import { crossbell } from "wagmi/chains";
 
-import { isMobile } from "../../../../utils";
-import { QRCode } from "../../../../components";
-import { Wallet, WalletConnector } from "../../../../wallets";
+import { isMobile } from "../../utils";
+import { QRCode, ModalHeaderProps } from "../../components";
+import { Wallet, WalletConnector } from "../../wallets";
 
-import { Header } from "../../components/header";
 import { useInitiateConnect } from "./use-initiate-connect";
 import styles from "./qrCode.module.css";
 
 type QRCodeWalletConnector = RequireAtLeastOne<WalletConnector, "qrCode">;
 
 export type ConnectWithQRCodeProps = {
+	Header: React.ComponentType<ModalHeaderProps>;
 	wallet: Wallet;
 	connector: QRCodeWalletConnector;
 };
 
 export function ConnectWithQRCode({
+	Header,
 	wallet,
 	connector,
 }: ConnectWithQRCodeProps) {

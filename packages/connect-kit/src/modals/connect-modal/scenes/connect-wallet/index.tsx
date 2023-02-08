@@ -1,18 +1,13 @@
 import React from "react";
 
-import { PickScene, SceneKind } from "../../types";
+import {
+	ConnectWallet as Main,
+	ConnectWalletProps as Props,
+} from "../../../../scenes";
+import { Header } from "../../components/header";
 
-import { ConnectWithQRCode, isQRCodeWalletConnector } from "./qrCode";
-import { ConnectWithInjector } from "./injector";
-
-export type ConnectWalletProps = PickScene<SceneKind.connectWallet>;
+export type ConnectWalletProps = Omit<Props, "Header">;
 
 export function ConnectWallet({ wallet }: ConnectWalletProps) {
-	const connector = React.useMemo(() => wallet.createConnector(), [wallet]);
-
-	if (isQRCodeWalletConnector(connector)) {
-		return <ConnectWithQRCode wallet={wallet} connector={connector} />;
-	} else {
-		return <ConnectWithInjector wallet={wallet} connector={connector} />;
-	}
+	return <Main wallet={wallet} Header={Header} />;
 }
