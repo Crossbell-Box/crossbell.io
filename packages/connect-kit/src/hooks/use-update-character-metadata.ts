@@ -2,7 +2,11 @@ import { produce, Draft } from "immer";
 import { CharacterMetadata } from "crossbell.js";
 import { indexer, SCOPE_KEY_CHARACTER } from "@crossbell/indexer";
 
-import { siweUpdateMetadata, updateCharactersMetadata } from "../apis";
+import {
+	siweUpdateMetadata,
+	updateCharactersMetadata,
+	waitUntilTransactionFinished,
+} from "../apis";
 import { useAccountState } from "./account-state";
 import { createAccountTypeBasedMutationHooks } from "./account-type-based-hooks";
 
@@ -35,7 +39,12 @@ export const useUpdateCharacterMetadata = createAccountTypeBasedMutationHooks<
 			const metadata = await prepareData(variables);
 
 			if (metadata) {
-				await updateCharactersMetadata({ token: account.token, metadata });
+				const { transactionHash } = await updateCharactersMetadata({
+					token: account.token,
+					metadata,
+				});
+
+				await waitUntilTransactionFinished(transactionHash);
 			}
 		},
 

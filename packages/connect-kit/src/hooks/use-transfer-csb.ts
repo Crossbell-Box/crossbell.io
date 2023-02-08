@@ -1,7 +1,9 @@
 import { BigNumber } from "ethers";
 
+import { waitUntilTransactionFinished } from "../apis";
+
+import { useAccountState } from "./account-state";
 import { createAccountTypeBasedMutationHooks } from "./account-type-based-hooks";
-import { useAccountState } from "@crossbell/connect-kit";
 
 export type UseTransferCSBParams = {
 	toAddress: string;
@@ -12,8 +14,12 @@ export const useTransferCsb = createAccountTypeBasedMutationHooks<
 	void,
 	UseTransferCSBParams
 >({ actionDesc: "transfer CSB", withParams: false }, () => ({
-	contract({ toAddress, amount }, { contract }) {
-		return contract.transferCsb(toAddress, amount);
+	async contract({ toAddress, amount }, { contract }) {
+		const result = await contract.transferCsb(toAddress, amount);
+
+		await waitUntilTransactionFinished(result.transactionHash);
+
+		return result;
 	},
 
 	onSuccess() {

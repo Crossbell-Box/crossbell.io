@@ -5,7 +5,7 @@ import { BigNumber, utils } from "ethers";
 import { indexer } from "@crossbell/indexer";
 
 import { useClaimCSBTipsModal } from "../../modals/claim-csb-tips-modal";
-import { asyncRetry, SliceFn } from "../../utils";
+import { asyncExhaust, asyncRetry, SliceFn } from "../../utils";
 import { fetchAccountInfo, refillBalance } from "../../apis";
 
 export type EmailAccount = {
@@ -58,7 +58,7 @@ export const createEmailAccountSlice: SliceFn<EmailAccountSlice> = (
 ) => ({
 	email: null,
 
-	async connectEmail(token: string) {
+	connectEmail: asyncExhaust(async (token) => {
 		const connectError = (message: string) => {
 			set({ email: null });
 			showNotification({ color: "red", message, title: "Account" });
@@ -96,7 +96,7 @@ export const createEmailAccountSlice: SliceFn<EmailAccountSlice> = (
 		} catch (err) {
 			return connectError(`${err}`);
 		}
-	},
+	}),
 
 	async refreshEmail() {
 		const { email } = get();

@@ -4,7 +4,7 @@ import { indexer } from "@crossbell/indexer";
 
 import { isAddressEqual } from "@crossbell/util-ethers";
 
-import { SliceFn } from "../../utils";
+import { asyncExhaust, SliceFn } from "../../utils";
 import { siweGetAccount, siweGetBalance, siweSignIn } from "../../apis";
 
 export type SiweInfo = {
@@ -38,7 +38,7 @@ export const createWalletAccountSlice: SliceFn<WalletAccountSlice> = (
 ) => ({
 	wallet: null,
 
-	async connectWallet(address) {
+	connectWallet: asyncExhaust(async (address) => {
 		if (address) {
 			const { wallet } = get();
 			const [character] = await Promise.all([
@@ -81,7 +81,7 @@ export const createWalletAccountSlice: SliceFn<WalletAccountSlice> = (
 			set({ wallet: null });
 			return false;
 		}
-	},
+	}),
 
 	async refreshWallet() {
 		const { wallet } = get();
