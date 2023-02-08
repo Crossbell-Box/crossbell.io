@@ -15,10 +15,9 @@ export function useCharacterOperatorPermissions({
 	const contract = useContract();
 
 	return useQuery(
-		SCOPE_KEY_CHARACTER_OPERATOR(characterId ?? -1),
+		SCOPE_KEY_CHARACTER_OPERATOR({ characterId, operator: operatorAddress }),
 		async () => {
 			if (!characterId) return null;
-
 			return contract
 				.getOperatorPermissionsForCharacter(characterId, operatorAddress)
 				.then(({ data }) => data);

@@ -18,9 +18,7 @@ export const useRemoveCharacterOperator = createAccountTypeBasedMutationHooks<
 	onSuccess({ queryClient, variables }) {
 		return Promise.all([
 			useAccountState.getState().refresh(),
-			queryClient.invalidateQueries(
-				SCOPE_KEY_CHARACTER_OPERATOR(variables.characterId)
-			),
+			queryClient.invalidateQueries(SCOPE_KEY_CHARACTER_OPERATOR(variables)),
 		]);
 	},
 }));
