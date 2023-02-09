@@ -6,17 +6,16 @@ import { ActionBtn, ActionBtnProps } from "../action-btn";
 
 import styles from "./index.module.css";
 
-export const BottomTips = ({
-	children,
-	className,
-	...props
-}: ActionBtnProps) => (
-	<ActionBtn
-		color="ghost"
-		className={classNames(styles.container, className)}
-		{...props}
-	>
-		<LightBulbIcon />
-		{children}
-	</ActionBtn>
+export const BottomTips = React.forwardRef<HTMLButtonElement, ActionBtnProps>(
+	({ children, className, ...props }, ref) => (
+		<ActionBtn
+			color="ghost"
+			className={classNames(styles.container, className)}
+			ref={ref}
+			{...props}
+		>
+			<LightBulbIcon />
+			{children}
+		</ActionBtn>
+	)
 );

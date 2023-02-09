@@ -1,19 +1,15 @@
 import React from "react";
 import { useWeb2Url } from "@crossbell/ui";
+import { Tooltip, TooltipProps } from "@mantine/core";
 
 import { IMAGES } from "../../utils";
 import { CrossbellIcon } from "../icons";
 
 import styles from "./index.module.css";
-import { Tooltip } from "@mantine/core";
 
-export type WhatIsCharacterTooltipProps = {
-	children: React.ReactNode;
-};
+export type WhatIsCharacterTooltipProps = Omit<TooltipProps, "label">;
 
-export function WhatIsCharacterTooltip({
-	children,
-}: WhatIsCharacterTooltipProps) {
+export function WhatIsCharacterTooltip(props: WhatIsCharacterTooltipProps) {
 	const imgUrl = useWeb2Url(IMAGES.whatIsCharacterImg);
 
 	return (
@@ -25,6 +21,11 @@ export function WhatIsCharacterTooltip({
 			radius={16}
 			classNames={{ tooltip: styles.tooltip }}
 			arrowSize={10}
+			openDelay={200}
+			multiline={true}
+			transition="pop"
+			withArrow={true}
+			{...props}
 			label={
 				<div className={styles.tooltipLabel}>
 					<div className={styles.tooltipLabelIconSection}>
@@ -50,12 +51,6 @@ export function WhatIsCharacterTooltip({
 					</p>
 				</div>
 			}
-			openDelay={200}
-			multiline={true}
-			transition="pop-bottom-left"
-			withArrow={true}
-		>
-			{children}
-		</Tooltip>
+		/>
 	);
 }
