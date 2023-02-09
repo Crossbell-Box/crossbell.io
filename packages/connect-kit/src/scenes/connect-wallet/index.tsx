@@ -1,4 +1,5 @@
 import React from "react";
+import { useAccount } from "wagmi";
 
 import { ModalHeaderProps } from "../../components";
 
@@ -9,10 +10,22 @@ import { ConnectWithInjector } from "./injector";
 export type ConnectWalletProps = {
 	Header: React.ComponentType<ModalHeaderProps>;
 	wallet: Wallet;
+	onConnect?: () => void;
 };
 
-export function ConnectWallet({ wallet, Header }: ConnectWalletProps) {
+export function ConnectWallet({
+	wallet,
+	Header,
+	onConnect,
+}: ConnectWalletProps) {
 	const connector = React.useMemo(() => wallet.createConnector(), [wallet]);
+	const { isConnected } = useAccount();
+
+	React.useEffect(() => {
+		if (isConnected) {
+			onConnect?.();
+		}
+	}, [isConnected]);
 
 	if (isQRCodeWalletConnector(connector)) {
 		return (
