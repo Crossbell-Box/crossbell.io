@@ -5,25 +5,21 @@ import { Loading } from "../loading";
 
 import styles from "./index.module.css";
 
-type BaseProps = {
+export type LoadingOverlayProps = {
 	visible: boolean;
 	zIndex?: number;
 	color?: string;
+	children?: React.ReactNode;
 };
 
-export type LoadingOverlayProps = Omit<
-	React.HTMLAttributes<HTMLDivElement>,
-	keyof BaseProps
-> &
-	BaseProps;
-
 export const LoadingOverlay = React.memo(
-	({ visible, zIndex = 10, color }: LoadingOverlayProps) => (
+	({ visible, zIndex = 10, color, children }: LoadingOverlayProps) => (
 		<div
 			className={classNames(styles.container, !visible && styles.hidden)}
 			style={{ zIndex, color }}
 		>
 			<Loading />
+			{children}
 		</div>
 	)
 );
