@@ -22,3 +22,4 @@ export * from "./sign-in-with-wallet";
 export * from "./transfer-csb";
 export * from "./transfer-csb-success";
 export * from "./wallet-claim-csb";
+export * from "./what-is-character-tooltip";

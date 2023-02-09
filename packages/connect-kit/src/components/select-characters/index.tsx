@@ -2,10 +2,12 @@ import React from "react";
 import { LoadingOverlay } from "@crossbell/ui";
 
 import { useAccountCharacters } from "../../hooks";
+import { BottomTips } from "../bottom-tips";
+import { WhatIsCharacterTooltip } from "../what-is-character-tooltip";
 
 import { List, ListProps } from "./list";
 import { Empty } from "./empty";
-import { BottomTips } from "../bottom-tips";
+import styles from "./index.module.css";
 
 export type SelectCharactersProps = Omit<
 	ListProps,
@@ -37,10 +39,11 @@ export function SelectCharacters(props: SelectCharactersProps) {
 				<Empty onSelectNew={props.onSelectNew} />
 			)}
 
-			{/* TODO: - add link */}
-			<a href="" target="_blank" rel="noreferrer">
-				<BottomTips>What is Character?</BottomTips>
-			</a>
+			<WhatIsCharacterTooltip offset={0} openDelay={0}>
+				<BottomTips noUxOverlay={true} className={styles.whatIsCharacter}>
+					What is Character?
+				</BottomTips>
+			</WhatIsCharacterTooltip>
 		</>
 	);
 }

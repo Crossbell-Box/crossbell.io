@@ -9,6 +9,7 @@ type BaseProps = {
 	color?: keyof typeof colorMap;
 	height?: string;
 	minWidth?: string;
+	noUxOverlay?: boolean;
 };
 
 export type ActionBtnProps = Omit<
@@ -30,14 +31,26 @@ const sizeMap = {
 };
 
 export const ActionBtn = React.forwardRef<HTMLButtonElement, ActionBtnProps>(
-	({ color, size, className, height, minWidth, disabled, ...props }, ref) => (
+	(
+		{
+			color,
+			size,
+			className,
+			height,
+			minWidth,
+			disabled,
+			noUxOverlay,
+			...props
+		},
+		ref
+	) => (
 		<button
 			{...props}
 			ref={ref}
 			disabled={disabled}
 			style={{ height, minWidth }}
 			className={classNames(
-				!disabled && commonStyles.uxOverlay,
+				!disabled && !noUxOverlay && commonStyles.uxOverlay,
 				styles.btn,
 				className,
 				sizeMap[size ?? "sm"],

@@ -1,8 +1,9 @@
-import { ActionIcon, Space, Text } from "@mantine/core";
+import { Text } from "@mantine/core";
 import React, { PropsWithChildren, useEffect, useState } from "react";
 import { useRouter } from "next/router";
 import classNames from "classnames";
 import { useElementSize, useWindowScroll } from "@mantine/hooks";
+import { ArrowBackIcon } from "@crossbell/ui";
 
 let _height = 72;
 
@@ -62,12 +63,12 @@ export default function Header({
 				)}
 			>
 				{hasBackButton && (
-					<ActionIcon
-						className="flex items-center justify-center mr-8px"
+					<button
+						className="flex items-center justify-center mr-8px p-0 border-none bg-transparent ux-overlay rounded-md"
 						onClick={handleCLickBack}
 					>
-						<Text className="i-csb:back text-size-3xl" />
-					</ActionIcon>
+						<ArrowBackIcon className="text-size-3xl text-[#999]" />
+					</button>
 				)}
 
 				{typeof children === "string" ? (
