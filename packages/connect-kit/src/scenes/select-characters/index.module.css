@@ -1,0 +1,9 @@
+@media (min-width: 768px) {
+	.container {
+		width: 360px;
+	}
+}
+
+.main {
+	padding: 0 24px 18px;
+}
