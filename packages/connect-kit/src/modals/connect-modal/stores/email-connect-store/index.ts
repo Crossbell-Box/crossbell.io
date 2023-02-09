@@ -61,30 +61,35 @@ export const [EmailConnectStoreProvider, useEmailConnectStore] =
 			async connect() {
 				const { email, password, computed } = get();
 
-				if (computed.isAbleToConnect && isEmail(email)) {
-					set({ status: "connecting" });
+				try {
+					if (computed.isAbleToConnect && isEmail(email)) {
+						set({ status: "connecting" });
 
-					const result = await connectByEmail({ email, password });
+						const result = await connectByEmail({ email, password });
 
-					if (result.ok) {
-						useAccountState
-							.getState()
-							.connectEmail(result.token)
-							.then(() => {
-								set({ status: "connected", emailErrorMsg: "" });
-								notify.success(result.msg);
-								useConnectModal.getState().hide();
-							});
-					} else {
-						if (result.msg.toLowerCase() === "user not found") {
-							const msg = "Haven't Registered yet";
-							set({ status: "idle", emailErrorMsg: msg });
-							notify.error(msg);
+						if (result.ok) {
+							useAccountState
+								.getState()
+								.connectEmail(result.token)
+								.then(() => {
+									set({ status: "connected", emailErrorMsg: "" });
+									notify.success(result.msg);
+									useConnectModal.getState().hide();
+								});
 						} else {
-							set({ status: "idle", emailErrorMsg: "" });
-							notify.error(result.msg);
+							if (result.msg.toLowerCase() === "user not found") {
+								const msg = "Haven't Registered yet";
+								set({ status: "idle", emailErrorMsg: msg });
+								notify.error(msg);
+							} else {
+								set({ status: "idle", emailErrorMsg: "" });
+								notify.error(result.msg);
+							}
 						}
 					}
+				} catch (e) {
+					set({ status: "idle", emailErrorMsg: "" });
+					notify.error(e instanceof Error ? e.message : `${e}`);
 				}
 			},
 		}))
