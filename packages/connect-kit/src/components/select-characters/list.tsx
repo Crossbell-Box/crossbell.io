@@ -38,6 +38,7 @@ export function List({
 		s.computed.account?.characterId,
 		s.switchCharacter,
 	]);
+	const isWalletConnected = useAccountState((s) => !!s.wallet);
 
 	return (
 		<ScrollArea.Autosize maxHeight="80vh">
@@ -87,24 +88,26 @@ export function List({
 					isLoading={isLoading}
 				/>
 
-				<OptionListItem
-					color="gray"
-					className={styles.mintItem}
-					onClick={onSelectNew}
-				>
-					<svg
-						width="24"
-						height="24"
-						viewBox="0 0 24 24"
-						fill="none"
-						xmlns="http://www.w3.org/2000/svg"
+				{isWalletConnected && (
+					<OptionListItem
+						color="gray"
+						className={styles.mintItem}
+						onClick={onSelectNew}
 					>
-						<path
-							d="M10.9778 24V13.0222H0V10.9778H10.9778V0H13.0222V10.9778H24V13.0222H13.0222V24H10.9778Z"
-							fill="#979DA4"
-						/>
-					</svg>
-				</OptionListItem>
+						<svg
+							width="24"
+							height="24"
+							viewBox="0 0 24 24"
+							fill="none"
+							xmlns="http://www.w3.org/2000/svg"
+						>
+							<path
+								d="M10.9778 24V13.0222H0V10.9778H10.9778V0H13.0222V10.9778H24V13.0222H13.0222V24H10.9778Z"
+								fill="#979DA4"
+							/>
+						</svg>
+					</OptionListItem>
+				)}
 			</OptionList>
 		</ScrollArea.Autosize>
 	);
