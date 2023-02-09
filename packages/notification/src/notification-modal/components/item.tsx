@@ -134,8 +134,8 @@ function getTitleInfo(
 		case "mint-note":
 			return {
 				title:
-					(notification.originNote.metadata?.content?.title ??
-						notification.originNote.metadata?.content?.content) ||
+					notification.originNote.metadata?.content?.title ||
+					notification.originNote.metadata?.content?.content ||
 					"Note",
 				url: urlComposer.noteUrl(notification.originNote),
 			};
