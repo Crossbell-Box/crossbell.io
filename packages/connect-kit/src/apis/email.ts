@@ -290,3 +290,14 @@ export async function updateCharactersMetadata({
 		body: { metadata, mode },
 	});
 }
+
+export function getWithdrawProof({
+	token,
+}: {
+	token: string;
+}): Promise<{ proof: string; nonce: number; expires: number }> {
+	return request(`/newbie/account/withdraw/proof`, {
+		method: "GET",
+		token,
+	});
+}

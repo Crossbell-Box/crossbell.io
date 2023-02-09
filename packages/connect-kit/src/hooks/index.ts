@@ -21,3 +21,4 @@ export * from "./use-set-primary-character";
 export * from "./use-transfer-csb";
 export * from "./use-update-character-handle";
 export * from "./use-update-character-metadata";
+export * from "./use-withdraw-email-account";

@@ -1,7 +1,7 @@
 import React from "react";
 import { DynamicContainer, DynamicContainerContent } from "@crossbell/ui";
 
-import { BaseModal } from "../../components";
+import { BaseModal, Congrats } from "../../components";
 
 import { SceneKind } from "./types";
 import {
@@ -10,9 +10,13 @@ import {
 	StoresProvider,
 } from "./stores";
 
+import { Header } from "./components/header";
 import { ConnectKindDifferences } from "./scenes/connect-kind-differences";
 import { SelectOptions } from "./scenes/select-options";
-import { UpgradeToWallet } from "./scenes/upgrade-to-wallet";
+import { SelectWalletToConnect } from "./scenes/select-wallet-to-connect";
+import { ConnectWallet } from "./scenes/connect-wallet";
+import { ConfirmUpgrade } from "./scenes/confirm-upgrade";
+import { GetAWallet } from "../../scenes";
 
 export { useUpgradeAccountModal };
 
@@ -32,18 +36,26 @@ export function UpgradeAccountModal() {
 }
 
 function Main() {
-	const currentScene = useScenesStore(({ computed }) => computed.currentScene);
+	const scene = useScenesStore(({ computed }) => computed.currentScene);
 
 	return (
-		<DynamicContainerContent id={currentScene.kind}>
-			{((): JSX.Element => {
-				switch (currentScene.kind) {
+		<DynamicContainerContent id={scene.kind}>
+			{((): React.ReactNode => {
+				switch (scene.kind) {
 					case SceneKind.selectOptions:
 						return <SelectOptions />;
 					case SceneKind.connectKindDifferences:
 						return <ConnectKindDifferences />;
-					case SceneKind.upgradeToWallet:
-						return <UpgradeToWallet />;
+					case SceneKind.selectWalletToConnect:
+						return <SelectWalletToConnect />;
+					case SceneKind.connectWallet:
+						return <ConnectWallet {...scene} />;
+					case SceneKind.congrats:
+						return <Congrats {...scene} />;
+					case SceneKind.getAWallet:
+						return <GetAWallet Header={Header} />;
+					case SceneKind.confirmUpgrade:
+						return <ConfirmUpgrade {...scene} />;
 				}
 			})()}
 		</DynamicContainerContent>

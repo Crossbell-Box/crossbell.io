@@ -34,11 +34,13 @@ export function SelectOptions() {
 				<Selections
 					items={[
 						{
-							id: SceneKind.upgradeToWallet,
+							id: SceneKind.selectWalletToConnect,
 							title: "Upgrade to Wallet",
 							style: { background: "#6AD991", color: "#FFF" },
 							icon: <WalletIcon className={styles.walletIcon} />,
-							onClick: () => goToScene({ kind: SceneKind.upgradeToWallet }),
+							onClick: () => {
+								goToScene({ kind: SceneKind.selectWalletToConnect });
+							},
 						},
 
 						{
