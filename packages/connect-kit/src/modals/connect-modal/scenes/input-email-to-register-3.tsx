@@ -1,16 +1,15 @@
 import React from "react";
-import { LoadingOverlay, Tooltip } from "@mantine/core";
-import { useWeb2Url, CircleHelpIcon, useUrlComposer } from "@crossbell/ui";
+import { LoadingOverlay } from "@mantine/core";
+import { CircleHelpIcon, useUrlComposer } from "@crossbell/ui";
 
 import { useAccountState } from "../../../hooks";
 import {
 	CheckIcon,
-	CrossbellIcon,
 	EmailIcon,
 	MemberIcon,
 	TextInput,
+	WhatIsCharacterTooltip,
 } from "../../../components";
-import { IMAGES } from "../../../utils";
 
 import { Header } from "../components/header";
 import { Field } from "../components/field";
@@ -29,7 +28,6 @@ export function InputEmailToRegister3() {
 	const urlComposer = useUrlComposer();
 	const store = useEmailRegisterStore();
 	const scene = useScenesStore();
-	const imgUrl = useWeb2Url(IMAGES.whatIsCharacterImg);
 	const { hide: hideModal } = useConnectModal();
 
 	const register = React.useCallback(() => {
@@ -76,46 +74,9 @@ export function InputEmailToRegister3() {
 					title={
 						<span>
 							{"Give your character a name"}
-							<Tooltip
-								offset={4}
-								withinPortal={true}
-								px={20}
-								py={16}
-								radius={16}
-								classNames={{ tooltip: styles.tooltip }}
-								arrowSize={10}
-								label={
-									<div className={styles.tooltipLabel}>
-										<div className={styles.tooltipLabelIconSection}>
-											<div>
-												<CrossbellIcon className={styles.crossbellIcon} />
-											</div>
-
-											<div className={styles.whatIsCharacter}>
-												<img
-													className={styles.whatIsCharacterImg}
-													src={imgUrl}
-													alt="What Is Character"
-												/>
-											</div>
-										</div>
-										<h3 className={styles.whatIsCharacterTitle}>
-											Guide - What is Character？
-										</h3>
-										<p className={styles.whatIsCharacterContent}>
-											Character is your Crossbell profile where you can check
-											all the content synced from other social media and also
-											browse your treasure collection and achievements.
-										</p>
-									</div>
-								}
-								openDelay={200}
-								multiline={true}
-								transition="pop-bottom-left"
-								withArrow={true}
-							>
+							<WhatIsCharacterTooltip>
 								<CircleHelpIcon className={styles.circleHelpIcon} />
-							</Tooltip>
+							</WhatIsCharacterTooltip>
 						</span>
 					}
 					icon={<MemberIcon className={styles.memberIcon} />}
