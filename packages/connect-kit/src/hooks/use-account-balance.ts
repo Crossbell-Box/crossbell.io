@@ -9,33 +9,50 @@ export type UseAccountBalanceResult = {
 	isLoading: boolean;
 };
 
+const NO_BALANCE: UseAccountBalanceResult = { balance: null, isLoading: false };
+
 export function useAccountBalance(): UseAccountBalanceResult {
 	const account = useAccountState((s) => s.computed.account);
+	const emailBalance = useEmailAccountBalance();
+	const walletBalance = useWalletAccountBalance();
 
-	const { data: balance, isLoading } = useBalance({
-		address: account?.address as `0x${string}` | undefined,
-	});
+	switch (account?.type) {
+		case "email":
+			return emailBalance;
+		case "wallet":
+			return walletBalance;
+		default:
+			return NO_BALANCE;
+	}
+}
+
+export function useEmailAccountBalance(): UseAccountBalanceResult {
+	const email = useAccountState((s) => s.email);
 
 	return React.useMemo((): UseAccountBalanceResult => {
-		switch (account?.type) {
-			case "email": {
-				const decimals = 18;
-				const value = BigNumber.from(account.csb);
+		if (!email) return { balance: null, isLoading: false };
 
-				return {
-					balance: {
-						decimals,
-						formatted: utils.formatUnits(value, decimals),
-						symbol: "CSB",
-						value,
-					},
-					isLoading: false,
-				};
-			}
-			case "wallet":
-				return { balance, isLoading };
-		}
+		const decimals = 18;
+		const value = BigNumber.from(email.csb);
 
-		return { balance: null, isLoading: true };
-	}, [account, balance, isLoading]);
+		return {
+			balance: {
+				decimals,
+				formatted: utils.formatUnits(value, decimals),
+				symbol: "CSB",
+				value,
+			},
+			isLoading: false,
+		};
+	}, [email]);
+}
+
+export function useWalletAccountBalance(): UseAccountBalanceResult {
+	const wallet = useAccountState((s) => s.wallet);
+
+	const { data: balance, isLoading } = useBalance({
+		address: wallet?.address as `0x${string}` | undefined,
+	});
+
+	return React.useMemo(() => ({ balance, isLoading }), [balance, isLoading]);
 }
