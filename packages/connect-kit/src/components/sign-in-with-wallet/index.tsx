@@ -2,7 +2,7 @@ import React from "react";
 import classNames from "classnames";
 import { LoadingOverlay } from "@crossbell/ui";
 
-import { useAccountState, useWalletSignIn } from "../../hooks";
+import { useIsWalletSignedIn, useWalletSignIn } from "../../hooks";
 import { BottomTips } from "../bottom-tips";
 
 import { Selections } from "../../modals/connect-modal/components/selections";
@@ -23,13 +23,13 @@ export function SignInWithWallet({
 	skipText,
 }: SignInWithWalletProps) {
 	const signIn = useWalletSignIn();
-	const siwe = useAccountState((s) => s.wallet?.siwe);
+	const isWalletSignedIn = useIsWalletSignedIn();
 
 	React.useEffect(() => {
-		if (siwe) {
+		if (isWalletSignedIn) {
 			afterSignIn?.();
 		}
-	}, [siwe]);
+	}, [isWalletSignedIn]);
 
 	return (
 		<div className={styles.main}>

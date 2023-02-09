@@ -7,7 +7,7 @@ type RequestConfig = {
 };
 
 export function request<T = any>(
-	url: `/${string}`,
+	url: `/${"newbie" | "siwe"}/${string}`,
 	{ body, method, token }: RequestConfig
 ): Promise<T> {
 	const headers = new Headers({ "Content-Type": "application/json" });

@@ -1,8 +1,9 @@
 import React from "react";
-import { useOpSignSettingsModal } from "@crossbell/connect-kit";
+
 import { useRefCallback } from "@crossbell/util-hooks";
 
-import { useAccountState, useToggleOpSignOperator } from "../../hooks";
+import { useOpSignSettingsModal } from "../../modals/op-sign-settings-modal";
+import { useToggleOpSignOperator, useIsWalletSignedIn } from "../../hooks";
 import { Icon } from "./icon";
 
 export type OpSignIconProps = React.SVGAttributes<SVGSVGElement> & {
@@ -17,7 +18,7 @@ export function OpSignIcon({
 	openSettingsOnClick,
 	...props
 }: OpSignIconProps) {
-	const isSignedIn = useAccountState((s) => !!s.wallet?.siwe);
+	const isSignedIn = useIsWalletSignedIn();
 	const [{ hasPermissions }] = useToggleOpSignOperator({ characterId });
 
 	const showSettingModal = useOpSignSettingsModal((s) => s.show);
