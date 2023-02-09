@@ -1,5 +1,6 @@
 export { default as AccessPointIcon } from "./access-point";
 export { default as AccountCircleIcon } from "./account-circle";
+export { default as ArrowBackIcon } from "./arrow-back";
 export { default as ArrowCirclepathIcon } from "./arrow-circlepath";
 export { default as ArrowForwardIcon } from "./arrow-forward";
 export { default as ArrowRightIcon } from "./arrow-right";
