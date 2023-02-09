@@ -2,12 +2,12 @@ import React from "react";
 import { DynamicContainer, DynamicContainerContent } from "@crossbell/ui";
 
 import { BaseModal } from "../../components";
+import { useIsWalletSignedIn } from "../../hooks";
 
 import { useOpSignSettingsModal } from "./stores";
 
 import { Settings } from "./scenes/settings";
 import { SignInWithWallet } from "./scenes/sign-in-with-wallet";
-import { useAccountState } from "@crossbell/connect-kit";
 
 export { useOpSignSettingsModal };
 
@@ -24,7 +24,7 @@ export function OpSignSettingsModal() {
 }
 
 function Main({ characterId }: { characterId?: number }) {
-	const isSignedIn = useAccountState((s) => s.wallet?.siwe);
+	const isSignedIn = useIsWalletSignedIn();
 
 	return (
 		<DynamicContainerContent id={`${isSignedIn}`}>
