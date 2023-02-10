@@ -2,6 +2,7 @@ import React from "react";
 import { CharacterPermissionKey } from "crossbell.js";
 
 import { useCharacterOperatorPermissions } from "./use-character-operator-permissions";
+import { haveSamePermissions } from "./utils";
 
 export type UseCharacterOperatorHasPermissionsOptions = {
 	operatorAddress: string;
@@ -19,21 +20,8 @@ export function useCharacterOperatorHasPermissions({
 		characterId,
 	});
 
-	const permissionMap = React.useMemo(
-		() => getPermissionMap(data ?? []),
-		[data]
-	);
-
 	return React.useMemo(
-		(): boolean =>
-			permissions.every((permission) => permissionMap.has(permission)),
-		[permissions, permissionMap]
+		() => haveSamePermissions(permissions, data),
+		[permissions, data]
 	);
-}
-
-function getPermissionMap(permissions: CharacterPermissionKey[]) {
-	return permissions.reduce((map, permission) => {
-		map.set(permission, true);
-		return map;
-	}, new Map<string, boolean>());
 }

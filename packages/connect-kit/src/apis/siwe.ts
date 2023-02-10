@@ -176,3 +176,22 @@ export async function siwePutNote({
 		body,
 	});
 }
+
+export function siweMintNote({
+	siwe,
+	characterId,
+	noteId,
+}: {
+	siwe: Siwe;
+	characterId: number;
+	noteId: number;
+}) {
+	return request(
+		`/siwe/contract/characters/${characterId}/notes/${noteId}/minted`,
+		{
+			method: "PUT",
+			token: siwe.token,
+			body: {},
+		}
+	);
+}

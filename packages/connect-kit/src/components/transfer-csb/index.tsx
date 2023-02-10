@@ -41,6 +41,8 @@ export function TransferCSB({ toAddress, onSuccess }: TransferCSBProps) {
 					tips={`Balance: ${balance?.formatted}`}
 				>
 					<TextInput
+						type="number"
+						placeholder="0.00"
 						autoFocus={true}
 						value={value}
 						className={styles.input}

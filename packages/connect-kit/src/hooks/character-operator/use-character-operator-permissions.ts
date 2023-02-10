@@ -1,5 +1,6 @@
 import { useQuery } from "@tanstack/react-query";
-import { useContract } from "@crossbell/contract";
+import { indexer } from "@crossbell/indexer";
+import { CharacterPermissionKey } from "crossbell.js";
 
 import { SCOPE_KEY_CHARACTER_OPERATOR } from "./const";
 
@@ -12,15 +13,15 @@ export function useCharacterOperatorPermissions({
 	operatorAddress,
 	characterId,
 }: UseCharacterOperatorPermissionsOptions) {
-	const contract = useContract();
-
 	return useQuery(
 		SCOPE_KEY_CHARACTER_OPERATOR({ characterId, operator: operatorAddress }),
-		async () => {
+		async (): Promise<CharacterPermissionKey[] | null> => {
 			if (!characterId) return null;
-			return contract
-				.getOperatorPermissionsForCharacter(characterId, operatorAddress)
-				.then(({ data }) => data);
+
+			return (
+				(await indexer.getCharacterOperator(characterId, operatorAddress))
+					?.permissions ?? null
+			);
 		},
 		{ enabled: !!characterId }
 	);

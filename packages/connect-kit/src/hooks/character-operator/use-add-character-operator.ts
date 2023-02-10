@@ -1,8 +1,11 @@
+import { indexer } from "@crossbell/indexer";
 import { CharacterPermissionKey } from "crossbell.js";
 
+import { asyncRetry } from "../../utils";
 import { useAccountState } from "../account-state";
 import { createAccountTypeBasedMutationHooks } from "../account-type-based-hooks";
 import { SCOPE_KEY_CHARACTER_OPERATOR } from "./const";
+import { haveSamePermissions } from "./utils";
 
 export const useAddCharacterOperator = createAccountTypeBasedMutationHooks<
 	void,
@@ -13,11 +16,16 @@ export const useAddCharacterOperator = createAccountTypeBasedMutationHooks<
 	}
 >({ actionDesc: "adding operator", withParams: false }, () => ({
 	async contract({ characterId, operator, permissions }, { contract }) {
-		return contract.grantOperatorPermissionsForCharacter(
+		await contract.grantOperatorPermissionsForCharacter(
 			characterId,
 			operator,
 			permissions
 		);
+
+		await asyncRetry(async (RETRY) => {
+			const op = await indexer.getCharacterOperator(characterId, operator);
+			return haveSamePermissions(permissions, op?.permissions) || RETRY;
+		});
 	},
 
 	onSuccess({ queryClient, variables }) {
