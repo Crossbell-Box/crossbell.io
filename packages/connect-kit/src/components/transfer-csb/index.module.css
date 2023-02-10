@@ -15,6 +15,17 @@
 	padding: 0 60px 0 16px;
 }
 
+.input::-webkit-outer-spin-button,
+.input::-webkit-inner-spin-button {
+	-webkit-appearance: none;
+	margin: 0;
+}
+
+/* Firefox */
+.input[type="number"] {
+	-moz-appearance: textfield;
+}
+
 .maxContainer {
 	width: 60px;
 	height: 100%;
