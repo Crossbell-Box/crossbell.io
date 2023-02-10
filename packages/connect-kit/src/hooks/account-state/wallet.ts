@@ -35,24 +35,79 @@ export type WalletAccountSlice = {
 export const createWalletAccountSlice: SliceFn<WalletAccountSlice> = (
 	set,
 	get
-) => ({
-	wallet: null,
+) => {
+	const updateSiwe = (siwe: WalletAccount["siwe"]) => {
+		const { wallet } = get();
 
-	connectWallet: asyncExhaust(async (address) => {
-		if (address) {
+		if (wallet) {
+			set({ wallet: { ...wallet, siwe } });
+		}
+	};
+
+	return {
+		wallet: null,
+
+		connectWallet: asyncExhaust(async (address) => {
+			if (address) {
+				const { wallet } = get();
+
+				const [character] = await Promise.all([
+					wallet?.address === address && wallet.characterId
+						? indexer.getCharacter(wallet.characterId)
+						: indexer.getPrimaryCharacter(address),
+					wallet?.address === address && wallet.siwe
+						? get().siweRefresh(wallet.siwe.token)
+						: updateSiwe(undefined),
+				]);
+
+				const siwe = get().wallet?.siwe;
+
+				if (character) {
+					set({
+						wallet: {
+							siwe,
+							address,
+							type: "wallet",
+							handle: character.handle,
+							characterId: character.characterId,
+							character,
+						},
+					});
+					return true;
+				} else {
+					set({
+						wallet: {
+							siwe,
+							address,
+							type: "wallet",
+							handle: undefined,
+							characterId: undefined,
+							character: undefined,
+						},
+					});
+					return false;
+				}
+			} else {
+				set({ wallet: null });
+				return false;
+			}
+		}),
+
+		async refreshWallet() {
 			const { wallet } = get();
-			const [character] = await Promise.all([
-				wallet?.address === address && wallet.characterId
-					? indexer.getCharacter(wallet.characterId)
-					: indexer.getPrimaryCharacter(address),
-				wallet?.address === address && wallet.siwe
-					? get().siweRefresh(wallet.siwe.token)
-					: false,
-			]);
 
+			if (wallet?.address) {
+				return get().connectWallet(wallet.address);
+			} else {
+				return false;
+			}
+		},
+
+		switchCharacter(character: CharacterEntity) {
+			const address = get().wallet?.address;
 			const siwe = get().wallet?.siwe;
 
-			if (character) {
+			if (address) {
 				set({
 					wallet: {
 						siwe,
@@ -63,87 +118,40 @@ export const createWalletAccountSlice: SliceFn<WalletAccountSlice> = (
 						character,
 					},
 				});
-				return true;
-			} else {
-				set({
-					wallet: {
-						siwe,
-						address,
-						type: "wallet",
-						handle: undefined,
-						characterId: undefined,
-						character: undefined,
-					},
-				});
-				return false;
 			}
-		} else {
-			set({ wallet: null });
-			return false;
-		}
-	}),
 
-	async refreshWallet() {
-		const { wallet } = get();
+			return true;
+		},
 
-		if (wallet?.address) {
-			return get().connectWallet(wallet.address);
-		} else {
-			return false;
-		}
-	},
+		async siweSignIn(signer) {
+			const address = get().wallet?.address;
 
-	switchCharacter(character: CharacterEntity) {
-		const address = get().wallet?.address;
-		const siwe = get().wallet?.siwe;
+			if (address) {
+				const { token } = await siweSignIn(signer);
 
-		if (address) {
-			set({
-				wallet: {
-					siwe,
-					address,
-					type: "wallet",
-					handle: character.handle,
-					characterId: character.characterId,
-					character,
-				},
-			});
-		}
-
-		return true;
-	},
-
-	async siweSignIn(signer) {
-		const address = get().wallet?.address;
-
-		if (address) {
-			const { token } = await siweSignIn(signer);
-
-			if (token) {
-				return get().siweRefresh(token);
+				if (token) {
+					return get().siweRefresh(token);
+				} else {
+					return false;
+				}
 			} else {
 				return false;
 			}
-		} else {
-			return false;
-		}
-	},
+		},
 
-	async siweRefresh(token) {
-		const wallet = get().wallet;
+		async siweRefresh(token) {
+			const address = get().wallet?.address;
 
-		if (!wallet || !token) return false;
+			if (!address || !token) return false;
 
-		const siwe = await getSiweInfo({
-			token,
-			address: wallet.address,
-		});
+			const siwe = await getSiweInfo({ token, address });
 
-		set({ wallet: { ...wallet, siwe } });
+			updateSiwe(siwe);
 
-		return !!siwe;
-	},
-});
+			return !!siwe;
+		},
+	};
+};
 
 async function getSiweInfo({
 	address,
