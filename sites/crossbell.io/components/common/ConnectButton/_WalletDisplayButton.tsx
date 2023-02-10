@@ -128,11 +128,14 @@ const WalletDisplayButton = forwardRef<
 								<span className="font-500 leading-24px text-15px truncate max-w-8em text-[#F2F2F2]">
 									{extractCharacterName(character)}
 								</span>
-								<OpSignIcon
-									openSettingsOnClick={true}
-									className="bg-[#FFFFFF]/80 p-1px rounded-2px text-12px"
-									characterId={character?.characterId}
-								/>
+
+								{account.type === "wallet" && (
+									<OpSignIcon
+										openSettingsOnClick={true}
+										className="bg-[#FFFFFF]/80 p-1px rounded-2px text-12px"
+										characterId={character?.characterId}
+									/>
+								)}
 							</div>
 						</Group>
 
