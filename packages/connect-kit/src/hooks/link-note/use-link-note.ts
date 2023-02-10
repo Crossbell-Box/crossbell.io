@@ -1,4 +1,8 @@
-import { NoteLinkType, SCOPE_KEY_NOTE_STATUS } from "@crossbell/indexer";
+import {
+	NoteLinkType,
+	SCOPE_KEY_NOTE_LIKES,
+	SCOPE_KEY_NOTE_STATUS,
+} from "@crossbell/indexer";
 
 import { linkNote, siweLinkNote } from "../../apis";
 import {
@@ -59,6 +63,7 @@ export const useLinkNote = createAccountTypeBasedMutationHooks<
 		const { noteId, characterId } = variables;
 
 		return Promise.all([
+			queryClient.invalidateQueries(SCOPE_KEY_NOTE_LIKES(characterId, noteId)),
 			queryClient.invalidateQueries(SCOPE_KEY_NOTE_STATUS(characterId, noteId)),
 		]);
 	},
