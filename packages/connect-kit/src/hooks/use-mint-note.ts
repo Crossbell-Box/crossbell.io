@@ -2,6 +2,7 @@ import {
 	SCOPE_KEY_MINTED_NOTE_OF_ADDRESS,
 	SCOPE_KEY_MINTED_NOTE_OF_NOTE,
 	SCOPE_KEY_NOTE_STATUS,
+	SCOPE_KEY_NOTE_MINTS,
 } from "@crossbell/indexer";
 
 import { useUpgradeAccountModal } from "../modals/upgrade-account-modal/stores/modal-store";
@@ -45,6 +46,9 @@ export const useMintNote = createAccountTypeBasedMutationHooks<
 			const { characterId, noteId } = variables;
 
 			return Promise.all([
+				queryClient.invalidateQueries(
+					SCOPE_KEY_NOTE_MINTS(characterId, noteId)
+				),
 				queryClient.invalidateQueries(
 					SCOPE_KEY_NOTE_STATUS(characterId, noteId)
 				),
