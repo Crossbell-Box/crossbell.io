@@ -1,6 +1,6 @@
 {
 	"name": "x-sync",
-	"version": "0.0.20",
+	"version": "0.0.21",
 	"private": true,
 	"scripts": {
 		"build": "rm -rf .next && next build",
