@@ -106,7 +106,7 @@ export function createAccountTypeBasedMutationHooks<
 				async onSuccess(...params) {
 					const [data, variables] = params;
 
-					await factory.onSuccess?.({ data, variables, queryClient });
+					await factory.onSuccess?.({ data, variables, queryClient, account });
 
 					return options?.onSuccess?.(...params);
 				},

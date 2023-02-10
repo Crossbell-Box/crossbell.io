@@ -1,7 +1,7 @@
 import { Contract, Indexer } from "crossbell.js";
 import { useQueryClient } from "@tanstack/react-query";
 
-import { EmailAccount, WalletAccount } from "../account-state";
+import { EmailAccount, GeneralAccount, WalletAccount } from "../account-state";
 
 export type Context<T> = { contract: Contract; indexer: Indexer } & T;
 
@@ -24,6 +24,7 @@ export type AccountTypeBasedHooksFactory<Params, Variables, Data> = (
 	onSuccess?: (params: {
 		data: Data | null;
 		variables: Variables;
+		account: GeneralAccount | null;
 		queryClient: ReturnType<typeof useQueryClient>;
 	}) => Promise<unknown>;
 };
