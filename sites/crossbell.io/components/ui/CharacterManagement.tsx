@@ -19,7 +19,10 @@ import { PropsWithChildren, useEffect, useState } from "react";
 
 import { useCharacter, useCharacterByHandle } from "@crossbell/indexer";
 import { ipfsLinkToHttpLink, uploadToIpfs } from "~/shared/ipfs";
-import { extractCharacterName } from "@crossbell/util-metadata";
+import {
+	extractCharacterName,
+	generateCharacterHandle,
+} from "@crossbell/util-metadata";
 import { composeCharacterHref } from "~/shared/url";
 import { BizError } from "@crossbell/contract";
 import {
@@ -31,7 +34,6 @@ import {
 } from "@crossbell/connect-kit";
 
 import { LoadingOverlay } from "~/shared/components/loading-overlay";
-import { generateHandleFromName } from "~/shared/character/generate-handle-from-name";
 
 export default function CharacterManagement({
 	characterId,
@@ -90,7 +92,7 @@ export default function CharacterManagement({
 		if (mode === "new") {
 			if (form.values.name.length > 0) {
 				const name = form.values.name;
-				const handle = generateHandleFromName(name);
+				const handle = generateCharacterHandle(name);
 				form.setFieldValue("handle", handle);
 			} else {
 				form.setFieldValue("handle", "");

@@ -3,9 +3,8 @@ import { NoteMetadata } from "crossbell.js";
 import { TinyColor, random, mostReadable } from "@ctrl/tinycolor";
 import Link from "next/link";
 import { ReactNode } from "react";
-
 import { stringToInteger } from "@crossbell/ui";
-import config from "~/shared/config";
+import { getSourceLink } from "@crossbell/util-metadata";
 
 const builtInColorMap = {
 	["crossbell.io"]: ["#E1BE60", "#000"],
@@ -34,7 +33,7 @@ export default function NoteSources({
 			{noteMetadata?.sources?.map((s) => {
 				const [bgColor, textColor] = getColorFromSource(s);
 				const lighterBgColor = new TinyColor(bgColor).lighten(10).toHexString();
-				const href = getLinkForSource(s, noteMetadata);
+				const href = getSourceLink(s, noteMetadata);
 
 				const Wrapper = ({ children }: { children: ReactNode }) =>
 					href ? (
@@ -88,49 +87,4 @@ function getColorFromSource(source: string) {
 		size: "small",
 	})?.toHexString();
 	return [bgColor, textColor];
-}
-
-function getLinkForSource(source: string, noteMetadata: NoteMetadata) {
-	const s = source.toLowerCase();
-
-	if (isBuiltInSource(s)) {
-		if (["operatorsync", "sync", "xsync"].includes(s)) {
-			return config.xSync.domain;
-		}
-
-		if (s === "xlog") {
-			return noteMetadata.external_urls?.[0];
-		}
-
-		if (s === "crosssync") {
-			return "https://crosssync.app/";
-		}
-
-		switch (s) {
-			case "twitter":
-				return findUrlIncludes(noteMetadata.external_urls, "twitter.com");
-			case "medium":
-				return findUrlIncludes(noteMetadata.external_urls, "medium.com");
-			case "tiktok":
-				return findUrlIncludes(noteMetadata.external_urls, "tiktok.com");
-			case "substack":
-				return findUrlIncludes(noteMetadata.external_urls, "substack.com");
-			case "pixiv":
-				return findUrlIncludes(noteMetadata.external_urls, "pixiv.com");
-			case "telegram channel":
-				return findUrlIncludes(noteMetadata.external_urls, "t.me");
-			case "pinterest":
-				return findUrlIncludes(noteMetadata.external_urls, "pinterest.com");
-			case "jike":
-				return findUrlIncludes(noteMetadata.external_urls, "okjike.com");
-		}
-	}
-
-	return undefined;
-}
-
-function findUrlIncludes(urls: string[] | undefined, pattern: string) {
-	if (!urls) return undefined;
-	const url = urls.find((u) => u.includes(pattern));
-	return url ? url : urls[0];
 }
