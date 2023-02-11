@@ -1,8 +1,7 @@
 import create from "zustand";
 import debounce from "lodash.debounce";
 import { indexer } from "@crossbell/indexer";
-
-import { generateHandleFromName } from "~/shared/character/generate-handle-from-name";
+import { generateCharacterHandle } from "@crossbell/util-metadata";
 
 export type MintCharacterForm = {
 	avatar: File | null;
@@ -22,7 +21,7 @@ export const useMintCharacterForm = create<MintCharacterForm>((set, get) => {
 	const updateHandle = debounce(async (username: string) => {
 		if (!username) return;
 
-		const handle = generateHandleFromName(username);
+		const handle = generateCharacterHandle(username);
 		const isHandleAvailable = !(await indexer.getCharacterByHandle(handle));
 
 		if (username === get().username && isHandleAvailable) {
