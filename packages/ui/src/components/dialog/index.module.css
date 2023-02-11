@@ -2,12 +2,14 @@
 	position: fixed;
 	bottom: 16px;
 	right: 16px;
+	pointer-events: none;
 	opacity: 0;
-	transition: opacity 0.2s, transform 0.2s;
 	transform: translateY(25%);
+	transition: opacity 0.2s, transform 0.2s;
 }
 
 .layout.isActive {
+	pointer-events: auto;
 	opacity: 1;
 	transform: translateY(0);
 }
