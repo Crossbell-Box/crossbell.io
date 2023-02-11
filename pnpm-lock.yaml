@@ -296,6 +296,7 @@ importers:
       pascal-case: ^3.1.2
       react-intersection-observer: 9.4.1
       react-transition-group: 4.4.5
+      ts-essentials: 9.3.0
     dependencies:
       classnames: 2.3.2
       facepaint: 1.2.1
@@ -309,6 +310,7 @@ importers:
       '@types/facepaint': 1.2.2
       '@types/react-transition-group': 4.4.5
       pascal-case: 3.1.2
+      ts-essentials: 9.3.0
 
   packages/util-ethers:
     specifiers: {}
@@ -11226,6 +11228,12 @@ packages:
   /trough/2.1.0:
     resolution: {integrity: sha512-AqTiAOLcj85xS7vQ8QkAV41hPDIJ71XJB4RCUrzo/1GM2CQwhkJGaf9Hgr7BOugMRpgGUrqRg/DrBDl4H40+8g==}
     dev: false
+
+  /ts-essentials/9.3.0:
+    resolution: {integrity: sha512-XeiCboEyBG8UqXZtXl59bWEi4ZgOqRsogFDI6WDGIF1LmzbYiAkIwjkXN6zZWWl4re/lsOqMlYfe8KA0XiiEPw==}
+    peerDependencies:
+      typescript: '>=4.1.0'
+    dev: true
 
   /ts-interface-checker/0.1.13:
     resolution: {integrity: sha512-Y/arvbn+rrz3JCKl9C4kVNfTfSm2/mEp5FSz5EsZSANGPSlQrpRI5M4PKF+mJnE52jOO90PnPSc3Ur3bTQw0gA==}

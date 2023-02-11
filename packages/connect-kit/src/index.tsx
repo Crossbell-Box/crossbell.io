@@ -5,7 +5,7 @@ import {
 	UseWeb2UrlContext,
 	GetWeb2Url,
 	UrlComposerContext,
-	UrlComposer,
+	UrlComposerContextValue,
 } from "@crossbell/ui";
 
 import { usePreloadAllImgs } from "./utils";
@@ -38,7 +38,7 @@ export type ConnectKitProviderProps = {
 	children: React.ReactNode;
 	ipfsLinkToHttpLink?: GetWeb2Url;
 	withoutNotificationsProvider?: boolean;
-	urlComposer?: Partial<UrlComposer>;
+	urlComposer?: UrlComposerContextValue;
 };
 
 export function ConnectKitProvider({

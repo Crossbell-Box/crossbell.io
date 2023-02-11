@@ -1,11 +1,11 @@
 import React from "react";
 import { CharacterEntity, NoteEntity } from "crossbell.js";
-
-import { composeCharacterHref, composeNoteHref } from "~/shared/url/href";
 import {
+	composeNoteId,
 	composeScanTxHref,
 	composeScanAddressHref,
-} from "~/shared/url/href-external";
+} from "@crossbell/util-metadata";
+import { MarkOptional } from "ts-essentials";
 
 type ComposerFn<T> = (params: T) => string;
 
@@ -17,14 +17,23 @@ export type UrlComposer = {
 };
 
 const defaultComposer: UrlComposer = {
-	characterUrl: ({ handle }) => composeCharacterHref(handle),
-	noteUrl: ({ characterId, noteId }) => composeNoteHref(characterId, noteId),
+	characterUrl: ({ handle }) => {
+		return `https://crossbell.io/${handle.replace(/^([^@])/, "@$1")}`;
+	},
+	noteUrl: ({ characterId, noteId }) => {
+		return `https://crossbell.io/notes/${composeNoteId(characterId, noteId)}`;
+	},
 	scanTxUrl: ({ txHash }) => composeScanTxHref(txHash),
 	scanAddressUrl: ({ addressHash }) => composeScanAddressHref(addressHash),
 };
 
+export type UrlComposerContextValue = MarkOptional<
+	UrlComposer,
+	"scanAddressUrl" | "scanTxUrl"
+>;
+
 export const UrlComposerContext =
-	React.createContext<Partial<UrlComposer> | null>(null);
+	React.createContext<UrlComposerContextValue | null>(null);
 
 export function useUrlComposer(): UrlComposer {
 	const context = React.useContext(UrlComposerContext);
