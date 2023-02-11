@@ -12,7 +12,8 @@ import Head from "next/head";
 
 import { NotificationModal } from "@crossbell/notification";
 
-import { MainProvider } from "~/shared/providers";
+import { MainProvider, MainProviderProps } from "~/shared/providers";
+import { composeCharacterHref, composeNoteHref } from "~/shared/url";
 
 export type NextPageWithLayout<P = Record<string, unknown>, IP = P> = NextPage<
 	P,
@@ -23,6 +24,11 @@ export type NextPageWithLayout<P = Record<string, unknown>, IP = P> = NextPage<
 
 type AppPropsWithLayout = AppProps & {
 	Component: NextPageWithLayout;
+};
+
+const urlComposer: Required<MainProviderProps>["urlComposer"] = {
+	characterUrl: ({ handle }) => composeCharacterHref(handle),
+	noteUrl: ({ characterId, noteId }) => composeNoteHref(characterId, noteId),
 };
 
 export default function App({ Component, pageProps }: AppPropsWithLayout) {
@@ -54,7 +60,7 @@ export default function App({ Component, pageProps }: AppPropsWithLayout) {
 				}}
 			/>
 
-			<MainProvider>
+			<MainProvider urlComposer={urlComposer}>
 				<NotificationModal />
 				{getLayout(<Component {...pageProps} />)}
 			</MainProvider>
