@@ -7,8 +7,7 @@ import {
 	Indicator,
 } from "@mantine/core";
 import { useRefCallback } from "@crossbell/util-hooks";
-
-import { LoadMore } from "~/shared/components/load-more";
+import { LoadMore } from "@crossbell/ui";
 
 import { useModalState, useReadingState, useNotifications } from "../hooks";
 
@@ -78,13 +77,9 @@ export function NotificationModal() {
 
 						<LoadMore
 							onLoadMore={() => fetchNextPage()}
-							hasNextPage={Boolean(hasNextPage)}
+							hasMore={!!hasNextPage}
 							isLoading={isFetchingNextPage}
-						>
-							<div className={styles.loader}>
-								<Loader />
-							</div>
-						</LoadMore>
+						/>
 					</div>
 				) : (
 					<div className={styles.noNotificationTips}>No notification yet</div>
