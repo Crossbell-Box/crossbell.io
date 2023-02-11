@@ -6,8 +6,14 @@ const map: Record<KnownSource, SourceType> = {
 	[KnownSource.twitter]: SourceType.externalPlatform,
 	[KnownSource.medium]: SourceType.externalPlatform,
 	[KnownSource.tiktok]: SourceType.externalPlatform,
+	[KnownSource.substack]: SourceType.externalPlatform,
+	[KnownSource.pixiv]: SourceType.externalPlatform,
+	[KnownSource.telegram]: SourceType.externalPlatform,
+	[KnownSource.pinterest]: SourceType.externalPlatform,
+	[KnownSource.jike]: SourceType.externalPlatform,
 
 	[KnownSource.operatorSync]: SourceType.syncTool,
+	[KnownSource.xsync]: SourceType.syncTool,
 	[KnownSource.sync]: SourceType.syncTool,
 	[KnownSource.crossSync]: SourceType.syncTool,
 };
