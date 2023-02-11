@@ -1,11 +1,17 @@
 export enum KnownSource {
 	operatorSync = "operatorsync",
 	sync = "sync",
+	xsync = "xsync",
 	crossSync = "crosssync",
 	xlog = "xlog",
 	twitter = "twitter",
 	medium = "medium",
 	tiktok = "tiktok",
+	substack = "substack",
+	pixiv = "pixiv",
+	telegram = "telegram",
+	pinterest = "pinterest",
+	jike = "jike",
 }
 
 export enum SourceType {

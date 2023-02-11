@@ -1,49 +1,44 @@
 import { NoteMetadata } from "crossbell.js";
 
-import config from "~/shared/config";
-
 import { KnownSource } from "./types";
 import { getKnownSource } from "./get-known-source";
-
-const map: Record<KnownSource, (externalUrls: string[]) => string | null> = {
-	[KnownSource.operatorSync]: () => {
-		return config.xSync.domain;
-	},
-
-	[KnownSource.sync]: () => {
-		return config.xSync.domain;
-	},
-
-	[KnownSource.crossSync]: () => {
-		return "https://crosssync.app/";
-	},
-
-	[KnownSource.xlog]: (externalUrls) => {
-		return externalUrls[0] ?? null;
-	},
-
-	[KnownSource.twitter]: (externalUrls) => {
-		return findUrlIncludes(externalUrls, "twitter.com");
-	},
-
-	[KnownSource.medium]: (externalUrls) => {
-		return findUrlIncludes(externalUrls, "medium.com");
-	},
-
-	[KnownSource.tiktok]: (externalUrls) => {
-		return findUrlIncludes(externalUrls, "tiktok.com");
-	},
-};
 
 export function getSourceLink(
 	source: string,
 	noteMetadata?: NoteMetadata | null
 ): string | null {
 	const knownSource = getKnownSource(source);
+	const external_urls = noteMetadata?.external_urls ?? [];
+	const defaultUrl = external_urls[0] ?? null;
+
 	if (knownSource) {
-		return map[knownSource](noteMetadata?.external_urls ?? []);
+		switch (knownSource) {
+			case KnownSource.sync:
+			case KnownSource.xsync:
+			case KnownSource.crossSync:
+			case KnownSource.operatorSync:
+				return "https://xsync.app";
+			case KnownSource.xlog:
+				return defaultUrl;
+			case KnownSource.twitter:
+				return findUrlIncludes(external_urls, "twitter.com");
+			case KnownSource.medium:
+				return findUrlIncludes(external_urls, "medium.com");
+			case KnownSource.tiktok:
+				return findUrlIncludes(external_urls, "tiktok.com");
+			case KnownSource.substack:
+				return findUrlIncludes(external_urls, "substack.com");
+			case KnownSource.pixiv:
+				return findUrlIncludes(external_urls, "pixiv.com");
+			case KnownSource.telegram:
+				return findUrlIncludes(external_urls, "t.me");
+			case KnownSource.pinterest:
+				return findUrlIncludes(external_urls, "pinterest.com");
+			case KnownSource.jike:
+				return findUrlIncludes(external_urls, "okjike.com");
+		}
 	} else {
-		return null;
+		return defaultUrl;
 	}
 }
 
