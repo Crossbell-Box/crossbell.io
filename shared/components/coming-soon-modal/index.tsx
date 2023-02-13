@@ -15,7 +15,7 @@ export function showComingSoonModal({
 		radius: 0,
 		zIndex,
 		classNames: {
-			modal: "my-auto rounded-28px w-auto overflow-hidden",
+			content: "my-auto rounded-28px w-auto overflow-hidden",
 			inner: "p-0",
 		},
 		children: (

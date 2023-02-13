@@ -51,7 +51,7 @@ export function openBindingModal(
 				<BindingModal platform={platform} />
 			</ContractProvider>
 		),
-		classNames: { modal: "rounded-24px overflow-hidden" },
+		classNames: { content: "rounded-24px overflow-hidden" },
 		closeOnClickOutside: false,
 		closeOnEscape: false,
 	});

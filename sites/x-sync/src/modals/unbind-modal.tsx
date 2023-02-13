@@ -34,7 +34,7 @@ export function openUnbindingModal(
 	openConfirmModal({
 		title: `Unbind`,
 		classNames: {
-			modal: "rounded-28px p-24px w-312px",
+			content: "rounded-28px p-24px w-312px",
 			title: "text-24px font-400 leading-32px",
 		},
 		children: `Are you sure you'd like to stop syncing your ${getPlatformDisplayName(
@@ -69,7 +69,7 @@ export function UnbindingModal() {
 			onClose={hide}
 			zIndex={11}
 			padding={0}
-			classNames={{ modal: "rounded-28px overflow-hidden" }}
+			classNames={{ content: "rounded-28px overflow-hidden" }}
 			withCloseButton={false}
 			closeOnClickOutside={ableToClose}
 			closeOnEscape={ableToClose}

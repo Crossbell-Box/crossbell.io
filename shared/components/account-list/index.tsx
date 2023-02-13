@@ -31,7 +31,7 @@ export function AccountList({ itemClassName }: AccountListProps) {
 	const hasNoResult = !isLoading && characters.length === 0;
 
 	return (
-		<ScrollArea.Autosize maxHeight="50vh">
+		<ScrollArea.Autosize mah="50vh">
 			{isLoading && (
 				<div className="h-100px">
 					<LoadingOverlay visible={isLoading} />

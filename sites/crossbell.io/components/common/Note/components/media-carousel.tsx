@@ -232,7 +232,7 @@ export default function MediaCarousel({
 		>
 			<Modal
 				classNames={{
-					modal: "backdrop-blur-lg bg-white/20",
+					content: "backdrop-blur-lg bg-white/20",
 				}}
 				size="100vw"
 				fullScreen

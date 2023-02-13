@@ -99,7 +99,7 @@ export function SwitchAppsBtn() {
 					padding={0}
 					radius={0}
 					classNames={{
-						modal: "rounded-28px overflow-hidden mx-16px",
+						content: "rounded-28px overflow-hidden mx-16px",
 						inner: "p-0",
 					}}
 					opened={isModalOpened}

@@ -96,7 +96,7 @@ export function NoteLikes({ model }: NoteLikesProps) {
 				onClose={modal.close}
 				closeOnClickOutside={!model.isLoading}
 				closeOnEscape={!model.isLoading}
-				classNames={{ modal: "w-600px max-w-90vw overflow-hidden" }}
+				classNames={{ content: "w-600px max-w-90vw overflow-hidden" }}
 			>
 				<div className="flex items-center gap-[8px] px-24px pt-24px">
 					<Text className="i-csb:favorite-fill text-24px text-[#E65040]" />
@@ -111,7 +111,7 @@ export function NoteLikes({ model }: NoteLikesProps) {
 						<EmptyPlaceholder onLike={model.like} />
 					</div>
 				) : (
-					<ScrollArea.Autosize maxHeight="80vh">
+					<ScrollArea.Autosize mah="80vh">
 						<div className="px-24px pt-12px pb-24px">
 							{status === LocalItemStatus.showCurrentCharacter && (
 								<Item character={currentCharacter} />

@@ -1,5 +1,5 @@
 import { formatDate, formatDateFromNow, formatToISO } from "~/shared/time";
-import { Tooltip, Text, TextProps } from "@mantine/core";
+import { Tooltip, Text, TextProps, Anchor } from "@mantine/core";
 import Link from "next/link";
 import { useEffect, useState } from "react";
 
@@ -20,27 +20,32 @@ export default function Time({
 		setIsMounted(true);
 	}, []);
 
+	const Content = isMounted ? (
+		<>
+			{mode === "accurate" && formatDate(date)}
+			{mode === "fromNow" && formatDateFromNow(date)}
+		</>
+	) : (
+		formatToISO(date)
+	);
+
 	return (
 		<Tooltip label={isMounted ? formatDate(date) : formatToISO(date)}>
-			{/* @ts-ignore */}
-			<Text
-				{...(href ? { component: Link, href, variant: "link" } : {})}
-				// component={Link}
-				// href={href}
-				// variant="link"
-				color="dimmed"
-				size="sm"
-				{...props}
-			>
-				{isMounted ? (
-					<>
-						{mode === "accurate" && formatDate(date)}
-						{mode === "fromNow" && formatDateFromNow(date)}
-					</>
-				) : (
-					formatToISO(date)
-				)}
-			</Text>
+			{href ? (
+				<Anchor
+					component={Link}
+					href={href}
+					color="dimmed"
+					size="sm"
+					{...props}
+				>
+					{Content}
+				</Anchor>
+			) : (
+				<Text color="dimmed" size="sm" {...props}>
+					{Content}
+				</Text>
+			)}
 		</Tooltip>
 	);
 }

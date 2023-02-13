@@ -1,5 +1,6 @@
 import { PropsWithChildren, useMemo, useState } from "react";
 import {
+	Anchor,
 	Blockquote,
 	Code,
 	Divider,
@@ -144,10 +145,9 @@ export function MarkdownRenderer({
 							// },
 							a: function Link({ node, ...props }) {
 								return (
-									<Text
+									<Anchor
 										component="a"
 										size={fontSize}
-										variant="link"
 										href={props.href!}
 										target="_blank"
 										rel="noreferrer"
@@ -155,7 +155,7 @@ export function MarkdownRenderer({
 										inline
 									>
 										{props.children}
-									</Text>
+									</Anchor>
 								);
 
 								// TODO: better UI
@@ -171,9 +171,8 @@ export function MarkdownRenderer({
 								// 		("description" in data && data.description)) ? (
 								// 	<LinkPreviewCard data={data} />
 								// ) : (
-								// 	<Text
+								// 	<Anchor
 								// 		size={fontSize}
-								// 		variant="link"
 								// 		component="a"
 								// 		href={props.href}
 								// 		target={
@@ -184,7 +183,7 @@ export function MarkdownRenderer({
 								// 		rel="noreferrer"
 								// 	>
 								// 		{props.children}
-								// 	</Text>
+								// 	</Anchor>
 								// );
 							},
 							video: ({ node, src, ...props }) => {

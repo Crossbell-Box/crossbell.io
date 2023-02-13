@@ -1,4 +1,4 @@
-import { Space, Text } from "@mantine/core";
+import { Anchor, Space, Text } from "@mantine/core";
 import Link from "next/link";
 
 const linksGroup: { title: string; list: { text: string; href: string }[] }[] =
@@ -95,8 +95,7 @@ export default function IndexFooter() {
 							<div>
 								{lg.list.map((l) => (
 									<div className="my-1 sm:my-2" key={l.text}>
-										<Text
-											variant="link"
+										<Anchor
 											component={Link}
 											href={l.href}
 											color="dimmed"
@@ -104,7 +103,7 @@ export default function IndexFooter() {
 											rel="noopener noreferrer"
 										>
 											{l.text}
-										</Text>
+										</Anchor>
 									</div>
 								))}
 							</div>

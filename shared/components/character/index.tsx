@@ -2,7 +2,7 @@ import React from "react";
 import { useCharacter, useCharacterByHandle } from "@crossbell/indexer";
 import { extractCharacterName } from "@crossbell/util-metadata";
 import { composeCharacterHref } from "~/shared/url";
-import { Text, TextProps } from "@mantine/core";
+import { Anchor, TextProps } from "@mantine/core";
 import { CharacterEntity } from "crossbell.js";
 import classNames from "classnames";
 import CharacterHoverCard from "./character-hover-card";
@@ -30,7 +30,7 @@ export function CharacterName({
 
 	return (
 		<CharacterHoverCard character={data} showHoverCard={showHoverCard}>
-			<Text
+			<Anchor
 				className={classNames(className, {
 					"overflow-hidden text-ellipsis max-w-8em": ellipsis === true,
 				})}
@@ -39,13 +39,12 @@ export function CharacterName({
 				component={Link}
 				href={composeCharacterHref(data?.handle)}
 				target="_blank"
-				variant="link"
 				onClick={(e: any) => e.stopPropagation()}
 				inline
 				{...props}
 			>
 				{characterName ?? (isLoading ? "..." : characterName)}
-			</Text>
+			</Anchor>
 		</CharacterHoverCard>
 	);
 }
@@ -88,20 +87,19 @@ export function CharacterHandle({
 
 	return (
 		<CharacterHoverCard character={data} showHoverCard={showHoverCard}>
-			<Text
+			<Anchor
 				className={classNames(className, {
 					"overflow-hidden text-ellipsis max-w-8em": ellipsis === true,
 				})}
 				component={Link}
 				href={composeCharacterHref(characterHandle)}
 				target="_blank"
-				variant="link"
 				onClick={(e: any) => e.stopPropagation()}
 				inline
 				{...props}
 			>
 				{characterHandle ?? (isLoading ? "..." : characterHandle)}
-			</Text>
+			</Anchor>
 		</CharacterHoverCard>
 	);
 }
