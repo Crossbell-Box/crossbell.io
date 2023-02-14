@@ -1,11 +1,11 @@
 import React from "react";
 import { utils } from "ethers";
-import { LoadingOverlay, useUrlComposer } from "@crossbell/ui";
+import { LoadingOverlay } from "@crossbell/ui";
 import { useRefCallback } from "@crossbell/util-hooks";
 
 import { WalletClaimCSB } from "../../../../scenes";
 import {
-	useAccountState,
+	useClaimCSBStatus,
 	useWalletAccountBalance,
 	useWithdrawEmailAccount,
 } from "../../../../hooks";
@@ -21,8 +21,8 @@ export type ConfirmUpgradeProps = {
 export function ConfirmUpgrade({ scene }: ConfirmUpgradeProps) {
 	const [goTo, updateLast] = useScenesStore((s) => [s.goTo, s.updateLast]);
 	const { hide: hideModal } = useUpgradeAccountModal();
-	const urlComposer = useUrlComposer();
 	const { balance } = useWalletAccountBalance();
+	const { isEligibleToClaim } = useClaimCSBStatus();
 
 	const {
 		account,
@@ -30,22 +30,22 @@ export function ConfirmUpgrade({ scene }: ConfirmUpgradeProps) {
 		isLoading,
 	} = useWithdrawEmailAccount({
 		onSuccess() {
-			const character = useAccountState.getState().computed.account?.character;
-
 			goTo({
 				kind: SceneKind.congrats,
 				title: "Congrats!",
-				desc: "Now you can return into the feed and enjoy Crossbell.",
+				desc: [
+					scene === "claim-csb"
+						? "You have upgraded to wallet account and get 0.02$CSB."
+						: "You have upgraded to wallet account.",
+					"Now you can return into the feed and enjoy Crossbell.",
+				]
+					.filter(Boolean)
+					.join(" "),
 				tips: "Welcome to new Crossbell",
 				timeout: "15s",
-				btnText: character ? "Check Character" : "Close",
+				btnText: "Close",
 				onClose: hideModal,
-				onClickBtn: () => {
-					if (character) {
-						window.open(urlComposer.characterUrl(character), "_blank");
-					}
-					hideModal();
-				},
+				onClickBtn: hideModal,
 			});
 		},
 	});
@@ -55,10 +55,10 @@ export function ConfirmUpgrade({ scene }: ConfirmUpgradeProps) {
 
 		const hasEnoughCSB = !!balance?.value.gte(utils.parseEther("0.001"));
 
-		if (hasEnoughCSB) {
-			withdraw();
-		} else {
+		if (!hasEnoughCSB || isEligibleToClaim || true) {
 			updateLast({ kind: SceneKind.confirmUpgrade, scene: "claim-csb" });
+		} else {
+			withdraw();
 		}
 	});
 
@@ -71,6 +71,10 @@ export function ConfirmUpgrade({ scene }: ConfirmUpgradeProps) {
 					Header={Header}
 					onSuccess={withdraw}
 					claimBtnText="Finish"
+					title="Tweet to upgrade"
+					getTweetContent={(account) =>
+						`Upgraded my email account to wallet ${account.address} on Crossbell! Excited to see what perks and benefits come with my new status. https://crossbell.io/`
+					}
 				/>
 			)}
 
