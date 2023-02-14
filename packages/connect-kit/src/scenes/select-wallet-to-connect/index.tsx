@@ -1,4 +1,5 @@
 import React from "react";
+import classNames from "classnames";
 
 import {
 	useDefaultWalletConnect,
@@ -19,12 +20,14 @@ export type SelectWalletToConnectProps = {
 	onSelectWallet: (wallet: Wallet) => void;
 	onSelectNoWallet: () => void;
 	Header: React.ComponentType<ModalHeaderProps>;
+	tipsBtnClassName?: string;
 };
 
 export function SelectWalletToConnect({
 	onSelectWallet,
 	onSelectNoWallet,
 	Header,
+	tipsBtnClassName,
 }: SelectWalletToConnectProps) {
 	const walletConnectors = useWalletConnectors();
 	const { openDefaultWalletConnect } = useDefaultWalletConnect();
@@ -61,7 +64,10 @@ export function SelectWalletToConnect({
 					</OptionListItem>
 				</OptionList>
 
-				<button className={styles.tipsBtn} onClick={onSelectNoWallet}>
+				<button
+					className={classNames(styles.tipsBtn, tipsBtnClassName)}
+					onClick={onSelectNoWallet}
+				>
 					<div>
 						<svg
 							aria-hidden="true"

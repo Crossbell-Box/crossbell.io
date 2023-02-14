@@ -16,6 +16,7 @@ import {
 	useAccountState,
 	useClaimCSBStatus,
 	useWalletClaimCsb,
+	WalletAccount,
 } from "../../hooks";
 import { IMAGES, useReCAPTCHA } from "../../utils";
 
@@ -24,9 +25,13 @@ import styles from "./index.module.css";
 export type WalletClaimCSBProps = {
 	onSuccess: () => void;
 	claimBtnText?: React.ReactNode;
+	title?: React.ReactNode;
+	getTweetContent?: (account: WalletAccount) => string;
 };
 
 export function WalletClaimCSB({
+	title,
+	getTweetContent,
 	onSuccess,
 	claimBtnText,
 }: WalletClaimCSBProps) {
@@ -38,7 +43,10 @@ export function WalletClaimCSB({
 	const claimCsb = useWalletClaimCsb();
 	const isLoading = claimCsb.isLoading || isCheckingEligibility;
 	const isAbleToClaim = tweetLink && isEligibleToClaim;
-	const tweetContent = `Requesting $CSB funds from the Faucet on the #Crossbell blockchain. Address: ${account?.address}. https://faucet.crossbell.io/`;
+	const tweetContent = account
+		? getTweetContent?.(account) ||
+		  `Requesting $CSB funds from the Faucet on the #Crossbell blockchain. Address: ${account?.address}. https://faucet.crossbell.io/`
+		: "";
 	const copyLinkToTweetImg = useWeb2Url(IMAGES.copyLinkToTweetImg);
 	const { refetch: refreshBalance } = useBalance({
 		address: account?.address as `0x${string}` | undefined,
@@ -68,7 +76,7 @@ export function WalletClaimCSB({
 
 			<h4 className={styles.title}>
 				<TwitterIcon className={styles.twitter} />
-				Tweet to claim $CSB
+				{title ?? "Tweet to claim $CSB"}
 			</h4>
 
 			<div className={styles.tips}>
