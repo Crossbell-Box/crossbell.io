@@ -19,6 +19,7 @@ export function MigrationNotification() {
 			onClose={() => setStatus("hide")}
 			size="lg"
 			radius="md"
+			zIndex={9}
 		>
 			<Text size="md" weight={500}>
 				Migrate from Cheers and Revery
