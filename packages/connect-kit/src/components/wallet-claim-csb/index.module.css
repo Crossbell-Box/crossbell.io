@@ -39,6 +39,7 @@
 	flex-direction: column;
 	gap: 8px;
 	align-items: center;
+	word-break: break-all;
 }
 
 .tweetContent a {
