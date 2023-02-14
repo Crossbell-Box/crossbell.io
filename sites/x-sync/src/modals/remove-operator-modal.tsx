@@ -26,7 +26,7 @@ export async function openRemoveOperatorModal(contract: Contract) {
 					<RemoveOperatorModal />
 				</ContractProvider>
 			),
-			classNames: { modal: "rounded-28px overflow-hidden w-auto" },
+			classNames: { content: "rounded-28px overflow-hidden w-auto" },
 			closeOnEscape: false,
 			closeOnClickOutside: false,
 			onClose() {

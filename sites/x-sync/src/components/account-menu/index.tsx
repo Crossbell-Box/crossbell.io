@@ -59,10 +59,12 @@ export function AccountMenu({
 					withCloseButton={false}
 					padding={0}
 					radius={0}
-					transition="slide-up"
+					transitionProps={{
+						transition: "slide-up",
+					}}
 					zIndex={11}
 					classNames={{
-						modal:
+						content:
 							"mt-auto sm:mb-auto rounded-t-28px sm:rounded-b-28px w-full sm:w-auto overflow-hidden",
 						inner: "p-0",
 					}}

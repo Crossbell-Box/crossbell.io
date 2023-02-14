@@ -19,7 +19,7 @@ export function BaseModal({ isActive, children, onClose }: BaseModalProps) {
 			padding={0}
 			radius={0}
 			classNames={{
-				modal: styles.modal,
+				content: styles.modal,
 				inner: styles.inner,
 			}}
 		>

@@ -145,9 +145,9 @@ export function MarkdownRenderer({
 							a: function Link({ node, ...props }) {
 								return (
 									<Text
+										variant="link"
 										component="a"
 										size={fontSize}
-										variant="link"
 										href={props.href!}
 										target="_blank"
 										rel="noreferrer"
@@ -171,9 +171,8 @@ export function MarkdownRenderer({
 								// 		("description" in data && data.description)) ? (
 								// 	<LinkPreviewCard data={data} />
 								// ) : (
-								// 	<Text
+								// 	<Anchor
 								// 		size={fontSize}
-								// 		variant="link"
 								// 		component="a"
 								// 		href={props.href}
 								// 		target={
@@ -184,7 +183,7 @@ export function MarkdownRenderer({
 								// 		rel="noreferrer"
 								// 	>
 								// 		{props.children}
-								// 	</Text>
+								// 	</Anchor>
 								// );
 							},
 							video: ({ node, src, ...props }) => {

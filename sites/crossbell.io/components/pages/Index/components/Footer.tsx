@@ -1,4 +1,4 @@
-import { Space, Text } from "@mantine/core";
+import { Text } from "@mantine/core";
 import Link from "next/link";
 
 const linksGroup: { title: string; list: { text: string; href: string }[] }[] =

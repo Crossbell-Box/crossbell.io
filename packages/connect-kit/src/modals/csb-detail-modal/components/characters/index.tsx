@@ -11,7 +11,7 @@ export function Characters() {
 		useAccountCharacters();
 
 	return (
-		<ScrollArea.Autosize maxHeight="50vh">
+		<ScrollArea.Autosize mah="50vh">
 			<div className={styles.container}>
 				{characters.map((character) => (
 					<Item key={character.characterId} character={character} />

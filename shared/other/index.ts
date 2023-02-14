@@ -11,6 +11,6 @@ export const copyToClipboard = async (
 	await navigator.clipboard.writeText(text);
 
 	if (showNotification) {
-		sN({ message: "Copied to clipboard", disallowClose: true });
+		sN({ message: "Copied to clipboard", withCloseButton: false });
 	}
 };

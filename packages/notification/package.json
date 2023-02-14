@@ -29,9 +29,9 @@
 	},
 	"dependencies": {
 		"@emotion/react": "^11",
-		"@mantine/core": "^5",
-		"@mantine/modals": "^5",
-		"@mantine/hooks": "^5",
+		"@mantine/core": "6.0.0-alpha.5",
+		"@mantine/modals": "6.0.0-alpha.5",
+		"@mantine/hooks": "6.0.0-alpha.5",
 		"classnames": "^2",
 		"react-intersection-observer": "^9"
 	},

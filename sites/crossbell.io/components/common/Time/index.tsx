@@ -20,27 +20,33 @@ export default function Time({
 		setIsMounted(true);
 	}, []);
 
+	const Content = isMounted ? (
+		<>
+			{mode === "accurate" && formatDate(date)}
+			{mode === "fromNow" && formatDateFromNow(date)}
+		</>
+	) : (
+		formatToISO(date)
+	);
+
 	return (
 		<Tooltip label={isMounted ? formatDate(date) : formatToISO(date)}>
-			{/* @ts-ignore */}
-			<Text
-				{...(href ? { component: Link, href, variant: "link" } : {})}
-				// component={Link}
-				// href={href}
-				// variant="link"
-				color="dimmed"
-				size="sm"
-				{...props}
-			>
-				{isMounted ? (
-					<>
-						{mode === "accurate" && formatDate(date)}
-						{mode === "fromNow" && formatDateFromNow(date)}
-					</>
-				) : (
-					formatToISO(date)
-				)}
-			</Text>
+			{href ? (
+				<Text
+					variant="link"
+					component={Link}
+					href={href}
+					color="dimmed"
+					size="sm"
+					{...props}
+				>
+					{Content}
+				</Text>
+			) : (
+				<Text color="dimmed" size="sm" {...props}>
+					{Content}
+				</Text>
+			)}
 		</Tooltip>
 	);
 }

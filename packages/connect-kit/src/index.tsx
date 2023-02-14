@@ -1,6 +1,6 @@
 import React from "react";
 import { useAccount } from "wagmi";
-import { NotificationsProvider } from "@mantine/notifications";
+import { Notifications } from "@mantine/notifications";
 import {
 	UseWeb2UrlContext,
 	GetWeb2Url,
@@ -83,8 +83,9 @@ export function ConnectKitProvider({
 	return withoutNotificationsProvider ? (
 		node
 	) : (
-		<NotificationsProvider position="bottom-center" zIndex={99999}>
+		<>
 			{node}
-		</NotificationsProvider>
+			<Notifications position="bottom-center" zIndex={99999} />
+		</>
 	);
 }

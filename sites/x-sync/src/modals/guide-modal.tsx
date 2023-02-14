@@ -21,7 +21,7 @@ export function openGuideModal() {
 	openBorderlessModal({
 		zIndex: 11,
 		children: <GuideModal />,
-		classNames: { modal: "rounded-24px overflow-hidden w-694px" },
+		classNames: { content: "rounded-24px overflow-hidden w-694px" },
 	});
 }
 

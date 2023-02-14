@@ -47,7 +47,7 @@ export function NotificationModal() {
 			padding={0}
 			onClose={hideModal}
 			opened={isModalActive}
-			classNames={{ modal: styles.modal }}
+			classNames={{ content: styles.modal }}
 		>
 			<div className={styles.header}>
 				<Indicator size={9} disabled={isAllRead} color="red" offset={4.5}>
@@ -57,10 +57,7 @@ export function NotificationModal() {
 				<CloseButton size={28} onClick={hideModal} />
 			</div>
 
-			<ScrollArea.Autosize
-				maxHeight="80vh"
-				classNames={{ root: styles.scrollArea }}
-			>
+			<ScrollArea.Autosize mah="80vh" classNames={{ root: styles.scrollArea }}>
 				{isLoading ? (
 					<div className={styles.loader}>
 						<Loader />

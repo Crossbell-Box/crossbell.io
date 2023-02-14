@@ -231,12 +231,13 @@ export default function MediaCarousel({
 			onMouseUp={onMouseUp}
 		>
 			<Modal
+				withinPortal
 				classNames={{
-					modal: "backdrop-blur-lg bg-white/20",
+					header: "bg-transparent justify-end",
+					content: "backdrop-blur-lg bg-white/20",
 				}}
-				size="100vw"
+				yOffset={0}
 				fullScreen
-				centered
 				opened={overlayOpened}
 				onClose={() => setOverlayOpened(false)}
 				onClick={(e) => {

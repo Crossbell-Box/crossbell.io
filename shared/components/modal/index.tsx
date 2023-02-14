@@ -60,7 +60,7 @@ export function openBorderlessModal(
 	options: Parameters<typeof openModal>["0"]
 ) {
 	return openModal({
-		styles: { modal: { background: "transparent" } },
+		styles: { content: { background: "transparent" } },
 		padding: 0,
 		...options,
 	});

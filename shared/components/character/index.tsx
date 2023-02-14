@@ -31,6 +31,7 @@ export function CharacterName({
 	return (
 		<CharacterHoverCard character={data} showHoverCard={showHoverCard}>
 			<Text
+				variant="link"
 				className={classNames(className, {
 					"overflow-hidden text-ellipsis max-w-8em": ellipsis === true,
 				})}
@@ -39,7 +40,6 @@ export function CharacterName({
 				component={Link}
 				href={composeCharacterHref(data?.handle)}
 				target="_blank"
-				variant="link"
 				onClick={(e: any) => e.stopPropagation()}
 				inline
 				{...props}
@@ -89,13 +89,13 @@ export function CharacterHandle({
 	return (
 		<CharacterHoverCard character={data} showHoverCard={showHoverCard}>
 			<Text
+				variant="link"
 				className={classNames(className, {
 					"overflow-hidden text-ellipsis max-w-8em": ellipsis === true,
 				})}
 				component={Link}
 				href={composeCharacterHref(characterHandle)}
 				target="_blank"
-				variant="link"
 				onClick={(e: any) => e.stopPropagation()}
 				inline
 				{...props}

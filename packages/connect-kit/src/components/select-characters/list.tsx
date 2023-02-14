@@ -41,7 +41,7 @@ export function List({
 	const isWalletConnected = useAccountState((s) => !!s.wallet);
 
 	return (
-		<ScrollArea.Autosize maxHeight="80vh">
+		<ScrollArea.Autosize mah="80vh">
 			<OptionList className={styles.container}>
 				{characters.map((character) => (
 					<HooksRenderer
