@@ -4,7 +4,11 @@ import { IpfsGateway } from "@crossbell/ipfs-gateway";
 
 import { IpfsGatewayContext } from "@crossbell/ipfs-react";
 import { InitContractProvider } from "@crossbell/contract";
-import { ConnectKitProvider, contractConfig } from "@crossbell/connect-kit";
+import {
+	ConnectKitProvider,
+	ConnectKitProviderProps,
+	contractConfig,
+} from "@crossbell/connect-kit";
 
 import { ipfsLinkToHttpLink } from "~/shared/ipfs";
 
@@ -20,7 +24,12 @@ const loadFeatures = () =>
 
 const ipfsGateway = new IpfsGateway();
 
-export function MainProvider({ children }: React.PropsWithChildren) {
+export type MainProviderProps = {
+	children: React.ReactNode;
+	urlComposer?: ConnectKitProviderProps["urlComposer"];
+};
+
+export function MainProvider({ children, urlComposer }: MainProviderProps) {
 	return (
 		<ThemeProvider>
 			<WalletProvider>
@@ -34,6 +43,7 @@ export function MainProvider({ children }: React.PropsWithChildren) {
 										<ConnectKitProvider
 											withoutNotificationsProvider={true}
 											ipfsLinkToHttpLink={ipfsLinkToHttpLink}
+											urlComposer={urlComposer}
 										>
 											{children}
 										</ConnectKitProvider>

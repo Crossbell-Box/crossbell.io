@@ -7,7 +7,15 @@ import "~/shared/crossbell.js/setup-operator-sync";
 import { AppProps } from "next/app";
 import Head from "next/head";
 
-import { MainProvider } from "~/shared/providers";
+import { MainProvider, MainProviderProps } from "~/shared/providers";
+import { composeCharacterHref, composeNoteHref } from "~/shared/url";
+
+const urlComposer: Required<MainProviderProps>["urlComposer"] = {
+	characterUrl: ({ handle }) =>
+		`https://crossbell.io/${composeCharacterHref(handle)}`,
+	noteUrl: ({ characterId, noteId }) =>
+		`https://crossbell.io/${composeNoteHref(characterId, noteId)}`,
+};
 
 export default function App({ Component, pageProps }: AppProps) {
 	return (
@@ -36,7 +44,7 @@ export default function App({ Component, pageProps }: AppProps) {
 				<meta name="msapplication-TileColor" content="#2b5797" />
 				<meta name="theme-color" content="#ffffff" />
 			</Head>
-			<MainProvider>
+			<MainProvider urlComposer={urlComposer}>
 				<Component {...pageProps} />
 			</MainProvider>
 		</>
