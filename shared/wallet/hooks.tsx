@@ -1,17 +1,17 @@
 import React from "react";
 
-import { openMintNewCharacterModel } from "~/shared/components/new-user-guide";
 import {
 	useAccountState,
 	useConnectModal,
 	useUpgradeAccountModal,
+	useSelectCharactersModal,
 } from "@crossbell/connect-kit";
 
 export function useLoginChecker() {
 	const account = useAccountState((s) => s.computed.account);
 	const connectModal = useConnectModal();
 	const upgradeAccountModal = useUpgradeAccountModal();
-
+	const selectCharactersModal = useSelectCharactersModal();
 	return React.useMemo(
 		() => ({
 			validate({ walletRequired }: { walletRequired?: boolean } = {}) {
@@ -27,7 +27,7 @@ export function useLoginChecker() {
 						if (account.characterId) {
 							return true;
 						} else {
-							openMintNewCharacterModel();
+							selectCharactersModal.show();
 							return false;
 						}
 				}
