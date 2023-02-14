@@ -1,6 +1,5 @@
 import { PropsWithChildren, useMemo, useState } from "react";
 import {
-	Anchor,
 	Blockquote,
 	Code,
 	Divider,
@@ -145,7 +144,8 @@ export function MarkdownRenderer({
 							// },
 							a: function Link({ node, ...props }) {
 								return (
-									<Anchor
+									<Text
+										variant="link"
 										component="a"
 										size={fontSize}
 										href={props.href!}
@@ -155,7 +155,7 @@ export function MarkdownRenderer({
 										inline
 									>
 										{props.children}
-									</Anchor>
+									</Text>
 								);
 
 								// TODO: better UI

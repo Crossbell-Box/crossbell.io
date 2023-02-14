@@ -97,7 +97,7 @@ export function NoteMints({ model }: NoteMintsProps) {
 				withCloseButton={false}
 				opened={isModalOpened}
 				onClose={modal.close}
-				classNames={{ content: "w-600px max-w-90vw overflow-hidden" }}
+				size="lg"
 				zIndex={11}
 			>
 				<div className="flex items-center gap-[8px] px-24px pt-24px">

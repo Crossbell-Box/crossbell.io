@@ -89,6 +89,7 @@ export function NoteLikes({ model }: NoteLikesProps) {
 
 			<Modal
 				radius={28}
+				size="lg"
 				padding={0}
 				zIndex={11}
 				withCloseButton={false}
@@ -96,7 +97,6 @@ export function NoteLikes({ model }: NoteLikesProps) {
 				onClose={modal.close}
 				closeOnClickOutside={!model.isLoading}
 				closeOnEscape={!model.isLoading}
-				classNames={{ content: "w-600px max-w-90vw overflow-hidden" }}
 			>
 				<div className="flex items-center gap-[8px] px-24px pt-24px">
 					<Text className="i-csb:favorite-fill text-24px text-[#E65040]" />

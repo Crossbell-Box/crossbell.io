@@ -21,7 +21,7 @@ export default function Nav() {
 	const [opened, setOpened] = useState(false);
 	return (
 		<Navbar
-			className="sticky top-0 bg-transparent w-281px pl-24px pr-16px py-16px"
+			className="sticky top-0 bg-transparent w-281px pl-24px pr-16px py-16px h-screen"
 			hiddenBreakpoint="sm"
 			hidden={!opened}
 		>
