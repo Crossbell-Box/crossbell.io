@@ -3,6 +3,7 @@ import { useRefCallback } from "@crossbell/util-hooks";
 
 import { useConnectModal } from "../modals/connect-modal/stores";
 import { useUpgradeAccountModal } from "../modals/upgrade-account-modal/stores";
+import { useWalletMintNewCharacterModal } from "../modals/wallet-mint-new-character/stores";
 import { useAccountState } from "./account-state";
 
 type Callback = () => void;
@@ -15,7 +16,7 @@ const isConnected = (type: ConnectType): boolean => {
 		case "email":
 			return !!state.email;
 		case "wallet":
-			return !!state.wallet && !state.email;
+			return !!state.wallet?.characterId && !state.email;
 		case "any":
 			return !!state.computed.account;
 	}
@@ -36,7 +37,10 @@ export function useConnectedAction<P extends any[]>(
 	{ connectType = "any", fallback }: UseConnectedActionOptions<P> = {}
 ): (...params: P) => void {
 	const callbackRef = React.useRef<Callback>();
-	const { isActive } = useConnectModal();
+	const isActive1 = useConnectModal((s) => s.isActive);
+	const isActive2 = useWalletMintNewCharacterModal((s) => s.isActive);
+	const isActive3 = useUpgradeAccountModal((s) => s.isActive);
+	const isActive = isActive1 || isActive2 || isActive3;
 
 	React.useEffect(() => {
 		if (!isActive) {
@@ -53,7 +57,7 @@ export function useConnectedAction<P extends any[]>(
 		} else if (fallback) {
 			fallback(...params);
 		} else {
-			const email = useAccountState.getState().email;
+			const { email, wallet } = useAccountState.getState();
 			const isEmailConnected = !!email;
 
 			if (connectType === "wallet" && isEmailConnected) {
@@ -70,6 +74,8 @@ export function useConnectedAction<P extends any[]>(
 				};
 
 				useUpgradeAccountModal.getState().show();
+			} else if (!wallet?.characterId) {
+				useWalletMintNewCharacterModal.getState().show();
 			} else {
 				callbackRef.current = () => action(...params);
 				useConnectModal.getState().show();
