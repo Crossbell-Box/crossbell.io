@@ -36,11 +36,11 @@ export function useWithdrawEmailAccount(options?: UseMutationOptions) {
 				: RETRY;
 		});
 
-		await account.refreshWallet();
-
-		account.switchCharacter(character);
-
-		await account.disconnectEmail();
+		if (character) {
+			await account.refreshWallet();
+			account.switchCharacter(character);
+			await account.disconnectEmail();
+		}
 	}, options);
 
 	return { ...mutation, account };
