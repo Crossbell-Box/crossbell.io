@@ -45,7 +45,9 @@ export function useCreateCharacter() {
 								return (await indexer.getCharacterByHandle(handle)) || RETRY;
 							});
 
-							useAccountState.getState().switchCharacter(character);
+							if (character) {
+								useAccountState.getState().switchCharacter(character);
+							}
 						}),
 				]);
 			},
