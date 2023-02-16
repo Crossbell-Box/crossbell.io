@@ -1,19 +1,16 @@
-import React from "react";
-import { useQueryClient } from "@tanstack/react-query";
-
-import { useRefCallback } from "@crossbell/util-hooks";
+import { useConnectedAction } from "./use-connected-action";
 import {
-	SCOPE_KEY_NOTE_LIKES,
-	SCOPE_KEY_NOTE_STATUS,
-} from "@crossbell/indexer";
-
-import { useAccountState } from "./account-state";
-import { useLikeNote, useUnlikeNote } from "./link-note";
+	useIsNoteLiked,
+	useLikeNote,
+	useNoteLikeCount,
+	useUnlikeNote,
+} from "./link-note";
+import { useAccountCharacterId } from "./use-account-character-id";
+import { useAccountState } from "@crossbell/connect-kit";
 
 export type UseToggleLikeNoteConfig = {
 	characterId: number;
 	noteId: number;
-	status?: { isLiked: boolean; likeCount: number };
 };
 
 export type UseToggleLikeNoteResult = {
@@ -26,98 +23,23 @@ export type UseToggleLikeNoteResult = {
 export function useToggleLikeNote(
 	config: UseToggleLikeNoteConfig
 ): UseToggleLikeNoteResult {
+	const { characterId } = useAccountCharacterId();
+	const { data: isLiked } = useIsNoteLiked({
+		characterId,
+		toNoteId: config.noteId,
+		toCharacterId: config.characterId,
+	});
+	const { data: likeCount } = useNoteLikeCount(config);
 	const likeNote = useLikeNote();
 	const unlikeNote = useUnlikeNote();
-	const byEmail = useToggleByEmail(config, { likeNote, unlikeNote });
-	const byContract = useToggleContract(config, { likeNote, unlikeNote });
-	const isEmail = useAccountState((s) => !!s.email);
+	const mutate = (isLiked ? unlikeNote : likeNote).mutate;
+	const needInvokeContract = useAccountState(
+		(s) => !s.email && !s.wallet?.siwe
+	);
+	const isLoading = needInvokeContract
+		? likeNote.isLoading || unlikeNote.isLoading
+		: false;
+	const toggleLike = useConnectedAction(() => mutate(config));
 
-	return isEmail ? byEmail : byContract;
-}
-
-type InternalConfig = {
-	likeNote: ReturnType<typeof useLikeNote>;
-	unlikeNote: ReturnType<typeof useUnlikeNote>;
-};
-
-function useToggleContract(
-	{ status, noteId, characterId }: UseToggleLikeNoteConfig,
-	{ likeNote, unlikeNote }: InternalConfig
-): UseToggleLikeNoteResult {
-	const { mutate, isLoading } = status?.isLiked ? unlikeNote : likeNote;
-	const toggleLike = useRefCallback(() => mutate({ noteId, characterId }));
-
-	return {
-		isLoading,
-		toggleLike,
-		likeCount: status?.likeCount,
-		isLiked: status?.isLiked,
-	};
-}
-
-function useToggleByEmail(
-	{ characterId, noteId, status }: UseToggleLikeNoteConfig,
-	{ likeNote, unlikeNote }: InternalConfig
-): UseToggleLikeNoteResult {
-	const noop = () => {};
-	const queryClient = useQueryClient();
-	const [mutation, setMutation] = React.useState({ run: noop });
-	const [isLiked, setIsLiked] = React.useState<boolean | undefined>();
-	const [likeCount, setLikeCount] = React.useState<number | undefined>();
-
-	React.useEffect(() => {
-		const timeout = window.setTimeout(mutation.run, 1000);
-		return () => window.clearTimeout(timeout);
-	}, [mutation]);
-
-	React.useEffect(() => {
-		if (status) {
-			setIsLiked(status.isLiked);
-		}
-		// Update only if `status.isLiked` changed
-	}, [status?.isLiked]);
-
-	React.useEffect(() => {
-		if (status) {
-			setLikeCount(status.likeCount);
-		}
-		// Update only if `status.likeCount` changed
-	}, [status?.likeCount]);
-
-	const toggleLike = useRefCallback(() => {
-		if (status) {
-			setIsLiked(!isLiked);
-			setLikeCount((likeCount ?? 0) + (isLiked ? -1 : 1));
-			setMutation({
-				async run() {
-					try {
-						await (isLiked ? unlikeNote : likeNote).mutateAsync({
-							characterId,
-							noteId,
-						});
-
-						await Promise.all([
-							queryClient.invalidateQueries({
-								queryKey: SCOPE_KEY_NOTE_STATUS(characterId, noteId),
-							}),
-
-							queryClient.invalidateQueries({
-								queryKey: SCOPE_KEY_NOTE_LIKES(characterId, noteId),
-							}),
-						]);
-					} catch (e) {
-						setIsLiked(isLiked);
-						setLikeCount(likeCount);
-					}
-				},
-			});
-		}
-	});
-
-	return {
-		isLoading: false,
-		likeCount,
-		isLiked,
-		toggleLike,
-	};
+	return { toggleLike, likeCount, isLiked, isLoading };
 }
