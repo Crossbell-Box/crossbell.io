@@ -1,32 +1,48 @@
-import {
-	NoteLinkType,
-	SCOPE_KEY_NOTE_LIKES,
-	SCOPE_KEY_NOTE_STATUS,
-} from "@crossbell/indexer";
+import { NoteLinkType } from "@crossbell/indexer";
 
 import { linkNote, siweLinkNote } from "../../apis";
 import {
 	AccountTypeBasedMutationOptions,
 	createAccountTypeBasedMutationHooks,
 } from "../account-type-based-hooks";
+import {
+	revalidateQueries,
+	updateLinkStatus,
+	waitUntilLinkStatusUpdated,
+} from "./utils";
 
 export type UseLinkNoteOptions = AccountTypeBasedMutationOptions<
 	typeof useLinkNote
 >;
+
+const action = "link";
 
 export const useLinkNote = createAccountTypeBasedMutationHooks<
 	NoteLinkType,
 	{ characterId: number; noteId: number },
 	boolean
 >({ actionDesc: "", withParams: true }, (linkType) => ({
-	async email({ characterId, noteId }, { account }) {
+	async email({ characterId, noteId }, { account, queryClient }) {
 		if (account) {
-			await linkNote({
-				token: account.token,
-				toCharacterId: characterId,
+			const params = {
 				toNoteId: noteId,
-				linkType: linkType,
-			});
+				toCharacterId: characterId,
+				characterId: account.characterId,
+				linkType,
+			};
+
+			const needUpdate = await updateLinkStatus(queryClient, action, params);
+
+			if (needUpdate) {
+				await linkNote({
+					token: account.token,
+					toCharacterId: characterId,
+					toNoteId: noteId,
+					linkType: linkType,
+				});
+
+				await waitUntilLinkStatusUpdated(action, params);
+			}
 
 			return true;
 		} else {
@@ -34,16 +50,30 @@ export const useLinkNote = createAccountTypeBasedMutationHooks<
 		}
 	},
 
-	async contract({ characterId, noteId }, { account, siwe, contract }) {
+	async contract(
+		{ characterId, noteId },
+		{ account, siwe, contract, queryClient }
+	) {
 		if (account?.characterId) {
+			const params = {
+				toNoteId: noteId,
+				toCharacterId: characterId,
+				characterId: account.characterId,
+				linkType,
+			};
+
 			if (siwe) {
-				await siweLinkNote({
-					siwe,
-					characterId: account.characterId,
-					toCharacterId: characterId,
-					toNoteId: noteId,
-					linkType: linkType,
-				});
+				const needUpdate = await updateLinkStatus(queryClient, action, params);
+
+				if (needUpdate) {
+					await siweLinkNote({
+						siwe,
+						characterId: account.characterId,
+						toCharacterId: characterId,
+						toNoteId: noteId,
+						linkType: linkType,
+					});
+				}
 			} else {
 				await contract.linkNote(
 					account.characterId,
@@ -53,18 +83,24 @@ export const useLinkNote = createAccountTypeBasedMutationHooks<
 				);
 			}
 
+			await waitUntilLinkStatusUpdated(action, params);
+
 			return true;
 		} else {
 			return false;
 		}
 	},
 
-	onSuccess({ variables, queryClient }) {
+	async onSettled({ variables, queryClient, account }) {
 		const { noteId, characterId } = variables;
 
-		return Promise.all([
-			queryClient.invalidateQueries(SCOPE_KEY_NOTE_LIKES(characterId, noteId)),
-			queryClient.invalidateQueries(SCOPE_KEY_NOTE_STATUS(characterId, noteId)),
-		]);
+		if (account?.characterId) {
+			await revalidateQueries(queryClient, {
+				characterId: account?.characterId,
+				toNoteId: noteId,
+				toCharacterId: characterId,
+				linkType,
+			});
+		}
 	},
 }));

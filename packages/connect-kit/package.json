@@ -69,6 +69,7 @@
 		"@crossbell/util-hooks": "workspace:*",
 		"@crossbell/util-metadata": "workspace:*",
 		"@types/lodash.debounce": "4.0.7",
-		"@types/react-google-recaptcha": "2.1.5"
+		"@types/react-google-recaptcha": "2.1.5",
+		"ts-essentials": "9.3.0"
 	}
 }

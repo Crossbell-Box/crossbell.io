@@ -84,6 +84,7 @@ export function createAccountTypeBasedMutationHooks<
 								contract,
 								indexer,
 								account,
+								queryClient,
 							}) ?? null
 						);
 					case "wallet":
@@ -93,6 +94,7 @@ export function createAccountTypeBasedMutationHooks<
 								indexer,
 								account,
 								siwe: opSignOperatorHasPermissions ? account.siwe : undefined,
+								queryClient,
 							}) ?? null
 						);
 					default:
@@ -114,6 +116,14 @@ export function createAccountTypeBasedMutationHooks<
 				onError(...params) {
 					options?.onError?.(...params);
 					handleError(params[0]);
+				},
+
+				onSettled(...params) {
+					const [data, error, variables] = params;
+
+					factory.onSettled?.({ data, error, variables, queryClient, account });
+
+					return options?.onSettled?.(...params);
 				},
 			}
 		);

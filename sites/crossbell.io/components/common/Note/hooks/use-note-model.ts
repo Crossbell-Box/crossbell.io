@@ -1,10 +1,6 @@
 import React from "react";
 
-import {
-	useAccountCharacter,
-	useToggleLikeNote,
-	useMintNote,
-} from "@crossbell/connect-kit";
+import { useToggleLikeNote, useMintNote } from "@crossbell/connect-kit";
 import { useNoteStatus } from "@crossbell/indexer";
 
 import { useLoginChecker } from "~/shared/wallet/hooks";
@@ -30,23 +26,14 @@ export type NoteModel = {
 };
 
 export function useNoteModel({ characterId, noteId }: UseNoteActionsConfig) {
-	const currentCharacter = useAccountCharacter();
-	const { data: status } = useNoteStatus(
-		characterId,
-		noteId,
-		currentCharacter ?? null
-	);
+	const { data: status } = useNoteStatus(characterId, noteId);
 
 	const {
 		isLiked,
 		isLoading: isToggleLikeNoteLoading,
 		likeCount,
 		toggleLike,
-	} = useToggleLikeNote({
-		characterId,
-		noteId,
-		status,
-	});
+	} = useToggleLikeNote({ characterId, noteId });
 
 	const mintNote = useMintNote();
 
@@ -62,11 +49,7 @@ export function useNoteModel({ characterId, noteId }: UseNoteActionsConfig) {
 
 			isLiked: !!isLiked,
 			likeCount,
-			like() {
-				if (validate()) {
-					toggleLike();
-				}
-			},
+			like: toggleLike,
 
 			isMinted: !!status?.isMinted,
 			mintCount: status?.mintCount,
