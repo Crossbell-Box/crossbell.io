@@ -1,7 +1,12 @@
 import { useQuery } from "@tanstack/react-query";
+import { MarkOptional } from "ts-essentials";
+
 import { getNoteLinkCount, GetNoteLinkCountParams } from "../../apis";
 
-export type UseNoteLinkCountParams = GetNoteLinkCountParams;
+export type UseNoteLinkCountParams = MarkOptional<
+	GetNoteLinkCountParams,
+	"characterId"
+>;
 
 export const SCOPE_KEY_NOTE_LINK_COUNT = ({
 	characterId,
@@ -16,7 +21,13 @@ export const SCOPE_KEY_NOTE_LINK_COUNT = ({
 ];
 
 export function useNoteLinkCount(params: UseNoteLinkCountParams) {
-	return useQuery(SCOPE_KEY_NOTE_LINK_COUNT(params), () =>
-		getNoteLinkCount(params)
+	return useQuery(
+		SCOPE_KEY_NOTE_LINK_COUNT(params),
+		() =>
+			getNoteLinkCount({
+				...params,
+				characterId: params.characterId!,
+			}),
+		{ enabled: !!params.characterId }
 	);
 }

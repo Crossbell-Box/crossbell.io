@@ -9,11 +9,19 @@ import { SCOPE_KEY_IS_NOTE_LINKED } from "./use-is-note-linked";
 import { asyncRetry } from "../../utils";
 import { getIsNoteLinked, GetIsNoteLinkedConfig } from "../../apis";
 
-export const updateLinkStatus = async (
-	queryClient: ReturnType<typeof useQueryClient>,
-	action: "link" | "unlink",
-	params: GetIsNoteLinkedConfig
-): Promise<boolean> => {
+export type Action = "link" | "unlink";
+
+export const updateLinkStatus = async ({
+	queryClient,
+	action,
+	params,
+	noOptimisticallyUpdate,
+}: {
+	queryClient: ReturnType<typeof useQueryClient>;
+	params: GetIsNoteLinkedConfig;
+	noOptimisticallyUpdate?: boolean;
+	action?: Action;
+}): Promise<{ needUpdate: boolean; action: Action }> => {
 	const countKey = SCOPE_KEY_NOTE_LINK_COUNT({
 		characterId: params.toCharacterId,
 		noteId: params.toNoteId,
@@ -22,27 +30,39 @@ export const updateLinkStatus = async (
 
 	const isLinkedKey = SCOPE_KEY_IS_NOTE_LINKED(params);
 
-	const count = queryClient.getQueryData<number>(countKey) ?? 0;
+	const count =
+		queryClient.getQueryData<number>(countKey) ??
+		(await queryClient.fetchQuery<number>(countKey));
+
 	const isLinked =
-		(await queryClient.fetchQuery<boolean>(isLinkedKey)) ?? false;
+		queryClient.getQueryData<boolean>(isLinkedKey) ??
+		(await queryClient.fetchQuery<boolean>(isLinkedKey));
+
+	const link = () => {
+		if (!noOptimisticallyUpdate) {
+			queryClient.setQueryData(countKey, count + 1);
+			queryClient.setQueryData(isLinkedKey, true);
+		}
+
+		return { needUpdate: true, action: "link" } as const;
+	};
+
+	const unlink = () => {
+		if (!noOptimisticallyUpdate) {
+			queryClient.setQueryData(countKey, Math.max(count - 1, 0));
+			queryClient.setQueryData(isLinkedKey, false);
+		}
+
+		return { needUpdate: true, action: "unlink" } as const;
+	};
 
 	switch (action) {
 		case "link":
-			if (!isLinked) {
-				queryClient.setQueryData(countKey, Math.max(count + 1, 0));
-				queryClient.setQueryData(isLinkedKey, true);
-				return true;
-			} else {
-				return false;
-			}
+			return isLinked ? { needUpdate: false, action } : link();
 		case "unlink":
-			if (isLinked) {
-				queryClient.setQueryData(countKey, Math.max(count - 1, 0));
-				queryClient.setQueryData(isLinkedKey, false);
-				return true;
-			} else {
-				return false;
-			}
+			return isLinked ? unlink() : { needUpdate: false, action };
+		default:
+			return isLinked ? unlink() : link();
 	}
 };
 
