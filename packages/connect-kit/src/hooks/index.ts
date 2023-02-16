@@ -11,6 +11,7 @@ export * from "./use-account-character";
 export * from "./use-account-character-id";
 export * from "./use-account-characters";
 export * from "./use-account-has-character";
+export * from "./use-connected-action";
 export * from "./use-create-character";
 export * from "./use-disconnect-account";
 export * from "./use-is-wallet-signed-in";
