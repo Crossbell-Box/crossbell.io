@@ -215,6 +215,7 @@ importers:
       qrcode: ^1
       react-dropzone: 14.2.3
       react-google-recaptcha: 2.1.0
+      ts-essentials: 9.3.0
     dependencies:
       '@emotion/react': 11.10.5
       '@mantine/carousel': 6.0.0-alpha.5_g3fbla2ynx4lbz4xjvzzggtli4
@@ -239,6 +240,7 @@ importers:
       '@crossbell/util-metadata': link:../util-metadata
       '@types/lodash.debounce': 4.0.7
       '@types/react-google-recaptcha': 2.1.5
+      ts-essentials: 9.3.0
 
   packages/contract:
     specifiers:
