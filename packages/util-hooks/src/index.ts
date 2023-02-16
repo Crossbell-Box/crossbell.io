@@ -1,4 +1,5 @@
 export * from "./use-debounce";
+export * from "./use-debounced-action-sequence";
 export * from "./use-disclosure";
 export * from "./use-interval-memo";
 export * from "./use-is-first-mount";

@@ -1,29 +1,41 @@
 import { NoteLinkType } from "@crossbell/indexer";
 
-import { useLinkNote, UseLinkNoteOptions } from "./use-link-note";
-import { useUnlinkNote, UseUnlinkNoteOptions } from "./use-unlink-note";
 import { useIsNoteLinked, UseIsNoteLinkedParams } from "./use-is-note-linked";
 import {
 	useNoteLinkCount,
 	UseNoteLinkCountParams,
 } from "./use-note-link-count";
-
-export function useLikeNote(options?: UseLinkNoteOptions) {
-	return useLinkNote(NoteLinkType.like, options);
-}
-
-export function useUnlikeNote(options?: UseUnlinkNoteOptions) {
-	return useUnlinkNote(NoteLinkType.like, options);
-}
+import {
+	useToggleLinkNote,
+	UseToggleLinkNoteOptions,
+} from "./use-toggle-link-note";
+import { useAccountCharacterId } from "@crossbell/connect-kit";
+import { MarkOptional } from "ts-essentials";
 
 export function useIsNoteLiked(
-	params: Omit<UseIsNoteLinkedParams, "linkType">
+	params: MarkOptional<Omit<UseIsNoteLinkedParams, "linkType">, "characterId">
 ) {
-	return useIsNoteLinked({ linkType: NoteLinkType.like, ...params });
+	const { characterId } = useAccountCharacterId();
+
+	return useIsNoteLinked({
+		linkType: NoteLinkType.like,
+		characterId,
+		...params,
+	});
 }
 
 export function useNoteLikeCount(
-	params: Omit<UseNoteLinkCountParams, "linkType">
+	params: MarkOptional<Omit<UseNoteLinkCountParams, "linkType">, "characterId">
 ) {
-	return useNoteLinkCount({ linkType: NoteLinkType.like, ...params });
+	const { characterId } = useAccountCharacterId();
+
+	return useNoteLinkCount({
+		linkType: NoteLinkType.like,
+		characterId,
+		...params,
+	});
+}
+
+export function useToggleLikeNote(options?: UseToggleLinkNoteOptions) {
+	return useToggleLinkNote(NoteLinkType.like, options);
 }
