@@ -18,7 +18,7 @@ const isConnected = (type: ConnectType): boolean => {
 		case "wallet":
 			return !!state.wallet?.characterId && !state.email;
 		case "any":
-			return !!state.computed.account;
+			return !!state.computed.account?.characterId;
 	}
 };
 
@@ -60,7 +60,12 @@ export function useConnectedAction<P extends any[]>(
 			const { email, wallet } = useAccountState.getState();
 			const isEmailConnected = !!email;
 
-			if (connectType === "wallet" && isEmailConnected) {
+			if (connectType !== "email" && wallet && !wallet?.characterId) {
+				// Wallet is connected but no character
+				callbackRef.current = () => action(...params);
+				useWalletMintNewCharacterModal.getState().show();
+			} else if (connectType === "wallet" && isEmailConnected) {
+				// Email is connected but require wallet connection
 				const emailCharacterId = email.characterId;
 
 				callbackRef.current = () => {
@@ -74,8 +79,6 @@ export function useConnectedAction<P extends any[]>(
 				};
 
 				useUpgradeAccountModal.getState().show();
-			} else if (!wallet?.characterId) {
-				useWalletMintNewCharacterModal.getState().show();
 			} else {
 				callbackRef.current = () => action(...params);
 				useConnectModal.getState().show();
