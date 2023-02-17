@@ -39,7 +39,7 @@
 	flex-direction: column;
 	gap: 8px;
 	align-items: center;
-	word-break: break-all;
+	word-break: break-word;
 }
 
 .tweetContent a {
@@ -53,12 +53,37 @@
 	padding: 4px 12px;
 }
 
+.reCaptcha {
+	display: flex;
+	justify-content: center;
+}
+
 .reCaptcha > div:not(:empty) {
 	margin: 24px 0 -24px;
 }
 
-.mainBtn {
+.actions {
+	display: flex;
+	align-items: center;
+	gap: 12px;
 	margin-top: 48px;
+}
+
+.skipBtn,
+.claimBtn {
+	flex: 1;
+	height: 48px;
+	font-size: 14px;
+	border-radius: 16px;
+}
+
+.skipBtn {
+	color: #000;
+}
+
+.claimBtn.disabled {
+	opacity: 0.5;
+	cursor: not-allowed;
 }
 
 .tooltip {
