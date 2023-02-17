@@ -51,7 +51,7 @@ export function Confirm({ onConfirm }: ConfirmProps) {
 					>
 						<FiledTips color="#6AD991">
 							$CSB in your email account cannot be transferred to your upgraded
-							account. but you will be rewarding 0.02$csb for interaction.
+							account.
 						</FiledTips>
 					</Field>
 				</div>
