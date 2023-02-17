@@ -9,9 +9,10 @@ import {
 import { useRefCallback } from "@crossbell/util-hooks";
 import { Tooltip } from "@mantine/core";
 import { useBalance } from "wagmi";
+import classNames from "classnames";
 
 import commonStyles from "../../styles.module.css";
-import { TextInput, MainBtn } from "../../components";
+import { TextInput, ActionBtn } from "../../components";
 import {
 	useAccountState,
 	useClaimCSBStatus,
@@ -24,15 +25,19 @@ import styles from "./index.module.css";
 
 export type WalletClaimCSBProps = {
 	onSuccess: () => void;
+	onSkip?: () => void;
 	claimBtnText?: React.ReactNode;
 	title?: React.ReactNode;
+	titleDesc?: React.ReactNode;
 	getTweetContent?: (account: WalletAccount) => string;
 };
 
 export function WalletClaimCSB({
 	title,
+	titleDesc,
 	getTweetContent,
 	onSuccess,
+	onSkip,
 	claimBtnText,
 }: WalletClaimCSBProps) {
 	const account = useAccountState((s) => s.wallet);
@@ -42,7 +47,7 @@ export function WalletClaimCSB({
 		useClaimCSBStatus();
 	const claimCsb = useWalletClaimCsb();
 	const isLoading = claimCsb.isLoading || isCheckingEligibility;
-	const isAbleToClaim = tweetLink && isEligibleToClaim;
+	const isAbleToClaim = !!tweetLink && isEligibleToClaim;
 	const tweetContent = account
 		? getTweetContent?.(account) ||
 		  `Requesting $CSB funds from the Faucet on the #Crossbell blockchain. Address: ${account?.address}. https://faucet.crossbell.io/`
@@ -53,7 +58,7 @@ export function WalletClaimCSB({
 	});
 
 	const handleClaim = useRefCallback(async () => {
-		if (!account) return;
+		if (!account || !isAbleToClaim) return;
 
 		const tweetId = tweetLink.split("?").shift()?.split("/").pop();
 
@@ -80,8 +85,8 @@ export function WalletClaimCSB({
 			</h4>
 
 			<div className={styles.tips}>
-				To prevent spam, we kindly ask you to tweet this on Twitter before you
-				claim.
+				{titleDesc ??
+					"To prevent spam, we kindly ask you to tweet this on Twitter before you claim."}
 			</div>
 
 			<div className={styles.tweetContent}>
@@ -125,14 +130,25 @@ export function WalletClaimCSB({
 
 			<div className={styles.reCaptcha}>{reCaptcha.node}</div>
 
-			<MainBtn
-				color="green"
-				className={styles.mainBtn}
-				disabled={!isAbleToClaim}
-				onClick={handleClaim}
-			>
-				{claimBtnText ?? "Claim"}
-			</MainBtn>
+			<div className={styles.actions}>
+				{onSkip && (
+					<ActionBtn color="gray" className={styles.skipBtn} onClick={onSkip}>
+						Skip
+					</ActionBtn>
+				)}
+
+				<ActionBtn
+					color="green"
+					noUxOverlay={!isAbleToClaim}
+					className={classNames(
+						styles.claimBtn,
+						!isAbleToClaim && styles.disabled
+					)}
+					onClick={handleClaim}
+				>
+					{claimBtnText ?? "Claim"}
+				</ActionBtn>
+			</div>
 		</div>
 	);
 }

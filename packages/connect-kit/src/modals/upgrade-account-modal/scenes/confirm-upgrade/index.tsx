@@ -70,8 +70,10 @@ export function ConfirmUpgrade({ scene }: ConfirmUpgradeProps) {
 				<WalletClaimCSB
 					Header={Header}
 					onSuccess={withdraw}
-					claimBtnText="Finish"
+					onSkip={withdraw}
+					claimBtnText="Upgrade Now"
 					title="Tweet to upgrade"
+					titleDesc="share this exciting activity with your friends on Twitter, $0.02 would be rewarded to help you explore the wallet account world."
 					getTweetContent={(account) =>
 						`Upgraded my email account to wallet ${account.address} on Crossbell! Excited to see what perks and benefits come with my new status. https://crossbell.io/`
 					}
