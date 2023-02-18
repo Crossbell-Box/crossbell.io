@@ -9,7 +9,7 @@ import {
 	useToggleLinkNote,
 	UseToggleLinkNoteOptions,
 } from "./use-toggle-link-note";
-import { useAccountCharacterId } from "@crossbell/connect-kit";
+import { useAccountCharacterId, useAccountState } from "@crossbell/connect-kit";
 import { MarkOptional } from "ts-essentials";
 
 export function useIsNoteLiked(
@@ -37,5 +37,13 @@ export function useNoteLikeCount(
 }
 
 export function useToggleLikeNote(options?: UseToggleLinkNoteOptions) {
-	return useToggleLinkNote(NoteLinkType.like, options);
+	const needInvokeContract = useAccountState(
+		(s) => !s.email && !s.wallet?.siwe
+	);
+	const mutation = useToggleLinkNote(NoteLinkType.like, options);
+
+	return {
+		...mutation,
+		isLoading: needInvokeContract ? mutation.isLoading : false,
+	};
 }
