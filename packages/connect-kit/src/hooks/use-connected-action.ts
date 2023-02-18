@@ -22,9 +22,9 @@ const isConnected = (type: ConnectType): boolean => {
 	}
 };
 
-export type UseConnectedActionOptions<P extends any[]> = {
+export type UseConnectedActionOptions<P extends any[] = unknown[], V = void> = {
 	connectType?: ConnectType;
-	fallback?: (...params: P) => void;
+	fallback?: (...params: P) => V;
 };
 
 /*
@@ -32,10 +32,20 @@ export type UseConnectedActionOptions<P extends any[]> = {
  * If the user is not connected/logged in, this hooks will display the connect/login/upgrade modal and
  * automatically execute the action when the condition is met.
  * */
-export function useConnectedAction<P extends any[]>(
-	action: (...params: P) => unknown,
-	{ connectType = "any", fallback }: UseConnectedActionOptions<P> = {}
-): (...params: P) => void {
+export function useConnectedAction<P extends any[], V extends Promise<any>>(
+	action: (...params: P) => V,
+	options?: UseConnectedActionOptions<P, V>
+): (...params: P) => V;
+
+export function useConnectedAction<P extends any[], V>(
+	action: (...params: P) => V,
+	options?: UseConnectedActionOptions<P, V>
+): (...params: P) => Promise<V>;
+
+export function useConnectedAction<P extends any[], V>(
+	action: (...params: P) => V,
+	{ connectType = "any", fallback }: UseConnectedActionOptions<P, V> = {}
+): (...params: P) => Promise<V> {
 	const callbackRef = React.useRef<Callback>();
 	const isActive1 = useConnectModal((s) => s.isActive);
 	const isActive2 = useWalletMintNewCharacterModal((s) => s.isActive);
@@ -46,43 +56,53 @@ export function useConnectedAction<P extends any[]>(
 		if (!isActive) {
 			if (callbackRef.current && isConnected(connectType)) {
 				callbackRef.current();
-				callbackRef.current = undefined;
 			}
+
+			callbackRef.current = undefined;
 		}
 	}, [isActive, connectType]);
 
-	return useRefCallback((...params) => {
+	return useRefCallback(async (...params) => {
 		if (isConnected(connectType)) {
-			action(...params);
+			return action(...params);
 		} else if (fallback) {
-			fallback(...params);
+			return fallback(...params);
 		} else {
-			const { email, wallet } = useAccountState.getState();
-			const isEmailConnected = !!email;
-
-			if (connectType !== "email" && wallet && !wallet?.characterId) {
-				// Wallet is connected but no character
-				callbackRef.current = () => action(...params);
-				useWalletMintNewCharacterModal.getState().show();
-			} else if (connectType === "wallet" && isEmailConnected) {
-				// Email is connected but require wallet connection
-				const emailCharacterId = email.characterId;
-
-				callbackRef.current = () => {
-					const walletCharacterId =
-						useAccountState.getState().wallet?.characterId;
-
-					// Check if the account upgrade has been completed.
-					if (emailCharacterId === walletCharacterId) {
-						action(...params);
+			return new Promise((resolve, reject) => {
+				const { email, wallet } = useAccountState.getState();
+				const isEmailConnected = !!email;
+				const callback = () => {
+					try {
+						resolve(action(...params));
+					} catch (e) {
+						reject(e);
 					}
 				};
 
-				useUpgradeAccountModal.getState().show();
-			} else {
-				callbackRef.current = () => action(...params);
-				useConnectModal.getState().show();
-			}
+				if (connectType !== "email" && wallet && !wallet?.characterId) {
+					// Wallet is connected but no character
+					callbackRef.current = callback;
+					useWalletMintNewCharacterModal.getState().show();
+				} else if (connectType === "wallet" && isEmailConnected) {
+					// Email is connected but require wallet connection
+					const emailCharacterId = email.characterId;
+
+					callbackRef.current = () => {
+						const walletCharacterId =
+							useAccountState.getState().wallet?.characterId;
+
+						// Check if the account upgrade has been completed.
+						if (emailCharacterId === walletCharacterId) {
+							callback();
+						}
+					};
+
+					useUpgradeAccountModal.getState().show();
+				} else {
+					callbackRef.current = callback;
+					useConnectModal.getState().show();
+				}
+			});
 		}
 	});
 }

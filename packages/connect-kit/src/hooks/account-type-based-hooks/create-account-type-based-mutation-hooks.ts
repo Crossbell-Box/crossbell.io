@@ -10,6 +10,10 @@ import { indexer } from "@crossbell/indexer";
 import { useAccountState } from "../account-state";
 import { useHandleError } from "../use-handle-error";
 import { useOPSignOperatorHasPermissions } from "../operator-sign";
+import {
+	useConnectedAction,
+	UseConnectedActionOptions,
+} from "../use-connected-action";
 
 import { AccountTypeBasedHooksFactory } from "./types";
 
@@ -57,7 +61,12 @@ export function createAccountTypeBasedMutationHooks<
 	{
 		actionDesc,
 		withParams,
-	}: { actionDesc: string; withParams: Params extends void ? false : true },
+		connectType,
+	}: {
+		actionDesc: string;
+		withParams: Params extends void ? false : true;
+		connectType?: UseConnectedActionOptions["connectType"];
+	},
 	useFactory: AccountTypeBasedHooksFactory<Params, Variables, Data>
 ): AccountTypeBasedMutationHooks<Params, Variables, Data> {
 	const fnName = `use(${actionDesc})`;
@@ -75,7 +84,7 @@ export function createAccountTypeBasedMutationHooks<
 			characterId: account?.characterId,
 		});
 
-		return useMutation(
+		const mutation = useMutation(
 			async (variable) => {
 				switch (account?.type) {
 					case "email":
@@ -127,6 +136,13 @@ export function createAccountTypeBasedMutationHooks<
 				},
 			}
 		);
+
+		const mutate = useConnectedAction(mutation.mutate, { connectType });
+		const mutateAsync = useConnectedAction(mutation.mutateAsync, {
+			connectType,
+		});
+
+		return { ...mutation, mutate, mutateAsync } as typeof mutation;
 	}
 
 	return {
