@@ -1,4 +1,4 @@
-import create from "zustand";
+import { create } from "zustand";
 import debounce from "lodash.debounce";
 import { indexer } from "@crossbell/indexer";
 import { generateCharacterHandle } from "@crossbell/util-metadata";

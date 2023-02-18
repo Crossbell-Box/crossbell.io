@@ -1,5 +1,5 @@
 import { showNotification } from "@mantine/notifications";
-import create from "zustand";
+import { create } from "zustand";
 
 import { useAccountState } from "../../../../hooks";
 import { connectByEmail } from "../../../../apis";

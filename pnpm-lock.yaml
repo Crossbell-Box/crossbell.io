@@ -95,7 +95,7 @@ importers:
       typescript: 4.8.4
       unocss: 0.46.1
       wagmi: 0.11.2
-      zustand: ^4.1.5
+      zustand: ^4.3.3
     dependencies:
       '@crossbell/ipfs-gateway': 0.0.15
       '@crossbell/ipfs-react': 0.0.15_3cuac2dr7yf6nu67tvbbs2j6ry
@@ -151,7 +151,7 @@ importers:
       type-fest: 3.1.0
       typeit-react: 2.6.0
       wagmi: 0.11.2_x2s2sglxf36t2turrg55qka3aq
-      zustand: 4.1.5_immer@9.0.16+react@18.2.0
+      zustand: 4.3.3_immer@9.0.16+react@18.2.0
     devDependencies:
       '@crossbell/ipfs-gateway-next': 0.0.15_esbuild@0.15.6+next@13.0.0
       '@iconify/utils': 2.0.1
@@ -3256,7 +3256,7 @@ packages:
       ethers: 5.7.2
       eventemitter3: 4.0.7
       typescript: 4.8.4
-      zustand: 4.3.2_immer@9.0.16+react@18.2.0
+      zustand: 4.3.3_immer@9.0.16+react@18.2.0
     transitivePeerDependencies:
       - '@babel/core'
       - '@react-native-async-storage/async-storage'
@@ -3290,7 +3290,7 @@ packages:
       ethers: 5.7.2
       eventemitter3: 4.0.7
       typescript: 4.8.4
-      zustand: 4.3.2_immer@9.0.16+react@18.2.0
+      zustand: 4.3.3_immer@9.0.16+react@18.2.0
     transitivePeerDependencies:
       - '@babel/core'
       - '@react-native-async-storage/async-storage'
@@ -12491,25 +12491,8 @@ packages:
     resolution: {integrity: sha512-rVksvsnNCdJ/ohGc6xgPwyN8eheCxsiLM8mxuE/t/mOVqJewPuO1miLpTHQiRgTKCLexL4MeAFVagts7HmNZ2Q==}
     engines: {node: '>=10'}
 
-  /zustand/4.1.5_immer@9.0.16+react@18.2.0:
-    resolution: {integrity: sha512-PsdRT8Bvq22Yyh1tvpgdHNE7OAeFKqJXUxtJvj1Ixw2B9O2YZ1M34ImQ+xyZah4wZrR4lENMoDUutKPpyXCQ/Q==}
-    engines: {node: '>=12.7.0'}
-    peerDependencies:
-      immer: '>=9.0'
-      react: '>=16.8'
-    peerDependenciesMeta:
-      immer:
-        optional: true
-      react:
-        optional: true
-    dependencies:
-      immer: 9.0.16
-      react: 18.2.0
-      use-sync-external-store: 1.2.0_react@18.2.0
-    dev: false
-
-  /zustand/4.3.2_immer@9.0.16+react@18.2.0:
-    resolution: {integrity: sha512-rd4haDmlwMTVWVqwvgy00ny8rtti/klRoZjFbL/MAcDnmD5qSw/RZc+Vddstdv90M5Lv6RPgWvm1Hivyn0QgJw==}
+  /zustand/4.3.3_immer@9.0.16+react@18.2.0:
+    resolution: {integrity: sha512-x2jXq8S0kfLGNwGh87nhRfEc2eZy37tSatpSoSIN+O6HIaBhgQHSONV/F9VNrNcBcKQu/E80K1DeHDYQC/zCrQ==}
     engines: {node: '>=12.7.0'}
     peerDependencies:
       immer: '>=9.0'
