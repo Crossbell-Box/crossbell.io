@@ -5,12 +5,11 @@ import {
 	useMintNote,
 	useIsNoteLiked,
 	useNoteLikeCount,
-	useAccountState,
 } from "@crossbell/connect-kit";
 import { useNoteStatus } from "@crossbell/indexer";
+import { useRefCallback } from "@crossbell/util-hooks";
 
 import { useLoginChecker } from "~/shared/wallet/hooks";
-import { useRefCallback } from "@crossbell/util-hooks";
 
 export type UseNoteActionsConfig = {
 	characterId: number;
@@ -39,13 +38,7 @@ export function useNoteModel({ characterId, noteId }: UseNoteActionsConfig) {
 		toCharacterId: characterId,
 	});
 	const { data: likeCount } = useNoteLikeCount({ characterId, noteId });
-	const { isLoading: isToggleLikeNoteLoading_, mutate } = useToggleLikeNote();
-	const needInvokeContract = useAccountState(
-		(s) => !s.email && !s.wallet?.siwe
-	);
-	const isToggleLikeNoteLoading = needInvokeContract
-		? isToggleLikeNoteLoading_
-		: false;
+	const { isLoading: isToggleLikeNoteLoading, mutate } = useToggleLikeNote();
 
 	const like = useRefCallback(() =>
 		mutate({ characterId, noteId, action: isLiked ? "unlink" : "link" })
@@ -69,7 +62,7 @@ export function useNoteModel({ characterId, noteId }: UseNoteActionsConfig) {
 			isMinted: !!status?.isMinted,
 			mintCount: status?.mintCount,
 			mint() {
-				if (!status?.isMinted && validate({ walletRequired: true })) {
+				if (!status?.isMinted) {
 					mintNote.mutate({ characterId, noteId });
 				}
 			},
