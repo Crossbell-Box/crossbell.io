@@ -5,7 +5,6 @@ import {
 	SCOPE_KEY_NOTE_MINTS,
 } from "@crossbell/indexer";
 
-import { useUpgradeAccountModal } from "../modals/upgrade-account-modal/stores/modal-store";
 import { siweMintNote, getIsNoteMinted } from "../apis";
 import { asyncRetry } from "../utils";
 import { createAccountTypeBasedMutationHooks } from "./account-type-based-hooks";
@@ -17,12 +16,9 @@ export const useMintNote = createAccountTypeBasedMutationHooks<
 	{
 		actionDesc: "mint-note",
 		withParams: false,
+		connectType: "wallet",
 	},
 	() => ({
-		async email() {
-			useUpgradeAccountModal.getState().show();
-		},
-
 		async contract({ characterId, noteId }, { contract, account, siwe }) {
 			if (account?.address) {
 				if (siwe) {
