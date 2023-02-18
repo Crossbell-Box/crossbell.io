@@ -1,5 +1,5 @@
 import { showNotification } from "@mantine/notifications";
-import create from "zustand";
+import { create } from "zustand";
 
 import {
 	registerSendCodeToEmail,

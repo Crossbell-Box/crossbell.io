@@ -1,4 +1,4 @@
-import create from "zustand";
+import { create } from "zustand";
 import { SupportedPlatform } from "@crossbell/connect-kit";
 
 type Meta = {
