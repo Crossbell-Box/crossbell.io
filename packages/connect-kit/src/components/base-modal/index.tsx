@@ -1,5 +1,5 @@
 import React from "react";
-import { Modal } from "@mantine/core";
+import { BaseModal as BaseModal_ } from "@crossbell/ui";
 
 import styles from "./index.module.css";
 
@@ -11,19 +11,8 @@ export type BaseModalProps = {
 
 export function BaseModal({ isActive, children, onClose }: BaseModalProps) {
 	return (
-		<Modal
-			size="auto"
-			withCloseButton={false}
-			opened={isActive}
-			onClose={onClose}
-			padding={0}
-			radius={0}
-			classNames={{
-				content: styles.modal,
-				inner: styles.inner,
-			}}
-		>
-			{children}
-		</Modal>
+		<BaseModal_ isActive={isActive} onClickBg={onClose}>
+			<div className={styles.modal}>{children}</div>
+		</BaseModal_>
 	);
 }
