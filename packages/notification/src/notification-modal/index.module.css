@@ -3,6 +3,8 @@
 	max-width: 90vw;
 	overflow: hidden;
 	padding: 24px 0;
+	background: #fff;
+	border-radius: 28px;
 }
 
 .header {
