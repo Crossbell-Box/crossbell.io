@@ -1,3 +1,4 @@
+export * from "./base-modal";
 export * from "./hooks-renderer";
 export * from "./character-avatar";
 export * from "./dialog";

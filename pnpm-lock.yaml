@@ -287,12 +287,14 @@ importers:
       facepaint: ^1.2.1
       pascal-case: ^3.1.2
       react-intersection-observer: 9.4.1
+      react-remove-scroll: 2.5.5
       react-transition-group: 4.4.5
       ts-essentials: 9.3.0
     dependencies:
       classnames: 2.3.2
       facepaint: 1.2.1
       react-intersection-observer: 9.4.1
+      react-remove-scroll: 2.5.5
       react-transition-group: 4.4.5
       ts-essentials: 9.3.0
     devDependencies:
@@ -1646,15 +1648,6 @@ packages:
     resolution: {integrity: sha512-/kSXhY692qiV1MXu6EeOZvg5nECLclxNXcKCxJ3cXQgYuRymRHpdx/t7JXfsK+JLjwA1e1c1/SBrlQYpusC29Q==}
     dev: false
 
-  /@motionone/animation/10.15.0:
-    resolution: {integrity: sha512-FllQ9ogoATxEEiq7TFKuh2uPEvcw9658IYCpOTGnu53HYCrFQS61eKwsn7TqR4NEnTql2I+NGNipFqw3UZo1AA==}
-    dependencies:
-      '@motionone/easing': 10.15.0
-      '@motionone/types': 10.15.0
-      '@motionone/utils': 10.15.0
-      tslib: 2.4.0
-    dev: false
-
   /@motionone/animation/10.15.1:
     resolution: {integrity: sha512-mZcJxLjHor+bhcPuIFErMDNyrdb2vJur8lSfMCsuCB4UyV8ILZLvK+t+pg56erv8ud9xQGK/1OGPt10agPrCyQ==}
     dependencies:
@@ -1667,10 +1660,10 @@ packages:
   /@motionone/dom/10.13.1:
     resolution: {integrity: sha512-zjfX+AGMIt/fIqd/SL1Lj93S6AiJsEA3oc5M9VkUr+Gz+juRmYN1vfvZd6MvEkSqEjwPQgcjN7rGZHrDB9APfQ==}
     dependencies:
-      '@motionone/animation': 10.15.0
+      '@motionone/animation': 10.15.1
       '@motionone/generators': 10.15.0
-      '@motionone/types': 10.15.0
-      '@motionone/utils': 10.15.0
+      '@motionone/types': 10.15.1
+      '@motionone/utils': 10.15.1
       hey-listen: 1.0.8
       tslib: 2.4.0
     dev: false
@@ -1686,13 +1679,6 @@ packages:
       tslib: 2.4.0
     dev: false
 
-  /@motionone/easing/10.15.0:
-    resolution: {integrity: sha512-VA1a0sa81euSeki2JgVl/t4MygeqfJn7GsMfewoGCln7gp/iZR12HbSo6RaWsHxPkUBRxSRUo+8zeuYRxv6oZQ==}
-    dependencies:
-      '@motionone/utils': 10.15.1
-      tslib: 2.4.0
-    dev: false
-
   /@motionone/easing/10.15.1:
     resolution: {integrity: sha512-6hIHBSV+ZVehf9dcKZLT7p5PEKHGhDwky2k8RKkmOvUoYP3S+dXsKupyZpqx5apjd9f+php4vXk4LuS+ADsrWw==}
     dependencies:
@@ -1703,8 +1689,8 @@ packages:
   /@motionone/generators/10.15.0:
     resolution: {integrity: sha512-bE4lEd/RIQ+DwlLC2IfF/FBOSPwjxV5AbwQuatMg/bWtndps66YMvX1NbvD0wzg+EIpPwi8i8YnYy7usdb8apg==}
     dependencies:
-      '@motionone/types': 10.15.0
-      '@motionone/utils': 10.15.0
+      '@motionone/types': 10.15.1
+      '@motionone/utils': 10.15.1
       tslib: 2.4.0
     dev: false
 
@@ -1723,20 +1709,8 @@ packages:
       tslib: 2.4.0
     dev: false
 
-  /@motionone/types/10.15.0:
-    resolution: {integrity: sha512-uNjSt2/Ud1Ld5TuZ98empFFgHNPysIcUQE3F/YuWxDQR/UO86sCqvnAHBkxUhpc2FVE6hb+3RpFmFxAUDwn11w==}
-    dev: false
-
   /@motionone/types/10.15.1:
     resolution: {integrity: sha512-iIUd/EgUsRZGrvW0jqdst8st7zKTzS9EsKkP+6c6n4MPZoQHwiHuVtTQLD6Kp0bsBLhNzKIBlHXponn/SDT4hA==}
-    dev: false
-
-  /@motionone/utils/10.15.0:
-    resolution: {integrity: sha512-M1PCJ533xpjuEmhTVZYw+KPU6/lDZP9d2NpJDcMMUH/TYPnL3w9CYCTn+b4KKdSUJB2KO7t3xfspJsLqj35SRQ==}
-    dependencies:
-      '@motionone/types': 10.15.0
-      hey-listen: 1.0.8
-      tslib: 2.4.0
     dev: false
 
   /@motionone/utils/10.15.1:
