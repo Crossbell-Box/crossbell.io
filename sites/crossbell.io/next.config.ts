@@ -3,7 +3,6 @@ import UnoCSS from "@unocss/webpack";
 import { withIpfsGateway } from "@crossbell/ipfs-gateway-next";
 import nextBundleAnalyzer from "@next/bundle-analyzer";
 
-import { withLocalPackages } from "~/scripts/nextjs/with-local-packages";
 import config from "~/shared/config";
 
 const withBundleAnalyzer = nextBundleAnalyzer({
@@ -60,6 +59,4 @@ const nextConfig: NextConfig = {
 	},
 };
 
-module.exports = withBundleAnalyzer(
-	withIpfsGateway(withLocalPackages(nextConfig))
-);
+module.exports = withBundleAnalyzer(withIpfsGateway(nextConfig));
