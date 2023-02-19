@@ -43,7 +43,8 @@
 		"lodash.debounce": "4.0.8",
 		"qrcode": "^1",
 		"react-dropzone": "14.2.3",
-		"react-google-recaptcha": "2.1.0"
+		"react-google-recaptcha": "2.1.0",
+		"ts-essentials": "9.3.0"
 	},
 	"peerDependencies": {
 		"@crossbell/contract": "workspace:*",
@@ -69,7 +70,6 @@
 		"@crossbell/util-hooks": "workspace:*",
 		"@crossbell/util-metadata": "workspace:*",
 		"@types/lodash.debounce": "4.0.7",
-		"@types/react-google-recaptcha": "2.1.5",
-		"ts-essentials": "9.3.0"
+		"@types/react-google-recaptcha": "2.1.5"
 	}
 }

@@ -231,6 +231,7 @@ importers:
       qrcode: 1.5.1
       react-dropzone: 14.2.3
       react-google-recaptcha: 2.1.0
+      ts-essentials: 9.3.0
     devDependencies:
       '@crossbell/contract': link:../contract
       '@crossbell/indexer': link:../indexer
@@ -240,7 +241,6 @@ importers:
       '@crossbell/util-metadata': link:../util-metadata
       '@types/lodash.debounce': 4.0.7
       '@types/react-google-recaptcha': 2.1.5
-      ts-essentials: 9.3.0
 
   packages/contract:
     specifiers:
@@ -304,6 +304,7 @@ importers:
       facepaint: 1.2.1
       react-intersection-observer: 9.4.1
       react-transition-group: 4.4.5
+      ts-essentials: 9.3.0
     devDependencies:
       '@crossbell/indexer': link:../indexer
       '@crossbell/util-hooks': link:../util-hooks
@@ -312,7 +313,6 @@ importers:
       '@types/facepaint': 1.2.2
       '@types/react-transition-group': 4.4.5
       pascal-case: 3.1.2
-      ts-essentials: 9.3.0
 
   packages/util-ethers:
     specifiers: {}
@@ -11235,7 +11235,7 @@ packages:
     resolution: {integrity: sha512-XeiCboEyBG8UqXZtXl59bWEi4ZgOqRsogFDI6WDGIF1LmzbYiAkIwjkXN6zZWWl4re/lsOqMlYfe8KA0XiiEPw==}
     peerDependencies:
       typescript: '>=4.1.0'
-    dev: true
+    dev: false
 
   /ts-interface-checker/0.1.13:
     resolution: {integrity: sha512-Y/arvbn+rrz3JCKl9C4kVNfTfSm2/mEp5FSz5EsZSANGPSlQrpRI5M4PKF+mJnE52jOO90PnPSc3Ur3bTQw0gA==}
