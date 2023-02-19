@@ -1,7 +1,6 @@
 import { NextConfig } from "next";
 import UnoCSS from "@unocss/webpack";
 import { withIpfsGateway } from "@crossbell/ipfs-gateway-next";
-import { withLocalPackages } from "~/scripts/nextjs/with-local-packages";
 
 const nextConfig: NextConfig = {
 	reactStrictMode: true,
@@ -14,4 +13,4 @@ const nextConfig: NextConfig = {
 	},
 };
 
-module.exports = withIpfsGateway(withLocalPackages(nextConfig));
+module.exports = withIpfsGateway(nextConfig);
