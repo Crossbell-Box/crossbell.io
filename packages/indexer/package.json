@@ -1,6 +1,6 @@
 {
 	"name": "@crossbell/indexer",
-	"version": "0.0.30",
+	"version": "0.0.31",
 	"license": "MIT",
 	"repository": "github:Crossbell-Box/crossbell-universe",
 	"bugs": "https://github.com/Crossbell-Box/crossbell-universe/issues",
@@ -28,14 +28,14 @@
 		"./package.json": "./package.json"
 	},
 	"dependencies": {
-		"lru-cache": "7.14.0",
-		"lodash.compact": "^3"
+		"lodash.compact": "^3",
+		"lru-cache": "7.14.0"
 	},
 	"peerDependencies": {
 		"@tanstack/react-query": "4.x",
 		"crossbell.js": "0.16.x",
+		"dayjs": "^1.11.6",
 		"ethers": "5.x",
-		"wagmi": "0.11.x",
-		"dayjs": "^1.11.6"
+		"wagmi": "0.11.x"
 	}
 }

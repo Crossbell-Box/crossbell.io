@@ -1,6 +1,6 @@
 {
 	"name": "@crossbell/util-hooks",
-	"version": "0.0.30",
+	"version": "0.0.31",
 	"license": "MIT",
 	"repository": "github:Crossbell-Box/crossbell-universe",
 	"bugs": "https://github.com/Crossbell-Box/crossbell-universe/issues",
@@ -28,8 +28,8 @@
 		"./package.json": "./package.json"
 	},
 	"peerDependencies": {
+		"@tanstack/react-query": "*",
 		"crossbell.js": "^0.16",
-		"react": "18.x.x",
-		"@tanstack/react-query": "*"
+		"react": "18.x.x"
 	}
 }

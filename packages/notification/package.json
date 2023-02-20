@@ -1,6 +1,6 @@
 {
 	"name": "@crossbell/notification",
-	"version": "0.0.30",
+	"version": "0.0.31",
 	"license": "MIT",
 	"repository": "github:Crossbell-Box/crossbell-universe",
 	"bugs": "https://github.com/Crossbell-Box/crossbell-universe/issues",
@@ -34,19 +34,19 @@
 	},
 	"peerDependencies": {
 		"@crossbell/connect-kit": "workspace:*",
-		"@crossbell/util-metadata": "workspace:*",
-		"@crossbell/util-hooks": "workspace:*",
 		"@crossbell/indexer": "workspace:*",
 		"@crossbell/ui": "workspace:*",
+		"@crossbell/util-hooks": "workspace:*",
+		"@crossbell/util-metadata": "workspace:*",
+		"dayjs": "^1.11.6",
 		"react": "18.x.x",
-		"zustand": "^4.1.5",
-		"dayjs": "^1.11.6"
+		"zustand": "^4.1.5"
 	},
 	"devDependencies": {
 		"@crossbell/connect-kit": "workspace:*",
-		"@crossbell/util-metadata": "workspace:*",
-		"@crossbell/util-hooks": "workspace:*",
 		"@crossbell/indexer": "workspace:*",
-		"@crossbell/ui": "workspace:*"
+		"@crossbell/ui": "workspace:*",
+		"@crossbell/util-hooks": "workspace:*",
+		"@crossbell/util-metadata": "workspace:*"
 	}
 }
