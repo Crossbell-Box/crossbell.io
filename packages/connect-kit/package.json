@@ -30,7 +30,6 @@
 		"./index.css": "./dist/index.css"
 	},
 	"dependencies": {
-		"@mantine/carousel": "6.0.0-alpha.5",
 		"@mantine/core": "6.0.0-alpha.5",
 		"@mantine/notifications": "6.0.0-alpha.5",
 		"canvas-confetti": "^1",

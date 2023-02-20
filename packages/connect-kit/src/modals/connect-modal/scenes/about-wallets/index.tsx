@@ -1,5 +1,5 @@
 import React from "react";
-import { Carousel, Embla } from "@mantine/carousel";
+import useEmblaCarousel from "embla-carousel-react";
 
 import { Header } from "../../components/header";
 import { useConnectModal } from "../../stores";
@@ -69,7 +69,7 @@ const scenes: SceneConfig[] = [
 ];
 
 export function AboutWallets() {
-	const [embla, setEmbla] = React.useState<Embla | null>(null);
+	const [containerRef, embla] = useEmblaCarousel();
 	const [index, setIndex] = React.useState(0);
 	const currentScene = React.useMemo(() => scenes[index], [index]);
 	const setModalCanHide = useConnectModal((s) => s.setCanHide);
@@ -104,28 +104,34 @@ export function AboutWallets() {
 				data-animation="scale-fade-in"
 				onAnimationEnd={() => embla?.reInit()}
 			>
-				<Carousel
-					getEmblaApi={setEmbla}
-					sx={{ width: 320 }}
-					withControls={false}
-					withIndicators
-					classNames={{
-						indicator: styles.indicator,
-						indicators: styles.indicators,
-					}}
-				>
-					{scenes.map((scene) => (
-						<Carousel.Slide key={scene.title} className={styles.slide}>
-							<div className={styles.slideLayout}>
-								<div className={styles.slideIllustration}>
-									{scene.illustration}
+				<div className={styles.embla}>
+					<div className={styles.emblaViewport} ref={containerRef}>
+						<div className={styles.emblaContainer}>
+							{scenes.map((scene) => (
+								<div key={scene.title} className={styles.emblaSlide}>
+									<div className={styles.slideLayout}>
+										<div className={styles.slideIllustration}>
+											{scene.illustration}
+										</div>
+										<h3 className={styles.slideTitle}>{scene.title}</h3>
+										<p className={styles.slideDesc}>{scene.description}</p>
+									</div>
 								</div>
-								<h3 className={styles.slideTitle}>{scene.title}</h3>
-								<p className={styles.slideDesc}>{scene.description}</p>
-							</div>
-						</Carousel.Slide>
-					))}
-				</Carousel>
+							))}
+						</div>
+					</div>
+
+					<div className={styles.indicators}>
+						{scenes.map((scene, i) => (
+							<div
+								key={scene.title}
+								data-active={i === index}
+								className={styles.indicator}
+								onClick={() => embla?.scrollTo(i)}
+							/>
+						))}
+					</div>
+				</div>
 
 				<a
 					href={currentScene.learnMoreLink}

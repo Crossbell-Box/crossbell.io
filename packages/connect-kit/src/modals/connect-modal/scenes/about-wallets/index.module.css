@@ -100,7 +100,32 @@
 	padding: 0 24px 27px;
 }
 
+.embla {
+	position: relative;
+}
+
+.emblaViewport {
+	overflow: hidden;
+	width: 320px;
+}
+
+.emblaContainer {
+	display: flex;
+}
+
+.emblaSlide {
+	flex: 0 0 100%;
+	min-width: 0;
+	text-align: center;
+}
+
 .indicators {
+	position: absolute;
+	left: 0;
+	right: 0;
+	bottom: 1rem;
+	display: flex;
+	justify-content: center;
 	align-items: center;
 	gap: 4px;
 }
@@ -128,15 +153,11 @@
 	height: 3px;
 	width: 16px;
 	flex-shrink: 0;
+	cursor: pointer;
 }
 
 .indicator[data-active="true"] {
 	background: #373737;
-}
-
-.slide {
-	width: 100%;
-	text-align: center;
 }
 
 .slideLayout {
