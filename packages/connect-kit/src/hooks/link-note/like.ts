@@ -44,6 +44,6 @@ export function useToggleLikeNote(options?: UseToggleLinkNoteOptions) {
 
 	return {
 		...mutation,
-		isLoading: needInvokeContract ? mutation.isLoading : false,
+		isPending: needInvokeContract ? mutation.isLoading : false,
 	};
 }

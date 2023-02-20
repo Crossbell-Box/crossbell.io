@@ -38,7 +38,7 @@ export function useNoteModel({ characterId, noteId }: UseNoteActionsConfig) {
 		toCharacterId: characterId,
 	});
 	const { data: likeCount } = useNoteLikeCount({ characterId, noteId });
-	const { isLoading: isToggleLikeNoteLoading, mutate } = useToggleLikeNote();
+	const { isPending: isToggleLikeNoteLoading, mutate } = useToggleLikeNote();
 
 	const like = useRefCallback(() =>
 		mutate({ characterId, noteId, action: isLiked ? "unlink" : "link" })
