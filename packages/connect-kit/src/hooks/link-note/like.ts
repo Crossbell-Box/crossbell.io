@@ -1,5 +1,8 @@
 import { NoteLinkType } from "@crossbell/indexer";
+import { MarkOptional } from "ts-essentials";
 
+import { useAccountState } from "../account-state";
+import { useAccountCharacterId } from "../use-account-character-id";
 import { useIsNoteLinked, UseIsNoteLinkedParams } from "./use-is-note-linked";
 import {
 	useNoteLinkCount,
@@ -9,8 +12,7 @@ import {
 	useToggleLinkNote,
 	UseToggleLinkNoteOptions,
 } from "./use-toggle-link-note";
-import { useAccountCharacterId, useAccountState } from "@crossbell/connect-kit";
-import { MarkOptional } from "ts-essentials";
+import { useNoteLinkList, UseNoteLinkListParams } from "./use-note-link-list";
 
 export function useIsNoteLiked(
 	params: MarkOptional<Omit<UseIsNoteLinkedParams, "linkType">, "characterId">
@@ -54,4 +56,10 @@ export function useToggleLikeNote(options?: UseToggleLinkNoteOptions) {
 		...mutation,
 		isPending: needInvokeContract ? mutation.isLoading : false,
 	};
+}
+
+export function useNoteLikeList(
+	params: Omit<UseNoteLinkListParams, "linkType">
+) {
+	return useNoteLinkList({ ...params, linkType: NoteLinkType.like });
 }

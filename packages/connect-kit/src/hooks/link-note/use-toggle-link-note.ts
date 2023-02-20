@@ -66,6 +66,8 @@ export const useToggleLinkNote = createAccountTypeBasedMutationHooks<
 
 	return {
 		async email(variable, { account: { characterId, token }, queryClient }) {
+			actionSequence.clear();
+
 			const params = getLinkActionParams(characterId, linkType, variable);
 
 			const status = await updateLinkStatus({
@@ -86,7 +88,10 @@ export const useToggleLinkNote = createAccountTypeBasedMutationHooks<
 		},
 
 		async contract(variable, { account, siwe, contract, queryClient }) {
+			actionSequence.clear();
+
 			const characterId = account?.characterId;
+
 			if (characterId) {
 				const params = getLinkActionParams(characterId, linkType, variable);
 

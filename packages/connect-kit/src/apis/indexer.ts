@@ -27,12 +27,17 @@ export type GetIsNoteLinkedConfig = {
 	linkType: NoteLinkType;
 };
 
+export type GetIsNoteLinkedResult = {
+	isLinked: boolean;
+	transactionHash: string | null;
+};
+
 export async function getIsNoteLinked({
 	characterId,
 	toCharacterId,
 	toNoteId,
 	linkType,
-}: GetIsNoteLinkedConfig) {
+}: GetIsNoteLinkedConfig): Promise<GetIsNoteLinkedResult> {
 	const { count, list } = await indexer.getLinks(characterId, {
 		linkType,
 		toCharacterId,
@@ -42,7 +47,7 @@ export async function getIsNoteLinked({
 
 	return {
 		isLinked: count > 0,
-		transactionHash: list?.[0]?.transactionHash,
+		transactionHash: list?.[0]?.transactionHash ?? null,
 	};
 }
 
