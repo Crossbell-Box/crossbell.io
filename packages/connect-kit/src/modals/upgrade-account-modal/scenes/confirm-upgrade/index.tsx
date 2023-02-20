@@ -5,6 +5,7 @@ import { useRefCallback } from "@crossbell/util-hooks";
 
 import { WalletClaimCSB } from "../../../../scenes";
 import {
+	useAccountState,
 	useClaimCSBStatus,
 	useWalletAccountBalance,
 	useWithdrawEmailAccount,
@@ -23,6 +24,7 @@ export function ConfirmUpgrade({ scene }: ConfirmUpgradeProps) {
 	const { hide: hideModal } = useUpgradeAccountModal();
 	const { balance } = useWalletAccountBalance();
 	const { isEligibleToClaim } = useClaimCSBStatus();
+	const character = useAccountState((s) => s.email?.character);
 
 	const {
 		account,
@@ -75,7 +77,13 @@ export function ConfirmUpgrade({ scene }: ConfirmUpgradeProps) {
 					title="Tweet to upgrade"
 					titleDesc="share this exciting activity with your friends on Twitter, $0.02 would be rewarded to help you explore the wallet account world."
 					getTweetContent={(account) =>
-						`Upgraded my email account to wallet ${account.address} on Crossbell! Excited to see what perks and benefits come with my new status. https://crossbell.io/`
+						`Upgraded my email account to wallet ${
+							account.address
+						} on #Crossbell! Excited to see what perks and benefits come with my new status. ${
+							character
+								? `https://xchar.app/${character.handle}`
+								: "https://crossbell.io/"
+						}`
 					}
 				/>
 			)}
