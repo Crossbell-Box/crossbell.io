@@ -12,6 +12,7 @@ export type ModalProps = {
 	onClickBg?: () => void;
 	afterClose?: () => void;
 	className?: string;
+	zIndex?: number;
 };
 
 export function BaseModal({
@@ -20,6 +21,7 @@ export function BaseModal({
 	onClickBg,
 	afterClose,
 	className,
+	zIndex,
 }: ModalProps) {
 	const [needMount, setNeedMount] = React.useState(isActive);
 
@@ -34,6 +36,7 @@ export function BaseModal({
 				<div
 					className={styles.layout}
 					data-is-active={isActive}
+					style={{ zIndex }}
 					onTransitionEnd={() => {
 						if (!isActive) {
 							setNeedMount(false);
