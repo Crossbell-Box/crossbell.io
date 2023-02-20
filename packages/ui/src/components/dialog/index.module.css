@@ -4,12 +4,25 @@
 	right: 16px;
 	pointer-events: none;
 	opacity: 0;
-	transform: translateY(25%);
-	transition: opacity 0.2s, transform 0.2s;
+	transform: translateY(20%);
+	transition: opacity 0.25s, transform 0.25s;
 }
 
 .layout.isActive {
 	pointer-events: auto;
 	opacity: 1;
 	transform: translateY(0);
+	animation: fadeIn 0.25s;
+}
+
+@keyframes fadeIn {
+	0% {
+		opacity: 0;
+		transform: translateY(20%);
+	}
+
+	100% {
+		opacity: 1;
+		transform: translateY(0);
+	}
 }

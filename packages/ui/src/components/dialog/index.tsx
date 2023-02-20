@@ -18,9 +18,15 @@ export function Dialog({
 	className,
 	zIndex = 10,
 }: DialogProps) {
+	const [needMount, setNeedMount] = React.useState(isActive);
+
 	const mounted = useIsMounted();
 
-	return mounted
+	if (!needMount && isActive) {
+		setNeedMount(true);
+	}
+
+	return mounted && needMount
 		? ReactDOM.createPortal(
 				<div
 					className={classNames(
@@ -29,6 +35,11 @@ export function Dialog({
 						className
 					)}
 					style={{ zIndex }}
+					onTransitionEnd={() => {
+						if (!isActive) {
+							setNeedMount(false);
+						}
+					}}
 				>
 					{children}
 				</div>,
