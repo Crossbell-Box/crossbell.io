@@ -11,8 +11,8 @@ import { FollowButton } from "~/shared/components/follow-button";
 
 export type ItemProps = {
 	character?: CharacterEntity | null;
-	createdAt?: string;
-	transactionHash?: string;
+	createdAt?: string | null;
+	transactionHash?: string | null;
 };
 
 export function Item({ character, createdAt, transactionHash }: ItemProps) {
