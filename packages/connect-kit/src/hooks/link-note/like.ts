@@ -17,11 +17,19 @@ export function useIsNoteLiked(
 ) {
 	const { characterId } = useAccountCharacterId();
 
-	return useIsNoteLinked({
+	const result = useIsNoteLinked({
 		linkType: NoteLinkType.like,
 		characterId,
 		...params,
 	});
+
+	return [
+		{
+			isLiked: !!result.data?.isLinked,
+			transactionHash: result.data?.transactionHash,
+		},
+		result,
+	] as const;
 }
 
 export function useNoteLikeCount(

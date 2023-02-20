@@ -33,7 +33,7 @@ export type NoteModel = {
 
 export function useNoteModel({ characterId, noteId }: UseNoteActionsConfig) {
 	const { data: status } = useNoteStatus(characterId, noteId);
-	const { data: isLiked } = useIsNoteLiked({
+	const [{ isLiked }] = useIsNoteLiked({
 		toNoteId: noteId,
 		toCharacterId: characterId,
 	});

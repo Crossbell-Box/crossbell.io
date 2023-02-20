@@ -28,6 +28,8 @@ export function useNoteLinkCount(params: UseNoteLinkCountParams) {
 				...params,
 				characterId: params.characterId!,
 			}),
-		{ enabled: !!params.characterId }
+		{
+			enabled: !!params.characterId && !!params.noteId && !!params.linkType,
+		}
 	);
 }

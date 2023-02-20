@@ -31,7 +31,8 @@ export function useIsNoteLinked(params: UseIsNoteLinkedParams) {
 				characterId: params.characterId!,
 			}),
 		{
-			enabled: !!params.characterId,
+			enabled:
+				!!params.characterId && !!params.toCharacterId && !!params.toNoteId,
 		}
 	);
 }
