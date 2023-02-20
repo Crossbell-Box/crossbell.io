@@ -18,7 +18,7 @@
 		"lint": "eslint . --ext .ts,.tsx --fix --max-warnings 0",
 		"prepare": "husky install",
 		"release-dev": "[ -z \"$(git status --short)\" ] && run-s build:all release-dev:bump-version release-dev:publish release-dev:stash-changes || echo \"Commit your changes first:\n$(git status --short)\"",
-		"release-dev:bump-version": "lerna version \"$(npm pkg get version | sed 's/\"//g')-dev-$(date +%s)\" --no-git-tag-version --no-push --force-publish --yes",
+		"release-dev:bump-version": "lerna version \"$(node ./scripts/get-current-version.js)-dev-$(date +%s)\" --no-git-tag-version --no-push --force-publish --yes",
 		"release-dev:publish": "pnpm -r publish --access public --no-git-checks --tag dev",
 		"release-dev:stash-changes": "git stash push -m \"release-dev\"",
 		"release-prod": "lerna version",
