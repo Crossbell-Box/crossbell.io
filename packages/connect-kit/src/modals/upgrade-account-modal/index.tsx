@@ -2,6 +2,7 @@ import React from "react";
 import { DynamicContainer, DynamicContainerContent } from "@crossbell/ui";
 
 import { BaseModal, Congrats } from "../../components";
+import { SignInWithWallet, OPSignSettings } from "../../scenes";
 
 import { SceneKind } from "./types";
 import {
@@ -16,7 +17,9 @@ import { SelectOptions } from "./scenes/select-options";
 import { SelectWalletToConnect } from "./scenes/select-wallet-to-connect";
 import { ConnectWallet } from "./scenes/connect-wallet";
 import { ConfirmUpgrade } from "./scenes/confirm-upgrade";
+import { SelectCharacters } from "./scenes/select-characters";
 import { GetAWallet } from "../../scenes";
+import { MintCharacter } from "./scenes/mint-character";
 
 export { useUpgradeAccountModal };
 
@@ -56,6 +59,14 @@ function Main() {
 						return <GetAWallet Header={Header} />;
 					case SceneKind.confirmUpgrade:
 						return <ConfirmUpgrade {...scene} />;
+					case SceneKind.signInWithWallet:
+						return <SignInWithWallet Header={Header} {...scene} />;
+					case SceneKind.selectCharacters:
+						return <SelectCharacters />;
+					case SceneKind.opSignSettings:
+						return <OPSignSettings Header={Header} {...scene} />;
+					case SceneKind.mintCharacter:
+						return <MintCharacter {...scene} />;
 				}
 			})()}
 		</DynamicContainerContent>

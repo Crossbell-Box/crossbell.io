@@ -29,6 +29,7 @@ export type WalletClaimCSBProps = {
 	claimBtnText?: React.ReactNode;
 	title?: React.ReactNode;
 	titleDesc?: React.ReactNode;
+	getTweetContentNode?: (account: WalletAccount) => React.ReactNode;
 	getTweetContent?: (account: WalletAccount) => string;
 };
 
@@ -36,6 +37,7 @@ export function WalletClaimCSB({
 	title,
 	titleDesc,
 	getTweetContent,
+	getTweetContentNode,
 	onSuccess,
 	onSkip,
 	claimBtnText,
@@ -52,6 +54,9 @@ export function WalletClaimCSB({
 		? getTweetContent?.(account) ||
 		  `Requesting $CSB funds from the Faucet on the #Crossbell blockchain. Address: ${account?.address}. https://faucet.crossbell.io/`
 		: "";
+	const tweetContentNode =
+		(account && getTweetContentNode?.(account)) || tweetContent;
+
 	const copyLinkToTweetImg = useWeb2Url(IMAGES.copyLinkToTweetImg);
 	const { refetch: refreshBalance } = useBalance({
 		address: account?.address as `0x${string}` | undefined,
@@ -90,7 +95,7 @@ export function WalletClaimCSB({
 			</div>
 
 			<div className={styles.tweetContent}>
-				{tweetContent}
+				{tweetContentNode}
 				<a
 					className={commonStyles.uxOverlay}
 					href={`https://twitter.com/intent/tweet?text=${encodeURIComponent(

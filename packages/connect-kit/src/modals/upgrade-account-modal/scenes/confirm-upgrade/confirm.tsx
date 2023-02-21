@@ -1,7 +1,7 @@
 import React from "react";
 import { LogoIcon } from "@crossbell/ui";
 
-import { useAccountState, useEmailAccountBalance } from "../../../../hooks";
+import { useAccountState } from "../../../../hooks";
 import {
 	Field,
 	WalletIcon,
@@ -15,11 +15,11 @@ import styles from "./confirm.module.css";
 
 export type ConfirmProps = {
 	onConfirm: () => void;
+	confirmText: React.ReactNode;
 };
 
-export function Confirm({ onConfirm }: ConfirmProps) {
+export function Confirm({ onConfirm, confirmText }: ConfirmProps) {
 	const address = useAccountState((s) => s.wallet?.address);
-	const { balance } = useEmailAccountBalance();
 	const { hide } = useUpgradeAccountModal();
 
 	return (
@@ -27,10 +27,6 @@ export function Confirm({ onConfirm }: ConfirmProps) {
 			<Header title="Upgrade Account" />
 
 			<div className={styles.main}>
-				<p className={styles.tips}>
-					Are you sure you want to continue this step?
-				</p>
-
 				<div className={styles.fieldContainer}>
 					<Field
 						title="Confirm Wallet Address"
@@ -40,18 +36,17 @@ export function Confirm({ onConfirm }: ConfirmProps) {
 
 						<FiledTips color="#6AD991">
 							Once you upgrade, you'll no longer be able to access your email
-							account.
+							account. But the xSync and operator sign will still work as usual.
 						</FiledTips>
 					</Field>
 
 					<Field
 						title="Confirm $CSB"
 						icon={<LogoIcon className={styles.csbIcon} />}
-						tips={`Balance: ${balance?.formatted ?? "..."}`}
 					>
 						<FiledTips color="#6AD991">
 							$CSB in your email account cannot be transferred to your upgraded
-							account.
+							account. Claim new $CSB later.
 						</FiledTips>
 					</Field>
 				</div>
@@ -61,7 +56,7 @@ export function Confirm({ onConfirm }: ConfirmProps) {
 						Remain
 					</ActionBtn>
 					<ActionBtn color="green" onClick={onConfirm} size="md">
-						Upgrade Now
+						{confirmText}
 					</ActionBtn>
 				</div>
 			</div>

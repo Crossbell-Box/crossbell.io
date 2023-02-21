@@ -1,5 +1,4 @@
 import React from "react";
-import { utils } from "ethers";
 import { LoadingOverlay } from "@crossbell/ui";
 import { useRefCallback } from "@crossbell/util-hooks";
 
@@ -7,24 +6,24 @@ import { WalletClaimCSB } from "../../../../scenes";
 import {
 	useAccountState,
 	useClaimCSBStatus,
-	useWalletAccountBalance,
 	useWithdrawEmailAccount,
 } from "../../../../hooks";
 import { Header } from "../../components/header";
 import { useScenesStore, useUpgradeAccountModal } from "../../stores";
 import { SceneKind } from "../../types";
 import { Confirm } from "./confirm";
+import styles from "./index.module.css";
 
 export type ConfirmUpgradeProps = {
 	scene: "claim-csb" | "confirm";
 };
 
 export function ConfirmUpgrade({ scene }: ConfirmUpgradeProps) {
-	const [goTo, updateLast] = useScenesStore((s) => [s.goTo, s.updateLast]);
+	const scenes = useScenesStore();
 	const { hide: hideModal } = useUpgradeAccountModal();
-	const { balance } = useWalletAccountBalance();
 	const { isEligibleToClaim } = useClaimCSBStatus();
 	const character = useAccountState((s) => s.email?.character);
+	const isCSBClaimedRef = React.useRef(false);
 
 	const {
 		account,
@@ -32,11 +31,11 @@ export function ConfirmUpgrade({ scene }: ConfirmUpgradeProps) {
 		isLoading,
 	} = useWithdrawEmailAccount({
 		onSuccess() {
-			goTo({
+			scenes.goTo({
 				kind: SceneKind.congrats,
 				title: "Congrats!",
 				desc: [
-					scene === "claim-csb"
+					isCSBClaimedRef.current
 						? "You have upgraded to wallet account and get 0.02$CSB."
 						: "You have upgraded to wallet account.",
 					"Now you can return into the feed and enjoy Crossbell.",
@@ -45,9 +44,20 @@ export function ConfirmUpgrade({ scene }: ConfirmUpgradeProps) {
 					.join(" "),
 				tips: "Welcome to new Crossbell",
 				timeout: "15s",
-				btnText: "Close",
+				btnText: "Sign In",
 				onClose: hideModal,
-				onClickBtn: hideModal,
+				onClickBtn() {
+					const goToSelectCharacter = () => {
+						scenes.resetScenes([{ kind: SceneKind.selectCharacters }]);
+					};
+
+					scenes.goTo({
+						kind: SceneKind.signInWithWallet,
+						signInText: "Sign In (Recommended)",
+						onSkip: goToSelectCharacter,
+						afterSignIn: goToSelectCharacter,
+					});
+				},
 			});
 		},
 	});
@@ -55,31 +65,56 @@ export function ConfirmUpgrade({ scene }: ConfirmUpgradeProps) {
 	const handleConfirm = useRefCallback(() => {
 		if (!account.wallet || !account.email || isLoading) return;
 
-		const hasEnoughCSB = !!balance?.value.gte(utils.parseEther("0.001"));
-
-		if (!hasEnoughCSB || isEligibleToClaim || true) {
-			updateLast({ kind: SceneKind.confirmUpgrade, scene: "claim-csb" });
+		if (isEligibleToClaim) {
+			scenes.updateLast({ kind: SceneKind.confirmUpgrade, scene: "claim-csb" });
 		} else {
 			withdraw();
 		}
 	});
 
+	const handleClaimSuccess = useRefCallback(() => {
+		isCSBClaimedRef.current = true;
+		withdraw();
+	});
+
+	const skipClaim = useRefCallback(() => {
+		isCSBClaimedRef.current = false;
+		withdraw();
+	});
+
 	return (
 		<>
-			{scene === "confirm" && <Confirm onConfirm={handleConfirm} />}
+			{scene === "confirm" && (
+				<Confirm
+					onConfirm={handleConfirm}
+					confirmText={isEligibleToClaim ? "Claim $CSB" : "Upgrade Now"}
+				/>
+			)}
 
 			{scene === "claim-csb" && (
 				<WalletClaimCSB
 					Header={Header}
-					onSuccess={withdraw}
-					onSkip={withdraw}
+					onSuccess={handleClaimSuccess}
+					onSkip={skipClaim}
 					claimBtnText="Upgrade Now"
-					title="Tweet to upgrade"
-					titleDesc="share this exciting activity with your friends on Twitter, $0.02 would be rewarded to help you explore the wallet account world."
+					title="Tweet to claim"
+					titleDesc="share this exciting activity with your friends on Twitter, $0.02 would be rewarded."
+					getTweetContentNode={(account) => (
+						<div className={styles.tweetContentNode}>
+							{`Upgraded my email account to wallet\n`}
+							<span>[{account.address}]</span>
+							{` on #Crossbell and got $CSB! Excited to see what perks and benefits come with my new status >> `}
+							<span>
+								{character
+									? `https://xchar.app/${character.handle}`
+									: "https://crossbell.io/"}
+							</span>
+						</div>
+					)}
 					getTweetContent={(account) =>
-						`Upgraded my email account to wallet ${
+						`Upgraded my email account to wallet [${
 							account.address
-						} on #Crossbell! Excited to see what perks and benefits come with my new status. ${
+						}] on #Crossbell and got $CSB! Excited to see what perks and benefits come with my new status >> ${
 							character
 								? `https://xchar.app/${character.handle}`
 								: "https://crossbell.io/"
