@@ -25,7 +25,7 @@ export function NoteActions({ model }: { model: NoteModel }) {
 		<div className="flex items-center justify-between">
 			<LoadingOverlay
 				visible={model.isLoading}
-				description="Loading..."
+				description={model.loadingDescription}
 				global
 				onClick={(e) => e.stopPropagation()}
 			/>

@@ -20,6 +20,7 @@ export type NoteModel = {
 	characterId: number;
 	noteId: number;
 	isLoading: boolean;
+	loadingDescription: string;
 	commentCount?: number;
 
 	isLiked: boolean;
@@ -52,6 +53,7 @@ export function useNoteModel({ characterId, noteId }: UseNoteActionsConfig) {
 			characterId,
 			noteId,
 			isLoading: isToggleLikeNoteLoading || mintNote.isLoading,
+			loadingDescription: mintNote.isLoading ? "Minting..." : "Loading...",
 
 			commentCount: status?.commentCount,
 
