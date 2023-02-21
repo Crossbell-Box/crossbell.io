@@ -39,7 +39,7 @@ const linksGroup: { title: string; list: { text: string; href: string }[] }[] =
 				{ text: "Discord", href: "https://discord.gg/4GCwDsruyj" },
 				{
 					text: "Careers",
-					href: "https://www.notion.so/rss3/Open-Source-Remote-RSS3-s-Parent-Company-Natural-Selecti[…]Offering-the-Dopest-Positions-b6fdbffee017449797397f45340de9d4",
+					href: "https://rss3.notion.site/Work-with-RSS3-77c6c5dd8fec45ca8747dd7c650782ec",
 				},
 			],
 		},
