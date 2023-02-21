@@ -6,16 +6,17 @@ const NOOP = { run() {} };
 
 export type UseDebouncedActionSequenceConfig = {
 	delay?: number;
+	onError: (error: unknown) => void;
 };
 
 export type UseDebouncedActionSequenceConfigAddOptions = {
 	onSettled?: () => void;
-	onError?: (error: unknown) => void;
 };
 
 export function useDebouncedActionSequence({
 	delay = 1000,
-}: UseDebouncedActionSequenceConfig = {}) {
+	onError,
+}: UseDebouncedActionSequenceConfig) {
 	const actionIdRef = React.useRef(0);
 	const [action, _setAction] = React.useState(NOOP);
 
@@ -37,7 +38,7 @@ export function useDebouncedActionSequence({
 					try {
 						await action();
 					} catch (e) {
-						options?.onError?.(e);
+						onError?.(e);
 					} finally {
 						if (mutationId === actionIdRef.current) {
 							options?.onSettled?.();
