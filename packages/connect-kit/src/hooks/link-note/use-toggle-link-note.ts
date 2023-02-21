@@ -120,6 +120,7 @@ export const useToggleLinkNote = createAccountTypeBasedMutationHooks<
 						);
 
 						await waitUntilLinkStatusUpdated(status.action, params);
+						await revalidateQueries(queryClient, params);
 					}
 				}
 			}
