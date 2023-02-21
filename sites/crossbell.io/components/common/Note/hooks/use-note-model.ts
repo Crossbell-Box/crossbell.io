@@ -34,12 +34,12 @@ export type NoteModel = {
 
 export function useNoteModel({ characterId, noteId }: UseNoteActionsConfig) {
 	const { data: status } = useNoteStatus(characterId, noteId);
-	const { data: isLiked } = useIsNoteLiked({
+	const [{ isLiked }] = useIsNoteLiked({
 		toNoteId: noteId,
 		toCharacterId: characterId,
 	});
 	const { data: likeCount } = useNoteLikeCount({ characterId, noteId });
-	const { isLoading: isToggleLikeNoteLoading, mutate } = useToggleLikeNote();
+	const { isPending: isToggleLikeNoteLoading, mutate } = useToggleLikeNote();
 
 	const like = useRefCallback(() =>
 		mutate({ characterId, noteId, action: isLiked ? "unlink" : "link" })
