@@ -99,17 +99,17 @@ export const createEmailAccountSlice: SliceFn<EmailAccountSlice> = (
 	}),
 
 	async refreshEmail() {
-		const { email } = get();
+		const { email, connectEmail } = get();
 
 		if (email) {
-			return this.connectEmail(email.token);
+			return connectEmail(email.token);
 		} else {
 			return false;
 		}
 	},
 
 	async refillEmailBalance() {
-		const { email, checkIsAbleToRefillEmailBalance } = get();
+		const { email, checkIsAbleToRefillEmailBalance, refreshEmail } = get();
 
 		if (checkIsAbleToRefillEmailBalance({ showTips: true }) && email) {
 			set({ email: { ...email, lastCSBRefillTimestamp: Date.now() } });
@@ -117,8 +117,7 @@ export const createEmailAccountSlice: SliceFn<EmailAccountSlice> = (
 			const result = await refillBalance(email);
 
 			if ("balance" in result && result.balance) {
-				set({ email: { ...email, csb: result.balance } });
-				return true;
+				return refreshEmail();
 			}
 
 			if ("ok" in result) {
