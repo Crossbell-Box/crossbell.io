@@ -3,7 +3,7 @@ import { useAccount } from "wagmi";
 import { DynamicContainer, DynamicContainerContent } from "@crossbell/ui";
 
 import { BaseModal, Congrats } from "../../components";
-import { SignInWithWallet } from "../../scenes";
+import { SignInWithWallet, OPSignSettings } from "../../scenes";
 
 import { Scene, SceneKind } from "./types";
 import { StoresProvider, useConnectModal, useScenesStore } from "./stores";
@@ -22,7 +22,6 @@ import { InputEmailToResetPassword2 } from "./scenes/input-email-to-reset-passwo
 import { SelectConnectKind } from "./scenes/select-connect-kind";
 import { SelectWalletToConnect } from "./scenes/select-wallet-to-connect";
 import { SelectCharacters } from "./scenes/select-characters";
-import { OPSignSettings } from "./scenes/op-sign-settings";
 import { MintCharacter } from "./scenes/mint-character";
 
 export { useConnectModal };
@@ -92,7 +91,7 @@ function renderScene(scene: Scene) {
 		case SceneKind.selectCharacters:
 			return <SelectCharacters />;
 		case SceneKind.opSignSettings:
-			return <OPSignSettings {...scene} />;
+			return <OPSignSettings Header={Header} {...scene} />;
 		case SceneKind.mintCharacter:
 			return <MintCharacter {...scene} />;
 		case SceneKind.inputEmailToConnect:
