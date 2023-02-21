@@ -4,7 +4,7 @@ import Link from "next/link";
 import { useRouter } from "next/router";
 
 import type { NextPageWithLayout } from "@/pages/_app";
-import { Promotion } from "@/components/promotion/x-sync";
+import { Promotion } from "@/components/promotion";
 import { Feed, FeedSkeleton } from "@/components/common/Feed";
 import { LoadMore } from "~/shared/components/load-more";
 import Tabs from "@/components/common/Tabs";

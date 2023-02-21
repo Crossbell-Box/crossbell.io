@@ -1,4 +1,4 @@
-import { Promotion } from "@/components/promotion/x-sync";
+import { Promotion } from "@/components/promotion";
 import { Note, NoteSkeleton } from "@/components/common/Note";
 import { getLayout } from "@/components/layouts/AppLayout";
 import Header from "@/components/layouts/Header";
