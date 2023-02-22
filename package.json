@@ -25,6 +25,14 @@
 	"dependencies": {
 		"@crossbell/ipfs-gateway": "0.0.15",
 		"@crossbell/ipfs-react": "0.0.15",
+		"@crossbell/connect-kit": "0.0.36",
+		"@crossbell/contract": "0.0.36",
+		"@crossbell/indexer": "0.0.36",
+		"@crossbell/notification": "0.0.36",
+		"@crossbell/ui": "0.0.36",
+		"@crossbell/util-ethers": "0.0.36",
+		"@crossbell/util-hooks": "0.0.36",
+		"@crossbell/util-metadata": "0.0.36",
 		"@ctrl/tinycolor": "3.4.1",
 		"@emoji-mart/react": "1.0.1",
 		"@emotion/cache": "11.10.5",
@@ -46,7 +54,7 @@
 		"@wagmi/core": "^0.9.3",
 		"canvas-confetti": "1.6.0",
 		"classnames": "2.3.2",
-		"crossbell.js": "0.16.5",
+		"crossbell.js": "0.16.6",
 		"dayjs": "1.11.6",
 		"detect-browser": "5.3.0",
 		"embla-carousel-react": "7.0.4",
@@ -77,7 +85,7 @@
 		"type-fest": "3.1.0",
 		"typeit-react": "2.6.0",
 		"wagmi": "0.11.2",
-		"zustand": "^4.1.5"
+		"zustand": "^4.3.3"
 	},
 	"devDependencies": {
 		"@crossbell/ipfs-gateway-next": "0.0.15",

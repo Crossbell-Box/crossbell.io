@@ -8,10 +8,11 @@ import {
 	LoadingOverlay,
 } from "@mantine/core";
 import { useDisclosure } from "@mantine/hooks";
-import { ListResponse, LinkEntity, CharacterEntity } from "crossbell.js";
-
-import { useNoteLikes } from "@crossbell/indexer";
-import { useAccountCharacter } from "@crossbell/connect-kit";
+import {
+	useAccountCharacter,
+	useIsNoteLiked,
+	useNoteLikeList,
+} from "@crossbell/connect-kit";
 
 import { Avatar } from "~/shared/components/avatar";
 import { LoadMore } from "~/shared/components/load-more";
@@ -30,26 +31,11 @@ export type NoteLikesProps = {
 	model: NoteModel;
 };
 
-enum LocalItemStatus {
-	common = "common",
-	showCurrentCharacter = "showCurrentCharacter",
-}
-
 export function NoteLikes({ model }: NoteLikesProps) {
-	const { data, fetchNextPage, hasNextPage, isFetchingNextPage } = useNoteLikes(
-		model.characterId,
-		model.noteId
-	);
-	const currentCharacter = useAccountCharacter();
-	const [items, status] = useItems(data?.pages, currentCharacter, model);
+	const [list, { fetchNextPage, hasNextPage, isFetchingNextPage }] =
+		useNoteLikeList(model);
 
 	const total = model.likeCount ?? 0;
-	const thumbnailCount =
-		total > maxThumbnailCount
-			? status === LocalItemStatus.showCurrentCharacter
-				? maxThumbnailCount - 1
-				: maxThumbnailCount
-			: total;
 	const [isModalOpened, modal] = useDisclosure(false);
 
 	return (
@@ -67,21 +53,18 @@ export function NoteLikes({ model }: NoteLikesProps) {
 						<AvatarsPlaceholder />
 					) : (
 						<BaseAvatar.Group spacing="sm" className="flex-row-reverse">
-							{items
-								.slice(0, thumbnailCount)
+							{list
+								.slice(0, maxThumbnailCount)
 								.reverse()
-								.map(({ linklistId, fromCharacter }) => {
+								.map(({ character, transactionHash }, key) => {
 									return (
 										<Avatar
 											{...avatarStyles}
-											key={linklistId}
-											character={fromCharacter}
+											key={transactionHash ?? key}
+											character={character}
 										/>
 									);
 								})}
-							{status === LocalItemStatus.showCurrentCharacter && (
-								<Avatar {...avatarStyles} character={currentCharacter} />
-							)}
 						</BaseAvatar.Group>
 					)}
 				</div>
@@ -113,20 +96,14 @@ export function NoteLikes({ model }: NoteLikesProps) {
 				) : (
 					<ScrollArea.Autosize mah="80vh">
 						<div className="px-24px pt-12px pb-24px">
-							{status === LocalItemStatus.showCurrentCharacter && (
-								<Item character={currentCharacter} />
-							)}
-
-							{items.map(
-								({ linklistId, fromCharacter, createdAt, transactionHash }) => (
-									<Item
-										key={linklistId}
-										character={fromCharacter}
-										transactionHash={transactionHash}
-										createdAt={createdAt}
-									/>
-								)
-							)}
+							{list.map(({ character, transactionHash, entity }) => (
+								<Item
+									key={transactionHash}
+									character={character}
+									transactionHash={transactionHash}
+									createdAt={entity?.createdAt}
+								/>
+							))}
 
 							<LoadMore
 								onLoadMore={() => fetchNextPage()}
@@ -141,36 +118,4 @@ export function NoteLikes({ model }: NoteLikesProps) {
 			</Modal>
 		</>
 	);
-}
-
-function useItems(
-	pages: ListResponse<LinkEntity>[] | undefined,
-	currentCharacter: CharacterEntity | undefined,
-	model: NoteModel
-): [LinkEntity[], LocalItemStatus] {
-	return React.useMemo(() => {
-		const items: LinkEntity[] = [];
-		let currentCharacterIndex = -1;
-
-		pages?.forEach(({ list }) => {
-			list.forEach((item) => {
-				if (item.fromCharacterId === currentCharacter?.characterId) {
-					currentCharacterIndex = items.length;
-				}
-
-				items.push(item);
-			});
-		});
-
-		if (model.isLiked && currentCharacterIndex === -1) {
-			return [items, LocalItemStatus.showCurrentCharacter];
-		}
-
-		if (!model.isLiked && currentCharacterIndex !== -1) {
-			items.splice(currentCharacterIndex, 1);
-			return [items, LocalItemStatus.common];
-		}
-
-		return [items, LocalItemStatus.common];
-	}, [pages, model, currentCharacter]);
 }

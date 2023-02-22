@@ -1,11 +1,13 @@
 import React from "react";
 
 import {
-	useAccountCharacter,
 	useToggleLikeNote,
 	useMintNote,
+	useIsNoteLiked,
+	useNoteLikeCount,
 } from "@crossbell/connect-kit";
 import { useNoteStatus } from "@crossbell/indexer";
+import { useRefCallback } from "@crossbell/util-hooks";
 
 import { useLoginChecker } from "~/shared/wallet/hooks";
 
@@ -18,6 +20,7 @@ export type NoteModel = {
 	characterId: number;
 	noteId: number;
 	isLoading: boolean;
+	loadingDescription: string;
 	commentCount?: number;
 
 	isLiked: boolean;
@@ -30,24 +33,17 @@ export type NoteModel = {
 };
 
 export function useNoteModel({ characterId, noteId }: UseNoteActionsConfig) {
-	const currentCharacter = useAccountCharacter();
-	const { data: status } = useNoteStatus(
-		characterId,
-		noteId,
-		currentCharacter ?? null
-	);
-
-	const {
-		isLiked,
-		isLoading: isToggleLikeNoteLoading,
-		likeCount,
-		toggleLike,
-	} = useToggleLikeNote({
-		characterId,
-		noteId,
-		status,
+	const { data: status } = useNoteStatus(characterId, noteId);
+	const [{ isLiked }] = useIsNoteLiked({
+		toNoteId: noteId,
+		toCharacterId: characterId,
 	});
+	const { data: likeCount } = useNoteLikeCount({ characterId, noteId });
+	const { isPending: isToggleLikeNoteLoading, mutate } = useToggleLikeNote();
 
+	const like = useRefCallback(() =>
+		mutate({ characterId, noteId, action: isLiked ? "unlink" : "link" })
+	);
 	const mintNote = useMintNote();
 
 	const { validate } = useLoginChecker();
@@ -57,21 +53,18 @@ export function useNoteModel({ characterId, noteId }: UseNoteActionsConfig) {
 			characterId,
 			noteId,
 			isLoading: isToggleLikeNoteLoading || mintNote.isLoading,
+			loadingDescription: mintNote.isLoading ? "Minting..." : "Loading...",
 
 			commentCount: status?.commentCount,
 
 			isLiked: !!isLiked,
 			likeCount,
-			like() {
-				if (validate()) {
-					toggleLike();
-				}
-			},
+			like,
 
 			isMinted: !!status?.isMinted,
 			mintCount: status?.mintCount,
 			mint() {
-				if (!status?.isMinted && validate({ walletRequired: true })) {
+				if (!status?.isMinted) {
 					mintNote.mutate({ characterId, noteId });
 				}
 			},
@@ -86,7 +79,7 @@ export function useNoteModel({ characterId, noteId }: UseNoteActionsConfig) {
 			status?.commentCount,
 			status?.isMinted,
 			status?.mintCount,
-			toggleLike,
+			like,
 			validate,
 		]
 	);
