@@ -115,8 +115,13 @@ export function UnbindingModal() {
 									</div>
 
 									<div className="flex w-full h-44px">
-										<div className="h-full bg-[#1C1B1F]/4 border-none rounded-l-8px flex-1 flex items-center justify-center text-[#737272] text-16px leading-24px font-400">
-											{veriHandle}
+										<div
+											title={veriHandle}
+											className="h-full bg-[#1C1B1F]/4 border-none rounded-l-8px flex-1 flex items-center justify-center text-[#737272] text-16px leading-24px font-400 w-0 px-2"
+										>
+											<span className="max-w-full overflow-hidden text-ellipsis">
+												{veriHandle}
+											</span>
 										</div>
 										<button
 											className={classNames(
