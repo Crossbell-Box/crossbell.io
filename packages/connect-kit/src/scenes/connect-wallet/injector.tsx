@@ -3,9 +3,9 @@ import { Popover } from "@mantine/core";
 import classNames from "classnames";
 import { RefreshFilledIcon } from "@crossbell/ui";
 
-import { Wallet, WalletConnector } from "../../../../wallets";
+import { Wallet, WalletConnector } from "../../wallets";
 
-import { Header } from "../../components/header";
+import { ModalHeaderProps } from "../../components";
 
 import commonStyles from "./index.module.css";
 import styles from "./injector.module.css";
@@ -14,11 +14,13 @@ import { STATUS_TEXT_MAP } from "./text";
 import { useConnectState } from "./use-connect-state";
 
 export type ConnectWithInjectorProps = {
+	Header: React.ComponentType<ModalHeaderProps>;
 	wallet: Wallet;
 	connector: WalletConnector;
 };
 
 export function ConnectWithInjector({
+	Header,
 	wallet,
 	connector,
 }: ConnectWithInjectorProps) {

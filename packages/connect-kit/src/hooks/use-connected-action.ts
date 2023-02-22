@@ -79,11 +79,7 @@ export function useConnectedAction<P extends any[], V>(
 					}
 				};
 
-				if (connectType !== "email" && wallet && !wallet?.characterId) {
-					// Wallet is connected but no character
-					callbackRef.current = callback;
-					useWalletMintNewCharacterModal.getState().show();
-				} else if (connectType === "wallet" && isEmailConnected) {
+				if (connectType === "wallet" && isEmailConnected) {
 					// Email is connected but require wallet connection
 					const emailCharacterId = email.characterId;
 
@@ -98,6 +94,10 @@ export function useConnectedAction<P extends any[], V>(
 					};
 
 					useUpgradeAccountModal.getState().show();
+				} else if (connectType !== "email" && wallet && !wallet?.characterId) {
+					// Wallet is connected but no character
+					callbackRef.current = callback;
+					useWalletMintNewCharacterModal.getState().show();
 				} else {
 					callbackRef.current = callback;
 					useConnectModal.getState().show();

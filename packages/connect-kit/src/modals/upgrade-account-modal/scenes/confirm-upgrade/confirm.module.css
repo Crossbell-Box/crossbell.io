@@ -1,0 +1,51 @@
+@media (min-width: 768px) {
+	.container {
+		width: 360px;
+	}
+}
+
+.main {
+	padding: 13px 24px 24px;
+}
+
+.fieldContainer > div:not(:first-child) {
+	margin-top: 24px;
+}
+
+.walletIcon {
+	width: 24px;
+	height: 24px;
+}
+
+.csbIcon {
+	width: 20px;
+	height: 20px;
+	color: #f6c549;
+}
+
+.address {
+	margin: 12px 0;
+	padding: 10px 16px;
+	font-size: 14px;
+	background: rgba(28, 27, 31, 0.04);
+	color: rgba(28, 27, 31, 0.38);
+	border-radius: 12px;
+	word-break: break-all;
+}
+
+.actions {
+	display: flex;
+	justify-content: space-between;
+	gap: 12px;
+	margin-top: 48px;
+}
+
+.actions button:first-of-type {
+	background: #f6f7f9;
+	color: #000;
+}
+
+.actions button {
+	flex: 1;
+	height: 48px;
+}

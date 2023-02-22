@@ -15,11 +15,11 @@
 	transform: translate(-50%, 0);
 }
 
-.content [data-animation="scale-fade-in"] {
+.content:not(.noAnimation) [data-animation="scale-fade-in"] {
 	animation: scaleFadeIn 0.2s;
 }
 
-.content [data-animation="fade-in"] {
+.content:not(.noAnimation) [data-animation="fade-in"] {
 	animation: fadeIn 0.2s;
 }
 

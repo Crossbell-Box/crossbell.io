@@ -1,0 +1,7 @@
+.tweetContentNode {
+	white-space: pre-wrap;
+}
+
+.tweetContentNode span {
+	word-break: break-all;
+}

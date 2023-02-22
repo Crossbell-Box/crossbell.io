@@ -2,9 +2,9 @@ import React from "react";
 import classNames from "classnames";
 import { useWeb2Url } from "@crossbell/ui";
 
-import { IMAGES } from "../../../utils";
+import { IMAGES } from "../../utils";
 
-import styles from "./other-wallets.module.css";
+import styles from "./index.module.css";
 
 const WalletConnect = (props: React.SVGAttributes<SVGSVGElement>) => (
 	<svg

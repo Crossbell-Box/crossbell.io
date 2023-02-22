@@ -24,7 +24,7 @@ export function SelectOptions() {
 					{`Email account can't mint because a wallet is required to keep your assets. `}
 					<a
 						className={styles.tipsBtn}
-						href=""
+						href="https://crossbell-io-updates.xlog.app/Weekly-Updates-2023%2F02%2F06"
 						target="_blank"
 						rel="noreferrer"
 					>
@@ -34,11 +34,13 @@ export function SelectOptions() {
 				<Selections
 					items={[
 						{
-							id: SceneKind.upgradeToWallet,
+							id: SceneKind.selectWalletToConnect,
 							title: "Upgrade to Wallet",
 							style: { background: "#6AD991", color: "#FFF" },
 							icon: <WalletIcon className={styles.walletIcon} />,
-							onClick: () => goToScene({ kind: SceneKind.upgradeToWallet }),
+							onClick: () => {
+								goToScene({ kind: SceneKind.selectWalletToConnect });
+							},
 						},
 
 						{

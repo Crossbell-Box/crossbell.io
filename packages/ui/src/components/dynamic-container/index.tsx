@@ -54,6 +54,8 @@ export function DynamicContainerContent({
 
 	const nodeRef = React.useRef<HTMLDivElement | null>(null);
 	const ref = useResizerObserver({ ref: nodeRef, onResize: update });
+	const initialIdRef = React.useRef(id);
+	const skipMountAnimation = initialIdRef.current === id;
 
 	return (
 		<TransitionGroup>
@@ -61,7 +63,10 @@ export function DynamicContainerContent({
 				{(state) => (
 					<div
 						ref={ref}
-						className={styles.content}
+						className={classNames(
+							styles.content,
+							skipMountAnimation && styles.noAnimation
+						)}
 						style={{ ...defaultStyle, ...transitionStyles[state] }}
 					>
 						{children}

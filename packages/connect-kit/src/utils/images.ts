@@ -19,6 +19,8 @@ export const IMAGES = {
 
 	copyLinkToTweetImg:
 		"ipfs://bafkreifpp64hj7tvaxiz3l3tu3bypyuan7vnrdzn7rbq3qctd42tusduqi",
+
+	waveBg: "ipfs://bafkreiclraq3enbmwtqavz4gardvgq3riufjinwcictywoxrgl2xnva24e",
 } as const;
 
 const imgs = Object.values(IMAGES);
