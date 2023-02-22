@@ -36,7 +36,7 @@ export function ConfirmUpgrade({ scene }: ConfirmUpgradeProps) {
 				title: "Congrats!",
 				desc: [
 					isCSBClaimedRef.current
-						? "You have upgraded to wallet account and get 0.02$CSB."
+						? "You have upgraded to wallet account and get 0.02 $CSB."
 						: "You have upgraded to wallet account.",
 					"Now you can return into the feed and enjoy Crossbell.",
 				]

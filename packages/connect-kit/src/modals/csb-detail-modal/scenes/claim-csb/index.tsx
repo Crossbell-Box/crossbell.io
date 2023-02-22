@@ -15,7 +15,7 @@ export function ClaimCSB() {
 		goTo({
 			kind: SceneKind.congrats,
 			title: "Congrats!",
-			desc: "You have claimed 0.02$CSB.",
+			desc: "You have claimed 0.02 $CSB.",
 			tips: "Welcome to new Crossbell",
 			timeout: "15s",
 			btnText: "Close",
