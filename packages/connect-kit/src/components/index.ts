@@ -21,6 +21,7 @@ export * from "./qr-code";
 export * from "./text-input";
 export * from "./textarea";
 export * from "./select-characters";
+export * from "./settings-section";
 export * from "./main-btn";
 export * from "./sign-in-with-wallet";
 export * from "./transfer-csb";

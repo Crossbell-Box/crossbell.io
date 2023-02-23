@@ -1,6 +1,7 @@
 import React from "react";
 import classNames from "classnames";
 import { LoadingOverlay } from "@crossbell/ui";
+import compact from "lodash.compact";
 
 import { useIsWalletSignedIn, useWalletSignIn } from "../../hooks";
 import { BottomTips } from "../bottom-tips";
@@ -11,7 +12,7 @@ import styles from "./index.module.css";
 
 export type SignInWithWalletProps = {
 	afterSignIn?: () => void;
-	onSkip: () => void;
+	onSkip?: () => void;
 	signInText?: React.ReactNode;
 	skipText?: React.ReactNode;
 };
@@ -41,7 +42,7 @@ export function SignInWithWallet({
 			<LoadingOverlay visible={signIn.isLoading} />
 
 			<Selections
-				items={[
+				items={compact([
 					{
 						id: "sign-in",
 						icon: null,
@@ -49,14 +50,14 @@ export function SignInWithWallet({
 						className: classNames(styles.item, styles.signInItem),
 						onClick: () => signIn.mutate(),
 					},
-					{
+					!!onSkip && {
 						id: "skip",
 						icon: null,
 						title: skipText ?? "Skip",
 						className: classNames(styles.item),
 						onClick: onSkip,
 					},
-				]}
+				])}
 			/>
 
 			<a
