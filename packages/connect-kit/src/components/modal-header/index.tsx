@@ -1,5 +1,5 @@
 import React from "react";
-import { BackIcon, CloseIcon } from "@crossbell/ui";
+import { BackIcon, CloseIcon, useBaseModalContext } from "@crossbell/ui";
 
 import { IconBtn } from "../icon-btn";
 import styles from "./index.module.css";
@@ -21,6 +21,8 @@ export function ModalHeader({
 	isAbleToGoBack,
 	onClose,
 }: ModalHeaderProps) {
+	const modalContext = useBaseModalContext();
+
 	return (
 		<div data-animation="fade-in" className={styles.container}>
 			<div className={styles.main}>
@@ -36,7 +38,10 @@ export function ModalHeader({
 				<div>
 					{rightNode ??
 						(onClose && (
-							<IconBtn onClick={onClose}>
+							<IconBtn
+								disabled={!modalContext.canClose}
+								onClick={onClose ?? modalContext.onClose}
+							>
 								<CloseIcon />
 							</IconBtn>
 						))}
