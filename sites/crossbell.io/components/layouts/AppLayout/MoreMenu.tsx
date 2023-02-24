@@ -12,7 +12,7 @@ export default function MoreMenu() {
 					size="md"
 					radius="md"
 					leftIcon={<Text color="dark" className="i-csb:more text-24px" />}
-					className="text-[#082135]"
+					className="text-[#082135] w-full"
 				>
 					More
 				</Button>
