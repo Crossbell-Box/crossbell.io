@@ -1,0 +1,14 @@
+.container {
+	--dynamic-scenes-container__width: 360px;
+	--dynamic-scenes-container__padding: 24px;
+}
+
+@media (min-width: 768px) {
+	.container {
+		width: var(--dynamic-scenes-container__width);
+	}
+}
+
+.main {
+	padding: var(--dynamic-scenes-container__padding);
+}
