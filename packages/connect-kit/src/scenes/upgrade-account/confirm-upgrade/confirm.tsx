@@ -1,26 +1,32 @@
 import React from "react";
 import { LogoIcon } from "@crossbell/ui";
 
-import { useAccountState } from "../../../../hooks";
+import { useAccountState } from "../../../hooks";
 import {
 	Field,
 	WalletIcon,
 	ActionBtn,
 	FiledTips,
-} from "../../../../components";
+	HeaderProps,
+	DynamicScenesHeader,
+} from "../../../components";
 
-import { useUpgradeAccountModal } from "../../stores";
-import { Header } from "../../components/header";
 import styles from "./confirm.module.css";
 
 export type ConfirmProps = {
 	onConfirm: () => void;
 	confirmText: React.ReactNode;
+	onSkip: () => void;
+	Header?: React.ComponentType<HeaderProps>;
 };
 
-export function Confirm({ onConfirm, confirmText }: ConfirmProps) {
+export function Confirm({
+	onConfirm,
+	confirmText,
+	onSkip,
+	Header = DynamicScenesHeader,
+}: ConfirmProps) {
 	const address = useAccountState((s) => s.wallet?.address);
-	const { hide } = useUpgradeAccountModal();
 
 	return (
 		<div className={styles.container}>
@@ -52,7 +58,7 @@ export function Confirm({ onConfirm, confirmText }: ConfirmProps) {
 				</div>
 
 				<div className={styles.actions}>
-					<ActionBtn onClick={hide} size="md">
+					<ActionBtn onClick={onSkip} size="md">
 						Remain
 					</ActionBtn>
 					<ActionBtn color="green" onClick={onConfirm} size="md">
