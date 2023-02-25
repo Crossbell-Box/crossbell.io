@@ -13,6 +13,7 @@ import {
 	MintCharacterFormSlim as SlimForm,
 	WalletClaimCSB,
 	ModalHeaderProps,
+	DynamicScenesHeader,
 } from "../../components";
 
 import styles from "./index.module.css";
@@ -23,7 +24,7 @@ export type MintCharacterFormMode = "slim" | "normal";
 export type MintCharacterProps = {
 	sceneMode: MintCharacterSceneMode;
 	formMode: MintCharacterFormMode;
-	Header: React.ComponentType<ModalHeaderProps>;
+	Header?: React.ComponentType<ModalHeaderProps>;
 	onSwitchSceneMode: (sceneMode: MintCharacterSceneMode) => void;
 	onSwitchFormMode: (formMode: MintCharacterFormMode) => void;
 	onSuccess: () => void;
@@ -38,11 +39,12 @@ export function MintCharacter(props: MintCharacterProps) {
 
 	const { submit, form, hasEnoughCSB, isLoading, onClaimCSBSuccess } =
 		useMintModel(props);
+	const Header = props.Header ?? DynamicScenesHeader;
 
 	return (
 		<div className={styles.container}>
 			<LoadingOverlay visible={isLoading} />
-			<props.Header
+			<Header
 				title={((): string => {
 					switch (props.sceneMode) {
 						case "form": {

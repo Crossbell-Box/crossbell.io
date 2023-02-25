@@ -8,17 +8,22 @@ import {
 	useWeb2Url,
 } from "@crossbell/ui";
 
-import { MainBtn, ModalHeaderProps } from "../../components";
+import {
+	DynamicScenesHeader,
+	MainBtn,
+	ModalHeaderProps,
+} from "../../components";
 import { IMAGES } from "../../utils";
 
 import styles from "./index.module.css";
 
 export type GetAWalletProps = {
-	Header: React.ComponentType<ModalHeaderProps>;
+	Header?: React.ComponentType<ModalHeaderProps>;
 };
 
-export function GetAWallet({ Header }: GetAWalletProps) {
+export function GetAWallet({ Header: Header_ }: GetAWalletProps) {
 	const waveBg = useWeb2Url(IMAGES.waveBg);
+	const Header = Header_ ?? DynamicScenesHeader;
 
 	return (
 		<div className={styles.container}>

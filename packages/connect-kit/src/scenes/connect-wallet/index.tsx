@@ -1,25 +1,26 @@
 import React from "react";
 import { useAccount } from "wagmi";
 
-import { ModalHeaderProps } from "../../components";
+import { DynamicScenesHeader, ModalHeaderProps } from "../../components";
 
 import { Wallet } from "../../wallets";
 import { ConnectWithQRCode, isQRCodeWalletConnector } from "./qrCode";
 import { ConnectWithInjector } from "./injector";
 
 export type ConnectWalletProps = {
-	Header: React.ComponentType<ModalHeaderProps>;
+	Header?: React.ComponentType<ModalHeaderProps>;
 	wallet: Wallet;
 	onConnect?: () => void;
 };
 
 export function ConnectWallet({
 	wallet,
-	Header,
+	Header: Header_,
 	onConnect,
 }: ConnectWalletProps) {
 	const connector = React.useMemo(() => wallet.createConnector(), [wallet]);
 	const { isConnected } = useAccount();
+	const Header = Header_ ?? DynamicScenesHeader;
 
 	React.useEffect(() => {
 		if (isConnected) {
