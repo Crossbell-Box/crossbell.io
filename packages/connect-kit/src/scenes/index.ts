@@ -1,4 +1,5 @@
 export * from "./mint-character";
+export * from "./connect-kind-differences";
 export * from "./connect-wallet";
 export * from "./op-sign-settings";
 export * from "./get-a-wallet";
