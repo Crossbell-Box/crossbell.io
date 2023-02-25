@@ -1,7 +1,6 @@
 import React from "react";
-import styles from "./index.module.css";
 
-import { SelectWalletToConnect as Main } from "../../../../scenes";
+import { SelectWalletToConnect as Main } from "../../../../scenes/upgrade-account/select-wallet-to-connect";
 
 import { SceneKind } from "../../types";
 import { useScenesStore } from "../../stores";
@@ -12,7 +11,6 @@ export function SelectWalletToConnect() {
 
 	return (
 		<Main
-			tipsBtnClassName={styles.tipsBtn}
 			Header={Header}
 			onSelectWallet={(wallet) => {
 				goTo({ kind: SceneKind.connectWallet, wallet });
