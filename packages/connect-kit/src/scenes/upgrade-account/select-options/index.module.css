@@ -1,14 +1,3 @@
-.container {
-	margin: 0 24px;
-	padding-bottom: 18px;
-}
-
-@media (min-width: 768px) {
-	.container {
-		width: 312px;
-	}
-}
-
 .tips {
 	margin: 10px 0 20px;
 	text-align: center;
@@ -19,6 +8,15 @@
 
 .tipsBtn {
 	color: #6ad991;
+}
+
+.item {
+	font-weight: 500;
+}
+
+.walletIcon,
+.emailIcon {
+	margin-left: auto;
 }
 
 .walletIcon {
@@ -34,9 +32,6 @@
 
 .differenceBtn {
 	margin-top: 16px;
-	height: 42px;
-	font-size: 14px;
-	font-weight: 400;
 }
 
 .differenceIcon {
