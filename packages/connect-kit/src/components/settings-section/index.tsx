@@ -25,6 +25,8 @@ export function SettingsSection({
 	items,
 	className,
 }: SettingsSectionProps) {
+	if (items.length === 0) return null;
+
 	return (
 		<div className={classNames(styles.container, className)}>
 			<h4 className={styles.title}>{title}</h4>

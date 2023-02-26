@@ -82,13 +82,14 @@ export function MainSetting() {
 				<SettingsSection
 					title="Connect"
 					items={compact([
-						{
+						!account.email && {
 							id: "sign-in",
 							icon: <IdCardIcon className={styles.icon} />,
 							title: "Sign In",
-							disabled: !!account.email || !!account.wallet?.siwe,
+							disabled: !!account.wallet?.siwe,
 							onClick: goToSignIn,
 						},
+
 						!!account.email && {
 							id: "upgrade-email-account",
 							icon: <WalletIcon className={styles.icon} />,
@@ -102,12 +103,12 @@ export function MainSetting() {
 				<SettingsSection
 					title="Operator"
 					items={compact([
-						{
+						!account.email && {
 							id: "op-sign",
 							icon: <DumbOpSignIcon className={styles.icon} isActive={true} />,
 							title: "Operator Sign",
 							description: "Set up operator for interactions",
-							disabled: !characterId || !!account.email,
+							disabled: !characterId,
 							onClick: goToOPSign,
 						},
 					])}
