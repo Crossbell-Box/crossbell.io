@@ -2,34 +2,109 @@ import React from "react";
 import { LoadingOverlay } from "@crossbell/ui";
 import { useRefCallback } from "@crossbell/util-hooks";
 
-import { HeaderProps, DynamicScenesHeader } from "../../../components";
+import { useDynamicScenesModal, Congrats } from "../../../components";
+import { SignInWithWallet } from "../../sign-in-with-wallet";
+
 import {
 	useAccountState,
 	useClaimCSBStatus,
 	useWithdrawEmailAccount,
 } from "../../../hooks";
 import { WalletClaimCSB } from "../../wallet-claim-csb";
+import { SelectCharacters } from "../select-characters";
 
 import { Confirm } from "./confirm";
 import styles from "./index.module.css";
 
 export type ConfirmUpgradeScene = "claim-csb" | "confirm";
 
-export type ConfirmUpgradeProps = {
+type BaseConfirmUpgradeProps = {
 	scene: ConfirmUpgradeScene;
-	Header?: React.ComponentType<HeaderProps>;
 	onSkip: () => void;
 	onSuccess: (params: { isCSBClaimed: boolean }) => void;
 	onSwitchScene: (scene: ConfirmUpgradeScene) => void;
 };
 
-export function ConfirmUpgrade({
+export type ConfirmUpgradeProps = Pick<BaseConfirmUpgradeProps, "scene">;
+
+export function ConfirmUpgrade({ scene }: ConfirmUpgradeProps) {
+	const { goTo, updateLast, hide } = useDynamicScenesModal();
+
+	const onSuccess = useRefCallback(
+		({ isCSBClaimed }: { isCSBClaimed: boolean }) => {
+			goTo({
+				kind: "congrats",
+				Component: () => <CongratsForUpgrade isCSBClaimed={isCSBClaimed} />,
+			});
+		}
+	);
+
+	const onSwitchScene = useRefCallback((scene: ConfirmUpgradeScene) => {
+		updateLast({
+			kind: "confirm-upgrade",
+			Component: () => <ConfirmUpgrade scene={scene} />,
+		});
+	});
+
+	return (
+		<BaseConfirmUpgrade
+			scene={scene}
+			onSkip={hide}
+			onSwitchScene={onSwitchScene}
+			onSuccess={onSuccess}
+		/>
+	);
+}
+
+function CongratsForUpgrade({ isCSBClaimed }: { isCSBClaimed: boolean }) {
+	const { hide, resetScenes, goTo } = useDynamicScenesModal();
+
+	return (
+		<Congrats
+			title="Congrats!"
+			desc={[
+				isCSBClaimed
+					? "You have upgraded to wallet account and get 0.02 $CSB."
+					: "You have upgraded to wallet account.",
+				"Now you can return into the feed and enjoy Crossbell.",
+			]
+				.filter(Boolean)
+				.join(" ")}
+			tips="Welcome to new Crossbell"
+			timeout="15s"
+			btnText="Sign In"
+			onClose={hide}
+			onClickBtn={() => {
+				const goToSelectCharacter = () => {
+					resetScenes([
+						{
+							kind: "select-characters",
+							Component: SelectCharacters,
+						},
+					]);
+				};
+
+				goTo({
+					kind: "sign-in-with-wallet",
+					Component: () => (
+						<SignInWithWallet
+							signInText="Sign In (Recommended)"
+							onSkip={goToSelectCharacter}
+							afterSignIn={goToSelectCharacter}
+						/>
+					),
+				});
+			}}
+		/>
+	);
+}
+
+function BaseConfirmUpgrade({
 	scene,
-	Header = DynamicScenesHeader,
 	onSuccess,
 	onSkip,
 	onSwitchScene,
-}: ConfirmUpgradeProps) {
+}: BaseConfirmUpgradeProps) {
 	const { isEligibleToClaim } = useClaimCSBStatus();
 	const character = useAccountState((s) => s.email?.character);
 	const isCSBClaimedRef = React.useRef(false);
@@ -69,7 +144,6 @@ export function ConfirmUpgrade({
 			{scene === "confirm" && (
 				<Confirm
 					onSkip={onSkip}
-					Header={Header}
 					onConfirm={handleConfirm}
 					confirmText={isEligibleToClaim ? "Claim $CSB" : "Upgrade Now"}
 				/>
@@ -77,7 +151,6 @@ export function ConfirmUpgrade({
 
 			{scene === "claim-csb" && (
 				<WalletClaimCSB
-					Header={Header}
 					onSuccess={handleClaimSuccess}
 					onSkip={skipClaim}
 					claimBtnText="Upgrade Now"

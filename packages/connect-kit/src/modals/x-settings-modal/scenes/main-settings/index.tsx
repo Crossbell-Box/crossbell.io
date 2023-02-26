@@ -4,6 +4,7 @@ import { useRefCallback } from "@crossbell/util-hooks";
 
 import { useAccountState } from "../../../../hooks";
 import { SignInWithWallet, OPSignSettings } from "../../../../scenes";
+import { SelectOptions } from "../../../../scenes/upgrade-account";
 
 import {
 	DynamicScenesHeader,
@@ -36,6 +37,13 @@ export function MainSetting() {
 		});
 	});
 
+	const goToUpgradeAccount = useRefCallback(() => {
+		goTo({
+			kind: "op-sign",
+			Component: () => <SelectOptions onCancel={goBack} />,
+		});
+	});
+
 	return (
 		<DynamicScenesContainer
 			header={<DynamicScenesHeader title="xSettings" />}
@@ -57,6 +65,7 @@ export function MainSetting() {
 							icon: <DumbOpSignIcon isActive={true} />,
 							title: "Upgrade Account",
 							description: "Upgrade to wallet account for assets",
+							onClick: goToUpgradeAccount,
 						},
 					])}
 				/>
