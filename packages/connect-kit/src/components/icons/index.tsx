@@ -58,6 +58,39 @@ export function WalletIcon(props: React.SVGAttributes<SVGSVGElement>) {
 	);
 }
 
+export function IdCardIcon(props: React.SVGAttributes<SVGSVGElement>) {
+	return (
+		<svg
+			width="1em"
+			height="1em"
+			viewBox="0 0 24 24"
+			fill="none"
+			xmlns="http://www.w3.org/2000/svg"
+			{...props}
+		>
+			<g clipPath="url(#clip0_6055_20504)">
+				<path
+					d="M23 6C23 4.896 22.104 4 21 4H3C1.896 4 1 4.896 1 6V18C1 19.104 1.896 20 3 20H21C22.104 20 23 19.104 23 18V6Z"
+					fill="#E1E8F7"
+				/>
+				<path
+					d="M7 13C5.343 13 4 11.657 4 10C4 8.343 5.343 7 7 7C8.657 7 10 8.343 10 10C10 11.657 8.657 13 7 13ZM3 18H11C11 18 11 17 11 16C11 15 9 14 7 14C5 14 3 15 3 16C3 17 3 18 3 18Z"
+					fill="#5B89F7"
+				/>
+				<path
+					d="M13 10C13 9.448 13.447 9 14 9H20C20.553 9 21 9.448 21 10C21 10.552 20.553 11 20 11H14C13.447 11 13 10.552 13 10ZM13 14C13 14.553 13.447 15 14 15H20C20.553 15 21 14.553 21 14C21 13.447 20.553 13 20 13H14C13.447 13 13 13.447 13 14Z"
+					fill="#455A64"
+				/>
+			</g>
+			<defs>
+				<clipPath id="clip0_6055_20504">
+					<rect width="24" height="24" fill="white" />
+				</clipPath>
+			</defs>
+		</svg>
+	);
+}
+
 export function CrossbellIcon(props: React.SVGAttributes<SVGSVGElement>) {
 	return (
 		<svg

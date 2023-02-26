@@ -5,7 +5,7 @@ import { IconBtn } from "../icon-btn";
 import styles from "./index.module.css";
 
 export type ModalHeaderProps = {
-	title: React.ReactNode;
+	title?: React.ReactNode;
 	leftNode?: React.ReactNode;
 	rightNode?: React.ReactNode;
 	isAbleToGoBack?: boolean;
