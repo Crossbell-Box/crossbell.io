@@ -1,20 +1,22 @@
 import React from "react";
 
-import { SignInWithWallet as Main } from "../../../../components";
+import {
+	SignInWithWallet as Main,
+	DynamicScenesContainer,
+} from "../../../../components";
 
 import { Header } from "../../components";
 import { useOpSignSettingsModal } from "../../stores";
-
-import styles from "./index.module.css";
 
 export function SignInWithWallet() {
 	const { hide } = useOpSignSettingsModal();
 
 	return (
-		<div className={styles.container}>
-			<Header leftNode={false} title="Sign In with Wallet" />
-
+		<DynamicScenesContainer
+			padding="8px 24px 18px"
+			header={<Header leftNode={false} title="Sign In with Wallet" />}
+		>
 			<Main onSkip={hide} skipText="Close" />
-		</div>
+		</DynamicScenesContainer>
 	);
 }

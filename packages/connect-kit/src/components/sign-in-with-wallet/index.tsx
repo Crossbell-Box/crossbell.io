@@ -1,12 +1,9 @@
 import React from "react";
-import classNames from "classnames";
 import { LoadingOverlay } from "@crossbell/ui";
-import compact from "lodash.compact";
 
 import { useIsWalletSignedIn, useWalletSignIn } from "../../hooks";
 import { BottomTips } from "../bottom-tips";
-
-import { Selections } from "../../modals/connect-modal/components/selections";
+import { OptionList, OptionListItem } from "../option-list";
 
 import styles from "./index.module.css";
 
@@ -33,7 +30,7 @@ export function SignInWithWallet({
 	}, [isWalletSignedIn]);
 
 	return (
-		<div className={styles.main}>
+		<div>
 			<div className={styles.tips}>
 				By clicking Sign In, you will sign a message and prove you have your
 				private key.
@@ -41,24 +38,21 @@ export function SignInWithWallet({
 
 			<LoadingOverlay visible={signIn.isLoading} />
 
-			<Selections
-				items={compact([
-					{
-						id: "sign-in",
-						icon: null,
-						title: signInText ?? "Sign In",
-						className: classNames(styles.item, styles.signInItem),
-						onClick: () => signIn.mutate(),
-					},
-					!!onSkip && {
-						id: "skip",
-						icon: null,
-						title: skipText ?? "Skip",
-						className: classNames(styles.item),
-						onClick: onSkip,
-					},
-				])}
-			/>
+			<OptionList>
+				<OptionListItem
+					className={styles.item}
+					color="green"
+					onClick={() => signIn.mutate()}
+				>
+					{signInText ?? "Sign In"}
+				</OptionListItem>
+
+				{onSkip && (
+					<OptionListItem className={styles.item} color="gray" onClick={onSkip}>
+						{skipText ?? "Skip"}
+					</OptionListItem>
+				)}
+			</OptionList>
 
 			<a
 				href="https://eips.ethereum.org/EIPS/eip-4361"
