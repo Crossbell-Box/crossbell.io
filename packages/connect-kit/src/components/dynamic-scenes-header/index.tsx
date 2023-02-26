@@ -1,11 +1,7 @@
 import React from "react";
 
 import { ModalHeaderProps, ModalHeader } from "../modal-header";
-
-import {
-	useDynamicScenesModal,
-	useScenesStore,
-} from "../dynamic-scenes-modal/stores";
+import { useDynamicScenesModal } from "../dynamic-scenes-modal";
 
 export type HeaderProps = ModalHeaderProps;
 
@@ -14,11 +10,11 @@ export function DynamicScenesHeader({
 	leftNode,
 	rightNode,
 }: HeaderProps) {
-	const isAbleToGoBack = useScenesStore(
-		({ computed }) => computed.isAbleToGoBack
-	);
-	const goBack = useScenesStore(({ goBack }) => goBack);
-	const { hide } = useDynamicScenesModal();
+	const {
+		hide,
+		goBack,
+		computed: { isAbleToGoBack },
+	} = useDynamicScenesModal();
 
 	return (
 		<ModalHeader

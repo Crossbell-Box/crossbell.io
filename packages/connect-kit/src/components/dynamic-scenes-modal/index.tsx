@@ -3,19 +3,22 @@ import { DynamicContainer, DynamicContainerContent } from "@crossbell/ui";
 
 import { BaseModal } from "../../components";
 
-import { useScenesStore, useDynamicScenesModal } from "./stores";
+import { useDynamicScenesModal } from "./stores";
 
 export { useDynamicScenesModal };
 
 export function DynamicScenesModal() {
-	const { isActive, hide } = useDynamicScenesModal();
-	const scene = useScenesStore((s) => s.computed.currentScene);
+	const {
+		isActive,
+		hide,
+		computed: { currentScene },
+	} = useDynamicScenesModal();
 
 	return (
 		<BaseModal isActive={isActive} onClose={hide}>
-			<DynamicContainer data-scene-kind={scene.kind}>
-				<DynamicContainerContent id={scene.kind}>
-					<scene.Component />
+			<DynamicContainer data-scene-kind={currentScene.kind}>
+				<DynamicContainerContent id={currentScene.kind}>
+					<currentScene.Component />
 				</DynamicContainerContent>
 			</DynamicContainer>
 		</BaseModal>

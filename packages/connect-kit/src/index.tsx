@@ -31,7 +31,7 @@ export { useWalletClaimCSBModal } from "./modals/wallet-claim-csb-modal";
 export { useOpSignSettingsModal } from "./modals/op-sign-settings-modal";
 export { useWalletMintNewCharacterModal } from "./modals/wallet-mint-new-character";
 export { useSelectCharactersModal } from "./modals/select-characters-modal";
-export { useXSettingsModal } from "./modals/x-settings-modal";
+export { showXSettingsModal } from "./modals/x-settings-modal";
 export { OpSignIcon } from "./components";
 export * from "./hooks";
 export * from "./contract-config";

@@ -17,20 +17,20 @@ import styles from "./index.module.css";
 
 export function MainSetting() {
 	const account = useAccountState();
-	const { scenes } = useDynamicScenesModal();
+	const { goTo, goBack } = useDynamicScenesModal();
 	const characterId = account.computed.account?.characterId;
 
 	const goToSignIn = useRefCallback(() => {
-		scenes.goTo({
+		goTo({
 			kind: "sign-in",
 			Component: () => (
-				<SignInWithWallet canGoBack={true} afterSignIn={scenes.goBack} />
+				<SignInWithWallet canGoBack={true} afterSignIn={goBack} />
 			),
 		});
 	});
 
 	const goToOPSign = useRefCallback(() => {
-		scenes.goTo({
+		goTo({
 			kind: "op-sign",
 			Component: () => <OPSignSettings characterId={characterId} />,
 		});
