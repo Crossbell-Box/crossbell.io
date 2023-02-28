@@ -4,20 +4,33 @@ import {
 	SignInWithWallet as Main,
 	SignInWithWalletProps as Props,
 	ModalHeaderProps,
+	DynamicScenesHeader,
+	DynamicScenesContainer,
 } from "../../components";
 
-import styles from "./index.module.css";
-
 export type SignInWithWalletProps = Props & {
-	Header: React.ComponentType<ModalHeaderProps>;
+	canGoBack?: boolean;
+	Header?: React.ComponentType<ModalHeaderProps>;
 };
 
-export function SignInWithWallet({ Header, ...props }: SignInWithWalletProps) {
-	return (
-		<div className={styles.container}>
-			<Header leftNode={false} title="Sign In with Wallet" />
+export function SignInWithWallet({
+	Header: Header_,
+	canGoBack,
+	...props
+}: SignInWithWalletProps) {
+	const Header = Header_ ?? DynamicScenesHeader;
 
+	return (
+		<DynamicScenesContainer
+			padding="8px 24px 18px"
+			header={
+				<Header
+					leftNode={canGoBack ? undefined : false}
+					title="Sign In with Wallet"
+				/>
+			}
+		>
 			<Main {...props} />
-		</div>
+		</DynamicScenesContainer>
 	);
 }

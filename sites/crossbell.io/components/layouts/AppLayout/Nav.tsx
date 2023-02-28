@@ -16,6 +16,7 @@ import {
 import config from "~/shared/config";
 
 import MoreMenu from "./MoreMenu";
+import { XSettingsEntry } from "./x-settings-entry";
 
 export default function Nav() {
 	const [opened, setOpened] = useState(false);
@@ -46,7 +47,8 @@ export default function Nav() {
 				<NavLinks />
 			</Navbar.Section>
 
-			<Navbar.Section className="flex justify-center items-center">
+			<Navbar.Section className="flex justify-center items-center flex-col gap-1">
+				<XSettingsEntry />
 				<MoreMenu />
 			</Navbar.Section>
 		</Navbar>

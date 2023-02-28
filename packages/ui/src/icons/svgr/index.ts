@@ -23,6 +23,7 @@ export { default as EyeCloseIcon } from "./eye-close";
 export { default as EyeOpenIcon } from "./eye-open";
 export { default as FavoriteFillIcon } from "./favorite-fill";
 export { default as FeedIcon } from "./feed";
+export { default as GearIcon } from "./gear";
 export { default as GithubIcon } from "./github";
 export { default as HouseFillIcon } from "./house-fill";
 export { default as ImTokenWalletIcon } from "./im-token-wallet";

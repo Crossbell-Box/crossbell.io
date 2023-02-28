@@ -1,9 +1,11 @@
 import React from "react";
 import { useRefCallback } from "@crossbell/util-hooks";
 
+import { useDynamicScenesModal } from "../components";
 import { useConnectModal } from "../modals/connect-modal/stores";
-import { useUpgradeAccountModal } from "../modals/upgrade-account-modal/stores";
+import { showUpgradeAccountModal } from "../modals/upgrade-account-modal";
 import { useWalletMintNewCharacterModal } from "../modals/wallet-mint-new-character/stores";
+
 import { useAccountState } from "./account-state";
 
 type Callback = () => void;
@@ -49,7 +51,7 @@ export function useConnectedAction<P extends any[], V>(
 	const callbackRef = React.useRef<Callback>();
 	const isActive1 = useConnectModal((s) => s.isActive);
 	const isActive2 = useWalletMintNewCharacterModal((s) => s.isActive);
-	const isActive3 = useUpgradeAccountModal((s) => s.isActive);
+	const isActive3 = useDynamicScenesModal((s) => s.isActive);
 	const isActive = isActive1 || isActive2 || isActive3;
 
 	React.useEffect(() => {
@@ -93,7 +95,7 @@ export function useConnectedAction<P extends any[], V>(
 						}
 					};
 
-					useUpgradeAccountModal.getState().show();
+					showUpgradeAccountModal();
 				} else if (connectType !== "email" && wallet && !wallet?.characterId) {
 					// Wallet is connected but no character
 					callbackRef.current = callback;

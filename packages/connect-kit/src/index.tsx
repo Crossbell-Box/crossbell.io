@@ -13,7 +13,6 @@ import { useAccountState } from "./hooks";
 import { ClaimCSBTipsModal } from "./modals/claim-csb-tips-modal";
 import { ConnectModal } from "./modals/connect-modal";
 import { DisconnectModal } from "./modals/disconnect-modal";
-import { UpgradeAccountModal } from "./modals/upgrade-account-modal";
 import { CsbDetailModal } from "./modals/csb-detail-modal";
 import { WalletClaimCSBModal } from "./modals/wallet-claim-csb-modal";
 import { OpSignSettingsModal } from "./modals/op-sign-settings-modal";
@@ -21,15 +20,17 @@ import { TransferCSBToOperatorModal } from "./modals/transfer-csb-to-operator-mo
 import { NoEnoughCSBModal } from "./modals/no-enough-csb-modal";
 import { WalletMintNewCharacter } from "./modals/wallet-mint-new-character";
 import { SelectCharactersModal } from "./modals/select-characters-modal";
+import { DynamicScenesModal } from "./components/dynamic-scenes-modal";
 
 export { useConnectModal } from "./modals/connect-modal";
 export { useDisconnectModal } from "./modals/disconnect-modal";
-export { useUpgradeAccountModal } from "./modals/upgrade-account-modal";
+export { showUpgradeAccountModal } from "./modals/upgrade-account-modal";
 export { useCsbDetailModal } from "./modals/csb-detail-modal";
 export { useWalletClaimCSBModal } from "./modals/wallet-claim-csb-modal";
 export { useOpSignSettingsModal } from "./modals/op-sign-settings-modal";
 export { useWalletMintNewCharacterModal } from "./modals/wallet-mint-new-character";
 export { useSelectCharactersModal } from "./modals/select-characters-modal";
+export { showXSettingsModal } from "./modals/x-settings-modal";
 export { OpSignIcon } from "./components";
 export * from "./hooks";
 export * from "./contract-config";
@@ -66,7 +67,6 @@ export function ConnectKitProvider({
 			<UrlComposerContext.Provider value={urlComposer ?? null}>
 				<ConnectModal />
 				<DisconnectModal />
-				<UpgradeAccountModal />
 				<ClaimCSBTipsModal />
 				<CsbDetailModal />
 				<WalletClaimCSBModal />
@@ -75,6 +75,7 @@ export function ConnectKitProvider({
 				<NoEnoughCSBModal />
 				<WalletMintNewCharacter />
 				<SelectCharactersModal />
+				<DynamicScenesModal />
 				{children}
 			</UrlComposerContext.Provider>
 		</UseWeb2UrlContext.Provider>

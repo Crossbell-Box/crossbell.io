@@ -28,7 +28,8 @@ export function OPSignSettings({
 			<div className={styles.container}>
 				<div className={styles.tips}>
 					By signing the <DumbOpSignIcon isActive={true} /> , you can interact
-					without clicking to agree the smart contracts every time.
+					without clicking to agree the smart contracts every time. We are in
+					Beta, and new users who try it out will be rewarded with 0.01 $CSB.
 				</div>
 
 				<div className={styles.item}>

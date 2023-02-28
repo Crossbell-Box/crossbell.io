@@ -1,7 +1,7 @@
 import {
 	useAccountState,
 	useConnectModal,
-	useUpgradeAccountModal,
+	showUpgradeAccountModal,
 	useSelectCharactersModal,
 } from "@crossbell/connect-kit";
 import { useRefCallback } from "@crossbell/util-hooks";
@@ -9,7 +9,6 @@ import { useRefCallback } from "@crossbell/util-hooks";
 export function useLoginChecker() {
 	const account = useAccountState((s) => s.computed.account);
 	const connectModal = useConnectModal();
-	const upgradeAccountModal = useUpgradeAccountModal();
 	const selectCharactersModal = useSelectCharactersModal();
 
 	const validate = useRefCallback(
@@ -17,7 +16,7 @@ export function useLoginChecker() {
 			switch (account?.type) {
 				case "email":
 					if (walletRequired) {
-						upgradeAccountModal.show();
+						showUpgradeAccountModal();
 						return false;
 					} else {
 						return true;

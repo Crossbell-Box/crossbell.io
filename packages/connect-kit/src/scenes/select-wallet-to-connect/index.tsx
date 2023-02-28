@@ -12,6 +12,7 @@ import {
 	OtherWallets,
 	OptionList,
 	OptionListItem,
+	DynamicScenesHeader,
 } from "../../components";
 
 import styles from "./index.module.css";
@@ -19,16 +20,17 @@ import styles from "./index.module.css";
 export type SelectWalletToConnectProps = {
 	onSelectWallet: (wallet: Wallet) => void;
 	onSelectNoWallet: () => void;
-	Header: React.ComponentType<ModalHeaderProps>;
+	Header?: React.ComponentType<ModalHeaderProps>;
 	tipsBtnClassName?: string;
 };
 
 export function SelectWalletToConnect({
 	onSelectWallet,
 	onSelectNoWallet,
-	Header,
+	Header: Header_,
 	tipsBtnClassName,
 }: SelectWalletToConnectProps) {
+	const Header = Header_ ?? DynamicScenesHeader;
 	const walletConnectors = useWalletConnectors();
 	const { openDefaultWalletConnect } = useDefaultWalletConnect();
 
