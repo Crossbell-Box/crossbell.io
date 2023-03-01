@@ -14,6 +14,16 @@ const nextConfig: NextConfig = {
 	experimental: {
 		externalDir: true,
 	},
+
+	async redirects() {
+		return [
+			{
+				source: "/",
+				destination: "/docs",
+				permanent: false,
+			},
+		];
+	},
 };
 
 module.exports = withNextra(withIpfsGateway(withLocalPackages(nextConfig)));
