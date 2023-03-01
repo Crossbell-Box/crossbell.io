@@ -34,6 +34,7 @@ export { showXSettingsModal } from "./modals/x-settings-modal";
 export { OpSignIcon } from "./components";
 export * from "./hooks";
 export * from "./contract-config";
+export * from "./get-default-client";
 
 export type ConnectKitProviderProps = {
 	children: React.ReactNode;
