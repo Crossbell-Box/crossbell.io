@@ -11,6 +11,7 @@ const withNextra = configNextra({
 
 const nextConfig: NextConfig = {
 	reactStrictMode: true,
+
 	experimental: {
 		externalDir: true,
 	},
