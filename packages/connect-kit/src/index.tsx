@@ -7,6 +7,7 @@ import {
 	UrlComposerContext,
 	UrlComposerContextValue,
 } from "@crossbell/ui";
+import { InitContractProvider } from "@crossbell/contract";
 
 import { usePreloadAllImgs } from "./utils";
 import { useAccountState } from "./hooks";
@@ -21,6 +22,7 @@ import { NoEnoughCSBModal } from "./modals/no-enough-csb-modal";
 import { WalletMintNewCharacter } from "./modals/wallet-mint-new-character";
 import { SelectCharactersModal } from "./modals/select-characters-modal";
 import { DynamicScenesModal } from "./components/dynamic-scenes-modal";
+import { contractConfig } from "./contract-config";
 
 export { useConnectModal } from "./modals/connect-modal";
 export { useDisconnectModal } from "./modals/disconnect-modal";
@@ -33,7 +35,6 @@ export { useSelectCharactersModal } from "./modals/select-characters-modal";
 export { showXSettingsModal } from "./modals/x-settings-modal";
 export { OpSignIcon } from "./components";
 export * from "./hooks";
-export * from "./contract-config";
 export * from "./get-default-client";
 
 export type ConnectKitProviderProps = {
@@ -70,22 +71,24 @@ export function ConnectKitProvider({
 	usePreloadAllImgs();
 
 	const node = (
-		<UseWeb2UrlContext.Provider value={ipfsLinkToHttpLink ?? null}>
-			<UrlComposerContext.Provider value={urlComposer ?? null}>
-				<ConnectModal />
-				<DisconnectModal />
-				<ClaimCSBTipsModal />
-				<CsbDetailModal />
-				<WalletClaimCSBModal />
-				<OpSignSettingsModal />
-				<TransferCSBToOperatorModal />
-				<NoEnoughCSBModal />
-				<WalletMintNewCharacter />
-				<SelectCharactersModal />
-				<DynamicScenesModal />
-				{children}
-			</UrlComposerContext.Provider>
-		</UseWeb2UrlContext.Provider>
+		<InitContractProvider {...contractConfig}>
+			<UseWeb2UrlContext.Provider value={ipfsLinkToHttpLink ?? null}>
+				<UrlComposerContext.Provider value={urlComposer ?? null}>
+					<ConnectModal />
+					<DisconnectModal />
+					<ClaimCSBTipsModal />
+					<CsbDetailModal />
+					<WalletClaimCSBModal />
+					<OpSignSettingsModal />
+					<TransferCSBToOperatorModal />
+					<NoEnoughCSBModal />
+					<WalletMintNewCharacter />
+					<SelectCharactersModal />
+					<DynamicScenesModal />
+					{children}
+				</UrlComposerContext.Provider>
+			</UseWeb2UrlContext.Provider>
+		</InitContractProvider>
 	);
 
 	return withoutNotificationsProvider ? (
