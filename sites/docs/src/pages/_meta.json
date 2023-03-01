@@ -1,0 +1,19 @@
+{
+	"index": {
+		"type": "page",
+		"title": "Crossbell Dev",
+		"display": "hidden"
+	},
+	"docs": {
+		"type": "page",
+		"title": "Documentation"
+	},
+	"showcase": {
+		"type": "page",
+		"title": "Showcase",
+		"theme": {
+			"typesetting": "article",
+			"layout": "full"
+		}
+	}
+}

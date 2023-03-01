@@ -1,0 +1,13 @@
+{
+	"index": "Introduction",
+	"guide": "Guide",
+	"-- @crossbell/connect-kit": {
+		"type": "separator",
+		"title": ""
+	},
+	"connect-kit": "@crossbell/connect-kit",
+	"-- @crossbell/notification": {
+		"type": "separator",
+		"title": "@crossbell/notification"
+	}
+}
