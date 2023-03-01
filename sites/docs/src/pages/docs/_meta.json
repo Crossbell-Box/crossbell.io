@@ -1,5 +1,6 @@
 {
 	"index": "Introduction",
+	"try-it-out": "",
 	"guide": "Guide",
 	"-- @crossbell/connect-kit": {
 		"type": "separator",
