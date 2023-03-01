@@ -15,7 +15,7 @@ export function TryItOut() {
 	const address = account?.type === "email" ? account.email : account?.address;
 
 	return (
-		<div className="h-60 flex gap-5 flex-col items-center justify-center bg-gray-100 rounded-2xl">
+		<div className="h-60 flex gap-5 flex-col items-center justify-center bg-slate-500/10 rounded-2xl">
 			{account?.character && (
 				<div className="flex gap-2 items-center w-full max-w-[90%] md:max-w-[60%] bg-white p-4 rounded-xl shadow">
 					<CharacterAvatar size="48px" character={account.character} />
