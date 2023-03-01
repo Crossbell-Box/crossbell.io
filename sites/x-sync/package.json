@@ -7,5 +7,8 @@
 		"dev": "rm -rf .next && next dev -p 3001",
 		"lint": "next lint",
 		"start": "next start"
+	},
+	"dependencies": {
+		"next": "^13.2.2"
 	}
 }

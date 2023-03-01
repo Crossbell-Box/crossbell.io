@@ -58,7 +58,6 @@
 		"immer": "^9.0.19",
 		"link-preview-js": "^3.0.4",
 		"lodash.compact": "^3.0.1",
-		"next": "^13.2.1",
 		"next-seo": "^5.15.0",
 		"pretty-bytes": "^6.1.0",
 		"react": "^18.2.0",
