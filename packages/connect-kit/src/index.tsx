@@ -52,8 +52,14 @@ export function ConnectKitProvider({
 	const account = useAccount();
 
 	React.useEffect(() => {
-		accountState.connectWallet(account.address ?? null);
-	}, [account.address]);
+		if (account.status === "connected") {
+			accountState.connectWallet(account.address ?? null);
+		}
+
+		if (account.status === "disconnected") {
+			accountState.connectWallet(null);
+		}
+	}, [account.address, account.status]);
 
 	React.useEffect(() => {
 		accountState.refreshEmail();
