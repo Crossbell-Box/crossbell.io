@@ -30,6 +30,12 @@
 		"./index.css": "./dist/index.css"
 	},
 	"dependencies": {
+		"@crossbell/contract": "0.0.37",
+		"@crossbell/indexer": "0.0.37",
+		"@crossbell/ui": "0.0.37",
+		"@crossbell/util-ethers": "0.0.37",
+		"@crossbell/util-hooks": "0.0.37",
+		"@crossbell/util-metadata": "0.0.37",
 		"@emotion/react": "^11",
 		"@mantine/core": "6.0.0-alpha.5",
 		"@mantine/hooks": "6.0.0-alpha.5",
@@ -41,33 +47,20 @@
 		"embla-carousel-react": "^7",
 		"lodash.debounce": "4.0.8",
 		"qrcode": "^1",
-		"react-dropzone": "14.2.3",
-		"react-google-recaptcha": "2.1.0",
-		"ts-essentials": "9.3.0"
-	},
-	"peerDependencies": {
-		"@crossbell/contract": "workspace:*",
-		"@crossbell/indexer": "workspace:*",
-		"@crossbell/ui": "workspace:*",
-		"@crossbell/util-ethers": "workspace:*",
-		"@crossbell/util-hooks": "workspace:*",
-		"@crossbell/util-metadata": "workspace:*",
-		"@tanstack/react-query": "*",
-		"@wagmi/core": "*",
+		"react-dropzone": "^14.2.3",
+		"react-google-recaptcha": "^2.1.0",
+		"ts-essentials": "^9.3.0",
 		"crossbell.js": "^0.16",
-		"ethers": "*",
 		"immer": "^9",
 		"react": "^18",
-		"wagmi": "*",
 		"zustand": "^4"
 	},
+	"peerDependencies": {
+		"@tanstack/react-query": "^4.24.10",
+		"ethers": "^5.7.2",
+		"wagmi": "^0.11.7"
+	},
 	"devDependencies": {
-		"@crossbell/contract": "workspace:*",
-		"@crossbell/indexer": "workspace:*",
-		"@crossbell/ui": "workspace:*",
-		"@crossbell/util-ethers": "workspace:*",
-		"@crossbell/util-hooks": "workspace:*",
-		"@crossbell/util-metadata": "workspace:*",
 		"@types/lodash.debounce": "4.0.7",
 		"@types/react-google-recaptcha": "2.1.5"
 	}

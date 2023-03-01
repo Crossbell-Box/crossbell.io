@@ -28,25 +28,18 @@
 		"./package.json": "./package.json"
 	},
 	"dependencies": {
+		"@crossbell/connect-kit": "0.0.37",
+		"@crossbell/indexer": "0.0.37",
+		"@crossbell/ui": "0.0.37",
+		"@crossbell/util-hooks": "0.0.37",
+		"@crossbell/util-metadata": "0.0.37",
 		"@mantine/core": "6.0.0-alpha.5",
 		"classnames": "^2",
-		"react-intersection-observer": "^9"
-	},
-	"peerDependencies": {
-		"@crossbell/connect-kit": "workspace:*",
-		"@crossbell/indexer": "workspace:*",
-		"@crossbell/ui": "workspace:*",
-		"@crossbell/util-hooks": "workspace:*",
-		"@crossbell/util-metadata": "workspace:*",
+		"react-intersection-observer": "^9",
 		"dayjs": "^1.11.6",
-		"react": "18.x.x",
 		"zustand": "^4.1.5"
 	},
-	"devDependencies": {
-		"@crossbell/connect-kit": "workspace:*",
-		"@crossbell/indexer": "workspace:*",
-		"@crossbell/ui": "workspace:*",
-		"@crossbell/util-hooks": "workspace:*",
-		"@crossbell/util-metadata": "workspace:*"
+	"peerDependencies": {
+		"react": "^18"
 	}
 }

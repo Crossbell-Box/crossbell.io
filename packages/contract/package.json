@@ -27,16 +27,14 @@
 		},
 		"./package.json": "./package.json"
 	},
-	"peerDependencies": {
-		"@crossbell/indexer": "workspace:*",
-		"@crossbell/util-hooks": "workspace:*",
-		"crossbell.js": "0.16.x",
-		"ethers": "5.x.x",
-		"react": "18.x.x",
-		"wagmi": "0.11.x"
+	"dependencies": {
+		"@crossbell/indexer": "0.0.37",
+		"@crossbell/util-hooks": "0.0.37",
+		"crossbell.js": "^0.16.6"
 	},
-	"devDependencies": {
-		"@crossbell/indexer": "workspace:*",
-		"@crossbell/util-hooks": "workspace:*"
+	"peerDependencies": {
+		"ethers": "^5",
+		"react": "^18",
+		"wagmi": "0.11.x"
 	}
 }

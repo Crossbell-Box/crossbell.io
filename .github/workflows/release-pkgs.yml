@@ -14,29 +14,20 @@ jobs:
     steps:
       - uses: actions/checkout@v3
 
-      - name: Setup pnpm
-        uses: pnpm/action-setup@v2
-        with:
-          version: latest
-
       - name: Setup node
         uses: actions/setup-node@v3
         with:
           node-version: "lts/*"
-          cache: "pnpm"
-
-      - name: Setup npm auth
-        env:
-          NPM_AUTH_TOKEN: ${{ secrets.NPM_AUTH_TOKEN }}
-        run: |
-          pnpm config set '//registry.npmjs.org/:_authToken' "${NPM_AUTH_TOKEN}"
-          pnpm whoami
+          cache: "yarn"
 
       - name: Install dependencies
-        run: pnpm install --frozen-lockfile
+        run: yarn install --immutable
 
       - name: Build packages
-        run: pnpm run build:all
+        run: yarn run build
 
       - name: Publish packages
-        run: pnpm -r publish --access public --no-git-checks
+        run: lerna publish from-package --yes --no-verify-access --loglevel silly
+        env:
+          CI: true
+          NODE_AUTH_TOKEN: ${{ secrets.NPM_AUTH_TOKEN }}

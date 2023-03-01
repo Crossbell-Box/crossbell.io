@@ -30,29 +30,28 @@
 		"./package.json": "./package.json"
 	},
 	"dependencies": {
+		"@crossbell/indexer": "0.0.37",
+		"@crossbell/util-hooks": "0.0.37",
+		"@crossbell/util-metadata": "0.0.37",
+		"@tanstack/react-query": "^4.24.10",
+		"crossbell.js": "^0.16.6",
 		"classnames": "^2",
 		"facepaint": "^1.2.1",
-		"react-intersection-observer": "9.4.1",
-		"react-remove-scroll": "2.5.5",
-		"react-transition-group": "4.4.5",
-		"ts-essentials": "9.3.0"
+		"react-intersection-observer": "^9.4.3",
+		"react-remove-scroll": "^2.5.5",
+		"react-transition-group": "^4.4.5",
+		"ts-essentials": "^9.3.0"
 	},
 	"peerDependencies": {
-		"@crossbell/indexer": "workspace:*",
-		"@crossbell/util-hooks": "workspace:*",
-		"@crossbell/util-metadata": "workspace:*",
-		"@tanstack/react-query": "*",
-		"crossbell.js": "^0.16",
-		"react": "18.x.x",
-		"react-dom": "18.x.x"
+		"react": "^18",
+		"react-dom": "^18"
 	},
 	"devDependencies": {
-		"@crossbell/indexer": "workspace:*",
-		"@crossbell/util-hooks": "workspace:*",
-		"@crossbell/util-metadata": "workspace:*",
 		"@svgr/cli": "6.5.1",
-		"@types/facepaint": "^1.2.1",
+		"@types/facepaint": "^1.2.2",
 		"@types/react-transition-group": "^4",
+		"@types/react": "^18",
+		"@types/react-dom": "^18",
 		"pascal-case": "^3.1.2"
 	}
 }

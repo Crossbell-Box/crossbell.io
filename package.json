@@ -7,9 +7,12 @@
 	"homepage": "https://github.com/Crossbell-Box/crossbell-universe#readme",
 	"author": "Natural Selection Labs",
 	"keywords": [],
+	"workspaces": [
+		"packages/*",
+		"sites/*"
+	],
 	"scripts": {
-		"build": "turbo run build --filter='crossbell.io'",
-		"build:all": "turbo run build",
+		"build": "turbo run build",
 		"build:pkgs": "turbo run build --filter=@crossbell/*",
 		"clean": "turbo run clean",
 		"format": "run-p format:code format:package",
@@ -17,12 +20,8 @@
 		"format:package": "format-package 'package.json' -w -c format-package.json",
 		"lint": "eslint . --ext .ts,.tsx --fix --max-warnings 0",
 		"prepare": "husky install",
-		"release-dev": "[ -z \"$(git status --short)\" ] && run-s build:all release-dev:bump-version release-dev:publish release-dev:stash-changes || echo \"Commit your changes first:\n$(git status --short)\"",
-		"release-dev:bump-version": "lerna version \"$(node ./scripts/get-current-version.js)-dev-$(date +%s)\" --no-git-tag-version --no-push --force-publish --yes",
-		"release-dev:publish": "pnpm -r publish --access public --no-git-checks --tag dev",
-		"release-dev:stash-changes": "git stash push -m \"release-dev\"",
-		"release-prod": "lerna version",
-		"start": "turbo run start --filter='crossbell.io'",
+		"release:dev": "zx ./scripts/release-dev.mjs",
+		"release:prod": "lerna version",
 		"test": "turbo run test"
 	},
 	"dependencies": {

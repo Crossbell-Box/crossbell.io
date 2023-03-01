@@ -27,9 +27,11 @@
 		},
 		"./package.json": "./package.json"
 	},
+	"dependencies": {
+		"@tanstack/react-query": "^4.24.10",
+		"crossbell.js": "^0.16.6"
+	},
 	"peerDependencies": {
-		"@tanstack/react-query": "*",
-		"crossbell.js": "^0.16",
-		"react": "18.x.x"
+		"react": "^18"
 	}
 }

@@ -28,13 +28,8 @@
 		"./package.json": "./package.json"
 	},
 	"dependencies": {
-		"@fastify/deepmerge": "1.1.0"
-	},
-	"peerDependencies": {
-		"@crossbell/util-ethers": "workspace:*",
-		"crossbell.js": "0.16.x"
-	},
-	"devDependencies": {
-		"@crossbell/util-ethers": "workspace:*"
+		"@crossbell/util-ethers": "^0.0.37",
+		"@fastify/deepmerge": "^1.3.0",
+		"crossbell.js": "^0.16.6"
 	}
 }
