@@ -33,9 +33,9 @@ export { useOpSignSettingsModal } from "./modals/op-sign-settings-modal";
 export { useWalletMintNewCharacterModal } from "./modals/wallet-mint-new-character";
 export { useSelectCharactersModal } from "./modals/select-characters-modal";
 export { showXSettingsModal } from "./modals/x-settings-modal";
-export { OpSignIcon } from "./components";
 export * from "./hooks";
 export * from "./get-default-client";
+export * from "./components/public";
 
 export type ConnectKitProviderProps = {
 	children: React.ReactNode;
