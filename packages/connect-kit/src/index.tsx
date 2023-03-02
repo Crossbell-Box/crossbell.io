@@ -26,13 +26,19 @@ import { contractConfig } from "./contract-config";
 
 export { useConnectModal } from "./modals/connect-modal";
 export { useDisconnectModal } from "./modals/disconnect-modal";
-export { showUpgradeAccountModal } from "./modals/upgrade-account-modal";
+export {
+	useUpgradeAccountModal,
+	showUpgradeAccountModal,
+} from "./modals/upgrade-account-modal";
 export { useCsbDetailModal } from "./modals/csb-detail-modal";
 export { useWalletClaimCSBModal } from "./modals/wallet-claim-csb-modal";
 export { useOpSignSettingsModal } from "./modals/op-sign-settings-modal";
 export { useWalletMintNewCharacterModal } from "./modals/wallet-mint-new-character";
 export { useSelectCharactersModal } from "./modals/select-characters-modal";
-export { showXSettingsModal } from "./modals/x-settings-modal";
+export {
+	useXSettingsModal,
+	showXSettingsModal,
+} from "./modals/x-settings-modal";
 export * from "./hooks";
 export * from "./get-default-client-config";
 export * from "./components/public";
