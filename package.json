@@ -27,6 +27,7 @@
 		"release:prod": "lerna version",
 		"test": "turbo run test"
 	},
+	"packageManager": "^yarn@1.22.19",
 	"dependencies": {
 		"@crossbell/ipfs-gateway": "0.0.15",
 		"@crossbell/ipfs-react": "0.0.15",
