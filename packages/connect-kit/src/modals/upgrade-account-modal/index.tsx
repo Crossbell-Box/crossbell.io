@@ -1,9 +1,10 @@
-import { useDynamicScenesModal } from "../../components";
 import { SelectOptions } from "../../scenes/upgrade-account";
+import { createDynamicScenesModal } from "../../components";
 
-export function showUpgradeAccountModal() {
-	useDynamicScenesModal.getState().show({
-		kind: "select-upgrade-account-options",
-		Component: SelectOptions,
-	});
-}
+export const {
+	useModal: useUpgradeAccountModal,
+	showModal: showUpgradeAccountModal,
+} = createDynamicScenesModal("upgrade-account", {
+	kind: "select-upgrade-account-options",
+	Component: SelectOptions,
+});

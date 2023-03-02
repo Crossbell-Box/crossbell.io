@@ -2,10 +2,9 @@ import React from "react";
 import { DynamicContainer, DynamicContainerContent } from "@crossbell/ui";
 
 import { BaseModal } from "../../components";
-
 import { useDynamicScenesModal } from "./stores";
 
-export { useDynamicScenesModal };
+export * from "./stores";
 
 export function DynamicScenesModal() {
 	const {
