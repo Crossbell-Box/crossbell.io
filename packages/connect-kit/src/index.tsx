@@ -34,7 +34,7 @@ export { useWalletMintNewCharacterModal } from "./modals/wallet-mint-new-charact
 export { useSelectCharactersModal } from "./modals/select-characters-modal";
 export { showXSettingsModal } from "./modals/x-settings-modal";
 export * from "./hooks";
-export * from "./get-default-client";
+export * from "./get-default-client-config";
 export * from "./components/public";
 
 export type ConnectKitProviderProps = {
