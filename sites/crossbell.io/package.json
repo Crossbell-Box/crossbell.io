@@ -1,6 +1,6 @@
 {
 	"name": "crossbell.io",
-	"version": "0.0.38",
+	"version": "0.0.39",
 	"private": true,
 	"scripts": {
 		"analyze": "ANALYZE=true npm run build",
