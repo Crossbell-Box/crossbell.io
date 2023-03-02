@@ -4,6 +4,10 @@
 
 /* steps-container */
 
+body {
+	tab-size: 2;
+}
+
 .steps-container {
 	margin-left: 1rem;
 	padding-left: 1.5rem;
@@ -41,4 +45,22 @@
 	color: #999;
 	border: 4px solid rgba(17, 17, 17, var(--tw-bg-opacity));
 	background: #2e2e2e;
+}
+
+/* buttons */
+
+.btn {
+	@apply transition px-6 py-2 font-medium rounded-lg;
+}
+
+.btn-primary {
+	@apply bg-blue-500 hover:bg-blue-600 active:bg-blue-700 text-white;
+}
+
+.btn-danger {
+	@apply bg-red-500 hover:bg-red-600 active:bg-red-700 text-white;
+}
+
+.btn-violet {
+	@apply bg-violet-500 hover:bg-violet-600 active:bg-violet-700 text-white;
 }

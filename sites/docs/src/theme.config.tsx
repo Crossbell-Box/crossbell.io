@@ -13,7 +13,6 @@ const config: DocsThemeConfig = {
 			</div>
 		</span>
 	),
-	darkMode: false,
 	logoLink: "/docs",
 	docsRepositoryBase:
 		"https://github.com/Crossbell-Box/crossbell-universe/tree/main/sites/docs",

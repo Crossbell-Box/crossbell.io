@@ -32,7 +32,7 @@ export type ConnectButtonProps = {
 	) => React.ReactNode;
 };
 
-export function ConnectButton({ children }: ConnectButtonProps) {
+export function ConnectButton({ children }: ConnectButtonProps): JSX.Element {
 	const connectModal = useConnectModal();
 	const disconnectModal = useDisconnectModal();
 	const selectCharactersModal = useSelectCharactersModal();
@@ -41,25 +41,29 @@ export function ConnectButton({ children }: ConnectButtonProps) {
 		s.ssrReady,
 	]);
 
-	return children(
-		account
-			? {
-					isConnected: true,
-					ssrReady,
-					account,
-					displayAddress:
-						account?.type === "email" ? account.email : account?.address,
-			  }
-			: {
-					isConnected: false,
-					ssrReady,
-					account,
-					displayAddress: null,
-			  },
-		{
-			connect: connectModal.show,
-			disconnect: disconnectModal.show,
-			selectCharacters: selectCharactersModal.show,
-		}
+	return (
+		<>
+			{children(
+				account
+					? {
+							isConnected: true,
+							ssrReady,
+							account,
+							displayAddress:
+								account?.type === "email" ? account.email : account?.address,
+					  }
+					: {
+							isConnected: false,
+							ssrReady,
+							account,
+							displayAddress: null,
+					  },
+				{
+					connect: connectModal.show,
+					disconnect: disconnectModal.show,
+					selectCharacters: selectCharactersModal.show,
+				}
+			)}
+		</>
 	);
 }

@@ -1,5 +1,6 @@
 import { Tab, Tabs } from "nextra-theme-docs";
-import { useConnectModal } from "@crossbell/connect-kit";
+import { ConnectButton } from "@crossbell/connect-kit";
+import { ConnectButtonBasicUsage } from "@/examples";
 
 # Quick Start
 
@@ -53,18 +54,25 @@ export default function App() {
 }
 ```
 
-### Ready to go!
+### Add the connect button
 
 ```tsx filename="main.tsx"
-import { useConnectModal } from "@crossbell/connect-kit";
+import { ConnectButton } from "@crossbell/connect-kit";
 
-export function Main() {
-	const connectModal = useConnectModal();
-	return <button onClick={connectModal.show}>Connect</button>;
-}
+export const Main = () => (
+	<ConnectButton>
+		{(status, { connect, disconnect }) => (
+			<button onClick={status.isConnected ? disconnect : connect}>
+				{status.isConnected ? "Disconnect" : "Connect"}
+			</button>
+		)}
+	</ConnectButton>
+);
 ```
 
-<div className="flex justify-end">
+<ConnectButtonBasicUsage />
+
+<div className="flex justify-end mt-8">
 	<a
 		href="https://codesandbox.io/s/quick-start-90eixv?autoresize=1&fontsize=14&hidenavigation=1&theme=light&view=preview"
 		target="_blank"

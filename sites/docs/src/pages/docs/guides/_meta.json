@@ -1,11 +1,4 @@
 {
-	"-- account": {
-		"type": "separator",
-		"title": "Account"
-	},
-	"connect-account": "",
-	"disconnect-account": "",
-
 	"-- character": {
 		"type": "separator",
 		"title": "Character"

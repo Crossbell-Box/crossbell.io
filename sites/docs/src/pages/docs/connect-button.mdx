@@ -1,0 +1,64 @@
+import { Callout } from "nextra-theme-docs";
+
+import {
+	ConnectButtonBasicUsage,
+	ConnectButtonWithAccountInfo,
+} from "@/examples";
+
+# ConnectButton
+
+ConnectButton is responsible for rendering the connect/disconnect button
+
+<Callout>
+	Note: Make sure your app is wrapped in the necessary providers. [Read
+	more](/docs/quick-start).
+</Callout>
+
+### Basic usage
+
+```tsx
+import { ConnectButton } from "@crossbell/connect-kit";
+
+export const Main = () => (
+	<ConnectButton>
+		{(status, { connect, disconnect }) => (
+			<button onClick={status.isConnected ? disconnect : connect}>
+				{status.isConnected ? "Disconnect" : "Connect"}
+			</button>
+		)}
+	</ConnectButton>
+);
+```
+
+<ConnectButtonBasicUsage />
+
+### Render with account info
+
+```tsx
+import { CharacterAvatar } from "@crossbell/ui";
+import { ConnectButton } from "@crossbell/connect-kit";
+import { extractCharacterName } from "@crossbell/util-metadata";
+
+export const Main = () => (
+	<ConnectButton>
+		{(status, { connect, selectCharacters }) => {
+			if (status.isConnected) {
+				const { character } = status.account;
+				const displayName =
+					extractCharacterName(character) ?? status.displayAddress;
+
+				return (
+					<button onClick={selectCharacters}>
+						<CharacterAvatar size="24px" character={character} />
+						{displayName}
+					</button>
+				);
+			} else {
+				return <button onClick={connect}>Connect</button>;
+			}
+		}}
+	</ConnectButton>
+);
+```
+
+<ConnectButtonWithAccountInfo />
