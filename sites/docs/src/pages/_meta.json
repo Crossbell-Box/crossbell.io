@@ -1,0 +1,11 @@
+{
+	"index": {
+		"type": "page",
+		"title": "Crossbell Dev",
+		"display": "hidden"
+	},
+	"docs": {
+		"type": "page",
+		"title": "Documentation"
+	}
+}

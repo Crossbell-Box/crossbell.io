@@ -1,7 +1,10 @@
 import React from "react";
+import classNames from "classnames";
 import { CharacterEntity } from "crossbell.js";
 import { useCharacterAvatar } from "@crossbell/ui";
 import { extractCharacterName } from "@crossbell/util-metadata";
+
+import styles from "./index.module.css";
 
 export type CharacterAvatarProps = React.ImgHTMLAttributes<HTMLImageElement> & {
 	character?: CharacterEntity;
@@ -15,7 +18,16 @@ export const CharacterAvatar = React.forwardRef<
 	CharacterAvatarProps
 >(
 	(
-		{ characterId, character, size, radius = "100vh", style, src, ...props },
+		{
+			characterId,
+			character,
+			size,
+			radius = "100vh",
+			style,
+			src,
+			className,
+			...props
+		},
 		ref
 	) => {
 		const avatar = useCharacterAvatar({
@@ -30,6 +42,7 @@ export const CharacterAvatar = React.forwardRef<
 				alt={`${extractCharacterName(avatar.character)} Avatar`}
 				style={{ ...style, width: size, height: size, borderRadius: radius }}
 				ref={ref}
+				className={classNames(className, styles.img)}
 				{...props}
 			/>
 		);

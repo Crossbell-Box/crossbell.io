@@ -1,0 +1,27 @@
+{
+	"-- character": {
+		"type": "separator",
+		"title": "Character"
+	},
+	"get-current-character": "",
+	"get-character-by-id": "",
+	"switch-current-character": "",
+	"edit-character-profile": "",
+
+	"-- feeds": {
+		"type": "separator",
+		"title": "Feeds"
+	},
+	"get-followed-feed": "",
+	"get-explore-feed": "",
+	"get-latest-feed": "",
+
+	"-- actions": {
+		"type": "separator",
+		"title": "Actions"
+	},
+	"follow-character": "",
+	"follow-characters": "",
+	"toggle-like-note": "",
+	"mint-note": ""
+}

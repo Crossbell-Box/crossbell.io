@@ -8,6 +8,7 @@ import {
 	ScenesSlice,
 	SceneType,
 } from "../../../utils";
+import { useRefCallback } from "@crossbell/util-hooks";
 
 type Scene = SceneType<string, { Component: React.ComponentType }>;
 
@@ -15,7 +16,8 @@ export type UseDynamicScenesModal = Omit<
 	ModalSlice & ScenesSlice<Scene>,
 	"show"
 > & {
-	show: (scene: Scene) => void;
+	id: string;
+	show: (id: string, scene: Scene) => void;
 };
 
 const defaultScene: Scene = {
@@ -32,10 +34,33 @@ export const useDynamicScenesModal = create<UseDynamicScenesModal>(
 			...modal,
 			...scenes,
 
-			show(scene) {
+			id: "",
+
+			show(id, scene) {
+				setState({ id });
 				scenes.resetScenes([scene]);
 				modal.show();
 			},
 		};
 	}
 );
+
+export function createDynamicScenesModal(id: string, scene: Scene) {
+	function showModal() {
+		useDynamicScenesModal.getState().show(id, scene);
+	}
+
+	function useModal(): ModalSlice {
+		const [isActive, hide, show_] = useDynamicScenesModal((s) => [
+			s.id === id && s.isActive,
+			s.hide,
+			s.show,
+		]);
+
+		const show = useRefCallback(() => show_(id, scene));
+
+		return { isActive, hide, show };
+	}
+
+	return { useModal, showModal };
+}

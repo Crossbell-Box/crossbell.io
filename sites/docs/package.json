@@ -1,17 +1,18 @@
 {
 	"name": "docs",
-	"version": "0.1.0",
+	"version": "0.0.37",
 	"private": true,
 	"scripts": {
-		"build": "next build",
-		"dev": "next dev -p 3002",
+		"build": "rm -rf .next && next build",
+		"dev": "rm -rf .next && next dev -p 3002",
 		"lint": "next lint",
 		"start": "next start"
 	},
 	"dependencies": {
 		"next": "^13.2.2",
 		"nextra": "^2.2.16",
-		"nextra-theme-docs": "^2.2.16"
+		"nextra-theme-docs": "^2.2.16",
+		"outdent": "^0.8.0"
 	},
 	"devDependencies": {
 		"autoprefixer": "^10.4.13",

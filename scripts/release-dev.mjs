@@ -1,11 +1,12 @@
 import "zx/globals";
 
 const isWorkingDirectoryClean = !String(await $`git status --short`);
+const devVersion = `0.0.${Date.now()}-dev`;
 
 if (isWorkingDirectoryClean) {
-	await $`yarn run build:all`;
+	await $`yarn run build`;
 	// Bump dev version
-	await $`lerna version \"$(node ./scripts/get-current-version.js)-dev-$(date +%s)\" --no-git-tag-version --force-publish --yes`;
+	await $`lerna version "${devVersion}" --no-git-tag-version --force-publish --yes`;
 	// Save Temporary changes
 	await $`git add . && git commit -m 'release-dev'`;
 	// Publish to `dev` tag

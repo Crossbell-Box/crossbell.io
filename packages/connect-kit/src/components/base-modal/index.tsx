@@ -11,8 +11,13 @@ export type BaseModalProps = {
 
 export function BaseModal({ isActive, children, onClose }: BaseModalProps) {
 	return (
-		<BaseModal_ isActive={isActive} onClickBg={onClose} onClose={onClose}>
-			<div className={styles.modal}>{children}</div>
+		<BaseModal_
+			className={styles.modal}
+			isActive={isActive}
+			onClickBg={onClose}
+			onClose={onClose}
+		>
+			{children}
 		</BaseModal_>
 	);
 }

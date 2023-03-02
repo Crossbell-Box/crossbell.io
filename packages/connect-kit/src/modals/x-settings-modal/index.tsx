@@ -1,10 +1,8 @@
-import { useDynamicScenesModal } from "../../components";
-
 import { MainSetting } from "./scenes/main-settings";
+import { createDynamicScenesModal } from "../../components";
 
-export function showXSettingsModal() {
-	useDynamicScenesModal.getState().show({
+export const { useModal: useXSettingsModal, showModal: showXSettingsModal } =
+	createDynamicScenesModal("x-settings", {
 		kind: "x-settings-main",
 		Component: MainSetting,
 	});
-}

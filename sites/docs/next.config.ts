@@ -11,8 +11,19 @@ const withNextra = configNextra({
 
 const nextConfig: NextConfig = {
 	reactStrictMode: true,
+
 	experimental: {
 		externalDir: true,
+	},
+
+	async redirects() {
+		return [
+			{
+				source: "/",
+				destination: "/docs",
+				permanent: false,
+			},
+		];
 	},
 };
 
