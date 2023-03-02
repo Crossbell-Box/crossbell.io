@@ -20,6 +20,14 @@ jobs:
           node-version: "lts/*"
           cache: "yarn"
 
+      - name: "NPM Identity"
+        env:
+          NPM_AUTH_TOKEN: ${{ secrets.NPM_AUTH_TOKEN }}
+        run: |
+          echo "//registry.npmjs.org/:_authToken=$NPM_AUTH_TOKEN" > .npmrc
+          cat .npmrc
+          npm whoami
+
       - name: Install dependencies
         run: yarn install --immutable
 
@@ -30,4 +38,3 @@ jobs:
         run: lerna publish from-package --yes --no-verify-access --loglevel silly
         env:
           CI: true
-          NODE_AUTH_TOKEN: ${{ secrets.NPM_AUTH_TOKEN }}
