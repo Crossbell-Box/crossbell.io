@@ -1,8 +1,11 @@
 import React, { PropsWithChildren } from "react";
-import { WagmiConfig } from "wagmi";
+import { WagmiConfig, createClient } from "wagmi";
+import { getDefaultClientConfig } from "@crossbell/connect-kit";
 
-import { wagmiClient } from "~/shared/wallet/provider";
+const client = createClient(
+	getDefaultClientConfig({ appName: "crossbell.io" })
+);
 
 export function WalletProvider({ children }: PropsWithChildren) {
-	return <WagmiConfig client={wagmiClient}>{children}</WagmiConfig>;
+	return <WagmiConfig client={client}>{children}</WagmiConfig>;
 }
