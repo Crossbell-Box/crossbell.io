@@ -1,11 +1,13 @@
 import { Callout } from "nextra-theme-docs";
+import { OptionTable, SourceCodeBadge } from "@/components";
+import outdent from "outdent";
 
 import {
 	ConnectButtonBasicUsage,
 	ConnectButtonWithAccountInfo,
 } from "@/examples";
 
-# ConnectButton
+# ConnectButton <SourceCodeBadge url="https://github.com/Crossbell-Box/crossbell-universe/blob/main/packages/connect-kit/src/components/connect-button/index.tsx" />
 
 ConnectButton is responsible for rendering the connect/disconnect button
 
@@ -14,7 +16,7 @@ ConnectButton is responsible for rendering the connect/disconnect button
 	more](/docs/quick-start).
 </Callout>
 
-### Basic usage
+## Basic usage
 
 ```tsx
 import { ConnectButton } from "@crossbell/connect-kit";
@@ -32,7 +34,7 @@ export const Main = () => (
 
 <ConnectButtonBasicUsage />
 
-### Render with account info
+## Render with account info
 
 ```tsx
 import { CharacterAvatar } from "@crossbell/ui";
@@ -62,3 +64,42 @@ export const Main = () => (
 ```
 
 <ConnectButtonWithAccountInfo />
+
+## Interfaces
+
+### ConnectButtonProps
+
+<OptionTable
+	options={[
+		[
+			"children",
+			outdent`
+        (
+		      status: ConnectButtonStatus,
+		      actions: ConnectButtonActions
+        ) => React.ReactNode`,
+			"Render props",
+		],
+	]}
+/>
+
+### ConnectButtonStatus
+
+<OptionTable
+	options={[
+		["isConnected", "boolean", ""],
+		["ssrReady", "boolean", ""],
+		["account", "GeneralAccount | null", ""],
+		["displayAddress", "string | null", ""],
+	]}
+/>
+
+### ConnectButtonActions
+
+<OptionTable
+	options={[
+		["connect", "() => void", "Show connect modal"],
+		["disconnect", "() => void", "Show disconnect modal"],
+		["selectCharacters", "() => void", "Show character selection modal"],
+	]}
+/>

@@ -11,7 +11,8 @@
 	"dependencies": {
 		"next": "^13.2.2",
 		"nextra": "^2.2.16",
-		"nextra-theme-docs": "^2.2.16"
+		"nextra-theme-docs": "^2.2.16",
+		"outdent": "^0.8.0"
 	},
 	"devDependencies": {
 		"autoprefixer": "^10.4.13",
