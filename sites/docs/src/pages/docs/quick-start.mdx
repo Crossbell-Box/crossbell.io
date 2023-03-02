@@ -1,0 +1,79 @@
+import { Tab, Tabs } from "nextra-theme-docs";
+import { useConnectModal } from "@crossbell/connect-kit";
+
+# Quick Start
+
+<div className="steps-container">
+
+### Install dependencies
+
+Install `@crossbell/connect-kit` and its peer dependencies.
+
+{/* prettier-ignore */}
+<Tabs items={['pnpm', 'npm', 'yarn']}>
+  <Tab>
+    ```bash
+    pnpm i @crossbell/connect-kit @tanstack/react-query wagmi ethers@^5
+    ```
+  </Tab>
+  <Tab>
+    ```bash
+    npm i @crossbell/connect-kit @tanstack/react-query wagmi ethers@^5
+    ```
+  </Tab>
+  <Tab>
+    ```bash
+    yarn add @crossbell/connect-kit @tanstack/react-query wagmi ethers@^5
+    ```
+  </Tab>
+</Tabs>
+
+### Setup providers
+
+```tsx filename="app.tsx"
+import { WagmiConfig } from "wagmi";
+import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
+import { ConnectKitProvider, getDefaultClient } from "@crossbell/connect-kit";
+
+import { Main } from "./main";
+
+const wagmiClient = getDefaultClient({ appName: "Crossbell Dev" });
+const queryClient = new QueryClient();
+
+export default function App() {
+	return (
+		<QueryClientProvider client={queryClient}>
+			<WagmiConfig client={wagmiClient}>
+				<ConnectKitProvider>
+					<Main />
+				</ConnectKitProvider>
+			</WagmiConfig>
+		</QueryClientProvider>
+	);
+}
+```
+
+### Ready to go!
+
+```tsx filename="main.tsx"
+import { useConnectModal } from "@crossbell/connect-kit";
+
+export function Main() {
+	const connectModal = useConnectModal();
+	return <button onClick={connectModal.show}>Connect</button>;
+}
+```
+
+<div className="flex justify-end">
+	<a
+		href="https://codesandbox.io/s/quick-start-90eixv?autoresize=1&fontsize=14&hidenavigation=1&theme=light&view=preview"
+		target="_blank"
+	>
+		<img
+			src="https://codesandbox.io/static/img/play-codesandbox.svg"
+			alt="Edit on CodeSandbox"
+		/>
+	</a>
+</div>
+
+</div>
