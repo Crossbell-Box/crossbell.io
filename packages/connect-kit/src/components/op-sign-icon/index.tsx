@@ -24,7 +24,7 @@ export function OpSignIcon({
 	const handleClick = useRefCallback((event: React.MouseEvent) => {
 		if (openSettingsOnClick && characterId) {
 			event.stopPropagation();
-			showSettingModal(characterId);
+			showSettingModal({ characterId });
 		}
 	});
 
