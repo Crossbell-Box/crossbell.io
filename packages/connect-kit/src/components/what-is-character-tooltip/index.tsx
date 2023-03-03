@@ -23,7 +23,7 @@ export function WhatIsCharacterTooltip(props: WhatIsCharacterTooltipProps) {
 			arrowSize={10}
 			openDelay={200}
 			multiline={true}
-			transition="pop"
+			transitionProps={{ transition: "pop" }}
 			withArrow={true}
 			{...props}
 			label={

@@ -33,7 +33,7 @@ export function Block({ title, tips, icon, sections, status }: BlockProps) {
 						label={tips}
 						openDelay={200}
 						multiline={true}
-						transition="pop-bottom-left"
+						transitionProps={{ transition: "pop-bottom-left" }}
 						classNames={{ tooltip: styles.tooltip }}
 					>
 						<button className={styles.tipsBtn}>
