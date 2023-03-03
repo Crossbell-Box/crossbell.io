@@ -1,11 +1,11 @@
 import { Callout } from "nextra-theme-docs";
 import { OptionTable } from "@/components";
-import { ConnectModalExample } from "@/examples";
+import { DisconnectModalExample } from "@/examples";
 
-# Connect Modal
+# Disconnect Modal
 
 <div className="my-8">
-	<ConnectModalExample />
+	<DisconnectModalExample />
 </div>
 
 <Callout>
@@ -16,12 +16,12 @@ import { ConnectModalExample } from "@/examples";
 ## Usage
 
 ```tsx
-import { useConnectModal } from "@crossbell/connet-kit";
+import { useDisconnectModal } from "@crossbell/connet-kit";
 
 export const Main = () => {
-	const { isActive, show, hide } = useConnectModal();
+	const { isActive, show, hide } = useDisconnectModal();
 
-	return <button onClick={show}>Connect</button>;
+	return <button onClick={show}>Disconnect</button>;
 };
 ```
 
