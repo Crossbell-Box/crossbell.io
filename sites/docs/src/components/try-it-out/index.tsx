@@ -17,7 +17,7 @@ export function TryItOut() {
 	return (
 		<div className="h-60 flex gap-5 flex-col items-center justify-center bg-slate-500/10 rounded-2xl">
 			{account?.character && (
-				<div className="flex gap-2 items-center w-full max-w-[90%] md:max-w-[60%] bg-white p-4 rounded-xl shadow">
+				<div className="flex gap-2 items-center w-full max-w-[90%] md:max-w-[60%] bg-white text-black p-4 rounded-xl shadow">
 					<CharacterAvatar size="48px" character={account.character} />
 					<div className="flex-1 w-0 flex flex-col items-start">
 						<p

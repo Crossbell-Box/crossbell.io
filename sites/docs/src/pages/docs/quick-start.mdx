@@ -32,14 +32,19 @@ Install `@crossbell/connect-kit` and its peer dependencies.
 ### Setup providers
 
 ```tsx filename="app.tsx"
-import { WagmiConfig } from "wagmi";
+import { WagmiConfig, createClient } from "wagmi";
 import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
-import { ConnectKitProvider, getDefaultClient } from "@crossbell/connect-kit";
+import {
+	ConnectKitProvider,
+	getDefaultClientConfig,
+} from "@crossbell/connect-kit";
 
 import { Main } from "./main";
 
-const wagmiClient = getDefaultClient({ appName: "Crossbell Dev" });
 const queryClient = new QueryClient();
+const wagmiClient = createClient(
+	getDefaultClientConfig({ appName: "Crossbell Dev" })
+);
 
 export default function App() {
 	return (
@@ -54,7 +59,9 @@ export default function App() {
 }
 ```
 
-### Add the connect button
+### You're good to go!
+
+Here is an example of adding a [connect button](/docs/connect-button) to your app.
 
 ```tsx filename="main.tsx"
 import { ConnectButton } from "@crossbell/connect-kit";
