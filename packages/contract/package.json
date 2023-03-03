@@ -35,6 +35,6 @@
 	"peerDependencies": {
 		"ethers": "^5",
 		"react": "^18",
-		"wagmi": "0.11.x"
+		"wagmi": "^0.11"
 	}
 }

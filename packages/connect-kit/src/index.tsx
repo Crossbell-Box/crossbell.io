@@ -29,6 +29,8 @@ export { useDisconnectModal } from "./modals/disconnect-modal";
 export {
 	useUpgradeAccountModal,
 	showUpgradeAccountModal,
+	useUpgradeEmailAccountModal,
+	showUpgradeEmailAccountModal,
 } from "./modals/upgrade-account-modal";
 export { useCsbDetailModal } from "./modals/csb-detail-modal";
 export { useWalletClaimCSBModal } from "./modals/wallet-claim-csb-modal";

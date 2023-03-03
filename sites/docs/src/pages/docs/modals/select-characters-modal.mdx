@@ -1,0 +1,36 @@
+import { OptionTable } from "@/components";
+import { SelectCharactersExample } from "@/examples";
+
+# Select Characters Modal
+
+<div className="my-8">
+	<SelectCharactersExample />
+</div>
+
+## Usage
+
+```tsx
+import {
+	useIsConnected,
+	useSelectCharactersModal,
+} from "@crossbell/connet-kit";
+
+export function SelectCharactersBtn() {
+	const isConnected = useIsConnected();
+	const { isActive, show, hide } = useSelectCharactersModal();
+
+	if (!isConnected) return null;
+
+	return <button onClick={show}>Select Characters</button>;
+}
+```
+
+## Return type
+
+<OptionTable
+	options={[
+		["isActive", "boolean", "Indicates whether the modal is activated or not"],
+		["show", "() => void", "Show modal"],
+		["hide", "() => void", "Hide modal"],
+	]}
+/>

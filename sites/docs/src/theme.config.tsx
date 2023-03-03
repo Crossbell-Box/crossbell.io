@@ -8,7 +8,7 @@ const config: DocsThemeConfig = {
 		<span className="flex items-center gap-2">
 			<CrossbellLogo />
 			<div className="flex flex-col text-xs">
-				<span className="font-black">DEV</span>
+				<span className="font-black italic">DEV</span>
 				<span className="opacity-60 font-mono">{packageInfo.version}</span>
 			</div>
 		</span>

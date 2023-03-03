@@ -7,6 +7,7 @@ import { withLocalPackages } from "~/scripts/nextjs/with-local-packages";
 const withNextra = configNextra({
 	theme: "nextra-theme-docs",
 	themeConfig: "./src/theme.config.tsx",
+	defaultShowCopyCode: true,
 });
 
 const nextConfig: NextConfig = {

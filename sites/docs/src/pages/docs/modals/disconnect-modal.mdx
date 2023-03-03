@@ -1,0 +1,37 @@
+import { Callout } from "nextra-theme-docs";
+import { OptionTable } from "@/components";
+import { DisconnectModalExample } from "@/examples";
+
+# Disconnect Modal
+
+<div className="my-8">
+	<DisconnectModalExample />
+</div>
+
+<Callout>
+	It is recommended to use [ConnectButton](/docs/connect-button) to render the
+	connect/disconnect button.
+</Callout>
+
+## Usage
+
+```tsx
+import { useIsConnected, useDisconnectModal } from "@crossbell/connet-kit";
+
+export function DisconnectBtn() {
+	const isConnected = useIsConnected();
+	const { isActive, show, hide } = useDisconnectModal();
+
+	return isConnected ? <button onClick={show}>Disconnect</button> : null;
+}
+```
+
+## Return type
+
+<OptionTable
+	options={[
+		["isActive", "boolean", "Indicates whether the modal is activated or not"],
+		["show", "() => void", "Show modal"],
+		["hide", "() => void", "Hide modal"],
+	]}
+/>

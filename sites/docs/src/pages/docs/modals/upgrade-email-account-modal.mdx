@@ -1,0 +1,36 @@
+import { OptionTable } from "@/components";
+import { UpgradeEmailAccountExample } from "@/examples";
+
+# Upgrade Email Account Modal
+
+<div className="my-8">
+	<UpgradeEmailAccountExample />
+</div>
+
+## Usage
+
+```tsx copy /useUpgradeEmailAccountModal/
+import {
+	useIsConnected,
+	useUpgradeEmailAccountModal,
+} from "@crossbell/connet-kit";
+
+export function ConnectBtn() {
+	const isEmailConnected = useIsConnected("email");
+	const { isActive, show, hide } = useUpgradeEmailAccountModal();
+
+	return isEmailConnected ? (
+		<button onClick={show}>Upgrade Account</button>
+	) : null;
+}
+```
+
+## Return type
+
+<OptionTable
+	options={[
+		["isActive", "boolean", "Indicates whether the modal is activated or not"],
+		["show", "() => void", "Show modal"],
+		["hide", "() => void", "Hide modal"],
+	]}
+/>

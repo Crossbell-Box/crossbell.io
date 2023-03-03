@@ -1,0 +1,36 @@
+import { OptionTable } from "@/components";
+import { WalletMintNewCharacterModal } from "@/examples";
+
+# Wallet Mint New Character Modal
+
+<div className="my-8">
+	<WalletMintNewCharacterModal />
+</div>
+
+## Usage
+
+```tsx copy
+import {
+	useIsConnected,
+	useWalletMintNewCharacterModal,
+} from "@crossbell/connet-kit";
+
+export function ClaimBtn() {
+	const isWalletConnected = useIsConnected("wallet");
+	const { isActive, show, hide } = useWalletMintNewCharacterModal();
+
+	if (!isWalletConnected) return null;
+
+	return <button onClick={show}>Mint Character</button>;
+}
+```
+
+## Return type
+
+<OptionTable
+	options={[
+		["isActive", "boolean", "Indicates whether the modal is activated or not"],
+		["show", "() => void", "Show modal"],
+		["hide", "() => void", "Hide modal"],
+	]}
+/>

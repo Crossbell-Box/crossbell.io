@@ -1,0 +1,52 @@
+import { OptionTable } from "@/components";
+import { OpSignSettingsModalExample } from "@/examples";
+
+# Operator Sign Settings Modal
+
+<div className="my-8">
+	<OpSignSettingsModalExample />
+</div>
+
+## Usage
+
+```tsx copy
+import {
+	useIsConnected,
+	useAccountCharacter,
+	useOpSignSettingsModal,
+} from "@crossbell/connet-kit";
+
+export function OpSignSettingsBtn() {
+	const isWalletConnected = useIsConnected("wallet");
+	const character = useAccountCharacter();
+	const { isActive, show, hide } = useOpSignSettingsModal();
+
+	if (!isWalletConnected || !character) return null;
+
+	return (
+		<button
+			onClick={() => {
+				if (character) {
+					show(character);
+				}
+			}}
+		>
+			Operator Sign Settings
+		</button>
+	);
+}
+```
+
+## Return type
+
+<OptionTable
+	options={[
+		["isActive", "boolean", "Indicates whether the modal is activated or not"],
+		[
+			"show",
+			"(params: { characterId: number }) => void",
+			"Show character-specific modal",
+		],
+		["hide", "() => void", "Hide modal"],
+	]}
+/>
