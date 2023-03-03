@@ -15,6 +15,7 @@ export * from "./use-connected-account";
 export * from "./use-connected-action";
 export * from "./use-create-character";
 export * from "./use-disconnect-account";
+export * from "./use-is-connected";
 export * from "./use-is-wallet-signed-in";
 export * from "./use-mint-note";
 export * from "./use-post-note-for-note";
