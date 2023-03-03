@@ -1,0 +1,30 @@
+import { OptionTable } from "@/components";
+import { ConnectModalExample } from "@/examples";
+
+# Connect Modal
+
+<div className="my-8">
+	<ConnectModalExample />
+</div>
+
+## Usage
+
+```tsx
+import { useConnectModal } from "@crossbell/connet-kit";
+
+export const Main = () => {
+	const { isActive, show, hide } = useConnectModal();
+
+	return <button onClick={show}>Connect</button>;
+};
+```
+
+## Return type
+
+<OptionTable
+	options={[
+		["isActive", "boolean", "Indicates whether the modal is activated or not"],
+		["show", "() => void", "Show modal"],
+		["hide", "() => void", "Hide modal"],
+	]}
+/>
