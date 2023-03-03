@@ -1,7 +1,7 @@
 {
 	"connect-modal": "",
 	"disconnect-modal": "",
-	"upgrade-account-modal": "",
+	"upgrade-email-account-modal": "",
 	"csb-detail-modal": "",
 	"wallet-claim-csb-modal": "",
 	"op-sign-settings-modal": "",

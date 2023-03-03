@@ -64,3 +64,7 @@ body {
 .btn-violet {
 	@apply bg-violet-500 hover:bg-violet-600 active:bg-violet-700 text-white;
 }
+
+.btn-emerald {
+	@apply bg-emerald-500 hover:bg-emerald-600 active:bg-emerald-700 text-white;
+}
