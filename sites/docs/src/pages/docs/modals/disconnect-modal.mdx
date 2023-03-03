@@ -9,20 +9,21 @@ import { DisconnectModalExample } from "@/examples";
 </div>
 
 <Callout>
-	Note: It is recommended to use [ConnectButton](/docs/connect-button) to render
-	the connect/disconnect button.
+	It is recommended to use [ConnectButton](/docs/connect-button) to render the
+	connect/disconnect button.
 </Callout>
 
 ## Usage
 
 ```tsx
-import { useDisconnectModal } from "@crossbell/connet-kit";
+import { useIsConnected, useDisconnectModal } from "@crossbell/connet-kit";
 
-export const Main = () => {
+export function DisconnectBtn() {
+	const isConnected = useIsConnected();
 	const { isActive, show, hide } = useDisconnectModal();
 
-	return <button onClick={show}>Disconnect</button>;
-};
+	return isConnected ? <button onClick={show}>Disconnect</button> : null;
+}
 ```
 
 ## Return type
