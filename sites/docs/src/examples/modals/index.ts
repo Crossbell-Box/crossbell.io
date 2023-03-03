@@ -5,3 +5,4 @@ export * from "./op-sign-settings-modal-example";
 export * from "./select-characters-modal";
 export * from "./upgrade-email-account-example";
 export * from "./wallet-mint-new-character-modal";
+export * from "./x-settings-modal";
