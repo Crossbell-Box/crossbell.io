@@ -1,0 +1,65 @@
+{
+	"use-is-ssr-ready": "",
+	"use-is-connected": "",
+	"use-account-balance": "",
+	"use-account-character": "",
+	"use-account-character-id": "",
+	"use-account-characters": "",
+	"use-account-has-character": "",
+	"use-connected-account": "",
+	"use-connected-action": "",
+	"use-disconnect-account": "",
+	"use-transfer-csb": "",
+
+	"-- character": {
+		"type": "separator",
+		"title": "Character"
+	},
+	"use-update-character-handle": "",
+	"use-update-character-metadata": "",
+	"use-set-primary-character": "",
+
+	"-- feeds": {
+		"type": "separator",
+		"title": "Feeds"
+	},
+
+	"-- follow": {
+		"type": "separator",
+		"title": "Follow"
+	},
+	"use-follow-character": "",
+	"use-unfollow-character": "",
+	"use-follow-characters": "",
+
+	"-- like": {
+		"type": "separator",
+		"title": "Like"
+	},
+	"use-is-note-liked": "",
+	"use-note-like-count": "",
+	"use-note-like-list": "",
+	"use-toggle-like-note": "",
+
+	"-- mint": {
+		"type": "separator",
+		"title": "Mint"
+	},
+	"use-mint-note": "",
+
+	"-- operator-sign": {
+		"type": "separator",
+		"title": "Operator Sign"
+	},
+	"use-is-wallet-signed-in": "",
+	"use-is-op-sign-enabled": "",
+	"use-op-sign-balance": "",
+	"use-op-sign-operator-has-permissions": "",
+	"use-toggle-op-sign-operator": "",
+	"use-wallet-sign-in": "",
+
+	"-- claim csb": {
+		"type": "separator",
+		"title": "Claim CSB"
+	}
+}
