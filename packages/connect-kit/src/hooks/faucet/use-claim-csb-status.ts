@@ -33,7 +33,7 @@ export function useClaimCSBStatus(): UseClaimCSBStatusResult {
 		if (addressInfo?.eligible) {
 			return [true, ""];
 		} else {
-			return [true, "Sorry, you're not eligible to claim"];
+			return [false, "Sorry, you're not eligible to claim"];
 		}
 	})();
 
