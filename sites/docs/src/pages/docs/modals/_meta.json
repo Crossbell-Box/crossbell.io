@@ -1,10 +1,18 @@
 {
-	"connect-modal": "",
-	"disconnect-modal": "",
-	"upgrade-email-account-modal": "",
-	"wallet-claim-csb-modal": "Wallet Claim CSB Modal",
-	"op-sign-settings-modal": "",
-	"wallet-mint-new-character-modal": "",
-	"select-characters-modal": "",
-	"x-settings-modal": "xSettings Modal"
+	"connect-modal": "Connect",
+	"disconnect-modal": "Disconnect",
+	"select-characters-modal": "Select Characters",
+	"x-settings-modal": "xSettings",
+	"-- wallet": {
+		"type": "separator",
+		"title": "Wallet Account"
+	},
+	"wallet-claim-csb-modal": "Claim CSB",
+	"op-sign-settings-modal": "OP Sign Settings",
+	"wallet-mint-new-character-modal": "Mint New Character",
+	"-- email": {
+		"type": "separator",
+		"title": "Email Account"
+	},
+	"upgrade-email-account-modal": "Upgrade Email Account"
 }
