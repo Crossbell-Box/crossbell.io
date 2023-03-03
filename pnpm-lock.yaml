@@ -32,8 +32,8 @@ importers:
       '@mantine/notifications': 6.0.0-alpha.5
       '@mantine/nprogress': 6.0.0-alpha.5
       '@next/bundle-analyzer': 13.0.0
-      '@tanstack/react-query': 4.13.5
-      '@tanstack/react-query-devtools': 4.13.5
+      '@tanstack/react-query': 4.24.10
+      '@tanstack/react-query-devtools': 4.24.12
       '@types/canvas-confetti': 1.4.3
       '@types/lodash.compact': 3.0.7
       '@types/node': 18.11.8
@@ -105,12 +105,12 @@ importers:
       wagmi: 0.11.2
       zustand: ^4.3.3
     dependencies:
-      '@crossbell/connect-kit': 0.0.38_7wtkyrvx2twjvd4r5b5qltrzgu
+      '@crossbell/connect-kit': 0.0.38_o3dqhnswthvsq7d3eyf6spbmda
       '@crossbell/contract': 0.0.38_sjlg6rugchmh4a2aw2nrfjoyiq
       '@crossbell/indexer': 0.0.38_sjlg6rugchmh4a2aw2nrfjoyiq
       '@crossbell/ipfs-gateway': 0.0.15
       '@crossbell/ipfs-react': 0.0.15_3cuac2dr7yf6nu67tvbbs2j6ry
-      '@crossbell/notification': 0.0.38_ksxa2xgvhrmcnkz4wfh5pnb26i
+      '@crossbell/notification': 0.0.38_a6us2lmgekl2vevnvs3ujnlshq
       '@crossbell/ui': 0.0.38_cvxao7pnycl4zvcqztfak6ov74
       '@crossbell/util-ethers': 0.0.38
       '@crossbell/util-hooks': 0.0.38_biqbaboplfbrettd7655fr4n2y
@@ -131,8 +131,8 @@ importers:
       '@mantine/notifications': 6.0.0-alpha.5_kjotsjdmc4bg6raywavak2ysi4
       '@mantine/nprogress': 6.0.0-alpha.5_kjotsjdmc4bg6raywavak2ysi4
       '@next/bundle-analyzer': 13.0.0
-      '@tanstack/react-query': 4.13.5_biqbaboplfbrettd7655fr4n2y
-      '@tanstack/react-query-devtools': 4.13.5_i7kuhmcsnmccyzigx3mxdtc2mu
+      '@tanstack/react-query': 4.24.10_biqbaboplfbrettd7655fr4n2y
+      '@tanstack/react-query-devtools': 4.24.12_636dldj5wfr5vkyyqzs5k363kq
       '@wagmi/core': 0.9.3_bwjswvl2jzlimcp6gevknicprm
       canvas-confetti: 1.6.0
       classnames: 2.3.2
@@ -385,7 +385,7 @@ packages:
       - utf-8-validate
     dev: false
 
-  /@crossbell/connect-kit/0.0.38_7wtkyrvx2twjvd4r5b5qltrzgu:
+  /@crossbell/connect-kit/0.0.38_o3dqhnswthvsq7d3eyf6spbmda:
     resolution: {integrity: sha512-lK21thaZ0jzEaxEqfhrQOqJ7hEZFUUOYjCUBp+YG/RhXgeW2qH0pzJjZvO9pnmQpWDTM+M+KkLwirZVn4swUgA==}
     peerDependencies:
       '@tanstack/react-query': ^4.24.10
@@ -402,7 +402,7 @@ packages:
       '@mantine/core': 6.0.0-alpha.5_jdcgfcfe4kcyx5qqx4zopziniu
       '@mantine/hooks': 6.0.0-alpha.5_react@18.2.0
       '@mantine/notifications': 6.0.0-alpha.5_kjotsjdmc4bg6raywavak2ysi4
-      '@tanstack/react-query': 4.13.5_biqbaboplfbrettd7655fr4n2y
+      '@tanstack/react-query': 4.24.10_biqbaboplfbrettd7655fr4n2y
       canvas-confetti: 1.6.0
       check-password-strength: 2.0.7
       classnames: 2.3.2
@@ -459,7 +459,7 @@ packages:
       ethers: ^5
       wagmi: ^0.11
     dependencies:
-      '@tanstack/react-query': 4.13.5_biqbaboplfbrettd7655fr4n2y
+      '@tanstack/react-query': 4.24.10_biqbaboplfbrettd7655fr4n2y
       crossbell.js: 0.16.6
       dayjs: 1.11.6
       ethers: 5.7.2
@@ -520,12 +520,12 @@ packages:
       react: 18.2.0
     dev: false
 
-  /@crossbell/notification/0.0.38_ksxa2xgvhrmcnkz4wfh5pnb26i:
+  /@crossbell/notification/0.0.38_a6us2lmgekl2vevnvs3ujnlshq:
     resolution: {integrity: sha512-UTJ+KuRYP1gCPp98OkHvs6U6AUIEYcjO2zSu8EfGwU5fyanv5M1Lv++Y4+xQX5xfdcN0rorePo3RVAK2/rqPsw==}
     peerDependencies:
       react: ^18
     dependencies:
-      '@crossbell/connect-kit': 0.0.38_7wtkyrvx2twjvd4r5b5qltrzgu
+      '@crossbell/connect-kit': 0.0.38_o3dqhnswthvsq7d3eyf6spbmda
       '@crossbell/indexer': 0.0.38_sjlg6rugchmh4a2aw2nrfjoyiq
       '@crossbell/ui': 0.0.38_cvxao7pnycl4zvcqztfak6ov74
       '@crossbell/util-hooks': 0.0.38_biqbaboplfbrettd7655fr4n2y
@@ -2083,16 +2083,8 @@ packages:
       remove-accents: 0.4.2
     dev: false
 
-  /@tanstack/query-core/4.13.4:
-    resolution: {integrity: sha512-DMIy6tgGehYoRUFyoR186+pQspOicyZNSGvBWxPc2CinHjWOQ7DPnGr9zmn/kE9xK4Zd3GXd25Nj3X20+TF6Lw==}
-    dev: false
-
   /@tanstack/query-core/4.24.10:
     resolution: {integrity: sha512-2QywqXEAGBIUoTdgn1lAB4/C8QEqwXHj2jrCLeYTk2xVGtLiPEUD8jcMoeB2noclbiW2mMt4+Fq7fZStuz3wAQ==}
-    dev: false
-
-  /@tanstack/query-core/4.24.4:
-    resolution: {integrity: sha512-9dqjv9eeB6VHN7lD3cLo16ZAjfjCsdXetSAD5+VyKqLUvcKTL0CklGQRJu+bWzdrS69R6Ea4UZo8obHYZnG6aA==}
     dev: false
 
   /@tanstack/query-persist-client-core/4.19.1:
@@ -2109,48 +2101,30 @@ packages:
       - '@tanstack/query-core'
     dev: false
 
-  /@tanstack/react-query-devtools/4.13.5_i7kuhmcsnmccyzigx3mxdtc2mu:
-    resolution: {integrity: sha512-ItXysFt7a2WJcodeoZ52/NFoMeWUgwzSaKL3NXhHvdyDOFsX945/AN/+Q9WgXRDG+YgqDJm6f/ozYIfFaORoZQ==}
+  /@tanstack/react-query-devtools/4.24.12_636dldj5wfr5vkyyqzs5k363kq:
+    resolution: {integrity: sha512-FxSIQk84vn5SpK6xQ2AxL63eis/qQ5foJ1LEjTzaU7cMcfvN4vNZ3mtUCeW/txI8aBpZ5gbVmGLEAtoi8ub4kQ==}
     peerDependencies:
-      '@tanstack/react-query': 4.13.5
+      '@tanstack/react-query': 4.24.10
       react: ^16.8.0 || ^17.0.0 || ^18.0.0
       react-dom: ^16.8.0 || ^17.0.0 || ^18.0.0
     dependencies:
       '@tanstack/match-sorter-utils': 8.7.0
-      '@tanstack/react-query': 4.13.5_biqbaboplfbrettd7655fr4n2y
+      '@tanstack/react-query': 4.24.10_biqbaboplfbrettd7655fr4n2y
       react: 18.2.0
       react-dom: 18.2.0_react@18.2.0
       superjson: 1.11.0
       use-sync-external-store: 1.2.0_react@18.2.0
     dev: false
 
-  /@tanstack/react-query-persist-client/4.19.1_pbzrecrhgj7fe7hddoo6lp43hu:
+  /@tanstack/react-query-persist-client/4.19.1_ealzb334a6lsej726khr2zjck4:
     resolution: {integrity: sha512-uNHCBfK7YiNXTjlO3B/Rym7HrNX6OnrcWIw3iiuGFK+gC566/BB3lcLHvriHwanxbnFvWiua8g9hvddeXVQzeA==}
     peerDependencies:
       '@tanstack/react-query': 4.19.1
     dependencies:
       '@tanstack/query-persist-client-core': 4.19.1
-      '@tanstack/react-query': 4.24.4_biqbaboplfbrettd7655fr4n2y
+      '@tanstack/react-query': 4.24.10_biqbaboplfbrettd7655fr4n2y
     transitivePeerDependencies:
       - '@tanstack/query-core'
-    dev: false
-
-  /@tanstack/react-query/4.13.5_biqbaboplfbrettd7655fr4n2y:
-    resolution: {integrity: sha512-p2HcWGuqfvG7Pz04un4phWZeXzlITD7Ue0gMXjD56g8y3rP1r5qEYC/BckffrZLf4dZtQeVPCWOa8RYAqx036g==}
-    peerDependencies:
-      react: ^16.8.0 || ^17.0.0 || ^18.0.0
-      react-dom: ^16.8.0 || ^17.0.0 || ^18.0.0
-      react-native: '*'
-    peerDependenciesMeta:
-      react-dom:
-        optional: true
-      react-native:
-        optional: true
-    dependencies:
-      '@tanstack/query-core': 4.13.4
-      react: 18.2.0
-      react-dom: 18.2.0_react@18.2.0
-      use-sync-external-store: 1.2.0_react@18.2.0
     dev: false
 
   /@tanstack/react-query/4.24.10_biqbaboplfbrettd7655fr4n2y:
@@ -2166,24 +2140,6 @@ packages:
         optional: true
     dependencies:
       '@tanstack/query-core': 4.24.10
-      react: 18.2.0
-      react-dom: 18.2.0_react@18.2.0
-      use-sync-external-store: 1.2.0_react@18.2.0
-    dev: false
-
-  /@tanstack/react-query/4.24.4_biqbaboplfbrettd7655fr4n2y:
-    resolution: {integrity: sha512-RpaS/3T/a3pHuZJbIAzAYRu+1nkp+/enr9hfRXDS/mojwx567UiMksoqW4wUFWlwIvWTXyhot2nbIipTKEg55Q==}
-    peerDependencies:
-      react: ^16.8.0 || ^17.0.0 || ^18.0.0
-      react-dom: ^16.8.0 || ^17.0.0 || ^18.0.0
-      react-native: '*'
-    peerDependenciesMeta:
-      react-dom:
-        optional: true
-      react-native:
-        optional: true
-    dependencies:
-      '@tanstack/query-core': 4.24.4
       react: 18.2.0
       react-dom: 18.2.0_react@18.2.0
       use-sync-external-store: 1.2.0_react@18.2.0
@@ -11262,8 +11218,8 @@ packages:
         optional: true
     dependencies:
       '@tanstack/query-sync-storage-persister': 4.19.1
-      '@tanstack/react-query': 4.24.4_biqbaboplfbrettd7655fr4n2y
-      '@tanstack/react-query-persist-client': 4.19.1_pbzrecrhgj7fe7hddoo6lp43hu
+      '@tanstack/react-query': 4.24.10_biqbaboplfbrettd7655fr4n2y
+      '@tanstack/react-query-persist-client': 4.19.1_ealzb334a6lsej726khr2zjck4
       '@wagmi/core': 0.9.2_bwjswvl2jzlimcp6gevknicprm
       abitype: 0.3.0_typescript@4.8.4
       ethers: 5.7.2
