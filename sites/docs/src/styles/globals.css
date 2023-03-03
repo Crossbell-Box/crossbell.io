@@ -53,18 +53,26 @@ body {
 	@apply transition px-6 py-2 font-medium rounded-lg;
 }
 
-.btn-primary {
+.btn:disabled {
+	@apply bg-gray-500 text-white opacity-30 cursor-not-allowed;
+}
+
+.btn-primary:not(:disabled) {
 	@apply bg-blue-500 hover:bg-blue-600 active:bg-blue-700 text-white;
 }
 
-.btn-danger {
+.btn-danger:not(:disabled) {
 	@apply bg-red-500 hover:bg-red-600 active:bg-red-700 text-white;
 }
 
-.btn-violet {
+.btn-violet:not(:disabled) {
 	@apply bg-violet-500 hover:bg-violet-600 active:bg-violet-700 text-white;
 }
 
-.btn-emerald {
+.btn-emerald:not(:disabled) {
 	@apply bg-emerald-500 hover:bg-emerald-600 active:bg-emerald-700 text-white;
+}
+
+.btn-yellow:not(:disabled) {
+	@apply bg-yellow-500 hover:bg-yellow-600 active:bg-yellow-700 text-white;
 }
