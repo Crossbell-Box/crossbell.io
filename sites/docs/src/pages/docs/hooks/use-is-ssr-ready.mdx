@@ -1,0 +1,39 @@
+# useIsSsrReady
+
+Hook for indicating Server Side Render (SSR) status.
+
+```ts
+import { useIsSsrReady } from "@crossbell/connect-kit";
+```
+
+## Usage
+
+Most connect statuses are client-side only.
+Hooks that are related to account status, such as `useAccountCharacter`,
+will always return `null` during SSR to avoid any potential mismatching issues.
+
+As a result, the UI will render with an unconnected status initially.
+To prevent any glitches during the first render, it is recommended to visually hide those components before SSR is ready.
+
+```tsx
+import { useIsSsrReady, useIsConnected } from "@crossbell/connect-kit";
+
+function App() {
+	const isSsrReady = useIsSsrReady();
+	const isConnected = useIsConnected();
+
+	return (
+		<button
+			style={{
+				opacity: isSsrReady ? 1 : 0,
+			}}
+		>
+			{isConnected ? "Disconnect" : "Connect"}
+		</button>
+	);
+}
+```
+
+import { UseIsSsrReadyExample } from "@/examples/hooks";
+
+<UseIsSsrReadyExample />
