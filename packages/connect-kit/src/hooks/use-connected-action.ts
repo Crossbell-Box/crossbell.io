@@ -25,6 +25,7 @@ const isConnected = (type: ConnectType): boolean => {
 };
 
 export type UseConnectedActionOptions<P extends any[] = unknown[], V = void> = {
+	noAutoResume?: boolean;
 	connectType?: ConnectType;
 	fallback?: (...params: P) => V;
 };
@@ -46,7 +47,11 @@ export function useConnectedAction<P extends any[], V>(
 
 export function useConnectedAction<P extends any[], V>(
 	action: (...params: P) => V,
-	{ connectType = "any", fallback }: UseConnectedActionOptions<P, V> = {}
+	{
+		connectType = "any",
+		noAutoResume = false,
+		fallback,
+	}: UseConnectedActionOptions<P, V> = {}
 ): (...params: P) => Promise<V> {
 	const callbackRef = React.useRef<Callback>();
 	const isActive1 = useConnectModal((s) => s.isActive);
@@ -56,7 +61,7 @@ export function useConnectedAction<P extends any[], V>(
 
 	React.useEffect(() => {
 		if (!isActive) {
-			if (callbackRef.current && isConnected(connectType)) {
+			if (!noAutoResume && callbackRef.current && isConnected(connectType)) {
 				callbackRef.current();
 			}
 

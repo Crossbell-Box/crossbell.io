@@ -21,7 +21,9 @@ type Options<Data, Variables> = UseMutationOptions<
 	Data | null,
 	unknown,
 	Variables
->;
+> & {
+	noAutoResume?: boolean;
+};
 
 export type AccountTypeBasedMutationHooksWithParams<
 	Params = void,
@@ -71,10 +73,7 @@ export function createAccountTypeBasedMutationHooks<
 ): AccountTypeBasedMutationHooks<Params, Variables, Data> {
 	const fnName = `use(${actionDesc})`;
 
-	function useFn(
-		params: Params,
-		options?: UseMutationOptions<Data | null, unknown, Variables>
-	) {
+	function useFn(params: Params, options?: Options<Data, Variables>) {
 		const factory = useFactory(params);
 		const queryClient = useQueryClient();
 		const account = useAccountState((s) => s.computed.account);
@@ -137,9 +136,14 @@ export function createAccountTypeBasedMutationHooks<
 			}
 		);
 
-		const mutate = useConnectedAction(mutation.mutate, { connectType });
+		const mutate = useConnectedAction(mutation.mutate, {
+			connectType,
+			noAutoResume: options?.noAutoResume,
+		});
+
 		const mutateAsync = useConnectedAction(mutation.mutateAsync, {
 			connectType,
+			noAutoResume: options?.noAutoResume,
 		});
 
 		return { ...mutation, mutate, mutateAsync } as typeof mutation;
@@ -147,15 +151,12 @@ export function createAccountTypeBasedMutationHooks<
 
 	return {
 		a: {
-			[fnName](
-				params: Params,
-				options?: UseMutationOptions<Data | null, unknown, Variables>
-			) {
+			[fnName](params: Params, options?: Options<Data, Variables>) {
 				return useFn(params, options);
 			},
 		},
 		b: {
-			[fnName](options?: UseMutationOptions<Data | null, unknown, Variables>) {
+			[fnName](options?: Options<Data, Variables>) {
 				return useFn(undefined as Params, options);
 			},
 		},
