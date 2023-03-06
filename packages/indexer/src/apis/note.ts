@@ -24,14 +24,22 @@ export function useNotesOfCharacter(characterId?: number) {
 }
 
 // fetch notes
-
-export const SCOPE_KEY_NOTES = () => {
-	return [...SCOPE_KEY, "list", "all"];
+export type UseNotesConfig = Omit<
+	Parameters<typeof indexer.getNotes>[0],
+	"cursor"
+>;
+export const SCOPE_KEY_NOTES = (config?: UseNotesConfig) => {
+	return [...SCOPE_KEY, "list", "all", config];
 };
-export function useNotes() {
+export function useNotes(config?: UseNotesConfig) {
 	return useInfiniteQuery(
-		SCOPE_KEY_NOTES(),
-		({ pageParam }) => indexer.getNotes({ cursor: pageParam, limit: 20 }),
+		SCOPE_KEY_NOTES(config),
+		({ pageParam }) =>
+			indexer.getNotes({
+				cursor: pageParam,
+				limit: 20,
+				...config,
+			}),
 		{
 			getNextPageParam: (lastPage) => lastPage.cursor,
 		}
