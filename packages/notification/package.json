@@ -37,7 +37,7 @@
 		"classnames": "^2",
 		"dayjs": "^1.11.7",
 		"react-intersection-observer": "^9",
-		"zustand": "^4.3.5"
+		"zustand": "^4.3.6"
 	},
 	"peerDependencies": {
 		"react": "^18"
