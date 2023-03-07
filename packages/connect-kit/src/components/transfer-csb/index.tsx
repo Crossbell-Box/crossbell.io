@@ -2,7 +2,7 @@ import React from "react";
 import { BigNumber, utils } from "ethers";
 import { LogoIcon, LoadingOverlay } from "@crossbell/ui";
 
-import { MainBtn, Field, TextInput } from "../../components";
+import { MainBtn, Field, FiledTips, TextInput } from "../../components";
 import {
 	useAccountBalance,
 	UseAccountBalanceResult,
@@ -16,6 +16,7 @@ const ZERO = BigNumber.from(0);
 enum NormalizeError {
 	invalidFormat = "invalidFormat",
 	outOfRange = "outOfRange",
+	notEnoughGasFee = "notEnoughGasFee",
 }
 
 export type TransferCSBProps = {
@@ -23,12 +24,17 @@ export type TransferCSBProps = {
 	onSuccess: () => void;
 };
 
+const minGasFee = utils.parseUnits("0.000021");
+
 export function TransferCSB({ toAddress, onSuccess }: TransferCSBProps) {
 	const { balance } = useAccountBalance();
 	const [value, setValue] = React.useState("0.00");
-	const maxAmount = balance?.formatted ?? "0.00";
+	const maxAmount = getMaxAmount(balance);
 	const amount = React.useMemo(() => normalizeNumber(value, balance), [value]);
 	const { isLoading, mutate: transferCsb } = useTransferCsb({ onSuccess });
+	const errorMsg = BigNumber.isBigNumber(amount)
+		? null
+		: normalizeErrorToMsg(amount, maxAmount);
 
 	return (
 		<>
@@ -49,22 +55,30 @@ export function TransferCSB({ toAddress, onSuccess }: TransferCSBProps) {
 						rightSection={
 							<div
 								className={styles.maxContainer}
-								onClick={() => setValue(maxAmount)}
+								onClick={() => setValue(utils.formatUnits(maxAmount))}
 							>
-								<button className={styles.max}>Max</button>
+								<button disabled={maxAmount.lte(ZERO)} className={styles.max}>
+									Max
+								</button>
 							</div>
 						}
 						onInput={(e) => {
 							setValue(e.currentTarget.value);
 						}}
 					/>
-				</Field>
 
-				{!BigNumber.isBigNumber(amount) && (
-					<div className={styles.error}>
-						{normalizeErrorToMsg(amount, maxAmount)}
-					</div>
-				)}
+					<FiledTips color="#E65040">
+						{errorMsg || (
+							<>
+								<div>Gas Fee: {utils.formatUnits(minGasFee)}</div>
+								<div>
+									Tips: With 0.01 $CSB, you can like, comment, and mint roughly
+									70 times on our platform!
+								</div>
+							</>
+						)}
+					</FiledTips>
+				</Field>
 
 				<MainBtn
 					className={styles.mainBtn}
@@ -83,7 +97,7 @@ export function TransferCSB({ toAddress, onSuccess }: TransferCSBProps) {
 	);
 }
 
-function normalizeErrorToMsg(error: NormalizeError, maxAmount: string) {
+function normalizeErrorToMsg(error: NormalizeError, maxAmount: BigNumber) {
 	switch (error) {
 		case NormalizeError.invalidFormat:
 			return "Invalid number format";
@@ -91,10 +105,18 @@ function normalizeErrorToMsg(error: NormalizeError, maxAmount: string) {
 			return (
 				<>
 					The transfer number should be between{" "}
-					<span className={styles.nowrap}>0 - {maxAmount}</span>
+					<span className={styles.nowrap}>
+						0 - {utils.formatUnits(maxAmount)}
+					</span>
 				</>
 			);
+		case NormalizeError.notEnoughGasFee:
+			return `Require a minimum of ${utils.formatUnits(minGasFee)} gas fee`;
 	}
+}
+
+function getMaxAmount(balance: UseAccountBalanceResult["balance"]) {
+	return balance?.value.sub(minGasFee) ?? utils.parseUnits("0.00");
 }
 
 function normalizeNumber(
@@ -106,7 +128,11 @@ function normalizeNumber(
 
 		const num = utils.parseUnits(input, balance.decimals);
 
-		if (num.gt(balance.value) || num.lt(ZERO)) {
+		if (balance.value.lte(minGasFee)) {
+			return NormalizeError.notEnoughGasFee;
+		}
+
+		if (num.add(minGasFee).gt(balance.value) || num.lt(ZERO)) {
 			return NormalizeError.outOfRange;
 		}
 
