@@ -5,6 +5,7 @@ import { MetamaskIcon } from "../../../components";
 import { isAndroid, isMobile } from "../../../utils";
 import { Chain, Wallet } from "../../types";
 import { getWalletConnectConnector } from "../get-wallet-connect-connector";
+import { getWalletConnectLegacyConnector } from "../get-wallet-connect-legacy-connector";
 import styles from "../coinbase-wallet/index.module.css";
 
 export interface MetaMaskWalletOptions {
@@ -12,9 +13,10 @@ export interface MetaMaskWalletOptions {
 	options?: NonNullable<
 		ConstructorParameters<typeof MetaMaskConnector>[0]
 	>["options"];
+	walletConnectProjectId: string | null;
 }
 
-function isMetaMask(ethereum: NonNullable<typeof window["ethereum"]>) {
+function isMetaMask(ethereum: NonNullable<(typeof window)["ethereum"]>) {
 	// Logic borrowed from wagmi's MetaMaskConnector
 	// https://github.com/tmm/wagmi/blob/main/packages/core/src/connectors/metaMask.ts
 	const isMetaMask = Boolean(ethereum.isMetaMask);
@@ -43,6 +45,7 @@ function isMetaMask(ethereum: NonNullable<typeof window["ethereum"]>) {
 export const metaMaskWallet = ({
 	chains,
 	options,
+	walletConnectProjectId,
 }: MetaMaskWalletOptions): Wallet => {
 	const isMetaMaskInjected =
 		typeof window !== "undefined" &&
@@ -55,10 +58,17 @@ export const metaMaskWallet = ({
 		id: "metaMask",
 		name: "MetaMask",
 		installed: isMetaMaskInjected,
-		icon: <MetamaskIcon className={styles.icon} />,
 		createConnector: () => {
 			if (shouldUseWalletConnect) {
-				const connector = getWalletConnectConnector({ chains });
+				const connector = walletConnectProjectId
+					? getWalletConnectConnector({
+							chains,
+							options: { projectId: walletConnectProjectId },
+					  })
+					: getWalletConnectLegacyConnector({
+							chains,
+							options: { qrcode: true, chainId: chains[0].id },
+					  });
 
 				return {
 					connector,
@@ -84,5 +94,6 @@ export const metaMaskWallet = ({
 				};
 			}
 		},
+		icon: <MetamaskIcon className={styles.icon} />,
 	};
 };

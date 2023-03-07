@@ -1,5 +1,4 @@
 import { useConnect } from "wagmi";
-import { WalletConnectConnector } from "wagmi/connectors/walletConnect";
 import { showNotification } from "@mantine/notifications";
 
 export function useDefaultWalletConnect() {
@@ -7,17 +6,21 @@ export function useDefaultWalletConnect() {
 
 	return {
 		async openDefaultWalletConnect() {
-			const connector = connectors.find((c) => c.id === "walletConnect");
+			const connector =
+				connectors.find((c) => c.id === "walletConnect") ||
+				connectors.find((c) => c.id === "walletConnectLegacy");
 
 			if (connector) {
 				try {
-					await connectAsync({
-						chainId: connector.chains[0].id,
-						connector: new WalletConnectConnector({
-							chains: connector.chains,
-							options: { ...connector.options, qrcode: true },
-						}),
+					const preferredChainId = connector?.chains[0]?.id;
+					const result = await connectAsync({
+						chainId: preferredChainId,
+						connector: connector,
 					});
+
+					if (result.chain.id !== connector.chains[0]?.id) {
+						connector.switchChain?.(preferredChainId);
+					}
 				} catch (err) {
 					showNotification({
 						title: "Error while connecting to WalletConnect",

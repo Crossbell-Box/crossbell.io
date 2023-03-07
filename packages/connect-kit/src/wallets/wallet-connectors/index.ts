@@ -1,5 +1,5 @@
 import React from "react";
-import { useClient } from "wagmi";
+import { Connector, useClient } from "wagmi";
 
 import { Wallet } from "../types";
 
@@ -12,6 +12,7 @@ export function useWalletConnectors() {
 
 	return React.useMemo(() => {
 		const walletConnectors: Wallet[] = [];
+		const walletConnectProjectId = findWalletConnectProjectId(connectors);
 
 		connectors.forEach((connector) => {
 			if (connector.id === "metaMask") {
@@ -19,6 +20,7 @@ export function useWalletConnectors() {
 					metaMaskWallet({
 						chains: connector.chains,
 						options: connector.options,
+						walletConnectProjectId,
 					})
 				);
 			}
@@ -43,4 +45,14 @@ export function useWalletConnectors() {
 
 		return walletConnectors;
 	}, [connectors]);
+}
+
+function findWalletConnectProjectId(connectors: Connector[]): string | null {
+	for (const connector of connectors) {
+		if (connector.id === "walletConnect" && !!connector.options?.projectId) {
+			return connector.options.projectId;
+		}
+	}
+
+	return null;
 }
