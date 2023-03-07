@@ -3,7 +3,7 @@ import compact from "lodash.compact";
 import { useRefCallback } from "@crossbell/util-hooks";
 import { GearIcon } from "@crossbell/ui";
 
-import { useAccountState } from "../../../../hooks";
+import { useAccountCharacter, useAccountState } from "../../../../hooks";
 import { SignInWithWallet, OPSignSettings } from "../../../../scenes";
 import { SelectOptions } from "../../../../scenes/upgrade-account";
 
@@ -18,11 +18,13 @@ import {
 } from "../../../../components";
 
 import styles from "./index.module.css";
+import { StorageWidget } from "../../components/storage-widget";
 
 export function MainSetting() {
 	const account = useAccountState();
+	const character = useAccountCharacter();
+	const characterId = character?.characterId;
 	const { goTo, goBack, updateLast } = useDynamicScenesModal();
-	const characterId = account.computed.account?.characterId;
 
 	const goToSignIn = useRefCallback(() => {
 		goTo({
@@ -79,6 +81,8 @@ export function MainSetting() {
 			padding="0 24px 48px"
 		>
 			<div className={styles.container}>
+				{characterId && <StorageWidget characterId={characterId} />}
+
 				<SettingsSection
 					title="Connect"
 					items={compact([
