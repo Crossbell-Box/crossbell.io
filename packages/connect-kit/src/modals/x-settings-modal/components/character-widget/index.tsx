@@ -1,18 +1,25 @@
 import React from "react";
-import { CharacterAvatar } from "@crossbell/ui";
+import { CharacterAvatar, SettingsAccountOutlineIcon } from "@crossbell/ui";
 import { extractCharacterName } from "@crossbell/util-metadata";
 import { truncateAddress } from "@crossbell/util-ethers";
+
 import {
 	GeneralAccount,
 	useAccountCharacter,
 	useConnectedAccount,
-} from "@crossbell/connect-kit";
+} from "../../../../hooks";
 
 import { WalletIcon, EmailIcon } from "../../../../components";
 
 import styles from "./index.module.css";
 
-export function CharacterWidget() {
+export type CharacterWidgetProps = {
+	onClickSwitchCharacter: () => void;
+};
+
+export function CharacterWidget({
+	onClickSwitchCharacter,
+}: CharacterWidgetProps) {
 	const account = useConnectedAccount();
 	const character = useAccountCharacter();
 
@@ -22,29 +29,32 @@ export function CharacterWidget() {
 
 	return (
 		<div className={styles.container}>
-			<div>
-				<div className={styles.characterInfo}>
-					<CharacterAvatar
-						character={character}
-						size="36px"
-						className={styles.avatar}
-					/>
+			<div className={styles.characterInfo}>
+				<CharacterAvatar
+					character={character}
+					size="36px"
+					className={styles.avatar}
+				/>
 
-					<div>
-						<div className={styles.characterName}>
-							{extractCharacterName(character)}
-						</div>
-						<div className={styles.characterHandle}>@{character.handle}</div>
+				<div className={styles.characterInfoMain}>
+					<div className={styles.characterName}>
+						{extractCharacterName(character)}
 					</div>
+					<div className={styles.characterHandle}>@{character.handle}</div>
 				</div>
 
-				<div className={styles.accountDescription}>
-					{getAccountDescription(account)}
-				</div>
-				<div className={styles.accountAddress}>
-					{getAccountAddress(account)}
-				</div>
+				{account.type === "wallet" && (
+					<SettingsAccountOutlineIcon
+						onClick={onClickSwitchCharacter}
+						className={styles.switchCharacter}
+					/>
+				)}
 			</div>
+
+			<div className={styles.accountDescription}>
+				{getAccountDescription(account)}
+			</div>
+			<div className={styles.accountAddress}>{getAccountAddress(account)}</div>
 
 			{getAccountIcon(account)}
 		</div>

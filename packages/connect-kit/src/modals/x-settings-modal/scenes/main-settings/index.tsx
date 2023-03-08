@@ -9,6 +9,8 @@ import {
 	OPSignSettings,
 	CharacterSyncSettings,
 	ManageOperators,
+	SelectCharacters,
+	MintCharacterForDynamicModal,
 } from "../../../../scenes";
 import { SelectOptions } from "../../../../scenes/upgrade-account";
 
@@ -20,6 +22,7 @@ import {
 	DumbOpSignIcon,
 	WalletIcon,
 	IdCardIcon,
+	Congrats,
 } from "../../../../components";
 
 import styles from "./index.module.css";
@@ -86,6 +89,38 @@ export function MainSetting() {
 		});
 	});
 
+	const goToCongratsForMintCharacter = useRefCallback(() => {
+		goTo({
+			kind: "congrats-for-mint-character",
+			Component: () => <CongratsForMintCharacter />,
+		});
+	});
+
+	const goToMintCharacter = useRefCallback(() => {
+		goTo({
+			kind: "mint-characters",
+			Component: () => (
+				<MintCharacterForDynamicModal
+					sceneMode="form"
+					formMode="normal"
+					onSuccess={goToCongratsForMintCharacter}
+				/>
+			),
+		});
+	});
+
+	const goToSwitchCharacter = useRefCallback(() => {
+		goTo({
+			kind: "select-characters",
+			Component: () => (
+				<SelectCharacters
+					onSelectNew={goToMintCharacter}
+					afterSelectCharacter={goBack}
+				/>
+			),
+		});
+	});
+
 	return (
 		<DynamicScenesContainer
 			header={
@@ -101,7 +136,7 @@ export function MainSetting() {
 			padding="0 24px 48px"
 		>
 			<div className={styles.container}>
-				<CharacterWidget />
+				<CharacterWidget onClickSwitchCharacter={goToSwitchCharacter} />
 
 				{character && <StorageWidget characterId={character.characterId} />}
 
@@ -158,5 +193,28 @@ export function MainSetting() {
 				/>
 			</div>
 		</DynamicScenesContainer>
+	);
+}
+
+function CongratsForMintCharacter() {
+	const { hide, resetScenes } = useDynamicScenesModal();
+
+	return (
+		<Congrats
+			title="Congrats!"
+			desc="Now you can return into the feed and enjoy Crossbell."
+			tips="Welcome to new Crossbell"
+			timeout="15s"
+			btnText="Back to xSettings"
+			onClose={hide}
+			onClickBtn={() => {
+				resetScenes([
+					{
+						kind: "main-settings",
+						Component: MainSetting,
+					},
+				]);
+			}}
+		/>
 	);
 }

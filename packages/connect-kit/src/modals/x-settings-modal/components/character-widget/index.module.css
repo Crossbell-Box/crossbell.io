@@ -14,9 +14,25 @@
 }
 
 .characterInfo {
+	width: fit-content;
 	display: flex;
 	align-items: center;
 	gap: 8px;
+	overflow: hidden;
+	background: rgba(62, 64, 82, 0.5);
+	backdrop-filter: blur(3px);
+}
+
+.characterInfoMain {
+	flex: 0 1;
+	max-width: 188px;
+}
+
+.characterName,
+.characterHandle {
+	white-space: nowrap;
+	text-overflow: ellipsis;
+	overflow: hidden;
 }
 
 .characterName {
@@ -28,6 +44,12 @@
 	font-size: 12px;
 	font-weight: 500;
 	opacity: 0.9;
+}
+
+.switchCharacter {
+	flex: 0 0 auto;
+	font-size: 24px;
+	cursor: pointer;
 }
 
 .accountDescription {
