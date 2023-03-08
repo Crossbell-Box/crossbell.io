@@ -87,12 +87,12 @@ export function MainSetting() {
 				{character && <StorageWidget characterId={character.characterId} />}
 
 				<SettingsSection
-					title="Connect"
 					items={compact([
 						!account.email && {
 							id: "sign-in",
 							icon: <IdCardIcon className={styles.icon} />,
 							title: "Sign In",
+							description: "Sign in servers to get more features",
 							disabled: !!account.wallet?.siwe,
 							onClick: goToSignIn,
 						},
