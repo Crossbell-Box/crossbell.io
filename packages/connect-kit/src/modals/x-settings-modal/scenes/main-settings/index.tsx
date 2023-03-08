@@ -19,6 +19,7 @@ import {
 
 import styles from "./index.module.css";
 import { StorageWidget } from "../../components/storage-widget";
+import { CharacterWidget } from "../../components/character-widget";
 
 export function MainSetting() {
 	const account = useAccountState();
@@ -81,7 +82,9 @@ export function MainSetting() {
 			padding="0 24px 48px"
 		>
 			<div className={styles.container}>
-				{characterId && <StorageWidget characterId={characterId} />}
+				<CharacterWidget />
+
+				{character && <StorageWidget characterId={character.characterId} />}
 
 				<SettingsSection
 					title="Connect"

@@ -1,10 +1,20 @@
-export const truncateAddress = (address?: string) => {
+export type TruncateAddressOptions = {
+	start?: number;
+	end?: number;
+};
+
+export const truncateAddress = (
+	address?: string,
+	options?: TruncateAddressOptions
+) => {
 	if (!address) {
 		return "0xUNKNOWN";
 	}
 
 	return (
-		address.substring(0, 6) + "..." + address.substring(address.length - 4)
+		address.substring(0, options?.start ?? 6) +
+		"..." +
+		address.substring(address.length - (options?.end ?? 4))
 	);
 };
 
