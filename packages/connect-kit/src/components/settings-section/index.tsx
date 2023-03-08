@@ -7,11 +7,12 @@ import styles from "./index.module.css";
 
 export type SettingsSectionItemProps = {
 	id: React.Key;
-	icon: React.ReactNode;
-	title: React.ReactNode;
+	icon?: React.ReactNode;
 	disabled?: boolean;
+	title: React.ReactNode;
 	description?: React.ReactNode;
 	onClick?: () => void;
+	className?: string;
 };
 
 export type SettingsSectionProps = {
@@ -26,16 +27,19 @@ export function SettingsSectionItem(props: SettingsSectionItemProps) {
 			onClick={props.disabled ? undefined : props.onClick}
 			className={classNames(
 				styles.item,
-				props.disabled ? styles.disabled : commonStyles.uxOverlay
+				props.className,
+				props.disabled
+					? styles.disabled
+					: !!props.onClick && commonStyles.uxOverlay
 			)}
 		>
-			<div className={styles.itemIcon}>{props.icon}</div>
+			{props.icon && <div className={styles.itemIcon}>{props.icon}</div>}
 			<div className={styles.itemMain}>
 				<div>
 					<div className={styles.itemTitle}>{props.title}</div>
 					<div className={styles.itemDescription}>{props.description}</div>
 				</div>
-				<ArrowBackIcon className={styles.actionIcon} />
+				{props.onClick && <ArrowBackIcon className={styles.actionIcon} />}
 			</div>
 		</div>
 	);

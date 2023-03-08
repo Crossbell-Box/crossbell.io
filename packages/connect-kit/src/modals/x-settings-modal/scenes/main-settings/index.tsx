@@ -1,13 +1,14 @@
 import React from "react";
 import compact from "lodash.compact";
 import { useRefCallback } from "@crossbell/util-hooks";
-import { GearIcon, SettingsXSyncIcon } from "@crossbell/ui";
+import { GearIcon, SettingsXSyncIcon, SettingsEyeIcon } from "@crossbell/ui";
 
 import { useAccountCharacter, useAccountState } from "../../../../hooks";
 import {
 	SignInWithWallet,
 	OPSignSettings,
 	CharacterSyncSettings,
+	ManageOperators,
 } from "../../../../scenes";
 import { SelectOptions } from "../../../../scenes/upgrade-account";
 
@@ -78,6 +79,13 @@ export function MainSetting() {
 		});
 	});
 
+	const goToManageOperators = useRefCallback(() => {
+		goTo({
+			kind: "manage-operators",
+			Component: () => <ManageOperators />,
+		});
+	});
+
 	return (
 		<DynamicScenesContainer
 			header={
@@ -137,6 +145,14 @@ export function MainSetting() {
 							description: "Set up operator for syncing content",
 							disabled: !characterId,
 							onClick: goToCharacterSync,
+						},
+
+						!account.email && {
+							id: "operators",
+							icon: <SettingsEyeIcon className={styles.icon} />,
+							title: "Manage Operators",
+							disabled: !characterId,
+							onClick: goToManageOperators,
 						},
 					])}
 				/>

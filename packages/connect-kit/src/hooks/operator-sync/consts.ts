@@ -32,7 +32,8 @@ export const X_SYNC_OPERATOR_PERMISSIONS: CharacterPermissionKey[] = [
 	"POST_NOTE",
 ];
 
-export const OPERATOR_ADDRESS = "0x0f588318a494e4508a121a32b6670b5494ca3357";
+export const X_SYNC_OPERATOR_ADDRESS =
+	"0x0f588318a494e4508a121a32b6670b5494ca3357";
 
 export const SUPPORTED_PLATFORMS = [
 	"medium",
@@ -45,7 +46,7 @@ export const SUPPORTED_PLATFORMS = [
 	"jike",
 ] as const;
 
-export type SupportedPlatform = typeof SUPPORTED_PLATFORMS[number];
+export type SupportedPlatform = (typeof SUPPORTED_PLATFORMS)[number];
 
 const PLATFORM_DISPLAY_STATUS_MAP: Record<SupportedPlatform, boolean> = {
 	medium: true,

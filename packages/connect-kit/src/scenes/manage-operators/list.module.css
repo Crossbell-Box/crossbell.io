@@ -1,0 +1,13 @@
+.container {
+	padding: 0 0 24px;
+}
+
+.list {
+	margin: 10px 24px 24px;
+	border-radius: 12px;
+	background: #f6f6f6;
+}
+
+.itemTitle {
+	padding: 0 0 0 20px;
+}
