@@ -1,6 +1,7 @@
 export * from "./action-btn";
 export * from "./base-modal";
 export * from "./bottom-tips";
+export * from "./character-sync-settings";
 export * from "./congrats";
 export * from "./connect-kind-differences";
 export * from "./dynamic-scenes-container";

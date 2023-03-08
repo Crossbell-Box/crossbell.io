@@ -1,10 +1,14 @@
 import React from "react";
 import compact from "lodash.compact";
 import { useRefCallback } from "@crossbell/util-hooks";
-import { GearIcon } from "@crossbell/ui";
+import { GearIcon, SettingsXSyncIcon } from "@crossbell/ui";
 
 import { useAccountCharacter, useAccountState } from "../../../../hooks";
-import { SignInWithWallet, OPSignSettings } from "../../../../scenes";
+import {
+	SignInWithWallet,
+	OPSignSettings,
+	CharacterSyncSettings,
+} from "../../../../scenes";
 import { SelectOptions } from "../../../../scenes/upgrade-account";
 
 import {
@@ -67,6 +71,13 @@ export function MainSetting() {
 		});
 	});
 
+	const goToCharacterSync = useRefCallback(() => {
+		goTo({
+			kind: "character-sync-settings",
+			Component: () => <CharacterSyncSettings />,
+		});
+	});
+
 	return (
 		<DynamicScenesContainer
 			header={
@@ -108,7 +119,7 @@ export function MainSetting() {
 				/>
 
 				<SettingsSection
-					title="Operator"
+					title="OPERATOR"
 					items={compact([
 						!account.email && {
 							id: "op-sign",
@@ -117,6 +128,15 @@ export function MainSetting() {
 							description: "Set up operator for interactions",
 							disabled: !characterId,
 							onClick: goToOPSign,
+						},
+
+						!account.email && {
+							id: "character-sync",
+							icon: <SettingsXSyncIcon className={styles.icon} />,
+							title: "Sync Operator",
+							description: "Set up operator for syncing content",
+							disabled: !characterId,
+							onClick: goToCharacterSync,
 						},
 					])}
 				/>
