@@ -1,11 +1,14 @@
 import React from "react";
-import { CharacterOperatorEntity } from "crossbell.js";
-import { truncateAddress } from "@crossbell/util-ethers";
-import { Loading } from "@crossbell/ui";
 import classNames from "classnames";
+import { CharacterOperatorEntity } from "crossbell.js";
+import { Loading } from "@crossbell/ui";
+import { truncateAddress } from "@crossbell/util-ethers";
+import { useRefCallback } from "@crossbell/util-hooks";
+import { RemoveOperator } from "../remove-operator";
 
 import commonStyles from "../../../styles.module.css";
 import { useCharacterOperatorPermissions } from "../../../hooks";
+import { useDynamicScenesModal } from "../../../components";
 
 import styles from "./item.module.css";
 
@@ -33,6 +36,20 @@ export function Item({
 	});
 	const permissions = data ?? [];
 
+	const { goTo, goBack } = useDynamicScenesModal();
+	const goToRemoveOperator = useRefCallback(() => {
+		goTo({
+			kind: "remove-operator",
+			Component: () => (
+				<RemoveOperator
+					characterOperator={characterOperator}
+					onSuccess={goBack}
+					onCancel={goBack}
+				/>
+			),
+		});
+	});
+
 	return (
 		<div className={styles.container}>
 			<div>
@@ -56,6 +73,7 @@ export function Item({
 			) : permissions.length > 0 ? (
 				<button
 					className={classNames(styles.removeBtn, commonStyles.uxOverlay)}
+					onClick={goToRemoveOperator}
 				>
 					Remove
 				</button>

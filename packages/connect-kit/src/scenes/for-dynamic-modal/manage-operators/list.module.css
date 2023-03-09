@@ -11,3 +11,11 @@
 .itemTitle {
 	padding: 0 0 0 20px;
 }
+
+.emptyTips {
+	display: flex;
+	align-items: center;
+	justify-content: center;
+	height: 150px;
+	opacity: 0.8;
+}

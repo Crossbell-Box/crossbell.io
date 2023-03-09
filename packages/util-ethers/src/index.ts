@@ -11,11 +11,14 @@ export const truncateAddress = (
 		return "0xUNKNOWN";
 	}
 
-	return (
-		address.substring(0, options?.start ?? 6) +
-		"..." +
-		address.substring(address.length - (options?.end ?? 4))
-	);
+	const ellipsis = "...";
+	const start = options?.start ?? 6;
+	const end = options?.end ?? 4;
+
+	const [, startStr, endStr] =
+		new RegExp(`^(.{${start}}).+(.{${end}})$`).exec(address) ?? [];
+
+	return [startStr, endStr].filter(Boolean).join(ellipsis) || address;
 };
 
 export const NIL_ADDRESS = "0x0000000000000000000000000000000000000000";

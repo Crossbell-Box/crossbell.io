@@ -1,6 +1,6 @@
 import React from "react";
 import { ScrollArea } from "@mantine/core";
-import { LoadMore } from "@crossbell/ui";
+import { LoadMore, LoadingOverlay } from "@crossbell/ui";
 import { isAddressEqual } from "@crossbell/util-ethers";
 import { CharacterOperatorEntity } from "crossbell.js";
 
@@ -18,31 +18,42 @@ export type ListProps = {
 };
 
 export function List({ characterId }: ListProps) {
-	const { data, hasNextPage, fetchNextPage, isFetchingNextPage } =
+	const { data, hasNextPage, fetchNextPage, isFetchingNextPage, isLoading } =
 		useGetCharacterOperators({
 			characterId,
 		});
 
+	const list = React.useMemo(
+		() =>
+			data?.pages
+				.flatMap((page) =>
+					page.list.map((characterOperator) => ({
+						characterOperator: characterOperator,
+						tags: getTags(characterOperator),
+					}))
+				)
+				.sort((a, b) => (a.tags ? (b.tags ? 0 : -1) : 1)) ?? [],
+		[data]
+	);
+
 	return (
 		<ScrollArea.Autosize mah="70vh" className={styles.container}>
+			<LoadingOverlay visible={isLoading && isFetchingNextPage} />
+
+			{list.length === 0 && (
+				<div className={styles.emptyTips}>No operators</div>
+			)}
+
 			<div className={styles.list}>
-				{data?.pages
-					.flatMap((page) =>
-						page.list.map((characterOperator) => ({
-							characterOperator: characterOperator,
-							tags: getTags(characterOperator),
-						}))
-					)
-					.sort((a, b) => (a.tags ? (b.tags ? 0 : -1) : 1))
-					.map(({ characterOperator, tags }) => (
-						<Item
-							key={characterOperator.operator}
-							characterId={characterId}
-							characterOperator={characterOperator}
-							description={getDescription(characterOperator)}
-							tags={tags}
-						/>
-					))}
+				{list.map(({ characterOperator, tags }) => (
+					<Item
+						key={characterOperator.operator}
+						characterId={characterId}
+						characterOperator={characterOperator}
+						description={getDescription(characterOperator)}
+						tags={tags}
+					/>
+				))}
 			</div>
 
 			<LoadMore
