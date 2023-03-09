@@ -1,5 +1,4 @@
 export * from "./mint-character";
-export * from "./mint-character-for-dynamic-modal";
 export * from "./character-sync-settings";
 export * from "./connect-kind-differences";
 export * from "./connect-wallet";

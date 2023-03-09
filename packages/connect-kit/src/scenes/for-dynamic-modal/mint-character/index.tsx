@@ -2,27 +2,24 @@ import React from "react";
 import { useRefCallback } from "@crossbell/util-hooks";
 import { useUrlComposer } from "@crossbell/ui";
 
-import { useAccountCharacter } from "../../hooks";
-import { useDynamicScenesModal, Congrats } from "../../components";
+import { useAccountCharacter } from "../../../hooks";
+import { useDynamicScenesModal, Congrats } from "../../../components";
 import {
 	MintCharacter as Main,
 	MintCharacterProps as Props,
 	MintCharacterFormMode,
 	MintCharacterSceneMode,
-} from "../mint-character";
+} from "../../mint-character";
 
-export type MintCharacterPropsForDynamicModal = Pick<
-	Props,
-	"sceneMode" | "formMode"
-> & {
+export type MintCharacterProps = Pick<Props, "sceneMode" | "formMode"> & {
 	onSuccess?: () => void;
 };
 
-export function MintCharacterForDynamicModal({
+export function MintCharacter({
 	sceneMode,
 	formMode,
 	onSuccess,
-}: MintCharacterPropsForDynamicModal) {
+}: MintCharacterProps) {
 	const { goTo, updateLast } = useDynamicScenesModal();
 
 	const onSwitchSceneMode = useRefCallback(
@@ -30,7 +27,7 @@ export function MintCharacterForDynamicModal({
 			updateLast({
 				kind: "mint-character",
 				Component: () => (
-					<MintCharacterForDynamicModal
+					<MintCharacter
 						formMode={formMode}
 						sceneMode={sceneMode}
 						onSuccess={onSuccess}
@@ -44,7 +41,7 @@ export function MintCharacterForDynamicModal({
 		updateLast({
 			kind: "mint-character",
 			Component: () => (
-				<MintCharacterForDynamicModal
+				<MintCharacter
 					formMode={formMode}
 					sceneMode={sceneMode}
 					onSuccess={onSuccess}

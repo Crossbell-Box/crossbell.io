@@ -10,8 +10,8 @@ import {
 	CharacterSyncSettings,
 	ManageOperators,
 	SelectCharacters,
-	MintCharacterForDynamicModal,
 } from "../../../../scenes";
+import { MintCharacter } from "../../../../scenes/for-dynamic-modal/mint-character";
 import { SelectOptions } from "../../../../scenes/for-upgrade-account";
 
 import {
@@ -101,7 +101,7 @@ export function MainSetting() {
 		goTo({
 			kind: "mint-characters",
 			Component: () => (
-				<MintCharacterForDynamicModal
+				<MintCharacter
 					sceneMode="form"
 					formMode="normal"
 					onSuccess={goToCongratsForMintCharacter}
