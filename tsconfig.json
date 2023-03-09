@@ -9,6 +9,7 @@
 		"esModuleInterop": true,
 		"moduleResolution": "node",
 		"module": "ESNext",
+		"resolveJsonModule": true,
 		"skipLibCheck": true,
 		"target": "ESNext",
 		"jsx": "react",

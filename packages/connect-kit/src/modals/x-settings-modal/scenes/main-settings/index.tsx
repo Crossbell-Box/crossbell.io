@@ -28,6 +28,7 @@ import {
 import styles from "./index.module.css";
 import { StorageWidget } from "../../components/storage-widget";
 import { CharacterWidget } from "../../components/character-widget";
+import { VersionInfo } from "../../components/version-info";
 
 export function MainSetting() {
 	const account = useAccountState();
@@ -191,6 +192,8 @@ export function MainSetting() {
 						},
 					])}
 				/>
+
+				<VersionInfo />
 			</div>
 		</DynamicScenesContainer>
 	);

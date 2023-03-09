@@ -1,0 +1,22 @@
+.container {
+	display: flex;
+	align-items: center;
+	justify-content: center;
+	gap: 8px;
+	font-weight: 400;
+	font-size: 12px;
+	color: #878e95;
+	margin-top: 12px;
+}
+
+.container a:hover {
+	text-decoration: underline;
+}
+
+.container::after,
+.container::before {
+	content: "";
+	flex: 1;
+	height: 1px;
+	background: #cfd4d9;
+}

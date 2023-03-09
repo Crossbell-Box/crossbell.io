@@ -1,4 +1,5 @@
 import { defineConfig } from "tsup";
+import packageInfo from "./package.json";
 
 import { plugins } from "~/scripts/esbuild";
 
@@ -15,4 +16,10 @@ export default defineConfig({
 	sourcemap: true,
 	metafile: true,
 	esbuildPlugins: plugins,
+	esbuildOptions(options) {
+		options.define = {
+			...options.define,
+			"process.env.PKG_VERSION": JSON.stringify(packageInfo.version),
+		};
+	},
 });

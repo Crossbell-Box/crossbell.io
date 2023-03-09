@@ -11,4 +11,6 @@
 
 .main {
 	padding: var(--dynamic-scenes-container__padding);
+	overflow: auto;
+	max-height: 80vh;
 }
