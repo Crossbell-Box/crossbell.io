@@ -28,8 +28,7 @@ export function OPSignPromotion() {
 			className="block mt-12px mb-24px mx-16px cursor-pointer relative aspect-728/120"
 			onClick={() => {
 				if (character) {
-					opSignSettingsModal.show(character.characterId);
-					// hidePromotion({ hideImmediately: false });
+					opSignSettingsModal.show(character);
 				} else {
 					connectModal.show();
 				}
