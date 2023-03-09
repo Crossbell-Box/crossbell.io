@@ -27,6 +27,10 @@ export function CharacterWidget({
 		return null;
 	}
 
+	const accountAddress = getAccountAddress(account);
+	const characterName = extractCharacterName(character);
+	const characterHandle = `@${character.handle}`;
+
 	return (
 		<div className={styles.container}>
 			<div className={styles.characterInfo}>
@@ -37,10 +41,12 @@ export function CharacterWidget({
 				/>
 
 				<div className={styles.characterInfoMain}>
-					<div className={styles.characterName}>
-						{extractCharacterName(character)}
+					<div title={characterName} className={styles.characterName}>
+						{characterName}
 					</div>
-					<div className={styles.characterHandle}>@{character.handle}</div>
+					<div title={characterHandle} className={styles.characterHandle}>
+						{characterHandle}
+					</div>
 				</div>
 
 				{account.type === "wallet" && (
@@ -54,7 +60,14 @@ export function CharacterWidget({
 			<div className={styles.accountDescription}>
 				{getAccountDescription(account)}
 			</div>
-			<div className={styles.accountAddress}>{getAccountAddress(account)}</div>
+			<div title={accountAddress} className={styles.accountAddress}>
+				{truncateAddress(
+					accountAddress,
+					account.type === "email"
+						? { start: 15, end: 15 }
+						: { start: 8, end: 9 }
+				)}
+			</div>
 
 			{getAccountIcon(account)}
 		</div>
@@ -73,17 +86,17 @@ function getAccountDescription(account: GeneralAccount): string {
 function getAccountAddress(account: GeneralAccount): string {
 	switch (account.type) {
 		case "email":
-			return truncateAddress(account.email, { start: 8, end: 9 });
+			return account.email;
 		case "wallet":
-			return truncateAddress(account.address, { start: 8, end: 9 });
+			return account.address;
 	}
 }
 
 function getAccountIcon(account: GeneralAccount): React.ReactNode {
 	switch (account.type) {
 		case "email":
-			return <EmailIcon className={styles.accountIcon} />;
+			return <EmailIcon className={styles.emailIcon} />;
 		case "wallet":
-			return <WalletIcon className={styles.accountIcon} />;
+			return <WalletIcon className={styles.walletIcon} />;
 	}
 }
