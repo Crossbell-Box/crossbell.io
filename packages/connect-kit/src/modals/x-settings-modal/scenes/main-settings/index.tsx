@@ -27,7 +27,6 @@ import {
 	SettingsSection,
 	DumbOpSignIcon,
 	WalletIcon,
-	IdCardIcon,
 	Congrats,
 } from "../../../../components";
 
@@ -41,15 +40,6 @@ export function MainSetting() {
 	const character = useAccountCharacter();
 	const characterId = character?.characterId;
 	const { goTo, goBack, updateLast } = useDynamicScenesModal();
-
-	const goToSignIn = useRefCallback(() => {
-		goTo({
-			kind: "sign-in",
-			Component: () => (
-				<SignInWithWallet canGoBack={true} afterSignIn={goBack} />
-			),
-		});
-	});
 
 	const goToOPSign = useRefCallback(() => {
 		if (!!account.wallet?.siwe) {
@@ -156,15 +146,6 @@ export function MainSetting() {
 
 				<SettingsSection
 					items={compact([
-						!account.email && {
-							id: "sign-in",
-							icon: <IdCardIcon className={styles.icon} />,
-							title: "Sign In",
-							description: "Sign in servers to get more features",
-							disabled: !!account.wallet?.siwe,
-							onClick: goToSignIn,
-						},
-
 						!!account.email && {
 							id: "upgrade-email-account",
 							icon: <WalletIcon className={styles.icon} />,
