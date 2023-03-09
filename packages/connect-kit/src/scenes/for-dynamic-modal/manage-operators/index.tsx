@@ -4,9 +4,9 @@ import {
 	ModalHeaderProps,
 	DynamicScenesHeader,
 	DynamicScenesContainer,
-} from "../../components";
+} from "../../../components";
 import { List } from "./list";
-import { useAccountCharacterId } from "../../hooks";
+import { useAccountCharacterId } from "../../../hooks";
 
 export type ManageOperatorsProps = {
 	Header?: React.ComponentType<ModalHeaderProps>;

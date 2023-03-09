@@ -4,7 +4,6 @@ export * from "./connect-kind-differences";
 export * from "./connect-wallet";
 export * from "./op-sign-settings";
 export * from "./get-a-wallet";
-export * from "./manage-operators";
 export * from "./select-characters";
 export * from "./select-wallet-to-connect";
 export * from "./sign-in-with-wallet";

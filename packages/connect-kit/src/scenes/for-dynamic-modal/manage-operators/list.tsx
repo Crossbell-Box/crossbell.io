@@ -8,7 +8,7 @@ import {
 	OP_SIGN_OPERATOR_ADDRESS,
 	X_SYNC_OPERATOR_ADDRESS,
 	useGetCharacterOperators,
-} from "../../hooks";
+} from "../../../hooks";
 
 import styles from "./list.module.css";
 import { Item, ItemTag } from "./item";

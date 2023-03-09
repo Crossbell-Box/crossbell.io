@@ -13,10 +13,10 @@ import {
 	SignInWithWallet,
 	OPSignSettings,
 	SyncOperatorSettings,
-	ManageOperators,
 	SelectCharacters,
 } from "../../../../scenes";
 import { MintCharacter } from "../../../../scenes/for-dynamic-modal/mint-character";
+import { ManageOperators } from "../../../../scenes/for-dynamic-modal/manage-operators";
 import { SwitchApps } from "../../../../scenes/for-dynamic-modal/switch-apps";
 import { SelectOptions } from "../../../../scenes/for-upgrade-account";
 

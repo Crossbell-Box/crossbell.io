@@ -4,8 +4,8 @@ import { truncateAddress } from "@crossbell/util-ethers";
 import { Loading } from "@crossbell/ui";
 import classNames from "classnames";
 
-import commonStyles from "../../styles.module.css";
-import { useCharacterOperatorPermissions } from "../../hooks";
+import commonStyles from "../../../styles.module.css";
+import { useCharacterOperatorPermissions } from "../../../hooks";
 
 import styles from "./item.module.css";
 
