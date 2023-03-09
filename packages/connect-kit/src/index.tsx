@@ -22,6 +22,7 @@ import { NoEnoughCSBModal } from "./modals/no-enough-csb-modal";
 import { WalletMintNewCharacter } from "./modals/wallet-mint-new-character";
 import { SelectCharactersModal } from "./modals/select-characters-modal";
 import { DynamicScenesModal } from "./components/dynamic-scenes-modal";
+import { XSettingsConfig, XSettingsConfigContext } from "./x-settings-config";
 import { contractConfig } from "./contract-config";
 
 export { useConnectModal } from "./modals/connect-modal";
@@ -44,12 +45,14 @@ export {
 export * from "./hooks";
 export * from "./get-default-client-config";
 export * from "./components/public";
+export type { XSettingsConfig } from "./x-settings-config";
 
 export type ConnectKitProviderProps = {
 	children: React.ReactNode;
 	ipfsLinkToHttpLink?: GetWeb2Url;
 	withoutNotificationsProvider?: boolean;
 	urlComposer?: UrlComposerContextValue;
+	xSettings?: Partial<XSettingsConfig>;
 };
 
 export function ConnectKitProvider({
@@ -57,6 +60,7 @@ export function ConnectKitProvider({
 	ipfsLinkToHttpLink,
 	withoutNotificationsProvider,
 	urlComposer,
+	xSettings,
 }: ConnectKitProviderProps) {
 	const accountState = useAccountState();
 	const account = useAccount();
@@ -82,18 +86,20 @@ export function ConnectKitProvider({
 		<InitContractProvider {...contractConfig}>
 			<UseWeb2UrlContext.Provider value={ipfsLinkToHttpLink ?? null}>
 				<UrlComposerContext.Provider value={urlComposer ?? null}>
-					<ConnectModal />
-					<DisconnectModal />
-					<ClaimCSBTipsModal />
-					<CsbDetailModal />
-					<WalletClaimCSBModal />
-					<OpSignSettingsModal />
-					<TransferCSBToOperatorModal />
-					<NoEnoughCSBModal />
-					<WalletMintNewCharacter />
-					<SelectCharactersModal />
-					<DynamicScenesModal />
-					{children}
+					<XSettingsConfigContext.Provider value={xSettings ?? null}>
+						<ConnectModal />
+						<DisconnectModal />
+						<ClaimCSBTipsModal />
+						<CsbDetailModal />
+						<WalletClaimCSBModal />
+						<OpSignSettingsModal />
+						<TransferCSBToOperatorModal />
+						<NoEnoughCSBModal />
+						<WalletMintNewCharacter />
+						<SelectCharactersModal />
+						<DynamicScenesModal />
+						{children}
+					</XSettingsConfigContext.Provider>
 				</UrlComposerContext.Provider>
 			</UseWeb2UrlContext.Provider>
 		</InitContractProvider>

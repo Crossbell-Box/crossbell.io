@@ -1,7 +1,12 @@
 import React from "react";
 import compact from "lodash.compact";
 import { useRefCallback } from "@crossbell/util-hooks";
-import { GearIcon, SettingsXSyncIcon, SettingsEyeIcon } from "@crossbell/ui";
+import {
+	GearIcon,
+	SettingsXSyncIcon,
+	SettingsEyeIcon,
+	SettingsSwitchAppIcon,
+} from "@crossbell/ui";
 
 import { useAccountCharacter, useAccountState } from "../../../../hooks";
 import {
@@ -12,6 +17,7 @@ import {
 	SelectCharacters,
 } from "../../../../scenes";
 import { MintCharacter } from "../../../../scenes/for-dynamic-modal/mint-character";
+import { SwitchApps } from "../../../../scenes/for-dynamic-modal/switch-apps";
 import { SelectOptions } from "../../../../scenes/for-upgrade-account";
 
 import {
@@ -122,6 +128,13 @@ export function MainSetting() {
 		});
 	});
 
+	const goToSwitchApps = useRefCallback(() => {
+		goTo({
+			kind: "switch-apps",
+			Component: () => <SwitchApps />,
+		});
+	});
+
 	return (
 		<DynamicScenesContainer
 			header={
@@ -189,6 +202,18 @@ export function MainSetting() {
 							title: "Manage Operators",
 							disabled: !characterId,
 							onClick: goToManageOperators,
+						},
+					])}
+				/>
+
+				<SettingsSection
+					title="GENERAL SETTINGS"
+					items={compact([
+						{
+							id: "switch-apps",
+							icon: <SettingsSwitchAppIcon className={styles.icon} />,
+							title: "Switch Apps",
+							onClick: goToSwitchApps,
 						},
 					])}
 				/>
