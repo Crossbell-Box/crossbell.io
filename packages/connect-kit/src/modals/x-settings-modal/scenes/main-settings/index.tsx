@@ -12,7 +12,7 @@ import { useAccountCharacter, useAccountState } from "../../../../hooks";
 import {
 	SignInWithWallet,
 	OPSignSettings,
-	CharacterSyncSettings,
+	SyncOperatorSettings,
 	ManageOperators,
 	SelectCharacters,
 } from "../../../../scenes";
@@ -82,10 +82,10 @@ export function MainSetting() {
 		});
 	});
 
-	const goToCharacterSync = useRefCallback(() => {
+	const goToSyncOperatorSettings = useRefCallback(() => {
 		goTo({
-			kind: "character-sync-settings",
-			Component: () => <CharacterSyncSettings />,
+			kind: "sync-operator-settings",
+			Component: () => <SyncOperatorSettings />,
 		});
 	});
 
@@ -188,12 +188,12 @@ export function MainSetting() {
 						},
 
 						!account.email && {
-							id: "character-sync",
+							id: "sync-operator",
 							icon: <SettingsXSyncIcon className={styles.icon} />,
 							title: "Sync Operator",
 							description: "Set up operator for syncing content",
 							disabled: !characterId,
-							onClick: goToCharacterSync,
+							onClick: goToSyncOperatorSettings,
 						},
 
 						!account.email && {

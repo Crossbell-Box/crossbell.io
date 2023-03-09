@@ -1,5 +1,5 @@
 export * from "./mint-character";
-export * from "./character-sync-settings";
+export * from "./sync-operator-settings";
 export * from "./connect-kind-differences";
 export * from "./connect-wallet";
 export * from "./op-sign-settings";

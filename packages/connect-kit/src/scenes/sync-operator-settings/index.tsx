@@ -1,24 +1,24 @@
 import React from "react";
 
 import {
-	CharacterSyncSettings as Main,
+	SyncOperatorSettings as Main,
 	ModalHeaderProps,
 	DynamicScenesHeader,
 	DynamicScenesContainer,
 } from "../../components";
 
-export type CharacterSyncSettingsProps = {
+export type SyncOperatorSettingsProps = {
 	Header?: React.ComponentType<ModalHeaderProps>;
 };
 
-export function CharacterSyncSettings({
+export function SyncOperatorSettings({
 	Header: Header_,
-}: CharacterSyncSettingsProps) {
+}: SyncOperatorSettingsProps) {
 	const Header = Header_ ?? DynamicScenesHeader;
 
 	return (
 		<DynamicScenesContainer
-			padding="10px 24px 48px"
+			padding="10px 24px 36px"
 			header={<Header title="Sync Operator" />}
 		>
 			<Main />

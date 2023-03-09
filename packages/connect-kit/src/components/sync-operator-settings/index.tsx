@@ -6,7 +6,7 @@ import { useToggleCharacterSyncOperator } from "../../hooks";
 
 import styles from "./index.module.css";
 
-export function CharacterSyncSettings() {
+export function SyncOperatorSettings() {
 	const [{ hasPermissions, toggleOperator }, { isLoading }] =
 		useToggleCharacterSyncOperator();
 
