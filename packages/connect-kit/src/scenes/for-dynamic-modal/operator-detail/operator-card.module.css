@@ -1,6 +1,6 @@
 .container {
 	position: relative;
-	padding: 6px 12px;
+	padding: 12px;
 	min-height: 64px;
 	display: flex;
 	align-items: center;
@@ -9,6 +9,10 @@
 	box-sizing: border-box;
 	background-color: #f6f6f6;
 	border-radius: 12px;
+}
+
+.avatar {
+	margin: 4px 0 auto;
 }
 
 .main {
@@ -20,6 +24,7 @@
 	color: #49454f;
 	font-weight: 500;
 	font-size: 16px;
+	line-height: 20px;
 	display: flex;
 	align-items: center;
 	gap: 6px;
@@ -29,9 +34,7 @@
 	color: #999;
 	font-weight: 500;
 	font-size: 12px;
-	white-space: nowrap;
-	text-overflow: ellipsis;
-	overflow: hidden;
+	word-break: break-all;
 }
 
 .tags {
@@ -43,6 +46,7 @@
 }
 
 .tags span {
+	line-height: 16px;
 	font-size: 11px;
 	padding: 0 6px;
 	border-radius: 4px;

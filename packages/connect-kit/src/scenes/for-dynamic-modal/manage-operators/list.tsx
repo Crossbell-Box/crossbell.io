@@ -1,6 +1,6 @@
 import React from "react";
 import { ScrollArea } from "@mantine/core";
-import { LoadMore, LoadingOverlay } from "@crossbell/ui";
+import { LoadMore, Loading } from "@crossbell/ui";
 import { isAddressEqual } from "@crossbell/util-ethers";
 import { CharacterOperatorEntity } from "crossbell.js";
 
@@ -30,27 +30,31 @@ export function List({ characterId }: ListProps) {
 					page.list.map((characterOperator) => ({
 						characterOperator: characterOperator,
 						tags: getTags(characterOperator),
+						description: getDescription(characterOperator),
 					}))
 				)
-				.sort((a, b) => (a.tags ? (b.tags ? 0 : -1) : 1)) ?? [],
+				.filter(
+					({ characterOperator }) => characterOperator.permissions.length > 0
+				)
+				.sort((a, b) => (a.description ? (b.description ? 0 : -1) : 1)) ?? [],
 		[data]
 	);
 
 	return (
 		<ScrollArea.Autosize mah="70vh" className={styles.container}>
-			<LoadingOverlay visible={isLoading && isFetchingNextPage} />
-
 			{list.length === 0 && (
-				<div className={styles.emptyTips}>No operators</div>
+				<div className={styles.emptyTips}>
+					{isLoading ? <Loading className={styles.loading} /> : "No operators"}
+				</div>
 			)}
 
 			<div className={styles.list}>
-				{list.map(({ characterOperator, tags }) => (
+				{list.map(({ characterOperator, tags, description }) => (
 					<Item
 						key={characterOperator.operator}
 						characterId={characterId}
 						characterOperator={characterOperator}
-						description={getDescription(characterOperator)}
+						description={description}
 						tags={tags}
 					/>
 				))}
@@ -78,7 +82,9 @@ function getTags(characterOperator: CharacterOperatorEntity): ItemTag[] | null {
 		];
 	}
 
-	return null;
+	return [
+		{ title: "Unknown", style: { background: "#A9AAAB", color: "#fff" } },
+	];
 }
 
 function getDescription(

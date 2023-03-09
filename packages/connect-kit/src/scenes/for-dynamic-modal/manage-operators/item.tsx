@@ -1,14 +1,21 @@
 import React from "react";
 import classNames from "classnames";
 import { CharacterOperatorEntity } from "crossbell.js";
-import { Loading } from "@crossbell/ui";
-import { truncateAddress } from "@crossbell/util-ethers";
+import { CharacterAvatar, Loading, useWeb2Url } from "@crossbell/ui";
+import { isAddressEqual, truncateAddress } from "@crossbell/util-ethers";
 import { useRefCallback } from "@crossbell/util-hooks";
-import { RemoveOperator } from "../remove-operator";
+import { usePrimaryCharacter } from "@crossbell/indexer";
 
 import commonStyles from "../../../styles.module.css";
-import { useCharacterOperatorPermissions } from "../../../hooks";
+import {
+	OP_SIGN_OPERATOR_ADDRESS,
+	useCharacterOperatorPermissions,
+	X_SYNC_OPERATOR_ADDRESS,
+} from "../../../hooks";
 import { useDynamicScenesModal } from "../../../components";
+
+import { OperatorDetail } from "../operator-detail";
+import { RemoveOperator } from "../remove-operator";
 
 import styles from "./item.module.css";
 
@@ -37,7 +44,9 @@ export function Item({
 	const permissions = data ?? [];
 
 	const { goTo, goBack } = useDynamicScenesModal();
-	const goToRemoveOperator = useRefCallback(() => {
+
+	const goToRemoveOperator = useRefCallback((event: React.MouseEvent) => {
+		event.stopPropagation();
 		goTo({
 			kind: "remove-operator",
 			Component: () => (
@@ -50,22 +59,51 @@ export function Item({
 		});
 	});
 
+	const goToOperatorDetail = useRefCallback(() => {
+		goTo({
+			kind: "remove-operator",
+			Component: () => (
+				<OperatorDetail
+					characterOperator={characterOperator}
+					description={description}
+					characterId={characterId}
+					tags={tags}
+				/>
+			),
+		});
+	});
+
+	const { data: primaryCharacter } = usePrimaryCharacter(
+		characterOperator.operator
+	);
+
+	const handle = primaryCharacter?.handle ? `@${primaryCharacter.handle}` : "";
+	const avatar = useOperatorAvatar(characterOperator);
+
 	return (
-		<div className={styles.container}>
-			<div>
+		<div
+			className={classNames(styles.container, commonStyles.uxOverlay)}
+			onClick={goToOperatorDetail}
+		>
+			<CharacterAvatar size="32px" character={primaryCharacter} src={avatar} />
+
+			<div className={styles.main}>
 				<div title={characterOperator.operator} className={styles.title}>
-					{truncateAddress(characterOperator.operator, { start: 8, end: 9 })}
+					<span>
+						{truncateAddress(characterOperator.operator, { start: 4, end: 4 })}
+					</span>
+
+					{tags && tags.length > 0 && (
+						<div className={styles.tags}>
+							{tags.map((tag) => (
+								<span key={tag.title} style={tag.style}>
+									{tag.title}
+								</span>
+							))}
+						</div>
+					)}
 				</div>
-				<div className={styles.description}>{description}</div>
-				{tags && tags.length > 0 && (
-					<div className={styles.tags}>
-						{tags.map((tag) => (
-							<span key={tag.title} style={tag.style}>
-								{tag.title}
-							</span>
-						))}
-					</div>
-				)}
+				<div className={styles.description}>{description ?? handle}</div>
 			</div>
 
 			{isLoading ? (
@@ -82,4 +120,21 @@ export function Item({
 			)}
 		</div>
 	);
+}
+
+export function useOperatorAvatar(
+	characterOperator: CharacterOperatorEntity
+): string | undefined {
+	const administratorUrl = useWeb2Url(
+		"ipfs://bafkreibqpox3lhci37urb6vrcleicaedscqwlyeuqxawtkfc5vavldtziy"
+	);
+
+	if (
+		isAddressEqual(characterOperator.operator, X_SYNC_OPERATOR_ADDRESS) ||
+		isAddressEqual(characterOperator.operator, OP_SIGN_OPERATOR_ADDRESS)
+	) {
+		return administratorUrl;
+	}
+
+	return undefined;
 }

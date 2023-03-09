@@ -18,6 +18,7 @@ const colorMap = {
 	yellow: styles.yellow,
 	gray: styles.gray,
 	green: styles.green,
+	red: styles.red,
 	none: "",
 };
 

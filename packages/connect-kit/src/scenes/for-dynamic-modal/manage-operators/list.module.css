@@ -5,7 +5,9 @@
 .list {
 	margin: 10px 24px 24px;
 	border-radius: 12px;
-	background: #f6f6f6;
+	display: flex;
+	flex-direction: column;
+	gap: 12px;
 }
 
 .itemTitle {
@@ -17,5 +19,10 @@
 	align-items: center;
 	justify-content: center;
 	height: 150px;
+	opacity: 0.8;
+}
+
+.loading {
+	font-size: 32px;
 	opacity: 0.8;
 }

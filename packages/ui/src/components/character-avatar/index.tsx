@@ -7,8 +7,8 @@ import { extractCharacterName } from "@crossbell/util-metadata";
 import styles from "./index.module.css";
 
 export type CharacterAvatarProps = React.ImgHTMLAttributes<HTMLImageElement> & {
-	character?: CharacterEntity;
-	characterId?: CharacterEntity["characterId"];
+	character?: CharacterEntity | null;
+	characterId?: CharacterEntity["characterId"] | null;
 	size: string | number;
 	radius?: string | number;
 };

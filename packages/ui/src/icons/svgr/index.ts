@@ -42,6 +42,7 @@ export { default as RefreshFilledIcon } from "./refresh-filled";
 export { default as RiskIcon } from "./risk";
 export { default as SearchIcon } from "./search";
 export { default as SettingsAccountOutlineIcon } from "./settings-account-outline";
+export { default as SettingsCheckmark1Icon } from "./settings-checkmark1";
 export { default as SettingsEyeIcon } from "./settings-eye";
 export { default as SettingsSwitchAppIcon } from "./settings-switch-app";
 export { default as SettingsXSyncIcon } from "./settings-x-sync";
