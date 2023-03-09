@@ -44,7 +44,7 @@ const LinkPreviewCard = ({ data }: LinkPreviewCardProps) => (
 							<Space w={5} />
 						</div>
 					)}
-					{("siteName" in data || "title" in data) && (
+					{"title" in data && (
 						<div>
 							<Text color="dark" size="lg" lineClamp={1}>
 								{data.siteName || data.title}

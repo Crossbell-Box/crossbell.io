@@ -3,7 +3,7 @@ import { Loader } from "@mantine/core";
 import { useRouter } from "next/router";
 
 import {
-	OPERATOR_ADDRESS,
+	X_SYNC_OPERATOR_ADDRESS,
 	useAccountCharacterId,
 	useCharacterBoundAccounts,
 	useCharacterOperatorPermissions,
@@ -19,7 +19,7 @@ export function Platforms() {
 	const boundAccounts = useCharacterBoundAccounts(characterId);
 	const router = useRouter();
 	const characterOperatorPermissions = useCharacterOperatorPermissions({
-		operatorAddress: OPERATOR_ADDRESS,
+		operatorAddress: X_SYNC_OPERATOR_ADDRESS,
 		characterId,
 	});
 
