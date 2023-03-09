@@ -4,6 +4,10 @@
 	border-radius: 12px;
 	font-weight: 500;
 	line-height: 1.2;
+	min-height: 64px;
+	display: flex;
+	flex-direction: column;
+	justify-content: space-between;
 }
 
 .info {
@@ -17,7 +21,7 @@
 	height: 5px;
 	background: #e1e8f7;
 	border-radius: 5px;
-	margin-top: 16px;
+	margin-top: auto;
 }
 
 .title {
