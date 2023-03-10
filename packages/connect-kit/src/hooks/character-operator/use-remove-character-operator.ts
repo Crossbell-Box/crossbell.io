@@ -3,7 +3,10 @@ import { indexer } from "@crossbell/indexer";
 import { asyncRetry } from "../../utils";
 import { useAccountState } from "../account-state";
 import { createAccountTypeBasedMutationHooks } from "../account-type-based-hooks";
-import { SCOPE_KEY_CHARACTER_OPERATOR } from "./const";
+import {
+	GET_CHARACTER_OPERATORS_SCOPE_KEY,
+	SCOPE_KEY_CHARACTER_OPERATOR,
+} from "./const";
 
 export const useRemoveCharacterOperator = createAccountTypeBasedMutationHooks<
 	void,
@@ -26,6 +29,9 @@ export const useRemoveCharacterOperator = createAccountTypeBasedMutationHooks<
 		return Promise.all([
 			useAccountState.getState().refresh(),
 			queryClient.invalidateQueries(SCOPE_KEY_CHARACTER_OPERATOR(variables)),
+			queryClient.invalidateQueries(
+				GET_CHARACTER_OPERATORS_SCOPE_KEY(variables)
+			),
 		]);
 	},
 }));
