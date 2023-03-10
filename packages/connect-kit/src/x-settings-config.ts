@@ -7,6 +7,12 @@ export type XSettingsConfig = {
 		color: string;
 		url: string;
 	}[];
+
+	sentry?: {
+		dsn: string;
+		setup: () => void;
+		close: () => void;
+	};
 };
 
 const defaultConfig: XSettingsConfig = {

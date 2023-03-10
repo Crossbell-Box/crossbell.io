@@ -22,6 +22,7 @@ import { NoEnoughCSBModal } from "./modals/no-enough-csb-modal";
 import { WalletMintNewCharacter } from "./modals/wallet-mint-new-character";
 import { SelectCharactersModal } from "./modals/select-characters-modal";
 import { DynamicScenesModal } from "./components/dynamic-scenes-modal";
+import { SetupSentry } from "./scenes/for-dynamic-modal/privacy-and-security";
 import { XSettingsConfig, XSettingsConfigContext } from "./x-settings-config";
 import { contractConfig } from "./contract-config";
 
@@ -98,6 +99,7 @@ export function ConnectKitProvider({
 						<WalletMintNewCharacter />
 						<SelectCharactersModal />
 						<DynamicScenesModal />
+						<SetupSentry />
 						{children}
 					</XSettingsConfigContext.Provider>
 				</UrlComposerContext.Provider>

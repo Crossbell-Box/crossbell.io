@@ -6,7 +6,9 @@ import {
 	SettingsXSyncIcon,
 	SettingsEyeIcon,
 	SettingsSwitchAppIcon,
+	LockIcon,
 } from "@crossbell/ui";
+import classNames from "classnames";
 
 import { useAccountCharacter, useAccountState } from "../../../../hooks";
 import {
@@ -18,6 +20,7 @@ import {
 import { MintCharacter } from "../../../../scenes/for-dynamic-modal/mint-character";
 import { ManageOperators } from "../../../../scenes/for-dynamic-modal/manage-operators";
 import { SwitchApps } from "../../../../scenes/for-dynamic-modal/switch-apps";
+import { PrivacyAndSecurity } from "../../../../scenes/for-dynamic-modal/privacy-and-security";
 import { SelectOptions } from "../../../../scenes/for-upgrade-account";
 
 import {
@@ -29,6 +32,7 @@ import {
 	WalletIcon,
 	Congrats,
 } from "../../../../components";
+import { useXSettingsConfig } from "../../../../x-settings-config";
 
 import styles from "./index.module.css";
 import { StorageWidget } from "../../components/storage-widget";
@@ -40,6 +44,7 @@ export function MainSetting() {
 	const character = useAccountCharacter();
 	const characterId = character?.characterId;
 	const { goTo, goBack, updateLast } = useDynamicScenesModal();
+	const { sentry } = useXSettingsConfig();
 
 	const goToOPSign = useRefCallback(() => {
 		if (!!account.wallet?.siwe) {
@@ -125,6 +130,13 @@ export function MainSetting() {
 		});
 	});
 
+	const goToPrivacyAndSecurity = useRefCallback(() => {
+		goTo({
+			kind: "privacy-and-security",
+			Component: () => <PrivacyAndSecurity />,
+		});
+	});
+
 	return (
 		<DynamicScenesContainer
 			header={
@@ -190,6 +202,16 @@ export function MainSetting() {
 				<SettingsSection
 					title="GENERAL SETTINGS"
 					items={compact([
+						!!sentry && {
+							id: "privacy-and-security",
+							icon: (
+								<LockIcon
+									className={classNames(styles.icon, styles.lockIcon)}
+								/>
+							),
+							title: "Privacy & Security",
+							onClick: goToPrivacyAndSecurity,
+						},
 						{
 							id: "switch-apps",
 							icon: <SettingsSwitchAppIcon className={styles.icon} />,
