@@ -39,6 +39,7 @@ import { BIO_IMAGE_MAP, NAME_IMAGE_MAP } from "./binding-modal.images";
 const closeModals = () => closeAllModals();
 
 const modalZIndex = 11;
+const tooltipZIndex = modalZIndex + 1;
 
 export function openBindingModal(
 	platform: SupportedPlatform,
@@ -135,7 +136,7 @@ function BindingModal({ platform }: { platform: SupportedPlatform }) {
 
 								<Tooltip
 									withinPortal={true}
-									zIndex={modalZIndex}
+									zIndex={tooltipZIndex}
 									classNames={{ tooltip: "p-0 bg-transparent" }}
 									label={
 										<Image
@@ -199,7 +200,7 @@ function BindingModal({ platform }: { platform: SupportedPlatform }) {
 								{step2Description(platform)}
 								<Tooltip
 									withinPortal={true}
-									zIndex={modalZIndex}
+									zIndex={tooltipZIndex}
 									classNames={{ tooltip: "p-0 bg-transparent" }}
 									label={
 										<Image
