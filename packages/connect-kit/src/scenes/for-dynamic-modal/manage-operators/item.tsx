@@ -126,7 +126,7 @@ export function useOperatorAvatar(
 	characterOperator: CharacterOperatorEntity
 ): string | undefined {
 	const administratorUrl = useWeb2Url(
-		"ipfs://bafkreibqpox3lhci37urb6vrcleicaedscqwlyeuqxawtkfc5vavldtziy"
+		"ipfs://bafkreib3yzt66fwyeegrinj6ljtjjwpjugcdscepu2iw6kopiaoqsbidtm"
 	);
 
 	if (

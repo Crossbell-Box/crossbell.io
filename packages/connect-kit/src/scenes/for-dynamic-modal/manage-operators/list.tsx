@@ -1,5 +1,4 @@
 import React from "react";
-import { ScrollArea } from "@mantine/core";
 import { LoadMore, Loading } from "@crossbell/ui";
 import { isAddressEqual } from "@crossbell/util-ethers";
 import { CharacterOperatorEntity } from "crossbell.js";
@@ -41,7 +40,7 @@ export function List({ characterId }: ListProps) {
 	);
 
 	return (
-		<ScrollArea.Autosize mah="70vh" className={styles.container}>
+		<div className={styles.container}>
 			{list.length === 0 && (
 				<div className={styles.emptyTips}>
 					{isLoading ? <Loading className={styles.loading} /> : "No operators"}
@@ -65,7 +64,7 @@ export function List({ characterId }: ListProps) {
 				isLoading={isFetchingNextPage}
 				hasMore={!!hasNextPage}
 			/>
-		</ScrollArea.Autosize>
+		</div>
 	);
 }
 
@@ -78,7 +77,7 @@ function getTags(characterOperator: CharacterOperatorEntity): ItemTag[] | null {
 
 	if (isAddressEqual(characterOperator.operator, OP_SIGN_OPERATOR_ADDRESS)) {
 		return [
-			{ title: "OP Sign", style: { background: "#6AD991", color: "#fff" } },
+			{ title: "Op Sign", style: { background: "#6AD991", color: "#fff" } },
 		];
 	}
 

@@ -1,5 +1,5 @@
 .container {
-	background: #3e4052;
+	background: #687792;
 	color: #fff;
 	padding: 16px 24px;
 	border-radius: 12px;
@@ -19,7 +19,7 @@
 	align-items: center;
 	gap: 8px;
 	overflow: hidden;
-	background: rgba(62, 64, 82, 0.5);
+	background: rgba(104, 119, 146, 0.5);
 	backdrop-filter: blur(3px);
 }
 

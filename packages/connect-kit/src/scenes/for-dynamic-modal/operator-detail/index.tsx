@@ -43,7 +43,7 @@ export function OperatorDetail({
 	});
 	return (
 		<DynamicScenesContainer
-			padding="10px 24px 24px"
+			padding="10px 0 24px"
 			header={
 				<DynamicScenesHeader
 					title={truncateAddress(characterOperator.operator, {
@@ -53,25 +53,27 @@ export function OperatorDetail({
 				/>
 			}
 		>
-			<OperatorCard
-				tags={tags}
-				characterOperator={characterOperator}
-				description={description}
-				characterId={characterId}
-			/>
+			<div className={styles.container}>
+				<OperatorCard
+					tags={tags}
+					characterOperator={characterOperator}
+					description={description}
+					characterId={characterId}
+				/>
 
-			<PermissionList
-				characterId={characterId}
-				characterOperator={characterOperator}
-			/>
+				<PermissionList
+					characterId={characterId}
+					characterOperator={characterOperator}
+				/>
 
-			<MainBtn
-				onClick={goToRemoveOperator}
-				color="red"
-				className={styles.mainBtn}
-			>
-				Remove Operator
-			</MainBtn>
+				<MainBtn
+					onClick={goToRemoveOperator}
+					color="red"
+					className={styles.mainBtn}
+				>
+					Remove Operator
+				</MainBtn>
+			</div>
 		</DynamicScenesContainer>
 	);
 }
