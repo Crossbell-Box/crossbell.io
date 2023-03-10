@@ -17,9 +17,9 @@ export function SyncOperatorSettings() {
 			<div className={styles.tips}>
 				{"By turning the "}
 				<SettingsXSyncIcon />
-				{
-					" on, Sync Operator \n can help you sync all your web2 social media onto the Crossbell chain."
-				}
+				{` ${
+					hasPermissions ? "off" : "on"
+				}, Sync Operator\ncan help you sync all your web2 social media onto the Crossbell chain.`}
 			</div>
 
 			<div className={styles.item}>
