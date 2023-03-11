@@ -8,6 +8,7 @@ import { usePrimaryCharacter } from "@crossbell/indexer";
 
 import commonStyles from "../../../styles.module.css";
 import {
+	NEWBIE_VILLA_OPERATOR_ADDRESS,
 	OP_SIGN_OPERATOR_ADDRESS,
 	useCharacterOperatorPermissions,
 	X_SYNC_OPERATOR_ADDRESS,
@@ -130,6 +131,7 @@ export function useOperatorAvatar(
 	);
 
 	if (
+		isAddressEqual(characterOperator.operator, NEWBIE_VILLA_OPERATOR_ADDRESS) ||
 		isAddressEqual(characterOperator.operator, X_SYNC_OPERATOR_ADDRESS) ||
 		isAddressEqual(characterOperator.operator, OP_SIGN_OPERATOR_ADDRESS)
 	) {

@@ -1,5 +1,8 @@
 const SCOPE_KEY = ["indexer", "operator-sync"];
 
+export const NEWBIE_VILLA_OPERATOR_ADDRESS =
+	"0x51e2368d60bc329dbd5834370c1e633be60c1d6d";
+
 export const SCOPE_KEY_CHARACTER_OPERATOR = ({
 	operator,
 	characterId,

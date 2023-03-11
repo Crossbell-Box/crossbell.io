@@ -7,6 +7,7 @@ import {
 	OP_SIGN_OPERATOR_ADDRESS,
 	X_SYNC_OPERATOR_ADDRESS,
 	useGetCharacterOperators,
+	NEWBIE_VILLA_OPERATOR_ADDRESS,
 } from "../../../hooks";
 
 import styles from "./list.module.css";
@@ -78,6 +79,17 @@ function getTags(characterOperator: CharacterOperatorEntity): ItemTag[] | null {
 	if (isAddressEqual(characterOperator.operator, OP_SIGN_OPERATOR_ADDRESS)) {
 		return [
 			{ title: "Op Sign", style: { background: "#6AD991", color: "#fff" } },
+		];
+	}
+
+	if (
+		isAddressEqual(characterOperator.operator, NEWBIE_VILLA_OPERATOR_ADDRESS)
+	) {
+		return [
+			{
+				title: "Newbie Villa",
+				style: { background: "#F6C549", color: "#fff" },
+			},
 		];
 	}
 
