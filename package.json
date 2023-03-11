@@ -9,7 +9,7 @@
 	"author": "Natural Selection Labs",
 	"keywords": [],
 	"scripts": {
-		"build": "turbo run build --filter='crossbell.io'",
+		"build": "pnpm --filter crossbell.io run build",
 		"build:all": "turbo run build --no-cache",
 		"build:pkgs": "turbo run build --filter=@crossbell/*",
 		"bump-version": "bumpp package.json packages/*/package.json sites/*/package.json",
