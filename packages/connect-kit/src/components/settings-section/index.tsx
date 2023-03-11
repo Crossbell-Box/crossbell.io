@@ -35,7 +35,7 @@ export function SettingsSectionItem(props: SettingsSectionItemProps) {
 		>
 			{props.icon && <div className={styles.itemIcon}>{props.icon}</div>}
 			<div className={styles.itemMain}>
-				<div>
+				<div className={styles.itemMainInfo}>
 					<div className={styles.itemTitle}>{props.title}</div>
 					<div className={styles.itemDescription}>{props.description}</div>
 				</div>

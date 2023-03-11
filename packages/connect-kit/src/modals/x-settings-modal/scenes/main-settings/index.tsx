@@ -6,6 +6,7 @@ import {
 	SettingsXSyncIcon,
 	SettingsEyeIcon,
 	SettingsSwitchAppIcon,
+	SettingsMyCharacterIcon,
 	LockIcon,
 } from "@crossbell/ui";
 import classNames from "classnames";
@@ -15,13 +16,11 @@ import {
 	SignInWithWallet,
 	OPSignSettings,
 	SyncOperatorSettings,
-	SelectCharacters,
 } from "../../../../scenes";
-import { MintCharacter } from "../../../../scenes/for-dynamic-modal/mint-character";
 import { ManageOperators } from "../../../../scenes/for-dynamic-modal/manage-operators";
 import { SwitchApps } from "../../../../scenes/for-dynamic-modal/switch-apps";
 import { PrivacyAndSecurity } from "../../../../scenes/for-dynamic-modal/privacy-and-security";
-import { SelectOptions } from "../../../../scenes/for-upgrade-account";
+import { MyCharacter } from "../../../../scenes/for-dynamic-modal/my-character";
 
 import {
 	DynamicScenesHeader,
@@ -29,21 +28,18 @@ import {
 	useDynamicScenesModal,
 	SettingsSection,
 	DumbOpSignIcon,
-	WalletIcon,
-	Congrats,
 } from "../../../../components";
 import { useXSettingsConfig } from "../../../../x-settings-config";
 
 import styles from "./index.module.css";
-import { StorageWidget } from "../../components/storage-widget";
-import { CharacterWidget } from "../../components/character-widget";
 import { VersionInfo } from "../../components/version-info";
+import { extractCharacterName } from "@crossbell/util-metadata";
 
 export function MainSetting() {
 	const account = useAccountState();
 	const character = useAccountCharacter();
 	const characterId = character?.characterId;
-	const { goTo, goBack, updateLast } = useDynamicScenesModal();
+	const { goTo, updateLast } = useDynamicScenesModal();
 	const { sentry } = useXSettingsConfig();
 
 	const goToOPSign = useRefCallback(() => {
@@ -70,13 +66,6 @@ export function MainSetting() {
 		}
 	});
 
-	const goToUpgradeAccount = useRefCallback(() => {
-		goTo({
-			kind: "upgrade-account",
-			Component: () => <SelectOptions onCancel={goBack} />,
-		});
-	});
-
 	const goToSyncOperatorSettings = useRefCallback(() => {
 		goTo({
 			kind: "sync-operator-settings",
@@ -88,38 +77,6 @@ export function MainSetting() {
 		goTo({
 			kind: "manage-operators",
 			Component: () => <ManageOperators />,
-		});
-	});
-
-	const goToCongratsForMintCharacter = useRefCallback(() => {
-		goTo({
-			kind: "congrats-for-mint-character",
-			Component: () => <CongratsForMintCharacter />,
-		});
-	});
-
-	const goToMintCharacter = useRefCallback(() => {
-		goTo({
-			kind: "mint-characters",
-			Component: () => (
-				<MintCharacter
-					sceneMode="form"
-					formMode="normal"
-					onSuccess={goToCongratsForMintCharacter}
-				/>
-			),
-		});
-	});
-
-	const goToSwitchCharacter = useRefCallback(() => {
-		goTo({
-			kind: "select-characters",
-			Component: () => (
-				<SelectCharacters
-					onSelectNew={goToMintCharacter}
-					afterSelectCharacter={goBack}
-				/>
-			),
 		});
 	});
 
@@ -137,6 +94,13 @@ export function MainSetting() {
 		});
 	});
 
+	const goToMyCharacter = useRefCallback(() => {
+		goTo({
+			kind: "my-character",
+			Component: () => <MyCharacter />,
+		});
+	});
+
 	return (
 		<DynamicScenesContainer
 			header={
@@ -149,21 +113,23 @@ export function MainSetting() {
 					}
 				/>
 			}
-			padding="0 24px 48px"
+			padding="12px 24px 48px"
 		>
 			<div className={styles.container}>
-				<CharacterWidget onClickSwitchCharacter={goToSwitchCharacter} />
-
-				{character && <StorageWidget characterId={character.characterId} />}
-
 				<SettingsSection
 					items={compact([
-						!!account.email && {
-							id: "upgrade-email-account",
-							icon: <WalletIcon className={styles.icon} />,
-							title: "Upgrade Account",
-							description: "Upgrade to wallet account for assets",
-							onClick: goToUpgradeAccount,
+						{
+							id: "my-character",
+							icon: <SettingsMyCharacterIcon className={styles.icon} />,
+							title: (
+								<div className={styles.myCharacter}>
+									<span>My Character</span>
+									<span className={styles.characterName}>
+										{extractCharacterName(character)}
+									</span>
+								</div>
+							),
+							onClick: goToMyCharacter,
 						},
 					])}
 				/>
@@ -224,28 +190,5 @@ export function MainSetting() {
 				<VersionInfo />
 			</div>
 		</DynamicScenesContainer>
-	);
-}
-
-function CongratsForMintCharacter() {
-	const { hide, resetScenes } = useDynamicScenesModal();
-
-	return (
-		<Congrats
-			title="Congrats!"
-			desc="Now you can return into the feed and enjoy Crossbell."
-			tips="Welcome to new Crossbell"
-			timeout="15s"
-			btnText="Back to xSettings"
-			onClose={hide}
-			onClickBtn={() => {
-				resetScenes([
-					{
-						kind: "main-settings",
-						Component: MainSetting,
-					},
-				]);
-			}}
-		/>
 	);
 }

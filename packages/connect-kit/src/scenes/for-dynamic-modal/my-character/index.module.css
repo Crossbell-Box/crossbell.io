@@ -1,0 +1,27 @@
+.container {
+	display: flex;
+	flex-direction: column;
+	gap: 24px;
+}
+
+.headerTitle {
+	display: flex;
+	align-items: center;
+	gap: 8px;
+	font-size: 22px;
+	font-weight: 500;
+	color: #373737;
+}
+
+.headerTitle svg {
+	font-size: 24px;
+}
+
+.icon {
+	width: 24px;
+	height: 24px;
+}
+
+.lockIcon {
+	color: #78909c;
+}

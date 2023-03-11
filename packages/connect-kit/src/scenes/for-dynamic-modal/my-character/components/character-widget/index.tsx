@@ -7,9 +7,9 @@ import {
 	GeneralAccount,
 	useAccountCharacter,
 	useConnectedAccount,
-} from "../../../../hooks";
+} from "../../../../../hooks";
 
-import { WalletIcon, EmailIcon } from "../../../../components";
+import { WalletIcon, EmailIcon } from "../../../../../components";
 
 import styles from "./index.module.css";
 

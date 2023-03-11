@@ -46,6 +46,7 @@ export { default as SentryLogo } from "./sentry-logo";
 export { default as SettingsAccountOutlineIcon } from "./settings-account-outline";
 export { default as SettingsCheckmark1Icon } from "./settings-checkmark1";
 export { default as SettingsEyeIcon } from "./settings-eye";
+export { default as SettingsMyCharacterIcon } from "./settings-my-character";
 export { default as SettingsSwitchAppIcon } from "./settings-switch-app";
 export { default as SettingsXSyncIcon } from "./settings-x-sync";
 export { default as ShareIcon } from "./share";

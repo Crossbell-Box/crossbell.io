@@ -25,3 +25,24 @@
 .lockIcon {
 	color: #78909c;
 }
+
+.myCharacter {
+	display: flex;
+	align-items: center;
+	justify-content: space-between;
+	white-space: nowrap;
+	gap: 5px;
+}
+
+.characterName {
+	flex: 1 1 auto;
+	text-align: right;
+	width: 0;
+	overflow: hidden;
+	text-overflow: ellipsis;
+	white-space: nowrap;
+	color: #a9aaac;
+	font-size: 12px;
+	line-height: 16px;
+	margin-left: auto;
+}
