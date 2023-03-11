@@ -75,7 +75,7 @@ export default function WalletButtonWithMenu({
 			onClose={() => menuHandlers.close()}
 			position="bottom-start"
 			radius="md"
-			transition="scale-y"
+			transitionProps={{ transition: "scale-y" }}
 			width="target"
 		>
 			<Menu.Target>

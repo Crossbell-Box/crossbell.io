@@ -18,7 +18,7 @@ export function Tooltip({
 			}}
 			position="bottom"
 			openDelay={500}
-			transition="fade"
+			transitionProps={{ transition: "fade" }}
 			label={typeof label === "string" ? <Text size="xs">{label}</Text> : label}
 			{...props}
 		>
