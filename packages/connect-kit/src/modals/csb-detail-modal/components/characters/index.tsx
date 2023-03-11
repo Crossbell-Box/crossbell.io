@@ -20,7 +20,7 @@ export function Characters() {
 				<LoadMore
 					onLoadMore={fetchNextPage}
 					hasMore={hasNextPage}
-					isLoading={!isFetchingNextPage}
+					isLoading={isFetchingNextPage}
 				/>
 			</div>
 		</ScrollArea.Autosize>

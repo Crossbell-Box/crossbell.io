@@ -1,11 +1,26 @@
 import React from "react";
 import compact from "lodash.compact";
 import { useRefCallback } from "@crossbell/util-hooks";
-import { GearIcon } from "@crossbell/ui";
+import {
+	GearIcon,
+	SettingsXSyncIcon,
+	SettingsEyeIcon,
+	SettingsSwitchAppIcon,
+	SettingsMyCharacterIcon,
+	LockIcon,
+} from "@crossbell/ui";
+import classNames from "classnames";
 
-import { useAccountState } from "../../../../hooks";
-import { SignInWithWallet, OPSignSettings } from "../../../../scenes";
-import { SelectOptions } from "../../../../scenes/upgrade-account";
+import { useAccountCharacter, useAccountState } from "../../../../hooks";
+import {
+	SignInWithWallet,
+	OPSignSettings,
+	SyncOperatorSettings,
+} from "../../../../scenes";
+import { ManageOperators } from "../../../../scenes/for-dynamic-modal/manage-operators";
+import { SwitchApps } from "../../../../scenes/for-dynamic-modal/switch-apps";
+import { PrivacyAndSecurity } from "../../../../scenes/for-dynamic-modal/privacy-and-security";
+import { MyCharacter } from "../../../../scenes/for-dynamic-modal/my-character";
 
 import {
 	DynamicScenesHeader,
@@ -13,25 +28,19 @@ import {
 	useDynamicScenesModal,
 	SettingsSection,
 	DumbOpSignIcon,
-	WalletIcon,
-	IdCardIcon,
 } from "../../../../components";
+import { useXSettingsConfig } from "../../../../x-settings-config";
 
 import styles from "./index.module.css";
+import { VersionInfo } from "../../components/version-info";
+import { extractCharacterName } from "@crossbell/util-metadata";
 
 export function MainSetting() {
 	const account = useAccountState();
-	const { goTo, goBack, updateLast } = useDynamicScenesModal();
-	const characterId = account.computed.account?.characterId;
-
-	const goToSignIn = useRefCallback(() => {
-		goTo({
-			kind: "sign-in",
-			Component: () => (
-				<SignInWithWallet canGoBack={true} afterSignIn={goBack} />
-			),
-		});
-	});
+	const character = useAccountCharacter();
+	const characterId = character?.characterId;
+	const { goTo, updateLast } = useDynamicScenesModal();
+	const { sentry } = useXSettingsConfig();
 
 	const goToOPSign = useRefCallback(() => {
 		if (!!account.wallet?.siwe) {
@@ -57,10 +66,38 @@ export function MainSetting() {
 		}
 	});
 
-	const goToUpgradeAccount = useRefCallback(() => {
+	const goToSyncOperatorSettings = useRefCallback(() => {
 		goTo({
-			kind: "upgrade-account",
-			Component: () => <SelectOptions onCancel={goBack} />,
+			kind: "sync-operator-settings",
+			Component: () => <SyncOperatorSettings />,
+		});
+	});
+
+	const goToManageOperators = useRefCallback(() => {
+		goTo({
+			kind: "manage-operators",
+			Component: () => <ManageOperators />,
+		});
+	});
+
+	const goToSwitchApps = useRefCallback(() => {
+		goTo({
+			kind: "switch-apps",
+			Component: () => <SwitchApps />,
+		});
+	});
+
+	const goToPrivacyAndSecurity = useRefCallback(() => {
+		goTo({
+			kind: "privacy-and-security",
+			Component: () => <PrivacyAndSecurity />,
+		});
+	});
+
+	const goToMyCharacter = useRefCallback(() => {
+		goTo({
+			kind: "my-character",
+			Component: () => <MyCharacter />,
 		});
 	});
 
@@ -76,32 +113,29 @@ export function MainSetting() {
 					}
 				/>
 			}
-			padding="0 24px 48px"
+			padding="12px 24px 48px"
 		>
 			<div className={styles.container}>
 				<SettingsSection
-					title="Connect"
 					items={compact([
-						!account.email && {
-							id: "sign-in",
-							icon: <IdCardIcon className={styles.icon} />,
-							title: "Sign In",
-							disabled: !!account.wallet?.siwe,
-							onClick: goToSignIn,
-						},
-
-						!!account.email && {
-							id: "upgrade-email-account",
-							icon: <WalletIcon className={styles.icon} />,
-							title: "Upgrade Account",
-							description: "Upgrade to wallet account for assets",
-							onClick: goToUpgradeAccount,
+						{
+							id: "my-character",
+							icon: <SettingsMyCharacterIcon className={styles.icon} />,
+							title: (
+								<div className={styles.myCharacter}>
+									<span>My Character</span>
+									<span className={styles.characterName}>
+										{extractCharacterName(character)}
+									</span>
+								</div>
+							),
+							onClick: goToMyCharacter,
 						},
 					])}
 				/>
 
 				<SettingsSection
-					title="Operator"
+					title="OPERATOR"
 					items={compact([
 						!account.email && {
 							id: "op-sign",
@@ -111,8 +145,49 @@ export function MainSetting() {
 							disabled: !characterId,
 							onClick: goToOPSign,
 						},
+
+						!account.email && {
+							id: "sync-operator",
+							icon: <SettingsXSyncIcon className={styles.icon} />,
+							title: "Sync Operator",
+							description: "Set up operator for syncing content",
+							disabled: !characterId,
+							onClick: goToSyncOperatorSettings,
+						},
+
+						!account.email && {
+							id: "operators",
+							icon: <SettingsEyeIcon className={styles.icon} />,
+							title: "Manage Operators",
+							disabled: !characterId,
+							onClick: goToManageOperators,
+						},
 					])}
 				/>
+
+				<SettingsSection
+					title="GENERAL SETTINGS"
+					items={compact([
+						!!sentry && {
+							id: "privacy-and-security",
+							icon: (
+								<LockIcon
+									className={classNames(styles.icon, styles.lockIcon)}
+								/>
+							),
+							title: "Privacy & Security",
+							onClick: goToPrivacyAndSecurity,
+						},
+						{
+							id: "switch-apps",
+							icon: <SettingsSwitchAppIcon className={styles.icon} />,
+							title: "Switch Apps",
+							onClick: goToSwitchApps,
+						},
+					])}
+				/>
+
+				<VersionInfo />
 			</div>
 		</DynamicScenesContainer>
 	);

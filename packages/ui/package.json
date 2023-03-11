@@ -19,7 +19,7 @@
 		"build": "run-s clean build:icons build:ts",
 		"build:icons": "svgr --typescript --ref --icon --filename-case kebab --index-template svgr-index-template.js --out-dir src/icons/svgr  ../../scripts/unocss/icons",
 		"build:ts": "tsup",
-		"clean": "rm -rf ./dist"
+		"clean": "rm -rf ./dist && rm -rf ./src/icons/svgr"
 	},
 	"exports": {
 		".": {

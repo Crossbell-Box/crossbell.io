@@ -1,4 +1,4 @@
-import { SelectOptions } from "../../scenes/upgrade-account";
+import { SelectOptions } from "../../scenes/for-upgrade-account";
 import { createDynamicScenesModal } from "../../components";
 
 export const {

@@ -1,0 +1,41 @@
+.container {
+	background-color: #f6f6f6;
+	border-radius: 12px;
+	margin-top: 12px;
+}
+
+.item {
+	padding: 16px 10px 16px 20px;
+	display: flex;
+	align-items: center;
+	position: relative;
+	font-weight: 500;
+	font-size: 12px;
+}
+
+.item:not(:last-child)::after {
+	content: "";
+	position: absolute;
+	right: 0;
+	bottom: 0;
+	left: 52px;
+	height: 1px;
+	background-color: #e1e8f7;
+}
+
+.item svg {
+	font-size: 32px;
+	margin-left: auto;
+}
+
+.permission {
+	color: #49454f;
+}
+
+.permission:hover {
+	text-decoration: underline;
+}
+
+.description {
+	color: #888;
+}

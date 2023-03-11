@@ -1,0 +1,31 @@
+.container {
+	padding: 0 0 24px;
+	max-height: 70vh;
+	max-height: min(70vh, 475px);
+	overflow: auto;
+}
+
+.list {
+	margin: 10px 24px 24px;
+	border-radius: 12px;
+	display: flex;
+	flex-direction: column;
+	gap: 12px;
+}
+
+.itemTitle {
+	padding: 0 0 0 20px;
+}
+
+.emptyTips {
+	display: flex;
+	align-items: center;
+	justify-content: center;
+	height: 150px;
+	opacity: 0.8;
+}
+
+.loading {
+	font-size: 32px;
+	opacity: 0.8;
+}

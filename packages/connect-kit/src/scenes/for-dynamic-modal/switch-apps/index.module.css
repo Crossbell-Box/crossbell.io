@@ -1,0 +1,38 @@
+.container {
+	display: flex;
+	flex-direction: column;
+	gap: 12px;
+}
+
+.item {
+	--tint-color: #000000;
+
+	background: #f6f6f6;
+	color: #000;
+	cursor: pointer;
+	font-weight: 500;
+	font-size: 16px;
+	border-radius: 12px;
+	transition: background-color 0.15s;
+}
+
+.itemLayout {
+	display: flex;
+	align-items: center;
+	justify-content: center;
+	gap: 8px;
+	padding: 20px;
+}
+
+.item:hover {
+	background: var(--tint-color);
+}
+
+.item:hover .itemLayout {
+	filter: brightness(0) invert(1);
+}
+
+.item svg {
+	width: 24px;
+	height: 24px;
+}

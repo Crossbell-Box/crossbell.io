@@ -9,6 +9,6 @@
 		"start": "next start"
 	},
 	"dependencies": {
-		"next": "^13.2.3"
+		"next": "^13.2.4"
 	}
 }

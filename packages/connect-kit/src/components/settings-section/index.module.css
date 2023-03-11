@@ -51,6 +51,10 @@
 	min-height: 64px;
 }
 
+.itemMainInfo {
+	flex: 1;
+}
+
 .itemTitle {
 	font-weight: 500;
 	font-size: 16px;

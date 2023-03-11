@@ -5,20 +5,52 @@ import { ArrowBackIcon } from "@crossbell/ui";
 import commonStyles from "../../styles.module.css";
 import styles from "./index.module.css";
 
-export type SettingsSectionItem = {
+export type SettingsSectionItemProps = {
 	id: React.Key;
-	icon: React.ReactNode;
-	title: React.ReactNode;
+	icon?: React.ReactNode;
 	disabled?: boolean;
+	title: React.ReactNode;
 	description?: React.ReactNode;
 	onClick?: () => void;
+	className?: string;
 };
 
 export type SettingsSectionProps = {
-	title: string;
-	items: SettingsSectionItem[];
+	title?: string;
+	items: SettingsSectionItemProps[];
 	className?: string;
 };
+
+export function SettingsSectionItem(props: SettingsSectionItemProps) {
+	return (
+		<div
+			onClick={props.disabled ? undefined : props.onClick}
+			className={classNames(
+				styles.item,
+				props.className,
+				props.disabled
+					? styles.disabled
+					: !!props.onClick && commonStyles.uxOverlay
+			)}
+		>
+			{props.icon && <div className={styles.itemIcon}>{props.icon}</div>}
+			<div className={styles.itemMain}>
+				<div className={styles.itemMainInfo}>
+					<div className={styles.itemTitle}>{props.title}</div>
+					<div className={styles.itemDescription}>{props.description}</div>
+				</div>
+				{props.onClick && <ArrowBackIcon className={styles.actionIcon} />}
+			</div>
+		</div>
+	);
+}
+
+export function SettingsSectionTitle({
+	className,
+	...props
+}: React.HTMLAttributes<HTMLHeadingElement>) {
+	return <h4 className={classNames(styles.title, className)} {...props} />;
+}
 
 export function SettingsSection({
 	title,
@@ -29,26 +61,10 @@ export function SettingsSection({
 
 	return (
 		<div className={classNames(styles.container, className)}>
-			<h4 className={styles.title}>{title}</h4>
+			{title && <SettingsSectionTitle>{title}</SettingsSectionTitle>}
 			<div className={styles.section}>
 				{items.map((item) => (
-					<div
-						key={item.id}
-						onClick={item.disabled ? undefined : item.onClick}
-						className={classNames(
-							styles.item,
-							item.disabled ? styles.disabled : commonStyles.uxOverlay
-						)}
-					>
-						<div className={styles.itemIcon}>{item.icon}</div>
-						<div className={styles.itemMain}>
-							<div>
-								<div className={styles.itemTitle}>{item.title}</div>
-								<div className={styles.itemDescription}>{item.description}</div>
-							</div>
-							<ArrowBackIcon className={styles.actionIcon} />
-						</div>
-					</div>
+					<SettingsSectionItem key={item.id} {...item} />
 				))}
 			</div>
 		</div>
