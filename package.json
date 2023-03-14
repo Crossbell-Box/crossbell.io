@@ -1,17 +1,11 @@
 {
-	"name": "crossbell-universe",
-	"version": "0.0.28",
-	"license": "MIT",
 	"private": true,
-	"repository": "github:Crossbell-Box/crossbell-universe",
-	"bugs": "https://github.com/Crossbell-Box/crossbell-universe/issues",
-	"homepage": "https://github.com/Crossbell-Box/crossbell-universe#readme",
+	"repository": "github:Crossbell-Box/crossbell.io",
+	"bugs": "https://github.com/Crossbell-Box/crossbell.io/issues",
+	"homepage": "https://github.com/Crossbell-Box/crossbell.io#readme",
 	"author": "Natural Selection Labs",
-	"keywords": [],
 	"scripts": {
 		"build": "pnpm --filter crossbell.io run build",
-		"build:all": "turbo run build --no-cache",
-		"build:pkgs": "turbo run build --filter=@crossbell/*",
 		"bump-version": "bumpp package.json packages/*/package.json sites/*/package.json",
 		"clean": "turbo run clean",
 		"format": "run-p format:code format:package",
@@ -19,8 +13,7 @@
 		"format:package": "format-package 'package.json' -w -c format-package.json",
 		"lint": "eslint . --ext .ts,.tsx --fix --max-warnings 0",
 		"prepare": "husky install",
-		"start": "pnpm --filter crossbell.io run start",
-		"test": "turbo run test"
+		"start": "pnpm --filter crossbell.io run start"
 	},
 	"dependencies": {
 		"@crossbell/connect-kit": "0.0.42",
