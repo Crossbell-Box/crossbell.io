@@ -15,7 +15,6 @@
 		"jsx": "react",
 		"baseUrl": ".",
 		"paths": {
-			"~/shared/*": ["shared/*"],
 			"~/scripts/*": ["scripts/*"],
 			"@crossbell/*": ["packages/*/src"]
 		}
