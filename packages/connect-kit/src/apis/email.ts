@@ -158,6 +158,15 @@ export async function updateHandle(
 	});
 }
 
+export async function deleteAccount(
+	token: string
+): Promise<{ ok: boolean; msg: string }> {
+	return request("/newbie/account", {
+		method: "DELETE",
+		token,
+	});
+}
+
 export async function linkNote({
 	token,
 	toNoteId,
