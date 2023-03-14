@@ -5107,10 +5107,10 @@ cross-spawn@^7.0.2, cross-spawn@^7.0.3:
     shebang-command "^2.0.0"
     which "^2.0.1"
 
-crossbell.js@^0.16, crossbell.js@^0.16.8:
-  version "0.16.8"
-  resolved "https://registry.yarnpkg.com/crossbell.js/-/crossbell.js-0.16.8.tgz#b915d41d5b53c2238db9470a15a8b52b4a6e2437"
-  integrity sha512-dO0StfnQUQJClVbsIzO3Z1A4pnN7BQm/zbYYIaFD3kIpp0GD+Dh03PKavBBoP2wdLs7a1RPowNGf8Lwvll62tw==
+crossbell.js@^0.16, crossbell.js@^0.16.11:
+  version "0.16.11"
+  resolved "https://registry.yarnpkg.com/crossbell.js/-/crossbell.js-0.16.11.tgz#2171215cfb98fe0dcf9a4099aec8e203d24b897b"
+  integrity sha512-GLTBH+xIfiAUZ9unhnbknDYxbQZlEWhbm+O/yRg+qads7FnGk5WvMwyFotbX3qvfTB5akh97Yj9mVDgsaf/gNg==
   dependencies:
     "@crossbell/ipfs-fetch" "^0.0.15"
     async-retry "^1.3.3"
