@@ -5,6 +5,7 @@ import { useRefCallback } from "@crossbell/util-hooks";
 import { useAccountCharacter, useAccountState } from "../../../hooks";
 import { SelectCharacters } from "../../../scenes";
 import { MintCharacter } from "../../../scenes/for-dynamic-modal/mint-character";
+import { DeleteCharacter } from "../delete-character";
 import { SelectOptions } from "../../../scenes/for-upgrade-account";
 
 import {
@@ -15,10 +16,11 @@ import {
 	WalletIcon,
 	Congrats,
 } from "../../../components";
-
+import commonStyles from "../../../styles.module.css";
 import styles from "./index.module.css";
 import { StorageWidget } from "./components/storage-widget";
 import { CharacterWidget } from "./components/character-widget";
+import classNames from "classnames";
 
 export function MyCharacter() {
 	const account = useAccountState();
@@ -64,6 +66,17 @@ export function MyCharacter() {
 		});
 	});
 
+	const goToDeleteCharacter = useRefCallback(() => {
+		if (character) {
+			goTo({
+				kind: "delete-character",
+				Component: () => (
+					<DeleteCharacter characterId={character?.characterId} />
+				),
+			});
+		}
+	});
+
 	return (
 		<DynamicScenesContainer
 			header={<DynamicScenesHeader title="My Character" />}
@@ -85,6 +98,18 @@ export function MyCharacter() {
 						},
 					])}
 				/>
+
+				{character && (
+					<button
+						className={classNames(
+							styles.deleteCharacter,
+							commonStyles.uxOverlay
+						)}
+						onClick={goToDeleteCharacter}
+					>
+						Delete Character
+					</button>
+				)}
 			</div>
 		</DynamicScenesContainer>
 	);

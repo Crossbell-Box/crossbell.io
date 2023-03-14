@@ -25,3 +25,16 @@
 .lockIcon {
 	color: #78909c;
 }
+
+.deleteCharacter {
+	background: transparent;
+	color: #e65040;
+	font-family: inherit;
+	font-weight: 500;
+	font-size: 16px;
+	border: none;
+	height: 64px;
+	margin-top: 36px;
+	margin-bottom: -36px;
+	border-radius: 12px;
+}

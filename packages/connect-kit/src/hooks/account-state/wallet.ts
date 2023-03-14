@@ -52,9 +52,7 @@ export const createWalletAccountSlice: SliceFn<WalletAccountSlice> = (
 				const { wallet } = get();
 
 				const [character] = await Promise.all([
-					wallet?.address === address && wallet.characterId
-						? indexer.getCharacter(wallet.characterId)
-						: indexer.getPrimaryCharacter(address),
+					getDefaultCharacter({ address, characterId: wallet?.characterId }),
 					wallet?.address === address && wallet.siwe
 						? get().siweRefresh(wallet.siwe.token)
 						: updateSiwe(undefined),
@@ -172,4 +170,18 @@ async function getSiweInfo({
 	} else {
 		return undefined;
 	}
+}
+
+async function getDefaultCharacter({
+	address,
+	characterId,
+}: {
+	address: string;
+	characterId?: number | null;
+}): Promise<CharacterEntity | null> {
+	const character = await (characterId
+		? indexer.getCharacter(characterId)
+		: indexer.getPrimaryCharacter(address));
+
+	return character ?? (await indexer.getCharacters(address)).list[0] ?? null;
 }
