@@ -4,6 +4,7 @@ type BaseNotification<T, V> = {
 	type: T;
 	transactionHash: string;
 	createdAt: number;
+	isReadBefore: boolean;
 } & V;
 
 export type LikeNoteNotification = BaseNotification<

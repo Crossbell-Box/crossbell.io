@@ -27,6 +27,7 @@ export function useCharacterNotification(
 					type: types,
 					limit: 20,
 					cursor: pageParam,
+					includeIsRead: true,
 				}
 			);
 

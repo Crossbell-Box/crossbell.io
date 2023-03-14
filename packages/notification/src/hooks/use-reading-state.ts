@@ -15,7 +15,10 @@ export const useReadingState = create(
 			cache: {},
 
 			isRead(notification) {
-				return !!get().cache[notification.transactionHash];
+				return (
+					notification.isReadBefore ||
+					!!get().cache[notification.transactionHash]
+				);
 			},
 
 			markRead(notifications) {

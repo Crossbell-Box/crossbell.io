@@ -10,6 +10,7 @@ export async function parseNotificationEntity(
 	const baseInfo = {
 		transactionHash: entity.transactionHash,
 		createdAt: dayjs(entity.createdAt).valueOf(),
+		isReadBefore: !!entity.isRead,
 	};
 
 	switch (entity.type) {
