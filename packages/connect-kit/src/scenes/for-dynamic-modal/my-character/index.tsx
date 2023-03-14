@@ -4,9 +4,12 @@ import { useRefCallback } from "@crossbell/util-hooks";
 
 import { useAccountCharacter, useAccountState } from "../../../hooks";
 import { SelectCharacters } from "../../../scenes";
-import { MintCharacter } from "../../../scenes/for-dynamic-modal/mint-character";
+
+import { SelectOptions } from "../../for-upgrade-account";
+
+import { MintCharacter } from "../mint-character";
 import { DeleteCharacter } from "../delete-character";
-import { SelectOptions } from "../../../scenes/for-upgrade-account";
+import { DeleteEmailAccount } from "../delete-email-account";
 
 import {
 	DynamicScenesHeader,
@@ -77,6 +80,15 @@ export function MyCharacter() {
 		}
 	});
 
+	const goToDeleteEmailAccount = useRefCallback(() => {
+		if (character) {
+			goTo({
+				kind: "delete-email-account",
+				Component: () => <DeleteEmailAccount />,
+			});
+		}
+	});
+
 	return (
 		<DynamicScenesContainer
 			header={<DynamicScenesHeader title="My Character" />}
@@ -105,9 +117,11 @@ export function MyCharacter() {
 							styles.deleteCharacter,
 							commonStyles.uxOverlay
 						)}
-						onClick={goToDeleteCharacter}
+						onClick={
+							account.email ? goToDeleteEmailAccount : goToDeleteCharacter
+						}
 					>
-						Delete Character
+						{account.email ? "Delete Account" : "Delete Character"}
 					</button>
 				)}
 			</div>

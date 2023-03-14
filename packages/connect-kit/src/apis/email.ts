@@ -158,12 +158,12 @@ export async function updateHandle(
 	});
 }
 
-export async function deleteAccount(
-	token: string
-): Promise<{ ok: boolean; msg: string }> {
+export async function deleteAccount(token: string): Promise<void> {
 	return request("/newbie/account", {
 		method: "DELETE",
 		token,
+		body: {},
+		handleResponse() {},
 	});
 }
 

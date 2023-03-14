@@ -1,6 +1,6 @@
 import React from "react";
 import classNames from "classnames";
-import { usePreloadImgs, useRefCallback } from "@crossbell/util-hooks";
+import { usePreloadImgs } from "@crossbell/util-hooks";
 import { LoadingOverlay, useWeb2Url } from "@crossbell/ui";
 
 import {
@@ -11,27 +11,25 @@ import {
 	useDynamicScenesModal,
 	Congrats,
 } from "../../../components";
-import { useDeleteCharacter } from "../../../hooks";
+import { useDeleteEmailAccount } from "../../../hooks";
 
 import styles from "./index.module.css";
 
 const heartImgIPFS =
 	"ipfs://bafkreiggl5dvgdoak4grhokwyam3zp3ohecaede4rgbop2jupnbgqjb7bi";
 
-export type DeleteCharacterProps = {
-	characterId: number;
+export type DeleteEmailAccountProps = {
 	afterDelete?: () => void;
 	onCancel?: () => void;
 };
 
-export function DeleteCharacter({
-	characterId,
+export function DeleteEmailAccount({
 	onCancel,
 	afterDelete,
-}: DeleteCharacterProps) {
+}: DeleteEmailAccountProps) {
 	const { goBack, updateLast } = useDynamicScenesModal();
 	const heartUrl = useWeb2Url(heartImgIPFS);
-	const { mutate, isLoading } = useDeleteCharacter({
+	const { mutate: deleteAccount, isLoading } = useDeleteEmailAccount({
 		onSuccess() {
 			if (afterDelete) {
 				afterDelete();
@@ -46,18 +44,16 @@ export function DeleteCharacter({
 
 	usePreloadImgs([heartUrl]);
 
-	const deleteCharacter = useRefCallback(() => mutate({ characterId }));
-
 	return (
 		<DynamicScenesContainer
 			padding="0 24px 24px"
-			header={<DynamicScenesHeader title="Delete Character" />}
+			header={<DynamicScenesHeader title="Delete Account" />}
 		>
 			<LoadingOverlay visible={isLoading} />
 
 			<p className={styles.tips}>
-				Your data including your character and feed will be permanently deleted
-				except your wallet. Press the button to proceed with the deletion
+				All your data including your email account, your character and feed will
+				be permanently deleted. Press the button to proceed with the deletion.
 			</p>
 
 			<OptionList className={styles.list}>
@@ -78,7 +74,7 @@ export function DeleteCharacter({
 									.trim() === "true";
 
 							if (isActive) {
-								deleteCharacter();
+								deleteAccount();
 							}
 						}}
 					/>
@@ -103,8 +99,8 @@ function DeletedCongrats() {
 	return (
 		<Congrats
 			title="Deleted!"
-			desc="You have deleted your character, take care and see you next time!"
-			tips="Delete Character"
+			desc="You have deleted your account, take care and see you next time!"
+			tips="Delete Account"
 			timeout="15s"
 			btnText=""
 			onClose={hide}

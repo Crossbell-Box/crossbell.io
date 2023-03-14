@@ -1,14 +1,15 @@
 import { indexer } from "@crossbell/indexer";
 
-type RequestConfig = {
+type RequestConfig<T> = {
 	method: string;
 	body?: Record<string, unknown>;
 	token?: string;
+	handleResponse?: (res: Response) => T;
 };
 
 export function request<T = any>(
 	url: `/${"newbie" | "siwe"}/${string}`,
-	{ body, method, token }: RequestConfig
+	{ body, method, token, handleResponse }: RequestConfig<T>
 ): Promise<T> {
 	const headers = new Headers({ "Content-Type": "application/json" });
 
@@ -20,13 +21,16 @@ export function request<T = any>(
 		method,
 		headers,
 		body: body && JSON.stringify(body),
-	}).then(async (res) => {
-		const result = await res.json();
+	}).then(
+		handleResponse ??
+			(async (res) => {
+				const result = await res.json();
 
-		if (!res.ok) {
-			throw new Error(result.message);
-		}
+				if (!res.ok) {
+					throw new Error(result.message);
+				}
 
-		return result;
-	});
+				return result;
+			})
+	);
 }
