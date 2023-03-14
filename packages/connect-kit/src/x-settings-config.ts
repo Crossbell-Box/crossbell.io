@@ -1,6 +1,8 @@
 import React from "react";
 
 export type XSettingsConfig = {
+	appName?: string;
+
 	otherApps: {
 		title: string;
 		icon: React.ReactNode;

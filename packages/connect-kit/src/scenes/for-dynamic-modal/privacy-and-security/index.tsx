@@ -1,6 +1,5 @@
 import React from "react";
 import { Toggle, LoadingOverlay, SentryLogo } from "@crossbell/ui";
-import { useRefCallback } from "@crossbell/util-hooks";
 import { useConnect } from "wagmi";
 
 import {
@@ -8,7 +7,11 @@ import {
 	DynamicScenesContainer,
 	DynamicScenesHeader,
 } from "../../../components";
-import { useAccountCharacter, useCharacterAttribute } from "../../../hooks";
+import {
+	useAccountCharacter,
+	useCharacterAttribute,
+	useSentryStatus,
+} from "../../../hooks";
 import { useXSettingsConfig } from "../../../x-settings-config";
 
 import styles from "./index.module.css";
@@ -53,19 +56,6 @@ export function PrivacyAndSecurity() {
 			</FiledTips>
 		</DynamicScenesContainer>
 	);
-}
-
-function useSentryStatus() {
-	const { sentry } = useXSettingsConfig();
-	const character = useAccountCharacter();
-	const { data, update, isLoading } = useCharacterAttribute({
-		characterId: character?.characterId,
-		key: sentry?.dsn,
-	});
-	const isEnabled = !!data;
-	const toggle = useRefCallback(() => update(isEnabled ? null : true));
-
-	return { isEnabled, isLoading, toggle };
 }
 
 export function SetupSentry() {
