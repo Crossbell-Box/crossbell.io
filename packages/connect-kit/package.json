@@ -43,7 +43,7 @@
 		"canvas-confetti": "^1",
 		"check-password-strength": "^2",
 		"classnames": "^2",
-		"crossbell.js": "^0.16",
+		"crossbell.js": "^0.17",
 		"detect-browser": "^5",
 		"embla-carousel-react": "^7",
 		"immer": "^9",

@@ -4285,11 +4285,6 @@ brorand@^1.1.0:
   resolved "https://registry.npmjs.org/brorand/-/brorand-1.1.0.tgz"
   integrity sha512-cKV8tMCEpQs4hK/ik71d6LrPOnpkpGBR0wzxqr68g2m/LB2GxVYQroAjMJZRVM1Y4BCjCKc3vAamxSzOY2RP+w==
 
-browser-or-node@^2.1.1:
-  version "2.1.1"
-  resolved "https://registry.npmjs.org/browser-or-node/-/browser-or-node-2.1.1.tgz"
-  integrity sha512-8CVjaLJGuSKMVTxJ2DpBl5XnlNDiT4cQFeuCJJrvJmts9YrTZDizTX7PjC2s6W4x+MBGZeEY6dGMrF04/6Hgqg==
-
 browser-stdout@1.3.1:
   version "1.3.1"
   resolved "https://registry.npmjs.org/browser-stdout/-/browser-stdout-1.3.1.tgz"
@@ -5170,14 +5165,13 @@ cross-spawn@^7.0.2, cross-spawn@^7.0.3:
     shebang-command "^2.0.0"
     which "^2.0.1"
 
-crossbell.js@^0.16, crossbell.js@^0.16.15:
-  version "0.16.15"
-  resolved "https://registry.yarnpkg.com/crossbell.js/-/crossbell.js-0.16.15.tgz#af9699924840aeceeae8811936816053cefdeaee"
-  integrity sha512-RpnZwOQ2fxUymXu+BDVtfLyLr5lM0NYmEA+fZ7YbggDNapt7WP52L2ntLYTfHPkwXbzSSenQa7p/mm9/V3PVoA==
+crossbell.js@^0.17, crossbell.js@^0.17.2:
+  version "0.17.2"
+  resolved "https://registry.yarnpkg.com/crossbell.js/-/crossbell.js-0.17.2.tgz#e6ae2f5060995f925c504ae9554c84791d42ff9f"
+  integrity sha512-Fev8e6KoGrYhnK4lVB0rYF7gV5Ul+MTFWLk07xpkMAnDGGakMegXRXs6QiJDsolLLYhPKgeAP0XBLa/Ecd5C+g==
   dependencies:
     "@crossbell/ipfs-fetch" "^0.0.15"
     async-retry "^1.3.3"
-    browser-or-node "^2.1.1"
     ethers "^5.7.2"
     fetch-undici "^3.0.1"
     p-limit "^3.1.0"
@@ -6812,10 +6806,10 @@ fraction.js@^4.2.0:
   resolved "https://registry.yarnpkg.com/fraction.js/-/fraction.js-4.2.0.tgz#448e5109a313a3527f5a3ab2119ec4cf0e0e2950"
   integrity sha512-MhLuK+2gUcnZe8ZHlaaINnQLl0xRIGRfcGk2yl8xoQAfHrSsL3rYu6FCmBdkdbhc9EPlwyGHewaRsvwRMJtAlA==
 
-framer-motion@^10.3.1:
-  version "10.3.1"
-  resolved "https://registry.yarnpkg.com/framer-motion/-/framer-motion-10.3.1.tgz#68581f62e43f8177b31cf88ab0786d101e75bb00"
-  integrity sha512-z90Dwg2adrltIdYiibynBN+EbSRrakFKGgOnE5TN24E1bmb2TdpfzFqvwxLTvvMimh+/yN43njMFKFKe2CkY/g==
+framer-motion@^10.3.2:
+  version "10.3.2"
+  resolved "https://registry.yarnpkg.com/framer-motion/-/framer-motion-10.3.2.tgz#9feee03a280bb2fdaac49b80ae46ee81e6e78265"
+  integrity sha512-8GrK3X2vXG/9LJCNJuU5gKxDwSN0VTf7tD6MFP3S9F7rgsUavx+8ZNwhfZfak6maCBBHZ1m86K7TIXpbdfML2w==
   dependencies:
     tslib "^2.4.0"
   optionalDependencies:
@@ -8813,10 +8807,10 @@ lower-case@^2.0.2:
   dependencies:
     tslib "^2.0.3"
 
-lru-cache@8.0.0:
-  version "8.0.0"
-  resolved "https://registry.yarnpkg.com/lru-cache/-/lru-cache-8.0.0.tgz#152bf98daafa6a46a5905694fccd6f5f7f6095fe"
-  integrity sha512-pMu1vSJIwJPS/YuMJAJFjvKA2OC7rvgKqJHr90JmZ1kv/hO+MuzqHRSWqyn730vlOwc1Bx/c8+3izTGzmKyXNQ==
+lru-cache@8.0.3:
+  version "8.0.3"
+  resolved "https://registry.yarnpkg.com/lru-cache/-/lru-cache-8.0.3.tgz#42a2c84ec91426d165b0887783f6a0fed367402f"
+  integrity sha512-hDYyWLYUrrTuQQlZWe6U56i+t6UU7LnimwV9Tvvw0HadkTnD7VbErepoJVeNEfC4exBIcGwO8M7TQyF6HO5tQA==
 
 lru-cache@^4.0.1:
   version "4.1.5"
