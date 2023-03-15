@@ -15,6 +15,7 @@ export type CongratsProps = {
 	desc: string;
 	tips: string;
 	timeout?: `${number}${"s" | "ms"}`;
+	illustration?: React.ReactNode;
 };
 
 export function Congrats({
@@ -25,6 +26,7 @@ export function Congrats({
 	onClickBtn,
 	onClose,
 	timeout,
+	illustration,
 }: CongratsProps) {
 	const illustrationUrl = useWeb2Url(IMAGES.addBtnImg);
 	const bgUrl = useWeb2Url(IMAGES.congratsBg);
@@ -56,15 +58,19 @@ export function Congrats({
 				<p className={styles.desc}>{desc}</p>
 			</div>
 
-			<div className={styles.illustration1}>
-				<img className={styles.illustration1Img} src={illustrationUrl} />
-			</div>
+			{illustration ?? (
+				<div className={styles.illustration1}>
+					<img className={styles.illustration1Img} src={illustrationUrl} />
+				</div>
+			)}
 
 			<img className={styles.bg} src={bgUrl} />
 
-			<button className={styles.btn} onClick={onClickBtn}>
-				{btnText}
-			</button>
+			{btnText && (
+				<button className={styles.btn} onClick={onClickBtn}>
+					{btnText}
+				</button>
+			)}
 		</div>
 	);
 }

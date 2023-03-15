@@ -53,7 +53,8 @@ export const useAccountState = create(
 			},
 
 			async refresh() {
-				await Promise.all([this.refreshEmail(), this.refreshWallet()]);
+				const { refreshEmail, refreshWallet } = get();
+				await Promise.all([refreshEmail(), refreshWallet()]);
 			},
 		}),
 		{

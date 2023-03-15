@@ -4,8 +4,12 @@ import { useRefCallback } from "@crossbell/util-hooks";
 
 import { useAccountCharacter, useAccountState } from "../../../hooks";
 import { SelectCharacters } from "../../../scenes";
-import { MintCharacter } from "../../../scenes/for-dynamic-modal/mint-character";
-import { SelectOptions } from "../../../scenes/for-upgrade-account";
+
+import { SelectOptions } from "../../for-upgrade-account";
+
+import { MintCharacter } from "../mint-character";
+import { DeleteCharacter } from "../delete-character";
+import { DeleteEmailAccount } from "../delete-email-account";
 
 import {
 	DynamicScenesHeader,
@@ -15,10 +19,11 @@ import {
 	WalletIcon,
 	Congrats,
 } from "../../../components";
-
+import commonStyles from "../../../styles.module.css";
 import styles from "./index.module.css";
 import { StorageWidget } from "./components/storage-widget";
 import { CharacterWidget } from "./components/character-widget";
+import classNames from "classnames";
 
 export function MyCharacter() {
 	const account = useAccountState();
@@ -64,6 +69,26 @@ export function MyCharacter() {
 		});
 	});
 
+	const goToDeleteCharacter = useRefCallback(() => {
+		if (character) {
+			goTo({
+				kind: "delete-character",
+				Component: () => (
+					<DeleteCharacter characterId={character?.characterId} />
+				),
+			});
+		}
+	});
+
+	const goToDeleteEmailAccount = useRefCallback(() => {
+		if (character) {
+			goTo({
+				kind: "delete-email-account",
+				Component: () => <DeleteEmailAccount />,
+			});
+		}
+	});
+
 	return (
 		<DynamicScenesContainer
 			header={<DynamicScenesHeader title="My Character" />}
@@ -85,6 +110,20 @@ export function MyCharacter() {
 						},
 					])}
 				/>
+
+				{character && (
+					<button
+						className={classNames(
+							styles.deleteCharacter,
+							commonStyles.uxOverlay
+						)}
+						onClick={
+							account.email ? goToDeleteEmailAccount : goToDeleteCharacter
+						}
+					>
+						{account.email ? "Delete Account" : "Delete Character"}
+					</button>
+				)}
 			</div>
 		</DynamicScenesContainer>
 	);

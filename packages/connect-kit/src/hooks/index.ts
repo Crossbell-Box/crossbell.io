@@ -14,6 +14,8 @@ export * from "./use-account-has-character";
 export * from "./use-connected-account";
 export * from "./use-connected-action";
 export * from "./use-create-character";
+export * from "./use-delete-character";
+export * from "./use-delete-email-account";
 export * from "./use-disconnect-account";
 export * from "./use-is-connected";
 export * from "./use-is-ssr-ready";

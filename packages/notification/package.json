@@ -33,7 +33,7 @@
 		"@crossbell/ui": "^0.0.43",
 		"@crossbell/util-hooks": "^0.0.43",
 		"@crossbell/util-metadata": "^0.0.43",
-		"@mantine/core": "6.0.1",
+		"@mantine/core": "6.0.2",
 		"classnames": "^2",
 		"dayjs": "^1.11.7",
 		"react-intersection-observer": "^9",

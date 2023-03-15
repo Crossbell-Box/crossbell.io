@@ -1,0 +1,55 @@
+.tips {
+	color: #49454f;
+	font-weight: 400;
+	font-size: 14px;
+	text-align: center;
+	margin: 10px 0 22px;
+}
+
+.list {
+	margin-top: 12px;
+	width: 100%;
+}
+
+.item {
+	justify-content: center;
+	font-weight: 500;
+	height: 64px;
+	position: relative;
+	overflow: hidden;
+	z-index: 0;
+}
+
+.deleteProgress {
+	position: absolute;
+	top: 0;
+	left: 0;
+	right: 0;
+	bottom: 0;
+	background: #000;
+	z-index: -1;
+	transform: translateX(-100%);
+	transition: 3s transform linear;
+	--is-active: false;
+}
+
+.delete:active .deleteProgress,
+.deleting .deleteProgress {
+	transform: translateX(0);
+	--is-active: true;
+}
+
+.heartImgContainer {
+	display: flex;
+	align-items: center;
+	justify-content: center;
+	height: 183px;
+	width: 100%;
+	margin-bottom: -24px;
+}
+
+.heartImg {
+	width: 120px;
+	height: 120px;
+	object-fit: contain;
+}
