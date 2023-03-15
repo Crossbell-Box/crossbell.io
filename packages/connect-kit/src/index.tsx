@@ -22,6 +22,7 @@ import { NoEnoughCSBModal } from "./modals/no-enough-csb-modal";
 import { WalletMintNewCharacter } from "./modals/wallet-mint-new-character";
 import { SelectCharactersModal } from "./modals/select-characters-modal";
 import { DynamicScenesModal } from "./components/dynamic-scenes-modal";
+import { SentryPrivacyModal } from "./modals/sentry-privacy-modal";
 import { SetupSentry } from "./scenes/for-dynamic-modal/privacy-and-security";
 import { XSettingsConfig, XSettingsConfigContext } from "./x-settings-config";
 import { contractConfig } from "./contract-config";
@@ -39,6 +40,7 @@ export { useWalletClaimCSBModal } from "./modals/wallet-claim-csb-modal";
 export { useOpSignSettingsModal } from "./modals/op-sign-settings-modal";
 export { useWalletMintNewCharacterModal } from "./modals/wallet-mint-new-character";
 export { useSelectCharactersModal } from "./modals/select-characters-modal";
+export { useSentryPrivacyModal } from "./modals/sentry-privacy-modal";
 export {
 	useXSettingsModal,
 	showXSettingsModal,
@@ -100,6 +102,7 @@ export function ConnectKitProvider({
 						<SelectCharactersModal />
 						<DynamicScenesModal />
 						<SetupSentry />
+						<SentryPrivacyModal />
 						{children}
 					</XSettingsConfigContext.Provider>
 				</UrlComposerContext.Provider>

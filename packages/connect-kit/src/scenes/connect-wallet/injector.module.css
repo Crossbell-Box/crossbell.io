@@ -103,6 +103,14 @@
 	color: #999;
 }
 
+.desc a {
+	color: #5b89f7;
+}
+
+.desc a:hover {
+	text-decoration: underline;
+}
+
 @keyframes spin {
 	from {
 		transform: rotate(0deg);

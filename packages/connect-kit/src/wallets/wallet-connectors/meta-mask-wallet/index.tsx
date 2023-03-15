@@ -58,6 +58,16 @@ export const metaMaskWallet = ({
 		id: "metaMask",
 		name: "MetaMask",
 		installed: isMetaMaskInjected,
+		unavailableDescription: (
+			<span>
+				You don’t have MetaMask Plugin.
+				<br />
+				<a href="https://metamask.io" target="_blank">
+					Download here
+				</a>
+				{" and try it again."}
+			</span>
+		),
 		createConnector: () => {
 			if (shouldUseWalletConnect) {
 				const connector = walletConnectProjectId

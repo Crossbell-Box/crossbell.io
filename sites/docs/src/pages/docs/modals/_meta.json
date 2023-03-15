@@ -14,5 +14,10 @@
 		"type": "separator",
 		"title": "Email Account"
 	},
-	"upgrade-email-account-modal": "Upgrade Email Account"
+	"upgrade-email-account-modal": "Upgrade Email Account",
+	"-- others": {
+		"type": "separator",
+		"title": "Others"
+	},
+	"sentry-privacy-modal": "Sentry Privacy"
 }

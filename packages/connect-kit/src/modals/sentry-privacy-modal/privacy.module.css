@@ -1,0 +1,33 @@
+.container {
+	width: 360px;
+	background-color: #fff;
+	border-radius: 28px;
+	border: 1px solid rgba(0, 0, 0, 0.1);
+	box-sizing: content-box;
+	overflow: hidden;
+	position: relative;
+}
+
+.main {
+	padding: 0 24px 24px;
+}
+
+.tips {
+	font-size: 14px;
+	color: #999999;
+	margin: 10px 0 22px;
+}
+
+.tips a {
+	color: #f6c549;
+}
+
+.tips a:hover {
+	text-decoration: underline;
+}
+
+.item {
+	justify-content: center;
+	font-weight: 500;
+	min-height: 64px;
+}

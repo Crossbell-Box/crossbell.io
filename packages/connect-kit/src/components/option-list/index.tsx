@@ -19,6 +19,11 @@ const colorMap = {
 		color: "#fff",
 		background: "#E65040",
 	},
+
+	yellow: {
+		color: "#3C3C3C",
+		background: "#F6C549",
+	},
 };
 
 type OptionListItemBaseProps = {

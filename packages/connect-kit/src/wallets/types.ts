@@ -13,6 +13,7 @@ export type Wallet = {
 	id: string;
 	name: string;
 	installed: boolean;
+	unavailableDescription?: React.ReactNode;
 	icon: React.ReactNode;
 	createConnector: () => WalletConnector;
 };
