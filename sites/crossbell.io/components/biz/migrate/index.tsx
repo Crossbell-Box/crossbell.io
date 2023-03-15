@@ -3,6 +3,8 @@ import { useLocalStorage } from "@mantine/hooks";
 import Link from "next/link";
 import { useAccount } from "wagmi";
 
+import { useNeedShowSentryPrivacyModal } from "../sentry-privacy";
+
 export function MigrationNotification() {
 	const [status, setStatus] = useLocalStorage<"show" | "hide">({
 		key: "csb.biz.MigrationNotification",
@@ -10,9 +12,14 @@ export function MigrationNotification() {
 		getInitialValueInEffect: false,
 	});
 
+	const needShowSentryPrivacyModal = useNeedShowSentryPrivacyModal();
 	const { isConnected } = useAccount();
 
-	return isConnected ? (
+	if (!isConnected || needShowSentryPrivacyModal) {
+		return null;
+	}
+
+	return (
 		<Dialog
 			opened={status === "show"}
 			withCloseButton
@@ -43,7 +50,5 @@ export function MigrationNotification() {
 				Migrate
 			</Button>
 		</Dialog>
-	) : (
-		<></>
 	);
 }

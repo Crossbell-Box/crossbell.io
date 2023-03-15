@@ -12,6 +12,7 @@ import Head from "next/head";
 
 import { NotificationModal } from "@crossbell/notification";
 
+import { ShowSentryPrivacyModalIfNeed } from "@/components/biz/sentry-privacy";
 import { MainProvider, MainProviderProps } from "~/shared/providers";
 import { composeCharacterHref, composeNoteHref } from "~/shared/url";
 
@@ -62,6 +63,7 @@ export default function App({ Component, pageProps }: AppPropsWithLayout) {
 
 			<MainProvider urlComposer={urlComposer}>
 				<NotificationModal />
+				<ShowSentryPrivacyModalIfNeed />
 				{getLayout(<Component {...pageProps} />)}
 			</MainProvider>
 		</>

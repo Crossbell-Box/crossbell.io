@@ -4,17 +4,17 @@ importers:
 
   .:
     specifiers:
-      '@crossbell/connect-kit': 0.0.44
-      '@crossbell/contract': 0.0.44
-      '@crossbell/indexer': 0.0.44
+      '@crossbell/connect-kit': 0.0.47
+      '@crossbell/contract': 0.0.47
+      '@crossbell/indexer': 0.0.47
       '@crossbell/ipfs-gateway': 0.0.15
       '@crossbell/ipfs-gateway-next': 0.0.15
       '@crossbell/ipfs-react': 0.0.15
-      '@crossbell/notification': 0.0.44
-      '@crossbell/ui': 0.0.44
-      '@crossbell/util-ethers': 0.0.44
-      '@crossbell/util-hooks': 0.0.44
-      '@crossbell/util-metadata': 0.0.44
+      '@crossbell/notification': 0.0.47
+      '@crossbell/ui': 0.0.47
+      '@crossbell/util-ethers': 0.0.47
+      '@crossbell/util-hooks': 0.0.47
+      '@crossbell/util-metadata': 0.0.47
       '@ctrl/tinycolor': 3.6.0
       '@emoji-mart/react': 1.1.1
       '@emotion/cache': 11.10.5
@@ -50,7 +50,7 @@ importers:
       canvas-confetti: 1.6.0
       classnames: 2.3.2
       commander: ^10.0.0
-      crossbell.js: 0.16.15
+      crossbell.js: 0.17.2
       dayjs: 1.11.7
       detect-browser: 5.3.0
       embla-carousel-react: 7.1.0
@@ -65,7 +65,7 @@ importers:
       eslint-plugin-react: ^7.32.2
       ethers: 5.7.2
       format-package: ^7.0.0
-      framer-motion: 10.3.1
+      framer-motion: 10.3.2
       husky: ^8.0.3
       immer: 9.0.19
       link-preview-js: 3.0.4
@@ -107,16 +107,16 @@ importers:
       wagmi: 0.12.1
       zustand: ^4.3.6
     dependencies:
-      '@crossbell/connect-kit': 0.0.44_3i3ptz2gsl6ckbkwnwop2k4jne
-      '@crossbell/contract': 0.0.44_hvk6qtqdjwgzdxbzslrclt7jjy
-      '@crossbell/indexer': 0.0.44_hvk6qtqdjwgzdxbzslrclt7jjy
+      '@crossbell/connect-kit': 0.0.47_3i3ptz2gsl6ckbkwnwop2k4jne
+      '@crossbell/contract': 0.0.47_hvk6qtqdjwgzdxbzslrclt7jjy
+      '@crossbell/indexer': 0.0.47_hvk6qtqdjwgzdxbzslrclt7jjy
       '@crossbell/ipfs-gateway': 0.0.15
       '@crossbell/ipfs-react': 0.0.15_3cuac2dr7yf6nu67tvbbs2j6ry
-      '@crossbell/notification': 0.0.44_2r6mgf5qetscw5ju6d72gzqqze
-      '@crossbell/ui': 0.0.44_y4uztdx76vgkdggpzm47hqnvly
-      '@crossbell/util-ethers': 0.0.44
-      '@crossbell/util-hooks': 0.0.44_biqbaboplfbrettd7655fr4n2y
-      '@crossbell/util-metadata': 0.0.44
+      '@crossbell/notification': 0.0.47_2r6mgf5qetscw5ju6d72gzqqze
+      '@crossbell/ui': 0.0.47_y4uztdx76vgkdggpzm47hqnvly
+      '@crossbell/util-ethers': 0.0.47
+      '@crossbell/util-hooks': 0.0.47_biqbaboplfbrettd7655fr4n2y
+      '@crossbell/util-metadata': 0.0.47
       '@ctrl/tinycolor': 3.6.0
       '@emoji-mart/react': 1.1.1_kyrnz3vmphzqyjjk2ivrm6bcsu
       '@emotion/cache': 11.10.5
@@ -140,13 +140,13 @@ importers:
       '@wagmi/core': 0.10.1_2zrgxdt5q765plt4jqbkdqlxje
       canvas-confetti: 1.6.0
       classnames: 2.3.2
-      crossbell.js: 0.16.15
+      crossbell.js: 0.17.2
       dayjs: 1.11.7
       detect-browser: 5.3.0
       embla-carousel-react: 7.1.0_react@18.2.0
       emoji-mart: 5.5.2
       ethers: 5.7.2
-      framer-motion: 10.3.1_biqbaboplfbrettd7655fr4n2y
+      framer-motion: 10.3.2_biqbaboplfbrettd7655fr4n2y
       immer: 9.0.19
       link-preview-js: 3.0.4
       lodash.compact: 3.0.1
@@ -381,19 +381,19 @@ packages:
       - utf-8-validate
     dev: false
 
-  /@crossbell/connect-kit/0.0.44_3i3ptz2gsl6ckbkwnwop2k4jne:
-    resolution: {integrity: sha512-1C2Gmv5UeB8IXzoCz5IoSO+YCaaPg9Op9gYaDGpxMgvejwTHhzU5gOcMMXmt2NO0yi3Gcu1ucVtl2juEhWP6VA==}
+  /@crossbell/connect-kit/0.0.47_3i3ptz2gsl6ckbkwnwop2k4jne:
+    resolution: {integrity: sha512-JzGp+uyoTZJYharMZsDyYyy9nCypDUhjfCW2rIctGj3L4C0+knvSEsY4OSnE+DaFlwEtIn/BvLpr1TRDqP7fUQ==}
     peerDependencies:
       '@tanstack/react-query': ^4
       ethers: ^5
       wagmi: ^0.11
     dependencies:
-      '@crossbell/contract': 0.0.44_hvk6qtqdjwgzdxbzslrclt7jjy
-      '@crossbell/indexer': 0.0.44_hvk6qtqdjwgzdxbzslrclt7jjy
-      '@crossbell/ui': 0.0.44_y4uztdx76vgkdggpzm47hqnvly
-      '@crossbell/util-ethers': 0.0.44
-      '@crossbell/util-hooks': 0.0.44_biqbaboplfbrettd7655fr4n2y
-      '@crossbell/util-metadata': 0.0.44
+      '@crossbell/contract': 0.0.47_hvk6qtqdjwgzdxbzslrclt7jjy
+      '@crossbell/indexer': 0.0.47_hvk6qtqdjwgzdxbzslrclt7jjy
+      '@crossbell/ui': 0.0.47_y4uztdx76vgkdggpzm47hqnvly
+      '@crossbell/util-ethers': 0.0.47
+      '@crossbell/util-hooks': 0.0.47_biqbaboplfbrettd7655fr4n2y
+      '@crossbell/util-metadata': 0.0.47
       '@emotion/react': 11.10.6_pmekkgnqduwlme35zpnqhenc34
       '@mantine/core': 6.0.2_md2nfwiomeeos7ogkicwnxcafa
       '@mantine/hooks': 6.0.2_react@18.2.0
@@ -402,7 +402,7 @@ packages:
       canvas-confetti: 1.6.0
       check-password-strength: 2.0.7
       classnames: 2.3.2
-      crossbell.js: 0.16.15
+      crossbell.js: 0.17.2
       detect-browser: 5.3.0
       embla-carousel-react: 7.1.0_react@18.2.0
       ethers: 5.7.2
@@ -425,16 +425,16 @@ packages:
       - utf-8-validate
     dev: false
 
-  /@crossbell/contract/0.0.44_hvk6qtqdjwgzdxbzslrclt7jjy:
-    resolution: {integrity: sha512-A7+CMzdr2a63UDRTg0CZhikDMfhEfKTjN8jPnrKtNaHHntTlrlsysRH9DZQApSM5YI8F4zfsfenTQ6G7GbkERw==}
+  /@crossbell/contract/0.0.47_hvk6qtqdjwgzdxbzslrclt7jjy:
+    resolution: {integrity: sha512-HorFDujT3uDlvbWzXlM6GvZlZw8rIAm1MwwzR2gt0YPDNzq07wToTr57elSIu0AaD5ioR/PiEcjwnAEje6gBvw==}
     peerDependencies:
       ethers: ^5
       react: ^18
       wagmi: ^0.11
     dependencies:
-      '@crossbell/indexer': 0.0.44_hvk6qtqdjwgzdxbzslrclt7jjy
-      '@crossbell/util-hooks': 0.0.44_biqbaboplfbrettd7655fr4n2y
-      crossbell.js: 0.16.15
+      '@crossbell/indexer': 0.0.47_hvk6qtqdjwgzdxbzslrclt7jjy
+      '@crossbell/util-hooks': 0.0.47_biqbaboplfbrettd7655fr4n2y
+      crossbell.js: 0.17.2
       ethers: 5.7.2
       react: 18.2.0
       wagmi: 0.12.1_gxoh7hy6qogh77orjjt75qirf4
@@ -446,18 +446,18 @@ packages:
       - utf-8-validate
     dev: false
 
-  /@crossbell/indexer/0.0.44_hvk6qtqdjwgzdxbzslrclt7jjy:
-    resolution: {integrity: sha512-FQKZtdORkA4I262uawRT9qiOgFyfTXh79R3dVGz9+t9MsZ3JdXVtdKmKf5YuyXs21lr5Zczjh8WNukCjImBB+g==}
+  /@crossbell/indexer/0.0.47_hvk6qtqdjwgzdxbzslrclt7jjy:
+    resolution: {integrity: sha512-5fIPuaVBEUtNux0C0XfI5DW49Tx6d6i2O08+VeBMJZxoLIA8EJ/fcHHFLxPT5YZ7ARKSH/9Je317VLEflcZpqA==}
     peerDependencies:
       ethers: ^5
       wagmi: ^0.11
     dependencies:
       '@tanstack/react-query': 4.26.1_biqbaboplfbrettd7655fr4n2y
-      crossbell.js: 0.16.15
+      crossbell.js: 0.17.2
       dayjs: 1.11.7
       ethers: 5.7.2
       lodash.compact: 3.0.1
-      lru-cache: 8.0.0
+      lru-cache: 8.0.3
       wagmi: 0.12.1_gxoh7hy6qogh77orjjt75qirf4
     transitivePeerDependencies:
       - bufferutil
@@ -512,16 +512,16 @@ packages:
       react: 18.2.0
     dev: false
 
-  /@crossbell/notification/0.0.44_2r6mgf5qetscw5ju6d72gzqqze:
-    resolution: {integrity: sha512-wdTR1IoOPhMJit5AS+Ca6JM3k29vURO1wkesFqqTmYkBm61cZz2U0tJEP3r5CEmy8LYn4YlKeW/6+F4st/wh4g==}
+  /@crossbell/notification/0.0.47_2r6mgf5qetscw5ju6d72gzqqze:
+    resolution: {integrity: sha512-1CmePLsuc7gllZMmebZKJ1xglnFMxzNQwXz+nQY4yKt5O9F6RkNLijje+1oSGmSbMacynMF0TmVf1HyscVAx6w==}
     peerDependencies:
       react: ^18
     dependencies:
-      '@crossbell/connect-kit': 0.0.44_3i3ptz2gsl6ckbkwnwop2k4jne
-      '@crossbell/indexer': 0.0.44_hvk6qtqdjwgzdxbzslrclt7jjy
-      '@crossbell/ui': 0.0.44_y4uztdx76vgkdggpzm47hqnvly
-      '@crossbell/util-hooks': 0.0.44_biqbaboplfbrettd7655fr4n2y
-      '@crossbell/util-metadata': 0.0.44
+      '@crossbell/connect-kit': 0.0.47_3i3ptz2gsl6ckbkwnwop2k4jne
+      '@crossbell/indexer': 0.0.47_hvk6qtqdjwgzdxbzslrclt7jjy
+      '@crossbell/ui': 0.0.47_y4uztdx76vgkdggpzm47hqnvly
+      '@crossbell/util-hooks': 0.0.47_biqbaboplfbrettd7655fr4n2y
+      '@crossbell/util-metadata': 0.0.47
       '@mantine/core': 6.0.2_md2nfwiomeeos7ogkicwnxcafa
       classnames: 2.3.2
       dayjs: 1.11.7
@@ -544,18 +544,18 @@ packages:
       - wagmi
     dev: false
 
-  /@crossbell/ui/0.0.44_y4uztdx76vgkdggpzm47hqnvly:
-    resolution: {integrity: sha512-ywz5T4gjPHEGFNrybyWM7iA3g3Ul125U/Ij0W6u9STD45gKKb1zCfkBFx+4Z+OJZ8DFhJ5zX4gzhEoU+t+WokA==}
+  /@crossbell/ui/0.0.47_y4uztdx76vgkdggpzm47hqnvly:
+    resolution: {integrity: sha512-z6CQmyFebi3Fsqdmgch3PweeXNUZc4WC6GqFJBRUUiELTANTFLIaXD9kksUaLrWl3JLWWCOh/vLJIfVxWfJ7sg==}
     peerDependencies:
       react: ^18
       react-dom: ^18
     dependencies:
-      '@crossbell/indexer': 0.0.44_hvk6qtqdjwgzdxbzslrclt7jjy
-      '@crossbell/util-hooks': 0.0.44_biqbaboplfbrettd7655fr4n2y
-      '@crossbell/util-metadata': 0.0.44
+      '@crossbell/indexer': 0.0.47_hvk6qtqdjwgzdxbzslrclt7jjy
+      '@crossbell/util-hooks': 0.0.47_biqbaboplfbrettd7655fr4n2y
+      '@crossbell/util-metadata': 0.0.47
       '@tanstack/react-query': 4.26.1_biqbaboplfbrettd7655fr4n2y
       classnames: 2.3.2
-      crossbell.js: 0.16.15
+      crossbell.js: 0.17.2
       facepaint: 1.2.1
       react: 18.2.0
       react-dom: 18.2.0_react@18.2.0
@@ -574,17 +574,17 @@ packages:
       - wagmi
     dev: false
 
-  /@crossbell/util-ethers/0.0.44:
-    resolution: {integrity: sha512-H7TxBazbCqQAMMLqjDMYDKobLHF6Mh66/VkhI2ftG4cOcT2xt4Chd0uw5mfjd/noe2ipmBY6+gZPk0PN1PGo5g==}
+  /@crossbell/util-ethers/0.0.47:
+    resolution: {integrity: sha512-B/+CpIm49m8zU9xeP3QqUuOO6DosEEFCY4+Cc7SBmak34DPTKPKIag95iVSt6u3pbs+1XSy0Wb5MAnSuPbVj8A==}
     dev: false
 
-  /@crossbell/util-hooks/0.0.44_biqbaboplfbrettd7655fr4n2y:
-    resolution: {integrity: sha512-43/ERi+4l998Se2vVvq3WL8P6ay392Y53tGaF1y6906QtSVVtFjsE2HEa2QHXEnIEIFL0xA8rCgJYDUrXp8fVQ==}
+  /@crossbell/util-hooks/0.0.47_biqbaboplfbrettd7655fr4n2y:
+    resolution: {integrity: sha512-X6WAojA4KuB8Md93cbiXYZbevFRiVwE36qwj8bicAmoAVMDJBok1P7JJEn6uNk7HOC5V8GjuBS/JAYSzuRR3gQ==}
     peerDependencies:
       react: ^18
     dependencies:
       '@tanstack/react-query': 4.26.1_biqbaboplfbrettd7655fr4n2y
-      crossbell.js: 0.16.15
+      crossbell.js: 0.17.2
       react: 18.2.0
     transitivePeerDependencies:
       - bufferutil
@@ -594,12 +594,12 @@ packages:
       - utf-8-validate
     dev: false
 
-  /@crossbell/util-metadata/0.0.44:
-    resolution: {integrity: sha512-BypkqYo4X+G0j304dNMUZWiRUmw9uezKYY8tZHMA43TQ9WSw12lzcpvG+ORu9rgYfOcGt8Jz5ZA4crezvlAw4w==}
+  /@crossbell/util-metadata/0.0.47:
+    resolution: {integrity: sha512-4ggacnrHsX3A8CBUCSUNyhdjDC8xlUjNr8TkNIm2iwG6GlIkwm+2GbvtMSqhz/QUNQRqnsy0cy8hbb6nBfz35w==}
     dependencies:
-      '@crossbell/util-ethers': 0.0.44
+      '@crossbell/util-ethers': 0.0.47
       '@fastify/deepmerge': 1.3.0
-      crossbell.js: 0.16.15
+      crossbell.js: 0.17.2
     transitivePeerDependencies:
       - bufferutil
       - supports-color
@@ -3995,10 +3995,6 @@ packages:
     resolution: {integrity: sha512-cKV8tMCEpQs4hK/ik71d6LrPOnpkpGBR0wzxqr68g2m/LB2GxVYQroAjMJZRVM1Y4BCjCKc3vAamxSzOY2RP+w==}
     dev: false
 
-  /browser-or-node/2.1.1:
-    resolution: {integrity: sha512-8CVjaLJGuSKMVTxJ2DpBl5XnlNDiT4cQFeuCJJrvJmts9YrTZDizTX7PjC2s6W4x+MBGZeEY6dGMrF04/6Hgqg==}
-    dev: false
-
   /browser-stdout/1.3.1:
     resolution: {integrity: sha512-qhAVI1+Av2X7qelOfAIYwXONood6XlZE/fXaBSmW/T5SzLAmCgzi+eiWE7fUvbHaeNBQH13UftjpXxsfLkMpgw==}
     dev: false
@@ -4564,12 +4560,11 @@ packages:
       which: 2.0.2
     dev: true
 
-  /crossbell.js/0.16.15:
-    resolution: {integrity: sha512-RpnZwOQ2fxUymXu+BDVtfLyLr5lM0NYmEA+fZ7YbggDNapt7WP52L2ntLYTfHPkwXbzSSenQa7p/mm9/V3PVoA==}
+  /crossbell.js/0.17.2:
+    resolution: {integrity: sha512-Fev8e6KoGrYhnK4lVB0rYF7gV5Ul+MTFWLk07xpkMAnDGGakMegXRXs6QiJDsolLLYhPKgeAP0XBLa/Ecd5C+g==}
     dependencies:
       '@crossbell/ipfs-fetch': 0.0.15
       async-retry: 1.3.3
-      browser-or-node: 2.1.1
       ethers: 5.7.2
       fetch-undici: 3.0.1
       p-limit: 3.1.0
@@ -5926,8 +5921,8 @@ packages:
     engines: {node: '>=0.4.x'}
     dev: false
 
-  /framer-motion/10.3.1_biqbaboplfbrettd7655fr4n2y:
-    resolution: {integrity: sha512-z90Dwg2adrltIdYiibynBN+EbSRrakFKGgOnE5TN24E1bmb2TdpfzFqvwxLTvvMimh+/yN43njMFKFKe2CkY/g==}
+  /framer-motion/10.3.2_biqbaboplfbrettd7655fr4n2y:
+    resolution: {integrity: sha512-8GrK3X2vXG/9LJCNJuU5gKxDwSN0VTf7tD6MFP3S9F7rgsUavx+8ZNwhfZfak6maCBBHZ1m86K7TIXpbdfML2w==}
     peerDependencies:
       react: ^18.0.0
       react-dom: ^18.0.0
@@ -7231,8 +7226,8 @@ packages:
     dependencies:
       yallist: 4.0.0
 
-  /lru-cache/8.0.0:
-    resolution: {integrity: sha512-pMu1vSJIwJPS/YuMJAJFjvKA2OC7rvgKqJHr90JmZ1kv/hO+MuzqHRSWqyn730vlOwc1Bx/c8+3izTGzmKyXNQ==}
+  /lru-cache/8.0.3:
+    resolution: {integrity: sha512-hDYyWLYUrrTuQQlZWe6U56i+t6UU7LnimwV9Tvvw0HadkTnD7VbErepoJVeNEfC4exBIcGwO8M7TQyF6HO5tQA==}
     engines: {node: '>=16.14'}
     dev: false
 
