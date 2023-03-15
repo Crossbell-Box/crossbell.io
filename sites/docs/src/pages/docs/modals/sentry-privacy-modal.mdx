@@ -1,0 +1,33 @@
+import { OptionTable } from "@/components";
+import { SentryPrivacyModal } from "@/examples";
+
+# Sentry Privacy Modal
+
+<div className="my-8">
+	<SentryPrivacyModal />
+</div>
+
+## Usage
+
+```tsx copy
+import { useIsConnected, useXSettingsModal } from "@crossbell/connet-kit";
+
+export function XSettingsBtn() {
+	const isConnected = useIsConnected();
+	const { isActive, show, hide } = useXSettingsModal();
+
+	if (!isConnected) return null;
+
+	return <button onClick={show}>xSettings</button>;
+}
+```
+
+## Return type
+
+<OptionTable
+	options={[
+		["isActive", "boolean", "Indicates whether the modal is activated or not"],
+		["show", "() => void", "Show modal"],
+		["hide", "() => void", "Hide modal"],
+	]}
+/>
