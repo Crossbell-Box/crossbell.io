@@ -49,6 +49,9 @@ export function useConnectState(connector: WalletConnector) {
 							case "User rejected request":
 								setStatus(ConnectStatus.REJECTED);
 								break;
+							case "Connector not found":
+								setStatus(ConnectStatus.UNAVAILABLE);
+								break;
 							default:
 								setStatus(ConnectStatus.FAILED);
 								break;
