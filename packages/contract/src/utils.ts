@@ -25,13 +25,9 @@ export function injectContractChecker({
 	return new Proxy(contract, {
 		get: (target, prop) => {
 			return async (...args: any[]) => {
-				const noNeedTxMethods: (string | symbol)[] = [
-					"then",
-					"getOperatorPermissionsForCharacter",
-				];
+				if (needValidate(prop)) {
+					const address = getCurrentAddress();
 
-				const address = getCurrentAddress();
-				if (!noNeedTxMethods.includes(prop)) {
 					if (address) {
 						// check if $CSB is enough to pay for the transaction
 						const balance = await getCsbBalance(address);
@@ -40,24 +36,16 @@ export function injectContractChecker({
 							throw new BizError("Not enough $CSB.", ERROR_CODES.NO_CHARACTER);
 						}
 					} else {
-						// check if the user is logged in
+						// user is not logged in
 						openConnectModal?.();
 						throw new BizError(
 							"Not connected. Please connect your wallet.",
 							ERROR_CODES.NOT_CONNECTED
 						);
 					}
-				}
 
-				// check if the wallet has any character
-				const allowedMethods: (string | symbol)[] = [
-					"then",
-					"createCharacter",
-					"getBalance",
-				];
-				if (!allowedMethods.includes(prop)) {
-					const ccid = getCurrentCharacterId();
-					if (!ccid) {
+					// check if the wallet has any character
+					if (needCheckCharacter(prop) && !getCurrentCharacterId()) {
 						openMintNewCharacterModel();
 						throw new BizError(
 							"You don't have a character yet",
@@ -70,6 +58,20 @@ export function injectContractChecker({
 			};
 		},
 	});
+}
+
+function needCheckCharacter(key: string | symbol) {
+	const whitelist: (string | symbol)[] = ["createCharacter"];
+
+	return !whitelist.includes(key);
+}
+
+function needValidate(key: string | symbol) {
+	if (typeof key === "string") {
+		return !(key === "then" || key.startsWith("get"));
+	}
+
+	return true;
 }
 
 function hasEnoughCsb(amount: BigNumber) {
