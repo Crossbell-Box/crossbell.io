@@ -43,7 +43,7 @@
 		"canvas-confetti": "^1",
 		"check-password-strength": "^2",
 		"classnames": "^2",
-		"crossbell.js": "^0.17",
+		"crossbell.js": "^0.18",
 		"detect-browser": "^5",
 		"embla-carousel-react": "^7",
 		"immer": "^9",
@@ -58,7 +58,7 @@
 	"peerDependencies": {
 		"@tanstack/react-query": "^4",
 		"ethers": "^5",
-		"wagmi": "^0.11"
+		"wagmi": "^0.12"
 	},
 	"devDependencies": {
 		"@types/lodash.debounce": "4.0.7",

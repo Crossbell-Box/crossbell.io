@@ -29,13 +29,13 @@
 	},
 	"dependencies": {
 		"@tanstack/react-query": "^4",
-		"crossbell.js": "^0.17",
+		"crossbell.js": "^0.18",
 		"dayjs": "^1.11.7",
 		"lodash.compact": "^3",
 		"lru-cache": "8.0.3"
 	},
 	"peerDependencies": {
 		"ethers": "^5",
-		"wagmi": "^0.11"
+		"wagmi": "^0.12"
 	}
 }
