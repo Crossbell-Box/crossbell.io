@@ -120,7 +120,7 @@ function actionDesc(
 					<a href="https://mira.crossbell.io/" target="_blank">
 						MIRA
 					</a>
-					{` on your note`}
+					{` on your Note`}
 				</span>
 			);
 		case "tip-character":
