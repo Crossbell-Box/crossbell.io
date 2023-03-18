@@ -1,5 +1,9 @@
+import compact from "lodash.compact";
+import React from "react";
+
 import { Promotion } from "@/components/promotion";
-import { Note, NoteSkeleton } from "@/components/common/Note";
+import { NoteSkeleton } from "@/components/common/Note";
+import { useGroupedNotes, GroupedFeedNote } from "@/components/grouped-note";
 import { getLayout } from "@/components/layouts/AppLayout";
 import Header from "@/components/layouts/Header";
 import type { NextPageWithLayout } from "@/pages/_app";
@@ -35,18 +39,22 @@ function NoteList() {
 	const { data, hasNextPage, fetchNextPage, isFetchingNextPage } =
 		useTrending("note");
 
+	const flattedData = React.useMemo(
+		() => compact(data?.pages.flatMap((page) => page.items) ?? []),
+		[data]
+	);
+
+	const list = useGroupedNotes(flattedData, (note) => note);
+
 	return (
 		<>
-			{data?.pages.flatMap(
-				({ items }) =>
-					items?.map((note) => (
-						<Note
-							note={note}
-							key={`${note.characterId}-${note.noteId}`}
-							collapsible
-						/>
-					)) ?? []
-			)}
+			{list?.map((note) => (
+				<GroupedFeedNote
+					note={note}
+					key={`${note.characterId}-${note.noteId}`}
+					collapsible
+				/>
+			))}
 
 			<LoadMore
 				onLoadMore={() => fetchNextPage()}

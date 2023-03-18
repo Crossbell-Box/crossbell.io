@@ -60,6 +60,7 @@
 		"immer": "9.0.19",
 		"link-preview-js": "3.0.4",
 		"lodash.compact": "3.0.1",
+		"lru-cache": "8.0.4",
 		"next": "13.2.4",
 		"next-seo": "5.15.0",
 		"pretty-bytes": "6.1.0",

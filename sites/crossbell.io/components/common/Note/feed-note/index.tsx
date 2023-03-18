@@ -24,10 +24,12 @@ export function FeedNote({
 	note: initialNote,
 	character: initialCharacter,
 	collapsible,
+	isRepliedNote,
 }: {
 	collapsible?: boolean;
 	note: NoteEntity;
 	character?: CharacterEntity | null;
+	isRepliedNote?: boolean;
 }) {
 	const { data: fetchedNote, refetch } = useNote(
 		initialNote.characterId,
@@ -171,9 +173,13 @@ export function FeedNote({
 			onMouseEnter={prefetch}
 		>
 			{/* avatar & username */}
-			<div className="flex">
+			<div className="flex relative">
 				{/* avatar */}
 				{renderAvatar()}
+
+				{isRepliedNote && (
+					<div className="absolute w-2px left-1/2 top-[52px] bottom-[-20px] transform -translate-x-1/2 bg-[#D2DFF5]" />
+				)}
 			</div>
 
 			<Space w={10} />

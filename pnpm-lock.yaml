@@ -71,6 +71,7 @@ importers:
       link-preview-js: 3.0.4
       lint-staged: ^13.2.0
       lodash.compact: 3.0.1
+      lru-cache: 8.0.4
       msw: ^1.1.0
       next: 13.2.4
       next-seo: 5.15.0
@@ -150,6 +151,7 @@ importers:
       immer: 9.0.19
       link-preview-js: 3.0.4
       lodash.compact: 3.0.1
+      lru-cache: 8.0.4
       next: 13.2.4_biqbaboplfbrettd7655fr4n2y
       next-seo: 5.15.0_ld2jel3hspngo3u5lti2kgl2sq
       pretty-bytes: 6.1.0
@@ -7235,6 +7237,11 @@ packages:
 
   /lru-cache/8.0.3:
     resolution: {integrity: sha512-hDYyWLYUrrTuQQlZWe6U56i+t6UU7LnimwV9Tvvw0HadkTnD7VbErepoJVeNEfC4exBIcGwO8M7TQyF6HO5tQA==}
+    engines: {node: '>=16.14'}
+    dev: false
+
+  /lru-cache/8.0.4:
+    resolution: {integrity: sha512-E9FF6+Oc/uFLqZCuZwRKUzgFt5Raih6LfxknOSAVTjNkrCZkBf7DQCwJxZQgd9l4eHjIJDGR+E+1QKD1RhThPw==}
     engines: {node: '>=16.14'}
     dev: false
 

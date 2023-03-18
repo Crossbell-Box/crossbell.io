@@ -1,5 +1,7 @@
 import { FeedEntity } from "crossbell.js";
-import { Note, NoteSkeleton } from "../Note";
+import { GroupedFeedNote } from "@/components/grouped-note";
+
+import { NoteSkeleton } from "../Note";
 
 export function Feed({
 	feed,
@@ -9,13 +11,7 @@ export function Feed({
 	feed: FeedEntity;
 }) {
 	if (feed.note) {
-		return (
-			<Note
-				note={feed.note}
-				character={feed.character}
-				collapsible={collapsible}
-			/>
-		);
+		return <GroupedFeedNote note={feed.note} collapsible={collapsible} />;
 	} else {
 		return <div>{feed.type}</div>;
 	}

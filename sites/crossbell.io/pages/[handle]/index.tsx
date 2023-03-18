@@ -28,6 +28,7 @@ import { NextSeo } from "next-seo";
 import { Fragment } from "react";
 
 import xCharBanner from "@/public/images/pages/character/xchar-banner.png";
+import { useGroupedNotes, GroupedFeedNote } from "@/components/grouped-note";
 
 type PageProps = {
 	character: CharacterEntity | null;
@@ -80,19 +81,20 @@ function NotesList() {
 	const { data, hasNextPage, fetchNextPage, isFetchingNextPage, isLoading } =
 		useNotesOfCharacter(character?.characterId);
 
+	const list = useGroupedNotes(
+		data?.pages.flatMap((page) => page.list) ?? [],
+		(note) => note
+	);
+
 	return (
 		<>
 			{/* notes */}
-			{data?.pages.map((page, i) => (
-				<Fragment key={i}>
-					{page.list.map((note, i) => (
-						<Note
-							note={note}
-							key={`${note.characterId}-${note.noteId}`}
-							collapsible
-						/>
-					))}
-				</Fragment>
+			{list.map((note) => (
+				<GroupedFeedNote
+					note={note}
+					key={`${note.characterId}-${note.noteId}`}
+					collapsible
+				/>
 			))}
 
 			{isLoading &&
