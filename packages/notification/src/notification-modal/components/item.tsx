@@ -3,6 +3,7 @@ import dayjs from "dayjs";
 // https://github.com/iamkun/dayjs/issues/1167
 import relativeTime from "dayjs/plugin/relativeTime.js";
 import { Indicator, Avatar } from "@mantine/core";
+import { utils } from "ethers";
 
 import { ParsedNotification } from "@crossbell/indexer";
 import {
@@ -112,6 +113,25 @@ function actionDesc(
 			return <span>minted your Note</span>;
 		case "follow-character":
 			return <span>followed you</span>;
+		case "tip-note":
+			return (
+				<span>
+					{`tipped you ${utils.formatUnits(notification.amount)} `}
+					<a href="https://mira.crossbell.io/" target="_blank">
+						MIRA
+					</a>
+					{` on your note`}
+				</span>
+			);
+		case "tip-character":
+			return (
+				<span>
+					{`tipped you ${utils.formatUnits(notification.amount)} `}
+					<a href="https://mira.crossbell.io/" target="_blank">
+						MIRA
+					</a>
+				</span>
+			);
 	}
 
 	return null;
@@ -138,6 +158,14 @@ function getTitleInfo(
 					notification.originNote.metadata?.content?.content ||
 					"Note",
 				url: urlComposer.noteUrl(notification.originNote),
+			};
+		case "tip-note":
+			return {
+				title:
+					notification.toNote.metadata?.content?.title ||
+					notification.toNote.metadata?.content?.content ||
+					"Note",
+				url: urlComposer.noteUrl(notification.toNote),
 			};
 	}
 

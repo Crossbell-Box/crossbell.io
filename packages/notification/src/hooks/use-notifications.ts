@@ -12,6 +12,7 @@ const types: NotificationTypeKey[] = [
 	"NOTE_MINTED",
 	"NOTE_POSTED",
 	"MENTIONED",
+	"TIPPED",
 ];
 
 export function useNotifications() {

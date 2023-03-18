@@ -1,4 +1,5 @@
 import { CharacterEntity, NoteEntity } from "crossbell.js";
+import { BigNumber } from "ethers";
 
 type BaseNotification<T, V> = {
 	type: T;
@@ -41,8 +42,28 @@ export type FollowCharacterNotification = BaseNotification<
 	}
 >;
 
+export type TipNoteNotification = BaseNotification<
+	"tip-note",
+	{
+		fromCharacter: CharacterEntity;
+		toNote: NoteEntity;
+		amount: BigNumber;
+	}
+>;
+
+export type TipCharacterNotification = BaseNotification<
+	"tip-character",
+	{
+		fromCharacter: CharacterEntity;
+		toCharacter: CharacterEntity;
+		amount: BigNumber;
+	}
+>;
+
 export type ParsedNotification =
 	| LikeNoteNotification
 	| CommentNoteNotification
 	| MintNoteNotification
-	| FollowCharacterNotification;
+	| FollowCharacterNotification
+	| TipNoteNotification
+	| TipCharacterNotification;
