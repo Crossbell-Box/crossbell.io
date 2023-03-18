@@ -1,0 +1,84 @@
+import { Tab, Tabs, Callout } from "nextra-theme-docs";
+
+import { OptionTable } from "@/components";
+import { NotificationModal } from "@/examples";
+
+# Notification Modal
+
+<div className="my-8">
+	<NotificationModal />
+</div>
+
+## Install dependencies
+
+<Callout>
+	Please make sure `@crossbell/connect-kit` has been configured correctly. [Read
+	more](/docs/quick-start).
+</Callout>
+
+{/* prettier-ignore */}
+<Tabs items={['pnpm', 'npm', 'yarn']}>
+  <Tab>
+    ```bash
+    pnpm i @crossbell/notification
+    ```
+  </Tab>
+  <Tab>
+    ```bash
+    npm i @crossbell/notification
+    ```
+  </Tab>
+  <Tab>
+    ```bash
+    yarn add @crossbell/notification
+    ```
+  </Tab>
+</Tabs>
+
+## Setup notification modal
+
+```tsx {7,21}
+import { WagmiConfig, createClient } from "wagmi";
+import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
+import {
+	ConnectKitProvider,
+	getDefaultClientConfig,
+} from "@crossbell/connect-kit";
+import { NotificationModal } from "@crossbell/notification";
+
+import { Main } from "./main";
+
+const queryClient = new QueryClient();
+const wagmiClient = createClient(
+	getDefaultClientConfig({ appName: "Crossbell Dev" })
+);
+
+export default function App() {
+	return (
+		<QueryClientProvider client={queryClient}>
+			<WagmiConfig client={wagmiClient}>
+				<ConnectKitProvider>
+					<NotificationModal />
+					<Main />
+				</ConnectKitProvider>
+			</WagmiConfig>
+		</QueryClientProvider>
+	);
+}
+```
+
+## Show notification modal
+
+```tsx
+import { useIsConnected } from "@crossbell/connet-kit";
+import { useShowNotificationModal } from "@crossbell/notification";
+
+export function NotificationBtn() {
+	const isConnected = useIsConnected();
+	const show = useShowNotificationModal();
+
+	if (!isConnected) return null;
+
+	return <button onClick={show}>Show Notifications</button>;
+}
+```

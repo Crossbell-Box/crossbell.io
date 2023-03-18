@@ -10,6 +10,7 @@ import {
 	getDefaultClientConfig,
 	XSettingsConfig,
 } from "@crossbell/connect-kit";
+import { NotificationModal } from "@crossbell/notification";
 
 const wagmiClient = createClient(
 	getDefaultClientConfig({ appName: "Crossbell Dev" })
@@ -41,6 +42,7 @@ export default function App({ Component, pageProps }: AppProps) {
 		<QueryClientProvider client={queryClient}>
 			<WagmiConfig client={wagmiClient}>
 				<ConnectKitProvider xSettings={xSettings}>
+					<NotificationModal />
 					<Component {...pageProps} />
 				</ConnectKitProvider>
 			</WagmiConfig>
