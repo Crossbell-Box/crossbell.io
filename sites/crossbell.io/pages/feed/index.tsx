@@ -1,4 +1,4 @@
-import { Fragment, useEffect } from "react";
+import { useEffect } from "react";
 import { Button, Text } from "@mantine/core";
 import Link from "next/link";
 import { useRouter } from "next/router";
@@ -16,6 +16,7 @@ import {
 	useAccountCharacter,
 	useAccountHasCharacter,
 } from "@crossbell/connect-kit";
+import { useGroupedNotes } from "@/components/grouped-note";
 
 const Page: NextPageWithLayout = () => {
 	return (
@@ -78,20 +79,20 @@ function FeedList() {
 		useFollowingFeedsOfCharacter(character?.characterId);
 
 	const hasNoResult = !isLoading && !data?.pages.some((p) => p.count > 0);
+	const list = useGroupedNotes(
+		data?.pages.flatMap((page) => page.list) ?? [],
+		(feed) => feed.note
+	);
 
 	return (
 		<>
 			{/* feeds */}
-			{data?.pages.map((page, i) => (
-				<Fragment key={i}>
-					{page.list.map((feed, i) => (
-						<Feed
-							feed={feed}
-							key={`${feed.transactionHash}-${feed.logIndex}`}
-							collapsible
-						/>
-					))}
-				</Fragment>
+			{list.map((feed) => (
+				<Feed
+					feed={feed}
+					key={`${feed.transactionHash}-${feed.logIndex}`}
+					collapsible
+				/>
 			))}
 			{isLoading &&
 				Array(10)

@@ -12,6 +12,7 @@ export function Note({
 	character,
 	collapsible,
 	displayMode,
+	isRepliedNote,
 }: {
 	collapsible?: boolean;
 	note: NoteEntity;
@@ -22,6 +23,7 @@ export function Note({
 	 * This is smartly calculated from url unless specified.
 	 */
 	displayMode?: "normal" | "main";
+	isRepliedNote?: boolean;
 }) {
 	const { characterId, noteId } = useNoteRouterQuery();
 	const isMainNote =
@@ -31,6 +33,11 @@ export function Note({
 	return isMainNote ? (
 		<MainNote note={note} character={character} collapsible={collapsible} />
 	) : (
-		<FeedNote note={note} character={character} collapsible={collapsible} />
+		<FeedNote
+			isRepliedNote={isRepliedNote}
+			note={note}
+			character={character}
+			collapsible={collapsible}
+		/>
 	);
 }

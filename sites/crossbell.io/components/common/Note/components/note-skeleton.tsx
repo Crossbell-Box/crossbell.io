@@ -1,11 +1,19 @@
 import { Skeleton, Space, Text } from "@mantine/core";
 
-export function NoteSkeleton() {
+export type NoteSkeletonProps = {
+	isRepliedNote?: boolean;
+};
+
+export function NoteSkeleton({ isRepliedNote }: NoteSkeletonProps) {
 	return (
 		<div className="flex flex-row w-full py-3 px-3 border-b border-gray/20 bg-hover cursor-pointer">
 			{/* avatar */}
-			<div>
+			<div className="relative">
 				<Skeleton height={48} circle />
+
+				{isRepliedNote && (
+					<div className="absolute w-2px left-1/2 top-[52px] bottom-[-20px] transform -translate-x-1/2 bg-[#D2DFF5]" />
+				)}
 			</div>
 
 			<Space w={10} />

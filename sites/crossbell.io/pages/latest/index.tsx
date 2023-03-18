@@ -1,12 +1,12 @@
 import { Promotion } from "@/components/promotion";
 import { LoadMore } from "~/shared/components/load-more";
-import { Note, NoteSkeleton } from "@/components/common/Note";
+import { NoteSkeleton } from "@/components/common/Note";
 import { getLayout } from "@/components/layouts/AppLayout";
 import Header from "@/components/layouts/Header";
 import type { NextPageWithLayout } from "@/pages/_app";
 import { useNotes } from "@crossbell/indexer";
-import { Fragment } from "react";
 import { FeedTabs } from "../feed";
+import { useGroupedNotes, GroupedFeedNote } from "@/components/grouped-note";
 
 const Page: NextPageWithLayout = () => {
 	return (
@@ -35,19 +35,20 @@ function NoteList() {
 	const { data, isLoading, fetchNextPage, hasNextPage, isFetchingNextPage } =
 		useNotes();
 
+	const list = useGroupedNotes(
+		data?.pages.flatMap((page) => page.list) ?? [],
+		(note) => note
+	);
+
 	return (
 		<>
 			{/* feeds */}
-			{data?.pages.map((page, i) => (
-				<Fragment key={i}>
-					{page.list.map((note, i) => (
-						<Note
-							note={note}
-							key={`${note.characterId}-${note.noteId}`}
-							collapsible
-						/>
-					))}
-				</Fragment>
+			{list.map((note) => (
+				<GroupedFeedNote
+					note={note}
+					key={`${note.characterId}-${note.noteId}`}
+					collapsible
+				/>
 			))}
 			{isLoading &&
 				Array(10)
