@@ -33,13 +33,10 @@ export function FeedNote({
 }) {
 	const { data: fetchedNote, refetch } = useNote(
 		initialNote.characterId,
-		initialNote.noteId,
-		{
-			initialData: initialNote,
-		}
+		initialNote.noteId
 	);
 
-	const note = fetchedNote!;
+	const note = fetchedNote ?? initialNote;
 
 	const { data: character } = useCharacter(note.characterId, {
 		initialData: initialCharacter,
