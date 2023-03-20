@@ -19,12 +19,23 @@
 	font-size: 24px;
 }
 
+.characterInfo {
+	overflow: hidden;
+	flex: 1;
+	width: 0;
+	white-space: nowrap;
+}
+
 .characterName {
 	font-size: 16px;
+	text-overflow: ellipsis;
+	overflow: hidden;
 }
 
 .characterHandle {
 	font-size: 12px;
+	text-overflow: ellipsis;
+	overflow: hidden;
 }
 
 .mintItem {

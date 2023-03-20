@@ -68,7 +68,7 @@ export function List({
 									}}
 								>
 									<CharacterAvatar character={character} size={32} />
-									<div>
+									<div className={styles.characterInfo}>
 										<div className={styles.characterName}>
 											{extractCharacterName(character)}
 										</div>
