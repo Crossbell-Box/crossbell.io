@@ -50,10 +50,12 @@ export const createWalletAccountSlice: SliceFn<WalletAccountSlice> = (
 		connectWallet: asyncExhaust(async (address) => {
 			if (address) {
 				const { wallet } = get();
+				const isSameAddress = wallet?.address === address;
+				const preferredCharacterId = isSameAddress ? wallet?.characterId : null;
 
 				const [character] = await Promise.all([
-					getDefaultCharacter({ address, characterId: wallet?.characterId }),
-					wallet?.address === address && wallet.siwe
+					getDefaultCharacter({ address, characterId: preferredCharacterId }),
+					isSameAddress && wallet.siwe
 						? get().siweRefresh(wallet.siwe.token)
 						: updateSiwe(undefined),
 				]);
