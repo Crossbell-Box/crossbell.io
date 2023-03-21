@@ -41,7 +41,6 @@ export function getDefaultClientConfig({
 			chains,
 			options: {
 				shimDisconnect: true,
-				shimChainChangedDisconnect: false,
 				UNSTABLE_shimOnConnectSelectAccount: true,
 			},
 		}),

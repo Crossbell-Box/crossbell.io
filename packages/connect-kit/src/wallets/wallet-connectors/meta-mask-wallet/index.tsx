@@ -96,7 +96,6 @@ export const metaMaskWallet = ({
 						chains,
 						options: {
 							shimDisconnect: true,
-							shimChainChangedDisconnect: false,
 							UNSTABLE_shimOnConnectSelectAccount: true,
 							...options,
 						},
