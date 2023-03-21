@@ -47,7 +47,6 @@ export function InitContractProvider({
 
 	const [contract, setContract] = React.useState(() => {
 		const _contract = new Contract();
-		_contract.connect();
 		return injectContractChecker({
 			contract: _contract,
 			getCurrentCharacterId,
@@ -62,7 +61,6 @@ export function InitContractProvider({
 		if (connector && isConnected) {
 			connector?.getProvider().then((res) => {
 				const _contract = new Contract(res as any);
-				_contract.connect();
 				setContract(
 					injectContractChecker({
 						contract: _contract,

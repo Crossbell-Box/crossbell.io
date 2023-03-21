@@ -30,7 +30,7 @@
 	"dependencies": {
 		"@crossbell/indexer": "^0.0.51",
 		"@crossbell/util-hooks": "^0.0.51",
-		"crossbell.js": "^0.18"
+		"crossbell.js": "^0.19"
 	},
 	"peerDependencies": {
 		"ethers": "^5",
