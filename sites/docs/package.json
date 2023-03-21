@@ -9,8 +9,8 @@
 		"start": "next start"
 	},
 	"dependencies": {
-		"@sentry/react": "^7.43.0",
-		"@sentry/tracing": "^7.43.0",
+		"@sentry/react": "^7.44.2",
+		"@sentry/tracing": "^7.44.2",
 		"next": "^13.2.4",
 		"nextra": "^2.2.19",
 		"nextra-theme-docs": "^2.2.19",
