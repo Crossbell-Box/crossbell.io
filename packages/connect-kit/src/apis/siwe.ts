@@ -17,8 +17,8 @@ export async function siweSignIn(signer: Signer): Promise<Siwe> {
 		method: "POST",
 		body: {
 			address,
-			domain: "crossbell.io",
-			uri: "https://crossbell.io",
+			domain: window.location.host,
+			uri: window.location.origin,
 			statement: "Sign in with Crossbell to the app.",
 		},
 	});
