@@ -25,6 +25,7 @@ export * from "./use-is-wallet-signed-in";
 export * from "./use-mint-note";
 export * from "./use-post-note-for-note";
 export * from "./use-set-primary-character";
+export * from "./use-switch-character";
 export * from "./use-transfer-csb";
 export * from "./use-update-character-handle";
 export * from "./use-update-character-metadata";
