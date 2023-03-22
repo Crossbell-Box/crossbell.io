@@ -4,6 +4,7 @@ import dayjs from "dayjs";
 import relativeTime from "dayjs/plugin/relativeTime.js";
 import { Indicator, Avatar } from "@mantine/core";
 import { utils } from "ethers";
+import type { NoteEntity } from "crossbell.js";
 
 import { ParsedNotification } from "@crossbell/indexer";
 import {
@@ -144,32 +145,29 @@ function getTitleInfo(
 	switch (notification.type) {
 		case "comment-note":
 			return {
-				title:
-					(notification.commentNote.metadata?.content?.title ??
-						notification.commentNote.metadata?.content?.content) ||
-					"Note",
+				title: getNoteTitle(notification.commentNote),
 				url: urlComposer.noteUrl(notification.commentNote),
 			};
 		case "like-note":
 		case "mint-note":
 			return {
-				title:
-					notification.originNote.metadata?.content?.title ||
-					notification.originNote.metadata?.content?.content ||
-					"Note",
+				title: getNoteTitle(notification.originNote),
 				url: urlComposer.noteUrl(notification.originNote),
 			};
 		case "tip-note":
 			return {
-				title:
-					notification.toNote.metadata?.content?.title ||
-					notification.toNote.metadata?.content?.content ||
-					"Note",
+				title: getNoteTitle(notification.toNote),
 				url: urlComposer.noteUrl(notification.toNote),
 			};
 	}
 
 	return null;
+}
+
+function getNoteTitle(note: NoteEntity | undefined) {
+	return (
+		note?.metadata?.content?.title || note?.metadata?.content?.content || "Note"
+	);
 }
 
 function getCharacterName(notification: ParsedNotification) {
