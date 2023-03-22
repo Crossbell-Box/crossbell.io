@@ -13,11 +13,8 @@
 	],
 	"scripts": {
 		"build": "turbo run build",
-		"build:pkgs": "turbo run build --filter=@crossbell/*",
 		"clean": "turbo run clean",
-		"dev:crossbell.io": "lerna run dev --scope=crossbell.io",
 		"dev:docs": "lerna run dev --scope=docs",
-		"dev:x-sync": "lerna run dev --scope=x-sync",
 		"format": "run-p format:code format:package",
 		"format:code": "prettier '@(packages|examples)/**/*.@(ts|tsx|html|json)' --write",
 		"format:package": "format-package 'package.json' -w -c format-package.json",
