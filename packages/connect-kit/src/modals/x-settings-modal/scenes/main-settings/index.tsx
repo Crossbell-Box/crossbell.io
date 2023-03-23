@@ -107,7 +107,7 @@ export function MainSetting() {
 				<DynamicScenesHeader
 					leftNode={
 						<div className={styles.headerTitle}>
-							<GearIcon />
+							<GearIcon className={styles.gearIcon} />
 							xSettings
 						</div>
 					}
