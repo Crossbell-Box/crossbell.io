@@ -1,4 +1,4 @@
-import { CharacterEntity } from "crossbell.js";
+import { CharacterEntity, CharacterMetadata } from "crossbell.js";
 import { truncateAddress } from "@crossbell/util-ethers";
 
 export function extractCharacterName(
@@ -45,10 +45,8 @@ export function extractCharacterAvatar(
 	return avatars[0];
 }
 
-// export function extractCharacterBanners(
-// 	character: CharacterEntity | null | undefined
-// ): string[] {
-// 	const banners = character?.metadata?.content?.banners;
-
-// 	return banners ?? [];
-// }
+export function extractCharacterBanners(
+	character: CharacterEntity | null | undefined
+): Required<CharacterMetadata>["banners"] {
+	return character?.metadata?.content?.banners ?? [];
+}
