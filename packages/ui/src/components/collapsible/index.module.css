@@ -1,0 +1,5 @@
+.container {
+	overflow: hidden;
+	will-change: height;
+	transition: height 0.2s;
+}

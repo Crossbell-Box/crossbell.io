@@ -1,6 +1,7 @@
 export * from "./base-modal";
 export * from "./hooks-renderer";
 export * from "./character-avatar";
+export * from "./collapsible";
 export * from "./dialog";
 export * from "./dynamic-container";
 export * from "./load-more";
