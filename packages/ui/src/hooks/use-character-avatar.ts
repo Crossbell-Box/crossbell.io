@@ -22,12 +22,7 @@ export function useCharacterAvatar({
 	});
 
 	const rawSrc = React.useMemo(
-		() =>
-			extractCharacterAvatar(data) ??
-			(isLoading
-				? getDefaultAvatarIpfsUrl()
-				: extractCharacterAvatar(data) ??
-				  getDefaultAvatarIpfsUrl(data?.handle)),
+		() => extractCharacterAvatar(data) ?? getDefaultAvatarIpfsUrl(data?.handle),
 		[data, isLoading]
 	);
 
