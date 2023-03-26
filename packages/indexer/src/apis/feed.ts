@@ -15,9 +15,15 @@ const TIMELINE_FEED_TYPES: FeedType[] = [
 	// "UPDATE_CHARACTER_HANDLE",
 ];
 
+export const SCOPE_KEY_FEEDS_OF_CHARACTER = (characterId: number) => [
+	...SCOPE_KEYS,
+	"list",
+	characterId,
+];
+
 export function useFeedsOfCharacter(characterId: number) {
 	return useInfiniteQuery(
-		[...SCOPE_KEYS, "list", characterId],
+		SCOPE_KEY_FEEDS_OF_CHARACTER(characterId),
 		({ pageParam }) =>
 			indexer.getFeedsOfCharacter(characterId, {
 				type: TIMELINE_FEED_TYPES,
@@ -31,9 +37,13 @@ export function useFeedsOfCharacter(characterId: number) {
 	);
 }
 
+export const SCOPE_KEY_FOLLOWING_FEEDS_OF_CHARACTER = (
+	characterId?: number
+) => [...SCOPE_KEYS, "following", "list", characterId];
+
 export function useFollowingFeedsOfCharacter(characterId?: number) {
 	return useInfiniteQuery(
-		[...SCOPE_KEYS, "following", "list", characterId],
+		SCOPE_KEY_FOLLOWING_FEEDS_OF_CHARACTER(characterId),
 		({ pageParam }) =>
 			indexer.getFollowingFeedsOfCharacter(characterId!, {
 				type: TIMELINE_FEED_TYPES,

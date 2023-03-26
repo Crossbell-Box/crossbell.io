@@ -23,6 +23,7 @@ export * from "./use-is-connected";
 export * from "./use-is-ssr-ready";
 export * from "./use-is-wallet-signed-in";
 export * from "./use-mint-note";
+export * from "./use-post-note";
 export * from "./use-post-note-for-note";
 export * from "./use-set-primary-character";
 export * from "./use-switch-character";

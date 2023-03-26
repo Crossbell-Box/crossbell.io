@@ -261,8 +261,8 @@ export async function putNote({
 }: {
 	token: string;
 	metadata: NoteMetadata;
-	linkItemType: LinkItemType;
-	linkItem: LinkItemNote;
+	linkItemType?: LinkItemType;
+	linkItem?: LinkItemNote;
 	locked?: boolean;
 }): Promise<{ transactionHash: string; data: string }> {
 	return request(`/newbie/contract/notes`, {
