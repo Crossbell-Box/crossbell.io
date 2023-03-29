@@ -5,12 +5,13 @@ import classNames from "classnames";
 
 import commonStyles from "../../../styles.module.css";
 import styles from "./index.module.css";
+import { useGetWeb2Url } from "@crossbell/ui";
 
 const IMAGE_MIME = { "image/*": [] };
 
 export type AvatarProps = {
-	file: File | null;
-	onSelect: (file: File | null) => void;
+	file: string | File | null;
+	onSelect: (file: string | File | null) => void;
 };
 
 export function Avatar({ file, onSelect }: AvatarProps) {
@@ -39,15 +40,11 @@ export function Avatar({ file, onSelect }: AvatarProps) {
 			<input {...getInputProps()} />
 
 			{previewURL && (
-				<img
-					src={previewURL}
-					alt={`Blurred ${file?.name}`}
-					className={styles.bg}
-				/>
+				<img src={previewURL} alt={`Blurred Avatar`} className={styles.bg} />
 			)}
 
 			{previewURL ? (
-				<img src={previewURL} alt={file?.name} className={styles.avatar} />
+				<img src={previewURL} alt="Avatar" className={styles.avatar} />
 			) : (
 				<Placehoder />
 			)}
@@ -55,12 +52,21 @@ export function Avatar({ file, onSelect }: AvatarProps) {
 	);
 }
 
-function usePreviewFile(file: File | null) {
-	const url = React.useMemo(() => file && URL.createObjectURL(file), [file]);
+function usePreviewFile(file: string | File | null) {
+	const getWeb2Url = useGetWeb2Url();
+	const url = React.useMemo(
+		() =>
+			file
+				? typeof file === "string"
+					? getWeb2Url(file)
+					: URL.createObjectURL(file)
+				: null,
+		[file, getWeb2Url]
+	);
 
 	React.useEffect(() => {
 		return () => {
-			if (url) {
+			if (url && typeof file !== "string") {
 				URL.revokeObjectURL(url);
 			}
 		};

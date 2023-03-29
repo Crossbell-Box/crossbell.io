@@ -6,7 +6,7 @@ import { utils } from "ethers";
 import {
 	useAccountBalance,
 	useMintCharacter,
-	useMintCharacterForm,
+	useCharacterProfileForm,
 } from "../../hooks";
 import {
 	MintCharacterFormNormal as NormalForm,
@@ -96,7 +96,7 @@ function useMintModel({
 	onSwitchSceneMode,
 }: MintCharacterProps) {
 	const hasEnoughCSB = useHasEnoughCSB();
-	const form = useMintCharacterForm();
+	const form = useCharacterProfileForm();
 	const mintCharacter = useMintCharacter({ onSuccess });
 	const doSubmit = useRefCallback(() => {
 		mintCharacter.mutate(
@@ -118,6 +118,10 @@ function useMintModel({
 			onSwitchSceneMode("claim-csb");
 		}
 	});
+
+	React.useEffect(() => {
+		form.reset("wallet");
+	}, []);
 
 	return {
 		submit,

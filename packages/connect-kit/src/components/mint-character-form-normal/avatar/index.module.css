@@ -33,4 +33,5 @@
 	border: 2px solid #fff;
 	background: #fff;
 	box-sizing: content-box;
+	object-fit: cover;
 }

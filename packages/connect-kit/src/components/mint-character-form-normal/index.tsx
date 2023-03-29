@@ -1,7 +1,7 @@
 import React from "react";
 import { Loading } from "@crossbell/ui";
 
-import { MintCharacterForm } from "../../hooks";
+import { CharacterProfileForm } from "../../hooks";
 
 import { FiledTips } from "../filed-tips";
 import { Textarea } from "../textarea";
@@ -11,13 +11,13 @@ import { TextInput } from "../text-input";
 
 import styles from "./index.module.css";
 import { Avatar } from "./avatar";
-import { AvatarIcon, BioIcon, NameIcon } from "./icons";
+import { AvatarIcon, BioIcon, HandleIcon, NameIcon } from "./icons";
 
 export type MintCharacterFormNormalProps = {
-	onSwitchMode: () => void;
+	onSwitchMode?: () => void;
 	submitBtnText?: React.ReactNode;
 	onSubmit: () => void;
-	form: MintCharacterForm;
+	form: CharacterProfileForm;
 };
 
 export function MintCharacterFormNormal({
@@ -36,7 +36,7 @@ export function MintCharacterFormNormal({
 				<Avatar file={form.avatar} onSelect={form.updateAvatar} />
 			</Field>
 
-			<Field icon={<NameIcon />} title="Name ＆ Handle">
+			<Field icon={<NameIcon />} title="Name">
 				<TextInput
 					placeholder="Unique name for your character"
 					value={form.username}
@@ -44,14 +44,51 @@ export function MintCharacterFormNormal({
 				/>
 			</Field>
 
-			{form.username && (
-				<FiledTips
-					className={styles.tips}
-					color={form.handle ? "#6AD991" : "#999"}
-				>
-					Your handle: {form.handle || <Loading />}
-				</FiledTips>
+			{form.accountType === "wallet" && (
+				<Field icon={<HandleIcon />} title="Handle">
+					<TextInput
+						placeholder="Your ID for interacting with the Crossbell"
+						value={form.handle}
+						onInput={(e) => form.updateHandle(e.currentTarget.value)}
+					/>
+				</Field>
 			)}
+
+			{((): Exclude<React.ReactNode, undefined> => {
+				switch (form.handleStatus) {
+					case "checking":
+						return (
+							<FiledTips className={styles.tips} color="#999">
+								<Loading />
+								Checking
+							</FiledTips>
+						);
+
+					case "existed":
+						return (
+							<FiledTips className={styles.tips} color="#D32F2F">
+								The handle is already in use. Please choose a different one.
+							</FiledTips>
+						);
+
+					case "generating":
+						return (
+							<FiledTips className={styles.tips} color="#999">
+								<Loading />
+								Generating handle
+							</FiledTips>
+						);
+
+					case "valid":
+						return (
+							<FiledTips className={styles.tips} color="#6AD991">
+								Valid handle
+							</FiledTips>
+						);
+					case "idle":
+						return null;
+				}
+			})()}
 
 			<Field icon={<BioIcon />} title="Bio">
 				<Textarea
@@ -62,9 +99,11 @@ export function MintCharacterFormNormal({
 			</Field>
 
 			<div className={styles.actions}>
-				<ActionBtn color="ghost" size="md" onClick={onSwitchMode}>
-					Quickly mint?
-				</ActionBtn>
+				{onSwitchMode && (
+					<ActionBtn color="ghost" size="md" onClick={onSwitchMode}>
+						Quickly mint?
+					</ActionBtn>
+				)}
 
 				<ActionBtn
 					disabled={!form.username || !form.handle}

@@ -1,14 +1,15 @@
 import { useUploadToIpfs } from "@crossbell/util-hooks";
 import { useMutation, UseMutationOptions } from "@tanstack/react-query";
 
-import { OmitActions } from "../../utils";
-
 import { useHandleError } from "../use-handle-error";
 import { useCreateCharacter } from "../use-create-character";
 
-import { MintCharacterForm } from "./use-mint-character-form";
+import { BaseCharacterProfileForm } from "./use-character-profile-form";
 
-export type UseMintCharacterParams = OmitActions<MintCharacterForm>;
+export type UseMintCharacterParams = Pick<
+	BaseCharacterProfileForm,
+	"avatar" | "handle" | "username" | "bio"
+>;
 
 export type UseMintCharacterParamsOptions = UseMutationOptions<
 	unknown,
@@ -25,7 +26,11 @@ export function useMintCharacter(options?: UseMintCharacterParamsOptions) {
 		async ({ bio, avatar: file, handle, username }) => {
 			if (!handle || !username) return;
 
-			const avatar = file && (await uploadToIpfs.mutateAsync(file));
+			const avatar = file
+				? typeof file === "string"
+					? file
+					: await uploadToIpfs.mutateAsync(file)
+				: null;
 
 			await createCharacter.mutateAsync({
 				handle,

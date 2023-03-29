@@ -45,6 +45,7 @@ export {
 	useXSettingsModal,
 	showXSettingsModal,
 } from "./modals/x-settings-modal";
+export * from "./modals/edit-character-profile-modal";
 export * from "./hooks";
 export * from "./get-default-client-config";
 export * from "./components/public";

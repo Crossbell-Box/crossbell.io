@@ -3,12 +3,12 @@ import React from "react";
 import { useDynamicScenesModal } from "../../../components";
 
 import { SelectCharacters as Main, OPSignSettings } from "../../../scenes";
-import { useIsWalletSignedIn, useMintCharacterForm } from "../../../hooks";
+import { useIsWalletSignedIn, useCharacterProfileForm } from "../../../hooks";
 import { MintCharacter } from "../mint-character";
 
 export function SelectCharacters() {
 	const { hide, goTo } = useDynamicScenesModal();
-	const resetForm = useMintCharacterForm((s) => s.reset);
+	const resetForm = useCharacterProfileForm((s) => () => s.reset("wallet"));
 	const isWalletSignedIn = useIsWalletSignedIn();
 
 	return (

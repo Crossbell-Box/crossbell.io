@@ -4,6 +4,11 @@
 	"select-characters-modal": "Select Characters",
 	"notification": "Notification",
 	"x-settings-modal": "xSettings",
+	"-- character": {
+		"type": "separator",
+		"title": "Character"
+	},
+	"edit-character-profile-modal": "Edit Character Profile",
 	"-- wallet": {
 		"type": "separator",
 		"title": "Wallet Account"

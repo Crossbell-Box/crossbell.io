@@ -52,6 +52,7 @@
 		"react": "^18",
 		"react-dropzone": "^14.2.3",
 		"react-google-recaptcha": "^2.1.0",
+		"rxjs": "^7.8.0",
 		"ts-essentials": "^9.3.1",
 		"zustand": "^4"
 	},

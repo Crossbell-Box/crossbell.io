@@ -1,7 +1,10 @@
 import React from "react";
 
 import { SelectCharacters as Main } from "../../../../scenes";
-import { useIsWalletSignedIn, useMintCharacterForm } from "../../../../hooks";
+import {
+	useIsWalletSignedIn,
+	useCharacterProfileForm,
+} from "../../../../hooks";
 import { Header } from "../../components/header";
 import { useSelectCharactersModal, useScenesStore } from "../../stores";
 import { SceneKind } from "../../types";
@@ -9,7 +12,7 @@ import { SceneKind } from "../../types";
 export function SelectCharacters() {
 	const hide = useSelectCharactersModal((s) => s.hide);
 	const goTo = useScenesStore((s) => s.goTo);
-	const resetForm = useMintCharacterForm((s) => s.reset);
+	const resetForm = useCharacterProfileForm((s) => () => s.reset("wallet"));
 	const isWalletSignedIn = useIsWalletSignedIn();
 
 	return (

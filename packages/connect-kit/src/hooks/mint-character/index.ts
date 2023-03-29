@@ -1,2 +1,2 @@
 export * from "./use-mint-character";
-export * from "./use-mint-character-form";
+export * from "./use-character-profile-form";
