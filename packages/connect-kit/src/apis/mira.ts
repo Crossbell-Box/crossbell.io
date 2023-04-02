@@ -1,7 +1,10 @@
 import { indexer } from "@crossbell/indexer";
 import { Contract } from "crossbell.js";
+import { BigNumber, utils } from "ethers";
 
-export async function getMiraTokenDecimal(contract: Contract): Promise<number> {
+export async function getMiraTokenDecimals(
+	contract: Contract
+): Promise<number> {
 	try {
 		return (await contract.getMiraTokenDecimals()).data;
 	} catch (error) {
@@ -32,7 +35,7 @@ export async function getMiraTips(
 	const tips = await indexer.getTips({ tokenAddress, ...params });
 
 	if (tips?.list?.length) {
-		const decimal = await getMiraTokenDecimal(contract);
+		const decimal = await getMiraTokenDecimals(contract);
 
 		tips.list = tips.list
 			.filter(
@@ -50,4 +53,23 @@ export async function getMiraTips(
 	}
 
 	return tips;
+}
+
+export async function getMiraBalance({
+	address,
+	contract,
+}: {
+	address: string;
+	contract: Contract;
+}) {
+	const { data } = await contract.getMiraBalance(address);
+	const decimals = await getMiraTokenDecimals(contract);
+	const value = BigNumber.from(data);
+
+	return {
+		decimals,
+		formatted: utils.formatUnits(value, decimals),
+		symbol: "MIRA",
+		value,
+	};
 }

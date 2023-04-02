@@ -1,4 +1,4 @@
-import { getMiraTokenDecimal } from "../../apis";
+import { getMiraTokenDecimals } from "../../apis";
 import { createAccountTypeBasedMutationHooks } from "../account-type-based-hooks";
 import { SCOPE_KEY_TIPS_LIST } from "./use-tip-list";
 
@@ -8,7 +8,7 @@ export const useTip = createAccountTypeBasedMutationHooks<
 >({ actionDesc: "send tip", withParams: false, connectType: "wallet" }, () => ({
 	async contract({ characterId, noteId, amount }, { contract, account }) {
 		if (account.characterId) {
-			const decimal = await getMiraTokenDecimal(contract);
+			const decimal = await getMiraTokenDecimals(contract);
 
 			if (noteId) {
 				return contract?.tipCharacterForNote(
