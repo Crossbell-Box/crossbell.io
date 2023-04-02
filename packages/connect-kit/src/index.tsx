@@ -23,6 +23,7 @@ import { WalletMintNewCharacter } from "./modals/wallet-mint-new-character";
 import { SelectCharactersModal } from "./modals/select-characters-modal";
 import { DynamicScenesModal } from "./components/dynamic-scenes-modal";
 import { SentryPrivacyModal } from "./modals/sentry-privacy-modal";
+import { TipModal } from "./modals/tip-modal";
 import { SetupSentry } from "./scenes/for-dynamic-modal/privacy-and-security";
 import { XSettingsConfig, XSettingsConfigContext } from "./x-settings-config";
 import {
@@ -45,6 +46,7 @@ export { useOpSignSettingsModal } from "./modals/op-sign-settings-modal";
 export { useWalletMintNewCharacterModal } from "./modals/wallet-mint-new-character";
 export { useSelectCharactersModal } from "./modals/select-characters-modal";
 export { useSentryPrivacyModal } from "./modals/sentry-privacy-modal";
+export { useTipModal } from "./modals/tip-modal";
 export {
 	useXSettingsModal,
 	showXSettingsModal,
@@ -110,6 +112,7 @@ export function ConnectKitProvider({
 							<DynamicScenesModal />
 							<SetupSentry />
 							<SentryPrivacyModal />
+							<TipModal />
 							{children}
 						</XSettingsConfigContext.Provider>
 					</ConnectKitConfigContext.Provider>

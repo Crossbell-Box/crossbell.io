@@ -1,6 +1,8 @@
 import { getMiraTokenDecimals } from "../../apis";
 import { createAccountTypeBasedMutationHooks } from "../account-type-based-hooks";
+
 import { SCOPE_KEY_TIPS_LIST } from "./use-tip-list";
+import { SCOPE_KEY_ACCOUNT_MIRA_BALANCE } from "./use-account-mira-balance";
 
 export const useTip = createAccountTypeBasedMutationHooks<
 	void,
@@ -31,6 +33,10 @@ export const useTip = createAccountTypeBasedMutationHooks<
 		const { characterId, noteId } = variables;
 
 		return Promise.all([
+			queryClient.invalidateQueries(
+				SCOPE_KEY_ACCOUNT_MIRA_BALANCE({ address: account?.address ?? "" })
+			),
+
 			queryClient.invalidateQueries(
 				SCOPE_KEY_TIPS_LIST({
 					toCharacterId: characterId,

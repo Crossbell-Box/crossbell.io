@@ -24,7 +24,12 @@ export function useTipList(params: UseTipListParams) {
 	return useInfiniteQuery(
 		SCOPE_KEY_TIPS_LIST(params),
 		({ pageParam }) =>
-			getMiraTips(contract, { cursor: pageParam, limit: 20, ...params }),
+			getMiraTips(contract, {
+				cursor: pageParam,
+				limit: 20,
+				includeMetadata: true,
+				...params,
+			}),
 		{
 			enabled: !!params.toCharacterId,
 			getNextPageParam: (lastPage) => lastPage.cursor,
