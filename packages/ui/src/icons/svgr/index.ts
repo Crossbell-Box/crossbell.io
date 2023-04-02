@@ -37,6 +37,7 @@ export { default as MediumIcon } from "./medium";
 export { default as MetaMaskWalletIcon } from "./meta-mask-wallet";
 export { default as MintFillIcon } from "./mint-fill";
 export { default as MintIcon } from "./mint";
+export { default as MiraIcon } from "./mira";
 export { default as MoreRightArrowIcon } from "./more-right-arrow";
 export { default as MoreIcon } from "./more";
 export { default as PersonRemoveIcon } from "./person-remove";
