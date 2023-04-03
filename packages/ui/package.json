@@ -1,6 +1,6 @@
 {
 	"name": "@crossbell/ui",
-	"version": "0.0.55",
+	"version": "0.0.56",
 	"license": "MIT",
 	"repository": "github:Crossbell-Box/crossbell-universe",
 	"bugs": "https://github.com/Crossbell-Box/crossbell-universe/issues",
@@ -30,9 +30,9 @@
 		"./package.json": "./package.json"
 	},
 	"dependencies": {
-		"@crossbell/indexer": "^0.0.55",
-		"@crossbell/util-hooks": "^0.0.55",
-		"@crossbell/util-metadata": "^0.0.55",
+		"@crossbell/indexer": "^0.0.56",
+		"@crossbell/util-hooks": "^0.0.56",
+		"@crossbell/util-metadata": "^0.0.56",
 		"@tanstack/react-query": "^4",
 		"classnames": "^2",
 		"crossbell.js": "^0.19",
