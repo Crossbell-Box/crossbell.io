@@ -1,9 +1,6 @@
 import React from "react";
 
-export enum SignInStrategy {
-	complete = "complete",
-	simple = "simple",
-}
+export type SignInStrategy = "complete" | "simple";
 
 export type ConnectKitConfig = {
 	signInStrategy: SignInStrategy;
@@ -14,7 +11,7 @@ export const ConnectKitConfigContext = React.createContext<
 >({});
 
 const defaultConfig: ConnectKitConfig = {
-	signInStrategy: SignInStrategy.complete,
+	signInStrategy: "complete",
 };
 
 export function useConnectKitConfig() {

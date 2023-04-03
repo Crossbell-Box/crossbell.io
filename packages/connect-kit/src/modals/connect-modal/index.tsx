@@ -23,6 +23,7 @@ import { SelectConnectKind } from "./scenes/select-connect-kind";
 import { SelectWalletToConnect } from "./scenes/select-wallet-to-connect";
 import { SelectCharacters } from "./scenes/select-characters";
 import { MintCharacter } from "./scenes/mint-character";
+import { useConnectKitConfig } from "../../connect-kit-config";
 
 export { useConnectModal };
 
@@ -42,11 +43,18 @@ export function ConnectModal() {
 }
 
 function Main() {
-	const [currentScene, goTo] = useScenesStore((s) => [
+	const [currentScene, goTo, setSignInStrategy] = useScenesStore((s) => [
 		s.computed.currentScene,
 		s.goTo,
+		s.setSignInStrategy,
 	]);
 	const { isConnected } = useAccount();
+	const { signInStrategy } = useConnectKitConfig();
+
+	React.useEffect(
+		() => setSignInStrategy(signInStrategy),
+		[signInStrategy, setSignInStrategy]
+	);
 
 	React.useEffect(() => {
 		if (isConnected) {
