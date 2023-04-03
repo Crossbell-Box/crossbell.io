@@ -7,9 +7,11 @@ export function useWalletSignIn() {
 	const siweSignIn = useAccountState((s) => s.siweSignIn);
 	const { data: signer } = useSigner();
 
-	return useMutation(async () => {
+	const mutation = useMutation(async () => {
 		if (signer) {
 			await siweSignIn(signer);
 		}
 	});
+
+	return { ...mutation, isReady: !!signer };
 }

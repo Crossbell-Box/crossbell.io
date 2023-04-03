@@ -23,7 +23,7 @@ import { SelectConnectKind } from "./scenes/select-connect-kind";
 import { SelectWalletToConnect } from "./scenes/select-wallet-to-connect";
 import { SelectCharacters } from "./scenes/select-characters";
 import { MintCharacter } from "./scenes/mint-character";
-import { useConnectKitConfig } from "../../connect-kit-config";
+import { SignInStrategy, useConnectKitConfig } from "../../connect-kit-config";
 
 export { useConnectModal };
 
@@ -73,12 +73,18 @@ function Main() {
 
 	return (
 		<DynamicContainerContent id={currentScene.kind}>
-			{renderScene(currentScene)}
+			{renderScene({ scene: currentScene, signInStrategy })}
 		</DynamicContainerContent>
 	);
 }
 
-function renderScene(scene: Scene) {
+function renderScene({
+	scene,
+	signInStrategy,
+}: {
+	scene: Scene;
+	signInStrategy: SignInStrategy;
+}) {
 	switch (scene.kind) {
 		case SceneKind.congrats:
 			return <Congrats {...scene} />;
@@ -95,7 +101,13 @@ function renderScene(scene: Scene) {
 		case SceneKind.connectWallet:
 			return <ConnectWallet {...scene} />;
 		case SceneKind.signInWithWallet:
-			return <SignInWithWallet Header={Header} {...scene} />;
+			return (
+				<SignInWithWallet
+					Header={Header}
+					autoSignIn={signInStrategy === "simple"}
+					{...scene}
+				/>
+			);
 		case SceneKind.selectCharacters:
 			return <SelectCharacters />;
 		case SceneKind.opSignSettings:
