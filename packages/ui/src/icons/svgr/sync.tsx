@@ -3,8 +3,8 @@ import { SVGProps, Ref, forwardRef } from "react";
 const SvgSync = (props: SVGProps<SVGSVGElement>, ref: Ref<SVGSVGElement>) => (
 	<svg
 		xmlns="http://www.w3.org/2000/svg"
-		viewBox="0 0 48 48"
 		xmlSpace="preserve"
+		viewBox="0 0 48 48"
 		width="1em"
 		height="1em"
 		ref={ref}

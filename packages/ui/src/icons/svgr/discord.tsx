@@ -21,11 +21,7 @@ const SvgDiscord = (
 		</g>
 		<defs>
 			<clipPath id="discord_svg__a">
-				<path
-					fill="currentColor"
-					transform="translate(.538)"
-					d="M0 0h24v24H0z"
-				/>
+				<path fill="currentColor" d="M.538 0h24v24h-24z" />
 			</clipPath>
 		</defs>
 	</svg>
