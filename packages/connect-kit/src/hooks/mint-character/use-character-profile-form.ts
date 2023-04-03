@@ -54,9 +54,17 @@ export const useCharacterProfileForm = create<CharacterProfileForm>(
 		const cancel$ = new Subject();
 		const cancelOngoingProcess = () => cancel$.next(null);
 		let baseForm = getBaseForm();
+		let isHandleEditedManually = false;
 
-		const needAutoGenerateHandle = () =>
-			!baseForm.handle && get().accountType === "wallet";
+		const needAutoGenerateHandle = () => {
+			if (get().accountType === "wallet") {
+				const isHandleExistedBefore = !!baseForm.handle;
+				return !isHandleExistedBefore && !isHandleEditedManually;
+			} else {
+				// Email user cannot edit handle
+				return false;
+			}
+		};
 
 		const isHandleChanged = (handle: string) => handle !== baseForm.handle;
 
@@ -166,6 +174,7 @@ export const useCharacterProfileForm = create<CharacterProfileForm>(
 			updateHandle(handle) {
 				set({ handle });
 				validateHandle(handle);
+				isHandleEditedManually = true;
 			},
 
 			bio: "",
@@ -201,6 +210,8 @@ export const useCharacterProfileForm = create<CharacterProfileForm>(
 					bio: form?.bio ?? "",
 					avatar: form?.avatar ?? null,
 				};
+
+				isHandleEditedManually = false;
 
 				set({ ...baseForm, accountType, handleStatus: "idle" });
 			},

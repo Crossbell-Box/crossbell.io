@@ -12,6 +12,7 @@ export type SignInWithWalletProps = {
 	onSkip?: () => void;
 	signInText?: React.ReactNode;
 	skipText?: React.ReactNode;
+	autoSignIn?: boolean;
 };
 
 export function SignInWithWallet({
@@ -19,6 +20,7 @@ export function SignInWithWallet({
 	onSkip,
 	signInText,
 	skipText,
+	autoSignIn,
 }: SignInWithWalletProps) {
 	const signIn = useWalletSignIn();
 	const isWalletSignedIn = useIsWalletSignedIn();
@@ -28,6 +30,13 @@ export function SignInWithWallet({
 			afterSignIn?.();
 		}
 	}, [isWalletSignedIn]);
+
+	React.useEffect(() => {
+		if (autoSignIn && signIn.isReady && !signIn.isLoading) {
+			const timeout = setTimeout(() => signIn.mutate(), 500);
+			return () => clearTimeout(timeout);
+		}
+	}, [autoSignIn, signIn.isReady]);
 
 	return (
 		<div>

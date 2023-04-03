@@ -1,9 +1,9 @@
 import React from "react";
-import { useAccount } from "wagmi";
 import { DynamicContainer, DynamicContainerContent } from "@crossbell/ui";
 
 import { BaseModal, Congrats } from "../../components";
 import { SignInWithWallet, OPSignSettings } from "../../scenes";
+import { useConnectedAccount } from "../../hooks";
 
 import { Scene, SceneKind } from "./types";
 import { StoresProvider, useConnectModal, useScenesStore } from "./stores";
@@ -23,6 +23,7 @@ import { SelectConnectKind } from "./scenes/select-connect-kind";
 import { SelectWalletToConnect } from "./scenes/select-wallet-to-connect";
 import { SelectCharacters } from "./scenes/select-characters";
 import { MintCharacter } from "./scenes/mint-character";
+import { SignInStrategy, useConnectKitConfig } from "../../connect-kit-config";
 
 export { useConnectModal };
 
@@ -42,35 +43,63 @@ export function ConnectModal() {
 }
 
 function Main() {
-	const [currentScene, goTo] = useScenesStore((s) => [
+	const [currentScene, goTo, setSignInStrategy] = useScenesStore((s) => [
 		s.computed.currentScene,
 		s.goTo,
+		s.setSignInStrategy,
 	]);
-	const { isConnected } = useAccount();
+	const { hide } = useConnectModal();
+	const account = useConnectedAccount();
+	const { signInStrategy } = useConnectKitConfig();
+
+	React.useEffect(
+		() => setSignInStrategy(signInStrategy),
+		[signInStrategy, setSignInStrategy]
+	);
 
 	React.useEffect(() => {
-		if (isConnected) {
-			const goToSelectCharacter = () => {
+		if (account?.type === "wallet") {
+			const goToSelectCharacters = () =>
 				goTo({ kind: SceneKind.selectCharacters });
+
+			const nextStrategies: Record<SignInStrategy, () => void> = {
+				simple() {
+					if (account.character) {
+						hide();
+					} else {
+						goToSelectCharacters();
+					}
+				},
+				complete() {
+					goToSelectCharacters();
+				},
 			};
+
+			const next = nextStrategies[signInStrategy];
 
 			goTo({
 				kind: SceneKind.signInWithWallet,
 				signInText: "Sign In (Recommended)",
-				afterSignIn: goToSelectCharacter,
-				onSkip: goToSelectCharacter,
+				afterSignIn: next,
+				onSkip: next,
 			});
 		}
-	}, [isConnected, goTo]);
+	}, [account?.type, goTo]);
 
 	return (
 		<DynamicContainerContent id={currentScene.kind}>
-			{renderScene(currentScene)}
+			{renderScene({ scene: currentScene, signInStrategy })}
 		</DynamicContainerContent>
 	);
 }
 
-function renderScene(scene: Scene) {
+function renderScene({
+	scene,
+	signInStrategy,
+}: {
+	scene: Scene;
+	signInStrategy: SignInStrategy;
+}) {
 	switch (scene.kind) {
 		case SceneKind.congrats:
 			return <Congrats {...scene} />;
@@ -87,7 +116,13 @@ function renderScene(scene: Scene) {
 		case SceneKind.connectWallet:
 			return <ConnectWallet {...scene} />;
 		case SceneKind.signInWithWallet:
-			return <SignInWithWallet Header={Header} {...scene} />;
+			return (
+				<SignInWithWallet
+					Header={Header}
+					autoSignIn={signInStrategy === "simple"}
+					{...scene}
+				/>
+			);
 		case SceneKind.selectCharacters:
 			return <SelectCharacters />;
 		case SceneKind.opSignSettings:
