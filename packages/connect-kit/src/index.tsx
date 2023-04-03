@@ -25,6 +25,10 @@ import { DynamicScenesModal } from "./components/dynamic-scenes-modal";
 import { SentryPrivacyModal } from "./modals/sentry-privacy-modal";
 import { SetupSentry } from "./scenes/for-dynamic-modal/privacy-and-security";
 import { XSettingsConfig, XSettingsConfigContext } from "./x-settings-config";
+import {
+	ConnectKitConfig,
+	ConnectKitConfigContext,
+} from "./connect-kit-config";
 import { contractConfig } from "./contract-config";
 
 export { useConnectModal } from "./modals/connect-modal";
@@ -57,7 +61,7 @@ export type ConnectKitProviderProps = {
 	withoutNotificationsProvider?: boolean;
 	urlComposer?: UrlComposerContextValue;
 	xSettings?: Partial<XSettingsConfig>;
-};
+} & Partial<ConnectKitConfig>;
 
 export function ConnectKitProvider({
 	children,
@@ -65,6 +69,7 @@ export function ConnectKitProvider({
 	withoutNotificationsProvider,
 	urlComposer,
 	xSettings,
+	...connectKitConfig
 }: ConnectKitProviderProps) {
 	const accountState = useAccountState();
 	const account = useAccount();
@@ -90,22 +95,24 @@ export function ConnectKitProvider({
 		<InitContractProvider {...contractConfig}>
 			<UseWeb2UrlContext.Provider value={ipfsLinkToHttpLink ?? null}>
 				<UrlComposerContext.Provider value={urlComposer ?? null}>
-					<XSettingsConfigContext.Provider value={xSettings ?? null}>
-						<ConnectModal />
-						<DisconnectModal />
-						<ClaimCSBTipsModal />
-						<CsbDetailModal />
-						<WalletClaimCSBModal />
-						<OpSignSettingsModal />
-						<TransferCSBToOperatorModal />
-						<NoEnoughCSBModal />
-						<WalletMintNewCharacter />
-						<SelectCharactersModal />
-						<DynamicScenesModal />
-						<SetupSentry />
-						<SentryPrivacyModal />
-						{children}
-					</XSettingsConfigContext.Provider>
+					<ConnectKitConfigContext.Provider value={connectKitConfig}>
+						<XSettingsConfigContext.Provider value={xSettings ?? null}>
+							<ConnectModal />
+							<DisconnectModal />
+							<ClaimCSBTipsModal />
+							<CsbDetailModal />
+							<WalletClaimCSBModal />
+							<OpSignSettingsModal />
+							<TransferCSBToOperatorModal />
+							<NoEnoughCSBModal />
+							<WalletMintNewCharacter />
+							<SelectCharactersModal />
+							<DynamicScenesModal />
+							<SetupSentry />
+							<SentryPrivacyModal />
+							{children}
+						</XSettingsConfigContext.Provider>
+					</ConnectKitConfigContext.Provider>
 				</UrlComposerContext.Provider>
 			</UseWeb2UrlContext.Provider>
 		</InitContractProvider>
