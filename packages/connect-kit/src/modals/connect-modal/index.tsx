@@ -1,9 +1,9 @@
 import React from "react";
-import { useAccount } from "wagmi";
 import { DynamicContainer, DynamicContainerContent } from "@crossbell/ui";
 
 import { BaseModal, Congrats } from "../../components";
 import { SignInWithWallet, OPSignSettings } from "../../scenes";
+import { useConnectedAccount } from "../../hooks";
 
 import { Scene, SceneKind } from "./types";
 import { StoresProvider, useConnectModal, useScenesStore } from "./stores";
@@ -48,7 +48,8 @@ function Main() {
 		s.goTo,
 		s.setSignInStrategy,
 	]);
-	const { isConnected } = useAccount();
+	const { hide } = useConnectModal();
+	const account = useConnectedAccount();
 	const { signInStrategy } = useConnectKitConfig();
 
 	React.useEffect(
@@ -57,19 +58,33 @@ function Main() {
 	);
 
 	React.useEffect(() => {
-		if (isConnected) {
-			const goToSelectCharacter = () => {
+		if (account?.type === "wallet") {
+			const goToSelectCharacters = () =>
 				goTo({ kind: SceneKind.selectCharacters });
+
+			const nextStrategies: Record<SignInStrategy, () => void> = {
+				simple() {
+					if (account.character) {
+						hide();
+					} else {
+						goToSelectCharacters();
+					}
+				},
+				complete() {
+					goToSelectCharacters();
+				},
 			};
+
+			const next = nextStrategies[signInStrategy];
 
 			goTo({
 				kind: SceneKind.signInWithWallet,
 				signInText: "Sign In (Recommended)",
-				afterSignIn: goToSelectCharacter,
-				onSkip: goToSelectCharacter,
+				afterSignIn: next,
+				onSkip: next,
 			});
 		}
-	}, [isConnected, goTo]);
+	}, [account?.type, goTo]);
 
 	return (
 		<DynamicContainerContent id={currentScene.kind}>
