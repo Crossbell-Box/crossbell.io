@@ -1,0 +1,25 @@
+# `useConnectedAccount`
+
+Hook for getting connected account info. Including both wallet and email account. You can limit to specific account type by passing `email` or `wallet` as an argument.
+
+```ts
+function useConnectedAccount(type: "email"): EmailAccount | null;
+function useConnectedAccount(type: "wallet"): WalletAccount | null;
+function useConnectedAccount(): EmailAccount | WalletAccount | null;
+```
+
+## Usage
+
+```tsx
+import { useConnectedAccount } from "@crossbell/connect-kit";
+
+function App() {
+	const account = useConnectedAccount();
+
+	return (
+		<div>
+			{account ? `Connected with ${account.type}` : "Not Connected Yet"}
+		</div>
+	);
+}
+```
