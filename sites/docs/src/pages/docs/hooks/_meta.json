@@ -50,7 +50,7 @@
 	},
 	"use-is-op-sign-enabled": "useIsOpSignEnabled",
 	"use-op-sign-balance": "useOpSignBalance",
-	"use-toggle-op-sign-operator": "",
+	"use-toggle-op-sign-operator": "useToggleOpSign\nOperator",
 	"use-wallet-sign-in": "",
 	"use-is-wallet-signed-in": "useIsWalletSignedIn",
 	"use-op-sign-operator-has-permissions": "useOPSignOperator\nHasPermissions",
