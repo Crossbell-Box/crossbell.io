@@ -2,6 +2,7 @@
 	"use-is-ssr-ready": "useIsSsrReady",
 	"use-is-connected": "useIsConnected",
 	"use-connected-account": "useConnectedAccount",
+	"use-connected-action": "useConnectedAction",
 
 	"-- account-character": {
 		"type": "separator",
@@ -53,11 +54,5 @@
 	"use-toggle-op-sign-operator": "useToggleOpSign\nOperator",
 	"use-op-sign-operator-has-permissions": "useOPSignOperator\nHasPermissions",
 	"use-wallet-sign-in": "useWalletSignIn",
-	"use-is-wallet-signed-in": "useIsWalletSignedIn",
-
-	"-- utils": {
-		"type": "separator",
-		"title": "Util hooks"
-	},
-	"use-connected-action": ""
+	"use-is-wallet-signed-in": "useIsWalletSignedIn"
 }

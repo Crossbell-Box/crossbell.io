@@ -1,0 +1,36 @@
+# `useConnectedAction`
+
+Used to wrap an action that needs to be connected/logged in/upgraded before it can be executed.
+If the user is not connected/logged in, this hooks will display the connect/login/upgrade modal and
+automatically execute the action when the condition is met.
+
+```ts
+type ConnectType = "wallet" | "email";
+
+type UseConnectedActionOptions<P extends any[] = unknown[], V = void> = {
+	noAutoResume?: boolean;
+	connectType?: ConnectType;
+	fallback?: (...params: P) => V;
+};
+
+function useConnectedAction<P extends any[], V>(
+	action: (...params: P) => V,
+	options?: UseConnectedActionOptions<P, V>
+): (...params: P) => Promise<V>;
+```
+
+## Usage
+
+```tsx
+import { useConnectedAction, useTipModal } from "@crossbell/connect-kit";
+
+// https://xfeed.app/notes/32179-30
+const note = { characterId: 32179, noteId: 30 };
+
+function App() {
+	const tipModal = useTipModal();
+	const tipNote = useConnectedAction(() => tipModal.show(note));
+
+	return <button onClick={tipNote}>Tip Note</button>;
+}
+```
