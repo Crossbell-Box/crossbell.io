@@ -3,6 +3,7 @@
 	"try-it-out": "",
 	"quick-start": "",
 	"connect-button": "ConnectButton",
+	"notification": "Notification",
 	"modals": "Modals",
 	"hooks": "Hooks"
 }

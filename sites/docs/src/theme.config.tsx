@@ -26,6 +26,9 @@ const config: DocsThemeConfig = {
 			titleTemplate: route !== "/" ? "%s – Crossbell Dev" : "%s",
 		};
 	},
+	sidebar: {
+		defaultMenuCollapseLevel: 0,
+	},
 	footer: {
 		text() {
 			return (

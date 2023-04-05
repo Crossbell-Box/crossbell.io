@@ -2,7 +2,6 @@
 	"connect-modal": "Connect",
 	"disconnect-modal": "Disconnect",
 	"select-characters-modal": "Select Characters",
-	"notification": "Notification",
 	"x-settings-modal": "xSettings",
 	"-- character": {
 		"type": "separator",
