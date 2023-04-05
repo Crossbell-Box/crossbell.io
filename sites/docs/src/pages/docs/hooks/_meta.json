@@ -2,13 +2,20 @@
 	"use-is-ssr-ready": "useIsSsrReady",
 	"use-is-connected": "useIsConnected",
 	"use-connected-account": "useConnectedAccount",
-	"use-account-balance": "",
 	"use-account-character": "",
-	"use-account-character-id": "",
 	"use-account-characters": "",
 	"use-account-has-character": "",
 	"use-disconnect-account": "",
 	"use-transfer-csb": "",
+
+	"-- account-balance": {
+		"type": "separator",
+		"title": "Account Balance"
+	},
+
+	"use-account-balance": "useAccountBalance",
+	"use-email-account-balance": "useEmailAccountBalance",
+	"use-wallet-account-balance": "useWalletAccountBalance",
 
 	"-- character": {
 		"type": "separator",
