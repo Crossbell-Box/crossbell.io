@@ -9,12 +9,12 @@ export type UseOPSignOperatorHasPermissionsOptions = {
 	characterId: number | null | undefined;
 };
 
-export function useOPSignOperatorHasPermissions({
-	characterId,
-}: UseOPSignOperatorHasPermissionsOptions) {
+export function useOPSignOperatorHasPermissions(
+	options?: UseOPSignOperatorHasPermissionsOptions
+) {
 	return useCharacterOperatorHasPermissions({
 		operatorAddress: OP_SIGN_OPERATOR_ADDRESS,
 		permissions: OP_SIGN_OPERATOR_PERMISSIONS,
-		characterId,
+		characterId: options?.characterId,
 	});
 }
