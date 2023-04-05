@@ -15,13 +15,13 @@ import {
 import { useNoteLinkList, UseNoteLinkListParams } from "./use-note-link-list";
 
 export function useIsNoteLiked(
-	params: MarkOptional<Omit<UseIsNoteLinkedParams, "linkType">, "characterId">
+	params: Omit<UseIsNoteLinkedParams, "linkType">
 ) {
 	const { characterId } = useAccountCharacterId();
 
 	const result = useIsNoteLinked({
 		linkType: NoteLinkType.like,
-		characterId,
+		fromCharacterId: characterId,
 		...params,
 	});
 
