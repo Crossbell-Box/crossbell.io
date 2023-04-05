@@ -48,7 +48,7 @@
 		"type": "separator",
 		"title": "Operator Sign"
 	},
-	"use-is-wallet-signed-in": "",
+	"use-is-wallet-signed-in": "useIsWalletSignedIn",
 	"use-is-op-sign-enabled": "",
 	"use-op-sign-balance": "",
 	"use-op-sign-operator-has-permissions": "",

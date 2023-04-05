@@ -1,0 +1,30 @@
+# `useIsWalletSignedIn`
+
+Hook for indicating whether a wallet is signed in.
+
+```ts
+function useIsWalletSignedIn(): boolean;
+```
+
+## Usage
+
+```tsx {2,7,15}
+import {
+	useIsWalletSignedIn,
+	useOpSignSettingsModal,
+} from "@crossbell/connect-kit";
+
+function App() {
+	const isWalletSignedIn = useIsWalletSignedIn();
+	const opSignSettingsModal = useOpSignSettingsModal();
+
+	return (
+		<button
+			onClick={() => opSignSettingsModal.show()}
+			disabled={isWalletSignedIn}
+		>
+			{isWalletSignedIn ? "Signed In" : "Sign In"}
+		</button>
+	);
+}
+```
