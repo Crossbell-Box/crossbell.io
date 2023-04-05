@@ -1,0 +1,28 @@
+# `useIsNoteLiked`
+
+Hook for indicating if the note is liked or not.
+
+```ts
+import { UseQueryResult } from "@tanstack/react-query";
+
+function useIsNoteLiked(options?: {
+	noteId: number;
+	characterId: number;
+}): [{ isLiked: boolean; transactionHash: string | null }, UseQueryResult];
+```
+
+## Usage
+
+```tsx
+import { useIsNoteLiked } from "@crossbell/connect-kit";
+
+function App() {
+	const [{ isLiked }] = useIsNoteLiked({
+		// https://xfeed.app/notes/32179-30
+		noteId: 30,
+		characterId: 32179,
+	});
+
+	return <div>{isLiked ? "Liked" : "Not Liked"}</div>;
+}
+```

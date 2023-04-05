@@ -1,0 +1,28 @@
+# `useNoteLikeCount`
+
+Hook for getting like count of a note.
+
+```ts
+import { UseQueryResult } from "@tanstack/react-query";
+
+function useNoteLikeCount(options?: {
+	noteId: number;
+	characterId: number;
+}): UseQueryResult<number>;
+```
+
+## Usage
+
+```tsx
+import { useNoteLikeCount } from "@crossbell/connect-kit";
+
+function App() {
+	const { data: likeCount } = useNoteLikeCount({
+		// https://xfeed.app/notes/32179-30
+		noteId: 30,
+		characterId: 32179,
+	});
+
+	return <div>Count: {likeCount}</div>;
+}
+```

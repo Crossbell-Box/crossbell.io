@@ -31,12 +31,12 @@
 
 	"-- like": {
 		"type": "separator",
-		"title": "Like"
+		"title": "Like Actions"
 	},
-	"use-is-note-liked": "",
-	"use-note-like-count": "",
-	"use-note-like-list": "",
-	"use-toggle-like-note": "",
+	"use-is-note-liked": "useIsNoteLiked",
+	"use-note-like-count": "useNoteLikeCount",
+	"use-note-like-list": "useNoteLikeList",
+	"use-toggle-like-note": "useToggleLikeNote",
 
 	"-- mint": {
 		"type": "separator",
