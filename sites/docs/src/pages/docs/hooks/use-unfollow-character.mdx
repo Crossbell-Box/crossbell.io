@@ -1,0 +1,47 @@
+# `useUnfollowCharacter`
+
+Hook for unfollowing character.
+
+```ts
+import { UseMutationResult, UseMutationOptions } from "@tanstack/react-query";
+
+function useUnfollowCharacter(
+	options?: UseMutationOptions
+): UseMutationResult<unknown, unknown, { characterId: number }>;
+```
+
+## Usage
+
+```tsx {3,16,22}
+import {
+	useFollowCharacter,
+	useUnfollowCharacter,
+	useAccountCharacter,
+} from "@crossbell/connect-kit";
+import { useCharacterFollowRelation } from "@crossbell/indexer";
+
+function App() {
+	const characterId = 10; // https://xchar.app/diygod
+	const currentCharacter = useAccountCharacter();
+	const { data } = useCharacterFollowRelation(
+		currentCharacter?.characterId,
+		characterId
+	);
+	const follow = useFollowCharacter();
+	const unfollow = useUnfollowCharacter();
+
+	return (
+		<button
+			onClick={() => {
+				if (data?.isFollowing) {
+					unfollow.mutate({ characterId });
+				} else {
+					follow.mutate({ characterId });
+				}
+			}}
+		>
+			{data?.isFollowing ? "Unfollow" : "Follow"}
+		</button>
+	);
+}
+```

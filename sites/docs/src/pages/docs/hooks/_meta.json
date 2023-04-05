@@ -20,26 +20,14 @@
 	"use-email-account-balance": "useEmailAccountBalance",
 	"use-wallet-account-balance": "useWalletAccountBalance",
 
-	"-- character": {
-		"type": "separator",
-		"title": "Character"
-	},
-	"use-update-character-handle": "",
-	"use-update-character-metadata": "",
-	"use-set-primary-character": "",
-
-	"-- feeds": {
-		"type": "separator",
-		"title": "Feeds"
-	},
-
 	"-- follow": {
 		"type": "separator",
-		"title": "Follow"
+		"title": "Follow Actions"
 	},
-	"use-follow-character": "",
-	"use-unfollow-character": "",
-	"use-follow-characters": "",
+
+	"use-follow-character": "useFollowCharacter",
+	"use-unfollow-character": "useUnfollowCharacter",
+	"use-follow-characters": "useFollowCharacters",
 
 	"-- like": {
 		"type": "separator",
