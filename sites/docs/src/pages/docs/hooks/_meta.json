@@ -1,6 +1,6 @@
 {
 	"use-is-ssr-ready": "useIsSsrReady",
-	"use-is-connected": "",
+	"use-is-connected": "useIsConnected",
 	"use-account-balance": "",
 	"use-account-character": "",
 	"use-account-character-id": "",
