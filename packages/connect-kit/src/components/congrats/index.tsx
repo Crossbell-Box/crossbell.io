@@ -1,6 +1,6 @@
 import React from "react";
 import confetti from "canvas-confetti";
-
+import classNames from "classnames";
 import { useWeb2Url, CloseIcon } from "@crossbell/ui";
 
 import { IMAGES } from "../../utils";
@@ -16,6 +16,7 @@ export type CongratsProps = {
 	tips: string;
 	timeout?: `${number}${"s" | "ms"}`;
 	illustration?: React.ReactNode;
+	className?: string;
 };
 
 export function Congrats({
@@ -27,6 +28,7 @@ export function Congrats({
 	onClose,
 	timeout,
 	illustration,
+	className,
 }: CongratsProps) {
 	const illustrationUrl = useWeb2Url(IMAGES.addBtnImg);
 	const bgUrl = useWeb2Url(IMAGES.congratsBg);
@@ -34,7 +36,7 @@ export function Congrats({
 	React.useEffect(showConfetti, []);
 
 	return (
-		<div className={styles.container}>
+		<div className={classNames(styles.container, className)}>
 			{!!timeout && (
 				<div className={styles.progress}>
 					<div

@@ -21,6 +21,9 @@ export const IMAGES = {
 		"ipfs://bafkreifpp64hj7tvaxiz3l3tu3bypyuan7vnrdzn7rbq3qctd42tusduqi",
 
 	waveBg: "ipfs://bafkreiclraq3enbmwtqavz4gardvgq3riufjinwcictywoxrgl2xnva24e",
+
+	tipSuccessIllustration:
+		"ipfs://bafkreif3ipurekcxfpldotb2b4rqzsmic2vkojbcrishg7lk7v7omkuwtq",
 } as const;
 
 const imgs = Object.values(IMAGES);

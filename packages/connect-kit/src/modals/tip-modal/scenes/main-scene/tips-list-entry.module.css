@@ -1,0 +1,31 @@
+.container {
+	display: flex;
+	align-items: center;
+	color: #999;
+	gap: 4px;
+	font-size: 14px;
+	padding: 4px;
+	border-radius: 6px;
+	margin-right: -4px;
+	transition: opacity 0.2s;
+}
+
+.hidden {
+	pointer-events: none;
+	opacity: 0;
+}
+
+.avatars {
+	display: flex;
+	flex-direction: row-reverse;
+}
+
+.avatars > *:not(:last-child) {
+	margin-left: -8px;
+	border: 1px solid #fff;
+}
+
+.arrow {
+	font-size: 16px;
+	transform: rotate(180deg);
+}

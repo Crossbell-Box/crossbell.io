@@ -1,0 +1,72 @@
+.list {
+	display: flex;
+	justify-content: space-between;
+	gap: 14px;
+}
+
+.item {
+	flex: 1 1 0;
+	border-radius: 12px 32px 12px 12px;
+	display: flex;
+	flex-direction: column;
+	align-items: center;
+	justify-content: center;
+	height: 127px;
+	position: relative;
+	box-shadow: inset 0 0 0 1px #e1e8f7;
+	cursor: pointer;
+	background: transparent;
+}
+
+.item:disabled {
+	opacity: 0.5;
+	cursor: not-allowed;
+}
+
+.amount {
+	transition: transform 0.4s;
+	display: flex;
+	flex-direction: column;
+	align-items: center;
+	font-size: 14px;
+	font-weight: 500;
+}
+
+.flower {
+	font-size: 60px;
+	transition: width 0.4s, height 0.4s;
+}
+
+.tip {
+	position: absolute;
+	bottom: 0;
+	left: 0;
+	width: 100%;
+	text-align: center;
+	font-weight: 500;
+	font-size: 14px;
+	color: white;
+	background: #9688f2;
+	border-radius: 0 0 12px 12px;
+	line-height: 30px;
+	opacity: 0;
+	transform: translateY(50%) rotateX(90deg);
+	transition: opacity 0.4s, transform 0.4s;
+}
+
+.item:not(:disabled):hover {
+	box-shadow: inset 0 0 0 2px #9688f2;
+}
+
+.item:not(:disabled):hover .amount {
+	transform: translateY(-40%);
+}
+
+.item:not(:disabled):hover .flower {
+	font-size: 72px;
+}
+
+.item:not(:disabled):hover .tip {
+	opacity: 1;
+	transform: translateY(0) rotateX(0);
+}

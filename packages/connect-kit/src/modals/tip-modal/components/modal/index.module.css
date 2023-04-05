@@ -1,0 +1,31 @@
+.modal {
+	margin-top: auto;
+	width: 100%;
+}
+
+.modal [data-kind="modal-container"] {
+	color: #2e2e2e;
+	background: #fff;
+	border-top-left-radius: 28px;
+	border-top-right-radius: 28px;
+}
+
+.modal * {
+	box-sizing: border-box;
+}
+
+@media (min-width: 768px) {
+	.modal {
+		margin-bottom: auto;
+		width: auto;
+	}
+
+	.modal [data-kind="modal-container"] {
+		border-bottom-left-radius: 28px;
+		border-bottom-right-radius: 28px;
+	}
+}
+
+.inner {
+	padding: 0;
+}

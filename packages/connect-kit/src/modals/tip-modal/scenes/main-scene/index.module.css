@@ -1,0 +1,129 @@
+.modalContainer {
+	background: transparent;
+}
+
+.avatar {
+	display: flex;
+	align-items: center;
+	justify-content: center;
+	margin-top: 36px;
+	height: 0;
+	position: relative;
+}
+
+.avatar img {
+	border: 3px solid #fff;
+	background: #fff;
+}
+
+.main {
+	padding: 0 24px 24px;
+}
+
+.title {
+	font-weight: 500;
+	font-size: 16px;
+	text-align: center;
+}
+
+.tips {
+	display: flex;
+	align-items: center;
+	gap: 6px;
+	font-size: 14px;
+	color: #999;
+	margin-top: 18px;
+}
+
+.tips::before {
+	content: "";
+	display: inline-block;
+	width: 3px;
+	height: 20px;
+	border-radius: 3px;
+	background: #9688f2;
+}
+
+.characterName {
+	font-weight: 300;
+	font-size: 16px;
+	text-align: center;
+	margin-bottom: 36px;
+}
+
+.infos {
+	display: flex;
+	gap: 4px;
+	justify-content: space-between;
+	margin-top: 20px;
+}
+
+.mira {
+	display: flex;
+	align-items: center;
+	gap: 4px;
+	font-size: 14px;
+	font-weight: 400;
+	color: #999;
+}
+
+.mira svg {
+	font-size: 16px;
+}
+
+.mira strong {
+	font-weight: 500;
+	color: #000;
+}
+
+.bottomTipsContainer {
+	display: flex;
+	margin-top: 12px;
+}
+
+.successIllustration {
+	display: flex;
+	align-items: center;
+	justify-content: center;
+	margin: 24px auto 12px;
+}
+
+.avatar.isLoading::before {
+	content: "";
+	opacity: 1;
+	transition: opacity 0.2s;
+	position: absolute;
+	z-index: 1;
+	top: 50%;
+	left: 50%;
+	transform: translate(-50%, -50%);
+	width: 72px;
+	height: 72px;
+	border-radius: 72px;
+	background: rgba(255, 255, 255, 0.9);
+}
+
+.loadingOverlay {
+	opacity: 0;
+	pointer-events: none;
+	transition: opacity 0.2s;
+	position: absolute;
+	z-index: 1;
+	top: 65px;
+	left: 0;
+	right: 0;
+	bottom: 0;
+	display: flex;
+	align-items: center;
+	justify-content: center;
+	flex-direction: column;
+	background: rgba(255, 255, 255, 0.9);
+	color: rgba(0, 0, 0, 0.8);
+	border-radius: 28px;
+	font-size: 32px;
+}
+
+.loadingOverlay.isLoading {
+	opacity: 1;
+	pointer-events: auto;
+}
