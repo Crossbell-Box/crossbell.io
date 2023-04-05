@@ -42,7 +42,7 @@
 		"type": "separator",
 		"title": "Mint"
 	},
-	"use-mint-note": "",
+	"use-mint-note": "useMintNote",
 
 	"-- operator-sign": {
 		"type": "separator",
