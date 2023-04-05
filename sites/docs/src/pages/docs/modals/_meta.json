@@ -1,12 +1,15 @@
 {
+	"-- connection": {
+		"type": "separator",
+		"title": "Connection"
+	},
 	"connect-modal": "Connect",
 	"disconnect-modal": "Disconnect",
-	"select-characters-modal": "Select Characters",
-	"x-settings-modal": "xSettings",
 	"-- character": {
 		"type": "separator",
 		"title": "Character"
 	},
+	"select-characters-modal": "Select Characters",
 	"edit-character-profile-modal": "Edit Character Profile",
 	"-- wallet": {
 		"type": "separator",

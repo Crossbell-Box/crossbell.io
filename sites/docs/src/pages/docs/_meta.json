@@ -4,6 +4,7 @@
 	"quick-start": "",
 	"connect-button": "ConnectButton",
 	"notification": "Notification",
+	"x-settings": "xSettings",
 	"modals": "Modals",
 	"hooks": "Hooks"
 }
