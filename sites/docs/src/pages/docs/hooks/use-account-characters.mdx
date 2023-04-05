@@ -1,0 +1,51 @@
+# `useAccountCharacters`
+
+Hook for getting the current account's characters. Only fetch first 20 characters at initial request.
+
+```ts
+import { CharacterEntity } from "crossbell.js";
+
+type UseAccountCharactersResult = {
+	characters: CharacterEntity[];
+	isLoading: boolean;
+	hasNextPage: boolean;
+	isFetchingNextPage: boolean;
+	fetchNextPage: () => void;
+};
+
+function useAccountCharacters(): UseAccountCharactersResult;
+```
+
+## Usage
+
+```tsx
+import { useAccountCharacters } from "@crossbell/connect-kit";
+import { LoadMore, CharacterAvatar } from "@crossbell/ui";
+
+function App() {
+	const {
+		characters,
+		isLoading,
+		hasNextPage,
+		isFetchingNextPage,
+		fetchNextPage,
+	} = useAccountCharacters();
+
+	return (
+		<div>
+			{characters.map((character) => (
+				<div key={character.characterId}>
+					<CharacterAvatar size={52} character={character} />
+				</div>
+			))}
+
+			{/* Automatically fetch more characters if scroll to the bottom */}
+			<LoadMore
+				onLoadMore={fetchNextPage}
+				hasMore={hasNextPage}
+				isLoading={isFetchingNextPage}
+			/>
+		</div>
+	);
+}
+```
