@@ -1,0 +1,30 @@
+# `useWalletSignIn`
+
+Hook for initiating wallet sign in.
+
+```ts
+import { UseMutationResult } from "@tanstack/react-query";
+
+function useWalletSignIn(): UseMutationResult & {
+	isReady: boolean; // Indicates whether the mutation is ready to be executed.
+};
+```
+
+## Usage
+
+```tsx
+import { useWalletSignIn } from "@crossbell/connect-kit";
+
+function App() {
+	const signIn = useWalletSignIn();
+
+	return (
+		<button
+			onClick={() => signIn.mutate()}
+			disabled={!signIn.isReady || signIn.isLoading}
+		>
+			Sign In
+		</button>
+	);
+}
+```
