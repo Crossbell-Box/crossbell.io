@@ -5,9 +5,13 @@ export type UseIsOpSignEnabledConfig = {
 	characterId: number | null | undefined;
 };
 
-export function useIsOpSignEnabled({ characterId }: UseIsOpSignEnabledConfig) {
+export function useIsOpSignEnabled(
+	config: UseIsOpSignEnabledConfig | null | undefined
+) {
 	const isSignedIn = useIsWalletSignedIn();
-	const hasPermissions = useOPSignOperatorHasPermissions({ characterId });
+	const hasPermissions = useOPSignOperatorHasPermissions({
+		characterId: config?.characterId,
+	});
 
 	return isSignedIn && hasPermissions;
 }
