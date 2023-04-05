@@ -49,7 +49,7 @@
 		"title": "Operator Sign"
 	},
 	"use-is-wallet-signed-in": "useIsWalletSignedIn",
-	"use-is-op-sign-enabled": "",
+	"use-is-op-sign-enabled": "useIsOpSignEnabled",
 	"use-op-sign-balance": "",
 	"use-op-sign-operator-has-permissions": "",
 	"use-toggle-op-sign-operator": "",
