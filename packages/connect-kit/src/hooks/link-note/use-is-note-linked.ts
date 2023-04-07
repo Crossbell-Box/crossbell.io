@@ -5,21 +5,21 @@ import { getIsNoteLinked, GetIsNoteLinkedConfig } from "../../apis";
 
 export type UseIsNoteLinkedParams = MarkOptional<
 	GetIsNoteLinkedConfig,
-	"characterId"
+	"fromCharacterId"
 >;
 
 export const SCOPE_KEY_IS_NOTE_LINKED = ({
+	fromCharacterId,
 	characterId,
-	toCharacterId,
-	toNoteId,
+	noteId,
 	linkType,
 }: UseIsNoteLinkedParams) => [
 	"connect-kit",
 	"is-note-linked",
 	linkType,
-	toCharacterId,
-	toNoteId,
 	characterId,
+	noteId,
+	fromCharacterId,
 ];
 
 export function useIsNoteLinked(params: UseIsNoteLinkedParams) {
@@ -28,11 +28,11 @@ export function useIsNoteLinked(params: UseIsNoteLinkedParams) {
 		() =>
 			getIsNoteLinked({
 				...params,
-				characterId: params.characterId!,
+				fromCharacterId: params.fromCharacterId!,
 			}),
 		{
 			enabled:
-				!!params.characterId && !!params.toCharacterId && !!params.toNoteId,
+				!!params.fromCharacterId && !!params.characterId && !!params.noteId,
 		}
 	);
 }

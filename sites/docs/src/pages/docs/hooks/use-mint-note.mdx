@@ -1,0 +1,37 @@
+# `useMintNote`
+
+Hook for minting a note.
+
+```ts
+import { UseMutationResult, UseMutationOptions } from "@tanstack/react-query";
+
+function useMintNote(
+	options?: UseMutationOptions
+): UseMutationResult<unknown, unknown, { characterId: number; noteId: number }>;
+```
+
+## Usage
+
+```tsx
+import { useMintNote } from "@crossbell/connect-kit";
+import { useNoteStatus } from "@crossbell/indexer";
+
+// https://xfeed.app/notes/32179-30
+const note = { characterId: 32179, noteId: 30 };
+
+function App() {
+	const { data: status } = useNoteStatus(note.characterId, note.noteId);
+	const mintNote = useMintNote();
+
+	return (
+		<button
+			onClick={() => {
+				mintNote.mutate(note);
+			}}
+			disabled={status?.isMinted}
+		>
+			{status?.isMinted ? "Minted" : "Mint"}
+		</button>
+	);
+}
+```

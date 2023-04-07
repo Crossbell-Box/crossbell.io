@@ -169,36 +169,36 @@ export async function deleteAccount(token: string): Promise<void> {
 
 export async function linkNote({
 	token,
-	toNoteId,
-	toCharacterId,
+	noteId,
+	characterId,
 	linkType,
 	data,
 }: {
 	token: string;
-	toCharacterId: number;
-	toNoteId: number;
+	characterId: number;
+	noteId: number;
 	linkType: string;
 	data?: string;
 }): Promise<{ transactionHash: string; data: string }> {
 	return request(
-		`/newbie/contract/links/notes/${toCharacterId}/${toNoteId}/${linkType}`,
+		`/newbie/contract/links/notes/${characterId}/${noteId}/${linkType}`,
 		{ method: "PUT", token, body: { data } }
 	);
 }
 
 export async function unlinkNote({
 	token,
-	toNoteId,
-	toCharacterId,
+	noteId,
+	characterId,
 	linkType,
 }: {
 	token: string;
-	toCharacterId: number;
-	toNoteId: number;
+	characterId: number;
+	noteId: number;
 	linkType: string;
 }): Promise<{ transactionHash: string; data: string }> {
 	return request(
-		`/newbie/contract/links/notes/${toCharacterId}/${toNoteId}/${linkType}`,
+		`/newbie/contract/links/notes/${characterId}/${noteId}/${linkType}`,
 		{ method: "DELETE", token }
 	);
 }

@@ -1,0 +1,53 @@
+# `useNoteLikeList`
+
+Hook for getting like count of a note.
+
+```ts
+import { UseInfiniteQueryResult } from "@tanstack/react-query";
+import { CharacterEntity, LinkEntity } from "crossbell.js";
+
+type NoteLinkListItem = {
+	character: CharacterEntity | null;
+	characterId: CharacterEntity["characterId"] | null;
+	transactionHash: string | null;
+	entity: LinkEntity | null;
+};
+
+function useNoteLikeList(options?: {
+	noteId: number;
+	characterId: number;
+}): [NoteLinkListItem[], UseInfiniteQueryResult];
+```
+
+## Usage
+
+```tsx
+import { useNoteLikeList } from "@crossbell/connect-kit";
+import { CharacterAvatar, LoadMore } from "@crossbell/ui";
+
+function App() {
+	const [list, { fetchNextPage, hasNextPage, isFetchingNextPage }] =
+		useNoteLikeList({
+			// https://xfeed.app/notes/32179-30
+			noteId: 30,
+			characterId: 32179,
+		});
+
+	return (
+		<div>
+			{list.map(({ character, transactionHash }) => (
+				<div key={transactionHash}>
+					<CharacterAvatar character={character} />
+				</div>
+			))}
+
+			{/* Automatically fetch more items if scroll to the bottom */}
+			<LoadMore
+				onLoadMore={fetchNextPage}
+				hasMore={!!hasNextPage}
+				isLoading={isFetchingNextPage}
+			/>
+		</div>
+	);
+}
+```

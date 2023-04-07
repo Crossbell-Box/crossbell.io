@@ -1,65 +1,58 @@
 {
 	"use-is-ssr-ready": "useIsSsrReady",
-	"use-is-connected": "",
-	"use-account-balance": "",
-	"use-account-character": "",
-	"use-account-character-id": "",
-	"use-account-characters": "",
-	"use-account-has-character": "",
-	"use-connected-account": "",
-	"use-connected-action": "",
-	"use-disconnect-account": "",
-	"use-transfer-csb": "",
+	"use-is-connected": "useIsConnected",
+	"use-connected-account": "useConnectedAccount",
+	"use-connected-action": "useConnectedAction",
 
-	"-- character": {
+	"-- account-character": {
 		"type": "separator",
-		"title": "Character"
+		"title": "Account Character"
 	},
-	"use-update-character-handle": "",
-	"use-update-character-metadata": "",
-	"use-set-primary-character": "",
 
-	"-- feeds": {
+	"use-account-character": "useAccountCharacter",
+	"use-account-characters": "useAccountCharacters",
+
+	"-- account-balance": {
 		"type": "separator",
-		"title": "Feeds"
+		"title": "Account Balance"
 	},
+
+	"use-account-balance": "useAccountBalance",
+	"use-email-account-balance": "useEmailAccountBalance",
+	"use-wallet-account-balance": "useWalletAccountBalance",
 
 	"-- follow": {
 		"type": "separator",
-		"title": "Follow"
+		"title": "Follow Actions"
 	},
-	"use-follow-character": "",
-	"use-unfollow-character": "",
-	"use-follow-characters": "",
+
+	"use-follow-character": "useFollowCharacter",
+	"use-unfollow-character": "useUnfollowCharacter",
+	"use-follow-characters": "useFollowCharacters",
 
 	"-- like": {
 		"type": "separator",
-		"title": "Like"
+		"title": "Like Actions"
 	},
-	"use-is-note-liked": "",
-	"use-note-like-count": "",
-	"use-note-like-list": "",
-	"use-toggle-like-note": "",
+	"use-is-note-liked": "useIsNoteLiked",
+	"use-note-like-count": "useNoteLikeCount",
+	"use-note-like-list": "useNoteLikeList",
+	"use-toggle-like-note": "useToggleLikeNote",
 
 	"-- mint": {
 		"type": "separator",
 		"title": "Mint"
 	},
-	"use-mint-note": "",
+	"use-mint-note": "useMintNote",
 
 	"-- operator-sign": {
 		"type": "separator",
 		"title": "Operator Sign"
 	},
-	"use-is-wallet-signed-in": "",
-	"use-is-op-sign-enabled": "",
-	"use-op-sign-balance": "",
-	"use-op-sign-operator-has-permissions": "",
-	"use-toggle-op-sign-operator": "",
-	"use-wallet-sign-in": "",
-
-	"-- claim csb": {
-		"type": "separator",
-		"title": "Claim CSB"
-	}
+	"use-is-op-sign-enabled": "useIsOpSignEnabled",
+	"use-op-sign-balance": "useOpSignBalance",
+	"use-toggle-op-sign-operator": "useToggleOpSign\nOperator",
+	"use-op-sign-operator-has-permissions": "useOPSignOperator\nHasPermissions",
+	"use-wallet-sign-in": "useWalletSignIn",
+	"use-is-wallet-signed-in": "useIsWalletSignedIn"
 }

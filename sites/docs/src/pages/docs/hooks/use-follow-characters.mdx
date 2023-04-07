@@ -1,0 +1,36 @@
+# `useFollowCharacters`
+
+Hook for following multiple characters at once.
+
+```ts
+import { UseMutationResult, UseMutationOptions } from "@tanstack/react-query";
+
+function useFollowCharacters(
+	options?: UseMutationOptions
+): UseMutationResult<unknown, unknown, { characterIds?: number[] }>;
+```
+
+## Usage
+
+```tsx
+import { useFollowCharacters } from "@crossbell/connect-kit";
+
+function App() {
+	const followCharacters = useFollowCharacters();
+
+	return (
+		<button
+			onClick={() => {
+				followCharacters.mutate({ characterIds: [10, 11, 12] });
+			}}
+			disabled={followCharacters.isSuccess || followCharacters.isLoading}
+		>
+			{followCharacters.isLoading
+				? "Following"
+				: followCharacters.isSuccess
+				? "Followed"
+				: "Follow"}
+		</button>
+	);
+}
+```

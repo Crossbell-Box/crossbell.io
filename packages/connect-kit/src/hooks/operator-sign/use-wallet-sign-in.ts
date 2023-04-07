@@ -1,7 +1,7 @@
 import { useSigner } from "wagmi";
+import { useMutation } from "@tanstack/react-query";
 
 import { useAccountState } from "../account-state";
-import { useMutation } from "@tanstack/react-query";
 
 export function useWalletSignIn() {
 	const siweSignIn = useAccountState((s) => s.siweSignIn);

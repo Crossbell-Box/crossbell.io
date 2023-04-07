@@ -1,0 +1,33 @@
+# `useToggleOpSignOperator`
+
+Hook for toggling the permissions of Operator Sign Operator.
+
+```ts
+import { UseMutationResult, UseMutationOptions } from "@tanstack/react-query";
+
+function useToggleOpSignOperator(options?: {
+	characterId: number;
+}): [
+	{ hasPermissions: boolean; toggleOperator: () => Promise<void> },
+	UseMutationResult
+];
+```
+
+## Usage
+
+```tsx {2,8,9,12}
+import {
+	useToggleOpSignOperator,
+	useAccountCharacter,
+} from "@crossbell/connect-kit";
+
+function App() {
+	const character = useAccountCharacter();
+	const [{ hasPermissions, toggleOperator }] =
+		useToggleOpSignOperator(character);
+
+	return (
+		<button onClick={toggleOperator}>toggle: {`${hasPermissions}`}</button>
+	);
+}
+```

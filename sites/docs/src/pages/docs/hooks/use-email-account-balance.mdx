@@ -1,0 +1,26 @@
+# `useEmailAccountBalance`
+
+Hook for getting balance info of connected email account.
+
+```ts
+function useEmailAccountBalance(): UseAccountBalanceResult;
+```
+
+import { Callout } from "nextra-theme-docs";
+
+<Callout>
+	If you are not concerned about which type of account is being used, you can
+	use [useAccountBalance](/docs/hooks/use-account-balance) instead.
+</Callout>
+
+## Usage
+
+```tsx
+import { useEmailAccountBalance } from "@crossbell/connect-kit";
+
+function App() {
+	const balance = useEmailAccountBalance();
+
+	return <div>{balance ? balance.formatted : "No Balance Info"}</div>;
+}
+```

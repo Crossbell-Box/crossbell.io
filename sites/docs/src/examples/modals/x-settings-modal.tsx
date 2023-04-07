@@ -14,7 +14,7 @@ export function XSettingsModal() {
 	const isSsrReady = useIsSsrReady();
 
 	const wrongAccountTips = (
-		<p>In order to mint new character, you need to connect account first.</p>
+		<p>In order to open xSettings modal, you need to connect account first.</p>
 	);
 
 	return (

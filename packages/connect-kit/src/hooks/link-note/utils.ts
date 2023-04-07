@@ -28,8 +28,8 @@ export const updateLinkStatus = async ({
 	action?: Action;
 }): Promise<{ needUpdate: boolean; action: Action }> => {
 	const countKey = SCOPE_KEY_NOTE_LINK_COUNT({
-		characterId: params.toCharacterId,
-		noteId: params.toNoteId,
+		characterId: params.characterId,
+		noteId: params.noteId,
 		linkType: params.linkType,
 	});
 
@@ -79,41 +79,37 @@ export const updateLinkStatus = async ({
 
 export function revalidateQueries(
 	queryClient: ReturnType<typeof useQueryClient>,
-	{ characterId, toCharacterId, toNoteId, linkType }: GetIsNoteLinkedConfig
+	{ fromCharacterId, characterId, noteId, linkType }: GetIsNoteLinkedConfig
 ) {
 	return Promise.all([
 		queryClient.invalidateQueries(
 			SCOPE_KEY_NOTE_LINK_COUNT({
-				characterId: toCharacterId,
-				noteId: toNoteId,
+				characterId,
+				noteId,
 				linkType,
 			})
 		),
 
 		queryClient.invalidateQueries(
 			SCOPE_KEY_NOTE_LINK_LIST({
-				characterId: toCharacterId,
-				noteId: toNoteId,
+				characterId,
+				noteId,
 				linkType,
 			})
 		),
 
 		queryClient.invalidateQueries(
 			SCOPE_KEY_IS_NOTE_LINKED({
+				fromCharacterId,
 				characterId,
-				toCharacterId,
-				toNoteId,
+				noteId,
 				linkType,
 			})
 		),
 
-		queryClient.invalidateQueries(
-			SCOPE_KEY_NOTE_LIKES(toCharacterId, toNoteId)
-		),
+		queryClient.invalidateQueries(SCOPE_KEY_NOTE_LIKES(characterId, noteId)),
 
-		queryClient.invalidateQueries(
-			SCOPE_KEY_NOTE_STATUS(toCharacterId, toNoteId)
-		),
+		queryClient.invalidateQueries(SCOPE_KEY_NOTE_STATUS(characterId, noteId)),
 	]);
 }
 

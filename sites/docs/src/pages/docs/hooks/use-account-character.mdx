@@ -1,0 +1,25 @@
+# `useAccountCharacter`
+
+Hook for getting the current character. Returns `null` if there is no connected account or if the connected account does not have any characters.
+
+```ts
+import { CharacterEntity } from "crossbell.js";
+
+function useAccountCharacter(): CharacterEntity | null;
+```
+
+## Usage
+
+```tsx
+import { useAccountCharacter } from "@crossbell/connect-kit";
+
+function App() {
+	const character = useAccountCharacter();
+
+	return (
+		<div>
+			{character ? `Character: ${character.handle}` : "No Character Yet"}
+		</div>
+	);
+}
+```

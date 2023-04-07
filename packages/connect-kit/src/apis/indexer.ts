@@ -1,4 +1,5 @@
 import { indexer, NoteLinkType } from "@crossbell/indexer";
+import { NoteEntity } from "crossbell.js";
 
 export type GetIsNoteMintedConfig = {
 	noteCharacterId: number;
@@ -20,10 +21,11 @@ export async function getIsNoteMinted({
 	return count > 0;
 }
 
-export type GetIsNoteLinkedConfig = {
-	characterId: number;
-	toCharacterId: number;
-	toNoteId: number;
+export type GetIsNoteLinkedConfig = Pick<
+	NoteEntity,
+	"characterId" | "noteId"
+> & {
+	fromCharacterId: number;
 	linkType: NoteLinkType;
 };
 
@@ -33,15 +35,15 @@ export type GetIsNoteLinkedResult = {
 };
 
 export async function getIsNoteLinked({
+	fromCharacterId,
 	characterId,
-	toCharacterId,
-	toNoteId,
+	noteId,
 	linkType,
 }: GetIsNoteLinkedConfig): Promise<GetIsNoteLinkedResult> {
-	const { count, list } = await indexer.getLinks(characterId, {
+	const { count, list } = await indexer.getLinks(fromCharacterId, {
 		linkType,
-		toCharacterId,
-		toNoteId,
+		toCharacterId: characterId,
+		toNoteId: noteId,
 		limit: 1,
 	});
 

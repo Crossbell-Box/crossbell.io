@@ -51,14 +51,14 @@ const siweActionFn = (
 const actionDesc = "toggle like note";
 
 const getLinkActionParams = (
-	characterId: number,
+	fromCharacterId: number,
 	linkType: NoteLinkType,
 	variable: UseToggleLinkNoteVariable
 ) => ({
 	linkType,
-	characterId,
-	toNoteId: variable.noteId,
-	toCharacterId: variable.characterId,
+	fromCharacterId,
+	noteId: variable.noteId,
+	characterId: variable.characterId,
 });
 
 export const useToggleLinkNote = createAccountTypeBasedMutationHooks<

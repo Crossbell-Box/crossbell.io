@@ -1,0 +1,19 @@
+# `useIsConnected`
+
+Hook for indicating if a user is connected or not. Including both wallet and email connection.
+
+```ts
+type useIsConnected = () => boolean;
+```
+
+## Usage
+
+```tsx
+import { useIsConnected } from "@crossbell/connect-kit";
+
+function App() {
+	const isConnected = useIsConnected();
+
+	return <button>{isConnected ? "Disconnect" : "Connect"}</button>;
+}
+```

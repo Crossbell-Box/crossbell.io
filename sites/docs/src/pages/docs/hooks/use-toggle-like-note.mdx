@@ -1,0 +1,36 @@
+# `useToggleLikeNote`
+
+Hook for toggling like a note.
+
+```ts
+import { UseMutationResult, UseMutationOptions } from "@tanstack/react-query";
+
+function useToggleLikeNote(
+	options?: UseMutationOptions
+): UseMutationResult<unknown, unknown, { characterId: number; noteId: number }>;
+```
+
+## Usage
+
+```tsx
+import { useToggleLikeNote, useIsNoteLiked } from "@crossbell/connect-kit";
+
+// https://xfeed.app/notes/32179-30
+const note = { characterId: 32179, noteId: 30 };
+
+function App() {
+	const [{ isLiked }] = useIsNoteLiked(note);
+	const toggleLikeNote = useToggleLikeNote();
+
+	return (
+		<button
+			onClick={() => {
+				toggleLikeNote.mutate(note);
+			}}
+			disabled={toggleLikeNote.isLoading}
+		>
+			{isLiked ? "Unlike" : "Like"}
+		</button>
+	);
+}
+```

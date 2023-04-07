@@ -43,9 +43,9 @@ export function useNoteLinkList(params: UseNoteLinkListParams) {
 	);
 	const currentCharacter = useAccountCharacter();
 	const { data } = useIsNoteLinked({
-		characterId: currentCharacter?.characterId,
-		toNoteId: params.noteId,
-		toCharacterId: params.characterId,
+		fromCharacterId: currentCharacter?.characterId,
+		noteId: params.noteId,
+		characterId: params.characterId,
 		linkType: params.linkType,
 	});
 

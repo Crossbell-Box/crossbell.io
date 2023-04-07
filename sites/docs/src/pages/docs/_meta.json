@@ -1,8 +1,9 @@
 {
-	"index": "[WIP] Introduction",
-	"try-it-out": "",
-	"quick-start": "",
+	"index": "Introduction",
+	"quick-start": "Quick Start",
 	"connect-button": "ConnectButton",
+	"notification": "Notification",
+	"x-settings": "xSettings",
 	"modals": "Modals",
-	"hooks": "[WIP] Hooks"
+	"hooks": "Hooks"
 }

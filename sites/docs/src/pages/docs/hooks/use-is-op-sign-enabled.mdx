@@ -1,0 +1,36 @@
+# `useIsOpSignEnabled`
+
+Hook for indicating whether the Operator Sign is enabled or not.
+
+```ts
+function useIsOpSignEnabled(options: { characterId: number }): boolean;
+```
+
+## Usage
+
+```tsx {2,9,21}
+import {
+	useIsOpSignEnabled,
+	useAccountCharacter,
+	useOpSignSettingsModal,
+} from "@crossbell/connect-kit";
+
+function App() {
+	const character = useAccountCharacter();
+	const isOpSignEnabled = useIsOpSignEnabled(character);
+	const opSignSettingsModal = useOpSignSettingsModal();
+
+	return (
+		<button
+			onClick={() => {
+				if (character) {
+					opSignSettingsModal.show(character);
+				}
+			}}
+			disabled={isOpSignEnabled}
+		>
+			{isOpSignEnabled ? "OP Sign Enabled" : "Enable OP Sign"}
+		</button>
+	);
+}
+```

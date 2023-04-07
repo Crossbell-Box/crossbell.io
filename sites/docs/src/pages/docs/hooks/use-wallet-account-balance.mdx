@@ -1,0 +1,26 @@
+# `useWalletAccountBalance`
+
+Hook for getting balance info of connected wallet account.
+
+```ts
+function useWalletAccountBalance(): UseAccountBalanceResult;
+```
+
+import { Callout } from "nextra-theme-docs";
+
+<Callout>
+	If you are not concerned about which type of account is being used, you can
+	use [useAccountBalance](/docs/hooks/use-account-balance) instead.
+</Callout>
+
+## Usage
+
+```tsx
+import { useWalletAccountBalance } from "@crossbell/connect-kit";
+
+function App() {
+	const balance = useWalletAccountBalance();
+
+	return <div>{balance ? balance.formatted : "No Balance Info"}</div>;
+}
+```

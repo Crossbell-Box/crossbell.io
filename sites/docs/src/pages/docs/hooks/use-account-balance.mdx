@@ -1,0 +1,40 @@
+# `useAccountBalance`
+
+Hook for getting balance info of connected account. Including both wallet and email account.
+
+```ts
+import { BigNumber } from "ethers";
+
+type UseAccountBalanceResult = {
+	balance: null | {
+		decimals: number;
+		formatted: string;
+		symbol: string;
+		value: BigNumber;
+	};
+	isLoading: boolean;
+};
+
+function useAccountBalance(): UseAccountBalanceResult;
+```
+
+import { Callout } from "nextra-theme-docs";
+
+<Callout>
+	In order to get only email or wallet balance info, you can use the
+	[useEmailAccountBalance](/docs/hooks/use-email-account-balance) or
+	[useWalletAccountBalance](/docs/hooks/use-wallet-account-balance) Hook,
+	respectively.
+</Callout>
+
+## Usage
+
+```tsx
+import { useAccountBalance } from "@crossbell/connect-kit";
+
+function App() {
+	const balance = useAccountBalance();
+
+	return <div>{balance ? balance.formatted : "No Balance Info"}</div>;
+}
+```

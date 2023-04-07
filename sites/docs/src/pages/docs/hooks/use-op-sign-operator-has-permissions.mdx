@@ -1,0 +1,21 @@
+# `useCharacterOperatorHasPermissions`
+
+Hook for indicating whether the Operator Sign has enough permissions to manage the character. If you are checking whether if Operator Sign is enabled, use [useIsOpSignEnabled](docs/hooks/use-is-op-sign-enabled) instead.
+
+```ts
+function useCharacterOperatorHasPermissions(options?: {
+	characterId: number;
+}): boolean;
+```
+
+## Usage
+
+```tsx
+import { useCharacterOperatorHasPermissions } from "@crossbell/connect-kit";
+
+function App() {
+	const hasPermissions = useCharacterOperatorHasPermissions();
+
+	return <p>hasPermissions: {`${hasPermissions}`}</p>;
+}
+```

@@ -8,7 +8,7 @@ const config: DocsThemeConfig = {
 		<span className="flex items-center gap-2">
 			<CrossbellLogo />
 			<div className="flex flex-col text-xs">
-				<span className="font-black italic">DEV</span>
+				<span className="font-black italic">React Kits</span>
 				<span className="opacity-60 font-mono">{packageInfo.version}</span>
 			</div>
 		</span>
@@ -25,6 +25,9 @@ const config: DocsThemeConfig = {
 		return {
 			titleTemplate: route !== "/" ? "%s – Crossbell Dev" : "%s",
 		};
+	},
+	sidebar: {
+		defaultMenuCollapseLevel: 0,
 	},
 	footer: {
 		text() {

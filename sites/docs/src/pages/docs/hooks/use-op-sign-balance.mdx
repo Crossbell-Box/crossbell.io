@@ -1,0 +1,26 @@
+# `useOpSignBalance`
+
+Hook for retrieving balance information for the Operator Sign.
+
+```ts
+import { BigNumber } from "ethers";
+
+function useOpSignBalance(): null | {
+	decimals: number;
+	formatted: string;
+	symbol: string;
+	value: BigNumber;
+};
+```
+
+## Usage
+
+```tsx
+import { useOpSignBalance } from "@crossbell/connect-kit";
+
+function App() {
+	const balance = useOpSignBalance();
+
+	return <p>balance: {balance?.formatted}</p>;
+}
+```
