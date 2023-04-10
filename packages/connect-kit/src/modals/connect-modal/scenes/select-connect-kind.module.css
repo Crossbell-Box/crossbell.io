@@ -29,11 +29,12 @@
 
 .differenceBtn {
 	margin-top: 16px;
-	height: 42px;
-	font-size: 14px;
-	font-weight: 400;
 }
 
 .differenceIcon {
 	font-size: 24px;
+}
+
+.circleHelpIcon {
+	color: #868e96;
 }

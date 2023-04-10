@@ -1,8 +1,8 @@
 import React from "react";
 import { Button } from "@mantine/core";
-import { CircleHelpIcon, LightBulbIcon } from "@crossbell/ui";
+import { CircleHelpIcon } from "@crossbell/ui";
 
-import { EmailIcon, WalletIcon } from "../../../components";
+import { EmailIcon, WalletIcon, BottomTips } from "../../../components";
 
 import { SceneKind } from "../types";
 import { useScenesStore } from "../stores";
@@ -27,6 +27,7 @@ export function SelectConnectKind() {
 						size="sm"
 					>
 						<CircleHelpIcon
+							className={styles.circleHelpIcon}
 							onClick={() => goToScene({ kind: SceneKind.aboutWallets })}
 						/>
 					</Button>
@@ -53,16 +54,12 @@ export function SelectConnectKind() {
 					]}
 				/>
 
-				<Button
-					variant="subtle"
-					color="gray"
-					fullWidth
-					className={styles.differenceBtn}
-					leftIcon={<LightBulbIcon className={styles.differenceIcon} />}
+				<BottomTips
 					onClick={() => goToScene({ kind: SceneKind.connectKindDifferences })}
+					className={styles.differenceBtn}
 				>
 					What’s the difference
-				</Button>
+				</BottomTips>
 			</div>
 		</>
 	);
