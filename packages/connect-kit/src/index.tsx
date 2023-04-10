@@ -8,6 +8,7 @@ import {
 	UrlComposerContextValue,
 } from "@crossbell/ui";
 import { InitContractProvider } from "@crossbell/contract";
+import { MantineProvider } from "@mantine/core";
 
 import { usePreloadAllImgs } from "./utils";
 import { useAccountState } from "./hooks";
@@ -65,6 +66,8 @@ export type ConnectKitProviderProps = {
 	xSettings?: Partial<XSettingsConfig>;
 } & Partial<ConnectKitConfig>;
 
+const theme = { colorScheme: "light" } as const;
+
 export function ConnectKitProvider({
 	children,
 	ipfsLinkToHttpLink,
@@ -99,20 +102,22 @@ export function ConnectKitProvider({
 				<UrlComposerContext.Provider value={urlComposer ?? null}>
 					<ConnectKitConfigContext.Provider value={connectKitConfig}>
 						<XSettingsConfigContext.Provider value={xSettings ?? null}>
-							<ConnectModal />
-							<DisconnectModal />
-							<ClaimCSBTipsModal />
-							<CsbDetailModal />
-							<WalletClaimCSBModal />
-							<OpSignSettingsModal />
-							<TransferCSBToOperatorModal />
-							<NoEnoughCSBModal />
-							<WalletMintNewCharacter />
-							<SelectCharactersModal />
-							<DynamicScenesModal />
-							<SetupSentry />
-							<SentryPrivacyModal />
-							<TipModal />
+							<MantineProvider theme={theme}>
+								<ConnectModal />
+								<DisconnectModal />
+								<ClaimCSBTipsModal />
+								<CsbDetailModal />
+								<WalletClaimCSBModal />
+								<OpSignSettingsModal />
+								<TransferCSBToOperatorModal />
+								<NoEnoughCSBModal />
+								<WalletMintNewCharacter />
+								<SelectCharactersModal />
+								<DynamicScenesModal />
+								<SetupSentry />
+								<SentryPrivacyModal />
+								<TipModal />
+							</MantineProvider>
 							{children}
 						</XSettingsConfigContext.Provider>
 					</ConnectKitConfigContext.Provider>
