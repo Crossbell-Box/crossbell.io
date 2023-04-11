@@ -18,49 +18,76 @@ export type WalletAccount = {
 	characterId: number | undefined;
 	handle: string | undefined;
 	address: string;
-	siwe: SiweInfo | undefined;
+	siwe: SiweInfo | null;
 };
 
 export type WalletAccountSlice = {
 	wallet: WalletAccount | null;
+
+	_siweCache: Record<WalletAccount["address"], SiweInfo | null>;
 
 	connectWallet(address: string | null): Promise<boolean>;
 	refreshWallet(): Promise<boolean>;
 	switchCharacter(character: CharacterEntity): void;
 
 	siweSignIn(signer: Signer): Promise<boolean>;
-	siweRefresh(token: string): Promise<boolean>;
 };
 
 export const createWalletAccountSlice: SliceFn<WalletAccountSlice> = (
 	set,
 	get
 ) => {
-	const updateSiwe = (siwe: WalletAccount["siwe"]) => {
-		const { wallet } = get();
+	const updateSiwe = (params: { address: string; siwe: SiweInfo | null }) => {
+		const { _siweCache, wallet } = get();
 
-		if (wallet) {
-			set({ wallet: { ...wallet, siwe } });
-		}
+		set({
+			wallet:
+				wallet?.address === params.address
+					? { ...wallet, siwe: params.siwe }
+					: wallet,
+			_siweCache: {
+				..._siweCache,
+				[params.address]: params.siwe,
+			},
+		});
+	};
+
+	const getSiwe = (params: { address: string }): SiweInfo | null => {
+		const { _siweCache } = get();
+
+		return _siweCache[params.address] ?? null;
+	};
+
+	const refreshSiwe = async (params: {
+		address: string;
+		token?: string;
+	}): Promise<SiweInfo | null> => {
+		const address = params.address;
+		const token = params.token ?? getSiwe(params)?.token;
+
+		if (!address || !token) return null;
+
+		const siwe = await getSiweInfo({ token, address });
+
+		updateSiwe({ address, siwe });
+
+		return siwe;
 	};
 
 	return {
 		wallet: null,
+
+		_siweCache: {},
 
 		connectWallet: asyncExhaust(async (address) => {
 			if (address) {
 				const { wallet } = get();
 				const isSameAddress = wallet?.address === address;
 				const preferredCharacterId = isSameAddress ? wallet?.characterId : null;
-
-				const [character] = await Promise.all([
+				const [character, siwe] = await Promise.all([
 					getDefaultCharacter({ address, characterId: preferredCharacterId }),
-					isSameAddress && wallet.siwe
-						? get().siweRefresh(wallet.siwe.token)
-						: updateSiwe(undefined),
+					refreshSiwe({ address }),
 				]);
-
-				const siwe = get().wallet?.siwe;
 
 				if (character) {
 					set({
@@ -88,7 +115,7 @@ export const createWalletAccountSlice: SliceFn<WalletAccountSlice> = (
 					return false;
 				}
 			} else {
-				set({ wallet: null });
+				set({ wallet: null, _siweCache: {} });
 				return false;
 			}
 		}),
@@ -104,14 +131,13 @@ export const createWalletAccountSlice: SliceFn<WalletAccountSlice> = (
 		},
 
 		switchCharacter(character: CharacterEntity) {
-			const address = get().wallet?.address;
-			const siwe = get().wallet?.siwe;
+			const { wallet } = get();
 
-			if (address) {
+			if (wallet?.address) {
 				set({
 					wallet: {
-						siwe,
-						address,
+						siwe: wallet.siwe,
+						address: wallet.address,
 						type: "wallet",
 						handle: character.handle,
 						characterId: character.characterId,
@@ -130,25 +156,13 @@ export const createWalletAccountSlice: SliceFn<WalletAccountSlice> = (
 				const { token } = await siweSignIn(signer);
 
 				if (token) {
-					return get().siweRefresh(token);
+					return !!(await refreshSiwe({ address, token }));
 				} else {
 					return false;
 				}
 			} else {
 				return false;
 			}
-		},
-
-		async siweRefresh(token) {
-			const address = get().wallet?.address;
-
-			if (!address || !token) return false;
-
-			const siwe = await getSiweInfo({ token, address });
-
-			updateSiwe(siwe);
-
-			return !!siwe;
 		},
 	};
 };
@@ -159,8 +173,8 @@ async function getSiweInfo({
 }: {
 	address: string;
 	token: string;
-}): Promise<WalletAccount["siwe"]> {
-	if (!token) return undefined;
+}): Promise<SiweInfo | null> {
+	if (!token) return null;
 
 	const [account, { balance: csb }] = await Promise.all([
 		siweGetAccount({ token }),
@@ -170,7 +184,7 @@ async function getSiweInfo({
 	if (csb && isAddressEqual(account.address, address)) {
 		return { token, csb };
 	} else {
-		return undefined;
+		return null;
 	}
 }
 

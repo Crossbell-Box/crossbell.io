@@ -101,7 +101,7 @@ export function createAccountTypeBasedMutationHooks<
 								contract,
 								indexer,
 								account,
-								siwe: opSignOperatorHasPermissions ? account.siwe : undefined,
+								siwe: opSignOperatorHasPermissions ? account.siwe : null,
 								queryClient,
 							}) ?? null
 						);
