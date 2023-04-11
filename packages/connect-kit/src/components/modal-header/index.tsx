@@ -22,7 +22,7 @@ export function ModalHeader({
 	onGoBack,
 	isAbleToGoBack,
 	onClose,
-	isAbleToClose,
+	isAbleToClose = true,
 }: ModalHeaderProps) {
 	const modalContext = useBaseModalContext();
 	const canClose = modalContext.canClose && isAbleToClose;
