@@ -27,9 +27,9 @@ export function injectContractChecker({
 	return new Proxy(contract, {
 		get: (target, prop) => {
 			return async (...args: any[]) => {
-				await checkNetwork(contract, showSwitchNetworkModal);
-
 				if (needValidate(prop)) {
+					await checkNetwork(contract, showSwitchNetworkModal);
+
 					const address = getCurrentAddress();
 
 					if (address) {
