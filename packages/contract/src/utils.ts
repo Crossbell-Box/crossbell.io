@@ -1,4 +1,4 @@
-import { Contract } from "crossbell.js";
+import { Contract, Network } from "crossbell.js";
 import { BigNumber, utils } from "ethers";
 
 import { getCsbBalance } from "@crossbell/indexer";
@@ -12,6 +12,7 @@ export type InjectContractCheckerConfig = {
 	openFaucetHintModel: () => void;
 	openMintNewCharacterModel: () => void;
 	openConnectModal: () => void;
+	showSwitchNetworkModal?: (contract: Contract) => Promise<void>;
 };
 
 export function injectContractChecker({
@@ -21,10 +22,13 @@ export function injectContractChecker({
 	openConnectModal,
 	openFaucetHintModel,
 	openMintNewCharacterModel,
+	showSwitchNetworkModal,
 }: InjectContractCheckerConfig) {
 	return new Proxy(contract, {
 		get: (target, prop) => {
 			return async (...args: any[]) => {
+				await checkNetwork(contract, showSwitchNetworkModal);
+
 				if (needValidate(prop)) {
 					const address = getCurrentAddress();
 
@@ -77,4 +81,16 @@ function needValidate(key: string | symbol) {
 function hasEnoughCsb(amount: BigNumber) {
 	const threshold = utils.parseEther("0.0001");
 	return amount.gte(threshold);
+}
+
+async function checkNetwork(
+	contract: Contract,
+	showModal: InjectContractCheckerConfig["showSwitchNetworkModal"]
+) {
+	const provider = contract.contract.provider;
+	const isMainnet = await Network.isCrossbellMainnet(provider);
+
+	if (!isMainnet) {
+		await showModal?.(contract);
+	}
 }

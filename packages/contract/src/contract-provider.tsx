@@ -38,6 +38,7 @@ export function InitContractProvider({
 	openFaucetHintModel: openFaucetHintModel_,
 	openMintNewCharacterModel: openMintNewCharacterModel_,
 	getCurrentCharacterId,
+	showSwitchNetworkModal,
 }: InitContractProviderProps) {
 	const { connector, isConnected, address } = useAccount();
 	const openConnectModal = useRefCallback(openConnectModal_);
@@ -54,6 +55,7 @@ export function InitContractProvider({
 			openFaucetHintModel,
 			openMintNewCharacterModel,
 			getCurrentAddress,
+			showSwitchNetworkModal,
 		});
 	});
 
@@ -69,6 +71,7 @@ export function InitContractProvider({
 						openFaucetHintModel,
 						openMintNewCharacterModel,
 						getCurrentAddress,
+						showSwitchNetworkModal,
 					})
 				);
 			});

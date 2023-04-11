@@ -5,7 +5,7 @@ import styles from "./index.module.css";
 
 export type BaseModalProps = {
 	isActive: boolean;
-	onClose: () => void;
+	onClose?: () => void;
 	children: React.ReactNode;
 };
 

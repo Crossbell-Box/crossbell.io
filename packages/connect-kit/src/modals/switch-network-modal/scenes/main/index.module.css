@@ -1,0 +1,33 @@
+.tips {
+	text-align: center;
+	margin: 0 auto 24px;
+}
+
+.item {
+	justify-content: center;
+	gap: 8px;
+	font-weight: 500;
+}
+
+.loadingTips {
+	font-weight: bold;
+	margin: 8px auto;
+}
+
+.extraLoadingTips {
+	text-align: center;
+	margin: 0 12px;
+	transition: opacity 0.2s;
+}
+
+.cancelBtn {
+	border: none;
+	padding: 2px 8px;
+	color: rgba(0, 0, 0, 0.5);
+	border-radius: 6px;
+	margin: 16px auto 0;
+}
+
+.hidden {
+	opacity: 0;
+}

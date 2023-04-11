@@ -24,6 +24,7 @@ import { WalletMintNewCharacter } from "./modals/wallet-mint-new-character";
 import { SelectCharactersModal } from "./modals/select-characters-modal";
 import { DynamicScenesModal } from "./components/dynamic-scenes-modal";
 import { SentryPrivacyModal } from "./modals/sentry-privacy-modal";
+import { SwitchNetworkModal } from "./modals/switch-network-modal";
 import { TipModal } from "./modals/tip-modal";
 import { SetupSentry } from "./scenes/for-dynamic-modal/privacy-and-security";
 import { XSettingsConfig, XSettingsConfigContext } from "./x-settings-config";
@@ -117,6 +118,7 @@ export function ConnectKitProvider({
 								<SetupSentry />
 								<SentryPrivacyModal />
 								<TipModal />
+								<SwitchNetworkModal />
 							</MantineProvider>
 							{children}
 						</XSettingsConfigContext.Provider>

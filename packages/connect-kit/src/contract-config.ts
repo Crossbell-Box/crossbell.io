@@ -5,6 +5,7 @@ import { useNoEnoughCSBModal } from "./modals/no-enough-csb-modal";
 import { showUpgradeAccountModal } from "./modals/upgrade-account-modal";
 import { useConnectModal } from "./modals/connect-modal";
 import { useWalletMintNewCharacterModal } from "./modals/wallet-mint-new-character";
+import { showSwitchNetworkModal } from "./modals/switch-network-modal";
 
 export const contractConfig: ContractConfig = {
 	openConnectModal() {
@@ -26,4 +27,6 @@ export const contractConfig: ContractConfig = {
 	openMintNewCharacterModel() {
 		useWalletMintNewCharacterModal.getState().show();
 	},
+
+	showSwitchNetworkModal,
 };

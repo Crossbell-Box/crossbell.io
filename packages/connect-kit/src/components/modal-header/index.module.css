@@ -29,3 +29,8 @@
 .backIcon {
 	transform: translateX(25%);
 }
+
+.hidden {
+	pointer-events: none;
+	opacity: 0;
+}
