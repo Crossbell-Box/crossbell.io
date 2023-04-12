@@ -1,7 +1,7 @@
 import React from "react";
-import { CloseButton, ScrollArea, Loader, Indicator } from "@mantine/core";
+import { ScrollArea, Loader, Indicator } from "@mantine/core";
 import { useRefCallback } from "@crossbell/util-hooks";
-import { BaseModal, LoadMore } from "@crossbell/ui";
+import { BaseModal, LoadMore, CloseIcon } from "@crossbell/ui";
 
 import { useModalState, useReadingState, useNotifications } from "../hooks";
 
@@ -42,7 +42,9 @@ export function NotificationModal() {
 						<Bell className={styles.headerBell} />
 					</Indicator>
 					<span className={styles.headerTitle}>Notifications</span>
-					<CloseButton size={28} onClick={hideModal} />
+					<button className={styles.closeBtn} onClick={hideModal}>
+						<CloseIcon />
+					</button>
 				</div>
 
 				<ScrollArea.Autosize
