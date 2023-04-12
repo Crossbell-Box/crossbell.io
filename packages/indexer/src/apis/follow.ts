@@ -1,13 +1,19 @@
 import { useInfiniteQuery } from "@tanstack/react-query";
-import { indexer } from "../indexer";
 
+import { indexer } from "../indexer";
 import { CharacterLinkType } from "./types";
 
 const SCOPE_KEY = ["indexer", "characters"];
 
+export const SCOPE_KEY_FOLLOWING_CHARACTERS_OF_CHARACTER = ({
+	characterId,
+}: {
+	characterId?: number;
+}) => [...SCOPE_KEY, "following", "list", characterId];
+
 export function useFollowingCharactersOfCharacter(characterId?: number) {
 	return useInfiniteQuery(
-		[...SCOPE_KEY, "following", "list", characterId],
+		SCOPE_KEY_FOLLOWING_CHARACTERS_OF_CHARACTER({ characterId }),
 		({ pageParam }) =>
 			indexer.getLinks(characterId!, {
 				linkType: CharacterLinkType.follow,
@@ -21,9 +27,15 @@ export function useFollowingCharactersOfCharacter(characterId?: number) {
 	);
 }
 
+export const SCOPE_KEY_FOLLOWER_CHARACTERS_OF_CHARACTER = ({
+	characterId,
+}: {
+	characterId?: number;
+}) => [...SCOPE_KEY, "follower", "list", characterId];
+
 export function useFollowerCharactersOfCharacter(characterId?: number) {
 	return useInfiniteQuery(
-		[...SCOPE_KEY, "follower", "list", characterId],
+		SCOPE_KEY_FOLLOWER_CHARACTERS_OF_CHARACTER({ characterId }),
 		({ pageParam }) =>
 			indexer.getBacklinksOfCharacter(characterId!, {
 				linkType: CharacterLinkType.follow,
