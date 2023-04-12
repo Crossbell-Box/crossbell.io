@@ -12,7 +12,9 @@ import {
 } from "../../../../components";
 import {
 	useUploadAvatar,
+	GeneralAccount,
 	useConnectedAccount,
+	CharacterProfileForm,
 	useCharacterProfileForm,
 	useUpdateCharacterHandle,
 	useUpdateCharacterMetadata,
@@ -79,16 +81,7 @@ export function EditCharacterProfile() {
 		modal.hide();
 	});
 
-	React.useEffect(() => {
-		if (account?.character) {
-			form.reset(account.type, {
-				bio: account.character?.metadata?.content?.bio ?? "",
-				username: account.character?.metadata?.content?.name ?? "",
-				handle: account.character?.handle ?? "",
-				avatar: account.character?.metadata?.content?.avatars?.[0] ?? null,
-			});
-		}
-	}, [account?.type, account?.character, modal.isActive]);
+	useAutoResetForm({ account, form, isActive: modal.isActive });
 
 	return (
 		<DynamicScenesContainer
@@ -103,4 +96,25 @@ export function EditCharacterProfile() {
 			/>
 		</DynamicScenesContainer>
 	);
+}
+
+function useAutoResetForm({
+	account,
+	form,
+	isActive,
+}: {
+	account: GeneralAccount | null;
+	form: CharacterProfileForm;
+	isActive: boolean;
+}) {
+	const bio = account?.character?.metadata?.content?.bio ?? "";
+	const username = account?.character?.metadata?.content?.name ?? "";
+	const handle = account?.character?.handle ?? "";
+	const avatar = account?.character?.metadata?.content?.avatars?.[0] ?? null;
+
+	React.useEffect(() => {
+		if (account?.character) {
+			form.reset(account.type, { bio, username, handle, avatar });
+		}
+	}, [account?.type, isActive, bio, username, handle, avatar]);
 }
