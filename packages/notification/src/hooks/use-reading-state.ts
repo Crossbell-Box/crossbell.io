@@ -4,7 +4,7 @@ import { persist } from "zustand/middleware";
 import { ParsedNotification } from "@crossbell/indexer";
 
 export type ReadingState = {
-	cache: Record<ParsedNotification["transactionHash"], boolean>;
+	cache: Record<ParsedNotification["transactionHash"], boolean | undefined>;
 	isRead: (notification: ParsedNotification) => boolean;
 	markRead: (notifications: ParsedNotification[]) => void;
 };

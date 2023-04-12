@@ -19,6 +19,7 @@ export function NotificationModal() {
 	const {
 		notifications,
 		total,
+		markAllRead,
 		isAllRead,
 		isLoading,
 		fetchNextPage,
@@ -27,11 +28,11 @@ export function NotificationModal() {
 	} = useNotifications();
 
 	const { isModalActive, hideModal: hideModal_ } = useModalState();
-	const { isRead, markRead } = useReadingState();
+	const { isRead } = useReadingState();
 
 	const hideModal = useRefCallback(() => {
 		hideModal_();
-		markRead(notifications);
+		markAllRead();
 	});
 
 	return (

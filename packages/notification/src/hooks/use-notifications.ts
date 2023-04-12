@@ -1,7 +1,9 @@
 import React from "react";
 import { NotificationTypeKey } from "crossbell.js";
 import { useAccountCharacter } from "@crossbell/connect-kit";
-import { useCharacterNotification } from "@crossbell/indexer";
+import { useCharacterNotification, indexer } from "@crossbell/indexer";
+import { useRefCallback } from "@crossbell/util-hooks";
+
 import { useReadingState } from "./use-reading-state";
 
 const types: NotificationTypeKey[] = [
@@ -16,7 +18,7 @@ const types: NotificationTypeKey[] = [
 ];
 
 export function useNotifications() {
-	const { isRead, cache } = useReadingState();
+	const { isRead, cache, markRead: _markRead } = useReadingState();
 	const character = useAccountCharacter();
 	const { data, ...queryResult } = useCharacterNotification(
 		character?.characterId,
@@ -35,5 +37,13 @@ export function useNotifications() {
 		[notifications, cache]
 	);
 
-	return { notifications, total, isAllRead, ...queryResult };
+	const markAllRead = useRefCallback(() => {
+		_markRead(notifications);
+
+		if (character) {
+			indexer.markNotificationsAsRead(character?.characterId);
+		}
+	});
+
+	return { notifications, total, isAllRead, markAllRead, ...queryResult };
 }
