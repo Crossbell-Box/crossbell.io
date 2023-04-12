@@ -1,6 +1,7 @@
 import { useBalance } from "wagmi";
 import { BigNumber, utils } from "ethers";
 import React from "react";
+import { crossbell } from "wagmi/chains";
 
 import { useAccountState } from "./account-state";
 
@@ -51,6 +52,7 @@ export function useWalletAccountBalance(): UseAccountBalanceResult {
 	const wallet = useAccountState((s) => s.wallet);
 
 	const { data: balance, isLoading } = useBalance({
+		chainId: crossbell.id,
 		address: wallet?.address as `0x${string}` | undefined,
 	});
 
