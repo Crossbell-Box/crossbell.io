@@ -45,11 +45,18 @@ export function WalletClaimCSB({
 	const account = useAccountState((s) => s.wallet);
 	const reCaptcha = useReCAPTCHA();
 	const [tweetLink, setTweetLink] = React.useState("");
-	const { isEligibleToClaim, isLoading: isCheckingEligibility } =
-		useClaimCSBStatus();
+	const {
+		isEligibleToClaim,
+		isNeedTwitterToClaim,
+		isLoading: isCheckingEligibility,
+	} = useClaimCSBStatus();
 	const claimCsb = useWalletClaimCsb();
 	const isLoading = claimCsb.isLoading || isCheckingEligibility;
-	const isAbleToClaim = !!tweetLink && isEligibleToClaim;
+	const isAbleToClaim = isEligibleToClaim
+		? isNeedTwitterToClaim
+			? !!tweetLink
+			: true
+		: false;
 	const tweetContent = account
 		? getTweetContent?.(account) ||
 		  `Requesting $CSB funds from the Faucet on the #Crossbell blockchain. Address: ${account?.address}. https://faucet.crossbell.io/`
@@ -126,7 +133,10 @@ export function WalletClaimCSB({
 				</Tooltip>
 			</h4>
 
-			<div className={styles.tips}>Copy your tweet link and paste here.</div>
+			<div className={styles.tips}>
+				Copy your tweet link and paste here.
+				{isNeedTwitterToClaim ? "" : "(Optional)"}
+			</div>
 
 			<TextInput
 				value={tweetLink}
