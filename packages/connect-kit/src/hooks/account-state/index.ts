@@ -18,6 +18,8 @@ export type GeneralAccount = EmailAccount | WalletAccount;
 
 type AccountSlices = EmailAccountSlice & WalletAccountSlice;
 
+const ACCOUNT_STATE_STORAGE_KEY = "connect-kit:account";
+
 export type AccountState = AccountSlices & {
 	ssrReady: boolean;
 
@@ -27,6 +29,8 @@ export type AccountState = AccountSlices & {
 
 	markSSRReady(): void;
 	refresh(): Promise<void>;
+
+	_syncFromLocalStorage(): void;
 };
 
 export const useAccountState = create(
@@ -56,9 +60,23 @@ export const useAccountState = create(
 				const { refreshEmail, refreshWallet } = get();
 				await Promise.all([refreshEmail(), refreshWallet()]);
 			},
+
+			_syncFromLocalStorage() {
+				try {
+					const { state } = JSON.parse(
+						localStorage.getItem(ACCOUNT_STATE_STORAGE_KEY) || "{}"
+					);
+
+					if (state) {
+						set(state);
+					}
+				} catch (e) {
+					console.error("syncFromLocalStorageError:", e);
+				}
+			},
 		}),
 		{
-			name: "connect-kit:account",
+			name: ACCOUNT_STATE_STORAGE_KEY,
 			partialize: ({ computed: _, ssrReady: __, ...state }) => state,
 		}
 	)
