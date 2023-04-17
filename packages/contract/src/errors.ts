@@ -3,7 +3,7 @@ export const ERROR_CODES = {
 	NO_CHARACTER: "NO_CHARACTER",
 	NOT_ENOUGH_CSB: "NOT_ENOUGH_CSB",
 } as const;
-export type ErrorCode = typeof ERROR_CODES[keyof typeof ERROR_CODES];
+export type ErrorCode = (typeof ERROR_CODES)[keyof typeof ERROR_CODES];
 
 export class BizError extends Error {
 	constructor(message: string, public code: ErrorCode) {

@@ -6,7 +6,7 @@ export const MediaTypes = [
 	"pdf",
 	"html",
 ] as const;
-export type MediaType = typeof MediaTypes[number];
+export type MediaType = (typeof MediaTypes)[number];
 
 export function mimeTypeToMediaType(mimeType: string): MediaType | null {
 	if (mimeType.startsWith("image")) {

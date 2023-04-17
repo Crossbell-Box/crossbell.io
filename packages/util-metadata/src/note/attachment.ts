@@ -2,7 +2,7 @@ import { NoteMetadata } from "crossbell.js";
 import { MediaType, MediaTypes, mimeTypeToMediaType } from "./mimetype";
 
 const ContentTypes = ["address", "content"] as const;
-export type ContentType = typeof ContentTypes[number];
+export type ContentType = (typeof ContentTypes)[number];
 
 export function getValidAttachments(
 	attachments: NoteMetadata["attachments"],
