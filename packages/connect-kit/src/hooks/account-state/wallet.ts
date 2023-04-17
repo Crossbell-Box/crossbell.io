@@ -27,6 +27,7 @@ export type WalletAccountSlice = {
 	_siweCache: Record<WalletAccount["address"], SiweInfo | null>;
 
 	connectWallet(address: string | null): Promise<boolean>;
+	disconnectWallet(): void;
 	refreshWallet(): Promise<boolean>;
 	switchCharacter(character: CharacterEntity): void;
 
@@ -115,10 +116,14 @@ export const createWalletAccountSlice: SliceFn<WalletAccountSlice> = (
 					return false;
 				}
 			} else {
-				set({ wallet: null, _siweCache: {} });
+				get().disconnectWallet();
 				return false;
 			}
 		}),
+
+		disconnectWallet() {
+			set({ wallet: null, _siweCache: {} });
+		},
 
 		async refreshWallet() {
 			const { wallet } = get();

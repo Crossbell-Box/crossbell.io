@@ -41,7 +41,10 @@ export default function App({ Component, pageProps }: AppProps) {
 	return (
 		<QueryClientProvider client={queryClient}>
 			<WagmiConfig client={wagmiClient}>
-				<ConnectKitProvider xSettings={xSettings}>
+				<ConnectKitProvider
+					xSettings={xSettings}
+					ignoreWalletDisconnectEvent={true}
+				>
 					<NotificationModal />
 					<Component {...pageProps} />
 				</ConnectKitProvider>

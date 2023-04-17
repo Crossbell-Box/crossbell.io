@@ -1,12 +1,13 @@
 import React from "react";
 import classNames from "classnames";
+import { useAccount } from "wagmi";
 
+import { useConnectedAccount } from "../../hooks";
 import {
 	useDefaultWalletConnect,
 	useWalletConnectors,
 	Wallet,
 } from "../../wallets";
-
 import {
 	ModalHeaderProps,
 	OtherWallets,
@@ -33,12 +34,22 @@ export function SelectWalletToConnect({
 	const Header = Header_ ?? DynamicScenesHeader;
 	const walletConnectors = useWalletConnectors();
 	const { openDefaultWalletConnect } = useDefaultWalletConnect();
+	const { isConnected } = useAccount();
+	const account = useConnectedAccount("wallet");
 
 	return (
 		<>
 			<Header title="Connect Wallet" />
 
 			<div data-animation="scale-fade-in" className={styles.container}>
+				{!!account && !isConnected && (
+					<div className={styles.notConnectedTips}>
+						The wallet is not connected.
+						<br />
+						Reconnect to continue.
+					</div>
+				)}
+
 				<OptionList>
 					{walletConnectors.map((wallet) => (
 						<OptionListItem

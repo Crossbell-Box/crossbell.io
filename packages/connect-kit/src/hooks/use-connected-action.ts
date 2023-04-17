@@ -1,5 +1,6 @@
 import React from "react";
 import { useRefCallback } from "@crossbell/util-hooks";
+import { useAccount } from "wagmi";
 
 import { useDynamicScenesModal } from "../components";
 import { useConnectModal } from "../modals/connect-modal/stores";
@@ -11,16 +12,25 @@ import { useAccountState } from "./account-state";
 type Callback = () => void;
 type ConnectType = "wallet" | "email" | "any";
 
-const isConnected = (type: ConnectType): boolean => {
+const isConnected = ({
+	connectType: type,
+	isWalletConnected,
+}: {
+	isWalletConnected: boolean;
+	connectType: ConnectType;
+}): boolean => {
 	const state = useAccountState.getState();
+	const isEmailAccountConnected = !!state.email;
+	const isWalletAccountConnected =
+		isWalletConnected && !!state.wallet?.characterId && !state.email;
 
 	switch (type) {
 		case "email":
-			return !!state.email;
+			return isEmailAccountConnected;
 		case "wallet":
-			return !!state.wallet?.characterId && !state.email;
+			return isWalletAccountConnected;
 		case "any":
-			return !!state.computed.account?.characterId;
+			return isEmailAccountConnected || isWalletAccountConnected;
 	}
 };
 
@@ -54,6 +64,7 @@ export function useConnectedAction<P extends any[], V>(
 	}: UseConnectedActionOptions<P, V> = {}
 ): (...params: P) => Promise<V> {
 	const callbackRef = React.useRef<Callback>();
+	const { isConnected: isWalletConnected } = useAccount();
 	const isActive1 = useConnectModal((s) => s.isActive);
 	const isActive2 = useWalletMintNewCharacterModal((s) => s.isActive);
 	const isActive3 = useDynamicScenesModal((s) => s.isActive);
@@ -61,16 +72,20 @@ export function useConnectedAction<P extends any[], V>(
 
 	React.useEffect(() => {
 		if (!isActive) {
-			if (!noAutoResume && callbackRef.current && isConnected(connectType)) {
+			if (
+				!noAutoResume &&
+				callbackRef.current &&
+				isConnected({ connectType, isWalletConnected })
+			) {
 				callbackRef.current();
 			}
 
 			callbackRef.current = undefined;
 		}
-	}, [isActive, connectType]);
+	}, [isActive, connectType, noAutoResume, isWalletConnected]);
 
 	return useRefCallback(async (...params) => {
-		if (isConnected(connectType)) {
+		if (isConnected({ connectType, isWalletConnected })) {
 			return action(...params);
 		} else if (fallback) {
 			return fallback(...params);
@@ -78,11 +93,20 @@ export function useConnectedAction<P extends any[], V>(
 			return new Promise((resolve, reject) => {
 				const { email, wallet } = useAccountState.getState();
 				const isEmailConnected = !!email;
+				const previousCharacterId = getCurrentCharacterId();
 				const callback = () => {
-					try {
-						resolve(action(...params));
-					} catch (e) {
-						reject(e);
+					const currentCharacterId = getCurrentCharacterId();
+
+					// Skip if the character has changed
+					if (
+						currentCharacterId &&
+						previousCharacterId === currentCharacterId
+					) {
+						try {
+							resolve(action(...params));
+						} catch (e) {
+							reject(e);
+						}
 					}
 				};
 
@@ -112,4 +136,8 @@ export function useConnectedAction<P extends any[], V>(
 			});
 		}
 	});
+}
+
+function getCurrentCharacterId() {
+	return useAccountState.getState().computed?.account?.characterId;
 }

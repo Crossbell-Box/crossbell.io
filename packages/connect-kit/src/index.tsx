@@ -65,6 +65,8 @@ export type ConnectKitProviderProps = {
 	withoutNotificationsProvider?: boolean;
 	urlComposer?: UrlComposerContextValue;
 	xSettings?: Partial<XSettingsConfig>;
+	// Used for the case when we want to keep the user logged in even if the user disconnects from the wallet
+	ignoreWalletDisconnectEvent?: boolean;
 } & Partial<ConnectKitConfig>;
 
 const theme = { colorScheme: "light" } as const;
@@ -75,6 +77,7 @@ export function ConnectKitProvider({
 	withoutNotificationsProvider,
 	urlComposer,
 	xSettings,
+	ignoreWalletDisconnectEvent,
 	...connectKitConfig
 }: ConnectKitProviderProps) {
 	const accountState = useAccountState();
@@ -85,7 +88,7 @@ export function ConnectKitProvider({
 			accountState.connectWallet(account.address ?? null);
 		}
 
-		if (account.status === "disconnected") {
+		if (!ignoreWalletDisconnectEvent && account.status === "disconnected") {
 			accountState.connectWallet(null);
 		}
 	}, [account.address, account.status]);

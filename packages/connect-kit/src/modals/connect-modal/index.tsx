@@ -24,6 +24,7 @@ import { SelectWalletToConnect } from "./scenes/select-wallet-to-connect";
 import { SelectCharacters } from "./scenes/select-characters";
 import { MintCharacter } from "./scenes/mint-character";
 import { SignInStrategy, useConnectKitConfig } from "../../connect-kit-config";
+import { useAccount } from "wagmi";
 
 export { useConnectModal };
 
@@ -49,6 +50,7 @@ function Main() {
 		s.setSignInStrategy,
 	]);
 	const { hide } = useConnectModal();
+	const { isConnected: isWalletConnected } = useAccount();
 	const account = useConnectedAccount();
 	const { signInStrategy } = useConnectKitConfig();
 
@@ -59,32 +61,36 @@ function Main() {
 
 	React.useEffect(() => {
 		if (account?.type === "wallet") {
-			const goToSelectCharacters = () =>
-				goTo({ kind: SceneKind.selectCharacters });
+			if (isWalletConnected) {
+				const goToSelectCharacters = () =>
+					goTo({ kind: SceneKind.selectCharacters });
 
-			const nextStrategies: Record<SignInStrategy, () => void> = {
-				simple() {
-					if (account.character) {
-						hide();
-					} else {
+				const nextStrategies: Record<SignInStrategy, () => void> = {
+					simple() {
+						if (account.character) {
+							hide();
+						} else {
+							goToSelectCharacters();
+						}
+					},
+					complete() {
 						goToSelectCharacters();
-					}
-				},
-				complete() {
-					goToSelectCharacters();
-				},
-			};
+					},
+				};
 
-			const next = nextStrategies[signInStrategy];
+				const next = nextStrategies[signInStrategy];
 
-			goTo({
-				kind: SceneKind.signInWithWallet,
-				signInText: "Sign In (Recommended)",
-				afterSignIn: next,
-				onSkip: next,
-			});
+				goTo({
+					kind: SceneKind.signInWithWallet,
+					signInText: "Sign In (Recommended)",
+					afterSignIn: next,
+					onSkip: next,
+				});
+			} else {
+				goTo({ kind: SceneKind.selectWalletToConnect });
+			}
 		}
-	}, [account?.type, goTo]);
+	}, [account?.type, isWalletConnected, goTo]);
 
 	return (
 		<DynamicContainerContent id={currentScene.kind}>

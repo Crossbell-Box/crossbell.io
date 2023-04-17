@@ -76,3 +76,10 @@
 	height: 32px;
 	margin-left: auto;
 }
+
+.notConnectedTips {
+	text-align: center;
+	margin: -6px auto 12px;
+	font-size: 0.9em;
+	opacity: 0.7;
+}
