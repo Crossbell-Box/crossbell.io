@@ -18,17 +18,21 @@ export const useAddCharacterOperator = createAccountTypeBasedMutationHooks<
 		permissions: CharacterPermissionKey[];
 	}
 >({ actionDesc: "adding operator", withParams: false }, () => ({
-	async contract({ characterId, operator, permissions }, { contract }) {
-		await contract.grantOperatorPermissionsForCharacter(
-			characterId,
-			operator,
-			permissions
-		);
+	wallet: {
+		supportOPSign: false,
 
-		await asyncRetry(async (RETRY) => {
-			const op = await indexer.getCharacterOperator(characterId, operator);
-			return haveSamePermissions(permissions, op?.permissions) || RETRY;
-		});
+		async action({ characterId, operator, permissions }, { contract }) {
+			await contract.grantOperatorPermissionsForCharacter(
+				characterId,
+				operator,
+				permissions
+			);
+
+			await asyncRetry(async (RETRY) => {
+				const op = await indexer.getCharacterOperator(characterId, operator);
+				return haveSamePermissions(permissions, op?.permissions) || RETRY;
+			});
+		},
 	},
 
 	onSuccess({ queryClient, variables }) {

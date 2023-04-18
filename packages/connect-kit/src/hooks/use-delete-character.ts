@@ -15,8 +15,12 @@ export const useDeleteCharacter = createAccountTypeBasedMutationHooks<
 	() => {
 		const { refresh } = useAccountState();
 		return {
-			async contract({ characterId }, { contract }) {
-				return contract.burnCharacter(characterId);
+			wallet: {
+				supportOPSign: false,
+
+				async action({ characterId }, { contract }) {
+					return contract.burnCharacter(characterId);
+				},
 			},
 
 			onSuccess({ queryClient, variables, account }) {

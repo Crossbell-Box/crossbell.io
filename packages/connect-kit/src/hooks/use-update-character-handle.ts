@@ -17,8 +17,12 @@ export const useUpdateCharacterHandle = createAccountTypeBasedMutationHooks<
 		}
 	},
 
-	async contract({ characterId, handle }, { contract }) {
-		return contract.setHandle(characterId, handle);
+	wallet: {
+		supportOPSign: false,
+
+		async action({ characterId, handle }, { contract }) {
+			return contract.setHandle(characterId, handle);
+		},
 	},
 
 	onSuccess({ queryClient, variables }) {

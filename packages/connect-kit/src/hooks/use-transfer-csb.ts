@@ -14,12 +14,16 @@ export const useTransferCsb = createAccountTypeBasedMutationHooks<
 	void,
 	UseTransferCSBParams
 >({ actionDesc: "transfer CSB", withParams: false }, () => ({
-	async contract({ toAddress, amount }, { contract }) {
-		const result = await contract.transferCsb(toAddress, amount);
+	wallet: {
+		supportOPSign: false,
 
-		await waitUntilTransactionFinished(result.transactionHash);
+		async action({ toAddress, amount }, { contract }) {
+			const result = await contract.transferCsb(toAddress, amount);
 
-		return result;
+			await waitUntilTransactionFinished(result.transactionHash);
+
+			return result;
+		},
 	},
 
 	onSuccess() {

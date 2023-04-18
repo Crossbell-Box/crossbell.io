@@ -22,22 +22,26 @@ export const useUnlinkCharacter = createAccountTypeBasedMutationHooks<
 		});
 	},
 
-	async contract({ characterId }, { account, siwe, contract }) {
-		if (account?.characterId) {
-			if (siwe) {
-				return siweUnlinkCharacter({
-					characterId: account.characterId,
-					siwe,
-					toCharacterId: characterId,
-					linkType,
-				});
-			} else {
-				return contract.unlinkCharacter(
-					account.characterId,
-					characterId,
-					linkType
-				);
+	wallet: {
+		supportOPSign: true,
+
+		async action({ characterId }, { account, siwe, contract }) {
+			if (account?.characterId) {
+				if (siwe) {
+					return siweUnlinkCharacter({
+						characterId: account.characterId,
+						siwe,
+						toCharacterId: characterId,
+						linkType,
+					});
+				} else {
+					return contract.unlinkCharacter(
+						account.characterId,
+						characterId,
+						linkType
+					);
+				}
 			}
-		}
+		},
 	},
 }));

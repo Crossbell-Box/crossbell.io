@@ -26,24 +26,28 @@ export const useLinkCharacters = createAccountTypeBasedMutationHooks<
 		});
 	},
 
-	async contract({ characterIds, addresses }, { account, siwe, contract }) {
-		if (account?.characterId) {
-			if (siwe) {
-				return siweLinkCharacters({
-					characterId: account.characterId,
-					siwe,
-					toCharacterIds: characterIds ?? [],
-					toAddresses: addresses ?? [],
-					linkType,
-				});
-			} else {
-				return contract.linkCharactersInBatch(
-					account.characterId,
-					characterIds ?? [],
-					addresses ?? [],
-					linkType
-				);
+	wallet: {
+		supportOPSign: true,
+
+		async action({ characterIds, addresses }, { account, siwe, contract }) {
+			if (account?.characterId) {
+				if (siwe) {
+					return siweLinkCharacters({
+						characterId: account.characterId,
+						siwe,
+						toCharacterIds: characterIds ?? [],
+						toAddresses: addresses ?? [],
+						linkType,
+					});
+				} else {
+					return contract.linkCharactersInBatch(
+						account.characterId,
+						characterIds ?? [],
+						addresses ?? [],
+						linkType
+					);
+				}
 			}
-		}
+		},
 	},
 }));

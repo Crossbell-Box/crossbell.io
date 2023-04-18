@@ -8,34 +8,52 @@ import { showUpgradeAccountModal } from "../modals/upgrade-account-modal";
 import { useWalletMintNewCharacterModal } from "../modals/wallet-mint-new-character/stores";
 
 import { useAccountState } from "./account-state";
+import { useAccountCharacter } from "./use-account-character";
+import { useIsOpSignEnabled } from "./operator-sign";
 
 type Callback = () => void;
 type ConnectType = "wallet" | "email" | "any";
 
-const isConnected = ({
-	connectType: type,
-	isWalletConnected,
-}: {
-	isWalletConnected: boolean;
-	connectType: ConnectType;
-}): boolean => {
-	const state = useAccountState.getState();
-	const isEmailAccountConnected = !!state.email;
-	const isWalletAccountConnected =
-		isWalletConnected && !!state.wallet?.characterId && !state.email;
+const useCheckIsConnected = () => {
+	const { isConnected: isWalletConnected } = useAccount();
+	const character = useAccountCharacter();
+	const isOpSignEnabled = useIsOpSignEnabled(character);
 
-	switch (type) {
-		case "email":
-			return isEmailAccountConnected;
-		case "wallet":
-			return isWalletAccountConnected;
-		case "any":
-			return isEmailAccountConnected || isWalletAccountConnected;
-	}
+	return useRefCallback(
+		({
+			connectType: type,
+			supportOPSign,
+		}: {
+			connectType: ConnectType;
+			supportOPSign: boolean;
+		}): boolean => {
+			const state = useAccountState.getState();
+			const isEmailAccountConnected = !!state.email;
+			const isWalletAccountConnected = ((): boolean => {
+				if (state.email || !state.wallet?.characterId) return false;
+
+				if (supportOPSign && isOpSignEnabled) {
+					return true;
+				} else {
+					return isWalletConnected;
+				}
+			})();
+
+			switch (type) {
+				case "email":
+					return isEmailAccountConnected;
+				case "wallet":
+					return isWalletAccountConnected;
+				case "any":
+					return isEmailAccountConnected || isWalletAccountConnected;
+			}
+		}
+	);
 };
 
 export type UseConnectedActionOptions<P extends any[] = unknown[], V = void> = {
 	noAutoResume?: boolean;
+	supportOPSign?: boolean;
 	connectType?: ConnectType;
 	fallback?: (...params: P) => V;
 };
@@ -60,32 +78,33 @@ export function useConnectedAction<P extends any[], V>(
 	{
 		connectType = "any",
 		noAutoResume = false,
+		supportOPSign = false,
 		fallback,
 	}: UseConnectedActionOptions<P, V> = {}
 ): (...params: P) => Promise<V> {
 	const callbackRef = React.useRef<Callback>();
-	const { isConnected: isWalletConnected } = useAccount();
 	const isActive1 = useConnectModal((s) => s.isActive);
 	const isActive2 = useWalletMintNewCharacterModal((s) => s.isActive);
 	const isActive3 = useDynamicScenesModal((s) => s.isActive);
 	const isActive = isActive1 || isActive2 || isActive3;
+	const checkIsConnected = useCheckIsConnected();
 
 	React.useEffect(() => {
 		if (!isActive) {
 			if (
 				!noAutoResume &&
 				callbackRef.current &&
-				isConnected({ connectType, isWalletConnected })
+				checkIsConnected({ connectType, supportOPSign })
 			) {
 				callbackRef.current();
 			}
 
 			callbackRef.current = undefined;
 		}
-	}, [isActive, connectType, noAutoResume, isWalletConnected]);
+	}, [isActive, connectType, noAutoResume, supportOPSign]);
 
 	return useRefCallback(async (...params) => {
-		if (isConnected({ connectType, isWalletConnected })) {
+		if (checkIsConnected({ connectType, supportOPSign })) {
 			return action(...params);
 		} else if (fallback) {
 			return fallback(...params);

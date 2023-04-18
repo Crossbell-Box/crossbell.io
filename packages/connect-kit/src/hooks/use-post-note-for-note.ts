@@ -32,29 +32,33 @@ export const usePostNoteForNote = createAccountTypeBasedMutationHooks<
 			return true;
 		},
 
-		async contract({ metadata, note }, { account, siwe, contract }) {
-			if (account?.characterId) {
-				if (siwe) {
-					await siwePutNote({
-						characterId: account.characterId,
-						siwe,
-						metadata,
-						linkItemType: "Note",
-						linkItem: { characterId: note.characterId, noteId: note.noteId },
-					});
-				} else {
-					await contract.postNoteForNote(
-						account.characterId,
-						metadata,
-						note.characterId,
-						note.noteId
-					);
-				}
+		wallet: {
+			supportOPSign: true,
 
-				return true;
-			} else {
-				return false;
-			}
+			async action({ metadata, note }, { account, siwe, contract }) {
+				if (account?.characterId) {
+					if (siwe) {
+						await siwePutNote({
+							characterId: account.characterId,
+							siwe,
+							metadata,
+							linkItemType: "Note",
+							linkItem: { characterId: note.characterId, noteId: note.noteId },
+						});
+					} else {
+						await contract.postNoteForNote(
+							account.characterId,
+							metadata,
+							note.characterId,
+							note.noteId
+						);
+					}
+
+					return true;
+				} else {
+					return false;
+				}
+			},
 		},
 
 		onSuccess({ variables, queryClient }) {

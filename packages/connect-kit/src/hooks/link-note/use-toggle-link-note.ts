@@ -91,43 +91,47 @@ export const useToggleLinkNote = createAccountTypeBasedMutationHooks<
 			}
 		},
 
-		async contract(variable, { account, siwe, contract, queryClient }) {
-			actionSequence.clear();
+		wallet: {
+			supportOPSign: true,
 
-			const characterId = account?.characterId;
+			async action(variable, { account, siwe, contract, queryClient }) {
+				actionSequence.clear();
 
-			if (characterId) {
-				const params = getLinkActionParams(characterId, linkType, variable);
+				const characterId = account?.characterId;
 
-				const status = await updateLinkStatus({
-					queryClient,
-					params,
-					action: variable.action,
-					noOptimisticallyUpdate: !siwe,
-				});
+				if (characterId) {
+					const params = getLinkActionParams(characterId, linkType, variable);
 
-				if (status.needUpdate) {
-					if (siwe) {
-						actionSequence.add(
-							async () => {
-								await siweActionFn(status.action, { siwe, ...params });
-								await waitUntilLinkStatusUpdated(status.action, params);
-							},
-							{ onSettled: () => revalidateQueries(queryClient, params) }
-						);
-					} else {
-						await contract.linkNote(
-							characterId,
-							variable.characterId,
-							variable.noteId,
-							linkType
-						);
+					const status = await updateLinkStatus({
+						queryClient,
+						params,
+						action: variable.action,
+						noOptimisticallyUpdate: !siwe,
+					});
 
-						await waitUntilLinkStatusUpdated(status.action, params);
-						await revalidateQueries(queryClient, params);
+					if (status.needUpdate) {
+						if (siwe) {
+							actionSequence.add(
+								async () => {
+									await siweActionFn(status.action, { siwe, ...params });
+									await waitUntilLinkStatusUpdated(status.action, params);
+								},
+								{ onSettled: () => revalidateQueries(queryClient, params) }
+							);
+						} else {
+							await contract.linkNote(
+								characterId,
+								variable.characterId,
+								variable.noteId,
+								linkType
+							);
+
+							await waitUntilLinkStatusUpdated(status.action, params);
+							await revalidateQueries(queryClient, params);
+						}
 					}
 				}
-			}
+			},
 		},
 	};
 });

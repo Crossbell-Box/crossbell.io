@@ -8,25 +8,29 @@ export const useTip = createAccountTypeBasedMutationHooks<
 	void,
 	{ characterId: number; noteId?: string | number; amount: number }
 >({ actionDesc: "send tip", withParams: false, connectType: "wallet" }, () => ({
-	async contract({ characterId, noteId, amount }, { contract, account }) {
-		if (account.characterId) {
-			const decimal = await getMiraTokenDecimals(contract);
+	wallet: {
+		supportOPSign: false,
 
-			if (noteId) {
-				return contract?.tipCharacterForNote(
-					account.characterId,
-					characterId,
-					noteId,
-					BigInt(amount) * BigInt(10) ** BigInt(decimal)
-				);
-			} else {
-				return contract?.tipCharacter(
-					account.characterId,
-					characterId,
-					BigInt(amount) * BigInt(10) ** BigInt(decimal)
-				);
+		async action({ characterId, noteId, amount }, { contract, account }) {
+			if (account.characterId) {
+				const decimal = await getMiraTokenDecimals(contract);
+
+				if (noteId) {
+					return contract?.tipCharacterForNote(
+						account.characterId,
+						characterId,
+						noteId,
+						BigInt(amount) * BigInt(10) ** BigInt(decimal)
+					);
+				} else {
+					return contract?.tipCharacter(
+						account.characterId,
+						characterId,
+						BigInt(amount) * BigInt(10) ** BigInt(decimal)
+					);
+				}
 			}
-		}
+		},
 	},
 
 	onSuccess({ queryClient, variables, account }) {

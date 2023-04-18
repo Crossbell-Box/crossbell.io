@@ -19,23 +19,27 @@ export const useMintNote = createAccountTypeBasedMutationHooks<
 		connectType: "wallet",
 	},
 	() => ({
-		async contract({ characterId, noteId }, { contract, account, siwe }) {
-			if (account?.address) {
-				if (siwe) {
-					await siweMintNote({ siwe, characterId, noteId });
-				} else {
-					await contract.mintNote(characterId, noteId, account.address);
-				}
+		wallet: {
+			supportOPSign: true,
 
-				await asyncRetry(
-					async (RETRY) =>
-						(await getIsNoteMinted({
-							noteId,
-							noteCharacterId: characterId,
-							byAddress: account.address,
-						})) || RETRY
-				);
-			}
+			async action({ characterId, noteId }, { contract, account, siwe }) {
+				if (account?.address) {
+					if (siwe) {
+						await siweMintNote({ siwe, characterId, noteId });
+					} else {
+						await contract.mintNote(characterId, noteId, account.address);
+					}
+
+					await asyncRetry(
+						async (RETRY) =>
+							(await getIsNoteMinted({
+								noteId,
+								noteCharacterId: characterId,
+								byAddress: account.address,
+							})) || RETRY
+					);
+				}
+			},
 		},
 
 		onSuccess({ variables, queryClient, account }) {

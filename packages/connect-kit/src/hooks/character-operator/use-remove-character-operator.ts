@@ -12,17 +12,21 @@ export const useRemoveCharacterOperator = createAccountTypeBasedMutationHooks<
 	void,
 	{ characterId: number; operator: string }
 >({ actionDesc: "", withParams: false }, () => ({
-	async contract({ characterId, operator }, { contract }) {
-		await contract.grantOperatorPermissionsForCharacter(
-			characterId,
-			operator,
-			[]
-		);
+	wallet: {
+		supportOPSign: false,
 
-		await asyncRetry(async (RETRY) => {
-			const op = await indexer.getCharacterOperator(characterId, operator);
-			return op?.permissions.length === 0 || RETRY;
-		});
+		async action({ characterId, operator }, { contract }) {
+			await contract.grantOperatorPermissionsForCharacter(
+				characterId,
+				operator,
+				[]
+			);
+
+			await asyncRetry(async (RETRY) => {
+				const op = await indexer.getCharacterOperator(characterId, operator);
+				return op?.permissions.length === 0 || RETRY;
+			});
+		},
 	},
 
 	onSuccess({ queryClient, variables }) {

@@ -18,16 +18,20 @@ export const usePostNote = createAccountTypeBasedMutationHooks<
 			await putNote({ token: account.token, metadata });
 		},
 
-		async contract({ metadata }, { account, siwe, contract }) {
-			const characterId = account?.characterId;
+		wallet: {
+			supportOPSign: true,
 
-			if (characterId) {
-				if (siwe) {
-					await siwePutNote({ siwe, characterId, metadata });
-				} else {
-					await contract.postNote(characterId, metadata);
+			async action({ metadata }, { account, siwe, contract }) {
+				const characterId = account?.characterId;
+
+				if (characterId) {
+					if (siwe) {
+						await siwePutNote({ siwe, characterId, metadata });
+					} else {
+						await contract.postNote(characterId, metadata);
+					}
 				}
-			}
+			},
 		},
 
 		onSuccess({ queryClient, account }) {

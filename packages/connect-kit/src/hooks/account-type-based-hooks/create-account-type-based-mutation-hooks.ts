@@ -97,7 +97,7 @@ export function createAccountTypeBasedMutationHooks<
 						);
 					case "wallet":
 						return (
-							factory.contract?.(variable, {
+							factory.wallet?.action(variable, {
 								contract,
 								indexer,
 								account,
@@ -139,11 +139,13 @@ export function createAccountTypeBasedMutationHooks<
 		const mutate = useConnectedAction(mutation.mutate, {
 			connectType,
 			noAutoResume: options?.noAutoResume,
+			supportOPSign: factory.wallet?.supportOPSign,
 		});
 
 		const mutateAsync = useConnectedAction(mutation.mutateAsync, {
 			connectType,
 			noAutoResume: options?.noAutoResume,
+			supportOPSign: factory.wallet?.supportOPSign,
 		});
 
 		return { ...mutation, mutate, mutateAsync } as typeof mutation;
