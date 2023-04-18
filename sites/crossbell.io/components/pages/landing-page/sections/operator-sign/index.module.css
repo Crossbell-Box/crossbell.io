@@ -1,0 +1,15 @@
+.toggle.toggle {
+	margin-left: auto;
+
+	--toggle-width: 25px;
+	--toggle-indicator-size: 9px;
+	--toggle-gap: 2px;
+}
+
+@media (min-width: 992px) {
+	.toggle.toggle {
+		--toggle-width: 50px;
+		--toggle-indicator-size: 18px;
+		--toggle-gap: 3px;
+	}
+}

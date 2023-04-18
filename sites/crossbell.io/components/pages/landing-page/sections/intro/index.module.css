@@ -1,0 +1,9 @@
+.description {
+	min-height: 169px;
+	max-width: 1130px;
+}
+
+.description.isActive p:first-child,
+.description:not(.isActive) p:last-child {
+	display: none;
+}

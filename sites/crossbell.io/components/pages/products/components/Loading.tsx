@@ -45,7 +45,7 @@ export default function Loading() {
 					transition={{ duration: 0.5 }}
 					className="bg-black flex flex-col items-center justify-center h-screen w-screen fixed left-0 right-0 z-100"
 				>
-					<Text className="font-deca font-700 text-white text-4xl fixed top-50% translate-y--50% z-3">
+					<Text className="font-deca font-400 text-white text-4xl fixed top-50% translate-y--50% z-3">
 						Crossbell
 					</Text>
 

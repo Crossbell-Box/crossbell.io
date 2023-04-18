@@ -4,7 +4,7 @@ import "~/shared/styles/globals.css";
 import "~/shared/crossbell.js/setup-indexer";
 import "~/shared/crossbell.js/setup-operator-sync";
 
-import { ReactElement, ReactNode } from "react";
+import React, { ReactElement, ReactNode } from "react";
 import { DefaultSeo } from "next-seo";
 import { AppProps } from "next/app";
 import { NextPage } from "next/types";
