@@ -1,11 +1,25 @@
-import { detect } from "detect-browser";
+export function isSmallIOS(): boolean {
+	return (
+		typeof navigator !== "undefined" && /iPhone|iPod/.test(navigator.userAgent)
+	);
+}
+
+export function isLargeIOS(): boolean {
+	return (
+		typeof navigator !== "undefined" &&
+		(/iPad/.test(navigator.userAgent) ||
+			(navigator.platform === "MacIntel" && navigator.maxTouchPoints > 1))
+	);
+}
 
 export function isIOS(): boolean {
-	return detect()?.os?.toLowerCase().includes("ios") ?? false;
+	return isSmallIOS() || isLargeIOS();
 }
 
 export function isAndroid(): boolean {
-	return detect()?.os?.toLowerCase().includes("android") ?? false;
+	return (
+		typeof navigator !== "undefined" && /android/i.test(navigator.userAgent)
+	);
 }
 
 export function isMobile(): boolean {

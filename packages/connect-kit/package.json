@@ -44,7 +44,6 @@
 		"check-password-strength": "^2",
 		"classnames": "^2",
 		"crossbell.js": "^0.19",
-		"detect-browser": "^5",
 		"embla-carousel-react": "^7",
 		"immer": "^9",
 		"lodash.debounce": "4.0.8",
