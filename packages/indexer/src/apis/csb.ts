@@ -1,5 +1,5 @@
 import { BigNumber } from "ethers";
-import LRUCache from "lru-cache";
+import { LRUCache } from "lru-cache";
 
 const cache = new LRUCache({ ttl: 1000 * 10, max: 10 }); // 10s cache
 
