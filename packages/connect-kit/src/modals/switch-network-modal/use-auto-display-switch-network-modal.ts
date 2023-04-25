@@ -1,6 +1,7 @@
 import React from "react";
-import { useConnectedAccount, useConnectModal } from "@crossbell/connect-kit";
 
+import { useConnectModal } from "../connect-modal";
+import { useConnectedAccount } from "../../hooks";
 import { useIsSupportedChain } from "./use-is-supported-chain";
 import { useSwitchNetworkModal } from "./stores";
 

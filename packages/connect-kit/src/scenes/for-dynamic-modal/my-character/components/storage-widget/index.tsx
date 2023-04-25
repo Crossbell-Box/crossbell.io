@@ -1,7 +1,8 @@
 import React from "react";
 import prettyBytes from "pretty-bytes";
-import { useCharacterMediaUsage } from "@crossbell/connect-kit";
 import { Tooltip } from "@mantine/core";
+
+import { useCharacterMediaUsage } from "../../../../../hooks";
 
 import styles from "./index.module.css";
 

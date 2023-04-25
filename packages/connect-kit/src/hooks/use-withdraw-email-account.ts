@@ -1,4 +1,3 @@
-import { useAccountState } from "@crossbell/connect-kit";
 import { useMutation, UseMutationOptions } from "@tanstack/react-query";
 import { useContract } from "@crossbell/contract";
 import { indexer } from "@crossbell/indexer";
@@ -6,6 +5,7 @@ import { isAddressEqual } from "@crossbell/util-ethers";
 
 import { getWithdrawProof } from "../apis";
 import { asyncRetry } from "../utils";
+import { useAccountState } from "./account-state";
 
 export function useWithdrawEmailAccount(options?: UseMutationOptions) {
 	const account = useAccountState();

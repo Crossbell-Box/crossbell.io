@@ -2,7 +2,7 @@ import { useRefCallback } from "@crossbell/util-hooks";
 import { showNotification } from "@mantine/notifications";
 
 import { useNoEnoughCSBModal } from "../modals/no-enough-csb-modal";
-import { useAccountState } from "@crossbell/connect-kit";
+import { useAccountState } from "./account-state";
 
 const noEnoughCSB = "You do not have enough $CSB to perform this action";
 

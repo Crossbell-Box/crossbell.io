@@ -1,8 +1,8 @@
 import React from "react";
 import { utils } from "ethers";
 import { useRefCallback } from "@crossbell/util-hooks";
-import { useAccountMiraBalance } from "@crossbell/connect-kit";
 
+import { useAccountMiraBalance } from "../../../../hooks";
 import styles from "./options.module.css";
 import { FlowerIcon } from "./options.icons";
 

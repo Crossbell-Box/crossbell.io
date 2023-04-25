@@ -1,8 +1,8 @@
 import React from "react";
-import { useAccountCharacters } from "@crossbell/connect-kit";
 import { ScrollArea } from "@mantine/core";
 import { LoadMore } from "@crossbell/ui";
 
+import { useAccountCharacters } from "../../../../hooks";
 import styles from "./index.module.css";
 import { Item } from "./item";
 
