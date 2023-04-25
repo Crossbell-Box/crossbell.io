@@ -1,5 +1,6 @@
 import { NoteLinkType } from "@crossbell/indexer";
 import { useDebouncedActionSequence } from "@crossbell/util-hooks";
+import { CharacterEntity, Contract, NoteEntity } from "crossbell.js";
 
 import { linkNote, unlinkNote, siweUnlinkNote, siweLinkNote } from "../../apis";
 import { useHandleError } from "../use-handle-error";
@@ -45,6 +46,34 @@ const siweActionFn = (
 			return siweLinkNote(params);
 		case "unlink":
 			return siweUnlinkNote(params);
+	}
+};
+
+const contractActionFn = (
+	action: Action,
+	contract: Contract,
+	params: {
+		fromCharacterId: CharacterEntity["characterId"];
+		toCharacterId: NoteEntity["characterId"];
+		toNoteId: NoteEntity["noteId"];
+		linkType: NoteLinkType;
+	}
+) => {
+	switch (action) {
+		case "link":
+			return contract.linkNote(
+				params.fromCharacterId,
+				params.toCharacterId,
+				params.toNoteId,
+				params.linkType
+			);
+		case "unlink":
+			return contract.unlinkNote(
+				params.fromCharacterId,
+				params.toCharacterId,
+				params.toNoteId,
+				params.linkType
+			);
 	}
 };
 
@@ -119,12 +148,12 @@ export const useToggleLinkNote = createAccountTypeBasedMutationHooks<
 								{ onSettled: () => revalidateQueries(queryClient, params) }
 							);
 						} else {
-							await contract.linkNote(
-								characterId,
-								variable.characterId,
-								variable.noteId,
-								linkType
-							);
+							await contractActionFn(status.action, contract, {
+								fromCharacterId: characterId,
+								toCharacterId: variable.characterId,
+								toNoteId: variable.noteId,
+								linkType,
+							});
 
 							await waitUntilLinkStatusUpdated(status.action, params);
 							await revalidateQueries(queryClient, params);
