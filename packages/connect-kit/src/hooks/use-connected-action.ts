@@ -1,55 +1,15 @@
 import React from "react";
 import { useRefCallback } from "@crossbell/util-hooks";
 import { useAccount } from "wagmi";
-
-import { useDynamicScenesModal } from "../components";
-import { useConnectModal } from "../modals/connect-modal/stores";
-import { showUpgradeAccountModal } from "../modals/upgrade-account-modal";
-import { useWalletMintNewCharacterModal } from "../modals/wallet-mint-new-character/stores";
+import { EMPTY, filter, from, map, Subject, switchMap } from "rxjs";
 
 import { useAccountState } from "./account-state";
 import { useAccountCharacter } from "./use-account-character";
 import { useIsOpSignEnabled } from "./operator-sign";
+import { hooksConfig } from "./hooks-config";
 
 type Callback = () => void;
 type ConnectType = "wallet" | "email" | "any";
-
-const useCheckIsConnected = () => {
-	const { isConnected: isWalletConnected } = useAccount();
-	const character = useAccountCharacter();
-	const isOpSignEnabled = useIsOpSignEnabled(character);
-
-	return useRefCallback(
-		({
-			connectType: type,
-			supportOPSign,
-		}: {
-			connectType: ConnectType;
-			supportOPSign: boolean;
-		}): boolean => {
-			const state = useAccountState.getState();
-			const isEmailAccountConnected = !!state.email;
-			const isWalletAccountConnected = ((): boolean => {
-				if (state.email || !state.wallet?.characterId) return false;
-
-				if (supportOPSign && isOpSignEnabled) {
-					return true;
-				} else {
-					return isWalletConnected;
-				}
-			})();
-
-			switch (type) {
-				case "email":
-					return isEmailAccountConnected;
-				case "wallet":
-					return isWalletAccountConnected;
-				case "any":
-					return isEmailAccountConnected || isWalletAccountConnected;
-			}
-		}
-	);
-};
 
 export type UseConnectedActionOptions<P extends any[] = unknown[], V = void> = {
 	noAutoResume?: boolean;
@@ -82,29 +42,16 @@ export function useConnectedAction<P extends any[], V>(
 		fallback,
 	}: UseConnectedActionOptions<P, V> = {}
 ): (...params: P) => Promise<V> {
-	const callbackRef = React.useRef<Callback>();
-	const isActive1 = useConnectModal((s) => s.isActive);
-	const isActive2 = useWalletMintNewCharacterModal((s) => s.isActive);
-	const isActive3 = useDynamicScenesModal((s) => s.isActive);
-	const isActive = isActive1 || isActive2 || isActive3;
-	const checkIsConnected = useCheckIsConnected();
-
-	React.useEffect(() => {
-		if (!isActive) {
-			if (
-				!noAutoResume &&
-				callbackRef.current &&
-				checkIsConnected({ connectType, supportOPSign })
-			) {
-				callbackRef.current();
-			}
-
-			callbackRef.current = undefined;
-		}
-	}, [isActive, connectType, noAutoResume, supportOPSign]);
+	const checkIsConnected = useCheckIsConnected({ connectType, supportOPSign });
+	const { autoResume, resetAutoResume } = useAutoResume({
+		noAutoResume,
+		checkIsConnected,
+	});
 
 	return useRefCallback(async (...params) => {
-		if (checkIsConnected({ connectType, supportOPSign })) {
+		resetAutoResume();
+
+		if (checkIsConnected()) {
 			return action(...params);
 		} else if (fallback) {
 			return fallback(...params);
@@ -133,7 +80,7 @@ export function useConnectedAction<P extends any[], V>(
 					// Email is connected but require wallet connection
 					const emailCharacterId = email.characterId;
 
-					callbackRef.current = () => {
+					autoResume(hooksConfig.showUpgradeEmailAccountModal(), () => {
 						const walletCharacterId =
 							useAccountState.getState().wallet?.characterId;
 
@@ -141,22 +88,95 @@ export function useConnectedAction<P extends any[], V>(
 						if (emailCharacterId === walletCharacterId) {
 							callback();
 						}
-					};
-
-					showUpgradeAccountModal();
+					});
 				} else if (connectType !== "email" && wallet && !wallet?.characterId) {
 					// Wallet is connected but no character
-					callbackRef.current = callback;
-					useWalletMintNewCharacterModal.getState().show();
+					autoResume(hooksConfig.showWalletMintNewCharacterModal(), callback);
 				} else {
-					callbackRef.current = callback;
-					useConnectModal.getState().show();
+					autoResume(hooksConfig.showConnectModal(), callback);
 				}
 			});
 		}
 	});
 }
 
+function useCheckIsConnected({
+	connectType: type,
+	supportOPSign,
+}: {
+	connectType: ConnectType;
+	supportOPSign: boolean;
+}) {
+	const { isConnected: isWalletConnected } = useAccount();
+	const character = useAccountCharacter();
+	const isOpSignEnabled = useIsOpSignEnabled(character);
+
+	return useRefCallback((): boolean => {
+		const state = useAccountState.getState();
+		const isEmailAccountConnected = !!state.email;
+		const isWalletAccountConnected = ((): boolean => {
+			if (state.email || !state.wallet?.characterId) return false;
+
+			if (supportOPSign && isOpSignEnabled) {
+				return true;
+			} else {
+				return isWalletConnected;
+			}
+		})();
+
+		switch (type) {
+			case "email":
+				return isEmailAccountConnected;
+			case "wallet":
+				return isWalletAccountConnected;
+			case "any":
+				return isEmailAccountConnected || isWalletAccountConnected;
+		}
+	});
+}
+
 function getCurrentCharacterId() {
 	return useAccountState.getState().computed?.account?.characterId;
+}
+
+function useAutoResume({
+	noAutoResume = false,
+	checkIsConnected,
+}: {
+	noAutoResume: boolean;
+	checkIsConnected: () => boolean;
+}) {
+	const subjectRef =
+		React.useRef<
+			Subject<{ signal: Promise<unknown>; action: Callback } | null>
+		>();
+
+	if (!subjectRef.current) {
+		subjectRef.current = new Subject();
+	}
+
+	React.useEffect(() => {
+		const subscription = subjectRef.current
+			?.pipe(
+				switchMap((params) => {
+					if (!params) return EMPTY;
+
+					return from(params.signal).pipe(map(() => params.action));
+				}),
+				filter(() => (noAutoResume ? false : checkIsConnected()))
+			)
+			.subscribe((action) => action());
+
+		return () => subscription?.unsubscribe();
+	}, [noAutoResume]);
+
+	return {
+		autoResume: useRefCallback((signal: Promise<unknown>, action: Callback) => {
+			subjectRef.current?.next({ signal, action });
+		}),
+
+		resetAutoResume: useRefCallback(() => {
+			subjectRef.current?.next(null);
+		}),
+	};
 }

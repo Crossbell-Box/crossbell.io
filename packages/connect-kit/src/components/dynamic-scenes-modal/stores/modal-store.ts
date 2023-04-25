@@ -7,6 +7,7 @@ import {
 	scenesSlice,
 	ScenesSlice,
 	SceneType,
+	waitUntilModalClosed,
 } from "../../../utils";
 import { useRefCallback } from "@crossbell/util-hooks";
 
@@ -48,6 +49,11 @@ export const useDynamicScenesModal = create<UseDynamicScenesModal>(
 export function createDynamicScenesModal(id: string, scene: Scene) {
 	function showModal() {
 		useDynamicScenesModal.getState().show(id, scene);
+
+		return waitUntilModalClosed(
+			useDynamicScenesModal,
+			(s) => s.id === id && !s.isActive
+		);
 	}
 
 	function useModal(): ModalSlice {

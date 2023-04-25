@@ -2,12 +2,17 @@ import React from "react";
 import { useWeb2Url } from "@crossbell/ui";
 
 import { ModalHeader, BaseModal } from "../../components";
-import { IMAGES } from "../../utils";
+import { IMAGES, waitUntilModalClosed } from "../../utils";
 
 import styles from "./index.module.css";
 import { useClaimCSBTipsModal } from "./stores";
 
 export { useClaimCSBTipsModal };
+
+export function showClaimCSBTipsModal(msg: string) {
+	useClaimCSBTipsModal.getState().show(msg);
+	return waitUntilModalClosed(useClaimCSBTipsModal);
+}
 
 export function ClaimCSBTipsModal() {
 	const { isActive, hide, msg } = useClaimCSBTipsModal();

@@ -33,6 +33,7 @@ import {
 	ConnectKitConfigContext,
 } from "./connect-kit-config";
 import { contractConfig } from "./contract-config";
+import { configHooks } from "./config-hooks";
 
 export { useConnectModal } from "./modals/connect-modal";
 export { useDisconnectModal } from "./modals/disconnect-modal";
@@ -70,6 +71,8 @@ export type ConnectKitProviderProps = {
 } & Partial<ConnectKitConfig>;
 
 const theme = { colorScheme: "light" } as const;
+
+configHooks();
 
 export function ConnectKitProvider({
 	children,

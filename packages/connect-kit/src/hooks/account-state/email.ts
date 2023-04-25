@@ -4,9 +4,9 @@ import { BigNumber, utils } from "ethers";
 
 import { indexer } from "@crossbell/indexer";
 
-import { useClaimCSBTipsModal } from "../../modals/claim-csb-tips-modal";
 import { asyncExhaust, asyncRetry, SliceFn } from "../../utils";
 import { fetchAccountInfo, refillBalance } from "../../apis";
+import { hooksConfig } from "../hooks-config";
 
 export type EmailAccount = {
 	type: "email";
@@ -122,7 +122,7 @@ export const createEmailAccountSlice: SliceFn<EmailAccountSlice> = (
 
 			if ("ok" in result) {
 				if (result.message) {
-					useClaimCSBTipsModal.getState().show(result.message);
+					hooksConfig.showClaimCSBTipsModal(result.message);
 				}
 
 				return result.ok;
@@ -164,7 +164,7 @@ export const createEmailAccountSlice: SliceFn<EmailAccountSlice> = (
 			case RefillEmailBalanceStatusType.tooMuchCSB:
 			case RefillEmailBalanceStatusType.userNotConnected:
 				if (showTips) {
-					useClaimCSBTipsModal.getState().show(status.msg);
+					hooksConfig.showClaimCSBTipsModal(status.msg);
 				}
 				return false;
 		}

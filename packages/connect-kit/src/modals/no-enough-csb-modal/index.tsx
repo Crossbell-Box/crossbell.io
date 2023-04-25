@@ -1,8 +1,9 @@
 import React from "react";
 import { useWeb2Url, Dialog } from "@crossbell/ui";
 
+import { NoEnoughCSBKind } from "../../hooks";
 import { ModalHeader, MainBtn } from "../../components";
-import { IMAGES } from "../../utils";
+import { IMAGES, waitUntilModalClosed } from "../../utils";
 import { useTransferCSBToOperatorModal } from "../transfer-csb-to-operator-modal";
 import { useWalletClaimCSBModal } from "../wallet-claim-csb-modal";
 
@@ -10,6 +11,11 @@ import styles from "./index.module.css";
 import { useNoEnoughCSBModal } from "./stores";
 
 export { useNoEnoughCSBModal };
+
+export function showNoEnoughCSBModal(kind: NoEnoughCSBKind) {
+	useNoEnoughCSBModal.getState().show(kind);
+	return waitUntilModalClosed(useNoEnoughCSBModal);
+}
 
 export function NoEnoughCSBModal() {
 	const { isActive, kind } = useNoEnoughCSBModal();

@@ -2,6 +2,7 @@ import React from "react";
 import { DynamicContainer, DynamicContainerContent } from "@crossbell/ui";
 
 import { BaseModal, Congrats } from "../../components";
+import { waitUntilModalClosed } from "../../utils";
 
 import { Scene, SceneKind } from "./types";
 import {
@@ -13,6 +14,11 @@ import {
 import { MintCharacter } from "./scenes/mint-character";
 
 export { useWalletMintNewCharacterModal };
+
+export function showWalletMintNewCharacterModal() {
+	useWalletMintNewCharacterModal.getState().show();
+	return waitUntilModalClosed(useWalletMintNewCharacterModal);
+}
 
 export function WalletMintNewCharacter() {
 	const { isActive, hide } = useWalletMintNewCharacterModal();

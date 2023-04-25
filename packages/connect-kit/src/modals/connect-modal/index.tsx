@@ -1,9 +1,11 @@
 import React from "react";
 import { DynamicContainer, DynamicContainerContent } from "@crossbell/ui";
 
+import { waitUntilModalClosed } from "../../utils";
 import { BaseModal, Congrats } from "../../components";
 import { SignInWithWallet, OPSignSettings } from "../../scenes";
 import { useConnectedAccount } from "../../hooks";
+import { SignInStrategy, useConnectKitConfig } from "../../connect-kit-config";
 
 import { Scene, SceneKind } from "./types";
 import { StoresProvider, useConnectModal, useScenesStore } from "./stores";
@@ -23,10 +25,14 @@ import { SelectConnectKind } from "./scenes/select-connect-kind";
 import { SelectWalletToConnect } from "./scenes/select-wallet-to-connect";
 import { SelectCharacters } from "./scenes/select-characters";
 import { MintCharacter } from "./scenes/mint-character";
-import { SignInStrategy, useConnectKitConfig } from "../../connect-kit-config";
 import { useAccount } from "wagmi";
 
 export { useConnectModal };
+
+export function showConnectModal() {
+	useConnectModal.getState().show();
+	return waitUntilModalClosed(useConnectModal);
+}
 
 export function ConnectModal() {
 	const { isActive, hide } = useConnectModal();

@@ -1,12 +1,11 @@
 import { create } from "zustand";
 
 import { modalSlice, ModalSlice } from "../../../utils";
-
-export type UseNoEnoughCSBModalKind = "claim-csb" | "transfer-csb-to-operator";
+import { NoEnoughCSBKind } from "../../../hooks";
 
 type BaseStore = {
-	kind: UseNoEnoughCSBModalKind;
-	show: (kind: UseNoEnoughCSBModalKind) => void;
+	kind: NoEnoughCSBKind;
+	show: (kind: NoEnoughCSBKind) => void;
 };
 
 export type UseNoEnoughCSBModal = Omit<ModalSlice, keyof BaseStore> & BaseStore;
