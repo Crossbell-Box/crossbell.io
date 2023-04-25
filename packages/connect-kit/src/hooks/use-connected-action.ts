@@ -62,12 +62,22 @@ export function useConnectedAction<P extends any[], V>(
 				const previousCharacterId = getCurrentCharacterId();
 				const callback = () => {
 					const currentCharacterId = getCurrentCharacterId();
+					const ableToTriggerAction = ((): boolean => {
+						if (currentCharacterId) {
+							if (previousCharacterId) {
+								// Make sure character hasn't changed
+								return previousCharacterId === currentCharacterId;
+							} else {
+								// No previous character, trigger action
+								return true;
+							}
+						} else {
+							// Skip action if no character
+							return false;
+						}
+					})();
 
-					// Skip if the character has changed
-					if (
-						currentCharacterId &&
-						previousCharacterId === currentCharacterId
-					) {
+					if (ableToTriggerAction) {
 						try {
 							resolve(action(...params));
 						} catch (e) {
