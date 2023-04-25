@@ -35,8 +35,8 @@ export type NoteModel = {
 export function useNoteModel({ characterId, noteId }: UseNoteActionsConfig) {
 	const { data: status } = useNoteStatus(characterId, noteId);
 	const [{ isLiked }] = useIsNoteLiked({
-		toNoteId: noteId,
-		toCharacterId: characterId,
+		noteId,
+		characterId,
 	});
 	const { data: likeCount } = useNoteLikeCount({ characterId, noteId });
 	const { isPending: isToggleLikeNoteLoading, mutate } = useToggleLikeNote();
