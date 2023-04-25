@@ -1,4 +1,4 @@
-import { SliceFn } from "../../../../utils";
+import { SliceFn } from "@crossbell/react-account/utils";
 
 export interface CharacterSlice {
 	characterName: string;

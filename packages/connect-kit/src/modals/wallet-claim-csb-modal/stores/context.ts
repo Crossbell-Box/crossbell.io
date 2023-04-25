@@ -1,4 +1,4 @@
-import { withMultipleProviders } from "../../../utils";
+import { withMultipleProviders } from "@crossbell/react-account/utils";
 
 import { ScenesStoreProvider } from "./scenes-store";
 

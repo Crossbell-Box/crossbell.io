@@ -1,8 +1,7 @@
 import React from "react";
 import { CharacterOperatorEntity } from "crossbell.js";
 import { LoadingOverlay, SettingsCheckmark1Icon } from "@crossbell/ui";
-
-import { useCharacterOperatorPermissions } from "../../../hooks";
+import { useCharacterOperatorPermissions } from "@crossbell/react-account";
 
 import styles from "./permission-list.module.css";
 

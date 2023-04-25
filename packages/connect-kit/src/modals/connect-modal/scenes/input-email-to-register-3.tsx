@@ -1,8 +1,8 @@
 import React from "react";
 import { LoadingOverlay } from "@mantine/core";
 import { CircleHelpIcon, useUrlComposer } from "@crossbell/ui";
+import { useAccountState } from "@crossbell/react-account";
 
-import { useAccountState } from "../../../hooks";
 import {
 	CheckIcon,
 	EmailIcon,

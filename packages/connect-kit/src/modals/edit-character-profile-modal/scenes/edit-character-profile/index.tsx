@@ -18,7 +18,7 @@ import {
 	useCharacterProfileForm,
 	useUpdateCharacterHandle,
 	useUpdateCharacterMetadata,
-} from "../../../../hooks";
+} from "@crossbell/react-account";
 
 export function EditCharacterProfile() {
 	const form = useCharacterProfileForm();

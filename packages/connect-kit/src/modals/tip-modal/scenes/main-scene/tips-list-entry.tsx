@@ -1,10 +1,10 @@
 import React from "react";
 import { CharacterAvatar, ArrowBackIcon } from "@crossbell/ui";
 import classNames from "classnames";
+import { useTipList } from "@crossbell/react-account";
 
 import { SceneKind } from "../../types";
 import { useScenesStore, useTipModal } from "../../stores";
-import { useTipList } from "../../../../hooks";
 
 import commonStyles from "../../../../styles.module.css";
 import styles from "./tips-list-entry.module.css";

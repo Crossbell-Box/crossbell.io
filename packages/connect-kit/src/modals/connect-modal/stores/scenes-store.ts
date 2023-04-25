@@ -1,6 +1,7 @@
 import { create } from "zustand";
+import { createContextStore } from "@crossbell/react-account/utils";
 
-import { createContextStore, scenesSlice, ScenesSlice } from "../../../utils";
+import { scenesSlice, ScenesSlice } from "../../../utils";
 import { SignInStrategy } from "../../../connect-kit-config";
 
 import { Scene, SceneKind } from "../types";

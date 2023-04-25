@@ -18,7 +18,7 @@ import {
 	useClaimCSBStatus,
 	useWalletClaimCsb,
 	WalletAccount,
-} from "../../hooks";
+} from "@crossbell/react-account";
 import { IMAGES, useReCAPTCHA } from "../../utils";
 
 import styles from "./index.module.css";

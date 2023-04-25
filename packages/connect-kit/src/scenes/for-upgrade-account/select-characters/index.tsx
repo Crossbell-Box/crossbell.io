@@ -1,9 +1,12 @@
 import React from "react";
+import {
+	useIsWalletSignedIn,
+	useCharacterProfileForm,
+} from "@crossbell/react-account";
 
 import { useDynamicScenesModal } from "../../../components";
 
 import { SelectCharacters as Main, OPSignSettings } from "../../../scenes";
-import { useIsWalletSignedIn, useCharacterProfileForm } from "../../../hooks";
 import { MintCharacter } from "../mint-character";
 
 export function SelectCharacters() {

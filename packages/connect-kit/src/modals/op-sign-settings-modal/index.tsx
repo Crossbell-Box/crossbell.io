@@ -1,8 +1,8 @@
 import React from "react";
 import { DynamicContainer, DynamicContainerContent } from "@crossbell/ui";
+import { useIsWalletSignedIn } from "@crossbell/react-account";
 
 import { BaseModal } from "../../components";
-import { useIsWalletSignedIn } from "../../hooks";
 
 import { useOpSignSettingsModal } from "./stores";
 

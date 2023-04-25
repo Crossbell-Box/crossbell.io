@@ -2,14 +2,14 @@ import React from "react";
 import { LogoIcon } from "@crossbell/ui";
 import { Tooltip } from "@mantine/core";
 import classNames from "classnames";
-
-import { ActionBtn } from "../../../../components";
 import {
 	useAccountBalance,
 	useAccountState,
 	useClaimCSBStatus,
 	useOpSignBalance,
-} from "../../../../hooks";
+} from "@crossbell/react-account";
+
+import { ActionBtn } from "../../../../components";
 
 import { useScenesStore } from "../../stores";
 import { Characters, Header } from "../../components";

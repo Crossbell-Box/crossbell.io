@@ -1,9 +1,9 @@
 import React from "react";
+import { useAccountState, GeneralAccount } from "@crossbell/react-account";
 
 import { useConnectModal } from "../../modals/connect-modal";
 import { useDisconnectModal } from "../../modals/disconnect-modal";
 import { useSelectCharactersModal } from "../../modals/select-characters-modal";
-import { useAccountState, GeneralAccount } from "../../hooks/account-state";
 
 export type ConnectButtonStatus =
 	| {

@@ -7,7 +7,7 @@ import {
 	useAccountBalance,
 	UseAccountBalanceResult,
 	useTransferCsb,
-} from "../../hooks";
+} from "@crossbell/react-account";
 
 import styles from "./index.module.css";
 

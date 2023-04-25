@@ -1,10 +1,10 @@
 import React from "react";
 import classNames from "classnames";
 import { LightBulbIcon } from "@crossbell/ui";
+import { useDisconnectAccount } from "@crossbell/react-account";
 
 import commonStyles from "../../styles.module.css";
 import { ModalHeader, BaseModal } from "../../components";
-import { useDisconnectAccount } from "../../hooks";
 
 import styles from "./index.module.css";
 import { useDisconnectModal } from "./stores";

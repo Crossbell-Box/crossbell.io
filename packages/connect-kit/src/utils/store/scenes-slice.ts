@@ -1,4 +1,4 @@
-import { SliceFn } from "../zustand-slice";
+import { SliceFn } from "@crossbell/react-account/utils";
 
 export interface ScenesSlice<S> {
 	scenes: S[];

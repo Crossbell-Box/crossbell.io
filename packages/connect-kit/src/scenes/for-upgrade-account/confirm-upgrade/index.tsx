@@ -1,15 +1,14 @@
 import React from "react";
 import { LoadingOverlay } from "@crossbell/ui";
 import { useRefCallback } from "@crossbell/util-hooks";
-
-import { useDynamicScenesModal, Congrats } from "../../../components";
-import { SignInWithWallet } from "../../sign-in-with-wallet";
-
 import {
 	useAccountState,
 	useClaimCSBStatus,
 	useWithdrawEmailAccount,
-} from "../../../hooks";
+} from "@crossbell/react-account";
+
+import { useDynamicScenesModal, Congrats } from "../../../components";
+import { SignInWithWallet } from "../../sign-in-with-wallet";
 import { WalletClaimCSB } from "../../wallet-claim-csb";
 import { SelectCharacters } from "../select-characters";
 

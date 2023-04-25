@@ -2,8 +2,7 @@ import React from "react";
 import ReCAPTCHA from "react-google-recaptcha";
 import { useRefCallback } from "@crossbell/util-hooks";
 import { useQuery } from "@tanstack/react-query";
-
-import { faucetGetSiteKey } from "../apis";
+import { faucetGetSiteKey } from "@crossbell/react-account/apis";
 
 export function useReCAPTCHA() {
 	const { data: siteKey } = useFaucetSiteKey();

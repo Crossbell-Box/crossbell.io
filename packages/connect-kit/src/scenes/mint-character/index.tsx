@@ -2,12 +2,12 @@ import React from "react";
 import { useRefCallback } from "@crossbell/util-hooks";
 import { LoadingOverlay } from "@crossbell/ui";
 import { utils } from "ethers";
-
 import {
 	useAccountBalance,
 	useMintCharacter,
 	useCharacterProfileForm,
-} from "../../hooks";
+} from "@crossbell/react-account";
+
 import {
 	MintCharacterFormNormal as NormalForm,
 	MintCharacterFormSlim as SlimForm,

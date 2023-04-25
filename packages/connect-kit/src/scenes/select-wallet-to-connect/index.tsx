@@ -1,8 +1,8 @@
 import React from "react";
 import classNames from "classnames";
 import { useAccount } from "wagmi";
+import { useConnectedAccount } from "@crossbell/react-account";
 
-import { useConnectedAccount } from "../../hooks";
 import {
 	useDefaultWalletConnect,
 	useWalletConnectors,

@@ -2,12 +2,11 @@ import React from "react";
 import { CharacterAvatar, SettingsAccountOutlineIcon } from "@crossbell/ui";
 import { extractCharacterName } from "@crossbell/util-metadata";
 import { truncateAddress } from "@crossbell/util-ethers";
-
 import {
 	GeneralAccount,
 	useAccountCharacter,
 	useConnectedAccount,
-} from "../../../../../hooks";
+} from "@crossbell/react-account";
 
 import { WalletIcon, EmailIcon } from "../../../../../components";
 

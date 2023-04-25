@@ -5,14 +5,14 @@ import { CharacterAvatar, Loading, useWeb2Url } from "@crossbell/ui";
 import { isAddressEqual, truncateAddress } from "@crossbell/util-ethers";
 import { useRefCallback } from "@crossbell/util-hooks";
 import { usePrimaryCharacter } from "@crossbell/indexer";
-
-import commonStyles from "../../../styles.module.css";
 import {
 	NEWBIE_VILLA_OPERATOR_ADDRESS,
 	OP_SIGN_OPERATOR_ADDRESS,
 	useCharacterOperatorPermissions,
 	X_SYNC_OPERATOR_ADDRESS,
-} from "../../../hooks";
+} from "@crossbell/react-account";
+
+import commonStyles from "../../../styles.module.css";
 import { useDynamicScenesModal } from "../../../components";
 
 import { OperatorDetail } from "../operator-detail";

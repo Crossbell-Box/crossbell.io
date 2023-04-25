@@ -1,11 +1,11 @@
 import { useRefCallback } from "@crossbell/util-hooks";
-
-import { useXSettingsConfig } from "../../x-settings-config";
-import { useAccountCharacter } from "../use-account-character";
 import {
+	useAccountCharacter,
 	useCharacterAttribute,
 	UseCharacterAttributeOptions,
-} from "../character-attribute";
+} from "@crossbell/react-account";
+
+import { useXSettingsConfig } from "../../x-settings-config";
 
 export function useSentryStatus(options?: UseCharacterAttributeOptions) {
 	const { sentry } = useXSettingsConfig();

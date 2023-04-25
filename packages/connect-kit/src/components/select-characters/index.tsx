@@ -1,7 +1,7 @@
 import React from "react";
 import { LoadingOverlay } from "@crossbell/ui";
+import { useAccountCharacters } from "@crossbell/react-account";
 
-import { useAccountCharacters } from "../../hooks";
 import { BottomTips } from "../bottom-tips";
 import { WhatIsCharacterTooltip } from "../what-is-character-tooltip";
 

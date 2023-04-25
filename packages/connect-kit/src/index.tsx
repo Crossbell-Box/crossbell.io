@@ -9,9 +9,9 @@ import {
 } from "@crossbell/ui";
 import { InitContractProvider } from "@crossbell/contract";
 import { MantineProvider } from "@mantine/core";
+import { useAccountState } from "@crossbell/react-account";
 
 import { usePreloadAllImgs } from "./utils";
-import { useAccountState } from "./hooks";
 import { ClaimCSBTipsModal } from "./modals/claim-csb-tips-modal";
 import { ConnectModal } from "./modals/connect-modal";
 import { DisconnectModal } from "./modals/disconnect-modal";
@@ -35,6 +35,7 @@ import {
 import { contractConfig } from "./contract-config";
 import { configHooks } from "./config-hooks";
 
+export * from "@crossbell/react-account";
 export { useConnectModal } from "./modals/connect-modal";
 export { useDisconnectModal } from "./modals/disconnect-modal";
 export {

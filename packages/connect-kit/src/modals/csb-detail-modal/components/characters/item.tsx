@@ -2,9 +2,9 @@ import React from "react";
 import { CharacterEntity } from "crossbell.js";
 import { CharacterAvatar } from "@crossbell/ui";
 import { extractCharacterName } from "@crossbell/util-metadata";
+import { useToggleOpSignOperator } from "@crossbell/react-account";
 
 import { ActionBtn } from "../../../../components";
-import { useToggleOpSignOperator } from "../../../../hooks";
 
 import styles from "./item.module.css";
 

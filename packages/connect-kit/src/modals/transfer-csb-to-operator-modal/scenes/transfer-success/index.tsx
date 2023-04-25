@@ -1,7 +1,7 @@
 import React from "react";
+import { useOpSignBalance } from "@crossbell/react-account";
 
 import { TransferCSBSuccess as Main } from "../../../../components";
-import { useOpSignBalance } from "../../../../hooks";
 
 import { Header } from "../../components";
 import { useTransferCSBToOperatorModal } from "../../stores";

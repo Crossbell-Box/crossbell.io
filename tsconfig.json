@@ -16,11 +16,13 @@
 		"baseUrl": ".",
 		"paths": {
 			"~/scripts/*": ["scripts/*"],
-			"@crossbell/*": ["packages/*/src"]
+			"@crossbell/*": ["packages/*/src"],
+			"@crossbell/react-account/*": ["packages/react-account/src/*"]
 		}
 	},
 	"references": [
 		{ "path": "packages/connect-kit/tsconfig.json" },
+		{ "path": "packages/react-account/tsconfig.json" },
 		{ "path": "packages/contract/tsconfig.json" },
 		{ "path": "packages/indexer/tsconfig.json" },
 		{ "path": "packages/notification/tsconfig.json" },

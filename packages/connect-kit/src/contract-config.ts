@@ -1,6 +1,6 @@
 import { ContractConfig } from "@crossbell/contract";
+import { useAccountState } from "@crossbell/react-account";
 
-import { useAccountState } from "./hooks";
 import { showNoEnoughCSBModal } from "./modals/no-enough-csb-modal";
 import { showUpgradeEmailAccountModal } from "./modals/upgrade-account-modal";
 import { showConnectModal } from "./modals/connect-modal";

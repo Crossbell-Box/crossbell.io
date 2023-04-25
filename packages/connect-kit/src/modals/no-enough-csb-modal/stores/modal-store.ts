@@ -1,7 +1,7 @@
 import { create } from "zustand";
+import { NoEnoughCSBKind } from "@crossbell/react-account";
 
 import { modalSlice, ModalSlice } from "../../../utils";
-import { NoEnoughCSBKind } from "../../../hooks";
 
 type BaseStore = {
 	kind: NoEnoughCSBKind;

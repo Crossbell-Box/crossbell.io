@@ -1,8 +1,8 @@
 import React from "react";
 import compact from "lodash.compact";
 import { useRefCallback } from "@crossbell/util-hooks";
+import { useAccountCharacter, useAccountState } from "@crossbell/react-account";
 
-import { useAccountCharacter, useAccountState } from "../../../hooks";
 import { SelectCharacters } from "../../../scenes";
 
 import { SelectOptions } from "../../for-upgrade-account";

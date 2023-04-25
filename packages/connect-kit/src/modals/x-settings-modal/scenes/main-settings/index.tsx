@@ -10,8 +10,8 @@ import {
 	LockIcon,
 } from "@crossbell/ui";
 import classNames from "classnames";
+import { useAccountCharacter, useAccountState } from "@crossbell/react-account";
 
-import { useAccountCharacter, useAccountState } from "../../../../hooks";
 import {
 	SignInWithWallet,
 	OPSignSettings,

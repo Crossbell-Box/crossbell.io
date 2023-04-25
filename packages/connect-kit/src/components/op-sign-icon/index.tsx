@@ -1,9 +1,8 @@
 import React from "react";
-
 import { useRefCallback } from "@crossbell/util-hooks";
+import { useIsOpSignEnabled } from "@crossbell/react-account";
 
 import { useOpSignSettingsModal } from "../../modals/op-sign-settings-modal";
-import { useIsOpSignEnabled } from "../../hooks";
 import { Icon } from "./icon";
 
 export type OpSignIconProps = React.SVGAttributes<SVGSVGElement> & {

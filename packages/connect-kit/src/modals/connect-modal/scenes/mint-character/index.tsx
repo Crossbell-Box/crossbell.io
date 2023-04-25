@@ -1,8 +1,8 @@
 import React from "react";
 import { useRefCallback } from "@crossbell/util-hooks";
 import { useUrlComposer } from "@crossbell/ui";
+import { useAccountState } from "@crossbell/react-account";
 
-import { useAccountState } from "../../../../hooks";
 import {
 	MintCharacter as Main,
 	MintCharacterFormMode,

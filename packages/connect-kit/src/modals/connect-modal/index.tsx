@@ -1,10 +1,10 @@
 import React from "react";
 import { DynamicContainer, DynamicContainerContent } from "@crossbell/ui";
+import { useConnectedAccount } from "@crossbell/react-account";
 
 import { waitUntilModalClosed } from "../../utils";
 import { BaseModal, Congrats } from "../../components";
 import { SignInWithWallet, OPSignSettings } from "../../scenes";
-import { useConnectedAccount } from "../../hooks";
 import { SignInStrategy, useConnectKitConfig } from "../../connect-kit-config";
 
 import { Scene, SceneKind } from "./types";

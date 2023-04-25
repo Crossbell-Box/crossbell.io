@@ -1,7 +1,7 @@
 import React from "react";
 import { LogoIcon } from "@crossbell/ui";
+import { useAccountState } from "@crossbell/react-account";
 
-import { useAccountState } from "../../../hooks";
 import {
 	Field,
 	WalletIcon,

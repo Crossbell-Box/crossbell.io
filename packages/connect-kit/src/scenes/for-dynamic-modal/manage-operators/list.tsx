@@ -2,13 +2,12 @@ import React from "react";
 import { LoadMore, Loading } from "@crossbell/ui";
 import { isAddressEqual } from "@crossbell/util-ethers";
 import { CharacterOperatorEntity } from "crossbell.js";
-
 import {
 	OP_SIGN_OPERATOR_ADDRESS,
 	X_SYNC_OPERATOR_ADDRESS,
 	useGetCharacterOperators,
 	NEWBIE_VILLA_OPERATOR_ADDRESS,
-} from "../../../hooks";
+} from "@crossbell/react-account";
 
 import styles from "./list.module.css";
 import { Item, ItemTag } from "./item";

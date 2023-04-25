@@ -1,7 +1,6 @@
 import React from "react";
 import { Loading } from "@crossbell/ui";
-
-import { CharacterProfileForm } from "../../hooks";
+import { CharacterProfileForm } from "@crossbell/react-account";
 
 import { FiledTips } from "../filed-tips";
 import { Textarea } from "../textarea";

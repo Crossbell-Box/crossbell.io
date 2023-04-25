@@ -2,6 +2,7 @@ import React from "react";
 import classNames from "classnames";
 import { usePreloadImgs } from "@crossbell/util-hooks";
 import { LoadingOverlay, useWeb2Url } from "@crossbell/ui";
+import { useDeleteEmailAccount } from "@crossbell/react-account";
 
 import {
 	DynamicScenesHeader,
@@ -11,7 +12,6 @@ import {
 	useDynamicScenesModal,
 	Congrats,
 } from "../../../components";
-import { useDeleteEmailAccount } from "../../../hooks";
 
 import styles from "./index.module.css";
 

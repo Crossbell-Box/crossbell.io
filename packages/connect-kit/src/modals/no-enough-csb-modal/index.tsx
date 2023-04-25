@@ -1,7 +1,7 @@
 import React from "react";
 import { useWeb2Url, Dialog } from "@crossbell/ui";
+import { NoEnoughCSBKind } from "@crossbell/react-account";
 
-import { NoEnoughCSBKind } from "../../hooks";
 import { ModalHeader, MainBtn } from "../../components";
 import { IMAGES, waitUntilModalClosed } from "../../utils";
 import { useTransferCSBToOperatorModal } from "../transfer-csb-to-operator-modal";

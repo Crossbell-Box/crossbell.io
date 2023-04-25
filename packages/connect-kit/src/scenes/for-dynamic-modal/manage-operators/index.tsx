@@ -1,4 +1,5 @@
 import React from "react";
+import { useAccountCharacterId } from "@crossbell/react-account";
 
 import {
 	ModalHeaderProps,
@@ -6,7 +7,6 @@ import {
 	DynamicScenesContainer,
 } from "../../../components";
 import { List } from "./list";
-import { useAccountCharacterId } from "../../../hooks";
 
 export type ManageOperatorsProps = {
 	Header?: React.ComponentType<ModalHeaderProps>;

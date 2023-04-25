@@ -3,9 +3,9 @@ import { LoadMore } from "@crossbell/ui";
 import { BigNumber, utils } from "ethers";
 import { CharacterAvatar } from "@crossbell/ui";
 import { extractCharacterName } from "@crossbell/util-metadata";
+import { useTipList } from "@crossbell/react-account";
 
 import { DynamicScenesContainer } from "../../../../components";
-import { useTipList } from "../../../../hooks";
 
 import { Header } from "../../components";
 

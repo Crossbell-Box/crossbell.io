@@ -1,17 +1,17 @@
 import React from "react";
 import { Toggle, LoadingOverlay, SentryLogo } from "@crossbell/ui";
 import { useConnect } from "wagmi";
+import {
+	useAccountCharacter,
+	useCharacterAttribute,
+} from "@crossbell/react-account";
 
 import {
 	FiledTips,
 	DynamicScenesContainer,
 	DynamicScenesHeader,
 } from "../../../components";
-import {
-	useAccountCharacter,
-	useCharacterAttribute,
-	useSentryStatus,
-} from "../../../hooks";
+import { useSentryStatus } from "../../../hooks";
 import { useXSettingsConfig } from "../../../x-settings-config";
 
 import styles from "./index.module.css";

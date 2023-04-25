@@ -8,8 +8,10 @@ import {
 import { extractCharacterName } from "@crossbell/util-metadata";
 import { CharacterEntity } from "crossbell.js";
 import { ScrollArea } from "@mantine/core";
-
-import { useAccountState, useToggleOpSignOperator } from "../../hooks";
+import {
+	useAccountState,
+	useToggleOpSignOperator,
+} from "@crossbell/react-account";
 
 import { OptionList, OptionListItem } from "../option-list";
 import styles from "./list.module.css";

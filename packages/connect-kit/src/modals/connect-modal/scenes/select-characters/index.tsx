@@ -1,10 +1,10 @@
 import React from "react";
-
-import { SelectCharacters as Main } from "../../../../scenes";
 import {
 	useIsWalletSignedIn,
 	useCharacterProfileForm,
-} from "../../../../hooks";
+} from "@crossbell/react-account";
+
+import { SelectCharacters as Main } from "../../../../scenes";
 import { Header } from "../../components/header";
 import { useConnectModal, useScenesStore } from "../../stores";
 import { SceneKind } from "../../types";

@@ -1,8 +1,8 @@
 import React from "react";
 import { useRefCallback } from "@crossbell/util-hooks";
+import { OP_SIGN_OPERATOR_ADDRESS } from "@crossbell/react-account";
 
 import { TransferCSB as Main } from "../../../../components";
-import { OP_SIGN_OPERATOR_ADDRESS } from "../../../../hooks/operator-sign/consts";
 
 import { Header } from "../../components";
 import { useScenesStore } from "../../stores";

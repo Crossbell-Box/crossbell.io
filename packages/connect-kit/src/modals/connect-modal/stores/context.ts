@@ -1,4 +1,4 @@
-import { withMultipleProviders } from "../../../utils";
+import { withMultipleProviders } from "@crossbell/react-account/utils";
 
 import { EmailConnectStoreProvider } from "./email-connect-store";
 import { EmailRegisterStoreProvider } from "./email-register-store";

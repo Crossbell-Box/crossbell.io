@@ -1,4 +1,4 @@
-import { SliceFn } from "../../../../utils";
+import { SliceFn } from "@crossbell/react-account/utils";
 
 import { checkStrength } from "./password.strength";
 

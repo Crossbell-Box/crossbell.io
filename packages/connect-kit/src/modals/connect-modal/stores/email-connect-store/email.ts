@@ -1,4 +1,4 @@
-import { SliceFn, isEmail } from "../../../../utils";
+import { isEmail, SliceFn } from "@crossbell/react-account/utils";
 
 export interface EmailSlice {
 	email: string;

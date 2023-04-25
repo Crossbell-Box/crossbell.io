@@ -1,7 +1,7 @@
 import React from "react";
 import { LoadingOverlay } from "@crossbell/ui";
+import { useIsWalletSignedIn, useWalletSignIn } from "@crossbell/react-account";
 
-import { useIsWalletSignedIn, useWalletSignIn } from "../../hooks";
 import { BottomTips } from "../bottom-tips";
 import { OptionList, OptionListItem } from "../option-list";
 

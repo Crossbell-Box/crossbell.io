@@ -1,6 +1,5 @@
 import { UseBoundStore, StoreApi } from "zustand";
-
-import { SliceFn, OmitActions } from "../zustand-slice";
+import { SliceFn, OmitActions } from "@crossbell/react-account/utils";
 
 export interface ModalSlice {
 	isActive: boolean;

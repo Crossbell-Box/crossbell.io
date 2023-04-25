@@ -1,12 +1,11 @@
 import { showNotification } from "@mantine/notifications";
 import { create } from "zustand";
-
+import { isEmail, createContextStore } from "@crossbell/react-account/utils";
 import {
 	resetPasswordByEmail,
 	resetPasswordSendCodeToEmail,
 	resetPasswordVerifyEmailCode,
-} from "../../../../apis";
-import { createContextStore, isEmail } from "../../../../utils";
+} from "@crossbell/react-account/apis";
 
 import { createEmailSlice, EmailSlice } from "../email-register-store/email";
 import {

@@ -1,8 +1,7 @@
 import React from "react";
 import { CharacterOperatorEntity } from "crossbell.js";
 import { LoadingOverlay } from "@crossbell/ui";
-
-import { useRemoveCharacterOperator } from "../../../hooks";
+import { useRemoveCharacterOperator } from "@crossbell/react-account";
 
 import {
 	DynamicScenesContainer,

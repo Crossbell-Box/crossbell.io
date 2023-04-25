@@ -1,9 +1,8 @@
 import { showNotification } from "@mantine/notifications";
 import { create } from "zustand";
-
-import { useAccountState } from "../../../../hooks";
-import { connectByEmail } from "../../../../apis";
-import { createContextStore, isEmail } from "../../../../utils";
+import { useAccountState } from "@crossbell/react-account";
+import { isEmail, createContextStore } from "@crossbell/react-account/utils";
+import { connectByEmail } from "@crossbell/react-account/apis";
 
 import { useConnectModal } from "../modal-store";
 

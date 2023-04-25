@@ -5,10 +5,10 @@ import { extractCharacterName } from "@crossbell/util-metadata";
 import { CharacterEntity } from "crossbell.js";
 import { useRefCallback } from "@crossbell/util-hooks";
 import classNames from "classnames";
+import { useAccountMiraBalance, useTip } from "@crossbell/react-account";
 
 import { IMAGES } from "../../../../utils";
 import { BottomTips, DynamicScenesContainer } from "../../../../components";
-import { useAccountMiraBalance, useTip } from "../../../../hooks";
 
 import { Header } from "../../components";
 import { useScenesStore, useTipModal } from "../../stores";

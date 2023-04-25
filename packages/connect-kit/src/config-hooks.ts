@@ -1,4 +1,4 @@
-import { configHooks as config } from "./hooks/hooks-config";
+import { configHooks as config } from "@crossbell/react-account";
 
 import { showClaimCSBTipsModal } from "./modals/claim-csb-tips-modal";
 import { showNoEnoughCSBModal } from "./modals/no-enough-csb-modal";

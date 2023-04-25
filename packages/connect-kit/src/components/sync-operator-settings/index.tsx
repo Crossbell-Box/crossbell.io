@@ -1,8 +1,8 @@
 import React from "react";
 import { Toggle, LoadingOverlay, SettingsXSyncIcon } from "@crossbell/ui";
+import { useToggleCharacterSyncOperator } from "@crossbell/react-account";
 
 import { FiledTips } from "../../components";
-import { useToggleCharacterSyncOperator } from "../../hooks";
 
 import styles from "./index.module.css";
 
