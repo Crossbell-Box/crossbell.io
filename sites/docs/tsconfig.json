@@ -20,6 +20,7 @@
 			"@/*": ["src/*"],
 			"@/public/*": ["public/*"],
 			"@crossbell/*": ["../../packages/*/src"],
+			"@crossbell/react-account/*": ["../../packages/react-account/src/*"],
 			"~/scripts/*": ["../../scripts/*"]
 		}
 	},
