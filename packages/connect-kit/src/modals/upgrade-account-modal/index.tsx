@@ -2,20 +2,9 @@ import { SelectOptions } from "../../scenes/for-upgrade-account";
 import { createDynamicScenesModal } from "../../components";
 
 export const {
-	/**
-	 * @deprecated use `useUpgradeEmailAccountModal` instead.
-	 */
-	useModal: useUpgradeAccountModal,
-	/**
-	 * @deprecated use `showUpgradeEmailAccountModal` instead.
-	 */
-	showModal: showUpgradeAccountModal,
+	useModal: useUpgradeEmailAccountModal,
+	showModal: showUpgradeEmailAccountModal,
 } = createDynamicScenesModal("upgrade-account", {
 	kind: "select-upgrade-account-options",
 	Component: SelectOptions,
 });
-
-export {
-	useUpgradeAccountModal as useUpgradeEmailAccountModal,
-	showUpgradeAccountModal as showUpgradeEmailAccountModal,
-};

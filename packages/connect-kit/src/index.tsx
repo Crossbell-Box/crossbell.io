@@ -38,8 +38,6 @@ import { configHooks } from "./config-hooks";
 export { useConnectModal } from "./modals/connect-modal";
 export { useDisconnectModal } from "./modals/disconnect-modal";
 export {
-	useUpgradeAccountModal,
-	showUpgradeAccountModal,
 	useUpgradeEmailAccountModal,
 	showUpgradeEmailAccountModal,
 } from "./modals/upgrade-account-modal";

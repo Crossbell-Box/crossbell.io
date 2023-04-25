@@ -1,23 +1,23 @@
 import { ContractConfig } from "@crossbell/contract";
 
 import { useAccountState } from "./hooks";
-import { useNoEnoughCSBModal } from "./modals/no-enough-csb-modal";
-import { showUpgradeAccountModal } from "./modals/upgrade-account-modal";
-import { useConnectModal } from "./modals/connect-modal";
-import { useWalletMintNewCharacterModal } from "./modals/wallet-mint-new-character";
+import { showNoEnoughCSBModal } from "./modals/no-enough-csb-modal";
+import { showUpgradeEmailAccountModal } from "./modals/upgrade-account-modal";
+import { showConnectModal } from "./modals/connect-modal";
+import { showWalletMintNewCharacterModal } from "./modals/wallet-mint-new-character";
 import { showSwitchNetworkModal } from "./modals/switch-network-modal";
 
 export const contractConfig: ContractConfig = {
 	openConnectModal() {
 		if (useAccountState.getState().email) {
-			showUpgradeAccountModal();
+			showUpgradeEmailAccountModal();
 		} else {
-			useConnectModal.getState().show();
+			showConnectModal();
 		}
 	},
 
 	openFaucetHintModel() {
-		useNoEnoughCSBModal.getState().show("claim-csb");
+		showNoEnoughCSBModal("claim-csb");
 	},
 
 	getCurrentCharacterId() {
@@ -25,7 +25,7 @@ export const contractConfig: ContractConfig = {
 	},
 
 	openMintNewCharacterModel() {
-		useWalletMintNewCharacterModal.getState().show();
+		showWalletMintNewCharacterModal();
 	},
 
 	showSwitchNetworkModal,
