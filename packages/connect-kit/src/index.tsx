@@ -32,7 +32,7 @@ import {
 	ConnectKitConfig,
 	ConnectKitConfigContext,
 } from "./connect-kit-config";
-import { contractConfig } from "./contract-config";
+import { useContractConfig } from "./contract-config";
 import { setupReactAccount } from "./setup-react-account";
 
 export * from "@crossbell/react-account";
@@ -84,6 +84,7 @@ export function ConnectKitProvider({
 }: ConnectKitProviderProps) {
 	const accountState = useAccountState();
 	const account = useAccount();
+	const contractConfig = useContractConfig();
 
 	React.useEffect(() => {
 		if (account.status === "connected") {

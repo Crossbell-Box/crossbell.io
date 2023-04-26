@@ -1,5 +1,7 @@
+import React from "react";
 import { ContractConfig } from "@crossbell/contract";
 import { useAccountState } from "@crossbell/react-account";
+import { useAccount } from "wagmi";
 
 import { showNoEnoughCSBModal } from "./modals/no-enough-csb-modal";
 import { showUpgradeEmailAccountModal } from "./modals/upgrade-account-modal";
@@ -7,26 +9,42 @@ import { showConnectModal } from "./modals/connect-modal";
 import { showWalletMintNewCharacterModal } from "./modals/wallet-mint-new-character";
 import { showSwitchNetworkModal } from "./modals/switch-network-modal";
 
-export const contractConfig: ContractConfig = {
-	openConnectModal() {
-		if (useAccountState.getState().email) {
-			showUpgradeEmailAccountModal();
-		} else {
-			showConnectModal();
-		}
-	},
+export const useContractConfig = () => {
+	const { address, connector } = useAccount();
+	const [provider, setProvider] = React.useState<ContractConfig["provider"]>();
 
-	openFaucetHintModel() {
-		showNoEnoughCSBModal("claim-csb");
-	},
+	React.useEffect(() => {
+		connector?.getProvider().then(setProvider);
+	}, [connector]);
 
-	getCurrentCharacterId() {
-		return useAccountState.getState().computed.account?.characterId ?? null;
-	},
+	return React.useMemo(
+		(): ContractConfig => ({
+			address,
 
-	openMintNewCharacterModel() {
-		showWalletMintNewCharacterModal();
-	},
+			provider,
 
-	showSwitchNetworkModal,
+			openConnectModal() {
+				if (useAccountState.getState().email) {
+					showUpgradeEmailAccountModal();
+				} else {
+					showConnectModal();
+				}
+			},
+
+			openFaucetHintModel() {
+				showNoEnoughCSBModal("claim-csb");
+			},
+
+			getCurrentCharacterId() {
+				return useAccountState.getState().computed.account?.characterId ?? null;
+			},
+
+			openMintNewCharacterModel() {
+				showWalletMintNewCharacterModal();
+			},
+
+			showSwitchNetworkModal,
+		}),
+		[address, provider]
+	);
 };

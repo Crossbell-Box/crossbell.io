@@ -1,5 +1,4 @@
 import React from "react";
-import { useAccount } from "wagmi";
 import { Contract } from "crossbell.js";
 import { useRefCallback } from "@crossbell/util-hooks";
 
@@ -26,7 +25,10 @@ export function ContractProvider({
 export type ContractConfig = Omit<
 	InjectContractCheckerConfig,
 	"contract" | "getCurrentAddress"
->;
+> & {
+	address: string | undefined;
+	provider: ConstructorParameters<typeof Contract>[0];
+};
 
 export type InitContractProviderProps = ContractConfig & {
 	children: React.ReactNode;
@@ -39,8 +41,9 @@ export function InitContractProvider({
 	openMintNewCharacterModel: openMintNewCharacterModel_,
 	getCurrentCharacterId,
 	showSwitchNetworkModal,
+	address,
+	provider,
 }: InitContractProviderProps) {
-	const { connector, isConnected, address } = useAccount();
 	const openConnectModal = useRefCallback(openConnectModal_);
 	const openFaucetHintModel = useRefCallback(openFaucetHintModel_);
 	const openMintNewCharacterModel = useRefCallback(openMintNewCharacterModel_);
@@ -60,23 +63,22 @@ export function InitContractProvider({
 	});
 
 	React.useEffect(() => {
-		if (connector && isConnected) {
-			connector?.getProvider().then((res) => {
-				const _contract = new Contract(res as any);
-				setContract(
-					injectContractChecker({
-						contract: _contract,
-						getCurrentCharacterId,
-						openConnectModal,
-						openFaucetHintModel,
-						openMintNewCharacterModel,
-						getCurrentAddress,
-						showSwitchNetworkModal,
-					})
-				);
-			});
+		if (address && provider) {
+			const _contract = new Contract(provider);
+
+			setContract(
+				injectContractChecker({
+					contract: _contract,
+					getCurrentCharacterId,
+					openConnectModal,
+					openFaucetHintModel,
+					openMintNewCharacterModel,
+					getCurrentAddress,
+					showSwitchNetworkModal,
+				})
+			);
 		}
-	}, [connector, isConnected, openConnectModal]);
+	}, [provider, address, openConnectModal]);
 
 	return <ContractProvider contract={contract}>{children}</ContractProvider>;
 }

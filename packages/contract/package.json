@@ -34,7 +34,6 @@
 	},
 	"peerDependencies": {
 		"ethers": "^5",
-		"react": "^18",
-		"wagmi": "^0.12"
+		"react": "^18"
 	}
 }
