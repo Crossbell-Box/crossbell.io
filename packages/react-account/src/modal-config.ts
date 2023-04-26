@@ -1,6 +1,6 @@
 export type NoEnoughCSBKind = "claim-csb" | "transfer-csb-to-operator";
 
-export type HooksConfig = {
+export type ModalConfig = {
 	showClaimCSBTipsModal: (msg: string) => Promise<void>;
 	showNoEnoughCSBModal: (kind: NoEnoughCSBKind) => Promise<void>;
 	showConnectModal: () => Promise<void>;
@@ -8,7 +8,7 @@ export type HooksConfig = {
 	showWalletMintNewCharacterModal: () => Promise<void>;
 };
 
-export const hooksConfig: HooksConfig = {
+export const modalConfig: ModalConfig = {
 	showClaimCSBTipsModal() {
 		throw new Error("showClaimCSBTipsModal is not implemented yet");
 	},
@@ -30,6 +30,6 @@ export const hooksConfig: HooksConfig = {
 	},
 };
 
-export function configHooks(config: HooksConfig) {
-	Object.assign(hooksConfig, config);
+export function setupModal(config: ModalConfig) {
+	Object.assign(modalConfig, config);
 }

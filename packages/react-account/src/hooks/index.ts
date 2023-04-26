@@ -1,4 +1,3 @@
-export * from "./hooks-config/external";
 export * from "./account-state";
 export * from "./character-operator";
 export * from "./link-character";

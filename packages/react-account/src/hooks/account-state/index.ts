@@ -1,6 +1,8 @@
 import { create } from "zustand";
 import { persist } from "zustand/middleware";
 
+import { createStorage } from "../../storage-config";
+
 import {
 	createEmailAccountSlice,
 	EmailAccount,
@@ -78,6 +80,7 @@ export const useAccountState = create(
 		{
 			name: ACCOUNT_STATE_STORAGE_KEY,
 			partialize: ({ computed: _, ssrReady: __, ...state }) => state,
+			storage: createStorage(),
 		}
 	)
 );

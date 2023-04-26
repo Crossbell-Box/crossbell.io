@@ -10,6 +10,8 @@ export default defineConfig({
 		index: "src/index.ts",
 		utils: "src/utils/index.ts",
 		apis: "src/apis/index.ts",
+		["modal-config"]: "src/modal-config.ts",
+		["storage-config"]: "src/storage-config.ts",
 	},
 	outDir: "dist",
 	format: ["cjs", "esm"],

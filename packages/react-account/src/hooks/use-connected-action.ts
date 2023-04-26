@@ -6,7 +6,7 @@ import { EMPTY, filter, from, map, Subject, switchMap } from "rxjs";
 import { useAccountState } from "./account-state";
 import { useAccountCharacter } from "./use-account-character";
 import { useIsOpSignEnabled } from "./operator-sign";
-import { hooksConfig } from "./hooks-config";
+import { modalConfig } from "../modal-config";
 
 type Callback = () => void;
 type ConnectType = "wallet" | "email" | "any";
@@ -90,7 +90,7 @@ export function useConnectedAction<P extends any[], V>(
 					// Email is connected but require wallet connection
 					const emailCharacterId = email.characterId;
 
-					autoResume(hooksConfig.showUpgradeEmailAccountModal(), () => {
+					autoResume(modalConfig.showUpgradeEmailAccountModal(), () => {
 						const walletCharacterId =
 							useAccountState.getState().wallet?.characterId;
 
@@ -101,9 +101,9 @@ export function useConnectedAction<P extends any[], V>(
 					});
 				} else if (connectType !== "email" && wallet && !wallet?.characterId) {
 					// Wallet is connected but no character
-					autoResume(hooksConfig.showWalletMintNewCharacterModal(), callback);
+					autoResume(modalConfig.showWalletMintNewCharacterModal(), callback);
 				} else {
-					autoResume(hooksConfig.showConnectModal(), callback);
+					autoResume(modalConfig.showConnectModal(), callback);
 				}
 			});
 		}

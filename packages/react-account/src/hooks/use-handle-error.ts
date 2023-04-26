@@ -1,7 +1,7 @@
 import { useRefCallback } from "@crossbell/util-hooks";
 import { showNotification } from "@mantine/notifications";
 
-import { hooksConfig } from "./hooks-config";
+import { modalConfig } from "../modal-config";
 import { useAccountState } from "./account-state";
 
 const noEnoughCSB = "You do not have enough $CSB to perform this action";
@@ -15,7 +15,7 @@ export function useHandleError(title: string) {
 		const message = err instanceof Error ? err.message : `${err}`;
 
 		if (isWallet && message === noEnoughCSB) {
-			return hooksConfig.showNoEnoughCSBModal("transfer-csb-to-operator");
+			return modalConfig.showNoEnoughCSBModal("transfer-csb-to-operator");
 		}
 
 		showNotification({

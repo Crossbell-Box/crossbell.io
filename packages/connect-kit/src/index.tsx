@@ -33,7 +33,7 @@ import {
 	ConnectKitConfigContext,
 } from "./connect-kit-config";
 import { contractConfig } from "./contract-config";
-import { configHooks } from "./config-hooks";
+import { setupReactAccount } from "./setup-react-account";
 
 export * from "@crossbell/react-account";
 export { useConnectModal } from "./modals/connect-modal";
@@ -71,7 +71,7 @@ export type ConnectKitProviderProps = {
 
 const theme = { colorScheme: "light" } as const;
 
-configHooks();
+setupReactAccount();
 
 export function ConnectKitProvider({
 	children,

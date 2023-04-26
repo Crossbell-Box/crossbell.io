@@ -6,7 +6,7 @@ import { indexer } from "@crossbell/indexer";
 
 import { asyncExhaust, asyncRetry, SliceFn } from "../../utils";
 import { fetchAccountInfo, refillBalance } from "../../apis";
-import { hooksConfig } from "../hooks-config";
+import { modalConfig } from "../../modal-config";
 
 export type EmailAccount = {
 	type: "email";
@@ -122,7 +122,7 @@ export const createEmailAccountSlice: SliceFn<EmailAccountSlice> = (
 
 			if ("ok" in result) {
 				if (result.message) {
-					hooksConfig.showClaimCSBTipsModal(result.message);
+					modalConfig.showClaimCSBTipsModal(result.message);
 				}
 
 				return result.ok;
@@ -164,7 +164,7 @@ export const createEmailAccountSlice: SliceFn<EmailAccountSlice> = (
 			case RefillEmailBalanceStatusType.tooMuchCSB:
 			case RefillEmailBalanceStatusType.userNotConnected:
 				if (showTips) {
-					hooksConfig.showClaimCSBTipsModal(status.msg);
+					modalConfig.showClaimCSBTipsModal(status.msg);
 				}
 				return false;
 		}

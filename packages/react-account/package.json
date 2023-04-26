@@ -26,6 +26,11 @@
 			"import": "./dist/index.mjs",
 			"require": "./dist/index.js"
 		},
+		"./config": {
+			"types": "./dist/config.d.ts",
+			"import": "./dist/config.mjs",
+			"require": "./dist/config.js"
+		},
 		"./utils": {
 			"types": "./dist/utils.d.ts",
 			"import": "./dist/utils.mjs",
