@@ -1,4 +1,3 @@
-import { useAccount } from "wagmi";
 import {
 	useMutation,
 	UseMutationOptions,
@@ -6,7 +5,7 @@ import {
 } from "@tanstack/react-query";
 import { showNotification } from "@mantine/notifications";
 
-import { useContract } from "@crossbell/contract";
+import { useContract, useAddress } from "@crossbell/contract";
 import {
 	SCOPE_KEY_CHARACTERS,
 	SCOPE_KEY_PRIMARY_CHARACTER,
@@ -20,10 +19,11 @@ export type UseSetPrimaryCharacterOptions = UseMutationOptions<
 	UpdateFnParams
 >;
 
+// TODO: refactor this to use account-type-based-hooks
 export function useSetPrimaryCharacter(
 	options?: UseSetPrimaryCharacterOptions
 ) {
-	const { address } = useAccount();
+	const address = useAddress();
 
 	const contract = useContract();
 	const queryClient = useQueryClient();

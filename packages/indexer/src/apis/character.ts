@@ -7,7 +7,7 @@ const SCOPE_KEY = ["indexer", "characters"];
 
 // get list of characters by address
 
-export const SCOPE_KEY_CHARACTERS = (address?: string) => {
+export const SCOPE_KEY_CHARACTERS = (address: string | null | undefined) => {
 	return [...SCOPE_KEY, "list", address];
 };
 export function useCharacters(address?: string) {
@@ -91,7 +91,9 @@ export function useCharacterHandleExists(handle?: string) {
 
 // get the primary character of an address
 
-export const SCOPE_KEY_PRIMARY_CHARACTER = (address?: string) => {
+export const SCOPE_KEY_PRIMARY_CHARACTER = (
+	address: string | null | undefined
+) => {
 	return [...SCOPE_KEY, "primary", address];
 };
 

@@ -4,19 +4,29 @@ import { useRefCallback } from "@crossbell/util-hooks";
 
 import { injectContractChecker, InjectContractCheckerConfig } from "./utils";
 
-const ContractContext = React.createContext<Contract | null>(null);
-
 export type ContractProviderProps = {
 	contract: Contract;
+	address: string | null;
 	children?: React.ReactNode;
 };
 
+const ContractContext = React.createContext<{
+	address: string | null;
+	contract: Contract | null;
+}>({ address: null, contract: null });
+
 export function ContractProvider({
 	contract,
+	address,
 	children,
 }: ContractProviderProps) {
+	const value = React.useMemo(
+		() => ({ contract, address }),
+		[contract, address]
+	);
+
 	return (
-		<ContractContext.Provider value={contract}>
+		<ContractContext.Provider value={value}>
 			{children}
 		</ContractContext.Provider>
 	);
@@ -80,11 +90,15 @@ export function InitContractProvider({
 		}
 	}, [provider, address, openConnectModal]);
 
-	return <ContractProvider contract={contract}>{children}</ContractProvider>;
+	return (
+		<ContractProvider contract={contract} address={address ?? null}>
+			{children}
+		</ContractProvider>
+	);
 }
 
 export function useContract() {
-	const contract = React.useContext(ContractContext);
+	const { contract } = React.useContext(ContractContext);
 
 	if (!contract) {
 		throw new Error(
@@ -93,4 +107,8 @@ export function useContract() {
 	}
 
 	return contract;
+}
+
+export function useAddress() {
+	return React.useContext(ContractContext).address;
 }
