@@ -13,6 +13,10 @@ type Siwe = { token: string };
 export async function siweSignIn(signer: BaseSigner): Promise<Siwe> {
 	const address = await signer.getAddress();
 
+	if (!address) {
+		throw new Error(`SignInError: invalid address ${address}`);
+	}
+
 	const { message } = await request<{ message: string }>("/siwe/challenge", {
 		method: "POST",
 		body: {

@@ -3,7 +3,7 @@ import { useRefCallback } from "@crossbell/util-hooks";
 
 export type BaseSigner = {
 	signMessage: (msg: string) => Promise<string>;
-	getAddress: () => Promise<string>;
+	getAddress: () => Promise<string | null>;
 };
 
 export type ReactAccountContext = {
