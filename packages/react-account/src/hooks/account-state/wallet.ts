@@ -1,9 +1,9 @@
 import { CharacterEntity } from "crossbell.js";
-import { Signer } from "ethers";
 import { indexer } from "@crossbell/indexer";
 
 import { isAddressEqual } from "@crossbell/util-ethers";
 
+import { BaseSigner } from "../../context";
 import { asyncExhaust, SliceFn } from "../../utils";
 import { siweGetAccount, siweGetBalance, siweSignIn } from "../../apis";
 
@@ -31,7 +31,7 @@ export type WalletAccountSlice = {
 	refreshWallet(): Promise<boolean>;
 	switchCharacter(character: CharacterEntity): void;
 
-	siweSignIn(signer: Signer): Promise<boolean>;
+	siweSignIn(signer: BaseSigner): Promise<boolean>;
 };
 
 export const createWalletAccountSlice: SliceFn<WalletAccountSlice> = (

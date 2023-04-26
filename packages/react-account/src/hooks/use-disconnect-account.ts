@@ -1,12 +1,12 @@
 import React from "react";
-import { useDisconnect } from "wagmi";
 
 import { useRefCallback } from "@crossbell/util-hooks";
 
+import { useContext } from "../context";
 import { useAccountState } from "./account-state";
 
 export function useDisconnectAccount(afterDisconnect_?: () => void) {
-	const { disconnect } = useDisconnect();
+	const { onDisconnect } = useContext();
 	const [disconnectEmail, disconnectWallet] = useAccountState((s) => [
 		s.disconnectEmail,
 		s.disconnectWallet,
@@ -14,7 +14,7 @@ export function useDisconnectAccount(afterDisconnect_?: () => void) {
 	const afterDisconnect = useRefCallback(afterDisconnect_);
 
 	return React.useCallback(() => {
-		disconnect();
+		onDisconnect();
 		disconnectWallet();
 		disconnectEmail();
 		afterDisconnect();

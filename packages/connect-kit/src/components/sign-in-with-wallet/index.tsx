@@ -32,11 +32,11 @@ export function SignInWithWallet({
 	}, [isWalletSignedIn]);
 
 	React.useEffect(() => {
-		if (autoSignIn && signIn.isReady && !signIn.isLoading) {
+		if (autoSignIn && !signIn.isLoading) {
 			const timeout = setTimeout(() => signIn.mutate(), 500);
 			return () => clearTimeout(timeout);
 		}
-	}, [autoSignIn, signIn.isReady]);
+	}, [autoSignIn]);
 
 	return (
 		<div>

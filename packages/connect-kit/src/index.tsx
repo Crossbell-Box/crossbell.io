@@ -1,5 +1,5 @@
 import React from "react";
-import { useAccount } from "wagmi";
+import { useAccount, useDisconnect } from "wagmi";
 import { Notifications } from "@mantine/notifications";
 import {
 	UseWeb2UrlContext,
@@ -9,7 +9,11 @@ import {
 } from "@crossbell/ui";
 import { InitContractProvider } from "@crossbell/contract";
 import { MantineProvider } from "@mantine/core";
-import { useAccountState } from "@crossbell/react-account";
+import {
+	useAccountState,
+	ReactAccountProvider,
+} from "@crossbell/react-account";
+import { useRefCallback } from "@crossbell/util-hooks";
 
 import { usePreloadAllImgs } from "./utils";
 import { ClaimCSBTipsModal } from "./modals/claim-csb-tips-modal";
@@ -85,6 +89,8 @@ export function ConnectKitProvider({
 	const accountState = useAccountState();
 	const account = useAccount();
 	const contractConfig = useContractConfig();
+	const { disconnect } = useDisconnect();
+	const getSinger = useRefCallback(async () => account.connector?.getSigner());
 
 	React.useEffect(() => {
 		if (account.status === "connected") {
@@ -107,28 +113,30 @@ export function ConnectKitProvider({
 		<InitContractProvider {...contractConfig}>
 			<UseWeb2UrlContext.Provider value={ipfsLinkToHttpLink ?? null}>
 				<UrlComposerContext.Provider value={urlComposer ?? null}>
-					<ConnectKitConfigContext.Provider value={connectKitConfig}>
-						<XSettingsConfigContext.Provider value={xSettings ?? null}>
-							<MantineProvider theme={theme}>
-								<ConnectModal />
-								<DisconnectModal />
-								<ClaimCSBTipsModal />
-								<CsbDetailModal />
-								<WalletClaimCSBModal />
-								<OpSignSettingsModal />
-								<TransferCSBToOperatorModal />
-								<NoEnoughCSBModal />
-								<WalletMintNewCharacter />
-								<SelectCharactersModal />
-								<DynamicScenesModal />
-								<SetupSentry />
-								<SentryPrivacyModal />
-								<TipModal />
-								<SwitchNetworkModal />
-							</MantineProvider>
-							{children}
-						</XSettingsConfigContext.Provider>
-					</ConnectKitConfigContext.Provider>
+					<ReactAccountProvider getSinger={getSinger} onDisconnect={disconnect}>
+						<ConnectKitConfigContext.Provider value={connectKitConfig}>
+							<XSettingsConfigContext.Provider value={xSettings ?? null}>
+								<MantineProvider theme={theme}>
+									<ConnectModal />
+									<DisconnectModal />
+									<ClaimCSBTipsModal />
+									<CsbDetailModal />
+									<WalletClaimCSBModal />
+									<OpSignSettingsModal />
+									<TransferCSBToOperatorModal />
+									<NoEnoughCSBModal />
+									<WalletMintNewCharacter />
+									<SelectCharactersModal />
+									<DynamicScenesModal />
+									<SetupSentry />
+									<SentryPrivacyModal />
+									<TipModal />
+									<SwitchNetworkModal />
+								</MantineProvider>
+								{children}
+							</XSettingsConfigContext.Provider>
+						</ConnectKitConfigContext.Provider>
+					</ReactAccountProvider>
 				</UrlComposerContext.Provider>
 			</UseWeb2UrlContext.Provider>
 		</InitContractProvider>

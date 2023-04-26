@@ -60,8 +60,7 @@
 	},
 	"peerDependencies": {
 		"@tanstack/react-query": "^4",
-		"ethers": "^5",
-		"wagmi": "^0.12"
+		"ethers": "^5"
 	},
 	"devDependencies": {
 		"@types/lodash.debounce": "4.0.7"

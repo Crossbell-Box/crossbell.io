@@ -1,4 +1,3 @@
-import { Signer } from "ethers";
 import {
 	CharacterMetadata,
 	LinkItemNote,
@@ -7,10 +6,11 @@ import {
 } from "crossbell.js";
 
 import { request } from "./utils";
+import { BaseSigner } from "../context";
 
 type Siwe = { token: string };
 
-export async function siweSignIn(signer: Signer): Promise<Siwe> {
+export async function siweSignIn(signer: BaseSigner): Promise<Siwe> {
 	const address = await signer.getAddress();
 
 	const { message } = await request<{ message: string }>("/siwe/challenge", {

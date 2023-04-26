@@ -1,17 +1,17 @@
-import { useSigner } from "wagmi";
 import { useMutation } from "@tanstack/react-query";
 
+import { useContext } from "../../context";
 import { useAccountState } from "../account-state";
 
 export function useWalletSignIn() {
 	const siweSignIn = useAccountState((s) => s.siweSignIn);
-	const { data: signer } = useSigner();
+	const { getSinger } = useContext();
 
-	const mutation = useMutation(async () => {
+	return useMutation(async () => {
+		const signer = await getSinger();
+
 		if (signer) {
 			await siweSignIn(signer);
 		}
 	});
-
-	return { ...mutation, isReady: !!signer };
 }
