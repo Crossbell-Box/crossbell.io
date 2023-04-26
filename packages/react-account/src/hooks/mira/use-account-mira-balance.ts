@@ -1,12 +1,12 @@
-import { useBalance } from "wagmi";
 import { useQuery } from "@tanstack/react-query";
 import { useContract } from "@crossbell/contract";
 
 import { getMiraBalance } from "../../apis";
 import { useConnectedAccount } from "../use-connected-account";
+import { AccountBalance } from "../use-account-balance";
 
 export type UseAccountMiraBalanceResult = {
-	balance: ReturnType<typeof useBalance>["data"] | null;
+	balance: AccountBalance | null;
 	isLoading: boolean;
 };
 
@@ -27,5 +27,5 @@ export function useAccountMiraBalance(): UseAccountMiraBalanceResult {
 		{ enabled: !!address }
 	);
 
-	return { balance: data, isLoading };
+	return { balance: data ?? null, isLoading };
 }

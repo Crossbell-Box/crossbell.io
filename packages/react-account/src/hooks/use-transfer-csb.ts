@@ -4,6 +4,7 @@ import { waitUntilTransactionFinished } from "../apis";
 
 import { useAccountState } from "./account-state";
 import { createAccountTypeBasedMutationHooks } from "./account-type-based-hooks";
+import { SCOPE_KEY_ACCOUNT_BALANCE } from "./use-account-balance";
 
 export type UseTransferCSBParams = {
 	toAddress: string;
@@ -26,7 +27,10 @@ export const useTransferCsb = createAccountTypeBasedMutationHooks<
 		},
 	},
 
-	onSuccess() {
-		return Promise.all([useAccountState.getState().refresh()]);
+	onSuccess({ queryClient, account }) {
+		return Promise.all([
+			useAccountState.getState().refresh(),
+			queryClient.invalidateQueries(SCOPE_KEY_ACCOUNT_BALANCE(account)),
+		]);
 	},
 }));

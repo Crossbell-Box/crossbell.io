@@ -1,19 +1,34 @@
-import { useBalance } from "wagmi";
 import { BigNumber, utils } from "ethers";
 import React from "react";
-import { crossbell } from "wagmi/chains";
+import { useContract } from "@crossbell/contract";
+import { useQuery } from "@tanstack/react-query";
 
-import { useAccountState } from "./account-state";
+import { useConnectedAccount } from "./use-connected-account";
+import { GeneralAccount } from "./account-state";
+
+export type AccountBalance = {
+	decimals: number;
+	formatted: string;
+	symbol: string;
+	value: BigNumber;
+};
 
 export type UseAccountBalanceResult = {
-	balance: ReturnType<typeof useBalance>["data"] | null;
+	balance: AccountBalance | null;
 	isLoading: boolean;
 };
 
 const NO_BALANCE: UseAccountBalanceResult = { balance: null, isLoading: false };
 
+export const SCOPE_KEY_ACCOUNT_BALANCE = (account: GeneralAccount | null) => [
+	"connect-kit",
+	"balance",
+	account?.type,
+	account?.type === "email" ? account.email : account?.address,
+];
+
 export function useAccountBalance(): UseAccountBalanceResult {
-	const account = useAccountState((s) => s.computed.account);
+	const account = useConnectedAccount();
 	const emailBalance = useEmailAccountBalance();
 	const walletBalance = useWalletAccountBalance();
 
@@ -28,7 +43,7 @@ export function useAccountBalance(): UseAccountBalanceResult {
 }
 
 export function useEmailAccountBalance(): UseAccountBalanceResult {
-	const email = useAccountState((s) => s.email);
+	const email = useConnectedAccount("email");
 
 	return React.useMemo((): UseAccountBalanceResult => {
 		if (!email) return { balance: null, isLoading: false };
@@ -49,12 +64,29 @@ export function useEmailAccountBalance(): UseAccountBalanceResult {
 }
 
 export function useWalletAccountBalance(): UseAccountBalanceResult {
-	const wallet = useAccountState((s) => s.wallet);
+	const wallet = useConnectedAccount("wallet");
+	const contract = useContract();
 
-	const { data: balance, isLoading } = useBalance({
-		chainId: crossbell.id,
-		address: wallet?.address as `0x${string}` | undefined,
-	});
+	const { data, isLoading } = useQuery(
+		SCOPE_KEY_ACCOUNT_BALANCE(wallet),
+		async () => {
+			if (!wallet?.address) return null;
 
-	return React.useMemo(() => ({ balance, isLoading }), [balance, isLoading]);
+			const decimals = 18;
+			const { data } = await contract.getBalance(wallet.address);
+			const value = BigNumber.from(data);
+
+			return {
+				decimals,
+				formatted: utils.formatUnits(value, decimals),
+				symbol: "CSB",
+				value,
+			};
+		}
+	);
+
+	return {
+		balance: data ?? null,
+		isLoading,
+	};
 }

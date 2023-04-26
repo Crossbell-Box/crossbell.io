@@ -1,12 +1,10 @@
-import { useBalance } from "wagmi";
 import { BigNumber, utils } from "ethers";
 import React from "react";
 
 import { useAccountState } from "../account-state";
+import { AccountBalance } from "../use-account-balance";
 
-export function useOpSignBalance():
-	| ReturnType<typeof useBalance>["data"]
-	| null {
+export function useOpSignBalance(): AccountBalance | null {
 	const [csb, refreshWallet] = useAccountState((s) => [
 		s.wallet?.siwe?.csb,
 		s.refreshWallet,
