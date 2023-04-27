@@ -41,6 +41,13 @@
 	margin-left: auto;
 }
 
+.balanceFormatted {
+	flex: 1;
+	width: 0;
+	text-overflow: ellipsis;
+	overflow: hidden;
+}
+
 .operatorAccount {
 	display: flex;
 	align-items: center;

@@ -37,7 +37,12 @@ export function Balance() {
 
 				<div className={styles.balance}>
 					<LogoIcon />
-					{balance?.formatted}
+
+					<Tooltip label={balance?.formatted}>
+						<span className={styles.balanceFormatted}>
+							{balance?.formatted}
+						</span>
+					</Tooltip>
 
 					{claimCSBStatus.isEligibleToClaim ? (
 						<ActionBtn
