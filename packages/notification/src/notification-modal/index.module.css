@@ -2,6 +2,7 @@
 	--csb-notification-color-text: #000;
 	--csb-notification-color-textSecondary: #687792;
 	--csb-notification-color-closeBtn: #999;
+	--csb-notification-color-border: #999;
 	--csb-notification-color-background: #fff;
 	--csb-notification-color-indicator: #fa5252;
 	--csb-notification-color-transactionHash: #f6c549;
@@ -14,6 +15,7 @@
 	padding: 24px 0;
 	color: var(--csb-notification-color-text);
 	background: var(--csb-notification-color-background);
+	border: 1px solid var(--csb-notification-color-border);
 	border-radius: 28px;
 }
 

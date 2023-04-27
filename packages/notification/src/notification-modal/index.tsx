@@ -24,6 +24,7 @@ export type NotificationModalColorScheme = {
 	text?: string;
 	textSecondary?: string;
 	closeBtn?: string;
+	border?: string;
 	background?: string;
 	indicator?: string;
 	transactionHash?: string;
