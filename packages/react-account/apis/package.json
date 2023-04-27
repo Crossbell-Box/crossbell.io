@@ -1,0 +1,5 @@
+{
+	"main": "../dist/apis.js",
+	"module": "../dist/apis.mjs",
+	"typings": "../dist/apis.d.ts"
+}

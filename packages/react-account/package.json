@@ -13,6 +13,10 @@
 	"sideEffects": false,
 	"files": [
 		"dist",
+		"apis",
+		"modal-config",
+		"storage-config",
+		"utils",
 		"package.json"
 	],
 	"scripts": {

@@ -1,0 +1,5 @@
+{
+	"main": "../dist/modal-config.js",
+	"module": "../dist/modal-config.mjs",
+	"typings": "../dist/modal-config.d.ts"
+}

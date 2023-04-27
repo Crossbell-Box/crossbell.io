@@ -1,0 +1,5 @@
+{
+	"main": "../dist/storage-config.js",
+	"module": "../dist/storage-config.mjs",
+	"typings": "../dist/storage-config.d.ts"
+}
