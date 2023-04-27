@@ -26,10 +26,15 @@
 			"import": "./dist/index.mjs",
 			"require": "./dist/index.js"
 		},
-		"./config": {
-			"types": "./dist/config.d.ts",
-			"import": "./dist/config.mjs",
-			"require": "./dist/config.js"
+		"./modal-config": {
+			"types": "./dist/modal-config.d.ts",
+			"import": "./dist/modal-config.mjs",
+			"require": "./dist/modal-config.js"
+		},
+		"./storage-config": {
+			"types": "./dist/storage-config.d.ts",
+			"import": "./dist/storage-config.mjs",
+			"require": "./dist/storage-config.js"
 		},
 		"./utils": {
 			"types": "./dist/utils.d.ts",
