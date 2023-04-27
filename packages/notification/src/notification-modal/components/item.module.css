@@ -5,25 +5,6 @@
 	padding: 12px 0;
 }
 
-.avatar {
-	position: relative;
-}
-
-.avatar[data-is-read="true"]::after {
-	display: none;
-}
-
-.avatar::after {
-	content: "";
-	position: absolute;
-	top: 1.5px;
-	right: -1.5px;
-	width: 9px;
-	height: 9px;
-	border-radius: 9px;
-	background: #e65040;
-}
-
 .main {
 	flex: 1;
 }
@@ -51,7 +32,7 @@
 }
 
 .transactionHash {
-	color: #f6c549;
+	color: var(--csb-notification-color-transactionHash);
 }
 
 .transactionHash svg {
@@ -67,7 +48,7 @@
 	display: flex;
 	font-weight: 400;
 	font-size: 12px;
-	color: #687792;
+	color: var(--csb-notification-color-textSecondary);
 }
 
 .title a {

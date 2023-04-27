@@ -1,9 +1,19 @@
 .modal {
+	--csb-notification-color-text: #000;
+	--csb-notification-color-textSecondary: #687792;
+	--csb-notification-color-closeBtn: #999;
+	--csb-notification-color-background: #fff;
+	--csb-notification-color-indicator: #fa5252;
+	--csb-notification-color-transactionHash: #f6c549;
+	--csb-notification-color-bellPrimary: #f6c549;
+	--csb-notification-color-bellSecondary: #d2a52a;
+
 	width: 600px;
 	max-width: 90vw;
 	overflow: hidden;
 	padding: 24px 0;
-	background: #fff;
+	color: var(--csb-notification-color-text);
+	background: var(--csb-notification-color-background);
 	border-radius: 28px;
 }
 
@@ -35,7 +45,8 @@
 
 .loader {
 	font-size: 36px;
-	color: rgba(0, 0, 0, 0.5);
+	color: var(--csb-notification-color-text);
+	opacity: 0.5;
 }
 
 .scrollArea {
@@ -55,14 +66,14 @@
 	background: transparent;
 	outline: none;
 	border-radius: 8px;
-	color: #999;
+	color: var(--csb-notification-color-closeBtn);
 	transition: background-color 0.2s;
 }
 
 .closeBtn:hover {
-	background: rgba(0, 0, 0, 0.05);
+	background: rgba(50%, 50%, 50%, 0.1);
 }
 
 .closeBtn:active {
-	background: rgba(0, 0, 0, 0.15);
+	background: rgba(50%, 50%, 50%, 0.3);
 }

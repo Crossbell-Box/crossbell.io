@@ -2,3 +2,11 @@
 	position: relative;
 	line-height: 0;
 }
+
+.primary {
+	fill: var(--csb-notification-color-bellPrimary);
+}
+
+.secondary {
+	fill: var(--csb-notification-color-bellSecondary);
+}

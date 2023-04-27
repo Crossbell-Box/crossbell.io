@@ -20,7 +20,22 @@ export function useShowNotificationModal() {
 	return useModalState((s) => s.showModal);
 }
 
-export function NotificationModal() {
+export type NotificationModalColorScheme = {
+	text?: string;
+	textSecondary?: string;
+	closeBtn?: string;
+	background?: string;
+	indicator?: string;
+	transactionHash?: string;
+	bellPrimary?: string;
+	bellSecondary?: string;
+};
+
+export type NotificationModalProps = {
+	colorScheme?: NotificationModalColorScheme;
+};
+
+export function NotificationModal({ colorScheme }: NotificationModalProps) {
 	const {
 		notifications,
 		total,
@@ -32,6 +47,8 @@ export function NotificationModal() {
 		isFetchingNextPage,
 	} = useNotifications();
 
+	const colorVariable = useColorVariable(colorScheme);
+
 	const { isModalActive, hideModal: hideModal_ } = useModalState();
 	const { isRead } = useReadingState();
 
@@ -42,7 +59,7 @@ export function NotificationModal() {
 
 	return (
 		<BaseModal onClickBg={hideModal} isActive={isModalActive}>
-			<div className={styles.modal}>
+			<div className={styles.modal} style={colorVariable}>
 				<div className={styles.header}>
 					<Indicator disabled={isAllRead}>
 						<Bell className={styles.headerBell} />
@@ -81,4 +98,16 @@ export function NotificationModal() {
 			</div>
 		</BaseModal>
 	);
+}
+
+function useColorVariable(color: NotificationModalColorScheme = {}) {
+	return React.useMemo(() => {
+		const style: Record<string, string> = {};
+
+		Object.entries(color).forEach(([key, value]) => {
+			style[`--csb-notification-color-${key}`] = value;
+		});
+
+		return style as React.CSSProperties;
+	}, [color]);
 }
