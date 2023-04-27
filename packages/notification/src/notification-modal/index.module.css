@@ -33,8 +33,15 @@
 	justify-content: center;
 }
 
+.loader {
+	font-size: 36px;
+	color: rgba(0, 0, 0, 0.5);
+}
+
 .scrollArea {
 	padding: 0 24px;
+	max-height: 70vh;
+	overflow: auto;
 }
 
 .closeBtn {

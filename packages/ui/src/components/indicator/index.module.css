@@ -1,0 +1,11 @@
+.container {
+	position: relative;
+}
+
+.indicator {
+	position: absolute;
+	right: 0;
+	top: 0;
+	border-radius: 100vh;
+	transform: translate(50%, -50%);
+}

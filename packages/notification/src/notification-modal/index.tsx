@@ -1,7 +1,12 @@
 import React from "react";
-import { ScrollArea, Loader, Indicator } from "@mantine/core";
 import { useRefCallback } from "@crossbell/util-hooks";
-import { BaseModal, LoadMore, CloseIcon } from "@crossbell/ui";
+import {
+	BaseModal,
+	LoadMore,
+	CloseIcon,
+	Indicator,
+	Loading,
+} from "@crossbell/ui";
 
 import { useModalState, useReadingState, useNotifications } from "../hooks";
 
@@ -39,7 +44,7 @@ export function NotificationModal() {
 		<BaseModal onClickBg={hideModal} isActive={isModalActive}>
 			<div className={styles.modal}>
 				<div className={styles.header}>
-					<Indicator size={9} disabled={isAllRead} color="red" offset={4.5}>
+					<Indicator disabled={isAllRead}>
 						<Bell className={styles.headerBell} />
 					</Indicator>
 					<span className={styles.headerTitle}>Notifications</span>
@@ -48,13 +53,10 @@ export function NotificationModal() {
 					</button>
 				</div>
 
-				<ScrollArea.Autosize
-					mah="70vh"
-					classNames={{ root: styles.scrollArea }}
-				>
+				<div className={styles.scrollArea}>
 					{isLoading ? (
 						<div className={styles.loader}>
-							<Loader />
+							<Loading />
 						</div>
 					) : total > 0 ? (
 						<div>
@@ -75,7 +77,7 @@ export function NotificationModal() {
 					) : (
 						<div className={styles.noNotificationTips}>No notification yet</div>
 					)}
-				</ScrollArea.Autosize>
+				</div>
 			</div>
 		</BaseModal>
 	);

@@ -2,17 +2,11 @@ import React from "react";
 import dayjs from "dayjs";
 // https://github.com/iamkun/dayjs/issues/1167
 import relativeTime from "dayjs/plugin/relativeTime.js";
-import { Indicator, Avatar } from "@mantine/core";
 import { utils } from "ethers";
 import type { NoteEntity } from "crossbell.js";
-
+import { Indicator, CharacterAvatar } from "@crossbell/ui";
 import { ParsedNotification } from "@crossbell/indexer";
-import {
-	CrossbellChainLogo,
-	useCharacterAvatar,
-	useUrlComposer,
-	UrlComposer,
-} from "@crossbell/ui";
+import { CrossbellChainLogo, useUrlComposer, UrlComposer } from "@crossbell/ui";
 import { extractCharacterName } from "@crossbell/util-metadata";
 
 import styles from "./item.module.css";
@@ -27,7 +21,6 @@ export type ItemProps = {
 export function Item({ notification, isRead }: ItemProps) {
 	const urlComposer = useUrlComposer();
 	const titleInfo = getTitleInfo(notification, urlComposer);
-	const avatar = useCharacterAvatar(notification.fromCharacter ?? {});
 
 	return (
 		<div className={styles.container}>
@@ -36,8 +29,8 @@ export function Item({ notification, isRead }: ItemProps) {
 				target="_blank"
 				rel="noreferrer"
 			>
-				<Indicator size={9} disabled={isRead} color="red" offset={4.5}>
-					<Avatar radius="xl" src={avatar.src} />
+				<Indicator disabled={isRead}>
+					<CharacterAvatar character={notification.fromCharacter} size={38} />
 				</Indicator>
 			</a>
 			<div className={styles.main}>
