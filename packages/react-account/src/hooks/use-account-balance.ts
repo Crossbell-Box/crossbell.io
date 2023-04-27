@@ -72,21 +72,26 @@ export function useWalletAccountBalance(): UseAccountBalanceResult {
 		async () => {
 			if (!wallet?.address) return null;
 
-			const decimals = 18;
-			const { data } = await contract.getBalance(wallet.address);
-			const value = BigNumber.from(data);
-
-			return {
-				decimals,
-				formatted: utils.formatUnits(value, decimals),
-				symbol: "CSB",
-				value,
-			};
+			return (await contract.getBalance(wallet.address)).data;
 		}
 	);
 
+	const balance = React.useMemo(() => {
+		if (!data) return null;
+
+		const decimals = 18;
+		const value = BigNumber.from(data);
+
+		return {
+			decimals,
+			formatted: utils.formatUnits(value, decimals),
+			symbol: "CSB",
+			value,
+		};
+	}, [data]);
+
 	return {
-		balance: data ?? null,
+		balance,
 		isLoading,
 	};
 }
