@@ -27,5 +27,6 @@
 		"type": "separator",
 		"title": "Others"
 	},
+	"csb-detail-modal": "CSB Detail",
 	"sentry-privacy-modal": "Sentry Privacy"
 }

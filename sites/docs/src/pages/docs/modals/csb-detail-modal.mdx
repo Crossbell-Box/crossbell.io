@@ -1,0 +1,33 @@
+import { OptionTable } from "@/components";
+import { CSBDetailModalExample } from "@/examples";
+
+# CSB Detail Modal
+
+<div className="my-8">
+	<CSBDetailModalExample />
+</div>
+
+## Usage
+
+```tsx copy
+import { useIsConnected, useCsbDetailModal } from "@crossbell/connet-kit";
+
+export function CSBDetailBtn() {
+	const isConnected = useIsConnected();
+	const { isActive, show, hide } = useCsbDetailModal();
+
+	if (!isConnected) return null;
+
+	return <button onClick={show}>CSB Detail</button>;
+}
+```
+
+## Return type
+
+<OptionTable
+	options={[
+		["isActive", "boolean", "Indicates whether the modal is activated or not"],
+		["show", "() => void", "Show modal"],
+		["hide", "() => void", "Hide modal"],
+	]}
+/>
