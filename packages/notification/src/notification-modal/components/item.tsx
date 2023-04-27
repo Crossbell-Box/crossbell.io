@@ -133,6 +133,8 @@ function actionDesc(
 					</a>
 				</span>
 			);
+		case "mention":
+			return <span>mentioned you</span>;
 	}
 
 	return null;
@@ -158,6 +160,11 @@ function getTitleInfo(
 			return {
 				title: getNoteTitle(notification.toNote),
 				url: urlComposer.noteUrl(notification.toNote),
+			};
+		case "mention":
+			return {
+				title: getNoteTitle(notification.fromNote),
+				url: urlComposer.noteUrl(notification.fromNote),
 			};
 	}
 

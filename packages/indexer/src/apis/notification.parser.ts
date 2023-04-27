@@ -115,6 +115,21 @@ export async function parseNotificationEntity(
 
 			return null;
 		}
+
+		case "MENTIONED": {
+			const feed = entity.feed;
+
+			if (feed?.character && feed.note) {
+				return {
+					...baseInfo,
+					type: "mention",
+					fromCharacter: feed.character,
+					fromNote: feed.note,
+				};
+			}
+
+			return null;
+		}
 	}
 	return null;
 }

@@ -60,10 +60,19 @@ export type TipCharacterNotification = BaseNotification<
 	}
 >;
 
+export type MentionNotification = BaseNotification<
+	"mention",
+	{
+		fromCharacter: CharacterEntity;
+		fromNote: NoteEntity;
+	}
+>;
+
 export type ParsedNotification =
 	| LikeNoteNotification
 	| CommentNoteNotification
 	| MintNoteNotification
 	| FollowCharacterNotification
 	| TipNoteNotification
-	| TipCharacterNotification;
+	| TipCharacterNotification
+	| MentionNotification;
