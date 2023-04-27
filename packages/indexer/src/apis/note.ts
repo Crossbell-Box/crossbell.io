@@ -1,6 +1,6 @@
 import { indexer } from "../indexer";
 import { useQuery, useInfiniteQuery } from "@tanstack/react-query";
-import { useAccount } from "wagmi";
+import { useAddress } from "@crossbell/contract";
 
 import { NoteLinkType } from "./types";
 
@@ -104,7 +104,7 @@ export const SCOPE_KEY_NOTE_STATUS = (characterId: number, noteId: number) => {
 	return [...SCOPE_KEY, "status", characterId, noteId];
 };
 export function useNoteStatus(characterId: number, noteId: number) {
-	const { address } = useAccount();
+	const address = useAddress();
 
 	return useQuery(
 		SCOPE_KEY_NOTE_STATUS(characterId, noteId),
