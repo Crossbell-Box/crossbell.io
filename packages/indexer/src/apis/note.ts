@@ -133,7 +133,7 @@ export function useNoteStatus({
 	characterId,
 	noteId,
 	address,
-}: Pick<NoteEntity, "characterId" | "noteId"> & { address: string }) {
+}: Pick<NoteEntity, "characterId" | "noteId"> & { address?: string }) {
 	return useQuery(
 		SCOPE_KEY_NOTE_STATUS({ characterId, noteId }),
 		async () => {
