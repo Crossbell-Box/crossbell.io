@@ -16,6 +16,7 @@
 		"apis",
 		"modal-config",
 		"storage-config",
+		"ssr-config",
 		"utils",
 		"package.json"
 	],
@@ -39,6 +40,11 @@
 			"types": "./dist/storage-config.d.ts",
 			"import": "./dist/storage-config.mjs",
 			"require": "./dist/storage-config.js"
+		},
+		"./ssr-config": {
+			"types": "./dist/ssr-config.d.ts",
+			"import": "./dist/ssr-config.mjs",
+			"require": "./dist/ssr-config.js"
 		},
 		"./utils": {
 			"types": "./dist/utils.d.ts",

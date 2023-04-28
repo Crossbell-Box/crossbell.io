@@ -2,6 +2,7 @@ import { create } from "zustand";
 import { persist } from "zustand/middleware";
 
 import { createStorage } from "../../storage-config";
+import { getNeedSSR } from "../../ssr-config";
 
 import {
 	createEmailAccountSlice,
@@ -40,7 +41,8 @@ export const useAccountState = create(
 		(set, get) => ({
 			...createEmailAccountSlice(set, get),
 			...createWalletAccountSlice(set, get),
-			ssrReady: false,
+
+			ssrReady: !getNeedSSR(),
 
 			computed: {
 				get account() {

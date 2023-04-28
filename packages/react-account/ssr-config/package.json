@@ -1,0 +1,5 @@
+{
+	"main": "../dist/ssr-config.js",
+	"module": "../dist/ssr-config.mjs",
+	"typings": "../dist/ssr-config.d.ts"
+}
