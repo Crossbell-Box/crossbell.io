@@ -15,7 +15,14 @@ export function useNotesOfCharacter(characterId?: number) {
 	return useInfiniteQuery(
 		SCOPE_KEY_NOTES_OF_CHARACTER(characterId!),
 		({ pageParam }) =>
-			indexer.getNotes({ characterId, cursor: pageParam, limit: 20 }),
+			indexer
+				.getNotes({ characterId, cursor: pageParam, limit: 20 })
+				.then((res) => {
+					return {
+						...res,
+						list: res.list.filter((note) => !note.deleted),
+					};
+				}),
 		{
 			enabled: Boolean(characterId),
 			getNextPageParam: (lastPage) => lastPage.cursor,
@@ -35,11 +42,18 @@ export function useNotes(config?: UseNotesConfig) {
 	return useInfiniteQuery(
 		SCOPE_KEY_NOTES(config),
 		({ pageParam }) =>
-			indexer.getNotes({
-				cursor: pageParam,
-				limit: 20,
-				...config,
-			}),
+			indexer
+				.getNotes({
+					cursor: pageParam,
+					limit: 20,
+					...config,
+				})
+				.then((res) => {
+					return {
+						...res,
+						list: res.list.filter((note) => !note.deleted),
+					};
+				}),
 		{
 			getNextPageParam: (lastPage) => lastPage.cursor,
 		}
@@ -53,12 +67,19 @@ export function fetchNotesForNote(
 	noteId: number,
 	cursor: string
 ) {
-	return indexer.getNotes({
-		toCharacterId: characterId,
-		toNoteId: noteId,
-		cursor,
-		limit: 20,
-	});
+	return indexer
+		.getNotes({
+			toCharacterId: characterId,
+			toNoteId: noteId,
+			cursor,
+			limit: 20,
+		})
+		.then((res) => {
+			return {
+				...res,
+				list: res.list.filter((note) => !note.deleted),
+			};
+		});
 }
 export const SCOPE_KEY_NOTES_OF_NOTE = (
 	characterId: number,
@@ -78,7 +99,9 @@ export function useNotesForNote(characterId: number, noteId: number) {
 // fetch a single note
 
 export function fetchNote(characterId: number, noteId: number) {
-	return indexer.getNote(characterId, noteId);
+	return indexer
+		.getNote(characterId, noteId)
+		.then((note) => (note?.deleted ? null : note));
 }
 export const SCOPE_KEY_NOTE = (characterId: number, noteId: number) => {
 	return [...SCOPE_KEY, "one", characterId, noteId];
