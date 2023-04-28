@@ -26,9 +26,9 @@ export type WalletAccountSlice = {
 
 	_siweCache: Record<WalletAccount["address"], SiweInfo | null>;
 
-	connectWallet(address: string | null): Promise<boolean>;
+	connectWallet(address: string): Promise<void>;
 	disconnectWallet(): void;
-	refreshWallet(): Promise<boolean>;
+	refreshWallet(): Promise<void>;
 	switchCharacter(character: CharacterEntity): void;
 
 	siweSignIn(signer: BaseSigner): Promise<boolean>;
@@ -81,43 +81,38 @@ export const createWalletAccountSlice: SliceFn<WalletAccountSlice> = (
 		_siweCache: {},
 
 		connectWallet: asyncExhaust(async (address) => {
-			if (address) {
-				const { wallet } = get();
-				const isSameAddress = wallet?.address === address;
-				const preferredCharacterId = isSameAddress ? wallet?.characterId : null;
-				const [character, siwe] = await Promise.all([
-					getDefaultCharacter({ address, characterId: preferredCharacterId }),
-					refreshSiwe({ address }),
-				]);
+			if (!address) return;
 
-				if (character) {
-					set({
-						wallet: {
-							siwe,
-							address,
-							type: "wallet",
-							handle: character.handle,
-							characterId: character.characterId,
-							character,
-						},
-					});
-					return true;
-				} else {
-					set({
-						wallet: {
-							siwe,
-							address,
-							type: "wallet",
-							handle: undefined,
-							characterId: undefined,
-							character: undefined,
-						},
-					});
-					return false;
-				}
+			const { wallet } = get();
+			const isSameAddress = wallet?.address === address;
+			const preferredCharacterId = isSameAddress ? wallet?.characterId : null;
+			const [character, siwe] = await Promise.all([
+				getDefaultCharacter({ address, characterId: preferredCharacterId }),
+				refreshSiwe({ address }),
+			]);
+
+			if (character) {
+				set({
+					wallet: {
+						siwe,
+						address,
+						type: "wallet",
+						handle: character.handle,
+						characterId: character.characterId,
+						character,
+					},
+				});
 			} else {
-				get().disconnectWallet();
-				return false;
+				set({
+					wallet: {
+						siwe,
+						address,
+						type: "wallet",
+						handle: undefined,
+						characterId: undefined,
+						character: undefined,
+					},
+				});
 			}
 		}),
 
@@ -130,8 +125,6 @@ export const createWalletAccountSlice: SliceFn<WalletAccountSlice> = (
 
 			if (wallet?.address) {
 				return get().connectWallet(wallet.address);
-			} else {
-				return false;
 			}
 		},
 

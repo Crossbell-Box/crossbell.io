@@ -94,11 +94,11 @@ export function ConnectKitProvider({
 
 	React.useEffect(() => {
 		if (account.status === "connected") {
-			accountState.connectWallet(account.address ?? null);
+			accountState.connectWallet(account.address);
 		}
 
 		if (!ignoreWalletDisconnectEvent && account.status === "disconnected") {
-			accountState.connectWallet(null);
+			accountState.disconnectWallet();
 		}
 	}, [account.address, account.status]);
 
