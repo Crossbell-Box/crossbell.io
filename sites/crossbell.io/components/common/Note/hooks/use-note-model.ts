@@ -8,6 +8,7 @@ import {
 } from "@crossbell/connect-kit";
 import { useNoteStatus } from "@crossbell/indexer";
 import { useRefCallback } from "@crossbell/util-hooks";
+import { useAddress } from "@crossbell/contract";
 
 import { useLoginChecker } from "~/shared/wallet/hooks";
 
@@ -33,7 +34,8 @@ export type NoteModel = {
 };
 
 export function useNoteModel({ characterId, noteId }: UseNoteActionsConfig) {
-	const { data: status } = useNoteStatus(characterId, noteId);
+	const address = useAddress() ?? "";
+	const { data: status } = useNoteStatus({ characterId, noteId, address });
 	const [{ isLiked }] = useIsNoteLiked({
 		noteId,
 		characterId,

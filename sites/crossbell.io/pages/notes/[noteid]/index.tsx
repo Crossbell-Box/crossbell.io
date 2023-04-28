@@ -211,6 +211,12 @@ export const getServerSideProps: GetServerSideProps<PageProps> = async (
 		}
 	}) as [NoteEntity | null, CharacterEntity | null];
 
+	if (!note) {
+		return {
+			notFound: true,
+		};
+	}
+
 	return {
 		props: {
 			note,
