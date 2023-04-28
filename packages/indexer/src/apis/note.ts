@@ -1,7 +1,7 @@
-import { indexer } from "../indexer";
 import { useQuery, useInfiniteQuery } from "@tanstack/react-query";
-import { useAddress } from "@crossbell/contract";
+import { NoteEntity } from "crossbell.js";
 
+import { indexer } from "../indexer";
 import { NoteLinkType } from "./types";
 
 const SCOPE_KEY = ["indexer", "notes"];
@@ -100,14 +100,19 @@ export function useNote(
 
 // fetch note's status
 
-export const SCOPE_KEY_NOTE_STATUS = (characterId: number, noteId: number) => {
+export const SCOPE_KEY_NOTE_STATUS = ({
+	characterId,
+	noteId,
+}: Pick<NoteEntity, "characterId" | "noteId">) => {
 	return [...SCOPE_KEY, "status", characterId, noteId];
 };
-export function useNoteStatus(characterId: number, noteId: number) {
-	const address = useAddress();
-
+export function useNoteStatus({
+	characterId,
+	noteId,
+	address,
+}: Pick<NoteEntity, "characterId" | "noteId"> & { address: string }) {
 	return useQuery(
-		SCOPE_KEY_NOTE_STATUS(characterId, noteId),
+		SCOPE_KEY_NOTE_STATUS({ characterId, noteId }),
 		async () => {
 			const [commentCount, mintCount, isMinted] = await Promise.all([
 				// comment count

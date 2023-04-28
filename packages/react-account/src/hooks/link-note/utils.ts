@@ -109,7 +109,9 @@ export function revalidateQueries(
 
 		queryClient.invalidateQueries(SCOPE_KEY_NOTE_LIKES(characterId, noteId)),
 
-		queryClient.invalidateQueries(SCOPE_KEY_NOTE_STATUS(characterId, noteId)),
+		queryClient.invalidateQueries(
+			SCOPE_KEY_NOTE_STATUS({ characterId, noteId })
+		),
 	]);
 }
 

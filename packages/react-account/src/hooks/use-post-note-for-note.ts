@@ -68,9 +68,7 @@ export const usePostNoteForNote = createAccountTypeBasedMutationHooks<
 				queryClient.invalidateQueries(
 					SCOPE_KEY_NOTES_OF_NOTE(note.characterId, note.noteId)
 				),
-				queryClient.invalidateQueries(
-					SCOPE_KEY_NOTE_STATUS(note.characterId, note.noteId)
-				),
+				queryClient.invalidateQueries(SCOPE_KEY_NOTE_STATUS(note)),
 			]);
 		},
 	})

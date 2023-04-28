@@ -50,7 +50,7 @@ export const useMintNote = createAccountTypeBasedMutationHooks<
 					SCOPE_KEY_NOTE_MINTS(characterId, noteId)
 				),
 				queryClient.invalidateQueries(
-					SCOPE_KEY_NOTE_STATUS(characterId, noteId)
+					SCOPE_KEY_NOTE_STATUS({ characterId, noteId })
 				),
 				queryClient.invalidateQueries(
 					SCOPE_KEY_MINTED_NOTE_OF_NOTE(characterId, noteId)
