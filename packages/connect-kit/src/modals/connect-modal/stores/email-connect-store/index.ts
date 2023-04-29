@@ -70,10 +70,12 @@ export const [EmailConnectStoreProvider, useEmailConnectStore] =
 							useAccountState
 								.getState()
 								.connectEmail(result.token)
-								.then(() => {
-									set({ status: "connected", emailErrorMsg: "" });
-									notify.success(result.msg);
-									useConnectModal.getState().hide();
+								.then((success) => {
+									if (success) {
+										set({ status: "connected", emailErrorMsg: "" });
+										notify.success(result.msg);
+										useConnectModal.getState().hide();
+									}
 								});
 						} else {
 							if (result.msg.toLowerCase() === "user not found") {

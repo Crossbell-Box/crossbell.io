@@ -91,7 +91,7 @@ export const createEmailAccountSlice: SliceFn<EmailAccountSlice> = (
 					return connectError(`No character for ${result.characterId}`);
 				}
 			} else {
-				return connectError(result.msg);
+				return connectError(`FetchAccountInfoError: ${result.msg}`);
 			}
 		} catch (err) {
 			return connectError(`${err}`);
