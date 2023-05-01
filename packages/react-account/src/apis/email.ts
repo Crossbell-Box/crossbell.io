@@ -3,6 +3,7 @@ import {
 	LinkItemType,
 	NoteMetadata,
 	LinkItemNote,
+	NoteEntity,
 } from "crossbell.js";
 
 import { request } from "./utils";
@@ -269,6 +270,19 @@ export async function putNote({
 		method: "PUT",
 		token,
 		body,
+	});
+}
+
+export async function deleteNote({
+	token,
+	noteId,
+}: {
+	token: string;
+	noteId: NoteEntity["noteId"];
+}): Promise<{ transactionHash: string; data: string }> {
+	return request(`/newbie/contract/notes/${noteId}`, {
+		method: "DELETE",
+		token,
 	});
 }
 

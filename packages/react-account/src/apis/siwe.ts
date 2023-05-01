@@ -2,6 +2,7 @@ import {
 	CharacterMetadata,
 	LinkItemNote,
 	LinkItemType,
+	NoteEntity,
 	NoteMetadata,
 } from "crossbell.js";
 
@@ -178,6 +179,21 @@ export async function siwePutNote({
 		method: "PUT",
 		token: siwe.token,
 		body,
+	});
+}
+
+export async function siweDeleteNote({
+	siwe,
+	characterId,
+	noteId,
+}: {
+	siwe: Siwe;
+	characterId: number;
+	noteId: NoteEntity["noteId"];
+}): Promise<{ transactionHash: string; data: string }> {
+	return request(`/siwe/contract/characters/${characterId}/notes/${noteId}`, {
+		method: "DELETE",
+		token: siwe.token,
 	});
 }
 
