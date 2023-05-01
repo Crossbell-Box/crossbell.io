@@ -273,6 +273,22 @@ export async function putNote({
 	});
 }
 
+export async function updateNote({
+	token,
+	noteId,
+	metadata,
+}: {
+	token: string;
+	metadata: NoteMetadata;
+	noteId: NoteEntity["noteId"];
+}): Promise<{ transactionHash: string; data: string }> {
+	return request(`/newbie/contract/notes/${noteId}/metadata`, {
+		method: "POST",
+		token,
+		body: { metadata },
+	});
+}
+
 export async function deleteNote({
 	token,
 	noteId,

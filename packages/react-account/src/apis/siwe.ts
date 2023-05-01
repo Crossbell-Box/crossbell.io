@@ -182,6 +182,27 @@ export async function siwePutNote({
 	});
 }
 
+export async function siweUpdateNote({
+	siwe,
+	characterId,
+	noteId,
+	metadata,
+}: {
+	siwe: Siwe;
+	characterId: NoteEntity["characterId"];
+	noteId: NoteEntity["noteId"];
+	metadata: NoteMetadata;
+}): Promise<{ transactionHash: string; data: string }> {
+	return request(
+		`/siwe/contract/characters/${characterId}/notes/${noteId}/metadata`,
+		{
+			method: "POST",
+			token: siwe.token,
+			body: { metadata },
+		}
+	);
+}
+
 export async function siweDeleteNote({
 	siwe,
 	characterId,
