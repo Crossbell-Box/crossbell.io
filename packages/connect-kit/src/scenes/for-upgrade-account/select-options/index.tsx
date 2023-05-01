@@ -1,4 +1,6 @@
 import React from "react";
+import { useAccount } from "wagmi";
+import { useRefCallback } from "@crossbell/util-hooks";
 
 import {
 	WalletIcon,
@@ -13,6 +15,7 @@ import {
 
 import { ConnectKindDifferences } from "../../connect-kind-differences";
 import { SelectWalletToConnect } from "../select-wallet-to-connect";
+import { ConfirmUpgrade } from "../confirm-upgrade";
 
 import styles from "./index.module.css";
 
@@ -22,20 +25,28 @@ export type SelectOptionsProps = {
 
 export function SelectOptions({ onCancel }: SelectOptionsProps) {
 	const { goTo, hide } = useDynamicScenesModal();
+	const { isConnected } = useAccount();
 
-	const onSelectDifferences = () => {
+	const onSelectDifferences = useRefCallback(() => {
 		goTo({
 			kind: "connect-kind-differences",
 			Component: ConnectKindDifferences,
 		});
-	};
+	});
 
-	const onSelectWallet = () => {
-		goTo({
-			kind: "select-wallet-to-connect",
-			Component: SelectWalletToConnect,
-		});
-	};
+	const onSelectWallet = useRefCallback(() => {
+		if (isConnected) {
+			goTo({
+				kind: "confirm-upgrade",
+				Component: () => <ConfirmUpgrade scene="confirm" />,
+			});
+		} else {
+			goTo({
+				kind: "select-wallet-to-connect",
+				Component: SelectWalletToConnect,
+			});
+		}
+	});
 
 	return (
 		<DynamicScenesContainer
