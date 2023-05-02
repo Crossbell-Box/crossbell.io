@@ -1,0 +1,39 @@
+# `usePostNote`
+
+Hook for posting a note. For more information, check out [Note Metadata](https://docs.crossbell.io/docs/specs/metadata/note-metadata).
+
+```ts
+import { UseMutationResult, UseMutationOptions } from "@tanstack/react-query";
+import { NoteMetadata } from "crossbell.js";
+
+function usePostNote(
+	options?: UseMutationOptions
+): UseMutationResult<unknown, unknown, { metadata: NoteMetadata }>;
+```
+
+## Usage
+
+```tsx
+import { usePostNote } from "@crossbell/connect-kit";
+
+function App() {
+	const postNote = usePostNote();
+
+	return (
+		<button
+			onClick={() => {
+				postNote.mutate({
+					metadata: {
+						content: "Hello Word!",
+						sources: ["Crossbell Dev"],
+						external_urls: ["https://crossbell.io"],
+						tags: ["post"],
+					},
+				});
+			}}
+		>
+			Post Note
+		</button>
+	);
+}
+```

@@ -30,19 +30,18 @@
 	"use-unfollow-character": "useUnfollowCharacter",
 	"use-follow-characters": "useFollowCharacters",
 
-	"-- like": {
+	"-- note": {
 		"type": "separator",
-		"title": "Like Actions"
+		"title": "Note Actions"
 	},
+	"use-post-note": "usePostNote",
+	"use-post-note-for-note": "usePostNoteForNote",
+	"use-update-note": "useUpdateNote",
+	"use-delete-note": "useDeleteNote",
 	"use-is-note-liked": "useIsNoteLiked",
 	"use-note-like-count": "useNoteLikeCount",
 	"use-note-like-list": "useNoteLikeList",
 	"use-toggle-like-note": "useToggleLikeNote",
-
-	"-- mint": {
-		"type": "separator",
-		"title": "Mint"
-	},
 	"use-mint-note": "useMintNote",
 
 	"-- operator-sign": {

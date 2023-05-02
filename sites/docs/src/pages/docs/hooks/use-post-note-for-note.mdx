@@ -1,0 +1,48 @@
+# `usePostNoteForNote`
+
+Hook for replying a note. For more information, check out [Note Metadata](https://docs.crossbell.io/docs/specs/metadata/note-metadata).
+
+```ts
+import { UseMutationResult, UseMutationOptions } from "@tanstack/react-query";
+import { NoteMetadata, NoteEntity } from "crossbell.js";
+
+function usePostNoteForNote(options?: UseMutationOptions): UseMutationResult<
+	unknown,
+	unknown,
+	{
+		metadata: NoteMetadata;
+		note: Pick<NoteEntity, "characterId" | "noteId">;
+	}
+>;
+```
+
+## Usage
+
+```tsx
+import { usePostNoteForNote } from "@crossbell/connect-kit";
+
+// https://xfeed.app/notes/32179-30
+const note = { characterId: 32179, noteId: 30 };
+
+function App() {
+	const postNoteForNote = usePostNoteForNote();
+
+	return (
+		<button
+			onClick={() => {
+				postNoteForNote.mutate({
+					note,
+					metadata: {
+						content: "Hello!",
+						sources: ["Crossbell Dev"],
+						external_urls: ["https://crossbell.io"],
+						tags: ["post"],
+					},
+				});
+			}}
+		>
+			Reply Note
+		</button>
+	);
+}
+```

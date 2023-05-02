@@ -1,0 +1,51 @@
+# `useUpdateNote`
+
+Hook for updating a note. For more information, check out [Note Metadata](https://docs.crossbell.io/docs/specs/metadata/note-metadata).
+
+```ts
+import type {
+	UseMutationResult,
+	UseMutationOptions,
+} from "@tanstack/react-query";
+import type { NoteMetadata, NoteEntity } from "crossbell.js";
+import type { Draft } from "immer";
+
+type EditFn = (draft: Draft<NoteMetadata>) => void;
+
+function useUpdateNote(options?: UseMutationOptions): UseMutationResult<
+	unknown,
+	unknown,
+	{
+		edit: EditFn;
+		note: Pick<NoteEntity, "characterId" | "noteId">;
+	}
+>;
+```
+
+## Usage
+
+```tsx
+import { useUpdateNote } from "@crossbell/connect-kit";
+
+// https://xfeed.app/notes/32179-30
+const note = { characterId: 32179, noteId: 30 };
+
+function App() {
+	const updateNote = useUpdateNote();
+
+	return (
+		<button
+			onClick={() => {
+				updateNote.mutate({
+					note,
+					edit(metadataDraft) {
+						metadataDraft.content += `\n\nUpdate at ${Date.now()}`;
+					},
+				});
+			}}
+		>
+			Update Note
+		</button>
+	);
+}
+```
