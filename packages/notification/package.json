@@ -42,6 +42,6 @@
 		"@tanstack/react-query": "^4",
 		"ethers": "^5",
 		"react": "^18",
-		"wagmi": "^0.12"
+		"wagmi": "^1.0.0-next.4"
 	}
 }
