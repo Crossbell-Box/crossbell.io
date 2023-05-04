@@ -30,7 +30,7 @@ export function useWalletClaimCsb(options?: UseWalletClaimCsbOptions) {
 							getCsbBalance(params.address, { noCache: true }),
 						]);
 
-						if (transaction.is_pending || balance.isZero()) return RETRY;
+						if (transaction.is_pending || balance === 0n) return RETRY;
 
 						return true;
 					},

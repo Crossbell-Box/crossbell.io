@@ -1,3 +1,5 @@
+import { type Address } from "viem";
+
 const BASE_URL = "https://faucet.crossbell.io";
 
 function request<T = any>(
@@ -51,7 +53,7 @@ type FaucetClaimResponse = {
 	error?: string;
 };
 export type FaucetClaimParams = {
-	address: string;
+	address: Address;
 	reCAPTCHAToken: string;
 	tweetId?: string;
 };
