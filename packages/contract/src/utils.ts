@@ -7,13 +7,13 @@ import { getCsbBalance } from "@crossbell/indexer";
 import { BizError, ERROR_CODES } from "./errors";
 
 export type InjectContractCheckerConfig = {
-	contract: Contract<any>;
+	contract: Contract;
 	getCurrentCharacterId: () => number | null;
 	getCurrentAddress: () => string | null;
 	openFaucetHintModel: () => void;
 	openMintNewCharacterModel: () => void;
 	openConnectModal: () => void;
-	showSwitchNetworkModal?: (contract: Contract<any>) => Promise<void>;
+	showSwitchNetworkModal?: (contract: Contract) => Promise<void>;
 };
 
 export function injectContractChecker({

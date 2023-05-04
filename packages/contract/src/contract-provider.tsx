@@ -5,14 +5,14 @@ import { useRefCallback } from "@crossbell/util-hooks";
 import { injectContractChecker, InjectContractCheckerConfig } from "./utils";
 
 export type ContractProviderProps = {
-	contract: Contract<any>;
+	contract: Contract;
 	address: string | null;
 	children?: React.ReactNode;
 };
 
 const ContractContext = React.createContext<{
 	address: string | null;
-	contract: Contract<any> | null;
+	contract: Contract | null;
 }>({ address: null, contract: null });
 
 export function ContractProvider({
