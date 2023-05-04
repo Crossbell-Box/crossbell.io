@@ -38,9 +38,9 @@
 		"crossbell.js": "^0.19",
 		"facepaint": "^1.2.1",
 		"react-intersection-observer": "^9.4.3",
-		"react-remove-scroll": "^2.5.5",
+		"react-remove-scroll": "^2.5.6",
 		"react-transition-group": "^4.4.5",
-		"ts-essentials": "^9.3.1"
+		"ts-essentials": "^9.3.2"
 	},
 	"peerDependencies": {
 		"react": "^18",
