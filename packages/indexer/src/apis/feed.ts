@@ -25,7 +25,7 @@ export function useFeedsOfCharacter(characterId: number) {
 	return useInfiniteQuery(
 		SCOPE_KEY_FEEDS_OF_CHARACTER(characterId),
 		({ pageParam }) =>
-			indexer.getFeedsOfCharacter(characterId, {
+			indexer.feed.getManyByCharacter(characterId, {
 				type: TIMELINE_FEED_TYPES,
 				cursor: pageParam,
 				limit: 20,
@@ -45,7 +45,7 @@ export function useFollowingFeedsOfCharacter(characterId?: number) {
 	return useInfiniteQuery(
 		SCOPE_KEY_FOLLOWING_FEEDS_OF_CHARACTER(characterId),
 		({ pageParam }) =>
-			indexer.getFollowingFeedsOfCharacter(characterId!, {
+			indexer.feed.getManyByCharacterFollowing(characterId!, {
 				type: TIMELINE_FEED_TYPES,
 				cursor: pageParam,
 				limit: 20,
@@ -60,7 +60,7 @@ export function useFollowingFeedsOfCharacter(characterId?: number) {
 export function useFeed(transactionHash: number, logIndex: number) {
 	return useQuery(
 		[...SCOPE_KEYS, "one", transactionHash, logIndex],
-		() => indexer.getNote(transactionHash, logIndex),
+		() => indexer.note.get(transactionHash, logIndex),
 		{ enabled: Boolean(transactionHash && typeof logIndex === "number") }
 	);
 }

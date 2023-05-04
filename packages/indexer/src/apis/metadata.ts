@@ -8,7 +8,7 @@ export function useSyncMetadataOfNote(characterId: number, noteId: number) {
 	const queryClient = useQueryClient();
 	return useMutation(
 		[...SCOPE_KEY, "note", characterId, noteId],
-		() => indexer.syncMetadataOfNote(characterId, noteId),
+		() => indexer.metadata.syncForNote(characterId, noteId),
 		{
 			onSuccess: async (data) => {
 				if (data) {

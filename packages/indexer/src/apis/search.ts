@@ -13,7 +13,7 @@ export function useSearchingCharacters(
 	return useInfiniteQuery(
 		[...SCOPE_KEY, "characters", "list", query, { limit }],
 		({ pageParam }) =>
-			indexer.searchCharacters(query, {
+			indexer.search.characters(query, {
 				cursor: pageParam,
 				limit,
 			}),
@@ -35,7 +35,7 @@ export function useSearchingNotes(
 	return useInfiniteQuery(
 		[...SCOPE_KEY, "notes", "list", query, { limit }],
 		({ pageParam }) =>
-			indexer.searchNotes(query, {
+			indexer.search.notes(query, {
 				cursor: pageParam,
 				limit,
 			}),

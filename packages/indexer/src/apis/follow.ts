@@ -15,7 +15,7 @@ export function useFollowingCharactersOfCharacter(characterId?: number) {
 	return useInfiniteQuery(
 		SCOPE_KEY_FOLLOWING_CHARACTERS_OF_CHARACTER({ characterId }),
 		({ pageParam }) =>
-			indexer.getLinks(characterId!, {
+			indexer.link.getMany(characterId!, {
 				linkType: CharacterLinkType.follow,
 				cursor: pageParam,
 				limit: 20,
@@ -37,7 +37,7 @@ export function useFollowerCharactersOfCharacter(characterId?: number) {
 	return useInfiniteQuery(
 		SCOPE_KEY_FOLLOWER_CHARACTERS_OF_CHARACTER({ characterId }),
 		({ pageParam }) =>
-			indexer.getBacklinksOfCharacter(characterId!, {
+			indexer.link.getBacklinksOfCharacter(characterId!, {
 				linkType: CharacterLinkType.follow,
 				cursor: pageParam,
 				limit: 20,

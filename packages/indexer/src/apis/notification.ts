@@ -21,7 +21,7 @@ export function useCharacterNotification(
 	return useInfiniteQuery(
 		SCOPE_KEY_CHARACTER_NOTIFICATION(characterId),
 		async ({ pageParam }) => {
-			const { list, ...rest } = await indexer.getNotificationsOfCharacter(
+			const { list, ...rest } = await indexer.notification.getMany(
 				characterId!,
 				{
 					type: types,

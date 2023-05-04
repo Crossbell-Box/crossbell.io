@@ -1,5 +1,6 @@
 import { useInfiniteQuery, useQuery } from "@tanstack/react-query";
 import { indexer } from "../indexer";
+import { type Address } from "viem";
 
 import { CharacterLinkType } from "./types";
 
@@ -7,14 +8,14 @@ const SCOPE_KEY = ["indexer", "characters"];
 
 // get list of characters by address
 
-export const SCOPE_KEY_CHARACTERS = (address: string | null | undefined) => {
+export const SCOPE_KEY_CHARACTERS = (address: Address | null | undefined) => {
 	return [...SCOPE_KEY, "list", address];
 };
-export function useCharacters(address?: string) {
+export function useCharacters(address?: Address) {
 	return useInfiniteQuery(
 		SCOPE_KEY_CHARACTERS(address),
 		({ pageParam }) =>
-			indexer.getCharacters(address!, {
+			indexer.character.getMany(address!, {
 				cursor: pageParam,
 				limit: 20,
 			}),
@@ -31,7 +32,7 @@ export const SCOPE_KEY_CHARACTER = (characterId?: number | null) => {
 	return [...SCOPE_KEY, "one", characterId];
 };
 export const fetchCharacter = async (characterId: number) => {
-	return indexer.getCharacter(characterId);
+	return indexer.character.get(characterId);
 };
 export function useCharacter(characterId?: number | null, options?: any) {
 	return useQuery(
@@ -50,7 +51,7 @@ export const SCOPE_KEY_CHARACTER_BY_HANDLE = (handle?: string) => {
 	return [...SCOPE_KEY, "one", "@handle", handle];
 };
 export const fetchCharacterByHandle = (handle: string) => {
-	return indexer.getCharacterByHandle(handle);
+	return indexer.character.getByHandle(handle);
 };
 export function useCharacterByHandle(handle?: string, options?: any) {
 	return useQuery(
@@ -97,10 +98,10 @@ export const SCOPE_KEY_PRIMARY_CHARACTER = (
 	return [...SCOPE_KEY, "primary", address];
 };
 
-export function usePrimaryCharacter(address?: string) {
+export function usePrimaryCharacter(address?: Address) {
 	return useQuery(
 		SCOPE_KEY_PRIMARY_CHARACTER(address),
-		() => indexer.getPrimaryCharacter(address!),
+		() => indexer.character.getPrimary(address!),
 		{ enabled: Boolean(address) }
 	);
 }
@@ -118,13 +119,13 @@ export function useCharacterFollowStats(
 		SCOPE_KEY_CHARACTER_FOLLOW_STATS(characterId),
 		async () => {
 			const [followingCount, followersCount] = await Promise.all([
-				indexer
-					.getLinks(characterId!, {
+				indexer.link
+					.getMany(characterId!, {
 						limit: 0,
 						linkType: CharacterLinkType.follow,
 					})
 					.then((links) => links.count),
-				indexer
+				indexer.link
 					.getBacklinksOfCharacter(characterId!, {
 						limit: 0,
 						linkType: CharacterLinkType.follow,
@@ -156,15 +157,15 @@ export function useCharacterFollowRelation(
 		SCOPE_KEY_CHARACTER_FOLLOW_RELATION(fromCharacterId, toCharacterID),
 		async () => {
 			const [isFollowing, isFollowed] = await Promise.all([
-				indexer
-					.getLinks(fromCharacterId!, {
+				indexer.link
+					.getMany(fromCharacterId!, {
 						linkType: CharacterLinkType.follow,
 						limit: 0,
 						toCharacterId: toCharacterID,
 					})
 					.then((links) => links.count > 0),
-				indexer
-					.getLinks(toCharacterID!, {
+				indexer.link
+					.getMany(toCharacterID!, {
 						linkType: CharacterLinkType.follow,
 						limit: 0,
 						toCharacterId: fromCharacterId,

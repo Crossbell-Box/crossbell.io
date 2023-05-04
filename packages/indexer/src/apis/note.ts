@@ -1,5 +1,6 @@
 import { useQuery, useInfiniteQuery } from "@tanstack/react-query";
 import { NoteEntity } from "crossbell.js";
+import { type Address } from "viem";
 
 import { indexer } from "../indexer";
 import { NoteLinkType } from "./types";
@@ -15,8 +16,8 @@ export function useNotesOfCharacter(characterId?: number) {
 	return useInfiniteQuery(
 		SCOPE_KEY_NOTES_OF_CHARACTER(characterId!),
 		({ pageParam }) =>
-			indexer
-				.getNotes({ characterId, cursor: pageParam, limit: 20 })
+			indexer.note
+				.getMany({ characterId, cursor: pageParam, limit: 20 })
 				.then((res) => {
 					return {
 						...res,
@@ -32,7 +33,7 @@ export function useNotesOfCharacter(characterId?: number) {
 
 // fetch notes
 export type UseNotesConfig = Omit<
-	Parameters<typeof indexer.getNotes>[0],
+	Parameters<(typeof indexer)["note"]["getMany"]>[0],
 	"cursor"
 >;
 export const SCOPE_KEY_NOTES = (config?: UseNotesConfig) => {
@@ -42,8 +43,8 @@ export function useNotes(config?: UseNotesConfig) {
 	return useInfiniteQuery(
 		SCOPE_KEY_NOTES(config),
 		({ pageParam }) =>
-			indexer
-				.getNotes({
+			indexer.note
+				.getMany({
 					cursor: pageParam,
 					limit: 20,
 					...config,
@@ -67,8 +68,8 @@ export function fetchNotesForNote(
 	noteId: number,
 	cursor: string
 ) {
-	return indexer
-		.getNotes({
+	return indexer.note
+		.getMany({
 			toCharacterId: characterId,
 			toNoteId: noteId,
 			cursor,
@@ -99,8 +100,8 @@ export function useNotesForNote(characterId: number, noteId: number) {
 // fetch a single note
 
 export function fetchNote(characterId: number, noteId: number) {
-	return indexer
-		.getNote(characterId, noteId)
+	return indexer.note
+		.get(characterId, noteId)
 		.then((note) => (note?.deleted ? null : note));
 }
 export const SCOPE_KEY_NOTE = (characterId: number, noteId: number) => {
@@ -133,27 +134,27 @@ export function useNoteStatus({
 	characterId,
 	noteId,
 	address,
-}: Pick<NoteEntity, "characterId" | "noteId"> & { address?: string }) {
+}: Pick<NoteEntity, "characterId" | "noteId"> & { address?: Address }) {
 	return useQuery(
 		SCOPE_KEY_NOTE_STATUS({ characterId, noteId }),
 		async () => {
 			const [commentCount, mintCount, isMinted] = await Promise.all([
 				// comment count
-				indexer.getNotes({
+				indexer.note.getMany({
 					toCharacterId: characterId,
 					toNoteId: noteId,
 					limit: 0,
 				}),
 
 				// mint count
-				indexer.getMintedNotesOfNote(characterId, noteId, {
+				indexer.mintedNote.getManyOfNote(characterId, noteId, {
 					limit: 0,
 				}),
 
 				// minted by me
 				address
-					? indexer
-							.getMintedNotesOfAddress(address, {
+					? indexer.mintedNote
+							.getManyOfAddress(address, {
 								limit: 0,
 								noteCharacterId: characterId,
 								noteId: noteId,
@@ -184,7 +185,7 @@ export function useNoteMintedCount(characterId: number, noteId: number) {
 	return useQuery(
 		SCOPE_KEY_NOTE_MINTED_COUNT(characterId, noteId),
 		async () => {
-			const { count } = await indexer.getMintedNotesOfNote(
+			const { count } = await indexer.mintedNote.getManyOfNote(
 				characterId,
 				noteId,
 				{
@@ -203,7 +204,7 @@ export function useNoteLikes(characterId: number, noteId: number) {
 	return useInfiniteQuery(
 		SCOPE_KEY_NOTE_LIKES(characterId, noteId),
 		({ pageParam }) =>
-			indexer.getBacklinksOfNote(characterId, noteId, {
+			indexer.link.getBacklinksByNote(characterId, noteId, {
 				linkType: NoteLinkType.like,
 				limit: 20,
 				cursor: pageParam,
@@ -222,7 +223,7 @@ export function useNoteMints(characterId: number, noteId: number) {
 	return useInfiniteQuery(
 		SCOPE_KEY_NOTE_MINTS(characterId, noteId),
 		({ pageParam }) =>
-			indexer.getMintedNotesOfNote(characterId, noteId, {
+			indexer.mintedNote.getManyOfNote(characterId, noteId, {
 				limit: 20,
 				cursor: pageParam,
 				order: "asc",
