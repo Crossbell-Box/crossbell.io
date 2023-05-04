@@ -1,7 +1,6 @@
 import { indexer } from "@crossbell/indexer";
 import { Contract } from "crossbell.js";
-import { BigNumber, utils } from "ethers";
-import { type Address } from "viem";
+import { type Address, formatUnits } from "viem";
 
 export async function getMiraTokenDecimals(
 	contract: Contract
@@ -65,13 +64,12 @@ export async function getMiraBalance({
 	address: Address;
 	contract: Contract;
 }) {
-	const { data } = await contract.tips.getBalance(address);
+	const { data: value } = await contract.tips.getBalance(address);
 	const decimals = await getMiraTokenDecimals(contract);
-	const value = BigNumber.from(data);
 
 	return {
 		decimals,
-		formatted: utils.formatUnits(value, decimals),
+		formatted: formatUnits(value, decimals),
 		symbol: "MIRA",
 		value,
 	};

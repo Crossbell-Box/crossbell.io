@@ -74,8 +74,7 @@
 		"zustand": "^4"
 	},
 	"peerDependencies": {
-		"@tanstack/react-query": "^4",
-		"ethers": "^5"
+		"@tanstack/react-query": "^4"
 	},
 	"devDependencies": {
 		"@types/lodash.debounce": "4.0.7"

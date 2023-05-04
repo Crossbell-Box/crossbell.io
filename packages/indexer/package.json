@@ -33,8 +33,5 @@
 		"dayjs": "^1.11.7",
 		"lodash.compact": "^3",
 		"lru-cache": "9.1.1"
-	},
-	"peerDependencies": {
-		"ethers": "^5"
 	}
 }

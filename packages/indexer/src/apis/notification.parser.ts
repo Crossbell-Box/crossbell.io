@@ -1,6 +1,5 @@
 import { NotificationEntity } from "crossbell.js";
 import dayjs from "dayjs";
-import { BigNumber } from "ethers";
 
 import { indexer } from "../indexer";
 import { ParsedNotification } from "./notification.types";
@@ -72,7 +71,7 @@ export async function parseNotificationEntity(
 
 			if (feed?.contractAddress && feed.mintedNote?.note) {
 				const fromAddress = feed.mintedNote.owner;
-				const fromCharacter = await indexer.getPrimaryCharacter(fromAddress);
+				const fromCharacter = await indexer.character.getPrimary(fromAddress);
 
 				return {
 					...baseInfo,
@@ -91,7 +90,7 @@ export async function parseNotificationEntity(
 
 			if (!feed?.tip || feed?.type !== "TIP_CHARACTER") return null;
 
-			const amount = BigNumber.from(feed.tip.amount);
+			const amount = BigInt(feed.tip.amount);
 
 			if (feed?.tip && feed.character && feed.tip.toNote) {
 				return {

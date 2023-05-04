@@ -1,7 +1,7 @@
-import { BigNumber, utils } from "ethers";
 import React from "react";
 import { useContract } from "@crossbell/contract";
 import { useQuery } from "@tanstack/react-query";
+import { formatUnits } from "viem";
 
 import { useConnectedAccount } from "./use-connected-account";
 import { GeneralAccount } from "./account-state";
@@ -10,7 +10,7 @@ export type AccountBalance = {
 	decimals: number;
 	formatted: string;
 	symbol: string;
-	value: BigNumber;
+	value: bigint;
 };
 
 export type UseAccountBalanceResult = {
@@ -49,12 +49,12 @@ export function useEmailAccountBalance(): UseAccountBalanceResult {
 		if (!email) return { balance: null, isLoading: false };
 
 		const decimals = 18;
-		const value = BigNumber.from(email.csb);
+		const value = BigInt(email.csb);
 
 		return {
 			balance: {
 				decimals,
-				formatted: utils.formatUnits(value, decimals),
+				formatted: formatUnits(value, decimals),
 				symbol: "CSB",
 				value,
 			},
@@ -80,11 +80,11 @@ export function useWalletAccountBalance(): UseAccountBalanceResult {
 		if (!data) return null;
 
 		const decimals = 18;
-		const value = BigNumber.from(data);
+		const value = BigInt(data);
 
 		return {
 			decimals,
-			formatted: utils.formatUnits(value, decimals),
+			formatted: formatUnits(value, decimals),
 			symbol: "CSB",
 			value,
 		};

@@ -1,7 +1,10 @@
-import { BigNumber } from "ethers";
+import { type Address } from "viem";
 import { LRUCache } from "lru-cache";
 
-const cache = new LRUCache({ ttl: 1000 * 10, max: 10 }); // 10s cache
+const cache = new LRUCache<string, string>({
+	ttl: 1000 * 10,
+	max: 10,
+}); // 10s cache
 
 export type GetCsbBalanceOptions = {
 	noCache?: boolean;
@@ -11,13 +14,13 @@ export type GetCsbBalanceOptions = {
  * @returns csb in gwei
  */
 export async function getCsbBalance(
-	address: string,
+	address: Address,
 	options?: GetCsbBalanceOptions
 ) {
 	const cached = cache.get(`csb:${address}`);
 
 	if (cached && !options?.noCache) {
-		return BigNumber.from(cached);
+		return BigInt(cached);
 	}
 
 	const data: { result?: string | null } = await fetch(
@@ -30,5 +33,5 @@ export async function getCsbBalance(
 
 	cache.set(`csb:${address}`, result);
 
-	return BigNumber.from(result);
+	return BigInt(result);
 }

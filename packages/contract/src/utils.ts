@@ -1,15 +1,15 @@
-import { Contract } from "crossbell.js";
+import { Contract, Numberish } from "crossbell.js";
 import { isCrossbellMainnet } from "crossbell.js/network";
-import { BigNumber, utils } from "ethers";
-
+import { parseEther } from "viem";
 import { getCsbBalance } from "@crossbell/indexer";
+import { type Address } from "viem";
 
 import { BizError, ERROR_CODES } from "./errors";
 
 export type InjectContractCheckerConfig = {
 	contract: Contract;
 	getCurrentCharacterId: () => number | null;
-	getCurrentAddress: () => string | null;
+	getCurrentAddress: () => Address | null;
 	openFaucetHintModel: () => void;
 	openMintNewCharacterModel: () => void;
 	openConnectModal: () => void;
@@ -79,9 +79,9 @@ function needValidate(key: string | symbol) {
 	return true;
 }
 
-function hasEnoughCsb(amount: BigNumber) {
-	const threshold = utils.parseEther("0.0001");
-	return amount.gte(threshold);
+function hasEnoughCsb(amount: Numberish) {
+	const threshold = parseEther("0.0001");
+	return BigInt(amount) >= threshold;
 }
 
 async function checkNetwork(

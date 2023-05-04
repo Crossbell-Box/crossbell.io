@@ -1,7 +1,6 @@
 import { showNotification } from "@mantine/notifications";
 import { CharacterEntity } from "crossbell.js";
-import { BigNumber, utils } from "ethers";
-
+import { parseEther } from "viem";
 import { indexer } from "@crossbell/indexer";
 
 import { asyncExhaust, asyncRetry, SliceFn } from "../../utils";
@@ -186,6 +185,6 @@ function isMoreThanADaySinceLastClaim(
 }
 
 function hasEnoughCsb(amountStr: string): boolean {
-	const threshold = utils.parseEther("0.02");
-	return BigNumber.from(amountStr).gte(threshold);
+	const threshold = parseEther("0.02");
+	return BigInt(amountStr) >= threshold;
 }

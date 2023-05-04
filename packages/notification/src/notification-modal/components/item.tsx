@@ -1,8 +1,8 @@
 import React from "react";
 import dayjs from "dayjs";
+import { formatUnits } from "viem";
 // https://github.com/iamkun/dayjs/issues/1167
 import relativeTime from "dayjs/plugin/relativeTime.js";
-import { utils } from "ethers";
 import type { NoteEntity } from "crossbell.js";
 import { Indicator, CharacterAvatar } from "@crossbell/ui";
 import { ParsedNotification } from "@crossbell/indexer";
@@ -110,7 +110,7 @@ function actionDesc(
 		case "tip-note":
 			return (
 				<span>
-					{`tipped you ${utils.formatUnits(notification.amount)} `}
+					{`tipped you ${formatUnits(notification.amount, 9)} `}
 					<a href="https://mira.crossbell.io/" target="_blank">
 						MIRA
 					</a>
@@ -120,7 +120,7 @@ function actionDesc(
 		case "tip-character":
 			return (
 				<span>
-					{`tipped you ${utils.formatUnits(notification.amount)} `}
+					{`tipped you ${formatUnits(notification.amount, 9)} `}
 					<a href="https://mira.crossbell.io/" target="_blank">
 						MIRA
 					</a>

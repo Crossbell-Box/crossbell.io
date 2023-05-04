@@ -1,6 +1,5 @@
-import { BigNumber, utils } from "ethers";
 import React from "react";
-
+import { formatUnits } from "viem";
 import { useAccountState } from "../account-state";
 import { AccountBalance } from "../use-account-balance";
 
@@ -18,11 +17,11 @@ export function useOpSignBalance(): AccountBalance | null {
 		if (!csb) return null;
 
 		const decimals = 18;
-		const value = BigNumber.from(csb);
+		const value = BigInt(csb);
 
 		return {
 			decimals,
-			formatted: utils.formatUnits(value, decimals),
+			formatted: formatUnits(value, decimals),
 			symbol: "CSB",
 			value,
 		};

@@ -49,7 +49,6 @@
 		"dayjs": "^1.11.7",
 		"embla-carousel-react": "^7.1.0",
 		"emoji-mart": "^5.5.2",
-		"ethers": "^5.7.2",
 		"framer-motion": "^10.12.8",
 		"immer": "^10.0.1",
 		"link-preview-js": "^3.0.4",

@@ -58,7 +58,6 @@
 	},
 	"peerDependencies": {
 		"@tanstack/react-query": "^4",
-		"ethers": "^5",
 		"wagmi": "^1.0.0-next.4"
 	},
 	"devDependencies": {
