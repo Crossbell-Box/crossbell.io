@@ -23,6 +23,12 @@
 	margin-bottom: 12px;
 }
 
+.discord {
+	color: #5865f2;
+	font-weight: 500;
+	text-decoration: underline;
+}
+
 .twitter {
 	color: #1d9bf0;
 }
@@ -95,4 +101,78 @@
 	width: 360px;
 	height: 196px;
 	object-fit: cover;
+}
+
+.visible,
+.invisible {
+	transition: opacity 0.2s;
+}
+
+.visible {
+	opacity: 1;
+}
+
+.invisible {
+	pointer-events: none;
+	opacity: 0;
+}
+
+.discordPendingTipsContainer {
+	margin-top: 24px;
+	position: relative;
+	text-align: center;
+	font-size: 14px;
+	padding: 0 8px;
+}
+
+.discordPendingTips code {
+	background: rgba(0, 0, 0, 0.15);
+	padding: 1px 4px;
+	border-radius: 4px;
+	font-size: 0.9em;
+}
+
+.discordCheckingBalanceTips {
+	position: absolute;
+	top: 0;
+	left: 0;
+	width: 100%;
+}
+
+.discordPendingActions {
+	display: flex;
+	align-items: center;
+	justify-content: center;
+	gap: 24px;
+	margin-top: 24px;
+}
+
+.discordPendingActions button {
+	padding: 4px 16px;
+	border-radius: 6px;
+	border: 1px solid;
+	font-weight: 500;
+	min-width: 90px;
+	min-height: 32px;
+	display: flex;
+	align-items: center;
+	justify-content: center;
+}
+
+.discordPendingActions button:disabled {
+	opacity: 0.5;
+}
+
+.discordPendingActions button svg {
+	font-size: 16px;
+}
+
+button.cancel {
+	border-color: rgba(0, 0, 0, 0.5);
+	background-color: white;
+}
+
+button.claimed {
+	background: #f6c549;
+	border-color: #f6c549;
 }
