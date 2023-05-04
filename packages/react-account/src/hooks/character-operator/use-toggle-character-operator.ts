@@ -1,12 +1,13 @@
 import { CharacterPermissionKey } from "crossbell.js";
 import { useRefCallback } from "@crossbell/util-hooks";
+import { type Address } from "viem";
 
 import { useCharacterOperatorHasPermissions } from "./use-character-operator-has-permissions";
 import { useAddCharacterOperator } from "./use-add-character-operator";
 import { useRemoveCharacterOperator } from "./use-remove-character-operator";
 
 export type UseToggleCharacterOperatorOptions = {
-	operatorAddress: string;
+	operatorAddress: Address;
 	permissions: CharacterPermissionKey[];
 	characterId: number | null | undefined;
 };

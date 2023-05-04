@@ -35,7 +35,7 @@ export const useLinkCharacter = createAccountTypeBasedMutationHooks<
 						linkType,
 					});
 				} else {
-					return contract.linkCharacter(
+					return contract.link.linkCharacter(
 						account.characterId,
 						characterId,
 						linkType

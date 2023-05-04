@@ -1,14 +1,13 @@
-import { BigNumber } from "ethers";
-
 import { waitUntilTransactionFinished } from "../apis";
 
 import { useAccountState } from "./account-state";
 import { createAccountTypeBasedMutationHooks } from "./account-type-based-hooks";
 import { SCOPE_KEY_ACCOUNT_BALANCE } from "./use-account-balance";
+import { type Address } from "viem";
 
 export type UseTransferCSBParams = {
-	toAddress: string;
-	amount: BigNumber;
+	toAddress: Address;
+	amount: bigint;
 };
 
 export const useTransferCsb = createAccountTypeBasedMutationHooks<
@@ -19,7 +18,7 @@ export const useTransferCsb = createAccountTypeBasedMutationHooks<
 		supportOPSign: false,
 
 		async action({ toAddress, amount }, { contract }) {
-			const result = await contract.transferCsb(toAddress, amount);
+			const result = await contract.csb.transfer(toAddress, amount);
 
 			await waitUntilTransactionFinished(result.transactionHash);
 

@@ -72,7 +72,7 @@ export function useWalletAccountBalance(): UseAccountBalanceResult {
 		async () => {
 			if (!wallet?.address) return null;
 
-			return (await contract.getBalance(wallet.address)).data;
+			return (await contract.tips.getBalance(wallet.address)).data;
 		}
 	);
 

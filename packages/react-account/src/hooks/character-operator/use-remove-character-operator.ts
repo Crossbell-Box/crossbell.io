@@ -7,23 +7,23 @@ import {
 	GET_CHARACTER_OPERATORS_SCOPE_KEY,
 	SCOPE_KEY_CHARACTER_OPERATOR,
 } from "./const";
+import { type Address } from "viem";
 
 export const useRemoveCharacterOperator = createAccountTypeBasedMutationHooks<
 	void,
-	{ characterId: number; operator: string }
+	{ characterId: number; operator: Address }
 >({ actionDesc: "", withParams: false }, () => ({
 	wallet: {
 		supportOPSign: false,
 
 		async action({ characterId, operator }, { contract }) {
-			await contract.grantOperatorPermissionsForCharacter(
-				characterId,
-				operator,
-				[]
-			);
+			await contract.operator.grantForCharacter(characterId, operator, []);
 
 			await asyncRetry(async (RETRY) => {
-				const op = await indexer.getCharacterOperator(characterId, operator);
+				const op = await indexer.operator.getForCharacter(
+					characterId,
+					operator
+				);
 				return op?.permissions.length === 0 || RETRY;
 			});
 		},

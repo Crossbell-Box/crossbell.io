@@ -15,7 +15,10 @@ export function useGetCharacterOperators({
 	return useInfiniteQuery(
 		GET_CHARACTER_OPERATORS_SCOPE_KEY({ characterId }),
 		({ pageParam }) =>
-			indexer.getCharacterOperators(characterId!, { limit, cursor: pageParam }),
+			indexer.operator.getManyForCharacter(characterId!, {
+				limit,
+				cursor: pageParam,
+			}),
 		{
 			enabled: Boolean(characterId),
 			getNextPageParam: (lastPage) => lastPage.cursor,

@@ -26,7 +26,10 @@ export const usePostNoteForNote = createAccountTypeBasedMutationHooks<
 				token: account.token,
 				metadata,
 				linkItemType: "Note",
-				linkItem: { characterId: note.characterId, noteId: note.noteId },
+				linkItem: {
+					characterId: BigInt(note.characterId),
+					noteId: BigInt(note.noteId),
+				},
 			});
 
 			return true;
@@ -43,10 +46,13 @@ export const usePostNoteForNote = createAccountTypeBasedMutationHooks<
 							siwe,
 							metadata,
 							linkItemType: "Note",
-							linkItem: { characterId: note.characterId, noteId: note.noteId },
+							linkItem: {
+								characterId: BigInt(note.characterId),
+								noteId: BigInt(note.noteId),
+							},
 						});
 					} else {
-						await contract.postNoteForNote(
+						await contract.note.postForNote(
 							account.characterId,
 							metadata,
 							note.characterId,

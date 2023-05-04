@@ -70,7 +70,7 @@ export const createEmailAccountSlice: SliceFn<EmailAccountSlice> = (
 
 			if (result.ok) {
 				const character = await asyncRetry(async (RETRY) => {
-					return (await indexer.getCharacter(result.characterId)) || RETRY;
+					return (await indexer.character.get(result.characterId)) || RETRY;
 				});
 
 				if (character) {

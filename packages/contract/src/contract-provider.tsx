@@ -3,15 +3,16 @@ import { Contract, createContract } from "crossbell.js";
 import { useRefCallback } from "@crossbell/util-hooks";
 
 import { injectContractChecker, InjectContractCheckerConfig } from "./utils";
+import { type Address } from "viem";
 
 export type ContractProviderProps = {
 	contract: Contract;
-	address: string | null;
+	address: Address | null;
 	children?: React.ReactNode;
 };
 
 const ContractContext = React.createContext<{
-	address: string | null;
+	address: Address | null;
 	contract: Contract | null;
 }>({ address: null, contract: null });
 
@@ -36,7 +37,7 @@ export type ContractConfig = Omit<
 	InjectContractCheckerConfig,
 	"contract" | "getCurrentAddress"
 > & {
-	address: string | undefined;
+	address: Address | undefined;
 	provider: ConstructorParameters<typeof Contract>[0];
 };
 

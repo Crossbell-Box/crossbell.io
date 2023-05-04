@@ -5,6 +5,7 @@ import {
 	AccountTypeBasedMutationOptions,
 	createAccountTypeBasedMutationHooks,
 } from "../account-type-based-hooks";
+import { type Address } from "viem";
 
 export type LinkCharactersOptions = AccountTypeBasedMutationOptions<
 	typeof useLinkCharacters
@@ -14,7 +15,7 @@ export const useLinkCharacters = createAccountTypeBasedMutationHooks<
 	CharacterLinkType,
 	{
 		characterIds?: number[];
-		addresses?: string[];
+		addresses?: Address[];
 	}
 >({ actionDesc: "linking characters", withParams: true }, (linkType) => ({
 	async email({ characterIds, addresses }, { account }) {
@@ -40,7 +41,7 @@ export const useLinkCharacters = createAccountTypeBasedMutationHooks<
 						linkType,
 					});
 				} else {
-					return contract.linkCharactersInBatch(
+					return contract.link.linkCharactersInBatch(
 						account.characterId,
 						characterIds ?? [],
 						addresses ?? [],

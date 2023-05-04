@@ -1,11 +1,12 @@
 import { useQuery } from "@tanstack/react-query";
 import { indexer } from "@crossbell/indexer";
 import { CharacterPermissionKey } from "crossbell.js";
+import { type Address } from "viem";
 
 import { SCOPE_KEY_CHARACTER_OPERATOR } from "./const";
 
 export type UseCharacterOperatorPermissionsOptions = {
-	operatorAddress: string;
+	operatorAddress: Address;
 	characterId?: number | null;
 };
 
@@ -19,7 +20,7 @@ export function useCharacterOperatorPermissions({
 			if (!characterId) return null;
 
 			return (
-				(await indexer.getCharacterOperator(characterId, operatorAddress))
+				(await indexer.operator.getForCharacter(characterId, operatorAddress))
 					?.permissions ?? null
 			);
 		},

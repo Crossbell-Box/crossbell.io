@@ -35,7 +35,7 @@ export const useUnlinkCharacter = createAccountTypeBasedMutationHooks<
 						linkType,
 					});
 				} else {
-					return contract.unlinkCharacter(
+					return contract.link.unlinkCharacter(
 						account.characterId,
 						characterId,
 						linkType

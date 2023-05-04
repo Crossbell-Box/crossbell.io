@@ -28,7 +28,7 @@ export function useCharacters(address?: Address) {
 
 // get a single character by id
 
-export const SCOPE_KEY_CHARACTER = (characterId?: number | null) => {
+export const SCOPE_KEY_CHARACTER = (characterId?: number | bigint | null) => {
 	return [...SCOPE_KEY, "one", characterId];
 };
 export const fetchCharacter = async (characterId: number) => {

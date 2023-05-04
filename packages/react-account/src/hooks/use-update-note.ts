@@ -21,7 +21,7 @@ const getMetadata = async ({
 	note: { characterId, noteId },
 	edit,
 }: Variables) => {
-	const note = await indexer.getNote(characterId, noteId);
+	const note = await indexer.note.get(characterId, noteId);
 	const oldMetadata = note?.metadata?.content;
 
 	if (!oldMetadata) return null;
@@ -72,7 +72,7 @@ export const useUpdateNote = createAccountTypeBasedMutationHooks<
 							metadata,
 						});
 					} else {
-						await contract.setNoteMetadata(
+						await contract.note.setMetadata(
 							variables.note.characterId,
 							variables.note.noteId,
 							metadata

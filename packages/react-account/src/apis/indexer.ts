@@ -1,10 +1,11 @@
 import { indexer, NoteLinkType } from "@crossbell/indexer";
+import { type Address } from "viem";
 import { NoteEntity } from "crossbell.js";
 
 export type GetIsNoteMintedConfig = {
 	noteCharacterId: number;
 	noteId: number;
-	byAddress: string;
+	byAddress: Address;
 };
 
 export async function getIsNoteMinted({
@@ -12,7 +13,7 @@ export async function getIsNoteMinted({
 	noteCharacterId,
 	byAddress,
 }: GetIsNoteMintedConfig): Promise<boolean> {
-	const { count } = await indexer.getMintedNotesOfAddress(byAddress, {
+	const { count } = await indexer.mintedNote.getManyOfAddress(byAddress, {
 		limit: 0,
 		noteCharacterId,
 		noteId,
@@ -40,7 +41,7 @@ export async function getIsNoteLinked({
 	noteId,
 	linkType,
 }: GetIsNoteLinkedConfig): Promise<GetIsNoteLinkedResult> {
-	const { count, list } = await indexer.getLinks(fromCharacterId, {
+	const { count, list } = await indexer.link.getMany(fromCharacterId, {
 		linkType,
 		toCharacterId: characterId,
 		toNoteId: noteId,
@@ -64,8 +65,8 @@ export function getNoteLinkCount({
 	noteId,
 	linkType,
 }: GetNoteLinkCountParams) {
-	return indexer
-		.getBacklinksOfNote(characterId, noteId, {
+	return indexer.link
+		.getBacklinksByNote(characterId, noteId, {
 			linkType,
 			limit: 0,
 		})

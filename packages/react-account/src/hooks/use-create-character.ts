@@ -28,7 +28,7 @@ export function useCreateCharacter() {
 			handle: string;
 			metadata: CharacterMetadata;
 		}) => {
-			return contract.createCharacter(address!, handle, metadata);
+			return contract.character.create(address!, handle, metadata);
 		},
 		{
 			onSuccess: (data, { handle }) => {
@@ -42,7 +42,7 @@ export function useCreateCharacter() {
 						.refreshWallet()
 						.then(async () => {
 							const character = await asyncRetry(async (RETRY) => {
-								return (await indexer.getCharacterByHandle(handle)) || RETRY;
+								return (await indexer.character.getByHandle(handle)) || RETRY;
 							});
 
 							if (character) {

@@ -20,7 +20,7 @@ export function useWithdrawEmailAccount(options?: UseMutationOptions) {
 			token: email.token,
 		});
 
-		await contract.withdrawCharacterFromNewbieVilla(
+		await contract.character.withdrawFromNewbieVilla(
 			wallet.address,
 			email.characterId,
 			nonce,
@@ -29,7 +29,7 @@ export function useWithdrawEmailAccount(options?: UseMutationOptions) {
 		);
 
 		const character = await asyncRetry(async (RETRY) => {
-			const character = await indexer.getCharacter(email.characterId);
+			const character = await indexer.character.get(email.characterId);
 
 			return isAddressEqual(character?.owner, wallet.address)
 				? character!

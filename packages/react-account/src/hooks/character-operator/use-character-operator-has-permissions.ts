@@ -1,11 +1,12 @@
 import React from "react";
 import { CharacterPermissionKey } from "crossbell.js";
+import { type Address } from "viem";
 
 import { useCharacterOperatorPermissions } from "./use-character-operator-permissions";
 import { haveSamePermissions } from "./utils";
 
 export type UseCharacterOperatorHasPermissionsOptions = {
-	operatorAddress: string;
+	operatorAddress: Address;
 	permissions: CharacterPermissionKey[];
 	characterId: number | null | undefined;
 };

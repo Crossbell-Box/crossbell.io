@@ -6,6 +6,7 @@ import { isAddressEqual } from "@crossbell/util-ethers";
 import { BaseSigner } from "../../context";
 import { asyncExhaust, SliceFn } from "../../utils";
 import { siweGetAccount, siweGetBalance, siweSignIn } from "../../apis";
+import { type Address } from "viem";
 
 export type SiweInfo = {
 	csb: string;
@@ -17,7 +18,7 @@ export type WalletAccount = {
 	character: CharacterEntity | undefined;
 	characterId: number | undefined;
 	handle: string | undefined;
-	address: string;
+	address: Address;
 	siwe: SiweInfo | null;
 };
 
@@ -26,7 +27,7 @@ export type WalletAccountSlice = {
 
 	_siweCache: Record<WalletAccount["address"], SiweInfo | null>;
 
-	connectWallet(address: string): Promise<void>;
+	connectWallet(address: Address): Promise<void>;
 	disconnectWallet(): void;
 	refreshWallet(): Promise<void>;
 	switchCharacter(character: CharacterEntity): void;
@@ -53,14 +54,14 @@ export const createWalletAccountSlice: SliceFn<WalletAccountSlice> = (
 		});
 	};
 
-	const getSiwe = (params: { address: string }): SiweInfo | null => {
+	const getSiwe = (params: { address: Address }): SiweInfo | null => {
 		const { _siweCache } = get();
 
 		return _siweCache[params.address] ?? null;
 	};
 
 	const refreshSiwe = async (params: {
-		address: string;
+		address: Address;
 		token?: string;
 	}): Promise<SiweInfo | null> => {
 		const address = params.address;
@@ -190,12 +191,14 @@ async function getDefaultCharacter({
 	address,
 	characterId,
 }: {
-	address: string;
+	address: Address;
 	characterId?: number | null;
 }): Promise<CharacterEntity | null> {
 	const character = await (characterId
-		? indexer.getCharacter(characterId)
-		: indexer.getPrimaryCharacter(address));
+		? indexer.character.get(characterId)
+		: indexer.character.getPrimary(address));
 
-	return character ?? (await indexer.getCharacters(address)).list[0] ?? null;
+	return (
+		character ?? (await indexer.character.getMany(address)).list[0] ?? null
+	);
 }

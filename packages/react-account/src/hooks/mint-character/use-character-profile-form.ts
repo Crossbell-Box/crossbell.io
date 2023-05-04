@@ -81,7 +81,7 @@ export const useCharacterProfileForm = create<CharacterProfileForm>(
 		const checkHandle = async (handle: string): Promise<boolean> => {
 			if (!isHandleChanged(handle)) return true;
 
-			return !(await indexer.getCharacterByHandle(handle));
+			return !(await indexer.character.getByHandle(handle));
 		};
 
 		const validateHandle = (() => {

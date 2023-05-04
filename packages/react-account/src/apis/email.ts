@@ -5,6 +5,7 @@ import {
 	LinkItemNote,
 	NoteEntity,
 } from "crossbell.js";
+import { type Address } from "viem";
 
 import { request } from "./utils";
 
@@ -334,7 +335,7 @@ export function getWithdrawProof({
 	token,
 }: {
 	token: string;
-}): Promise<{ proof: string; nonce: number; expires: number }> {
+}): Promise<{ proof: Address; nonce: number; expires: number }> {
 	return request(`/newbie/account/withdraw/proof`, {
 		method: "GET",
 		token,

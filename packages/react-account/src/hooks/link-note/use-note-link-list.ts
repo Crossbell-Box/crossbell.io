@@ -31,7 +31,7 @@ export function useNoteLinkList(params: UseNoteLinkListParams) {
 	const query = useInfiniteQuery(
 		SCOPE_KEY_NOTE_LINK_LIST(params),
 		({ pageParam }) =>
-			indexer.getBacklinksOfNote(params.characterId, params.noteId, {
+			indexer.link.getBacklinksByNote(params.characterId, params.noteId, {
 				linkType: params.linkType,
 				limit: 20,
 				cursor: pageParam,

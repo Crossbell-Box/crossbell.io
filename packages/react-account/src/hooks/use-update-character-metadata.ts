@@ -21,7 +21,7 @@ export const useUpdateCharacterMetadata = createAccountTypeBasedMutationHooks<
 		// Make sure character metadata is up-to-date.
 		await useAccountState.getState().refresh();
 		const account = useAccountState.getState().computed.account;
-		const character = await indexer.getCharacter(characterId);
+		const character = await indexer.character.get(characterId);
 
 		if (!account || !character) return null;
 
@@ -62,7 +62,7 @@ export const useUpdateCharacterMetadata = createAccountTypeBasedMutationHooks<
 							metadata,
 						});
 					} else {
-						await contract.setCharacterMetadata(
+						await contract.character.setMetadata(
 							variables.characterId,
 							// crossbell.js will try to modify the object internally,
 							// here the immutable object is converted to mutable object to avoid errors.
