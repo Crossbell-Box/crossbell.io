@@ -1,4 +1,5 @@
-import { Contract, Network } from "crossbell.js";
+import { Contract } from "crossbell.js";
+import { isCrossbellMainnet } from "crossbell.js/network";
 import { BigNumber, utils } from "ethers";
 
 import { getCsbBalance } from "@crossbell/indexer";
@@ -6,13 +7,13 @@ import { getCsbBalance } from "@crossbell/indexer";
 import { BizError, ERROR_CODES } from "./errors";
 
 export type InjectContractCheckerConfig = {
-	contract: Contract;
+	contract: Contract<any>;
 	getCurrentCharacterId: () => number | null;
 	getCurrentAddress: () => string | null;
 	openFaucetHintModel: () => void;
 	openMintNewCharacterModel: () => void;
 	openConnectModal: () => void;
-	showSwitchNetworkModal?: (contract: Contract) => Promise<void>;
+	showSwitchNetworkModal?: (contract: Contract<any>) => Promise<void>;
 };
 
 export function injectContractChecker({
@@ -84,11 +85,10 @@ function hasEnoughCsb(amount: BigNumber) {
 }
 
 async function checkNetwork(
-	contract: Contract,
+	contract: Contract<true>,
 	showModal: InjectContractCheckerConfig["showSwitchNetworkModal"]
 ) {
-	const provider = contract.contract.provider;
-	const isMainnet = await Network.isCrossbellMainnet(provider);
+	const isMainnet = await isCrossbellMainnet(contract.walletClient);
 
 	if (!isMainnet) {
 		await showModal?.(contract);

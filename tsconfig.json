@@ -7,7 +7,7 @@
 		"noUnusedLocals": true,
 		"noImplicitAny": true,
 		"esModuleInterop": true,
-		"moduleResolution": "node",
+		"moduleResolution": "bundler",
 		"module": "ESNext",
 		"resolveJsonModule": true,
 		"skipLibCheck": true,

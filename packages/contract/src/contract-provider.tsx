@@ -1,18 +1,18 @@
 import React from "react";
-import { Contract } from "crossbell.js";
+import { Contract, createContract } from "crossbell.js";
 import { useRefCallback } from "@crossbell/util-hooks";
 
 import { injectContractChecker, InjectContractCheckerConfig } from "./utils";
 
 export type ContractProviderProps = {
-	contract: Contract;
+	contract: Contract<any>;
 	address: string | null;
 	children?: React.ReactNode;
 };
 
 const ContractContext = React.createContext<{
 	address: string | null;
-	contract: Contract | null;
+	contract: Contract<any> | null;
 }>({ address: null, contract: null });
 
 export function ContractProvider({
@@ -60,7 +60,7 @@ export function InitContractProvider({
 	const getCurrentAddress = useRefCallback(() => address ?? null);
 
 	const [contract, setContract] = React.useState(() => {
-		const _contract = new Contract();
+		const _contract = createContract();
 		return injectContractChecker({
 			contract: _contract,
 			getCurrentCharacterId,
