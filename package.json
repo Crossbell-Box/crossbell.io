@@ -45,7 +45,7 @@
 		"@wagmi/core": "^0.10.11",
 		"canvas-confetti": "^1.6.0",
 		"classnames": "^2.3.2",
-		"crossbell.js": "^0.19.9",
+		"crossbell.js": "^1.0.0-alpha.2",
 		"dayjs": "^1.11.7",
 		"embla-carousel-react": "^7.1.0",
 		"emoji-mart": "^5.5.2",

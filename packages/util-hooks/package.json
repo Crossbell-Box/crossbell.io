@@ -29,7 +29,7 @@
 	},
 	"dependencies": {
 		"@tanstack/react-query": "^4",
-		"crossbell.js": "^0.19"
+		"crossbell.js": "^1.0.0-alpha.2"
 	},
 	"peerDependencies": {
 		"react": "^18"
