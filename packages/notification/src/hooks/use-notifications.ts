@@ -41,7 +41,7 @@ export function useNotifications() {
 		_markRead(notifications);
 
 		if (character) {
-			indexer.markNotificationsAsRead(character?.characterId);
+			indexer.notification.markAllAsRead(character?.characterId);
 		}
 	});
 
