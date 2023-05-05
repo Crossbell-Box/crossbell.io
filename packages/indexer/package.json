@@ -32,6 +32,7 @@
 		"crossbell.js": "^1.0.0-alpha.4",
 		"dayjs": "^1.11.7",
 		"lodash.compact": "^3",
-		"lru-cache": "9.1.1"
+		"lru-cache": "9.1.1",
+		"viem": "^0.3.17"
 	}
 }

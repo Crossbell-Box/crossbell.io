@@ -71,7 +71,8 @@
 		"react": "^18",
 		"rxjs": "^7.8.1",
 		"ts-essentials": "^9.3.2",
-		"zustand": "^4"
+		"zustand": "^4",
+		"viem": "^0.3.17"
 	},
 	"peerDependencies": {
 		"@tanstack/react-query": "^4"

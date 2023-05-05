@@ -362,6 +362,9 @@ importers:
       ts-essentials:
         specifier: ^9.3.2
         version: 9.3.2(typescript@5.0.4)
+      viem:
+        specifier: ^0.3.17
+        version: 0.3.17(typescript@5.0.4)
       wagmi:
         specifier: ^1.0.0-next.4
         version: 1.0.0-next.4(immer@10.0.1)(react-dom@18.2.0)(react@18.2.0)(typescript@5.0.4)(viem@0.3.17)
@@ -411,6 +414,9 @@ importers:
       lru-cache:
         specifier: 9.1.1
         version: 9.1.1
+      viem:
+        specifier: ^0.3.17
+        version: 0.3.17(typescript@5.0.4)
 
   packages/notification:
     dependencies:
@@ -495,6 +501,9 @@ importers:
       ts-essentials:
         specifier: ^9.3.2
         version: 9.3.2(typescript@5.0.4)
+      viem:
+        specifier: ^0.3.17
+        version: 0.3.17(typescript@5.0.4)
       zustand:
         specifier: ^4
         version: 4.3.7(immer@10.0.1)(react@18.2.0)
