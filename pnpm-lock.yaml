@@ -363,7 +363,7 @@ importers:
         specifier: ^9.3.2
         version: 9.3.2(typescript@5.0.4)
       wagmi:
-        specifier: ^0.12.12
+        specifier: ^0.12
         version: 0.12.12(@babel/core@7.21.4)(ethers@5.7.2)(immer@10.0.1)(react-dom@18.2.0)(react@18.2.0)(typescript@5.0.4)
       zustand:
         specifier: ^4
@@ -451,7 +451,7 @@ importers:
         specifier: ^9
         version: 9.4.3(react@18.2.0)
       wagmi:
-        specifier: ^0.12.12
+        specifier: ^0.12
         version: 0.12.12(@babel/core@7.21.4)(ethers@5.7.2)(immer@10.0.1)(react-dom@18.2.0)(react@18.2.0)(typescript@5.0.4)
       zustand:
         specifier: ^4.3.7
