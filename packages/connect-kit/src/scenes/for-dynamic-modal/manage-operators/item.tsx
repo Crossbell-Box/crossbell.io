@@ -2,7 +2,8 @@ import React from "react";
 import classNames from "classnames";
 import { CharacterOperatorEntity } from "crossbell.js";
 import { CharacterAvatar, Loading, useWeb2Url } from "@crossbell/ui";
-import { isAddressEqual, truncateAddress } from "@crossbell/util-ethers";
+import { truncateAddress } from "@crossbell/util-ethers";
+import { isAddressEqual } from "viem";
 import { useRefCallback } from "@crossbell/util-hooks";
 import { usePrimaryCharacter } from "@crossbell/indexer";
 import {

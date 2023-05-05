@@ -6,6 +6,7 @@ import {
 	NoteMetadata,
 } from "crossbell.js";
 
+import { type Address } from "viem";
 import { request } from "./utils";
 import { BaseSigner } from "../context";
 
@@ -39,7 +40,7 @@ export async function siweSignIn(signer: BaseSigner): Promise<Siwe> {
 	return { token };
 }
 
-export function siweGetAccount(siwe: Siwe): Promise<{ address: string }> {
+export function siweGetAccount(siwe: Siwe): Promise<{ address: Address }> {
 	return request(`/siwe/account`, { method: "GET", token: siwe.token });
 }
 

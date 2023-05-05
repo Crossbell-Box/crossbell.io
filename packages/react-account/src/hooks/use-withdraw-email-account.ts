@@ -1,7 +1,7 @@
 import { useMutation, UseMutationOptions } from "@tanstack/react-query";
 import { useContract } from "@crossbell/contract";
 import { indexer } from "@crossbell/indexer";
-import { isAddressEqual } from "@crossbell/util-ethers";
+import { isAddressEqual } from "viem";
 
 import { getWithdrawProof } from "../apis";
 import { asyncRetry } from "../utils";
@@ -31,7 +31,7 @@ export function useWithdrawEmailAccount(options?: UseMutationOptions) {
 		const character = await asyncRetry(async (RETRY) => {
 			const character = await indexer.character.get(email.characterId);
 
-			return isAddressEqual(character?.owner, wallet.address)
+			return character?.owner && isAddressEqual(character.owner, wallet.address)
 				? character!
 				: RETRY;
 		});

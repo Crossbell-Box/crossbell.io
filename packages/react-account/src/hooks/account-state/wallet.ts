@@ -1,7 +1,7 @@
 import { CharacterEntity } from "crossbell.js";
 import { indexer } from "@crossbell/indexer";
 
-import { isAddressEqual } from "@crossbell/util-ethers";
+import { isAddressEqual } from "viem";
 
 import { BaseSigner } from "../../context";
 import { asyncExhaust, SliceFn } from "../../utils";
@@ -170,7 +170,7 @@ async function getSiweInfo({
 	address,
 	token,
 }: {
-	address: string;
+	address: Address;
 	token: string;
 }): Promise<SiweInfo | null> {
 	if (!token) return null;
