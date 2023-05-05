@@ -1,5 +1,5 @@
 import React from "react";
-import { BigNumber, utils } from "ethers";
+import { Address, formatUnits, parseUnits } from "viem";
 import { LogoIcon, LoadingOverlay } from "@crossbell/ui";
 
 import { MainBtn, Field, FiledTips, TextInput } from "../../components";
@@ -11,8 +11,6 @@ import {
 
 import styles from "./index.module.css";
 
-const ZERO = BigNumber.from(0);
-
 enum NormalizeError {
 	invalidFormat = "invalidFormat",
 	outOfRange = "outOfRange",
@@ -20,11 +18,11 @@ enum NormalizeError {
 }
 
 export type TransferCSBProps = {
-	toAddress: string;
+	toAddress: Address;
 	onSuccess: () => void;
 };
 
-const minGasFee = utils.parseUnits("0.000021");
+const minGasFee = parseUnits("0.000021", 18);
 
 export function TransferCSB({ toAddress, onSuccess }: TransferCSBProps) {
 	const { balance } = useAccountBalance();
@@ -32,9 +30,8 @@ export function TransferCSB({ toAddress, onSuccess }: TransferCSBProps) {
 	const maxAmount = getMaxAmount(balance);
 	const amount = React.useMemo(() => normalizeNumber(value, balance), [value]);
 	const { isLoading, mutate: transferCsb } = useTransferCsb({ onSuccess });
-	const errorMsg = BigNumber.isBigNumber(amount)
-		? null
-		: normalizeErrorToMsg(amount, maxAmount);
+	const errorMsg =
+		typeof amount === "bigint" ? null : normalizeErrorToMsg(amount, maxAmount);
 
 	return (
 		<>
@@ -55,9 +52,9 @@ export function TransferCSB({ toAddress, onSuccess }: TransferCSBProps) {
 						rightSection={
 							<div
 								className={styles.maxContainer}
-								onClick={() => setValue(utils.formatUnits(maxAmount))}
+								onClick={() => setValue(formatUnits(maxAmount, 9))}
 							>
-								<button disabled={maxAmount.lte(ZERO)} className={styles.max}>
+								<button disabled={maxAmount <= 0n} className={styles.max}>
 									Max
 								</button>
 							</div>
@@ -70,7 +67,7 @@ export function TransferCSB({ toAddress, onSuccess }: TransferCSBProps) {
 					<FiledTips color="#E65040">
 						{errorMsg || (
 							<>
-								<div>Gas Fee: {utils.formatUnits(minGasFee)}</div>
+								<div>Gas Fee: {formatUnits(minGasFee, 9)}</div>
 								<div>
 									Tips: With 0.01 $CSB, you can like, comment, and mint roughly
 									70 times on our platform!
@@ -83,9 +80,9 @@ export function TransferCSB({ toAddress, onSuccess }: TransferCSBProps) {
 				<MainBtn
 					className={styles.mainBtn}
 					color="yellow"
-					disabled={!BigNumber.isBigNumber(amount) || amount.isZero()}
+					disabled={typeof amount !== "bigint" || amount === 0n}
 					onClick={() => {
-						if (BigNumber.isBigNumber(amount)) {
+						if (typeof amount === "bigint") {
 							transferCsb({ toAddress, amount });
 						}
 					}}
@@ -97,7 +94,7 @@ export function TransferCSB({ toAddress, onSuccess }: TransferCSBProps) {
 	);
 }
 
-function normalizeErrorToMsg(error: NormalizeError, maxAmount: BigNumber) {
+function normalizeErrorToMsg(error: NormalizeError, maxAmount: bigint) {
 	switch (error) {
 		case NormalizeError.invalidFormat:
 			return "Invalid number format";
@@ -105,34 +102,32 @@ function normalizeErrorToMsg(error: NormalizeError, maxAmount: BigNumber) {
 			return (
 				<>
 					The transfer number should be between{" "}
-					<span className={styles.nowrap}>
-						0 - {utils.formatUnits(maxAmount)}
-					</span>
+					<span className={styles.nowrap}>0 - {formatUnits(maxAmount, 9)}</span>
 				</>
 			);
 		case NormalizeError.notEnoughGasFee:
-			return `Require a minimum of ${utils.formatUnits(minGasFee)} gas fee`;
+			return `Require a minimum of ${formatUnits(minGasFee, 9)} gas fee`;
 	}
 }
 
 function getMaxAmount(balance: UseAccountBalanceResult["balance"]) {
-	return balance?.value.sub(minGasFee) ?? utils.parseUnits("0.00");
+	return balance ? balance.value - minGasFee : parseUnits("0.00", 18);
 }
 
 function normalizeNumber(
 	input: string | undefined,
 	balance: UseAccountBalanceResult["balance"]
-): BigNumber | NormalizeError {
+): bigint | NormalizeError {
 	try {
-		if (!input || !balance) return ZERO;
+		if (!input || !balance) return 0n;
 
-		const num = utils.parseUnits(input, balance.decimals);
+		const num = parseUnits(input as `${number}`, balance.decimals);
 
-		if (balance.value.lte(minGasFee)) {
+		if (balance.value <= minGasFee) {
 			return NormalizeError.notEnoughGasFee;
 		}
 
-		if (num.add(minGasFee).gt(balance.value) || num.lt(ZERO)) {
+		if (num + minGasFee > balance.value || num < 0n) {
 			return NormalizeError.outOfRange;
 		}
 

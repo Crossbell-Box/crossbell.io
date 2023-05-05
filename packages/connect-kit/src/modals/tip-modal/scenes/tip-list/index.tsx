@@ -1,6 +1,5 @@
 import React from "react";
 import { LoadMore } from "@crossbell/ui";
-import { BigNumber, utils } from "ethers";
 import { CharacterAvatar } from "@crossbell/ui";
 import { extractCharacterName } from "@crossbell/util-metadata";
 import { useTipList } from "@crossbell/react-account";
@@ -12,6 +11,7 @@ import { Header } from "../../components";
 import { useTipModal } from "../../stores";
 import styles from "./index.module.css";
 import { Rank } from "./rank";
+import { formatUnits } from "viem";
 
 export function TipList() {
 	const { characterId, noteId } = useTipModal();
@@ -29,7 +29,7 @@ export function TipList() {
 				{items.map((item, index) => {
 					const characterName = extractCharacterName(item.character);
 					const characterHandle = `@${item.character?.handle}`;
-					const amount = utils.formatUnits(BigNumber.from(item.amount), 18);
+					const amount = formatUnits(BigInt(item.amount), 18);
 
 					return (
 						<div key={item.transactionHash} className={styles.item}>

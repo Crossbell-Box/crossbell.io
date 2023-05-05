@@ -6,21 +6,34 @@ import { CoinbaseWalletConnector } from "wagmi/connectors/coinbaseWallet";
 import { InjectedConnector } from "wagmi/connectors/injected";
 
 import { getWalletConnectLegacyConnector } from "./wallets/wallet-connectors/get-wallet-connect-legacy-connector";
+import { WalletConnectConnector } from "wagmi/connectors/walletConnect";
+import { WalletConnectLegacyConnector } from "wagmi/connectors/walletConnectLegacy";
 
 export type GetDefaultClientConfigOptions = {
 	appName: string;
 };
 
+type Connectors = [
+	InjectedConnector,
+	MetaMaskConnector,
+	CoinbaseWalletConnector,
+	WalletConnectConnector | WalletConnectLegacyConnector
+];
+
 export function getDefaultClientConfig({
 	appName,
-}: GetDefaultClientConfigOptions) {
-	const { chains, provider } = configureChains(
+}: GetDefaultClientConfigOptions): {
+	autoConnect: boolean;
+	connectors: Connectors;
+	publicClient: ReturnType<typeof configureChains>["publicClient"];
+} {
+	const { chains, publicClient } = configureChains(
 		[crossbell],
 		[publicProvider()],
 		{ pollingInterval: 1_000 }
 	);
 
-	const connectors = [
+	const connectors: Connectors = [
 		new InjectedConnector({
 			chains,
 			options: {
@@ -56,6 +69,6 @@ export function getDefaultClientConfig({
 	return {
 		autoConnect: true,
 		connectors,
-		provider,
+		publicClient,
 	};
 }

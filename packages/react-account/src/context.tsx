@@ -1,14 +1,10 @@
 import React from "react";
 import { useRefCallback } from "@crossbell/util-hooks";
-
-export type BaseSigner = {
-	signMessage: (msg: string) => Promise<string>;
-	getAddress: () => Promise<string | null>;
-};
+import { type WalletClient } from "viem";
 
 export type ReactAccountContext = {
 	onDisconnect: () => void;
-	getSinger: () => Promise<BaseSigner>;
+	getWalletClient: () => Promise<WalletClient>;
 };
 
 const Context = React.createContext<ReactAccountContext>({
@@ -16,8 +12,8 @@ const Context = React.createContext<ReactAccountContext>({
 		throw new Error("onDisconnect not implemented");
 	},
 
-	getSinger() {
-		throw new Error("getSinger not implemented");
+	getWalletClient() {
+		throw new Error("getWalletClient not implemented");
 	},
 });
 
@@ -25,10 +21,10 @@ export function ReactAccountProvider(
 	props: ReactAccountContext & { children: React.ReactNode }
 ) {
 	const onDisconnect = useRefCallback(props.onDisconnect);
-	const getSinger = useRefCallback(props.getSinger);
+	const getWalletClient = useRefCallback(props.getWalletClient);
 	const value = React.useMemo(
-		() => ({ onDisconnect, getSinger }),
-		[onDisconnect, getSinger]
+		() => ({ onDisconnect, getWalletClient }),
+		[onDisconnect, getWalletClient]
 	);
 
 	return <Context.Provider value={value}>{props.children}</Context.Provider>;

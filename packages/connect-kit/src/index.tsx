@@ -39,6 +39,8 @@ import {
 import { useContractConfig } from "./contract-config";
 import { setupReactAccount } from "./setup-react-account";
 
+import type {} from "wagmi/window";
+
 export * from "@crossbell/react-account";
 export { useConnectModal } from "./modals/connect-modal";
 export { useDisconnectModal } from "./modals/disconnect-modal";
@@ -90,7 +92,9 @@ export function ConnectKitProvider({
 	const account = useAccount();
 	const contractConfig = useContractConfig();
 	const { disconnect } = useDisconnect();
-	const getSinger = useRefCallback(async () => account.connector?.getSigner());
+	const getWalletClient = useRefCallback(
+		async () => account.connector!.getWalletClient()!
+	);
 
 	React.useEffect(() => {
 		if (account.status === "connected") {
@@ -113,7 +117,10 @@ export function ConnectKitProvider({
 		<InitContractProvider {...contractConfig}>
 			<UseWeb2UrlContext.Provider value={ipfsLinkToHttpLink ?? null}>
 				<UrlComposerContext.Provider value={urlComposer ?? null}>
-					<ReactAccountProvider getSinger={getSinger} onDisconnect={disconnect}>
+					<ReactAccountProvider
+						getWalletClient={getWalletClient}
+						onDisconnect={disconnect}
+					>
 						<ConnectKitConfigContext.Provider value={connectKitConfig}>
 							<XSettingsConfigContext.Provider value={xSettings ?? null}>
 								<MantineProvider theme={theme}>

@@ -69,11 +69,7 @@ export function MainScene() {
 							<div>
 								{"Balance: "}
 								<strong>
-									{balance
-										? balance.value.isZero()
-											? 0
-											: balance.formatted
-										: 0}
+									{balance ? (balance.value === 0n ? 0 : balance.formatted) : 0}
 									{` MIRA`}
 								</strong>
 							</div>

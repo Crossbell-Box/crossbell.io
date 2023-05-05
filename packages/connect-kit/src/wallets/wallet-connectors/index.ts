@@ -1,5 +1,5 @@
 import React from "react";
-import { Connector, useClient } from "wagmi";
+import { Connector, useConfig } from "wagmi";
 
 import { Wallet } from "../types";
 
@@ -8,7 +8,7 @@ import { coinbaseWallet } from "./coinbase-wallet";
 import { braveWallet } from "./brave-wallet";
 
 export function useWalletConnectors() {
-	const { connectors } = useClient();
+	const { connectors } = useConfig();
 
 	return React.useMemo(() => {
 		const walletConnectors: Wallet[] = [];

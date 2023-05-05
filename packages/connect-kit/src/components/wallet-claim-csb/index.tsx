@@ -27,7 +27,7 @@ import { IMAGES, useReCAPTCHA } from "../../utils";
 import styles from "./index.module.css";
 import { useMutation, useQueryClient } from "@tanstack/react-query";
 import { asyncRetry } from "@crossbell/react-account/utils";
-import { utils } from "ethers";
+import { parseEther } from "viem";
 
 export type WalletClaimCSBProps = {
 	onSuccess: () => void;
@@ -221,8 +221,8 @@ function DiscordPendingOverlay({
 					const amount = await asyncRetry(
 						async (RETRY) => {
 							const amount = await getCsbBalance(address, { noCache: true });
-							const threshold = utils.parseEther("0.02");
-							return amount.gte(threshold) ? amount : RETRY;
+							const threshold = parseEther("0.02");
+							return amount >= threshold ? amount : RETRY;
 						},
 						{ maxRetryTimes: 10, delayMs: 2000 }
 					);

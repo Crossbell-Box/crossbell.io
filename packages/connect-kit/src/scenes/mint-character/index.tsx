@@ -1,7 +1,6 @@
 import React from "react";
 import { useRefCallback } from "@crossbell/util-hooks";
 import { LoadingOverlay } from "@crossbell/ui";
-import { utils } from "ethers";
 import {
 	useAccountBalance,
 	useMintCharacter,
@@ -17,6 +16,7 @@ import {
 } from "../../components";
 
 import styles from "./index.module.css";
+import { parseEther } from "viem";
 
 export type MintCharacterSceneMode = "form" | "claim-csb";
 export type MintCharacterFormMode = "slim" | "normal";
@@ -136,7 +136,7 @@ function useHasEnoughCSB() {
 	const { balance } = useAccountBalance();
 
 	return React.useMemo(
-		() => balance?.value.gte(utils.parseEther("0.001")),
+		() => !!balance && balance.value >= parseEther("0.001"),
 		[balance]
 	);
 }

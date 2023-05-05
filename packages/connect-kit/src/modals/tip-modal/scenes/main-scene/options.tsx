@@ -1,10 +1,10 @@
 import React from "react";
-import { utils } from "ethers";
 import { useRefCallback } from "@crossbell/util-hooks";
 import { useAccountMiraBalance } from "@crossbell/react-account";
 
 import styles from "./options.module.css";
 import { FlowerIcon } from "./options.icons";
+import { parseEther } from "viem";
 
 export type OptionsProps = {
 	balance: ReturnType<typeof useAccountMiraBalance>["balance"];
@@ -36,7 +36,7 @@ function Item({
 		<button
 			className={styles.item}
 			onClick={handleClick}
-			disabled={balance?.value.lt(utils.parseEther(`${amount}`))}
+			disabled={!!balance && balance.value <= parseEther(`${amount}`)}
 		>
 			<div className={styles.amount}>
 				<FlowerIcon className={styles.flower} />

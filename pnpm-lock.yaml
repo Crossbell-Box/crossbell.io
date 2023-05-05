@@ -1,5 +1,10 @@
 lockfileVersion: '6.0'
 
+patchedDependencies:
+  '@coinbase/wallet-sdk@3.6.6':
+    hash: 5sqkv53xgnr3sllyeb7rxtsz2q
+    path: patches/@coinbase__wallet-sdk@3.6.6.patch
+
 importers:
 
   .:
@@ -879,7 +884,7 @@ packages:
       '@babel/helper-validator-identifier': 7.19.1
       to-fast-properties: 2.0.0
 
-  /@coinbase/wallet-sdk@3.6.6:
+  /@coinbase/wallet-sdk@3.6.6(patch_hash=5sqkv53xgnr3sllyeb7rxtsz2q):
     resolution: {integrity: sha512-vX+epj/Ttjo7XRwlr3TFUUfW5GTRMvORpERPwiu7z2jl3DSVL4rXLmHt5y6LDPlUVreas2gumdcFbu0fLRG9Jg==}
     engines: {node: '>= 10.0.0'}
     dependencies:
@@ -906,6 +911,7 @@ packages:
       - supports-color
       - utf-8-validate
     dev: false
+    patched: true
 
   /@crossbell/ipfs-fetch@0.0.19:
     resolution: {integrity: sha512-0Yf9+MMTSD+JJkFbNaK/s+kl3CXhr4oq2yj3K0dvheB+e8uykcpM7yomxHie/sr0ushw3G7Ppf5NXYkfH0eiSw==}
@@ -4464,7 +4470,7 @@ packages:
       typescript:
         optional: true
     dependencies:
-      '@coinbase/wallet-sdk': 3.6.6
+      '@coinbase/wallet-sdk': 3.6.6(patch_hash=5sqkv53xgnr3sllyeb7rxtsz2q)
       '@ledgerhq/connect-kit-loader': 1.0.2
       '@safe-global/safe-apps-provider': 0.15.2
       '@safe-global/safe-apps-sdk': 7.10.0
@@ -4500,7 +4506,7 @@ packages:
       typescript:
         optional: true
     dependencies:
-      '@coinbase/wallet-sdk': 3.6.6
+      '@coinbase/wallet-sdk': 3.6.6(patch_hash=5sqkv53xgnr3sllyeb7rxtsz2q)
       '@ledgerhq/connect-kit-loader': 1.0.2
       '@safe-global/safe-apps-provider': 0.15.2
       '@safe-global/safe-apps-sdk': 7.10.0

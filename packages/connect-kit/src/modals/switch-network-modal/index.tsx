@@ -16,7 +16,7 @@ export function showSwitchNetworkModal(contract: Contract) {
 		const dispose = useSwitchNetworkModal.subscribe(({ isActive }) => {
 			if (!isActive) {
 				dispose();
-				contract.contract.provider.getNetwork().then(({ chainId }) => {
+				contract.walletClient!.getChainId().then((chainId) => {
 					if (chainId === crossbell.id) {
 						resolve();
 					} else {
