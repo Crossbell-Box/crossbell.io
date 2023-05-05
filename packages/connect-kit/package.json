@@ -44,7 +44,7 @@
 		"canvas-confetti": "^1",
 		"check-password-strength": "^2",
 		"classnames": "^2",
-		"crossbell.js": "^1.0.0-alpha.4",
+		"crossbell.js": "^1.0.0-alpha.5",
 		"embla-carousel-react": "^7",
 		"immer": "^10",
 		"lodash.debounce": "4.0.8",

@@ -30,6 +30,6 @@
 	"dependencies": {
 		"@crossbell/util-ethers": "^0.0.82",
 		"@fastify/deepmerge": "^1.3.0",
-		"crossbell.js": "^1.0.0-alpha.4"
+		"crossbell.js": "^1.0.0-alpha.5"
 	}
 }

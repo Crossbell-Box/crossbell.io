@@ -1,7 +1,7 @@
 import "../styles/globals.css";
 
 import type { AppProps } from "next/app";
-import { WagmiConfig, createClient } from "wagmi";
+import { WagmiConfig, createConfig } from "wagmi";
 import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
 import * as Sentry from "@sentry/react";
 import { BrowserTracing } from "@sentry/tracing";
@@ -12,7 +12,7 @@ import {
 } from "@crossbell/connect-kit";
 import { NotificationModal } from "@crossbell/notification";
 
-const wagmiClient = createClient(
+const wagmiClient = createConfig(
 	getDefaultClientConfig({ appName: "Crossbell Dev" })
 );
 const queryClient = new QueryClient();
@@ -40,7 +40,7 @@ const xSettings: Partial<XSettingsConfig> = {
 export default function App({ Component, pageProps }: AppProps) {
 	return (
 		<QueryClientProvider client={queryClient}>
-			<WagmiConfig client={wagmiClient}>
+			<WagmiConfig config={wagmiClient}>
 				<ConnectKitProvider
 					xSettings={xSettings}
 					ignoreWalletDisconnectEvent={true}
