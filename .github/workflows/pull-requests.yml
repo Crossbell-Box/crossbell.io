@@ -14,14 +14,16 @@ jobs:
     steps:
       - uses: actions/checkout@v3
 
+      - uses: pnpm/action-setup@v2
+
       - name: Setup node
         uses: actions/setup-node@v3
         with:
           node-version: "lts/*"
-          cache: "yarn"
+          cache: pnpm
 
       - name: Install dependencies
-        run: yarn install --immutable
+        run: pnpm i --frozen-lockfile
 
       - name: Build packages
-        run: yarn run build
+        run: pnpm run build
