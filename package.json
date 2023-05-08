@@ -7,10 +7,6 @@
 	"homepage": "https://github.com/Crossbell-Box/crossbell-universe#readme",
 	"author": "Natural Selection Labs",
 	"keywords": [],
-	"workspaces": [
-		"packages/*",
-		"sites/*"
-	],
 	"scripts": {
 		"build": "turbo run build",
 		"clean": "turbo run clean",
@@ -24,7 +20,7 @@
 		"release:prod": "lerna version",
 		"test": "turbo run test"
 	},
-	"packageManager": "yarn@1.22.19",
+	"packageManager": "pnpm@8.4.0",
 	"dependencies": {
 		"@crossbell/ipfs-gateway": "0.0.19",
 		"@crossbell/ipfs-react": "0.0.19",
