@@ -1,6 +1,6 @@
 {
 	"name": "@crossbell/connect-kit",
-	"version": "0.0.81",
+	"version": "0.0.82",
 	"license": "MIT",
 	"repository": "github:Crossbell-Box/crossbell-universe",
 	"bugs": "https://github.com/Crossbell-Box/crossbell-universe/issues",
@@ -30,13 +30,13 @@
 		"./index.css": "./dist/index.css"
 	},
 	"dependencies": {
-		"@crossbell/contract": "^0.0.81",
-		"@crossbell/indexer": "^0.0.81",
-		"@crossbell/react-account": "^0.0.81",
-		"@crossbell/ui": "^0.0.81",
-		"@crossbell/util-ethers": "^0.0.81",
-		"@crossbell/util-hooks": "^0.0.81",
-		"@crossbell/util-metadata": "^0.0.81",
+		"@crossbell/contract": "^0.0.82",
+		"@crossbell/indexer": "^0.0.82",
+		"@crossbell/react-account": "^0.0.82",
+		"@crossbell/ui": "^0.0.82",
+		"@crossbell/util-ethers": "^0.0.82",
+		"@crossbell/util-hooks": "^0.0.82",
+		"@crossbell/util-metadata": "^0.0.82",
 		"@emotion/react": "^11",
 		"@mantine/core": "^6",
 		"@mantine/hooks": "^6",
