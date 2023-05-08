@@ -14,13 +14,11 @@ jobs:
     steps:
       - uses: actions/checkout@v3
 
-      - uses: pnpm/action-setup@v2
-
       - name: Setup node
         uses: actions/setup-node@v3
         with:
           node-version: "lts/*"
-          cache: pnpm
+          cache: "yarn"
 
       - name: "NPM Identity"
         env:
@@ -31,10 +29,10 @@ jobs:
           npm whoami
 
       - name: Install dependencies
-        run: pnpm i --frozen-lockfile
+        run: yarn install --immutable
 
       - name: Build packages
-        run: pnpm run build
+        run: yarn run build
 
       - name: Publish packages
         run: lerna publish from-package --yes --no-verify-access --loglevel silly

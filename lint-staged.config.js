@@ -1,4 +1,4 @@
 module.exports = {
-	"**/package.json": ["pnpm format:package"],
+	"**/package.json": ["yarn format:package"],
 	"*.{js,ts,tsx,html,json}": ["prettier --write", "eslint --fix"],
 };

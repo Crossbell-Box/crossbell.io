@@ -9,7 +9,7 @@ if (isWorkingDirectoryClean) {
 	// Save Temporary changes
 	await $`git add . && git commit -m 'release-dev'`;
 	// Build
-	await $`pnpm run build`;
+	await $`yarn run build`;
 	// Publish to `dev` tag
 	try {
 		await $`lerna publish from-package --yes --no-private --dist-tag dev`;
