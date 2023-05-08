@@ -17,11 +17,11 @@
 		"@crossbell/util-ethers": "^0.0.82",
 		"@crossbell/util-hooks": "^0.0.82",
 		"@crossbell/util-metadata": "^0.0.82",
-		"@sentry/react": "^7.50.0",
-		"@sentry/tracing": "^7.50.0",
-		"next": "13.3.4",
-		"nextra": "^2.4.2",
-		"nextra-theme-docs": "^2.4.2",
+		"@sentry/react": "^7.51.2",
+		"@sentry/tracing": "^7.51.2",
+		"next": "13.4.1",
+		"nextra": "^2.5.0",
+		"nextra-theme-docs": "^2.5.0",
 		"outdent": "^0.8.0"
 	},
 	"devDependencies": {
