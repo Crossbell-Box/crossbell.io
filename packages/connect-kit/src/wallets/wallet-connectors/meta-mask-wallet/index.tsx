@@ -4,7 +4,6 @@ import React from "react";
 import { MetamaskIcon } from "../../../components";
 import { isAndroid, isMobile } from "../../../utils";
 import { Chain, Wallet } from "../../types";
-import { getWalletConnectConnector } from "../get-wallet-connect-connector";
 import { getWalletConnectLegacyConnector } from "../get-wallet-connect-legacy-connector";
 import styles from "../coinbase-wallet/index.module.css";
 
@@ -45,7 +44,6 @@ function isMetaMask(ethereum: NonNullable<(typeof window)["ethereum"]>) {
 export const metaMaskWallet = ({
 	chains,
 	options,
-	walletConnectProjectId,
 }: MetaMaskWalletOptions): Wallet => {
 	const isMetaMaskInjected =
 		typeof window !== "undefined" &&
@@ -70,15 +68,10 @@ export const metaMaskWallet = ({
 		),
 		createConnector: () => {
 			if (shouldUseWalletConnect) {
-				const connector = walletConnectProjectId
-					? getWalletConnectConnector({
-							chains,
-							options: { projectId: walletConnectProjectId },
-					  })
-					: getWalletConnectLegacyConnector({
-							chains,
-							options: { qrcode: true, chainId: chains[0].id },
-					  });
+				const connector = getWalletConnectLegacyConnector({
+					chains,
+					options: { qrcode: true, chainId: chains[0].id },
+				});
 
 				return {
 					connector,
