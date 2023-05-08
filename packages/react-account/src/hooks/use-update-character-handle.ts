@@ -6,6 +6,7 @@ import {
 import { updateHandle } from "../apis";
 
 import { createAccountTypeBasedMutationHooks } from "./account-type-based-hooks";
+import { useAccountState } from "@crossbell/react-account";
 
 export const useUpdateCharacterHandle = createAccountTypeBasedMutationHooks<
 	void,
@@ -29,6 +30,7 @@ export const useUpdateCharacterHandle = createAccountTypeBasedMutationHooks<
 		const { characterId, handle } = variables;
 
 		return Promise.all([
+			useAccountState.getState().refresh(),
 			queryClient.invalidateQueries(SCOPE_KEY_CHARACTER(characterId)),
 			queryClient.invalidateQueries(SCOPE_KEY_CHARACTER_BY_HANDLE(handle)),
 		]);
