@@ -41,13 +41,14 @@ export function ConnectWithQRCode({
 			}
 		});
 
-		connectAsync({ ...connector, chainId: crossbell.id }).catch((err) =>
+		connectAsync({ ...connector, chainId: crossbell.id }).catch((err) => {
+			console.error(err);
 			showNotification({
 				title: `Error while connect to ${wallet.name}`,
 				message: err instanceof Error ? err.message : `${err}`,
 				color: "red",
-			})
-		);
+			});
+		});
 	});
 
 	return (
