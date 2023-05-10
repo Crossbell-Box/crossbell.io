@@ -10,7 +10,6 @@ jobs:
     runs-on: ubuntu-latest
     env:
       CI: true
-      NPM_AUTH_TOKEN: ${{ secrets.NPM_AUTH_TOKEN }}
 
     steps:
       - name: Checkout
@@ -45,7 +44,11 @@ jobs:
         run: pnpm install --frozen-lockfile
 
       - name: "NPM Identity"
-        run: npm whoami
+        env:
+          NPM_AUTH_TOKEN: ${{ secrets.NPM_AUTH_TOKEN }}
+        run: |
+          npm config set '//registry.npmjs.org/:_authToken' "${NPM_AUTH_TOKEN}"
+          npm whoami
 
       - name: Build packages
         run: pnpm run build
