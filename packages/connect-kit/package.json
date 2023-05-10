@@ -54,12 +54,12 @@
 		"react-google-recaptcha": "^2.1.0",
 		"rxjs": "^7.8.1",
 		"ts-essentials": "^9.3.2",
-		"zustand": "^4",
-		"viem": "^0.3.17"
+		"viem": "^0.3.19",
+		"zustand": "^4"
 	},
 	"peerDependencies": {
 		"@tanstack/react-query": "^4",
-		"wagmi": "^1.0.0-next.4"
+		"wagmi": "^1.0.0"
 	},
 	"devDependencies": {
 		"@types/lodash.debounce": "4.0.7",

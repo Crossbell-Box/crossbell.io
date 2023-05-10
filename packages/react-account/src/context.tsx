@@ -1,6 +1,6 @@
 import React from "react";
 import { useRefCallback } from "@crossbell/util-hooks";
-import { type WalletClient } from "viem";
+import { type WalletClient } from "wagmi";
 
 export type ReactAccountContext = {
 	onDisconnect: () => void;

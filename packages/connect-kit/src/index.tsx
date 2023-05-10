@@ -93,7 +93,7 @@ export function ConnectKitProvider({
 	const contractConfig = useContractConfig();
 	const { disconnect } = useDisconnect();
 	const getWalletClient = useRefCallback(
-		async () => account.connector!.getWalletClient()!
+		() => account.connector!.getWalletClient()!
 	);
 
 	React.useEffect(() => {
