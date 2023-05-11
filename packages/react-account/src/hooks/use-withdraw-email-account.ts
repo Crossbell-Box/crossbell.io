@@ -20,13 +20,13 @@ export function useWithdrawEmailAccount(options?: UseMutationOptions) {
 			token: email.token,
 		});
 
-		await contract.character.withdrawFromNewbieVilla(
-			wallet.address,
-			email.characterId,
-			nonce,
-			expires,
-			proof
-		);
+		await contract.character.withdrawFromNewbieVilla({
+			toAddress: wallet.address,
+			characterId: email.characterId,
+			nonce: nonce,
+			expires: expires,
+			proof: proof,
+		});
 
 		const character = await asyncRetry(async (RETRY) => {
 			const character = await indexer.character.get(email.characterId);

@@ -30,7 +30,7 @@
 	"dependencies": {
 		"@crossbell/indexer": "^0.0.82",
 		"@crossbell/util-hooks": "^0.0.82",
-		"crossbell": "^1.0.0",
+		"crossbell": "^1.1.0",
 		"viem": "^0.3.19"
 	},
 	"peerDependencies": {

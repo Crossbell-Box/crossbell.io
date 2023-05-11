@@ -35,11 +35,11 @@ export const useLinkCharacter = createAccountTypeBasedMutationHooks<
 						linkType,
 					});
 				} else {
-					return contract.link.linkCharacter(
-						account.characterId,
-						characterId,
-						linkType
-					);
+					return contract.link.linkCharacter({
+						fromCharacterId: account.characterId,
+						toCharacterId: characterId,
+						linkType,
+					});
 				}
 			}
 		},

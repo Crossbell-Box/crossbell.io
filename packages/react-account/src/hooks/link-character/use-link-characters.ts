@@ -41,12 +41,12 @@ export const useLinkCharacters = createAccountTypeBasedMutationHooks<
 						linkType,
 					});
 				} else {
-					return contract.link.linkCharactersInBatch(
-						account.characterId,
-						characterIds ?? [],
-						addresses ?? [],
-						linkType
-					);
+					return contract.link.linkCharactersInBatch({
+						fromCharacterId: account.characterId,
+						toCharacterIds: characterIds ?? [],
+						toAddresses: addresses ?? [],
+						linkType: linkType,
+					});
 				}
 			}
 		},

@@ -47,10 +47,10 @@
 		"@next/bundle-analyzer": "^13.4.1",
 		"@tanstack/react-query": "^4",
 		"@tanstack/react-query-devtools": "^4",
-		"@wagmi/core": "^1.0.1",
+		"@wagmi/core": "^1.0.2",
 		"canvas-confetti": "^1.6.0",
 		"classnames": "^2.3.2",
-		"crossbell": "^1.0.0",
+		"crossbell": "^1.1.0",
 		"dayjs": "^1.11.7",
 		"embla-carousel-react": "^7.1.0",
 		"emoji-mart": "^5.5.2",
@@ -77,7 +77,7 @@
 		"sticky-sidebar-v2": "^1.1.1",
 		"type-fest": "^3.10.0",
 		"typeit-react": "^2.6.4",
-		"wagmi": "1.0.1",
+		"wagmi": "1.0.2",
 		"zustand": "^4.3.8"
 	},
 	"devDependencies": {

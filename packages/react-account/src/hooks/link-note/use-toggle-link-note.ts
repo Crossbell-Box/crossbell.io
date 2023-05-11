@@ -61,19 +61,19 @@ const contractActionFn = (
 ) => {
 	switch (action) {
 		case "link":
-			return contract.link.linkNote(
-				params.fromCharacterId,
-				params.toCharacterId,
-				params.toNoteId,
-				params.linkType
-			);
+			return contract.link.linkNote({
+				fromCharacterId: params.fromCharacterId,
+				toCharacterId: params.toCharacterId,
+				toNoteId: params.toNoteId,
+				linkType: params.linkType,
+			});
 		case "unlink":
-			return contract.link.unlinkNote(
-				params.fromCharacterId,
-				params.toCharacterId,
-				params.toNoteId,
-				params.linkType
-			);
+			return contract.link.unlinkNote({
+				fromCharacterId: params.fromCharacterId,
+				toCharacterId: params.toCharacterId,
+				toNoteId: params.toNoteId,
+				linkType: params.linkType,
+			});
 	}
 };
 
