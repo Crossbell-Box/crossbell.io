@@ -1,4 +1,4 @@
-import { CharacterMetadata } from "crossbell.js";
+import { CharacterMetadata } from "crossbell";
 import { useMutation, useQueryClient } from "@tanstack/react-query";
 import { showNotification } from "@mantine/notifications";
 

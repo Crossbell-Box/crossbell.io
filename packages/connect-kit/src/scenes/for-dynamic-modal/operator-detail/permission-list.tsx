@@ -1,5 +1,5 @@
 import React from "react";
-import { CharacterOperatorEntity } from "crossbell.js";
+import { CharacterOperatorEntity } from "crossbell";
 import { LoadingOverlay, SettingsCheckmark1Icon } from "@crossbell/ui";
 import { useCharacterOperatorPermissions } from "@crossbell/react-account";
 

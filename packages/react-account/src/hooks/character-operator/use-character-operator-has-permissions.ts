@@ -1,5 +1,5 @@
 import React from "react";
-import { CharacterPermissionKey } from "crossbell.js";
+import { CharacterPermissionKey } from "crossbell";
 import { type Address } from "viem";
 
 import { useCharacterOperatorPermissions } from "./use-character-operator-permissions";

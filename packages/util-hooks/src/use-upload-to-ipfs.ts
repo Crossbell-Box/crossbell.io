@@ -1,5 +1,5 @@
 import { useMutation } from "@tanstack/react-query";
-import { ipfsUploadFile } from "crossbell.js/ipfs";
+import { ipfsUploadFile } from "crossbell/ipfs";
 
 export function useUploadToIpfs() {
 	return useMutation(

@@ -4,7 +4,7 @@ import {
 	LinkItemType,
 	NoteEntity,
 	NoteMetadata,
-} from "crossbell.js";
+} from "crossbell";
 
 import { WalletClient, type Address } from "viem";
 import { request } from "./utils";

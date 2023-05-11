@@ -1,4 +1,4 @@
-import { NoteEntity, NoteMetadata } from "crossbell.js";
+import { NoteEntity, NoteMetadata } from "crossbell";
 import {
 	SCOPE_KEY_NOTES_OF_NOTE,
 	SCOPE_KEY_NOTE_STATUS,

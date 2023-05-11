@@ -1,4 +1,4 @@
-import { NoteMetadata } from "crossbell.js";
+import { NoteMetadata } from "crossbell";
 
 /**
  * @param metadata - the metadata of the note

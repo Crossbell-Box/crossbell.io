@@ -1,5 +1,5 @@
 import React from "react";
-import { NotificationTypeKey } from "crossbell.js";
+import { NotificationTypeKey } from "crossbell";
 import { useAccountCharacter } from "@crossbell/react-account";
 import { useCharacterNotification, indexer } from "@crossbell/indexer";
 import { useRefCallback } from "@crossbell/util-hooks";

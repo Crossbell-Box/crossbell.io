@@ -1,4 +1,4 @@
-import { Contract, Indexer } from "crossbell.js";
+import { Contract, Indexer } from "crossbell";
 import { useQueryClient } from "@tanstack/react-query";
 
 import { EmailAccount, GeneralAccount, WalletAccount } from "../account-state";

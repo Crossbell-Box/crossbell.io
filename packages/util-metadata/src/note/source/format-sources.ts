@@ -1,4 +1,4 @@
-import { NoteEntity } from "crossbell.js";
+import { NoteEntity } from "crossbell";
 
 import type { SourceType } from "./types";
 import { getSourceType } from "./get-source-type";

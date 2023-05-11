@@ -1,4 +1,4 @@
-import { NoteEntity, NoteMetadata } from "crossbell.js";
+import { NoteEntity, NoteMetadata } from "crossbell";
 import {
 	indexer,
 	SCOPE_KEY_FOLLOWING_FEEDS_OF_CHARACTER,

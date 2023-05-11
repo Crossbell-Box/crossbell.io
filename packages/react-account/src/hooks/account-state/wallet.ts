@@ -1,4 +1,4 @@
-import { CharacterEntity } from "crossbell.js";
+import { CharacterEntity } from "crossbell";
 import { indexer } from "@crossbell/indexer";
 
 import { isAddressEqual, WalletClient } from "viem";

@@ -1,5 +1,5 @@
 import React from "react";
-import { CharacterEntity, LinkEntity } from "crossbell.js";
+import { CharacterEntity, LinkEntity } from "crossbell";
 import { useInfiniteQuery } from "@tanstack/react-query";
 import { indexer, NoteLinkType } from "@crossbell/indexer";
 

@@ -1,4 +1,4 @@
-import { CharacterPermissionKey } from "crossbell.js";
+import { CharacterPermissionKey } from "crossbell";
 import { useRefCallback } from "@crossbell/util-hooks";
 import { type Address } from "viem";
 

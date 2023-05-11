@@ -1,4 +1,4 @@
-import { CharacterPermissionKey } from "crossbell.js";
+import { CharacterPermissionKey } from "crossbell";
 
 export function haveSamePermissions(
 	a: CharacterPermissionKey[],

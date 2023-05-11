@@ -1,5 +1,5 @@
 import React from "react";
-import { CharacterEntity, NoteEntity } from "crossbell.js";
+import { CharacterEntity, NoteEntity } from "crossbell";
 import {
 	composeNoteId,
 	composeScanTxHref,

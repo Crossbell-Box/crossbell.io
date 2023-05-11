@@ -1,5 +1,5 @@
 import React from "react";
-import { CharacterEntity } from "crossbell.js";
+import { CharacterEntity } from "crossbell";
 
 import { useCharacters } from "@crossbell/indexer";
 

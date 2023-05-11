@@ -1,4 +1,4 @@
-import { NotificationEntity } from "crossbell.js";
+import { NotificationEntity } from "crossbell";
 import dayjs from "dayjs";
 
 import { indexer } from "../indexer";

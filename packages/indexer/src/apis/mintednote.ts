@@ -1,7 +1,7 @@
 import { useInfiniteQuery, useQuery } from "@tanstack/react-query";
 import { indexer } from "../indexer";
 import { type Address } from "viem";
-import { type Numberish } from "crossbell.js";
+import { type Numberish } from "crossbell";
 
 const SCOPE_KEY = ["indexer", "mintedNotes"];
 

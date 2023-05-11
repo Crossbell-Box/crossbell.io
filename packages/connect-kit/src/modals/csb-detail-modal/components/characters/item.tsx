@@ -1,5 +1,5 @@
 import React from "react";
-import { CharacterEntity } from "crossbell.js";
+import { CharacterEntity } from "crossbell";
 import { CharacterAvatar } from "@crossbell/ui";
 import { extractCharacterName } from "@crossbell/util-metadata";
 import { useToggleOpSignOperator } from "@crossbell/react-account";

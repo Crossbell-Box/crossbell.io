@@ -1,4 +1,4 @@
-import { CharacterEntity, NoteEntity } from "crossbell.js";
+import { CharacterEntity, NoteEntity } from "crossbell";
 
 type BaseNotification<T, V> = {
 	type: T;

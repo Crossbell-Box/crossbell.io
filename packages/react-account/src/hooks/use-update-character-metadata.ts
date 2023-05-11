@@ -1,5 +1,5 @@
 import { produce, Draft } from "immer";
-import { CharacterMetadata } from "crossbell.js";
+import { CharacterMetadata } from "crossbell";
 import { indexer, SCOPE_KEY_CHARACTER } from "@crossbell/indexer";
 
 import {

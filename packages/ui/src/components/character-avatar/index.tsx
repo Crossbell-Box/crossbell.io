@@ -1,6 +1,6 @@
 import React from "react";
 import classNames from "classnames";
-import { CharacterEntity } from "crossbell.js";
+import { CharacterEntity } from "crossbell";
 import { useCharacterAvatar } from "@crossbell/ui";
 import { extractCharacterName } from "@crossbell/util-metadata";
 

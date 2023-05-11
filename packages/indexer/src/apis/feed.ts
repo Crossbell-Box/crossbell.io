@@ -1,5 +1,5 @@
 import { indexer } from "../indexer";
-import { FeedType } from "crossbell.js";
+import { FeedType } from "crossbell";
 import { useQuery, useInfiniteQuery } from "@tanstack/react-query";
 
 const SCOPE_KEYS = ["indexer", "feeds"];

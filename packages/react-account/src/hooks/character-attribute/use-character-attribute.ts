@@ -1,5 +1,5 @@
 import { useCharacter } from "@crossbell/indexer";
-import { AttributesMetadata } from "crossbell.js";
+import { AttributesMetadata } from "crossbell";
 
 import { useUpdateCharacterMetadata } from "../use-update-character-metadata";
 

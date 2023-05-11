@@ -1,6 +1,6 @@
 import { useQuery } from "@tanstack/react-query";
 import { indexer } from "@crossbell/indexer";
-import { CharacterPermissionKey } from "crossbell.js";
+import { CharacterPermissionKey } from "crossbell";
 import { type Address } from "viem";
 
 import { SCOPE_KEY_CHARACTER_OPERATOR } from "./const";

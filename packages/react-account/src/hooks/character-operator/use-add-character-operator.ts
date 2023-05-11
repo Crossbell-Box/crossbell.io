@@ -1,5 +1,5 @@
 import { indexer } from "@crossbell/indexer";
-import { CharacterPermissionKey } from "crossbell.js";
+import { CharacterPermissionKey } from "crossbell";
 import { type Address } from "viem";
 
 import { asyncRetry } from "../../utils";

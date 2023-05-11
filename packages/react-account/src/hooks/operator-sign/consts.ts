@@ -1,4 +1,4 @@
-import { CharacterPermissionKey } from "crossbell.js";
+import { CharacterPermissionKey } from "crossbell";
 
 export const OP_SIGN_OPERATOR_PERMISSIONS: CharacterPermissionKey[] = [
 	"SET_CHARACTER_URI",

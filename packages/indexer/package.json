@@ -29,7 +29,7 @@
 	},
 	"dependencies": {
 		"@tanstack/react-query": "^4",
-		"crossbell.js": "^1.0.0-alpha.5",
+		"crossbell": "^1.0.0",
 		"dayjs": "^1.11.7",
 		"lodash.compact": "^3",
 		"lru-cache": "9.1.1",

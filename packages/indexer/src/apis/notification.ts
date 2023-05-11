@@ -1,5 +1,5 @@
 import { useInfiniteQuery } from "@tanstack/react-query";
-import { NotificationTypeKey } from "crossbell.js";
+import { NotificationTypeKey } from "crossbell";
 import compact from "lodash.compact";
 
 import { indexer } from "../indexer";

@@ -1,5 +1,5 @@
-import { Contract, Numberish } from "crossbell.js";
-import { isCrossbellMainnet } from "crossbell.js/network";
+import { Contract, Numberish } from "crossbell";
+import { isCrossbellMainnet } from "crossbell/network";
 import { parseEther } from "viem";
 import { getCsbBalance } from "@crossbell/indexer";
 import { type Address } from "viem";

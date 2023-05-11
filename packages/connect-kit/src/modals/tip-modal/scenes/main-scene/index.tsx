@@ -2,7 +2,7 @@ import React from "react";
 import { CharacterAvatar, Loading, MiraIcon, useWeb2Url } from "@crossbell/ui";
 import { useCharacter } from "@crossbell/indexer";
 import { extractCharacterName } from "@crossbell/util-metadata";
-import { CharacterEntity } from "crossbell.js";
+import { CharacterEntity } from "crossbell";
 import { useRefCallback } from "@crossbell/util-hooks";
 import classNames from "classnames";
 import { useAccountMiraBalance, useTip } from "@crossbell/react-account";

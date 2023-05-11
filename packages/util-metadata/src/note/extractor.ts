@@ -1,4 +1,4 @@
-import { NoteMetadata } from "crossbell.js";
+import { NoteMetadata } from "crossbell";
 import { getValidAttachments } from "./attachment";
 
 export function extractCoverImageFromNote(

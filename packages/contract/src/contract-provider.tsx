@@ -1,5 +1,5 @@
 import React from "react";
-import { Contract, createContract } from "crossbell.js";
+import { Contract, createContract } from "crossbell";
 import { useRefCallback } from "@crossbell/util-hooks";
 
 import { injectContractChecker, InjectContractCheckerConfig } from "./utils";

@@ -1,5 +1,5 @@
 import React from "react";
-import { CharacterOperatorEntity } from "crossbell.js";
+import { CharacterOperatorEntity } from "crossbell";
 import { LoadingOverlay } from "@crossbell/ui";
 import { useRemoveCharacterOperator } from "@crossbell/react-account";
 

@@ -1,4 +1,4 @@
-import { NoteMetadata } from "crossbell.js";
+import { NoteMetadata } from "crossbell";
 import { SCOPE_KEY_FOLLOWING_FEEDS_OF_CHARACTER } from "@crossbell/indexer";
 
 import { putNote, siwePutNote } from "../apis";

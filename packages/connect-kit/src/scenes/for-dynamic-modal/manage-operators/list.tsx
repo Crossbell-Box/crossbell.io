@@ -1,7 +1,7 @@
 import React from "react";
 import { LoadMore, Loading } from "@crossbell/ui";
 import { isAddressEqual } from "viem";
-import { CharacterOperatorEntity } from "crossbell.js";
+import { CharacterOperatorEntity } from "crossbell";
 import {
 	OP_SIGN_OPERATOR_ADDRESS,
 	X_SYNC_OPERATOR_ADDRESS,

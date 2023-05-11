@@ -1,5 +1,5 @@
 import React from "react";
-import { Contract } from "crossbell.js";
+import { Contract } from "crossbell";
 
 import { BaseModal } from "../../components";
 import { Main } from "./scenes/main";

@@ -6,7 +6,7 @@ import {
 	LoadMore,
 } from "@crossbell/ui";
 import { extractCharacterName } from "@crossbell/util-metadata";
-import { CharacterEntity } from "crossbell.js";
+import { CharacterEntity } from "crossbell";
 import { ScrollArea } from "@mantine/core";
 import {
 	useAccountState,

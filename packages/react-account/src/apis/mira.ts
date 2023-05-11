@@ -1,5 +1,5 @@
 import { indexer } from "@crossbell/indexer";
-import { Contract } from "crossbell.js";
+import { Contract } from "crossbell";
 import { type Address, formatUnits } from "viem";
 
 export async function getMiraTokenDecimals(

@@ -1,5 +1,5 @@
 import { showNotification } from "@mantine/notifications";
-import { CharacterEntity } from "crossbell.js";
+import { CharacterEntity } from "crossbell";
 import { parseEther } from "viem";
 import { indexer } from "@crossbell/indexer";
 

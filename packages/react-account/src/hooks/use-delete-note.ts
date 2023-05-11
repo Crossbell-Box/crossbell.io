@@ -1,4 +1,4 @@
-import { NoteEntity } from "crossbell.js";
+import { NoteEntity } from "crossbell";
 import {
 	SCOPE_KEY_FOLLOWING_FEEDS_OF_CHARACTER,
 	SCOPE_KEY_NOTE,

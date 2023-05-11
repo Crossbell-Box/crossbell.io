@@ -1,4 +1,4 @@
-import { NoteMetadata } from "crossbell.js";
+import { NoteMetadata } from "crossbell";
 
 import { KnownSource } from "./types";
 import { getKnownSource } from "./get-known-source";

@@ -1,6 +1,6 @@
 import { NoteLinkType } from "@crossbell/indexer";
 import { useDebouncedActionSequence } from "@crossbell/util-hooks";
-import { CharacterEntity, Contract, NoteEntity } from "crossbell.js";
+import { CharacterEntity, Contract, NoteEntity } from "crossbell";
 
 import { linkNote, unlinkNote, siweUnlinkNote, siweLinkNote } from "../../apis";
 import { useHandleError } from "../use-handle-error";

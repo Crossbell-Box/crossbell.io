@@ -1,6 +1,6 @@
 import { indexer, NoteLinkType } from "@crossbell/indexer";
 import { type Address } from "viem";
-import { NoteEntity } from "crossbell.js";
+import { NoteEntity } from "crossbell";
 
 export type GetIsNoteMintedConfig = {
 	noteCharacterId: number;

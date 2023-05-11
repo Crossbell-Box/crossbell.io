@@ -1,4 +1,4 @@
-import { createIndexer, Indexer } from "crossbell.js";
+import { createIndexer, Indexer } from "crossbell";
 
 export { Indexer };
 

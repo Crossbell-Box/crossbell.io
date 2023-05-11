@@ -1,4 +1,4 @@
-import { CharacterEntity, CharacterMetadata } from "crossbell.js";
+import { CharacterEntity, CharacterMetadata } from "crossbell";
 import { truncateAddress } from "@crossbell/util-ethers";
 
 export function extractCharacterName(

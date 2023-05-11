@@ -1,4 +1,4 @@
-import { NoteMetadata } from "crossbell.js";
+import { NoteMetadata } from "crossbell";
 import { MediaType, MediaTypes, mimeTypeToMediaType } from "./mimetype";
 
 const ContentTypes = ["address", "content"] as const;

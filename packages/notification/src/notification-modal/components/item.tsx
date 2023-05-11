@@ -3,7 +3,7 @@ import dayjs from "dayjs";
 import { formatUnits } from "viem";
 // https://github.com/iamkun/dayjs/issues/1167
 import relativeTime from "dayjs/plugin/relativeTime.js";
-import type { NoteEntity } from "crossbell.js";
+import type { NoteEntity } from "crossbell";
 import { Indicator, CharacterAvatar } from "@crossbell/ui";
 import { ParsedNotification } from "@crossbell/indexer";
 import { CrossbellChainLogo, useUrlComposer, UrlComposer } from "@crossbell/ui";

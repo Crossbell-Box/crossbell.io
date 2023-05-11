@@ -1,5 +1,5 @@
 import { useQuery, useInfiniteQuery } from "@tanstack/react-query";
-import { NoteEntity } from "crossbell.js";
+import { NoteEntity } from "crossbell";
 import { type Address } from "viem";
 
 import { indexer } from "../indexer";
