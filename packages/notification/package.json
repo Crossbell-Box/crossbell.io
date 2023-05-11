@@ -36,7 +36,7 @@
 		"classnames": "^2",
 		"dayjs": "^1.11.7",
 		"react-intersection-observer": "^9",
-		"viem": "^0.3.19",
+		"viem": "^0.3.21",
 		"zustand": "^4.3.8"
 	},
 	"peerDependencies": {
