@@ -17,7 +17,11 @@ export const useRemoveCharacterOperator = createAccountTypeBasedMutationHooks<
 		supportOPSign: false,
 
 		async action({ characterId, operator }, { contract }) {
-			await contract.operator.grantForCharacter(characterId, operator, []);
+			await contract.operator.grantForCharacter({
+				characterId,
+				operator,
+				permissions: [],
+			});
 
 			await asyncRetry(async (RETRY) => {
 				const op = await indexer.operator.getForCharacter(

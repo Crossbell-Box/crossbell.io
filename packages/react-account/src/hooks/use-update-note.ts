@@ -72,11 +72,11 @@ export const useUpdateNote = createAccountTypeBasedMutationHooks<
 							metadata,
 						});
 					} else {
-						await contract.note.setMetadata(
-							variables.note.characterId,
-							variables.note.noteId,
-							metadata
-						);
+						await contract.note.setMetadata({
+							characterId: variables.note.characterId,
+							noteId: variables.note.noteId,
+							metadata,
+						});
 					}
 				},
 			},

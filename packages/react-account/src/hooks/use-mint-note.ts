@@ -27,7 +27,11 @@ export const useMintNote = createAccountTypeBasedMutationHooks<
 					if (siwe) {
 						await siweMintNote({ siwe, characterId, noteId });
 					} else {
-						await contract.note.mint(characterId, noteId, account.address);
+						await contract.note.mint({
+							characterId,
+							noteId,
+							toAddress: account.address,
+						});
 					}
 
 					await asyncRetry(

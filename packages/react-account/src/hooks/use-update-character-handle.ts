@@ -22,7 +22,7 @@ export const useUpdateCharacterHandle = createAccountTypeBasedMutationHooks<
 		supportOPSign: false,
 
 		async action({ characterId, handle }, { contract }) {
-			return contract.character.setHandle(characterId, handle);
+			return contract.character.setHandle({ characterId, handle });
 		},
 	},
 

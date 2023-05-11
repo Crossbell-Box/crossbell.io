@@ -28,7 +28,8 @@ export function useCreateCharacter() {
 			handle: string;
 			metadata: CharacterMetadata;
 		}) => {
-			return contract.character.create(address!, {
+			return contract.character.create({
+				owner: address!,
 				handle: handle,
 				metadataOrUri: metadata,
 			});

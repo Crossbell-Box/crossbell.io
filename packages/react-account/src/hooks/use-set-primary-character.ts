@@ -30,7 +30,7 @@ export function useSetPrimaryCharacter(
 
 	return useMutation(
 		async ({ characterId }) => {
-			return contract.character.setPrimaryId(characterId);
+			return contract.character.setPrimaryId({ characterId });
 		},
 		{
 			...options,

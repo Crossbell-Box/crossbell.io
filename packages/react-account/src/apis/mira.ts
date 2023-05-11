@@ -64,7 +64,7 @@ export async function getMiraBalance({
 	address: Address;
 	contract: Contract;
 }) {
-	const { data: value } = await contract.tips.getBalance(address);
+	const { data: value } = await contract.tips.getBalance({ address });
 	const decimals = await getMiraTokenDecimals(contract);
 
 	return {

@@ -23,11 +23,11 @@ export const useAddCharacterOperator = createAccountTypeBasedMutationHooks<
 		supportOPSign: false,
 
 		async action({ characterId, operator, permissions }, { contract }) {
-			await contract.operator.grantForCharacter(
+			await contract.operator.grantForCharacter({
 				characterId,
 				operator,
-				permissions
-			);
+				permissions,
+			});
 
 			await asyncRetry(async (RETRY) => {
 				const op = await indexer.operator.getForCharacter(

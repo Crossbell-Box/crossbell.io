@@ -31,7 +31,7 @@ export const useDeleteNote = createAccountTypeBasedMutationHooks<
 				if (siwe && account.characterId === characterId) {
 					await siweDeleteNote({ siwe, characterId, noteId });
 				} else {
-					await contract.note.delete(characterId, noteId);
+					await contract.note.delete({ characterId, noteId });
 				}
 			},
 		},

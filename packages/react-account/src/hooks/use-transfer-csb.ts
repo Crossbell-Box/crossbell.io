@@ -18,7 +18,7 @@ export const useTransferCsb = createAccountTypeBasedMutationHooks<
 		supportOPSign: false,
 
 		async action({ toAddress, amount }, { contract }) {
-			const result = await contract.csb.transfer(toAddress, amount);
+			const result = await contract.csb.transfer({ toAddress, amount });
 
 			await waitUntilTransactionFinished(result.transactionHash);
 

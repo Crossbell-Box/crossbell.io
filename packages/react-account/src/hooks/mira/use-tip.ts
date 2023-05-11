@@ -16,18 +16,18 @@ export const useTip = createAccountTypeBasedMutationHooks<
 				const decimal = await getMiraTokenDecimals(contract);
 
 				if (noteId) {
-					return contract?.tips.tipCharacterForNote(
-						account.characterId,
-						characterId,
-						noteId,
-						BigInt(amount) * BigInt(10) ** BigInt(decimal)
-					);
+					return contract?.tips.tipCharacterForNote({
+						fromCharacterId: account.characterId,
+						toCharacterId: characterId,
+						toNoteId: noteId,
+						amount: BigInt(amount) * BigInt(10) ** BigInt(decimal),
+					});
 				} else {
-					return contract?.tips.tipCharacter(
-						account.characterId,
-						characterId,
-						BigInt(amount) * BigInt(10) ** BigInt(decimal)
-					);
+					return contract?.tips.tipCharacter({
+						fromCharacterId: account.characterId,
+						toCharacterId: characterId,
+						amount: BigInt(amount) * BigInt(10) ** BigInt(decimal),
+					});
 				}
 			}
 		},

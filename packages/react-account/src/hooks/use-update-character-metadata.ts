@@ -62,12 +62,12 @@ export const useUpdateCharacterMetadata = createAccountTypeBasedMutationHooks<
 							metadata,
 						});
 					} else {
-						await contract.character.setMetadata(
-							variables.characterId,
+						await contract.character.setMetadata({
+							characterId: variables.characterId,
 							// crossbell.js will try to modify the object internally,
 							// here the immutable object is converted to mutable object to avoid errors.
-							JSON.parse(JSON.stringify(metadata))
-						);
+							metadata: JSON.parse(JSON.stringify(metadata)),
+						});
 					}
 				}
 			},

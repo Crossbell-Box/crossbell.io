@@ -19,7 +19,7 @@ export const useDeleteCharacter = createAccountTypeBasedMutationHooks<
 				supportOPSign: false,
 
 				async action({ characterId }, { contract }) {
-					return contract.character.burn(characterId);
+					return contract.character.burn({ characterId });
 				},
 			},
 

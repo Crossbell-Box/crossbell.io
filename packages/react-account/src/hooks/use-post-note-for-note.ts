@@ -52,12 +52,12 @@ export const usePostNoteForNote = createAccountTypeBasedMutationHooks<
 							},
 						});
 					} else {
-						await contract.note.postForNote(
-							account.characterId,
-							metadata,
-							note.characterId,
-							note.noteId
-						);
+						await contract.note.postForNote({
+							characterId: account.characterId,
+							metadataOrUri: metadata,
+							targetCharacterId: note.characterId,
+							targetNoteId: note.noteId,
+						});
 					}
 
 					return true;

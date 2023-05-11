@@ -28,7 +28,7 @@ export const usePostNote = createAccountTypeBasedMutationHooks<
 					if (siwe) {
 						await siwePutNote({ siwe, characterId, metadata });
 					} else {
-						await contract.note.post(characterId, metadata);
+						await contract.note.post({ characterId, metadataOrUri: metadata });
 					}
 				}
 			},
