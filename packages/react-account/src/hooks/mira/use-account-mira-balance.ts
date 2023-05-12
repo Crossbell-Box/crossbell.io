@@ -18,13 +18,13 @@ export const SCOPE_KEY_ACCOUNT_MIRA_BALANCE = ({
 }) => ["connect-kit", "account-mira-balance", address];
 
 export function useAccountMiraBalance(): UseAccountMiraBalanceResult {
-	const account = useConnectedAccount()!;
-	const address = account.address!;
+	const account = useConnectedAccount();
+	const address = account?.address;
 	const contract = useContract();
 
 	const { data, isLoading } = useQuery(
-		SCOPE_KEY_ACCOUNT_MIRA_BALANCE({ address }),
-		() => getMiraBalance({ contract, address }),
+		SCOPE_KEY_ACCOUNT_MIRA_BALANCE({ address: address! }),
+		() => getMiraBalance({ contract, address: address! }),
 		{ enabled: !!address }
 	);
 

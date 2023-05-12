@@ -4,10 +4,10 @@ import { publicProvider } from "wagmi/providers/public";
 import { MetaMaskConnector } from "wagmi/connectors/metaMask";
 import { CoinbaseWalletConnector } from "wagmi/connectors/coinbaseWallet";
 import { InjectedConnector } from "wagmi/connectors/injected";
-
 import { getWalletConnectLegacyConnector } from "./wallets/wallet-connectors/get-wallet-connect-legacy-connector";
-import { WalletConnectConnector } from "wagmi/connectors/walletConnect";
-import { WalletConnectLegacyConnector } from "wagmi/connectors/walletConnectLegacy";
+
+import type { WalletConnectConnector } from "wagmi/connectors/walletConnect";
+import type { WalletConnectLegacyConnector } from "wagmi/connectors/walletConnectLegacy";
 
 export type GetDefaultClientConfigOptions = {
 	appName: string;
