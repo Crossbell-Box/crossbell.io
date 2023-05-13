@@ -1,11 +1,10 @@
 import { CharacterEntity } from "crossbell";
 import { indexer } from "@crossbell/indexer";
-
-import { isAddressEqual, WalletClient } from "viem";
-
+import { isAddressEqual } from "viem";
 import { asyncExhaust, SliceFn } from "../../utils";
 import { siweGetAccount, siweGetBalance, siweSignIn } from "../../apis";
 import { type Address } from "viem";
+import { BaseSigner } from "@crossbell/react-account";
 
 export type SiweInfo = {
 	csb: string;
@@ -31,7 +30,7 @@ export type WalletAccountSlice = {
 	refreshWallet(): Promise<void>;
 	switchCharacter(character: CharacterEntity): void;
 
-	siweSignIn(walletClient: WalletClient): Promise<boolean>;
+	siweSignIn(signer: BaseSigner): Promise<boolean>;
 };
 
 export const createWalletAccountSlice: SliceFn<WalletAccountSlice> = (

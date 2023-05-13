@@ -5,13 +5,13 @@ import { useAccountState } from "../account-state";
 
 export function useWalletSignIn() {
 	const siweSignIn = useAccountState((s) => s.siweSignIn);
-	const { getWalletClient } = useContext();
+	const { getSigner } = useContext();
 
 	return useMutation(async () => {
-		const walletClient = await getWalletClient();
+		const signer = await getSigner();
 
-		if (walletClient) {
-			await siweSignIn(walletClient);
+		if (signer) {
+			await siweSignIn(signer);
 		}
 	});
 }

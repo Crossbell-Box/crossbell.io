@@ -6,13 +6,14 @@ import {
 	NoteMetadata,
 } from "crossbell";
 
-import { WalletClient, type Address } from "viem";
+import { type Address } from "viem";
 import { request } from "./utils";
+import { BaseSigner } from "../context";
 
 type Siwe = { token: string };
 
-export async function siweSignIn(walletClient: WalletClient): Promise<Siwe> {
-	const address = (await walletClient.getAddresses())[0];
+export async function siweSignIn(signer: BaseSigner): Promise<Siwe> {
+	const address = await signer.getAddress();
 
 	if (!address) {
 		throw new Error(`SignInError: invalid address ${address}`);
@@ -32,10 +33,7 @@ export async function siweSignIn(walletClient: WalletClient): Promise<Siwe> {
 		method: "POST",
 		body: {
 			address,
-			signature: await walletClient.signMessage({
-				account: address,
-				message,
-			}),
+			signature: await signer.signMessage(message),
 		},
 	});
 

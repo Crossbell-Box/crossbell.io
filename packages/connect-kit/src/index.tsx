@@ -12,6 +12,7 @@ import { MantineProvider } from "@mantine/core";
 import {
 	useAccountState,
 	ReactAccountProvider,
+	BaseSigner,
 } from "@crossbell/react-account";
 import { useRefCallback } from "@crossbell/util-hooks";
 
@@ -92,8 +93,19 @@ export function ConnectKitProvider({
 	const account = useAccount();
 	const contractConfig = useContractConfig();
 	const { disconnect } = useDisconnect();
-	const getWalletClient = useRefCallback(
-		() => account.connector!.getWalletClient()!
+	const getSigner = useRefCallback(
+		async (): Promise<BaseSigner | undefined> => {
+			return {
+				async getAddress() {
+					return account.address;
+				},
+				async signMessage(message) {
+					return (await account.connector?.getWalletClient())?.signMessage({
+						message,
+					});
+				},
+			};
+		}
 	);
 
 	React.useEffect(() => {
@@ -117,10 +129,7 @@ export function ConnectKitProvider({
 		<InitContractProvider {...contractConfig}>
 			<UseWeb2UrlContext.Provider value={ipfsLinkToHttpLink ?? null}>
 				<UrlComposerContext.Provider value={urlComposer ?? null}>
-					<ReactAccountProvider
-						getWalletClient={getWalletClient}
-						onDisconnect={disconnect}
-					>
+					<ReactAccountProvider getSigner={getSigner} onDisconnect={disconnect}>
 						<ConnectKitConfigContext.Provider value={connectKitConfig}>
 							<XSettingsConfigContext.Provider value={xSettings ?? null}>
 								<MantineProvider theme={theme}>
