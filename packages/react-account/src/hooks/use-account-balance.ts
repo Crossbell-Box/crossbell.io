@@ -72,7 +72,7 @@ export function useWalletAccountBalance(): UseAccountBalanceResult {
 		async () => {
 			if (!wallet?.address) return null;
 
-			return (await contract.tips.getBalance({ address: wallet.address })).data;
+			return (await contract.csb.getBalance({ owner: wallet.address })).data;
 		}
 	);
 
