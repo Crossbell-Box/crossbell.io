@@ -52,7 +52,7 @@ export function TransferCSB({ toAddress, onSuccess }: TransferCSBProps) {
 						rightSection={
 							<div
 								className={styles.maxContainer}
-								onClick={() => setValue(formatUnits(maxAmount, 9))}
+								onClick={() => setValue(formatUnits(maxAmount, 18))}
 							>
 								<button disabled={maxAmount <= 0n} className={styles.max}>
 									Max
@@ -67,7 +67,7 @@ export function TransferCSB({ toAddress, onSuccess }: TransferCSBProps) {
 					<FiledTips color="#E65040">
 						{errorMsg || (
 							<>
-								<div>Gas Fee: {formatUnits(minGasFee, 9)}</div>
+								<div>Gas Fee: {formatUnits(minGasFee, 18)}</div>
 								<div>
 									Tips: With 0.01 $CSB, you can like, comment, and mint roughly
 									70 times on our platform!
@@ -102,11 +102,13 @@ function normalizeErrorToMsg(error: NormalizeError, maxAmount: bigint) {
 			return (
 				<>
 					The transfer number should be between{" "}
-					<span className={styles.nowrap}>0 - {formatUnits(maxAmount, 9)}</span>
+					<span className={styles.nowrap}>
+						0 - {formatUnits(maxAmount, 18)}
+					</span>
 				</>
 			);
 		case NormalizeError.notEnoughGasFee:
-			return `Require a minimum of ${formatUnits(minGasFee, 9)} gas fee`;
+			return `Require a minimum of ${formatUnits(minGasFee, 18)} gas fee`;
 	}
 }
 

@@ -110,7 +110,7 @@ function actionDesc(
 		case "tip-note":
 			return (
 				<span>
-					{`tipped you ${formatUnits(notification.amount, 9)} `}
+					{`tipped you ${formatUnits(notification.amount, 18)} `}
 					<a href="https://mira.crossbell.io/" target="_blank">
 						MIRA
 					</a>
@@ -120,7 +120,7 @@ function actionDesc(
 		case "tip-character":
 			return (
 				<span>
-					{`tipped you ${formatUnits(notification.amount, 9)} `}
+					{`tipped you ${formatUnits(notification.amount, 18)} `}
 					<a href="https://mira.crossbell.io/" target="_blank">
 						MIRA
 					</a>
