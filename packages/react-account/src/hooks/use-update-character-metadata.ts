@@ -55,20 +55,24 @@ export const useUpdateCharacterMetadata = createAccountTypeBasedMutationHooks<
 				const metadata = await prepareData(variables);
 
 				if (metadata) {
-					if (siwe) {
-						await siweUpdateMetadata({
-							characterId: variables.characterId,
-							siwe,
-							metadata,
-						});
-					} else {
-						await contract.character.setMetadata({
-							characterId: variables.characterId,
-							// crossbell.js will try to modify the object internally,
-							// here the immutable object is converted to mutable object to avoid errors.
-							metadata: JSON.parse(JSON.stringify(metadata)),
-						});
-					}
+					const { transactionHash } = await (() => {
+						if (siwe) {
+							return siweUpdateMetadata({
+								characterId: variables.characterId,
+								siwe,
+								metadata,
+							});
+						} else {
+							return contract.character.setMetadata({
+								characterId: variables.characterId,
+								// crossbell.js will try to modify the object internally,
+								// here the immutable object is converted to mutable object to avoid errors.
+								metadata: JSON.parse(JSON.stringify(metadata)),
+							});
+						}
+					})();
+
+					await waitUntilTransactionFinished(transactionHash);
 				}
 			},
 		},
