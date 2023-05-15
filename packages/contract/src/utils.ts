@@ -25,53 +25,53 @@ export function injectContractChecker({
 	openMintNewCharacterModel,
 	showSwitchNetworkModal,
 }: InjectContractCheckerConfig) {
-	return new Proxy(contract, {
-		get: (target, prop) => {
-			return async (...args: any[]) => {
-				if (needValidate(prop)) {
-					await checkNetwork(contract, showSwitchNetworkModal);
+	return handleActions(contract, async ({ action, path }) => {
+		if (needValidate(path)) {
+			await checkNetwork(contract, showSwitchNetworkModal);
 
-					const address = getCurrentAddress();
+			const address = getCurrentAddress();
 
-					if (address) {
-						// check if $CSB is enough to pay for the transaction
-						const balance = await getCsbBalance(address);
-						if (!hasEnoughCsb(balance)) {
-							openFaucetHintModel();
-							throw new BizError("Not enough $CSB.", ERROR_CODES.NO_CHARACTER);
-						}
-					} else {
-						// user is not logged in
-						openConnectModal?.();
-						throw new BizError(
-							"Not connected. Please connect your wallet.",
-							ERROR_CODES.NOT_CONNECTED
-						);
-					}
-
-					// check if the wallet has any character
-					if (needCheckCharacter(prop) && !getCurrentCharacterId()) {
-						openMintNewCharacterModel();
-						throw new BizError(
-							"You don't have a character yet",
-							ERROR_CODES.NO_CHARACTER
-						);
-					}
+			if (address) {
+				// check if $CSB is enough to pay for the transaction
+				const balance = await getCsbBalance(address);
+				if (!hasEnoughCsb(balance)) {
+					openFaucetHintModel();
+					throw new BizError("Not enough $CSB.", ERROR_CODES.NO_CHARACTER);
 				}
+			} else {
+				// user is not logged in
+				openConnectModal?.();
+				throw new BizError(
+					"Not connected. Please connect your wallet.",
+					ERROR_CODES.NOT_CONNECTED
+				);
+			}
 
-				return (target as any)[prop]?.(...args);
-			};
-		},
+			// check if the wallet has any character
+			if (needCheckCharacter(path) && !getCurrentCharacterId()) {
+				openMintNewCharacterModel();
+				throw new BizError(
+					"You don't have a character yet",
+					ERROR_CODES.NO_CHARACTER
+				);
+			}
+		}
+
+		return action();
 	});
 }
 
-function needCheckCharacter(key: string | symbol) {
+function needCheckCharacter(path: (string | symbol)[]) {
+	const key = lastOne(path);
+
 	const whitelist: (string | symbol)[] = ["createCharacter"];
 
-	return !whitelist.includes(key);
+	return key ? !whitelist.includes(key) : false;
 }
 
-function needValidate(key: string | symbol) {
+function needValidate(path: (string | symbol)[]) {
+	const key = lastOne(path);
+
 	if (typeof key === "string") {
 		return !(key === "then" || key.startsWith("get"));
 	}
@@ -93,4 +93,42 @@ async function checkNetwork(
 	if (!isMainnet) {
 		await showModal?.(contract);
 	}
+}
+
+type ActionHandler = <T>(params: {
+	action: () => T;
+	path: string[];
+}) => Promise<T>;
+
+type RawAction = (...args: any[]) => any;
+
+function handleActions<T extends object>(obj: T, callback: ActionHandler): T {
+	function createProxy<T extends object>(target: T, path: string[]): T {
+		return new Proxy<T>(target, {
+			get: (target, prop) => {
+				const newPath = path.concat([String(prop)]);
+				const key = prop as keyof typeof target;
+				const value = target[key];
+
+				if (typeof value === "function") {
+					return function (...args: any[]) {
+						return callback({
+							action: () => (target[key] as RawAction)(...args),
+							path: newPath,
+						});
+					};
+				} else if (typeof value === "object" && value !== null) {
+					return createProxy(value, newPath);
+				} else {
+					return value;
+				}
+			},
+		});
+	}
+
+	return createProxy<T>(obj, []);
+}
+
+function lastOne<T>(list: T[]): T | undefined {
+	return list[list.length - 1];
 }
