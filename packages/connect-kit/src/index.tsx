@@ -113,8 +113,12 @@ export function ConnectKitProvider({
 			accountState.connectWallet(account.address);
 		}
 
-		if (!ignoreWalletDisconnectEvent && account.status === "disconnected") {
-			accountState.disconnectWallet();
+		if (account.status === "disconnected") {
+			if (ignoreWalletDisconnectEvent) {
+				accountState.refreshWallet();
+			} else {
+				accountState.disconnectWallet();
+			}
 		}
 	}, [account.address, account.status]);
 
