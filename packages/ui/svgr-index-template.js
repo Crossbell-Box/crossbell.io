@@ -1,9 +1,9 @@
 const path = require("path");
 const { pascalCase } = require("pascal-case");
 
-function defaultIndexTemplate(filePaths) {
-	const exportEntries = filePaths.map((filePath) => {
-		const basename = path.basename(filePath, path.extname(filePath));
+function defaultIndexTemplate(files) {
+	const exportEntries = files.map((file) => {
+		const basename = path.basename(file.path, path.extname(file.path));
 		const exportName = /^.+logo$/i.test(basename)
 			? pascalCase(basename)
 			: `${pascalCase(basename)}Icon`;

@@ -47,7 +47,7 @@
 		"react-dom": "^18"
 	},
 	"devDependencies": {
-		"@svgr/cli": "7.0.0",
+		"@svgr/cli": "8.0.1",
 		"pascal-case": "^3.1.2"
 	}
 }

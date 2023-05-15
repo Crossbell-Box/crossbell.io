@@ -1,5 +1,6 @@
 import * as React from "react";
-import { SVGProps, Ref, forwardRef } from "react";
+import type { SVGProps } from "react";
+import { Ref, forwardRef } from "react";
 const SvgMira = (props: SVGProps<SVGSVGElement>, ref: Ref<SVGSVGElement>) => (
 	<svg
 		xmlns="http://www.w3.org/2000/svg"
