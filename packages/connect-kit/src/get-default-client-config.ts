@@ -1,39 +1,25 @@
-import { configureChains } from "wagmi";
+import { configureChains, createConfig } from "wagmi";
 import { crossbell } from "wagmi/chains";
 import { publicProvider } from "wagmi/providers/public";
 import { MetaMaskConnector } from "wagmi/connectors/metaMask";
 import { CoinbaseWalletConnector } from "wagmi/connectors/coinbaseWallet";
 import { InjectedConnector } from "wagmi/connectors/injected";
-import { getWalletConnectLegacyConnector } from "./wallets/wallet-connectors/get-wallet-connect-legacy-connector";
-
-import type { WalletConnectConnector } from "wagmi/connectors/walletConnect";
-import type { WalletConnectLegacyConnector } from "wagmi/connectors/walletConnectLegacy";
+import { WalletConnectLegacyConnector } from "wagmi/connectors/walletConnectLegacy";
 
 export type GetDefaultClientConfigOptions = {
 	appName: string;
 };
 
-type Connectors = [
-	InjectedConnector,
-	MetaMaskConnector,
-	CoinbaseWalletConnector,
-	WalletConnectConnector | WalletConnectLegacyConnector
-];
-
 export function getDefaultClientConfig({
 	appName,
-}: GetDefaultClientConfigOptions): {
-	autoConnect: boolean;
-	connectors: Connectors;
-	publicClient: ReturnType<typeof configureChains>["publicClient"];
-} {
-	const { chains, publicClient } = configureChains(
+}: GetDefaultClientConfigOptions): Parameters<typeof createConfig>[0] {
+	const { chains, publicClient, webSocketPublicClient } = configureChains(
 		[crossbell],
 		[publicProvider()],
 		{ pollingInterval: 1_000 }
 	);
 
-	const connectors: Connectors = [
+	const connectors = [
 		new InjectedConnector({
 			chains,
 			options: {
@@ -60,7 +46,7 @@ export function getDefaultClientConfig({
 				headlessMode: true,
 			},
 		}),
-		getWalletConnectLegacyConnector({
+		new WalletConnectLegacyConnector({
 			chains,
 			options: { qrcode: true, chainId: chains[0].id },
 		}),
@@ -70,5 +56,6 @@ export function getDefaultClientConfig({
 		autoConnect: true,
 		connectors,
 		publicClient,
+		webSocketPublicClient,
 	};
 }

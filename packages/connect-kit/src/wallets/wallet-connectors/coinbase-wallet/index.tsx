@@ -1,34 +1,25 @@
-import { CoinbaseWalletConnector } from "wagmi/connectors/coinbaseWallet";
+import type { CoinbaseWalletConnector } from "wagmi/connectors/coinbaseWallet";
+
 import React from "react";
 
-import { Chain, Wallet } from "../../../wallets";
+import { Wallet } from "../../../wallets";
 import { CoinbaseIcon } from "../../../components";
 
 import styles from "./index.module.css";
 
-export interface CoinbaseWalletOptions {
-	chains: Chain[];
-	appName: string;
-}
+export const coinbaseWallet = (
+	connector?: CoinbaseWalletConnector
+): Wallet | null => {
+	if (!connector) return null;
 
-export const coinbaseWallet = ({
-	chains,
-	appName,
-}: CoinbaseWalletOptions): Wallet => {
 	return {
 		id: "coinbaseWallet",
 		name: "Coinbase Wallet",
 		icon: <CoinbaseIcon className={styles.icon} />,
 		installed: isCoinbaseWallet(),
 		createConnector: () => {
-			const connector = new CoinbaseWalletConnector({
-				chains,
-				options: { appName: appName, headlessMode: true },
-			});
-
 			return {
 				connector,
-				chainId: chains[0].id,
 				async qrCode() {
 					return (await connector.getProvider()).qrUrl ?? null;
 				},

@@ -5,7 +5,6 @@ export type Chain = WagmiChain;
 
 export type WalletConnector = {
 	connector: Connector;
-	chainId?: number;
 	qrCode?: () => Promise<string | null>;
 };
 

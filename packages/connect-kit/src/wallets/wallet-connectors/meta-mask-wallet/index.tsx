@@ -1,19 +1,11 @@
-import { MetaMaskConnector } from "wagmi/connectors/metaMask";
+import type { MetaMaskConnector } from "wagmi/connectors/metaMask";
+import type { WalletConnectLegacyConnector } from "wagmi/connectors/walletConnectLegacy";
 import React from "react";
 
 import { MetamaskIcon } from "../../../components";
 import { isAndroid, isMobile } from "../../../utils";
-import { Chain, Wallet } from "../../types";
-import { getWalletConnectLegacyConnector } from "../get-wallet-connect-legacy-connector";
+import { Wallet } from "../../types";
 import styles from "../coinbase-wallet/index.module.css";
-
-export interface MetaMaskWalletOptions {
-	chains: Chain[];
-	options?: NonNullable<
-		ConstructorParameters<typeof MetaMaskConnector>[0]
-	>["options"];
-	walletConnectProjectId: string | null;
-}
 
 function isMetaMask(ethereum: NonNullable<(typeof window)["ethereum"]>) {
 	// Logic borrowed from wagmi's MetaMaskConnector
@@ -41,10 +33,12 @@ function isMetaMask(ethereum: NonNullable<(typeof window)["ethereum"]>) {
 	return true;
 }
 
-export const metaMaskWallet = ({
-	chains,
-	options,
-}: MetaMaskWalletOptions): Wallet => {
+export const metaMaskWallet = (
+	metaMask?: MetaMaskConnector,
+	walletConnectLegacy?: WalletConnectLegacyConnector
+): Wallet | null => {
+	if (!metaMask) return null;
+
 	const isMetaMaskInjected =
 		typeof window !== "undefined" &&
 		typeof window.ethereum !== "undefined" &&
@@ -67,16 +61,12 @@ export const metaMaskWallet = ({
 			</span>
 		),
 		createConnector: () => {
-			if (shouldUseWalletConnect) {
-				const connector = getWalletConnectLegacyConnector({
-					chains,
-					options: { qrcode: true, chainId: chains[0].id },
-				});
-
+			if (shouldUseWalletConnect && walletConnectLegacy) {
 				return {
-					connector,
+					connector: walletConnectLegacy,
 					async qrCode() {
-						const { uri } = ((await connector.getProvider()) as any)?.connector;
+						const { uri } = ((await walletConnectLegacy.getProvider()) as any)
+							?.connector;
 
 						return isAndroid()
 							? uri
@@ -84,16 +74,7 @@ export const metaMaskWallet = ({
 					},
 				};
 			} else {
-				return {
-					connector: new MetaMaskConnector({
-						chains,
-						options: {
-							shimDisconnect: true,
-							UNSTABLE_shimOnConnectSelectAccount: true,
-							...options,
-						},
-					}),
-				};
+				return { connector: metaMask };
 			}
 		},
 		icon: <MetamaskIcon className={styles.icon} />,
