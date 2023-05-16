@@ -54,7 +54,7 @@ export function MainProvider({ children, urlComposer }: MainProviderProps) {
 		<ThemeProvider>
 			<WalletProvider>
 				<QueryProvider>
-					<LazyMotion features={loadFeatures} strict>
+					<LazyMotion features={loadFeatures}>
 						<ModalsProvider>
 							<NotificationsProvider>
 								<RouterTransition />

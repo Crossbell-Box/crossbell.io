@@ -1,51 +1,53 @@
 import { Text } from "@mantine/core";
 import Link from "next/link";
 
-const linksGroup: { title: string; list: { text: string; href: string }[] }[] =
-	[
-		{
-			title: "Eco Apps",
-			list: [
-				{ text: "Crosssync", href: "https://crosssync.app/" },
-				{ text: "Unidata", href: "https://unidata.app/" },
-				{ text: "xlog", href: "https://xlog.app/" },
-			],
-		},
-		{
-			title: "Resources",
-			list: [
-				{ text: "ToS & Policy", href: "https://legal.xlog.app/Privacy-Policy" },
-				{ text: "Indexer", href: "https://indexer.crossbell.io/docs" },
-				{
-					text: "Wiki",
-					href: "https://github.com/Crossbell-Box/Crossbell-Contracts/wiki",
-				},
-				{ text: "Blog", href: "https://crossbell-blog.xlog.app/" },
-				{ text: "Scan", href: "https://scan.crossbell.io/" },
-				{ text: "Status", href: "https://status.crossbell.io/" },
-			],
-		},
-		{
-			title: "Communities",
-			list: [
-				{
-					text: "Developer Discussion",
-					href: "https://github.com/orgs/Crossbell-Box/discussions",
-				},
-				{
-					text: "Twitter",
-					href: "https://twitter.com/_Crossbell",
-				},
-				{ text: "Discord", href: "https://discord.gg/4GCwDsruyj" },
-				{
-					text: "Careers",
-					href: "https://rss3.notion.site/Work-with-RSS3-77c6c5dd8fec45ca8747dd7c650782ec",
-				},
-			],
-		},
-	];
+export const linksGroup: {
+	title: string;
+	list: { text: string; href: string }[];
+}[] = [
+	{
+		title: "Eco Apps",
+		list: [
+			{ text: "Crosssync", href: "https://crosssync.app/" },
+			{ text: "Unidata", href: "https://unidata.app/" },
+			{ text: "xlog", href: "https://xlog.app/" },
+		],
+	},
+	{
+		title: "Resources",
+		list: [
+			{ text: "ToS & Policy", href: "https://legal.xlog.app/Privacy-Policy" },
+			{ text: "Indexer", href: "https://indexer.crossbell.io/docs" },
+			{
+				text: "Wiki",
+				href: "https://github.com/Crossbell-Box/Crossbell-Contracts/wiki",
+			},
+			{ text: "Blog", href: "https://crossbell-blog.xlog.app/" },
+			{ text: "Scan", href: "https://scan.crossbell.io/" },
+			{ text: "Status", href: "https://status.crossbell.io/" },
+		],
+	},
+	{
+		title: "Communities",
+		list: [
+			{
+				text: "Developer Discussion",
+				href: "https://github.com/orgs/Crossbell-Box/discussions",
+			},
+			{
+				text: "Twitter",
+				href: "https://twitter.com/_Crossbell",
+			},
+			{ text: "Discord", href: "https://discord.gg/4GCwDsruyj" },
+			{
+				text: "Careers",
+				href: "https://rss3.notion.site/Work-with-RSS3-77c6c5dd8fec45ca8747dd7c650782ec",
+			},
+		],
+	},
+];
 
-const socialMedias: {
+export const socialMedias: {
 	text: string;
 	icon: string;
 	link: string;

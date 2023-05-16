@@ -8,5 +8,17 @@
 		"dev": "rm -rf .next && next dev",
 		"lint": "next lint",
 		"start": "next start"
+	},
+	"dependencies": {
+		"lodash.once": "4.1.1",
+		"phoenix": "1.7.2",
+		"react-flip-numbers": "3.0.8",
+		"scrollex": "2.0.1"
+	},
+	"devDependencies": {
+		"@types/jsdom": "21.1.1",
+		"@types/lodash.once": "4.1.7",
+		"@types/phoenix": "1.5.6",
+		"jsdom": "21.1.1"
 	}
 }
