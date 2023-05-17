@@ -40,17 +40,17 @@ Install `@crossbell/connect-kit` and its peer dependencies in your project.
 <Tabs items={['pnpm', 'npm', 'yarn']}>
   <Tab>
     ```bash
-    pnpm i @crossbell/connect-kit @tanstack/react-query wagmi ethers@^5
+    pnpm i @crossbell/connect-kit @tanstack/react-query wagmi
     ```
   </Tab>
   <Tab>
     ```bash
-    npm i @crossbell/connect-kit @tanstack/react-query wagmi ethers@^5
+    npm i @crossbell/connect-kit @tanstack/react-query wagmi
     ```
   </Tab>
   <Tab>
     ```bash
-    yarn add @crossbell/connect-kit @tanstack/react-query wagmi ethers@^5
+    yarn add @crossbell/connect-kit @tanstack/react-query wagmi
     ```
   </Tab>
 </Tabs>
@@ -58,7 +58,7 @@ Install `@crossbell/connect-kit` and its peer dependencies in your project.
 ### Setup providers
 
 ```tsx filename="app.tsx"
-import { WagmiConfig, createClient } from "wagmi";
+import { WagmiConfig, createConfig } from "wagmi";
 import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
 import {
 	ConnectKitProvider,
@@ -68,14 +68,14 @@ import {
 import { Main } from "./main";
 
 const queryClient = new QueryClient();
-const wagmiClient = createClient(
-	getDefaultClientConfig({ appName: "Crossbell Dev" })
+const wagmiConfig = createConfig(
+  getDefaultClientConfig({ appName: "Crossbell Dev" })
 );
 
 export default function App() {
 	return (
 		<QueryClientProvider client={queryClient}>
-			<WagmiConfig client={wagmiClient}>
+      <WagmiConfig config={wagmiConfig}>
 				<ConnectKitProvider>
 					<Main />
 				</ConnectKitProvider>
