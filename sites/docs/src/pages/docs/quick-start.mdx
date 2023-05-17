@@ -58,24 +58,19 @@ Install `@crossbell/connect-kit` and its peer dependencies in your project.
 ### Setup providers
 
 ```tsx filename="app.tsx"
-import { WagmiConfig, createConfig } from "wagmi";
+import { WagmiConfig } from "wagmi";
 import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
-import {
-	ConnectKitProvider,
-	getDefaultClientConfig,
-} from "@crossbell/connect-kit";
+import { ConnectKitProvider, createWagmiConfig } from "@crossbell/connect-kit";
 
 import { Main } from "./main";
 
 const queryClient = new QueryClient();
-const wagmiConfig = createConfig(
-  getDefaultClientConfig({ appName: "Crossbell Dev" })
-);
+const wagmiConfig = createWagmiConfig({ appName: "Crossbell Dev" });
 
 export default function App() {
 	return (
 		<QueryClientProvider client={queryClient}>
-      <WagmiConfig config={wagmiConfig}>
+			<WagmiConfig config={wagmiConfig}>
 				<ConnectKitProvider>
 					<Main />
 				</ConnectKitProvider>
