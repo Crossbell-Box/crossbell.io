@@ -63,9 +63,9 @@ export function injectContractChecker({
 }
 
 function needCheckCharacter(path: (string | symbol)[]) {
-	const key = lastOne(path);
+	const key = path.map(String).join(".");
 
-	const whitelist: (string | symbol)[] = ["createCharacter"];
+	const whitelist = ["character.create"];
 
 	return key ? !whitelist.includes(key) : false;
 }
