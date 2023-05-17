@@ -1,3 +1,3 @@
 export * from "./types";
-export * from "./wallet-connectors";
+export * from "./wallets";
 export * from "./use-default-wallet-connect";
