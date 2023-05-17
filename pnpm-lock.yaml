@@ -594,7 +594,7 @@ importers:
   sites/docs:
     dependencies:
       "@crossbell/connect-kit":
-        specifier: ^1.1.0
+        specifier: ^1.1.1
         version: link:../../packages/connect-kit
       "@crossbell/contract":
         specifier: ^1.1.0
