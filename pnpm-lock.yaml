@@ -292,25 +292,25 @@ importers:
   packages/connect-kit:
     dependencies:
       "@crossbell/contract":
-        specifier: ^1.1.0
+        specifier: ^1.2.0
         version: link:../contract
       "@crossbell/indexer":
-        specifier: ^1.1.0
+        specifier: ^1.2.0
         version: link:../indexer
       "@crossbell/react-account":
-        specifier: ^1.1.0
+        specifier: ^1.2.0
         version: link:../react-account
       "@crossbell/ui":
-        specifier: ^1.1.0
+        specifier: ^1.2.0
         version: link:../ui
       "@crossbell/util-ethers":
-        specifier: ^1.0.0
+        specifier: ^1.2.0
         version: link:../util-ethers
       "@crossbell/util-hooks":
-        specifier: ^1.1.0
+        specifier: ^1.2.0
         version: link:../util-hooks
       "@crossbell/util-metadata":
-        specifier: ^1.0.0
+        specifier: ^1.2.0
         version: link:../util-metadata
       "@emotion/react":
         specifier: ^11
@@ -386,10 +386,10 @@ importers:
   packages/contract:
     dependencies:
       "@crossbell/indexer":
-        specifier: ^1.1.0
+        specifier: ^1.2.0
         version: link:../indexer
       "@crossbell/util-hooks":
-        specifier: ^1.1.0
+        specifier: ^1.2.0
         version: link:../util-hooks
       crossbell:
         specifier: ^1.1.0
@@ -425,19 +425,19 @@ importers:
   packages/notification:
     dependencies:
       "@crossbell/indexer":
-        specifier: ^1.1.0
+        specifier: ^1.2.0
         version: link:../indexer
       "@crossbell/react-account":
-        specifier: ^1.1.0
+        specifier: ^1.2.0
         version: link:../react-account
       "@crossbell/ui":
-        specifier: ^1.1.0
+        specifier: ^1.2.0
         version: link:../ui
       "@crossbell/util-hooks":
-        specifier: ^1.1.0
+        specifier: ^1.2.0
         version: link:../util-hooks
       "@crossbell/util-metadata":
-        specifier: ^1.0.0
+        specifier: ^1.2.0
         version: link:../util-metadata
       "@tanstack/react-query":
         specifier: ^4
@@ -467,19 +467,19 @@ importers:
   packages/react-account:
     dependencies:
       "@crossbell/contract":
-        specifier: ^1.1.0
+        specifier: ^1.2.0
         version: link:../contract
       "@crossbell/indexer":
-        specifier: ^1.1.0
+        specifier: ^1.2.0
         version: link:../indexer
       "@crossbell/util-ethers":
-        specifier: ^1.0.0
+        specifier: ^1.2.0
         version: link:../util-ethers
       "@crossbell/util-hooks":
-        specifier: ^1.1.0
+        specifier: ^1.2.0
         version: link:../util-hooks
       "@crossbell/util-metadata":
-        specifier: ^1.0.0
+        specifier: ^1.2.0
         version: link:../util-metadata
       "@tanstack/react-query":
         specifier: ^4
@@ -519,13 +519,13 @@ importers:
   packages/ui:
     dependencies:
       "@crossbell/indexer":
-        specifier: ^1.1.0
+        specifier: ^1.2.0
         version: link:../indexer
       "@crossbell/util-hooks":
-        specifier: ^1.1.0
+        specifier: ^1.2.0
         version: link:../util-hooks
       "@crossbell/util-metadata":
-        specifier: ^1.0.0
+        specifier: ^1.2.0
         version: link:../util-metadata
       "@tanstack/react-query":
         specifier: ^4
@@ -582,7 +582,7 @@ importers:
   packages/util-metadata:
     dependencies:
       "@crossbell/util-ethers":
-        specifier: ^1.0.0
+        specifier: ^1.2.0
         version: link:../util-ethers
       "@fastify/deepmerge":
         specifier: ^1.3.0
@@ -594,28 +594,28 @@ importers:
   sites/docs:
     dependencies:
       "@crossbell/connect-kit":
-        specifier: ^1.1.1
+        specifier: ^1.2.0
         version: link:../../packages/connect-kit
       "@crossbell/contract":
-        specifier: ^1.1.0
+        specifier: ^1.2.0
         version: link:../../packages/contract
       "@crossbell/indexer":
-        specifier: ^1.1.0
+        specifier: ^1.2.0
         version: link:../../packages/indexer
       "@crossbell/notification":
-        specifier: ^1.1.0
+        specifier: ^1.2.0
         version: link:../../packages/notification
       "@crossbell/ui":
-        specifier: ^1.1.0
+        specifier: ^1.2.0
         version: link:../../packages/ui
       "@crossbell/util-ethers":
-        specifier: ^1.0.0
+        specifier: ^1.2.0
         version: link:../../packages/util-ethers
       "@crossbell/util-hooks":
-        specifier: ^1.1.0
+        specifier: ^1.2.0
         version: link:../../packages/util-hooks
       "@crossbell/util-metadata":
-        specifier: ^1.0.0
+        specifier: ^1.2.0
         version: link:../../packages/util-metadata
       "@sentry/react":
         specifier: ^7.52.1
