@@ -2,7 +2,7 @@ import type { CoinbaseWalletConnector } from "wagmi/connectors/coinbaseWallet";
 
 import React from "react";
 
-import { Wallet } from "../../../wallets";
+import { Wallet } from "../../index";
 import { CoinbaseIcon } from "../../../components";
 
 import styles from "./index.module.css";
