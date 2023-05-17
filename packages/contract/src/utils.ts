@@ -2,6 +2,7 @@ import { Contract, Numberish } from "crossbell";
 import { isCrossbellMainnet } from "crossbell/network";
 import { parseEther } from "viem";
 import { getCsbBalance } from "@crossbell/indexer";
+import { handleActions } from "@crossbell/util-hooks";
 import { type Address } from "viem";
 
 import { BizError, ERROR_CODES } from "./errors";
@@ -93,40 +94,6 @@ async function checkNetwork(
 	if (!isMainnet) {
 		await showModal?.(contract);
 	}
-}
-
-type ActionHandler = <T>(params: {
-	action: () => T;
-	path: string[];
-}) => Promise<T>;
-
-type RawAction = (...args: any[]) => any;
-
-function handleActions<T extends object>(obj: T, callback: ActionHandler): T {
-	function createProxy<T extends object>(target: T, path: string[]): T {
-		return new Proxy<T>(target, {
-			get: (target, prop) => {
-				const newPath = path.concat([String(prop)]);
-				const key = prop as keyof typeof target;
-				const value = target[key];
-
-				if (typeof value === "function") {
-					return function (...args: any[]) {
-						return callback({
-							action: () => (target[key] as RawAction)(...args),
-							path: newPath,
-						});
-					};
-				} else if (typeof value === "object" && value !== null) {
-					return createProxy(value, newPath);
-				} else {
-					return value;
-				}
-			},
-		});
-	}
-
-	return createProxy<T>(obj, []);
 }
 
 function lastOne<T>(list: T[]): T | undefined {

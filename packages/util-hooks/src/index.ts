@@ -1,3 +1,5 @@
+export * from "./handle-actions";
+
 export * from "./use-debounce";
 export * from "./use-debounced-action-sequence";
 export * from "./use-disclosure";
