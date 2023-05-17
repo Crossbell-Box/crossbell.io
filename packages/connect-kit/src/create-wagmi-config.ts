@@ -2,8 +2,7 @@ import {
 	configureChains,
 	createConfig,
 	type CreateConfigParameters,
-	type PublicClient,
-	type WebSocketPublicClient,
+	type Config,
 } from "wagmi";
 import { crossbell } from "wagmi/chains";
 import { publicProvider } from "wagmi/providers/public";
@@ -13,23 +12,17 @@ import { WalletConnectLegacyConnector } from "wagmi/connectors/walletConnectLega
 
 import { CoinbaseWalletConnector } from "./wallets";
 
-export type GetDefaultClientConfigOptions<
-	TPublicClient extends PublicClient,
-	TWebSocketPublicClient extends WebSocketPublicClient
-> = Omit<
-	CreateConfigParameters<TPublicClient, TWebSocketPublicClient>,
+export type GetDefaultClientConfigOptions = Omit<
+	CreateConfigParameters,
 	"connectors" | "publicClient" | "webSocketPublicClient"
 > & {
 	appName: string;
 };
 
-export function createWagmiConfig<
-	TPublicClient extends PublicClient,
-	TWebSocketPublicClient extends WebSocketPublicClient
->({
+export function createWagmiConfig({
 	appName,
 	...restConfig
-}: GetDefaultClientConfigOptions<TPublicClient, TWebSocketPublicClient>) {
+}: GetDefaultClientConfigOptions): Config {
 	const { chains, publicClient, webSocketPublicClient } = configureChains(
 		[crossbell],
 		[publicProvider()],
@@ -75,5 +68,5 @@ export function createWagmiConfig<
 		publicClient,
 		webSocketPublicClient,
 		...restConfig,
-	});
+	}) as Config;
 }
