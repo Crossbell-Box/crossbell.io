@@ -36,26 +36,21 @@ import { NotificationModal } from "@/examples";
 
 ## Setup notification modal
 
-```tsx {7,21}
-import { WagmiConfig, createClient } from "wagmi";
+```tsx {4,16}
+import { WagmiConfig } from "wagmi";
 import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
-import {
-	ConnectKitProvider,
-	getDefaultClientConfig,
-} from "@crossbell/connect-kit";
+import { ConnectKitProvider, createWagmiConfig } from "@crossbell/connect-kit";
 import { NotificationModal } from "@crossbell/notification";
 
 import { Main } from "./main";
 
 const queryClient = new QueryClient();
-const wagmiClient = createClient(
-	getDefaultClientConfig({ appName: "Crossbell Dev" })
-);
+const wagmiConfig = createWagmiConfig({ appName: "Crossbell Dev" });
 
 export default function App() {
 	return (
 		<QueryClientProvider client={queryClient}>
-			<WagmiConfig client={wagmiClient}>
+			<WagmiConfig config={wagmiConfig}>
 				<ConnectKitProvider>
 					<NotificationModal />
 					<Main />
