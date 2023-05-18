@@ -33,7 +33,7 @@ export function extractCharacterName(
 export function extractCharacterAvatars(
 	character: CharacterEntity | null | undefined
 ): string[] {
-	const avatars = character?.metadata?.content?.avatars;
+	const avatars = character?.metadata?.content?.avatars?.filter(Boolean);
 
 	return avatars ?? [];
 }
