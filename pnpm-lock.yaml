@@ -298,7 +298,7 @@ importers:
         specifier: ^1.2.3
         version: link:../indexer
       "@crossbell/react-account":
-        specifier: ^1.2.3
+        specifier: ^1.2.4
         version: link:../react-account
       "@crossbell/ui":
         specifier: ^1.2.3
@@ -428,7 +428,7 @@ importers:
         specifier: ^1.2.3
         version: link:../indexer
       "@crossbell/react-account":
-        specifier: ^1.2.3
+        specifier: ^1.2.4
         version: link:../react-account
       "@crossbell/ui":
         specifier: ^1.2.3
@@ -594,7 +594,7 @@ importers:
   sites/docs:
     dependencies:
       "@crossbell/connect-kit":
-        specifier: ^1.2.3
+        specifier: ^1.2.4
         version: link:../../packages/connect-kit
       "@crossbell/contract":
         specifier: ^1.2.3
@@ -603,7 +603,7 @@ importers:
         specifier: ^1.2.3
         version: link:../../packages/indexer
       "@crossbell/notification":
-        specifier: ^1.2.3
+        specifier: ^1.2.4
         version: link:../../packages/notification
       "@crossbell/ui":
         specifier: ^1.2.3
