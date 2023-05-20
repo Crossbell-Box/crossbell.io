@@ -7,6 +7,12 @@ type RequestConfig<T> = {
 	handleResponse?: (res: Response) => T;
 };
 
+export function stringify(value: any) {
+	return JSON.stringify(value, (_, value) => {
+		return typeof value === "bigint" ? value.toString() : value;
+	});
+}
+
 export function request<T = any>(
 	url: `/${"newbie" | "siwe"}/${string}`,
 	{ body, method, token, handleResponse }: RequestConfig<T>
@@ -20,7 +26,7 @@ export function request<T = any>(
 	return fetch(indexer.endpoint + url, {
 		method,
 		headers,
-		body: body && JSON.stringify(body),
+		body: body && stringify(body),
 	}).then(
 		handleResponse ??
 			(async (res) => {

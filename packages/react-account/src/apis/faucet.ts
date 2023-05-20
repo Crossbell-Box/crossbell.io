@@ -1,5 +1,7 @@
 import { type Address } from "viem";
 
+import { stringify } from "./utils";
+
 const BASE_URL = "https://faucet.crossbell.io";
 
 function request<T = any>(
@@ -23,7 +25,7 @@ function request<T = any>(
 	return fetch(BASE_URL + url, {
 		method,
 		headers,
-		body: body && JSON.stringify(body),
+		body: body && stringify(body),
 	}).then(async (res) => {
 		const result = await res.json();
 
