@@ -75,7 +75,7 @@ export function InitContractProvider({
 
 	React.useEffect(() => {
 		if (address && provider) {
-			const _contract = new Contract(provider);
+			const _contract = createContract(provider, { account: address });
 
 			setContract(
 				injectContractChecker({
