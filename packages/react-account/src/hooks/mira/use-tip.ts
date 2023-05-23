@@ -1,4 +1,6 @@
-import { getMiraTokenDecimals } from "../../apis";
+import type { Numberish } from "crossbell";
+
+import { getMiraTokenDecimals, emailTip } from "../../apis";
 import { createAccountTypeBasedMutationHooks } from "../account-type-based-hooks";
 
 import { SCOPE_KEY_TIPS_LIST } from "./use-tip-list";
@@ -6,8 +8,8 @@ import { SCOPE_KEY_ACCOUNT_MIRA_BALANCE } from "./use-account-mira-balance";
 
 export const useTip = createAccountTypeBasedMutationHooks<
 	void,
-	{ characterId: number; noteId?: string | number; amount: number }
->({ actionDesc: "send tip", withParams: false, connectType: "wallet" }, () => ({
+	{ characterId: Numberish; noteId?: Numberish; amount: number }
+>({ actionDesc: "send tip", withParams: false }, () => ({
 	wallet: {
 		supportOPSign: false,
 
@@ -31,6 +33,17 @@ export const useTip = createAccountTypeBasedMutationHooks<
 				}
 			}
 		},
+	},
+
+	async email({ characterId, noteId, amount }, { contract, account }) {
+		const decimal = await getMiraTokenDecimals(contract);
+
+		return emailTip({
+			token: account.token,
+			characterId,
+			noteId,
+			amount: BigInt(amount) * BigInt(10) ** BigInt(decimal),
+		});
 	},
 
 	onSuccess({ queryClient, variables, account }) {

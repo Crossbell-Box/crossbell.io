@@ -4,6 +4,7 @@ import {
 	NoteMetadata,
 	LinkItemNote,
 	NoteEntity,
+	Numberish,
 } from "crossbell";
 import { type Address } from "viem";
 
@@ -339,5 +340,21 @@ export function getWithdrawProof({
 	return request(`/newbie/account/withdraw/proof`, {
 		method: "GET",
 		token,
+	});
+}
+
+export function emailTip({
+	token,
+	...body
+}: {
+	token: string;
+	characterId: Numberish;
+	noteId?: Numberish;
+	amount: bigint;
+}): Promise<{ transactionHash: string; data: boolean }> {
+	return request(`/newbie/contract/tips`, {
+		method: "POST",
+		token,
+		body,
 	});
 }
