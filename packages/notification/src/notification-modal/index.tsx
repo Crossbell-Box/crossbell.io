@@ -7,12 +7,14 @@ import {
 	Indicator,
 	Loading,
 } from "@crossbell/ui";
+import type { NotificationTypeKey } from "crossbell";
 
-import { useModalState, useReadingState, useNotifications } from "../hooks";
+import { useModalState, useNotifications } from "../hooks";
 
 import styles from "./index.module.css";
 import { Bell } from "./components/bell";
 import { Item } from "./components/item";
+import { Tabs } from "./components/tabs";
 
 export { useNotifications };
 
@@ -36,22 +38,52 @@ export type NotificationModalProps = {
 	colorScheme?: NotificationModalColorScheme;
 };
 
+enum TabItem {
+	all = "all",
+	interactions = "interactions",
+	earnings = "earnings",
+}
+
+const itemTypesMap: Record<TabItem, NotificationTypeKey[]> = {
+	all: [
+		"OPERATOR_ADDED",
+		"OPERATOR_REMOVED",
+		"LINKED",
+		"UNLINKED",
+		"NOTE_MINTED",
+		"NOTE_POSTED",
+		"MENTIONED",
+		"TIPPED",
+	],
+	interactions: [
+		"OPERATOR_ADDED",
+		"OPERATOR_REMOVED",
+		"LINKED",
+		"UNLINKED",
+		"NOTE_POSTED",
+		"MENTIONED",
+	],
+	earnings: ["NOTE_MINTED", "TIPPED"],
+};
+
 export function NotificationModal({ colorScheme }: NotificationModalProps) {
+	const [currentTypeId, setCurrentTypeId] = React.useState(TabItem.all);
+
 	const {
 		notifications,
 		total,
 		markAllRead,
 		isAllRead,
+		unreadCount,
 		isLoading,
 		fetchNextPage,
 		hasNextPage,
 		isFetchingNextPage,
-	} = useNotifications();
+	} = useNotifications({ types: itemTypesMap[currentTypeId] });
 
 	const colorVariable = useColorVariable(colorScheme);
 
 	const { isModalActive, hideModal: hideModal_ } = useModalState();
-	const { isRead } = useReadingState();
 
 	const hideModal = useRefCallback(() => {
 		hideModal_();
@@ -71,6 +103,16 @@ export function NotificationModal({ colorScheme }: NotificationModalProps) {
 					</button>
 				</div>
 
+				<Tabs
+					items={[
+						{ name: "View All", id: TabItem.all, count: unreadCount },
+						{ name: "Interactions", id: TabItem.interactions },
+						{ name: "Earnings", id: TabItem.earnings },
+					]}
+					currentTypeId={currentTypeId}
+					onSelectTab={setCurrentTypeId}
+				/>
+
 				<div className={styles.scrollArea}>
 					{isLoading ? (
 						<div className={styles.loader}>
@@ -81,7 +123,7 @@ export function NotificationModal({ colorScheme }: NotificationModalProps) {
 							{notifications.map((notification) => (
 								<Item
 									notification={notification}
-									isRead={isRead(notification)}
+									isRead={isAllRead || notification.isReadBefore}
 									key={notification.transactionHash}
 								/>
 							))}

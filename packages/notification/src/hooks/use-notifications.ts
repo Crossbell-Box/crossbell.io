@@ -1,12 +1,14 @@
 import React from "react";
 import { NotificationTypeKey } from "crossbell";
 import { useAccountCharacter } from "@crossbell/react-account";
-import { useCharacterNotification, indexer } from "@crossbell/indexer";
+import {
+	useCharacterNotification,
+	useCharacterNotificationUnreadCount,
+	useMarkCharacterNotificationAsRead,
+} from "@crossbell/indexer";
 import { useRefCallback } from "@crossbell/util-hooks";
 
-import { useReadingState } from "./use-reading-state";
-
-const types: NotificationTypeKey[] = [
+const defaultTypes: NotificationTypeKey[] = [
 	"OPERATOR_ADDED",
 	"OPERATOR_REMOVED",
 	"LINKED",
@@ -17,13 +19,17 @@ const types: NotificationTypeKey[] = [
 	"TIPPED",
 ];
 
-export function useNotifications() {
-	const { isRead, cache, markRead: _markRead } = useReadingState();
-	const character = useAccountCharacter();
+export function useNotifications(options?: { types?: NotificationTypeKey[] }) {
+	const characterId = useAccountCharacter()?.characterId;
 	const { data, ...queryResult } = useCharacterNotification(
-		character?.characterId,
-		types
+		characterId,
+		options?.types ?? defaultTypes
 	);
+	const { mutate: markAsRead } =
+		useMarkCharacterNotificationAsRead(characterId);
+
+	const { data: unreadCount } =
+		useCharacterNotificationUnreadCount(characterId);
 
 	const notifications = React.useMemo(
 		() => data?.pages.flatMap(({ list }) => list) ?? [],
@@ -31,19 +37,20 @@ export function useNotifications() {
 	);
 
 	const total = data?.pages?.[0]?.count ?? 0;
-
-	const isAllRead = React.useMemo(
-		() => notifications.every(isRead),
-		[notifications, cache]
-	);
+	const isAllRead = unreadCount === 0;
 
 	const markAllRead = useRefCallback(() => {
-		_markRead(notifications);
-
-		if (character) {
-			indexer.notification.markAllAsRead(character?.characterId);
+		if (!isAllRead) {
+			markAsRead();
 		}
 	});
 
-	return { notifications, total, isAllRead, markAllRead, ...queryResult };
+	return {
+		notifications,
+		total,
+		isAllRead,
+		unreadCount,
+		markAllRead,
+		...queryResult,
+	};
 }

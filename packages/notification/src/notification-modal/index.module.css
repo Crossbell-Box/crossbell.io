@@ -4,6 +4,7 @@
 	--csb-notification-color-closeBtn: #999;
 	--csb-notification-color-border: #999;
 	--csb-notification-color-background: #fff;
+	--csb-notification-color-indicator-text: #fff;
 	--csb-notification-color-indicator: #fa5252;
 	--csb-notification-color-transactionHash: #f6c549;
 	--csb-notification-color-bellPrimary: #f6c549;
@@ -23,8 +24,8 @@
 	display: flex;
 	align-items: center;
 	gap: 8px;
-	margin-bottom: 12px;
 	padding: 0 24px;
+	margin-bottom: 10px;
 }
 
 .headerBell {
@@ -39,7 +40,7 @@
 
 .loader,
 .noNotificationTips {
-	height: 100px;
+	height: 30vh;
 	display: flex;
 	align-items: center;
 	justify-content: center;
@@ -53,6 +54,7 @@
 
 .scrollArea {
 	padding: 0 24px;
+	min-height: 30vh;
 	max-height: 70vh;
 	overflow: auto;
 }
@@ -78,4 +80,14 @@
 
 .closeBtn:active {
 	background: rgba(50%, 50%, 50%, 0.3);
+}
+
+@media (min-width: 768px) {
+	.headerBell {
+		font-size: 32px;
+	}
+
+	.headerTitle {
+		font-size: 28px;
+	}
 }

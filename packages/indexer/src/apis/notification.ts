@@ -1,5 +1,10 @@
-import { useInfiniteQuery } from "@tanstack/react-query";
-import { NotificationTypeKey } from "crossbell";
+import {
+	useInfiniteQuery,
+	useQuery,
+	useMutation,
+	useQueryClient,
+} from "@tanstack/react-query";
+import type { NotificationTypeKey, Numberish } from "crossbell";
 import compact from "lodash.compact";
 
 import { indexer } from "../indexer";
@@ -7,19 +12,21 @@ import { parseNotificationEntity } from "./notification.parser";
 
 export * from "./notification.types";
 
-const SCOPE_KEY_CHARACTER_NOTIFICATION = (characterId: number | undefined) => [
-	"indexer",
-	"character",
-	"notification",
-	characterId,
-];
+const SCOPE_KEY_CHARACTER_NOTIFICATION = (
+	characterId: Numberish | undefined,
+	types?: NotificationTypeKey[]
+) => ["indexer", "character", "notification", characterId, types];
+
+const SCOPE_KEY_CHARACTER_NOTIFICATION_UNREAD_COUNT = (
+	characterId?: Numberish | undefined
+) => ["indexer", "character", "notification", "unread_count", characterId];
 
 export function useCharacterNotification(
-	characterId: number | undefined,
+	characterId: Numberish | undefined,
 	types: NotificationTypeKey[]
 ) {
 	return useInfiniteQuery(
-		SCOPE_KEY_CHARACTER_NOTIFICATION(characterId),
+		SCOPE_KEY_CHARACTER_NOTIFICATION(characterId, types),
 		async ({ pageParam }) => {
 			const { list, ...rest } = await indexer.notification.getMany(
 				characterId!,
@@ -39,6 +46,48 @@ export function useCharacterNotification(
 		{
 			enabled: Boolean(characterId),
 			getNextPageParam: (lastPage) => lastPage.cursor,
+		}
+	);
+}
+
+export function useCharacterNotificationUnreadCount(
+	characterId: Numberish | undefined
+) {
+	return useQuery(
+		SCOPE_KEY_CHARACTER_NOTIFICATION_UNREAD_COUNT(characterId),
+		async () => {
+			if (!characterId) return 0;
+
+			const { count } = await indexer.notification.getUnreadCount(characterId);
+
+			return count;
+		}
+	);
+}
+
+export function useMarkCharacterNotificationAsRead(
+	characterId: Numberish | undefined
+) {
+	const queryClient = useQueryClient();
+
+	return useMutation(
+		async () => {
+			if (characterId) {
+				await indexer.notification.markAllAsRead(characterId);
+			}
+		},
+		{
+			onSuccess() {
+				return Promise.all([
+					queryClient.invalidateQueries(
+						SCOPE_KEY_CHARACTER_NOTIFICATION(characterId)
+					),
+
+					queryClient.invalidateQueries(
+						SCOPE_KEY_CHARACTER_NOTIFICATION_UNREAD_COUNT(characterId)
+					),
+				]);
+			},
 		}
 	);
 }
