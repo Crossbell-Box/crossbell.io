@@ -1,5 +1,5 @@
 import { indexer } from "@crossbell/indexer";
-import { Contract } from "crossbell";
+import type { Contract, Numberish } from "crossbell";
 import { type Address, formatUnits } from "viem";
 
 export async function getMiraTokenDecimals(
@@ -57,7 +57,7 @@ export async function getMiraTips(
 	return tips;
 }
 
-export async function getMiraBalance({
+export async function getAddressMiraBalance({
 	address,
 	contract,
 }: {
@@ -65,6 +65,26 @@ export async function getMiraBalance({
 	contract: Contract;
 }) {
 	const { data: value } = await contract.tips.getBalance({ address });
+	const decimals = await getMiraTokenDecimals(contract);
+
+	return {
+		decimals,
+		formatted: formatUnits(value, decimals),
+		symbol: "MIRA",
+		value,
+	};
+}
+
+export async function getCharacterMiraBalance({
+	characterId,
+	contract,
+}: {
+	characterId: Numberish;
+	contract: Contract;
+}) {
+	const { data: value } = await contract.tips.getBalanceOfCharacter({
+		characterId,
+	});
 	const decimals = await getMiraTokenDecimals(contract);
 
 	return {

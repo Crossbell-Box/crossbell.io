@@ -36,7 +36,7 @@ function Item({
 		<button
 			className={styles.item}
 			onClick={handleClick}
-			disabled={!!balance && balance.value <= parseEther(`${amount}`)}
+			disabled={!!balance && balance.value < parseEther(`${amount}`)}
 		>
 			<div className={styles.amount}>
 				<FlowerIcon className={styles.flower} />
