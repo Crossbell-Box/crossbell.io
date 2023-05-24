@@ -30,8 +30,8 @@
 	"dependencies": {
 		"@crossbell/indexer": "^1.2.3",
 		"@crossbell/util-hooks": "^1.2.0",
-		"crossbell": "^1.1.0",
-		"viem": "^0.3.28"
+		"crossbell": "^1.2.0",
+		"viem": "^0.3.36"
 	},
 	"peerDependencies": {
 		"react": "^18"
