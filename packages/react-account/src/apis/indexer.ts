@@ -1,6 +1,6 @@
-import { indexer, NoteLinkType } from "@crossbell/indexer";
+import { CharacterLinkType, indexer, NoteLinkType } from "@crossbell/indexer";
 import { type Address } from "viem";
-import { NoteEntity } from "crossbell";
+import { NoteEntity, Numberish } from "crossbell";
 
 export type GetIsNoteMintedConfig = {
 	noteCharacterId: number;
@@ -71,4 +71,22 @@ export function getNoteLinkCount({
 			limit: 0,
 		})
 		.then((res) => res.count);
+}
+
+export async function getIsLinked({
+	fromCharacterId,
+	toCharacterId,
+	linkType,
+}: {
+	fromCharacterId: Numberish;
+	toCharacterId: Numberish;
+	linkType: CharacterLinkType;
+}): Promise<boolean> {
+	const { count } = await indexer.link.getMany(fromCharacterId, {
+		linkType: linkType,
+		limit: 0,
+		toCharacterId,
+	});
+
+	return count > 0;
 }

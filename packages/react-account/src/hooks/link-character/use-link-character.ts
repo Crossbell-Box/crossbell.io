@@ -1,6 +1,6 @@
 import { CharacterLinkType } from "@crossbell/indexer";
 
-import { linkCharacter, siweLinkCharacter } from "../../apis";
+import { getIsLinked, linkCharacter, siweLinkCharacter } from "../../apis";
 import {
 	AccountTypeBasedMutationOptions,
 	createAccountTypeBasedMutationHooks,
@@ -15,6 +15,14 @@ export const useLinkCharacter = createAccountTypeBasedMutationHooks<
 	{ characterId: number }
 >({ actionDesc: "linking character", withParams: true }, (linkType) => ({
 	async email({ characterId }, { account }) {
+		const isLinked = await getIsLinked({
+			fromCharacterId: account.characterId,
+			toCharacterId: characterId,
+			linkType,
+		});
+
+		if (isLinked) return null;
+
 		return linkCharacter({
 			token: account.token,
 			toCharacterId: characterId,
@@ -27,6 +35,14 @@ export const useLinkCharacter = createAccountTypeBasedMutationHooks<
 
 		async action({ characterId }, { contract, account, siwe }) {
 			if (account?.characterId) {
+				const isLinked = await getIsLinked({
+					fromCharacterId: account.characterId,
+					toCharacterId: characterId,
+					linkType,
+				});
+
+				if (isLinked) return null;
+
 				if (siwe) {
 					return siweLinkCharacter({
 						characterId: account.characterId,
