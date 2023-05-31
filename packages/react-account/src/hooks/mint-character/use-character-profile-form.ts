@@ -1,5 +1,4 @@
 import { create } from "zustand";
-import { indexer } from "@crossbell/indexer";
 import { generateCharacterHandle } from "@crossbell/util-metadata";
 import { useUploadToIpfs } from "@crossbell/util-hooks";
 import {
@@ -12,7 +11,10 @@ import {
 	takeUntil,
 	catchError,
 	debounceTime,
+	Observable,
 } from "rxjs";
+
+import { validateHandle, ValidateHandleErrorKind } from "../../utils";
 
 export type BaseCharacterProfileForm = {
 	avatar: string | File | null;
@@ -21,7 +23,9 @@ export type BaseCharacterProfileForm = {
 	bio: string;
 };
 
-type HandleStatus = "idle" | "generating" | "checking" | "valid" | "existed";
+type HandleStatus =
+	| { kind: "idle" | "generating" | "checking" | "valid" }
+	| { kind: ValidateHandleErrorKind; msg: string };
 type AccountType = "wallet" | "email";
 
 export type CharacterProfileForm = BaseCharacterProfileForm & {
@@ -78,31 +82,25 @@ export const useCharacterProfileForm = create<CharacterProfileForm>(
 			);
 		};
 
-		const checkHandle = async (handle: string): Promise<boolean> => {
-			if (!isHandleChanged(handle)) return true;
-
-			return !(await indexer.character.getByHandle(handle));
-		};
-
-		const validateHandle = (() => {
+		const checkHandle = (() => {
 			const handle$ = new Subject<string>();
 
 			handle$
 				.pipe(
 					debounceTime(500),
-					switchMap((handle) => {
+					switchMap((handle): Observable<HandleStatus> => {
 						if (!handle) return EMPTY;
 
-						return from(checkHandle(handle)).pipe(
+						if (!isHandleChanged(handle)) {
+							return from([{ kind: "idle" }] as const);
+						}
+
+						return from(validateHandle(handle)).pipe(
 							map(
-								(isValid): HandleStatus =>
-									isValid
-										? isHandleChanged(handle)
-											? "valid"
-											: "idle"
-										: "existed"
+								({ isValid, error, errorMsg }): HandleStatus =>
+									isValid ? { kind: "valid" } : { kind: error, msg: errorMsg }
 							),
-							startWith("checking" as const),
+							startWith({ kind: "checking" as const }),
 							takeUntil(cancel$)
 						);
 					})
@@ -130,8 +128,8 @@ export const useCharacterProfileForm = create<CharacterProfileForm>(
 						return from([username]).pipe(
 							map(generateCharacterHandle),
 							switchMap((handle) =>
-								from(checkHandle(handle)).pipe(
-									map((isValid) => {
+								from(validateHandle(handle)).pipe(
+									map(({ isValid }) => {
 										if (isValid) {
 											return true;
 										} else {
@@ -155,9 +153,9 @@ export const useCharacterProfileForm = create<CharacterProfileForm>(
 				)
 				.subscribe(({ isFinished, handle }) => {
 					if (isFinished) {
-						set({ handleStatus: "valid", handle });
+						set({ handleStatus: { kind: "valid" }, handle });
 					} else {
-						set({ handleStatus: "generating" });
+						set({ handleStatus: { kind: "generating" } });
 					}
 				});
 
@@ -169,11 +167,11 @@ export const useCharacterProfileForm = create<CharacterProfileForm>(
 
 		return {
 			handle: "",
-			handleStatus: "idle",
+			handleStatus: { kind: "idle" },
 			autoGenerateHandle: true,
 			updateHandle(handle) {
 				set({ handle });
-				validateHandle(handle);
+				checkHandle(handle);
 				isHandleEditedManually = true;
 			},
 
@@ -213,7 +211,7 @@ export const useCharacterProfileForm = create<CharacterProfileForm>(
 
 				isHandleEditedManually = false;
 
-				set({ ...baseForm, accountType, handleStatus: "idle" });
+				set({ ...baseForm, accountType, handleStatus: { kind: "idle" } });
 			},
 
 			isHandleChanged() {

@@ -54,19 +54,15 @@ export function MintCharacterFormNormal({
 			)}
 
 			{((): Exclude<React.ReactNode, undefined> => {
-				switch (form.handleStatus) {
+				switch (form.handleStatus.kind) {
+					case "idle":
+						return null;
+
 					case "checking":
 						return (
 							<FiledTips className={styles.tips} color="#999">
 								<Loading />
 								Checking
-							</FiledTips>
-						);
-
-					case "existed":
-						return (
-							<FiledTips className={styles.tips} color="#D32F2F">
-								The handle is already in use. Please choose a different one.
 							</FiledTips>
 						);
 
@@ -84,8 +80,15 @@ export function MintCharacterFormNormal({
 								Valid handle
 							</FiledTips>
 						);
-					case "idle":
-						return null;
+
+					case "existed":
+					case "charsInvalid":
+					case "lengthInvalid":
+						return (
+							<FiledTips className={styles.tips} color="#D32F2F">
+								{form.handleStatus.msg}
+							</FiledTips>
+						);
 				}
 			})()}
 
