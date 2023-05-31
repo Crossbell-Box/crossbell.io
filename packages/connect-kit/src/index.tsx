@@ -43,6 +43,7 @@ import { setupReactAccount } from "./setup-react-account";
 import type {} from "wagmi/window";
 
 export * from "@crossbell/react-account";
+export * from "@crossbell/react-account/utils";
 export { useConnectModal } from "./modals/connect-modal";
 export { useDisconnectModal } from "./modals/disconnect-modal";
 export {
