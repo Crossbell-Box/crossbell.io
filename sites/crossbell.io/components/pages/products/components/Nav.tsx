@@ -1,8 +1,8 @@
-import { Box, Burger, MediaQuery } from "@mantine/core";
+import { Box, Burger } from "@mantine/core";
 import { useMediaQuery } from "@mantine/hooks";
 import classNames from "classnames";
 import { AnimatePresence, m } from "framer-motion";
-import { useCallback, useEffect, useState } from "react";
+import { useState } from "react";
 
 export default function Nav({
 	mode,
@@ -14,7 +14,6 @@ export default function Nav({
 	onSwitchPage: (index: number) => void;
 }) {
 	const navs = [
-		{ title: "Philosophy", activeColor: "text-white" },
 		{ title: "xSync", activeColor: "text-blue" },
 		{ title: "xFeed", activeColor: "text-yellow" },
 		{ title: "xCharacter", activeColor: "text-green" },
@@ -29,7 +28,7 @@ export default function Nav({
 	const title = opened ? "Close navigation" : "Open navigation";
 
 	const shouldShow =
-		index !== 6 && // the video page
+		index !== 5 && // the video page
 		(isLargeScreen || opened);
 
 	const openedInSmallScreen = !isLargeScreen && opened;

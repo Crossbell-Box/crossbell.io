@@ -16,30 +16,25 @@ import Logo from "./components/Logo";
 import Nav from "./components/Nav";
 import ScrollBall from "./components/ScrollBall";
 import ParallaxSection from "./Sections/ParallaxSection";
-import PhilosophySection from "./Sections/PhilosophySection";
 import FooterSection from "./Sections/FooterSection";
 import VideoSection from "./Sections/VideoSection";
 import Loading from "./components/Loading";
 import { useScroller } from "./utils";
 
 export default function LazyIndex() {
-	const { index, setIndex } = useScroller(7);
+	const { index, setIndex } = useScroller(6);
 
 	return (
 		<>
-			<Logo mode={index === 0 ? "light" : "dark"} />
+			<Logo mode="dark" />
 
-			{index === 7 && (
+			{index === 6 && (
 				<div className="hidden sm:block">
 					<Logo mode="dark" position="bottom-left" />
 				</div>
 			)}
 
-			<Nav
-				index={index}
-				mode={index === 0 ? "light" : "dark"}
-				onSwitchPage={(i) => setIndex(i)}
-			/>
+			<Nav index={index} mode="dark" onSwitchPage={(i) => setIndex(i)} />
 
 			<ScrollBall index={index} onClickNext={() => setIndex(index + 1)} />
 
@@ -56,12 +51,6 @@ export default function LazyIndex() {
 						perspective: 500px;
 					}
 				`}</style>
-
-				{/* 0 */}
-				<PhilosophySection
-					currentPageIndex={index}
-					onClickNext={() => setIndex(index + 1)}
-				/>
 
 				{/* 1 */}
 				<ParallaxSection
