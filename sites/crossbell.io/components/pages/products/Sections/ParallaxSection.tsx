@@ -1,4 +1,4 @@
-import { ComponentProps, PropsWithChildren } from "react";
+import React, { ComponentProps, PropsWithChildren } from "react";
 import { m, useTime, useTransform } from "framer-motion";
 import { Text, Title, UnstyledButton } from "@mantine/core";
 import BaseSection from "./BaseSection";
@@ -15,6 +15,7 @@ export default function ParallaxSection({
 	btnText,
 	btnHoverClassName,
 	link,
+	onClick,
 	image,
 	children,
 }: PropsWithChildren<{
@@ -24,6 +25,7 @@ export default function ParallaxSection({
 	btnText: string;
 	btnHoverClassName?: string;
 	link: string;
+	onClick?: (event: React.MouseEvent) => void;
 	image: ComponentProps<typeof Image>["src"];
 }>) {
 	// image animation
@@ -66,6 +68,7 @@ export default function ParallaxSection({
 						<UnstyledButton
 							component={Link}
 							href={link}
+							onClick={onClick}
 							target={link.startsWith("/") ? "_self" : "_blank"}
 							className={classNames(
 								"mt-50px relative flex flex-row items-center justify-center space-x-10px w-300px h-60px rounded-md bg-black transition-colors group",

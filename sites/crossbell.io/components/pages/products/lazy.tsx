@@ -1,5 +1,6 @@
 import { m, useMotionTemplate, useTime, useTransform } from "framer-motion";
 import { useMediaQuery } from "@mantine/hooks";
+import { showNotification } from "@mantine/notifications";
 
 import { Image } from "~/shared/components/image";
 import config from "~/shared/config";
@@ -97,6 +98,11 @@ export default function LazyIndex() {
 					btnText="Shop now"
 					btnHoverClassName="hover:bg-[#E65040]"
 					link="/shop"
+					onClick={(event) => {
+						event.stopPropagation();
+						event.preventDefault();
+						showNotification({ message: "Coming Soon", color: "blue" });
+					}}
 					image={shopImage}
 				/>
 
