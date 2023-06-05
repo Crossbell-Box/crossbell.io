@@ -8,7 +8,7 @@ export const linksGroup: {
 	{
 		title: "Eco Apps",
 		list: [
-			{ text: "Crosssync", href: "https://crosssync.app/" },
+			{ text: "xSync", href: "https://xsync.app/" },
 			{ text: "Unidata", href: "https://unidata.app/" },
 			{ text: "xlog", href: "https://xlog.app/" },
 		],

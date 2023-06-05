@@ -42,8 +42,8 @@ export default function MoreMenu() {
 				<Menu.Divider />
 
 				<Menu.Label>Ecosystem</Menu.Label>
-				<MenuItemLink href="https://crosssync.app/">CrossSync</MenuItemLink>
-				<MenuItemLink href="https://xlog.app/">xlog</MenuItemLink>
+				<MenuItemLink href="https://xsync.app/">xSync</MenuItemLink>
+				<MenuItemLink href="https://xlog.app/">xLog</MenuItemLink>
 			</Menu.Dropdown>
 		</Menu>
 	);
