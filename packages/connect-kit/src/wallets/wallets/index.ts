@@ -7,18 +7,22 @@ import type { CoinbaseWalletConnector } from "wagmi/connectors/coinbaseWallet";
 import type { InjectedConnector } from "wagmi/connectors/injected";
 import type { WalletConnectLegacyConnector } from "wagmi/connectors/walletConnectLegacy";
 
+import type { OKXConnector } from "../connectors";
 import { metaMaskWallet } from "./meta-mask-wallet";
 import { coinbaseWallet } from "./coinbase-wallet";
 import { braveWallet } from "./brave-wallet";
+import { okxWallet } from "./okx-wallet";
 
 enum KnownConnector {
 	metaMask = "metaMask",
+	okx = "okx",
 	coinbaseWallet = "coinbaseWallet",
 	injected = "injected",
 	walletConnectLegacy = "walletConnectLegacy",
 }
 
 type ConnectorMap = Partial<{
+	[KnownConnector.okx]: OKXConnector;
 	[KnownConnector.metaMask]: MetaMaskConnector;
 	[KnownConnector.coinbaseWallet]: CoinbaseWalletConnector;
 	[KnownConnector.injected]: InjectedConnector;
@@ -35,6 +39,7 @@ export function useWalletConnectors() {
 	return React.useMemo(
 		() =>
 			compact([
+				okxWallet(connectorMap.okx),
 				metaMaskWallet(connectorMap.metaMask, connectorMap.walletConnectLegacy),
 				coinbaseWallet(connectorMap.coinbaseWallet),
 				braveWallet(connectorMap.injected),

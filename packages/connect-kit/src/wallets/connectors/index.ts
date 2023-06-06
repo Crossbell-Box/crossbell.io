@@ -1,2 +1,2 @@
 export * from "./coinbase-wallet";
-export * from "./meta-mask";
+export * from "./okx-wallet";

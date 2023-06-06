@@ -359,3 +359,30 @@ export const BraveIcon = (props: React.SVGAttributes<SVGSVGElement>) => (
 		</defs>
 	</svg>
 );
+
+export const OKXIcon = (props: React.SVGAttributes<SVGSVGElement>) => (
+	<svg
+		viewBox="0 0 2500 2500"
+		xmlns="http://www.w3.org/2000/svg"
+		width="1em"
+		height="1em"
+		{...props}
+	>
+		<rect
+			x="0"
+			y="0"
+			width="2500"
+			height="2500"
+			fill="black"
+			rx="600"
+			ry="600"
+		/>
+		<g fill="#fff">
+			<path d="m1463 1015h-404c-17 0-31 14-31 31v404c0 17 14 31 31 31h404c17 0 31-14 31-31v-404c0-17-14-31-31-31z" />
+			<path d="m996 549h-404c-17 0-31 14-31 31v404c0 17 14 31 31 31h404c17 0 31-14 31-31v-404c0-17-14-31-31-31z" />
+			<path d="m1930 549h-404c-17 0-31 14-31 31v404c0 17 14 31 31 31h404c17 0 31-14 31-31v-404c0-17-14-31-31-31z" />
+			<path d="m996 1482h-404c-17 0-31 14-31 31v404c0 17 14 31 31 31h404c17 0 31-14 31-31v-404c0-17-14-31-31-31z" />
+			<path d="m1930 1482h-404c-17 0-31 14-31 31v404c0 17 14 31 31 31h404c17 0 31-14 31-31v-404c0-17-14-31-31-31z" />
+		</g>
+	</svg>
+);

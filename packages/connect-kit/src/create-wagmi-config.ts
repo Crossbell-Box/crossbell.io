@@ -7,9 +7,10 @@ import {
 import { crossbell } from "wagmi/chains";
 import { publicProvider } from "wagmi/providers/public";
 import { InjectedConnector } from "wagmi/connectors/injected";
+import { MetaMaskConnector } from "wagmi/connectors/metaMask";
 import { WalletConnectLegacyConnector } from "wagmi/connectors/walletConnectLegacy";
 
-import { CoinbaseWalletConnector, MetaMaskConnector } from "./wallets";
+import { CoinbaseWalletConnector, OKXConnector } from "./wallets";
 
 export type GetDefaultClientConfigOptions = Omit<
 	CreateConfigParameters,
@@ -47,6 +48,10 @@ export function createWagmiConfig({
 				shimDisconnect: true,
 				UNSTABLE_shimOnConnectSelectAccount: true,
 			},
+		}),
+		new OKXConnector({
+			chains,
+			options: { shimDisconnect: true },
 		}),
 		new CoinbaseWalletConnector({
 			chains,
