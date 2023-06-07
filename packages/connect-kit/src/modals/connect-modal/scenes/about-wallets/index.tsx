@@ -28,7 +28,7 @@ const scenes: SceneConfig[] = [
 					<ArrowDown />
 				</div>
 				<div className={styles.scene1IllustrationWallet}>
-					<Wallet />
+					<Wallet className={styles.scene1IllustrationWalletIcon} />
 				</div>
 				<div className={styles.scene1IllustrationAirplane}>
 					<Airplane />

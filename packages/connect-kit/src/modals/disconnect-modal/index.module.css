@@ -21,8 +21,8 @@
 	font-size: 16px;
 	font-weight: 500;
 	font-family: "Roboto", sans-serif;
-	background: rgb(var(--color-246_246_246));
-	color: rgb(var(--color-46_46_46));
+	background: rgb(var(--csb-ck-color-bg1));
+	color: rgb(var(--csb-ck-color-text));
 }
 
 .disconnectBtn {
@@ -36,7 +36,7 @@
 	display: flex;
 	align-items: center;
 	justify-content: center;
-	color: rgb(var(--color-153_153_153));
+	color: rgb(var(--csb-ck-color-text-subtle));
 }
 
 .tipsIcon {

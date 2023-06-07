@@ -46,7 +46,7 @@
 	content: "";
 	position: absolute;
 	inset: 0;
-	background: rgb(var(--color-255_255_255));
+	background: rgb(var(--csb-ck-color-bg));
 	background: radial-gradient(closest-side, transparent 18.75%, rgb(var(--color-255_255_255)) 100%);
 	background-size: 100%;
 }
@@ -80,7 +80,7 @@
 	width: 58px;
 	border-radius: 13.84px;
 	box-shadow: 0 0 0 1px rgba(var(--color-0_0_0), 0.05), 0 2px 20px 0 rgba(var(--color-0_0_0), 0.03);
-	background: rgb(var(--color-255_255_255));
+	background: rgb(var(--csb-ck-color-bg));
 }
 
 .logoGraphic svg {

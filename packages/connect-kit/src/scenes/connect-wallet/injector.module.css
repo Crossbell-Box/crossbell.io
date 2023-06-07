@@ -77,7 +77,11 @@
 
 .tryAgainIcon {
 	font-size: 32px;
-	color: rgb(var(--color-255_255_255));
+	color: rgb(var(--csb-ck-color-text));
+}
+
+.tryAgainIcon path {
+	fill: rgb(var(--csb-ck-color-bg1));
 }
 
 .tryAgainPopover {
@@ -100,7 +104,7 @@
 	margin-top: 12px;
 	white-space: pre-wrap;
 	font-size: 16px;
-	color: rgb(var(--color-153_153_153));
+	color: rgb(var(--csb-ck-color-text-subtle));
 }
 
 .desc a {

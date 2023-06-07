@@ -27,8 +27,8 @@
 	margin: 12px 0;
 	padding: 10px 16px;
 	font-size: 14px;
-	background: rgba(var(--color-28_27_31), 0.04);
-	color: rgba(var(--color-28_27_31), 0.38);
+	background: rgba(var(--csb-ck-color-text), 0.04);
+	color: rgba(var(--csb-ck-color-text), 0.4);
 	border-radius: 12px;
 	word-break: break-all;
 }
@@ -41,8 +41,8 @@
 }
 
 .actions button:first-of-type {
-	background: rgb(var(--color-246_247_249));
-	color: rgb(var(--color-0_0_0));
+	background: rgb(var(--csb-ck-color-bg1));
+	color: rgb(var(--csb-ck-color-text));
 }
 
 .actions button {

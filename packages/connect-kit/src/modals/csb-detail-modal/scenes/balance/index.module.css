@@ -1,5 +1,5 @@
 .container {
-	color: rgb(var(--color-8_33_53));
+	color: rgba(var(--csb-ck-color-text), 0.9);
 }
 
 @media (min-width: 768px) {
@@ -13,7 +13,7 @@
 }
 
 .section:not(:last-child) {
-	border-bottom: 8px solid rgb(var(--color-246_247_249));
+	border-bottom: 8px solid rgb(var(--csb-ck-color-bg1));
 }
 
 .address {
@@ -23,7 +23,7 @@
 }
 
 .balance {
-	color: rgb(var(--color-8_33_53));
+	color: rgb(var(--csb-ck-color-text));
 	font-weight: 500;
 	font-size: 22px;
 	display: flex;

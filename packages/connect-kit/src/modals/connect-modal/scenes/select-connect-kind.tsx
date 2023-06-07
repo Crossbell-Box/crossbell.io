@@ -1,8 +1,12 @@
 import React from "react";
-import { Button } from "@mantine/core";
 import { CircleHelpIcon } from "@crossbell/ui";
 
-import { EmailIcon, WalletIcon, BottomTips } from "../../../components";
+import {
+	EmailIcon,
+	WalletIcon,
+	BottomTips,
+	IconBtn,
+} from "../../../components";
 
 import { SceneKind } from "../types";
 import { useScenesStore } from "../stores";
@@ -19,18 +23,12 @@ export function SelectConnectKind() {
 			<Header
 				title="Connect"
 				leftNode={
-					<Button
-						className={styles.backBtn}
-						variant="subtle"
-						color="gray"
-						compact
-						size="sm"
-					>
+					<IconBtn>
 						<CircleHelpIcon
 							className={styles.circleHelpIcon}
 							onClick={() => goToScene({ kind: SceneKind.aboutWallets })}
 						/>
-					</Button>
+					</IconBtn>
 				}
 			/>
 

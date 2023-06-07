@@ -19,7 +19,7 @@
 .tips {
 	font-weight: 400;
 	font-size: 14px;
-	color: rgb(var(--color-153_153_153));
+	color: rgb(var(--csb-ck-color-text-subtle));
 	margin-bottom: 12px;
 }
 
@@ -35,11 +35,11 @@
 
 .tweetContent {
 	padding: 16px;
-	background: rgb(var(--color-246_246_246));
+	background: rgb(var(--csb-ck-color-bg1));
 	border-radius: 12px;
 	font-weight: 400;
 	font-size: 14px;
-	color: rgba(var(--color-28_27_31), 0.38);
+	color: rgba(var(--csb-ck-color-text), 0.4);
 	margin: 12px 0 24px;
 	display: flex;
 	flex-direction: column;
@@ -84,7 +84,7 @@
 }
 
 .skipBtn {
-	color: rgb(var(--color-0_0_0));
+	color: rgb(var(--csb-ck-color-text));
 }
 
 .claimBtn.disabled {
@@ -126,7 +126,7 @@
 }
 
 .discordPendingTips code {
-	background: rgba(var(--color-0_0_0), 0.15);
+	background: rgba(var(--csb-ck-color-text), 0.15);
 	padding: 1px 4px;
 	border-radius: 4px;
 	font-size: 0.9em;
@@ -168,8 +168,8 @@
 }
 
 button.cancel {
-	border-color: rgba(var(--color-0_0_0), 0.5);
-	background-color: white;
+	border-color: rgba(var(--csb-ck-color-text), 0.5);
+	background-color: rgb(var(--csb-ck-color-bg1));
 }
 
 button.claimed {

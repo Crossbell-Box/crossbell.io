@@ -57,7 +57,7 @@ export function EmailBg(props: React.SVGAttributes<SVGSVGElement>) {
 			</mask>
 			<g
 				mask="url(#a)"
-				stroke="rgb(var(--color-225_232_247))"
+				stroke="rgba(var(--csb-ck-color-text), 0.15)"
 				strokeOpacity=".4"
 				strokeWidth="2"
 			>
@@ -240,7 +240,7 @@ export function WalletBg(props: React.SVGAttributes<SVGSVGElement>) {
 			</mask>
 			<g
 				mask="url(#a)"
-				stroke="rgb(var(--color-225_232_247))"
+				stroke="rgba(var(--csb-ck-color-text), 0.15)"
 				strokeOpacity=".4"
 				strokeWidth="2"
 			>

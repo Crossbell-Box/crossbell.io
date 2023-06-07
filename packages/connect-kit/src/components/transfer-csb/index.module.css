@@ -1,5 +1,5 @@
 .container {
-	color: rgb(var(--color-8_33_53));
+	color: rgb(var(--csb-ck-color-text));
 	padding: 24px;
 }
 

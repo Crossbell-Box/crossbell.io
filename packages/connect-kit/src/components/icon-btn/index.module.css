@@ -9,5 +9,5 @@
 	background: transparent;
 	outline: none;
 	border-radius: 8px;
-	color: rgb(var(--color-153_153_153));
+	color: rgb(var(--csb-ck-color-text-subtle));
 }

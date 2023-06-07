@@ -12,8 +12,7 @@
 	justify-content: center;
 	border-width: 1px;
 	border-style: solid;
-	--un-border-opacity: 1;
-	border-color: rgba(247, 246, 248, var(--un-border-opacity));
+	border-color: rgba(var(--csb-ck-color-text), 0.3);
 	border-radius: 24px;
 	padding: 14px;
 }

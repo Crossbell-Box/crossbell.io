@@ -5,10 +5,10 @@
 }
 
 .item {
-	--tint-color: rgb(var(--color-0_0_0));
+	--tint-color: rgb(var(--csb-ck-color-text));
 
-	background: rgb(var(--color-246_246_246));
-	color: rgb(var(--color-0_0_0));
+	background: rgb(var(--csb-ck-color-bg1));
+	color: rgb(var(--csb-ck-color-text));
 	cursor: pointer;
 	font-weight: 500;
 	font-size: 16px;

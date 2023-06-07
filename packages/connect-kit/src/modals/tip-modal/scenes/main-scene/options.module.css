@@ -13,7 +13,7 @@
 	justify-content: center;
 	height: 127px;
 	position: relative;
-	box-shadow: inset 0 0 0 1px rgb(var(--color-225_232_247));
+	box-shadow: inset 0 0 0 1px rgb(var(--csb-ck-color-bg1));
 	cursor: pointer;
 	background: transparent;
 }

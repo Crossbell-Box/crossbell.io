@@ -1,7 +1,7 @@
 .container {
 	height: 64px;
 	border-radius: 12px;
-	background: rgba(var(--color-28_27_31), 0.04);
+	background: rgba(var(--csb-ck-color-text), 0.04);
 	display: flex;
 	align-items: center;
 	justify-content: center;
@@ -30,8 +30,8 @@
 	height: 48px;
 	width: 48px;
 	border-radius: 100vh;
-	border: 2px solid rgb(var(--color-255_255_255));
-	background: rgb(var(--color-255_255_255));
+	border: 2px solid rgb(var(--csb-ck-color-bg));
+	background: rgb(var(--csb-ck-color-bg));
 	box-sizing: content-box;
 	object-fit: cover;
 }

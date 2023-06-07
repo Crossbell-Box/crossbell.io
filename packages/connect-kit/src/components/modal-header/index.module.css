@@ -23,7 +23,7 @@
 	white-space: nowrap;
 	font-size: 16px;
 	font-weight: 500;
-	color: rgb(var(--color-46_46_46));
+	color: rgb(var(--csb-ck-color-text));
 }
 
 .backIcon {

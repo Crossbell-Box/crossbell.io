@@ -1,6 +1,6 @@
 .container {
-	color: rgb(var(--color-46_46_46));
-	background-color: rgba(var(--color-28_27_31), 0.04);
+	color: rgb(var(--csb-ck-color-text));
+	background-color: rgba(var(--csb-ck-color-text), 0.04);
 	transition: background-color 0.2s;
 	min-height: 88px;
 	border: none;

@@ -7,7 +7,7 @@
 .input {
 	border-radius: 12px;
 	border-style: none;
-	background-color: rgba(var(--color-28_27_31), 0.04);
+	background-color: rgba(var(--csb-ck-color-text), 0.04);
 	padding: 0;
 	text-align: center;
 	font-family: ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas,
@@ -15,7 +15,7 @@
 	font-size: 22px;
 	font-weight: 500;
 	line-height: 0.25rem;
-	color: rgb(var(--color-46_46_46));
+	color: rgb(var(--csb-ck-color-text));
 }
 
 .input::selection {

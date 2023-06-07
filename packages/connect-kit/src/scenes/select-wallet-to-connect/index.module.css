@@ -24,12 +24,12 @@
 	padding: 0 16px;
 	font-size: 15px;
 	font-weight: 500;
-	color: rgb(var(--color-153_153_153));
+	color: rgb(var(--csb-ck-color-text-subtle));
 	transition: color 200ms ease, transform 100ms ease;
 }
 
 .tipsBtn:hover {
-	color: rgb(var(--color-17_17_17));
+	color: rgb(var(--csb-ck-color-text2));
 }
 
 .tipsBtn svg {

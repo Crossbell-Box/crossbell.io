@@ -8,15 +8,15 @@
 	width: 100%;
 	border-radius: 12px;
 	border-style: none;
-	background-color: rgba(var(--color-28_27_31), 0.04);
+	background-color: rgba(var(--csb-ck-color-text), 0.04);
 	padding: 0 12px;
 	outline: none;
 	transition: color 0.2s;
-	color: rgb(var(--color-46_46_46));
+	color: rgb(var(--csb-ck-color-text));
 }
 
 .input:focus {
-	background-color: rgba(var(--color-28_27_31), 0.06);
+	background-color: rgba(var(--csb-ck-color-text), 0.06);
 }
 
 .rightSection {

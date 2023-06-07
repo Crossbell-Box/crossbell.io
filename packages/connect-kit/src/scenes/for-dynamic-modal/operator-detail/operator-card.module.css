@@ -7,7 +7,7 @@
 	justify-content: space-between;
 	gap: 8px;
 	box-sizing: border-box;
-	background-color: rgb(var(--color-246_246_246));
+	background-color: rgb(var(--csb-ck-color-bg1));
 	border-radius: 12px;
 }
 
@@ -21,7 +21,7 @@
 }
 
 .title {
-	color: rgb(var(--color-73_69_79));
+	color: rgba(var(--csb-ck-color-text), 0.9);
 	font-weight: 500;
 	font-size: 16px;
 	line-height: 20px;
@@ -31,7 +31,7 @@
 }
 
 .description {
-	color: rgb(var(--color-153_153_153));
+	color: rgb(var(--csb-ck-color-text-subtle));
 	font-weight: 500;
 	font-size: 12px;
 	word-break: break-all;

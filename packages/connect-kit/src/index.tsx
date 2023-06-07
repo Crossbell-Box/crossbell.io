@@ -41,6 +41,7 @@ import { useContractConfig } from "./contract-config";
 import { setupReactAccount } from "./setup-react-account";
 
 import type {} from "wagmi/window";
+import { useColorScheme } from "@mantine/hooks";
 
 export * from "@crossbell/react-account";
 export * from "@crossbell/react-account/utils";
@@ -76,8 +77,6 @@ export type ConnectKitProviderProps = {
 	// Used for the case when we want to keep the user logged in even if the user disconnects from the wallet
 	ignoreWalletDisconnectEvent?: boolean;
 } & Partial<ConnectKitConfig>;
-
-const theme = { colorScheme: "light" } as const;
 
 setupReactAccount();
 
@@ -129,6 +128,7 @@ export function ConnectKitProvider({
 	}, []);
 
 	usePreloadAllImgs();
+	const colorScheme = useColorScheme();
 
 	const node = (
 		<InitContractProvider {...contractConfig}>
@@ -137,7 +137,7 @@ export function ConnectKitProvider({
 					<ReactAccountProvider getSigner={getSigner} onDisconnect={disconnect}>
 						<ConnectKitConfigContext.Provider value={connectKitConfig}>
 							<XSettingsConfigContext.Provider value={xSettings ?? null}>
-								<MantineProvider theme={theme}>
+								<MantineProvider theme={{ colorScheme }}>
 									<ConnectModal />
 									<DisconnectModal />
 									<ClaimCSBTipsModal />

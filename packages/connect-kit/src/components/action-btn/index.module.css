@@ -24,13 +24,13 @@
 }
 
 .ghost {
-	color: rgb(var(--color-153_153_153));
+	color: rgb(var(--csb-ck-color-text-subtle));
 	background: transparent;
 }
 
 .gray {
-	color: rgb(var(--color-117_127_141));
-	background: rgb(var(--color-250_250_250));
+	color: rgb(var(--csb-ck-color-text));
+	background: rgb(var(--csb-ck-color-bg1));
 }
 
 .yellow {

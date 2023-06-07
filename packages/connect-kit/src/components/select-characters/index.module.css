@@ -1,4 +1,4 @@
 .whatIsCharacter:hover {
-	color: rgb(var(--color-0_0_0));
+	color: rgb(var(--csb-ck-color-text));
 	cursor: pointer;
 }

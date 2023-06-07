@@ -19,7 +19,7 @@
 .characterName {
 	font-size: 14px;
 	font-weight: 500;
-	color: rgb(var(--color-8_33_53));
+	color: rgb(var(--csb-ck-color-text));
 }
 
 .characterHandle {

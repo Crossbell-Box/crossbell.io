@@ -4,12 +4,12 @@
 .title {
 	font-weight: 400;
 	font-size: 14px;
-	color: rgb(var(--color-153_153_153));
+	color: rgb(var(--csb-ck-color-text-subtle));
 	margin: 0 0 6px 20px;
 }
 
 .section {
-	background: rgb(var(--color-246_246_246));
+	background: rgb(var(--csb-ck-color-bg1));
 	border-radius: 12px;
 	overflow: hidden;
 }
@@ -31,7 +31,7 @@
 	right: 0;
 	width: 100%;
 	height: 1px;
-	background: rgb(var(--color-225_232_247));
+	background: rgb(var(--csb-ck-color-bg1));
 }
 
 .itemIcon:not(:empty) {
@@ -58,18 +58,18 @@
 .itemTitle {
 	font-weight: 500;
 	font-size: 16px;
-	color: rgb(var(--color-73_69_79));
+	color: rgba(var(--csb-ck-color-text), 0.9);
 }
 
 .itemDescription {
 	font-weight: 500;
 	font-size: 12px;
-	color: rgb(var(--color-153_153_153));
+	color: rgb(var(--csb-ck-color-text-subtle));
 }
 
 .actionIcon {
 	flex: 0 0 auto;
 	font-size: 32px;
 	transform: rotate(180deg);
-	color: rgb(var(--color-153_153_153));
+	color: rgb(var(--csb-ck-color-text-subtle));
 }

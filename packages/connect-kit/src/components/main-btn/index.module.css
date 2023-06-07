@@ -19,8 +19,8 @@
 }
 
 .gray {
-	color: rgb(var(--color-0_0_0));
-	background: rgb(var(--color-246_247_249));
+	color: rgb(var(--csb-ck-color-text));
+	background: rgb(var(--csb-ck-color-bg1));
 }
 
 .yellow {

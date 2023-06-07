@@ -6,8 +6,8 @@ import styles from "./index.module.css";
 
 const colorMap = {
 	gray: {
-		color: "rgb(var(--color-0_0_0))",
-		background: "rgb(var(--color-247_247_247))",
+		color: "rgb(var(--csb-ck-color-text))",
+		background: "rgb(var(--csb-ck-color-bg1))",
 	},
 
 	green: {

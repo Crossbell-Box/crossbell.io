@@ -1,5 +1,5 @@
 .tips {
-	color: rgb(var(--color-73_69_79));
+	color: rgba(var(--csb-ck-color-text), 0.9);
 	font-weight: 400;
 	font-size: 14px;
 	text-align: center;

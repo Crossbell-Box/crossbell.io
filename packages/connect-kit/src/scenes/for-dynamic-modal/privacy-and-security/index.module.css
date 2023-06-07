@@ -1,7 +1,7 @@
 .tips {
 	font-weight: 400;
 	font-size: 14px;
-	color: rgb(var(--color-153_153_153));
+	color: rgb(var(--csb-ck-color-text-subtle));
 	text-align: center;
 	margin-bottom: 20px;
 	white-space: pre-wrap;
@@ -17,7 +17,7 @@
 	display: flex;
 	align-items: center;
 	gap: 8px;
-	background: rgb(var(--color-246_246_246));
+	background: rgb(var(--csb-ck-color-bg1));
 	padding: 20px;
 	border-radius: 12px;
 	font-size: 16px;
@@ -35,8 +35,8 @@
 
 .mainBtn {
 	height: 64px;
-	background-color: rgb(var(--color-246_246_246));
-	color: rgb(var(--color-55_55_55));
+	background-color: rgb(var(--csb-ck-color-bg1));
+	color: rgb(var(--csb-ck-color-text));
 	margin-top: 12px;
 	font-size: 16px;
 	font-weight: 500;

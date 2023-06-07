@@ -36,7 +36,7 @@
 	left: 3px;
 	right: 3px;
 	bottom: 3px;
-	background: conic-gradient(from 90deg, rgb(var(--color-255_255_255)) 10%, rgb(var(--color-55_55_55)) 80%);
+	background: conic-gradient(from 90deg, rgb(var(--csb-ck-color-bg)) 10%, rgb(var(--csb-ck-color-text)) 80%);
 	border-radius: inherit;
 	z-index: -1;
 }

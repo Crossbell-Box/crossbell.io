@@ -1,8 +1,8 @@
 .modal {
 	margin-top: auto;
 	width: 100%;
-	color: rgb(var(--color-46_46_46));
-	background: rgb(var(--color-255_255_255));
+	color: rgb(var(--csb-ck-color-text));
+	background: rgb(var(--csb-ck-color-bg));
 	border-top-left-radius: 28px;
 	border-top-right-radius: 28px;
 }

@@ -1,5 +1,5 @@
 .container {
-	background-color: rgb(var(--color-246_246_246));
+	background-color: rgb(var(--csb-ck-color-bg1));
 	border-radius: 12px;
 	margin-top: 12px;
 }
@@ -20,7 +20,7 @@
 	bottom: 0;
 	left: 52px;
 	height: 1px;
-	background-color: rgb(var(--color-225_232_247));
+	background-color: rgb(var(--csb-ck-color-bg1));
 }
 
 .item svg {
@@ -29,7 +29,7 @@
 }
 
 .permission {
-	color: rgb(var(--color-73_69_79));
+	color: rgba(var(--csb-ck-color-text), 0.9);
 }
 
 .permission:hover {

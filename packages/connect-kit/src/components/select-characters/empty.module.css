@@ -19,6 +19,6 @@
 .title {
 	font-weight: 500;
 	font-size: 22px;
-	color: rgb(var(--color-0_0_0));
+	color: rgb(var(--csb-ck-color-text));
 	margin: 10px auto 10px;
 }

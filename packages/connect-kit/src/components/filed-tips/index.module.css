@@ -3,9 +3,9 @@
 	padding-left: 10px;
 	font-weight: 400;
 	font-size: 14px;
-	color: rgb(var(--color-153_153_153));
+	color: rgb(var(--csb-ck-color-text-subtle));
 	margin: 12px 0;
-	--field-tips-color: rgb(var(--color-0_0_0));
+	--field-tips-color: rgb(var(--csb-ck-color-text));
 }
 
 .container::before {

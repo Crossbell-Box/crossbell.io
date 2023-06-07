@@ -12,8 +12,8 @@
 }
 
 .avatar img {
-	border: 3px solid rgb(var(--color-255_255_255));
-	background: rgb(var(--color-255_255_255));
+	border: 3px solid rgb(var(--csb-ck-color-bg));
+	background: rgb(var(--csb-ck-color-bg));
 }
 
 .main {
@@ -31,7 +31,7 @@
 	align-items: center;
 	gap: 6px;
 	font-size: 14px;
-	color: rgb(var(--color-153_153_153));
+	color: rgb(var(--csb-ck-color-text-subtle));
 	margin-top: 18px;
 }
 
@@ -64,7 +64,7 @@
 	gap: 4px;
 	font-size: 14px;
 	font-weight: 400;
-	color: rgb(var(--color-153_153_153));
+	color: rgb(var(--csb-ck-color-text-subtle));
 }
 
 .mira svg {
@@ -73,7 +73,7 @@
 
 .mira strong {
 	font-weight: 500;
-	color: rgb(var(--color-0_0_0));
+	color: rgb(var(--csb-ck-color-text));
 }
 
 .bottomTipsContainer {
@@ -100,7 +100,7 @@
 	width: 72px;
 	height: 72px;
 	border-radius: 72px;
-	background: rgba(var(--color-255_255_255), 0.9);
+	background: rgba(var(--csb-ck-color-bg), 0.9);
 }
 
 .loadingOverlay {
@@ -117,8 +117,8 @@
 	align-items: center;
 	justify-content: center;
 	flex-direction: column;
-	background: rgba(var(--color-255_255_255), 0.9);
-	color: rgba(var(--color-0_0_0), 0.8);
+	background: rgba(var(--csb-ck-color-bg), 0.9);
+	color: rgba(var(--csb-ck-color-text), 0.8);
 	border-radius: 28px;
 	font-size: 32px;
 }

@@ -9,7 +9,7 @@
 	display: flex;
 	align-items: center;
 	border-radius: 12px;
-	background-color: rgb(var(--color-247_247_247));
+	background-color: rgb(var(--csb-ck-color-bg1));
 	padding: 14px 20px;
 	transition-property: color, background-color, border-color,
 		text-decoration-color, fill, stroke, opacity, box-shadow, transform, filter,

@@ -18,7 +18,7 @@
 	flex-direction: column;
 	align-items: center;
 	border-radius: 12px;
-	background-color: rgb(var(--color-0_0_0));
+	background-color: rgb(var(--csb-ck-color-text));
 }
 
 .crossbellIcon {

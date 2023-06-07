@@ -71,7 +71,7 @@ export function IdCardIcon(props: React.SVGAttributes<SVGSVGElement>) {
 			<g clipPath="url(#clip0_6055_20504)">
 				<path
 					d="M23 6C23 4.896 22.104 4 21 4H3C1.896 4 1 4.896 1 6V18C1 19.104 1.896 20 3 20H21C22.104 20 23 19.104 23 18V6Z"
-					fill="rgb(var(--color-225_232_247))"
+					fill="rgb(var(--csb-ck-color-bg1))"
 				/>
 				<path
 					d="M7 13C5.343 13 4 11.657 4 10C4 8.343 5.343 7 7 7C8.657 7 10 8.343 10 10C10 11.657 8.657 13 7 13ZM3 18H11C11 18 11 17 11 16C11 15 9 14 7 14C5 14 3 15 3 16C3 17 3 18 3 18Z"

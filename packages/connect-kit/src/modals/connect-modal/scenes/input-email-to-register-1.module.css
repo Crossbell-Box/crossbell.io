@@ -76,7 +76,7 @@
 	padding: 14px 0;
 	font-size: 14px;
 	font-weight: 400;
-	color: rgb(var(--color-153_153_153));
+	color: rgb(var(--csb-ck-color-text-subtle));
 	transition-property: color, background-color, border-color,
 		text-decoration-color, fill, stroke, opacity, box-shadow, transform, filter,
 		backdrop-filter;
@@ -86,5 +86,5 @@
 }
 
 .goToEmailLoginBtn:hover {
-	color: rgb(var(--color-17_17_17));
+	color: rgb(var(--csb-ck-color-text2));
 }
