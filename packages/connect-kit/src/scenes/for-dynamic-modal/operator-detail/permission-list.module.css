@@ -1,5 +1,5 @@
 .container {
-	background-color: #f6f6f6;
+	background-color: rgb(var(--color-246_246_246));
 	border-radius: 12px;
 	margin-top: 12px;
 }
@@ -20,7 +20,7 @@
 	bottom: 0;
 	left: 52px;
 	height: 1px;
-	background-color: #e1e8f7;
+	background-color: rgb(var(--color-225_232_247));
 }
 
 .item svg {
@@ -29,7 +29,7 @@
 }
 
 .permission {
-	color: #49454f;
+	color: rgb(var(--color-73_69_79));
 }
 
 .permission:hover {
@@ -37,5 +37,5 @@
 }
 
 .description {
-	color: #888;
+	color: rgb(var(--color-136_136_136));
 }

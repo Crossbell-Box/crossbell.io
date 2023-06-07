@@ -1,6 +1,6 @@
 .container {
-	background: #687792;
-	color: #fff;
+	background: rgb(var(--color-104_119_146));
+	color: rgb(var(--color-255_255_255));
 	padding: 16px 24px;
 	border-radius: 12px;
 	font-weight: 500;
@@ -10,7 +10,7 @@
 }
 
 .avatar {
-	border: 2px solid #fff;
+	border: 2px solid rgb(var(--color-255_255_255));
 }
 
 .characterInfo {
@@ -19,7 +19,7 @@
 	align-items: center;
 	gap: 8px;
 	overflow: hidden;
-	background: rgba(104, 119, 146, 0.5);
+	background: rgba(var(--color-104_119_146), 0.5);
 	backdrop-filter: blur(3px);
 }
 
@@ -76,5 +76,5 @@
 }
 
 .emailIcon {
-	color: #ffb74d;
+	color: rgb(var(--color-255_183_77));
 }

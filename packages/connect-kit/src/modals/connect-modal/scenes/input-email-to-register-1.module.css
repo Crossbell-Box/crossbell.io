@@ -16,7 +16,7 @@
 }
 
 .fieldTips {
-	color: #e65040;
+	color: rgb(var(--color-230_80_64));
 }
 
 .emailField {
@@ -37,10 +37,10 @@
 	border-top-right-radius: 12px;
 	border-bottom-right-radius: 12px;
 	border-style: none;
-	background-color: rgba(106, 217, 145, 1);
+	background-color: rgb(var(--color-106_217_145));
 	font-size: 14px;
 	font-weight: 500;
-	color: rgba(255, 255, 255, 1);
+	color: rgb(var(--color-255_255_255));
 	transition-property: color, background-color, border-color,
 		text-decoration-color, fill, stroke, opacity, box-shadow, transform, filter,
 		backdrop-filter;
@@ -50,7 +50,7 @@
 }
 
 .sendEmailBtn:disabled {
-	background-color: rgba(106, 217, 145, 0.5);
+	background-color: rgba(var(--color-106_217_145), 0.5);
 }
 
 .codeSentTips {
@@ -76,7 +76,7 @@
 	padding: 14px 0;
 	font-size: 14px;
 	font-weight: 400;
-	color: #999;
+	color: rgb(var(--color-153_153_153));
 	transition-property: color, background-color, border-color,
 		text-decoration-color, fill, stroke, opacity, box-shadow, transform, filter,
 		backdrop-filter;
@@ -86,5 +86,5 @@
 }
 
 .goToEmailLoginBtn:hover {
-	color: #111;
+	color: rgb(var(--color-17_17_17));
 }

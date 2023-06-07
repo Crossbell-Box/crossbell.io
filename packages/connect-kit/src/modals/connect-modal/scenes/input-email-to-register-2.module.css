@@ -45,7 +45,7 @@
 .checkboxLabel {
 	padding-left: 0;
 	font-size: 12px;
-	color: #999999;
+	color: rgb(var(--color-153_153_153));
 }
 
 .checkboxLabelWrapper {
@@ -57,7 +57,7 @@
 }
 
 .checkboxLabelContent a {
-	color: #f6c549;
+	color: rgb(var(--color-246_197_73));
 }
 
 .actions {
@@ -78,7 +78,7 @@
 	padding: 14px 0;
 	font-size: 14px;
 	font-weight: 400;
-	color: #999;
+	color: rgb(var(--color-153_153_153));
 	transition-property: color, background-color, border-color,
 		text-decoration-color, fill, stroke, opacity, box-shadow, transform, filter,
 		backdrop-filter;
@@ -88,5 +88,5 @@
 }
 
 .goToEmailLogin:hover {
-	color: #111;
+	color: rgb(var(--color-17_17_17));
 }

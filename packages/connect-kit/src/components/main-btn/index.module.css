@@ -19,21 +19,21 @@
 }
 
 .gray {
-	color: #000;
-	background: #f6f7f9;
+	color: rgb(var(--color-0_0_0));
+	background: rgb(var(--color-246_247_249));
 }
 
 .yellow {
-	color: #fff;
-	background: #f6c549;
+	color: rgb(var(--color-255_255_255));
+	background: rgb(var(--color-246_197_73));
 }
 
 .green {
-	color: #fff;
-	background: #6ad991;
+	color: rgb(var(--color-255_255_255));
+	background: rgb(var(--color-106_217_145));
 }
 
 .red {
-	color: #fff;
-	background: #e65040;
+	color: rgb(var(--color-255_255_255));
+	background: rgb(var(--color-230_80_64));
 }

@@ -26,7 +26,7 @@
 	opacity: 0;
 	border-radius: inherit;
 	transition: opacity 0.2s ease;
-	background: #373737;
+	background: rgb(var(--color-55_55_55));
 }
 
 .retryBtn::after {
@@ -36,7 +36,7 @@
 	left: 3px;
 	right: 3px;
 	bottom: 3px;
-	background: conic-gradient(from 90deg, #fff 10%, #373737 80%);
+	background: conic-gradient(from 90deg, rgb(var(--color-255_255_255)) 10%, rgb(var(--color-55_55_55)) 80%);
 	border-radius: inherit;
 	z-index: -1;
 }
@@ -47,7 +47,7 @@
 	position: absolute;
 	inset: -5px;
 	opacity: 0;
-	box-shadow: inset 0 0 0 3.5px #e65040;
+	box-shadow: inset 0 0 0 3.5px rgb(var(--color-230_80_64));
 	border-radius: inherit;
 }
 

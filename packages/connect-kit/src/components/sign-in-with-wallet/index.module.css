@@ -1,7 +1,7 @@
 .tips {
 	font-weight: 400;
 	font-size: 14px;
-	color: #999;
+	color: rgb(var(--color-153_153_153));
 	margin-bottom: 22px;
 	text-align: center;
 }

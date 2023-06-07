@@ -38,7 +38,9 @@ export function InputEmailToRegister1() {
 					icon={
 						<EmailIcon
 							style={{
-								color: store.emailErrorMsg ? "#E65040" : "#FFB74D",
+								color: store.emailErrorMsg
+									? "rgb(var(--color-230_80_64))"
+									: "rgb(var(--color-255_183_77))",
 							}}
 						/>
 					}
@@ -99,7 +101,9 @@ export function InputEmailToRegister1() {
 					icon={
 						<PasswordIcon
 							style={{
-								color: store.codeErrorMsg ? "#E65040" : "#FFB74D",
+								color: store.codeErrorMsg
+									? "rgb(var(--color-230_80_64))"
+									: "rgb(var(--color-255_183_77))",
 							}}
 						/>
 					}

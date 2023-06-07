@@ -1,5 +1,5 @@
 .container {
-	color: #082135;
+	color: rgb(var(--color-8_33_53));
 }
 
 @media (min-width: 768px) {

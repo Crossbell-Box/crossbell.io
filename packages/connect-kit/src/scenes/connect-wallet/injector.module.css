@@ -77,7 +77,7 @@
 
 .tryAgainIcon {
 	font-size: 32px;
-	color: #fff;
+	color: rgb(var(--color-255_255_255));
 }
 
 .tryAgainPopover {
@@ -100,11 +100,11 @@
 	margin-top: 12px;
 	white-space: pre-wrap;
 	font-size: 16px;
-	color: #999;
+	color: rgb(var(--color-153_153_153));
 }
 
 .desc a {
-	color: #5b89f7;
+	color: rgb(var(--color-91_137_247));
 }
 
 .desc a:hover {

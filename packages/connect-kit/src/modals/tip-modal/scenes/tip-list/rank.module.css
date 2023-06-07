@@ -7,6 +7,6 @@
 	font-weight: 700;
 	padding: 2px 10px;
 	color: white;
-	background: #262626;
+	background: rgb(var(--color-38_38_38));
 	border-radius: 8px;
 }

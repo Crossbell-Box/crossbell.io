@@ -16,7 +16,7 @@ export function EmailIcon(props: React.SVGAttributes<SVGSVGElement>) {
 			/>
 			<path
 				d="m21.99 6.01002-9.99 4.98998-9.99-4.99998c.01-.29.2-1.98 2.01-1.98h15.98s1.99 0 1.99 1.99zm-9.99 6.98998-10-4.99998v9.99998c0 2 2 2 2 2 0-.01 16 0 16 0 1.99 0 1.99-2 1.99-2v-9.98998z"
-				fill="rgba(255,255,255,0.4)"
+				fill="rgba(var(--color-255_255_255), 0.4)"
 			/>
 		</svg>
 	);
@@ -34,24 +34,24 @@ export function WalletIcon(props: React.SVGAttributes<SVGSVGElement>) {
 		>
 			<path
 				d="m33 21v12h-25.5c-2.481 0-4.5-2.019-4.5-4.5v-9c0-2.481 2.019-4.5 4.5-4.5h24v6z"
-				fill="#6d4c41"
+				fill="rgb(var(--color-109_76_65))"
 			/>
 			<path
 				d="m7.5 18h7.5 16.5v3h-24c-.8265 0-1.5-.6735-1.5-1.5s.6735-1.5 1.5-1.5z"
-				fill="#000"
+				fill="rgb(var(--color-0_0_0))"
 				opacity=".2"
 			/>
 			<path
 				d="m24.75 13.5c-2.895 0-5.25-2.355-5.25-5.25s2.355-5.25 5.25-5.25 5.25 2.355 5.25 5.25-2.355 5.25-5.25 5.25z"
-				fill="#fbc02d"
+				fill="rgb(var(--color-251_192_45))"
 			/>
 			<path
 				d="m7.5765 18c-.036-.2475-.0765-.4935-.0765-.75 0-2.895 2.355-5.25 5.25-5.25s5.25 2.355 5.25 5.25c0 .2565-.0405.5025-.0765.75z"
-				fill="#fbc02d"
+				fill="rgb(var(--color-251_192_45))"
 			/>
 			<path
 				d="m24.75 10.5c-1.242 0-2.25-1.008-2.25-2.25s1.008-2.25 2.25-2.25 2.25 1.008 2.25 2.25-1.008 2.25-2.25 2.25zm-9.888 7.5c.084-.2355.138-.486.138-.75 0-1.242-1.008-2.25-2.25-2.25s-2.25 1.008-2.25 2.25c0 .264.054.5145.138.75z"
-				fill="#000"
+				fill="rgb(var(--color-0_0_0))"
 				opacity=".2"
 			/>
 		</svg>
@@ -71,15 +71,15 @@ export function IdCardIcon(props: React.SVGAttributes<SVGSVGElement>) {
 			<g clipPath="url(#clip0_6055_20504)">
 				<path
 					d="M23 6C23 4.896 22.104 4 21 4H3C1.896 4 1 4.896 1 6V18C1 19.104 1.896 20 3 20H21C22.104 20 23 19.104 23 18V6Z"
-					fill="#E1E8F7"
+					fill="rgb(var(--color-225_232_247))"
 				/>
 				<path
 					d="M7 13C5.343 13 4 11.657 4 10C4 8.343 5.343 7 7 7C8.657 7 10 8.343 10 10C10 11.657 8.657 13 7 13ZM3 18H11C11 18 11 17 11 16C11 15 9 14 7 14C5 14 3 15 3 16C3 17 3 18 3 18Z"
-					fill="#5B89F7"
+					fill="rgb(var(--color-91_137_247))"
 				/>
 				<path
 					d="M13 10C13 9.448 13.447 9 14 9H20C20.553 9 21 9.448 21 10C21 10.552 20.553 11 20 11H14C13.447 11 13 10.552 13 10ZM13 14C13 14.553 13.447 15 14 15H20C20.553 15 21 14.553 21 14C21 13.447 20.553 13 20 13H14C13.447 13 13 13.447 13 14Z"
-					fill="#455A64"
+					fill="rgb(var(--color-69_90_100))"
 				/>
 			</g>
 			<defs>
@@ -109,11 +109,11 @@ export function CrossbellIcon(props: React.SVGAttributes<SVGSVGElement>) {
 				y1="21.0001"
 				y2="21.0001"
 			>
-				<stop offset="0" stopColor="#f6c549" />
-				<stop offset=".234375" stopColor="#e65040" />
-				<stop offset=".505208" stopColor="#9688f2" />
-				<stop offset=".760417" stopColor="#5b89f7" />
-				<stop offset="1" stopColor="#6ad991" />
+				<stop offset="0" stopColor="rgb(var(--color-246_197_73))" />
+				<stop offset=".234375" stopColor="rgb(var(--color-230_80_64))" />
+				<stop offset=".505208" stopColor="rgb(var(--color-150_136_242))" />
+				<stop offset=".760417" stopColor="rgb(var(--color-91_137_247))" />
+				<stop offset="1" stopColor="rgb(var(--color-106_217_145))" />
 			</linearGradient>
 			<path d="m4 17.75h121" stroke="url(#a)" strokeWidth="4.5" />
 			<path
@@ -144,7 +144,7 @@ export function PasswordIcon(props: React.SVGAttributes<SVGSVGElement>) {
 				/>
 				<path
 					d="m18.52 12 .98.566-.5.868-.98-.568v1.134h-1v-1.135l-.983.568-.5-.867.983-.566-.983-.566.5-.868.983.568v-1.134h1v1.134l.98-.568.5.867zm-6 0 .98.566-.5.868-.98-.568v1.134h-1v-1.135l-.983.568-.50001-.867.98301-.566-.98301-.566.50001-.868.983.568v-1.134h1v1.134l.98-.568.5.867zm-6.00001 0 .98.566-.5.868-.98-.568v1.134h-1v-1.135l-.983.568-.5-.867.983-.566-.983-.566.5-.868.983.568v-1.134h1v1.134l.98-.568.5.867z"
-					fill="rgba(255,255,255,0.7)"
+					fill="rgba(var(--color-255_255_255), 0.7)"
 				/>
 			</g>
 		</svg>
@@ -189,7 +189,7 @@ export function MemberIcon(props: React.SVGAttributes<SVGSVGElement>) {
 				/>
 				<path
 					d="m7.5 12c-1.381 0-2.5-1.119-2.5-2.5s1.119-2.5 2.5-2.5 2.5 1.119 2.5 2.5-1.119 2.5-2.5 2.5zm0 1s-3.5 0-3.5 2v2h7s0 0 0-2-3.5-2-3.5-2zm12.5-4h-7v2h7zm0 4h-7v2h7z"
-					fill="rgba(255,255,255,0.4)"
+					fill="rgba(var(--color-255_255_255), 0.4)"
 				/>
 			</g>
 		</svg>
@@ -224,7 +224,12 @@ export function CoinbaseIcon(props: React.SVGAttributes<SVGSVGElement>) {
 			xmlns="http://www.w3.org/2000/svg"
 			{...props}
 		>
-			<rect rx="27%" width="20" height="20" fill="#0052FF"></rect>
+			<rect
+				rx="27%"
+				width="20"
+				height="20"
+				fill="rgb(var(--color-0_82_255))"
+			></rect>
 			<path
 				fillRule="evenodd"
 				clipRule="evenodd"
@@ -247,63 +252,63 @@ export function MetamaskIcon(props: React.SVGAttributes<SVGSVGElement>) {
 			<g strokeLinecap="round" strokeLinejoin="round">
 				<path
 					d="m274.1 35.5-99.5 73.9 18.4-43.6z"
-					fill="#e2761b"
-					stroke="#e2761b"
+					fill="rgb(var(--color-226_118_27))"
+					stroke="rgb(var(--color-226_118_27))"
 				/>
 				<path
 					d="m44.4 35.5 98.7 74.6-17.5-44.3zm193.9 171.3-26.5 40.6 56.7 15.6 16.3-55.3zm-204.4.9 16.2 55.3 56.7-15.6-26.5-40.6z"
-					fill="#e4761b"
-					stroke="#e4761b"
+					fill="rgb(var(--color-228_118_27))"
+					stroke="rgb(var(--color-228_118_27))"
 				/>
 				<path
 					d="m103.6 138.2-15.8 23.9 56.3 2.5-2-60.5zm111.3 0-39-34.8-1.3 61.2 56.2-2.5zm-108.1 109.2 33.8-16.5-29.2-22.8zm71.1-16.5 33.9 16.5-4.7-39.3z"
-					fill="#e4761b"
-					stroke="#e4761b"
+					fill="rgb(var(--color-228_118_27))"
+					stroke="rgb(var(--color-228_118_27))"
 				/>
 				<path
 					d="m211.8 247.4-33.9-16.5 2.7 22.1-.3 9.3zm-105 0 31.5 14.9-.2-9.3 2.5-22.1z"
-					fill="#d7c1b3"
-					stroke="#d7c1b3"
+					fill="rgb(var(--color-215_193_179))"
+					stroke="rgb(var(--color-215_193_179))"
 				/>
 				<path
 					d="m138.8 193.5-28.2-8.3 19.9-9.1zm40.9 0 8.3-17.4 20 9.1z"
-					fill="#233447"
-					stroke="#233447"
+					fill="rgb(var(--color-35_52_71))"
+					stroke="rgb(var(--color-35_52_71))"
 				/>
 				<path
 					d="m106.8 247.4 4.8-40.6-31.3.9zm100.2-40.6 4.8 40.6 26.5-39.7zm23.8-44.7-56.2 2.5 5.2 28.9 8.3-17.4 20 9.1zm-120.2 23.1 20-9.1 8.2 17.4 5.3-28.9-56.3-2.5z"
-					fill="#cd6116"
-					stroke="#cd6116"
+					fill="rgb(var(--color-205_97_22))"
+					stroke="rgb(var(--color-205_97_22))"
 				/>
 				<path
 					d="m87.8 162.1 23.6 46-.8-22.9zm120.3 23.1-1 22.9 23.7-46zm-64-20.6-5.3 28.9 6.6 34.1 1.5-44.9zm30.5 0-2.7 18 1.2 45 6.7-34.1z"
-					fill="#e4751f"
-					stroke="#e4751f"
+					fill="rgb(var(--color-228_117_31))"
+					stroke="rgb(var(--color-228_117_31))"
 				/>
 				<path
 					d="m179.8 193.5-6.7 34.1 4.8 3.3 29.2-22.8 1-22.9zm-69.2-8.3.8 22.9 29.2 22.8 4.8-3.3-6.6-34.1z"
-					fill="#f6851b"
-					stroke="#f6851b"
+					fill="rgb(var(--color-246_133_27))"
+					stroke="rgb(var(--color-246_133_27))"
 				/>
 				<path
 					d="m180.3 262.3.3-9.3-2.5-2.2h-37.7l-2.3 2.2.2 9.3-31.5-14.9 11 9 22.3 15.5h38.3l22.4-15.5 11-9z"
-					fill="#c0ad9e"
-					stroke="#c0ad9e"
+					fill="rgb(var(--color-192_173_158))"
+					stroke="rgb(var(--color-192_173_158))"
 				/>
 				<path
 					d="m177.9 230.9-4.8-3.3h-27.7l-4.8 3.3-2.5 22.1 2.3-2.2h37.7l2.5 2.2z"
-					fill="#161616"
-					stroke="#161616"
+					fill="rgb(var(--color-22_22_22))"
+					stroke="rgb(var(--color-22_22_22))"
 				/>
 				<path
 					d="m278.3 114.2 8.5-40.8-12.7-37.9-96.2 71.4 37 31.3 52.3 15.3 11.6-13.5-5-3.6 8-7.3-6.2-4.8 8-6.1zm-246.5-40.8 8.5 40.8-5.4 4 8 6.1-6.1 4.8 8 7.3-5 3.6 11.5 13.5 52.3-15.3 37-31.3-96.2-71.4z"
-					fill="#763d16"
-					stroke="#763d16"
+					fill="rgb(var(--color-118_61_22))"
+					stroke="rgb(var(--color-118_61_22))"
 				/>
 				<path
 					d="m267.2 153.5-52.3-15.3 15.9 23.9-23.7 46 31.2-.4h46.5zm-163.6-15.3-52.3 15.3-17.4 54.2h46.4l31.1.4-23.6-46zm71 26.4 3.3-57.7 15.2-41.1h-67.5l15 41.1 3.5 57.7 1.2 18.2.1 44.8h27.7l.2-44.8z"
-					fill="#f6851b"
-					stroke="#f6851b"
+					fill="rgb(var(--color-246_133_27))"
+					stroke="rgb(var(--color-246_133_27))"
 				/>
 			</g>
 		</svg>
@@ -342,8 +347,8 @@ export const BraveIcon = (props: React.SVGAttributes<SVGSVGElement>) => (
 				y2="45.3241"
 				gradientUnits="userSpaceOnUse"
 			>
-				<stop offset="0.4" stopColor="#FF5500" />
-				<stop offset="0.6" stopColor="#FF2000" />
+				<stop offset="0.4" stopColor="rgb(var(--color-255_85_0))" />
+				<stop offset="0.6" stopColor="rgb(var(--color-255_32_0))" />
 			</linearGradient>
 			<linearGradient
 				id="paint1_linear_2183_5890"
@@ -353,8 +358,8 @@ export const BraveIcon = (props: React.SVGAttributes<SVGSVGElement>) => (
 				y2="18.8219"
 				gradientUnits="userSpaceOnUse"
 			>
-				<stop stopColor="#FF452A" />
-				<stop offset="1" stopColor="#FF2000" />
+				<stop stopColor="rgb(var(--color-255_69_42))" />
+				<stop offset="1" stopColor="rgb(var(--color-255_32_0))" />
 			</linearGradient>
 		</defs>
 	</svg>
@@ -377,7 +382,7 @@ export const OKXIcon = (props: React.SVGAttributes<SVGSVGElement>) => (
 			rx="600"
 			ry="600"
 		/>
-		<g fill="#fff">
+		<g fill="rgb(var(--color-255_255_255))">
 			<path d="m1463 1015h-404c-17 0-31 14-31 31v404c0 17 14 31 31 31h404c17 0 31-14 31-31v-404c0-17-14-31-31-31z" />
 			<path d="m996 549h-404c-17 0-31 14-31 31v404c0 17 14 31 31 31h404c17 0 31-14 31-31v-404c0-17-14-31-31-31z" />
 			<path d="m1930 549h-404c-17 0-31 14-31 31v404c0 17 14 31 31 31h404c17 0 31-14 31-31v-404c0-17-14-31-31-31z" />

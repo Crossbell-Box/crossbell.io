@@ -20,11 +20,11 @@
 }
 
 .emailTips {
-	color: #e65040;
+	color: rgb(var(--color-230_80_64));
 }
 
 .passwordIcon {
-	color: #ffb74d;
+	color: rgb(var(--color-255_183_77));
 }
 
 .forgotBtn {
@@ -49,7 +49,7 @@
 	padding: 14px 15px;
 	font-size: 14px;
 	font-weight: 400;
-	color: rgba(153, 153, 153, 1);
+	color: rgb(var(--color-153_153_153));
 	transition-property: color, background-color, border-color,
 		text-decoration-color, fill, stroke, opacity, box-shadow, transform, filter,
 		backdrop-filter;
@@ -59,5 +59,5 @@
 }
 
 .registerBtn:hover {
-	color: #111;
+	color: rgb(var(--color-17_17_17));
 }

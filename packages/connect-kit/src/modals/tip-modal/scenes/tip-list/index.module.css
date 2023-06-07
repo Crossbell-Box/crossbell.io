@@ -19,7 +19,7 @@
 .characterName {
 	font-size: 14px;
 	font-weight: 500;
-	color: #082135;
+	color: rgb(var(--color-8_33_53));
 }
 
 .characterHandle {
@@ -28,7 +28,7 @@
 }
 
 .amount {
-	color: #737479;
+	color: rgb(var(--color-115_116_121));
 	font-size: 14px;
 	margin-left: auto;
 }

@@ -47,7 +47,7 @@ export function Main() {
 		>
 			<LoadingOverlay
 				visible={switchNetwork.isLoading}
-				color="#2f2f2f"
+				color="rgb(var(--color-47_47_47))"
 				blur={2}
 			>
 				<p className={styles.loadingTips}>Approve in Wallet</p>

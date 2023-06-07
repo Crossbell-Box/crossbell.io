@@ -28,7 +28,7 @@
 }
 
 .filedTips {
-	color: #999;
+	color: rgb(var(--color-153_153_153));
 }
 
 .container input,

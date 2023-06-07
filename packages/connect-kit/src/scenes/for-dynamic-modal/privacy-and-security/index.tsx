@@ -43,7 +43,7 @@ export function PrivacyAndSecurity() {
 				/>
 			</div>
 
-			<FiledTips color="#6AD991">
+			<FiledTips color="rgb(var(--color-106_217_145))">
 				{`${appName} use `}
 				<a
 					className={styles.link}

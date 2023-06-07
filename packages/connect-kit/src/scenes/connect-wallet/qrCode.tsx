@@ -64,8 +64,8 @@ export function ConnectWithQRCode({
 								className={styles.qrCode}
 								size={288}
 								ecl="M"
-								dotColor="#000"
-								backgroundColor="#fff"
+								dotColor="rgb(var(--color-0_0_0))"
+								backgroundColor="rgb(var(--color-255_255_255))"
 								clearArea={true}
 							/>
 

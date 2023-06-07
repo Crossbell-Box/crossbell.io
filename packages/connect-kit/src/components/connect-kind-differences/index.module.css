@@ -69,7 +69,7 @@
 	padding: 0;
 	font-size: 14px;
 	font-weight: 400;
-	color: #999999;
+	color: rgb(var(--color-153_153_153));
 }
 
 .list li {
@@ -98,9 +98,9 @@
 	cursor: pointer;
 	border-radius: 16px;
 	border-style: none;
-	background-color: #f6f7f9;
+	background-color: rgb(var(--color-246_247_249));
 	font-size: 14px;
 	font-weight: 500;
-	color: #000;
+	color: rgb(var(--color-0_0_0));
 	font-family: "Roboto", sans-serif;
 }

@@ -11,7 +11,7 @@
 	right: 0;
 	bottom: 0;
 	border-radius: inherit;
-	background: #000;
+	background: rgb(var(--color-0_0_0));
 	opacity: 0;
 	transition: opacity 0.2s;
 	pointer-events: none;

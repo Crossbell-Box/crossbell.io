@@ -23,7 +23,7 @@ export function StorageWidget({ characterId }: StorageWidgetProps) {
 					label="Our storage is in beta, providing unlimited storage. When officially launched, storage may be limited and payment required."
 					withinPortal={true}
 					style={{
-						background: "rgba(94, 100, 115, 0.7)",
+						background: "rgba(var(--color-94_100_115), 0.7)",
 						backdropFilter: "blur(7.5px)",
 						borderRadius: "6px",
 						padding: "8px 16px",

@@ -60,7 +60,10 @@ export function MintCharacterFormNormal({
 
 					case "checking":
 						return (
-							<FiledTips className={styles.tips} color="#999">
+							<FiledTips
+								className={styles.tips}
+								color="rgb(var(--color-153_153_153))"
+							>
 								<Loading />
 								Checking
 							</FiledTips>
@@ -68,7 +71,10 @@ export function MintCharacterFormNormal({
 
 					case "generating":
 						return (
-							<FiledTips className={styles.tips} color="#999">
+							<FiledTips
+								className={styles.tips}
+								color="rgb(var(--color-153_153_153))"
+							>
 								<Loading />
 								Generating handle
 							</FiledTips>
@@ -76,7 +82,10 @@ export function MintCharacterFormNormal({
 
 					case "valid":
 						return (
-							<FiledTips className={styles.tips} color="#6AD991">
+							<FiledTips
+								className={styles.tips}
+								color="rgb(var(--color-106_217_145))"
+							>
 								Valid handle
 							</FiledTips>
 						);
@@ -85,7 +94,10 @@ export function MintCharacterFormNormal({
 					case "charsInvalid":
 					case "lengthInvalid":
 						return (
-							<FiledTips className={styles.tips} color="#D32F2F">
+							<FiledTips
+								className={styles.tips}
+								color="rgb(var(--color-211_47_47))"
+							>
 								{form.handleStatus.msg}
 							</FiledTips>
 						);

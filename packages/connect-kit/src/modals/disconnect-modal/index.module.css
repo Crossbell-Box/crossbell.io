@@ -21,13 +21,13 @@
 	font-size: 16px;
 	font-weight: 500;
 	font-family: "Roboto", sans-serif;
-	background: #f6f6f6;
-	color: #2e2e2e;
+	background: rgb(var(--color-246_246_246));
+	color: rgb(var(--color-46_46_46));
 }
 
 .disconnectBtn {
-	background-color: #e65040;
-	color: #fff;
+	background-color: rgb(var(--color-230_80_64));
+	color: rgb(var(--color-255_255_255));
 }
 
 .tips {
@@ -36,7 +36,7 @@
 	display: flex;
 	align-items: center;
 	justify-content: center;
-	color: #999;
+	color: rgb(var(--color-153_153_153));
 }
 
 .tipsIcon {

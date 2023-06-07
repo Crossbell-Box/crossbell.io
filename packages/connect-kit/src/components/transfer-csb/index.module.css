@@ -1,17 +1,17 @@
 .container {
-	color: #082135;
+	color: rgb(var(--color-8_33_53));
 	padding: 24px;
 }
 
 .bell {
 	font-size: 18px;
-	color: #f6c549;
+	color: rgb(var(--color-246_197_73));
 }
 
 .input {
 	font-weight: 500;
 	font-size: 22px;
-	color: #5b89f7;
+	color: rgb(var(--color-91_137_247));
 	padding: 0 60px 0 16px;
 }
 
@@ -40,7 +40,7 @@
 	border: none;
 	outline: none;
 	background-color: transparent;
-	color: #5b89f7;
+	color: rgb(var(--color-91_137_247));
 	cursor: pointer;
 	transition: color 0.2s;
 	padding: 6px;
@@ -52,11 +52,11 @@
 }
 
 .max:hover {
-	color: #466abf;
+	color: rgb(var(--color-70_106_191));
 }
 
 .max:active {
-	color: #365295;
+	color: rgb(var(--color-54_82_149));
 }
 
 .mainBtn {

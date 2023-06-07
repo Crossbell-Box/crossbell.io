@@ -40,7 +40,7 @@ export function Confirm({
 					>
 						<p className={styles.address}>{address}</p>
 
-						<FiledTips color="#6AD991">
+						<FiledTips color="rgb(var(--color-106_217_145))">
 							Once you upgrade, you'll no longer be able to access your email
 							account. But the xSync and operator sign will still work as usual.
 						</FiledTips>
@@ -50,7 +50,7 @@ export function Confirm({
 						title="Confirm $CSB"
 						icon={<LogoIcon className={styles.csbIcon} />}
 					>
-						<FiledTips color="#6AD991">
+						<FiledTips color="rgb(var(--color-106_217_145))">
 							$CSB in your email account cannot be transferred to your upgraded
 							account. Claim new $CSB later.
 						</FiledTips>

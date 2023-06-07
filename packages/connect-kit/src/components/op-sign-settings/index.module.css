@@ -5,7 +5,7 @@
 .tips {
 	font-weight: 400;
 	font-size: 14px;
-	color: #999;
+	color: rgb(var(--color-153_153_153));
 	text-align: center;
 	margin-bottom: 20px;
 }
@@ -20,7 +20,7 @@
 	display: flex;
 	align-items: center;
 	gap: 8px;
-	background: #f6f6f6;
+	background: rgb(var(--color-246_246_246));
 	padding: 20px;
 	border-radius: 12px;
 	font-size: 16px;
@@ -37,8 +37,8 @@
 
 .mainBtn {
 	height: 64px;
-	background-color: #f6f6f6;
-	color: #373737;
+	background-color: rgb(var(--color-246_246_246));
+	color: rgb(var(--color-55_55_55));
 	margin-top: 12px;
 	font-size: 16px;
 	font-weight: 500;

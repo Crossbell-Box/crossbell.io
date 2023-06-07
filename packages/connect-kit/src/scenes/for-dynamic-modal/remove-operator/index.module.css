@@ -8,7 +8,7 @@
 	margin: 0 0 12px;
 	font-weight: 400;
 	font-size: 14px;
-	color: #49454f;
+	color: rgb(var(--color-73_69_79));
 	text-align: center;
 }
 

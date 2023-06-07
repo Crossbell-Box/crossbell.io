@@ -5,10 +5,10 @@
 }
 
 .item {
-	--tint-color: #000000;
+	--tint-color: rgb(var(--color-0_0_0));
 
-	background: #f6f6f6;
-	color: #000;
+	background: rgb(var(--color-246_246_246));
+	color: rgb(var(--color-0_0_0));
 	cursor: pointer;
 	font-weight: 500;
 	font-size: 16px;

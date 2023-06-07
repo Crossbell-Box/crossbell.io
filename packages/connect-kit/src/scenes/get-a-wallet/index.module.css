@@ -46,8 +46,8 @@
 	content: "";
 	position: absolute;
 	inset: 0;
-	background: #fff;
-	background: radial-gradient(closest-side, transparent 18.75%, #fff 100%);
+	background: rgb(var(--color-255_255_255));
+	background: radial-gradient(closest-side, transparent 18.75%, rgb(var(--color-255_255_255)) 100%);
 	background-size: 100%;
 }
 
@@ -79,8 +79,8 @@
 	height: 58px;
 	width: 58px;
 	border-radius: 13.84px;
-	box-shadow: 0 0 0 1px rgba(0, 0, 0, 0.05), 0 2px 20px 0 rgba(0, 0, 0, 0.03);
-	background: #fff;
+	box-shadow: 0 0 0 1px rgba(var(--color-0_0_0), 0.05), 0 2px 20px 0 rgba(var(--color-0_0_0), 0.03);
+	background: rgb(var(--color-255_255_255));
 }
 
 .logoGraphic svg {

@@ -3,11 +3,11 @@
 	text-align: center;
 	font-size: 14px;
 	font-weight: 400;
-	color: #999999;
+	color: rgb(var(--color-153_153_153));
 }
 
 .tipsBtn {
-	color: #6ad991;
+	color: rgb(var(--color-106_217_145));
 }
 
 .item {
@@ -27,7 +27,7 @@
 .emailIcon {
 	height: 36px;
 	width: 36px;
-	color: #ffb74d;
+	color: rgb(var(--color-255_183_77));
 }
 
 .differenceBtn {

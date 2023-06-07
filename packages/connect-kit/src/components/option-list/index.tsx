@@ -6,23 +6,23 @@ import styles from "./index.module.css";
 
 const colorMap = {
 	gray: {
-		color: "#000",
-		background: "#F7F7F7",
+		color: "rgb(var(--color-0_0_0))",
+		background: "rgb(var(--color-247_247_247))",
 	},
 
 	green: {
-		color: "#fff",
-		background: "#6AD991",
+		color: "rgb(var(--color-255_255_255))",
+		background: "rgb(var(--color-106_217_145))",
 	},
 
 	red: {
-		color: "#fff",
-		background: "#E65040",
+		color: "rgb(var(--color-255_255_255))",
+		background: "rgb(var(--color-230_80_64))",
 	},
 
 	yellow: {
-		color: "#3C3C3C",
-		background: "#F6C549",
+		color: "rgb(var(--color-60_60_60))",
+		background: "rgb(var(--color-246_197_73))",
 	},
 };
 

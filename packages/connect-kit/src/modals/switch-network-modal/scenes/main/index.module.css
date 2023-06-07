@@ -23,7 +23,7 @@
 .cancelBtn {
 	border: none;
 	padding: 2px 8px;
-	color: rgba(0, 0, 0, 0.5);
+	color: rgba(var(--color-0_0_0), 0.5);
 	border-radius: 6px;
 	margin: 16px auto 0;
 }

@@ -3,7 +3,7 @@
 	padding-left: 8px;
 	font-size: 14px;
 	font-weight: 400;
-	color: #999;
+	color: rgb(var(--color-153_153_153));
 }
 
 .dot {
@@ -13,5 +13,5 @@
 	top: 0;
 	width: 3px;
 	border-radius: 9999px;
-	background-color: rgba(106, 217, 145, 1);
+	background-color: rgb(var(--color-106_217_145));
 }

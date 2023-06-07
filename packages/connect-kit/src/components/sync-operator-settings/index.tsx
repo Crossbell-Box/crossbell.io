@@ -32,7 +32,7 @@ export function SyncOperatorSettings() {
 				/>
 			</div>
 
-			<FiledTips color="#6AD991">
+			<FiledTips color="rgb(var(--color-106_217_145))">
 				{"If you turn this on, the following apps: "}
 				<a className={styles.link} href="https://xsync.app" target="_blank">
 					xSync

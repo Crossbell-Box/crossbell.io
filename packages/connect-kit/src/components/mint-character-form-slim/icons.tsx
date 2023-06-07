@@ -11,7 +11,7 @@ export function NameIcon() {
 		>
 			<path
 				d="M12 3C13.656 3 15 4.343 15 6C15 7.657 13.656 9 12 9C10.343 9 9 7.657 9 6C9 4.343 10.343 3 12 3ZM18 14V13C18 11 14 10 12 10C10 10 6 11 6 13V14H1V22H23V14H18Z"
-				fill="#FFB74D"
+				fill="rgb(var(--color-255_183_77))"
 			/>
 			<path
 				opacity="0.6"

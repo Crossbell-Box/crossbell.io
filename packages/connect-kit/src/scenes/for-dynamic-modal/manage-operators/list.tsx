@@ -71,13 +71,25 @@ export function List({ characterId }: ListProps) {
 function getTags(characterOperator: CharacterOperatorEntity): ItemTag[] | null {
 	if (isAddressEqual(characterOperator.operator, X_SYNC_OPERATOR_ADDRESS)) {
 		return [
-			{ title: "xSync", style: { background: "#5B89F7", color: "#fff" } },
+			{
+				title: "xSync",
+				style: {
+					background: "rgb(var(--color-91_137_247))",
+					color: "rgb(var(--color-255_255_255))",
+				},
+			},
 		];
 	}
 
 	if (isAddressEqual(characterOperator.operator, OP_SIGN_OPERATOR_ADDRESS)) {
 		return [
-			{ title: "Op Sign", style: { background: "#6AD991", color: "#fff" } },
+			{
+				title: "Op Sign",
+				style: {
+					background: "rgb(var(--color-106_217_145))",
+					color: "rgb(var(--color-255_255_255))",
+				},
+			},
 		];
 	}
 
@@ -87,13 +99,22 @@ function getTags(characterOperator: CharacterOperatorEntity): ItemTag[] | null {
 		return [
 			{
 				title: "Newbie Villa",
-				style: { background: "#F6C549", color: "#fff" },
+				style: {
+					background: "rgb(var(--color-246_197_73))",
+					color: "rgb(var(--color-255_255_255))",
+				},
 			},
 		];
 	}
 
 	return [
-		{ title: "Unknown", style: { background: "#A9AAAB", color: "#fff" } },
+		{
+			title: "Unknown",
+			style: {
+				background: "rgb(var(--color-169_170_171))",
+				color: "rgb(var(--color-255_255_255))",
+			},
+		},
 	];
 }
 

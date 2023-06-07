@@ -20,15 +20,15 @@
 .csbIcon {
 	width: 20px;
 	height: 20px;
-	color: #f6c549;
+	color: rgb(var(--color-246_197_73));
 }
 
 .address {
 	margin: 12px 0;
 	padding: 10px 16px;
 	font-size: 14px;
-	background: rgba(28, 27, 31, 0.04);
-	color: rgba(28, 27, 31, 0.38);
+	background: rgba(var(--color-28_27_31), 0.04);
+	color: rgba(var(--color-28_27_31), 0.38);
 	border-radius: 12px;
 	word-break: break-all;
 }
@@ -41,8 +41,8 @@
 }
 
 .actions button:first-of-type {
-	background: #f6f7f9;
-	color: #000;
+	background: rgb(var(--color-246_247_249));
+	color: rgb(var(--color-0_0_0));
 }
 
 .actions button {

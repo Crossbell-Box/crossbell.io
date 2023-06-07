@@ -12,8 +12,8 @@
 }
 
 .avatar img {
-	border: 3px solid #fff;
-	background: #fff;
+	border: 3px solid rgb(var(--color-255_255_255));
+	background: rgb(var(--color-255_255_255));
 }
 
 .main {
@@ -31,7 +31,7 @@
 	align-items: center;
 	gap: 6px;
 	font-size: 14px;
-	color: #999;
+	color: rgb(var(--color-153_153_153));
 	margin-top: 18px;
 }
 
@@ -41,7 +41,7 @@
 	width: 3px;
 	height: 20px;
 	border-radius: 3px;
-	background: #9688f2;
+	background: rgb(var(--color-150_136_242));
 }
 
 .characterName {
@@ -64,7 +64,7 @@
 	gap: 4px;
 	font-size: 14px;
 	font-weight: 400;
-	color: #999;
+	color: rgb(var(--color-153_153_153));
 }
 
 .mira svg {
@@ -73,7 +73,7 @@
 
 .mira strong {
 	font-weight: 500;
-	color: #000;
+	color: rgb(var(--color-0_0_0));
 }
 
 .bottomTipsContainer {
@@ -100,7 +100,7 @@
 	width: 72px;
 	height: 72px;
 	border-radius: 72px;
-	background: rgba(255, 255, 255, 0.9);
+	background: rgba(var(--color-255_255_255), 0.9);
 }
 
 .loadingOverlay {
@@ -117,8 +117,8 @@
 	align-items: center;
 	justify-content: center;
 	flex-direction: column;
-	background: rgba(255, 255, 255, 0.9);
-	color: rgba(0, 0, 0, 0.8);
+	background: rgba(var(--color-255_255_255), 0.9);
+	color: rgba(var(--color-0_0_0), 0.8);
 	border-radius: 28px;
 	font-size: 32px;
 }

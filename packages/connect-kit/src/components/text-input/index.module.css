@@ -8,15 +8,15 @@
 	width: 100%;
 	border-radius: 12px;
 	border-style: none;
-	background-color: rgba(28, 27, 31, 0.04);
+	background-color: rgba(var(--color-28_27_31), 0.04);
 	padding: 0 12px;
 	outline: none;
 	transition: color 0.2s;
-	color: #2e2e2e;
+	color: rgb(var(--color-46_46_46));
 }
 
 .input:focus {
-	background-color: rgba(28, 27, 31, 0.06);
+	background-color: rgba(var(--color-28_27_31), 0.06);
 }
 
 .rightSection {

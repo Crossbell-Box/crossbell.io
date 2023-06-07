@@ -26,6 +26,7 @@
 			"import": "./dist/index.mjs",
 			"require": "./dist/index.js"
 		},
+		"./colors.css": "./colors.css",
 		"./package.json": "./package.json",
 		"./index.css": "./dist/index.css"
 	},

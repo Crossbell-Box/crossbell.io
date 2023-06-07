@@ -10,7 +10,7 @@
 	gap: 8px;
 	font-size: 22px;
 	font-weight: 500;
-	color: #373737;
+	color: rgb(var(--color-55_55_55));
 }
 
 .headerTitle svg {
@@ -23,12 +23,12 @@
 }
 
 .lockIcon {
-	color: #78909c;
+	color: rgb(var(--color-120_144_156));
 }
 
 .deleteCharacter {
 	background: transparent;
-	color: #e65040;
+	color: rgb(var(--color-230_80_64));
 	font-family: inherit;
 	font-weight: 500;
 	font-size: 16px;

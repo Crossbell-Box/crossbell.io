@@ -37,7 +37,9 @@ export function InputEmailToConnect() {
 					icon={
 						<EmailIcon
 							style={{
-								color: emailConnectStore.emailErrorMsg ? "#E65040" : "#FFB74D",
+								color: emailConnectStore.emailErrorMsg
+									? "rgb(var(--color-230_80_64))"
+									: "rgb(var(--color-255_183_77))",
 							}}
 						/>
 					}

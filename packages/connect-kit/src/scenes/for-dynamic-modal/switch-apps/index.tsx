@@ -19,25 +19,25 @@ const defaultApps: XSettingsConfig["otherApps"] = [
 		title: "xFeed",
 		icon: <XFeedLogo />,
 		url: "https://crossbell.io/feed",
-		color: "#F6C549",
+		color: "rgb(var(--color-246_197_73))",
 	},
 	{
 		title: "xSync",
 		icon: <XSyncLogo />,
 		url: "https://xsync.app",
-		color: "#5B89F7",
+		color: "rgb(var(--color-91_137_247))",
 	},
 	{
 		title: "xChar",
 		icon: <XCharLogo />,
 		url: "https://xchar.app",
-		color: "#6AD991",
+		color: "rgb(var(--color-106_217_145))",
 	},
 	{
 		title: "xLog",
 		icon: <XLogLogo />,
 		url: "https://xlog.app",
-		color: "#9688F2",
+		color: "rgb(var(--color-150_136_242))",
 	},
 ];
 

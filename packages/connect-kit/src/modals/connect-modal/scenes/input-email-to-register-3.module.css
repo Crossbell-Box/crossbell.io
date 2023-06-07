@@ -21,14 +21,14 @@
 }
 
 .emailIcon {
-	color: #ffb74d;
+	color: rgb(var(--color-255_183_77));
 }
 
 .checkIcon {
 	position: absolute;
 	bottom: -10px;
 	right: -25px;
-	color: #6ad991;
+	color: rgb(var(--color-106_217_145));
 }
 
 .tipsContent {
@@ -44,7 +44,7 @@
 }
 
 .memberIcon {
-	color: #ffb74d;
+	color: rgb(var(--color-255_183_77));
 }
 
 .nameField {

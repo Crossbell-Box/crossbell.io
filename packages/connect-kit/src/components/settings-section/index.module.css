@@ -4,12 +4,12 @@
 .title {
 	font-weight: 400;
 	font-size: 14px;
-	color: #999;
+	color: rgb(var(--color-153_153_153));
 	margin: 0 0 6px 20px;
 }
 
 .section {
-	background: #f6f6f6;
+	background: rgb(var(--color-246_246_246));
 	border-radius: 12px;
 	overflow: hidden;
 }
@@ -31,7 +31,7 @@
 	right: 0;
 	width: 100%;
 	height: 1px;
-	background: #e1e8f7;
+	background: rgb(var(--color-225_232_247));
 }
 
 .itemIcon:not(:empty) {
@@ -58,18 +58,18 @@
 .itemTitle {
 	font-weight: 500;
 	font-size: 16px;
-	color: #49454f;
+	color: rgb(var(--color-73_69_79));
 }
 
 .itemDescription {
 	font-weight: 500;
 	font-size: 12px;
-	color: #999;
+	color: rgb(var(--color-153_153_153));
 }
 
 .actionIcon {
 	flex: 0 0 auto;
 	font-size: 32px;
 	transform: rotate(180deg);
-	color: #999;
+	color: rgb(var(--color-153_153_153));
 }

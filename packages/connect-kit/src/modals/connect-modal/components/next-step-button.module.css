@@ -11,12 +11,12 @@
 	transition-duration: 150ms;
 	font-family: "Roboto", sans-serif;
 	cursor: pointer;
-	background-color: #6ad991;
-	color: #fff;
+	background-color: rgb(var(--color-106_217_145));
+	color: rgb(var(--color-255_255_255));
 }
 
 .btn.disabled {
 	cursor: not-allowed;
-	background-color: #f6f7f9;
-	color: #000;
+	background-color: rgb(var(--color-246_247_249));
+	color: rgb(var(--color-0_0_0));
 }

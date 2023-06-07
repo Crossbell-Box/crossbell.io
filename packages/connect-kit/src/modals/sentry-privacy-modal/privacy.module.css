@@ -1,8 +1,8 @@
 .container {
 	width: 360px;
-	background-color: #fff;
+	background-color: rgb(var(--color-255_255_255));
 	border-radius: 28px;
-	border: 1px solid rgba(0, 0, 0, 0.1);
+	border: 1px solid rgba(var(--color-0_0_0), 0.1);
 	box-sizing: content-box;
 	overflow: hidden;
 	position: relative;
@@ -14,12 +14,12 @@
 
 .tips {
 	font-size: 14px;
-	color: #999999;
+	color: rgb(var(--color-153_153_153));
 	margin: 10px 0 22px;
 }
 
 .tips a {
-	color: #f6c549;
+	color: rgb(var(--color-246_197_73));
 }
 
 .tips a:hover {

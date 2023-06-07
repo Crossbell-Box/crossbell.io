@@ -105,7 +105,7 @@ export function List({
 						>
 							<path
 								d="M10.9778 24V13.0222H0V10.9778H10.9778V0H13.0222V10.9778H24V13.0222H13.0222V24H10.9778Z"
-								fill="#979DA4"
+								fill="rgb(var(--color-151_157_164))"
 							/>
 						</svg>
 					</OptionListItem>

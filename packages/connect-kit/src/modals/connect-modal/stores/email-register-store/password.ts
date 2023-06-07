@@ -20,13 +20,25 @@ export interface PasswordSlice {
 }
 
 const PasswordMsg = {
-	empty: { value: "", color: "#FFB74D" },
-	invalidPassword: { value: " * 8 or more characters", color: "#E65040" },
-	weakPassword: { value: " * Weak Password", color: "#E65040" },
-	moderatePassword: { value: " * Moderate Password", color: "#FFB74D" },
-	strongPassword: { value: " * Strong Password", color: "#6AD991" },
-	noMatch: { value: " * Didn't Match", color: "#E65040" },
-	match: { value: " * Match", color: "#6AD991" },
+	empty: { value: "", color: "rgb(var(--color-255_183_77))" },
+	invalidPassword: {
+		value: " * 8 or more characters",
+		color: "rgb(var(--color-230_80_64))",
+	},
+	weakPassword: {
+		value: " * Weak Password",
+		color: "rgb(var(--color-230_80_64))",
+	},
+	moderatePassword: {
+		value: " * Moderate Password",
+		color: "rgb(var(--color-255_183_77))",
+	},
+	strongPassword: {
+		value: " * Strong Password",
+		color: "rgb(var(--color-106_217_145))",
+	},
+	noMatch: { value: " * Didn't Match", color: "rgb(var(--color-230_80_64))" },
+	match: { value: " * Match", color: "rgb(var(--color-106_217_145))" },
 };
 
 export const createPasswordSlice: SliceFn<PasswordSlice> = (set, get) => ({

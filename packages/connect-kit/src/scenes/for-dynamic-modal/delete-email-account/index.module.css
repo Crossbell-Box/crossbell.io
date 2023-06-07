@@ -1,5 +1,5 @@
 .tips {
-	color: #49454f;
+	color: rgb(var(--color-73_69_79));
 	font-weight: 400;
 	font-size: 14px;
 	text-align: center;
@@ -25,7 +25,7 @@
 	left: 0;
 	right: 0;
 	bottom: 0;
-	background: #000;
+	background: rgb(var(--color-0_0_0));
 	z-index: -1;
 	transform: translateX(-100%);
 	transition: 3s transform linear;

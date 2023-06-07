@@ -64,7 +64,7 @@ export function TransferCSB({ toAddress, onSuccess }: TransferCSBProps) {
 						}}
 					/>
 
-					<FiledTips color="#E65040">
+					<FiledTips color="rgb(var(--color-230_80_64))">
 						{errorMsg || (
 							<>
 								<div>Gas Fee: {formatUnits(minGasFee, 18)}</div>

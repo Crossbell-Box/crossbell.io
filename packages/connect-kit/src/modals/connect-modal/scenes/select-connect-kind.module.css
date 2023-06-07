@@ -24,7 +24,7 @@
 .emailIcon {
 	height: 36px;
 	width: 36px;
-	color: #ffb74d;
+	color: rgb(var(--color-255_183_77));
 }
 
 .differenceBtn {
@@ -36,5 +36,5 @@
 }
 
 .circleHelpIcon {
-	color: #868e96;
+	color: rgb(var(--color-134_142_150));
 }

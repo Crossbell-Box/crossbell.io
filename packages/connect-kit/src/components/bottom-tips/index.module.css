@@ -5,7 +5,7 @@
 	gap: 4px;
 	font-weight: 400;
 	font-size: 14px;
-	color: #999;
+	color: rgb(var(--color-153_153_153));
 	height: 42px;
 	width: 100%;
 }

@@ -36,5 +36,5 @@
 	text-align: center;
 	font-size: 14px;
 	font-weight: 400;
-	color: #49454f;
+	color: rgb(var(--color-73_69_79));
 }

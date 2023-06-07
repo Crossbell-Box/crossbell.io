@@ -1,5 +1,5 @@
 .container {
-	color: #082135;
+	color: rgb(var(--color-8_33_53));
 }
 
 @media (min-width: 768px) {
@@ -13,7 +13,7 @@
 }
 
 .section:not(:last-child) {
-	border-bottom: 8px solid #f6f7f9;
+	border-bottom: 8px solid rgb(var(--color-246_247_249));
 }
 
 .address {
@@ -23,7 +23,7 @@
 }
 
 .balance {
-	color: #082135;
+	color: rgb(var(--color-8_33_53));
 	font-weight: 500;
 	font-size: 22px;
 	display: flex;
@@ -32,7 +32,7 @@
 }
 
 .balance svg {
-	color: #f6c549;
+	color: rgb(var(--color-246_197_73));
 	font-size: 18px;
 	margin-right: 6px;
 }
@@ -58,7 +58,7 @@
 }
 
 .operatorAccount svg {
-	color: #f6c549;
+	color: rgb(var(--color-246_197_73));
 	font-size: 14px;
 	margin: 0 8px 0 auto;
 }

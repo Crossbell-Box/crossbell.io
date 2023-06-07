@@ -1,4 +1,4 @@
 .tipsBtn,
 .tipsBtn:hover {
-	color: #6ad991;
+	color: rgb(var(--color-106_217_145));
 }

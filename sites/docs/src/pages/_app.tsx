@@ -1,4 +1,5 @@
 import "../styles/globals.css";
+import "@crossbell/connect-kit/colors.css";
 
 import type { AppProps } from "next/app";
 import { WagmiConfig } from "wagmi";

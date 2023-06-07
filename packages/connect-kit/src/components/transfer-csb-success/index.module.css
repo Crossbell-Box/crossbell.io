@@ -1,6 +1,6 @@
 .container {
 	padding: 0 24px 24px;
-	color: #49454f;
+	color: rgb(var(--color-73_69_79));
 }
 
 .img {

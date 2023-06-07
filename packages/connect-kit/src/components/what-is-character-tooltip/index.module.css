@@ -5,7 +5,7 @@
 }
 
 .tooltip {
-	background-color: #50c07b;
+	background-color: rgb(var(--color-80_192_123));
 }
 
 .tooltipLabel {
@@ -18,7 +18,7 @@
 	flex-direction: column;
 	align-items: center;
 	border-radius: 12px;
-	background-color: #000000;
+	background-color: rgb(var(--color-0_0_0));
 }
 
 .crossbellIcon {

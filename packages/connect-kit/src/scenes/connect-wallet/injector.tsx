@@ -123,8 +123,12 @@ function Loading(props: React.SVGAttributes<SVGSVGElement>) {
 					y2="100"
 					gradientUnits="userSpaceOnUse"
 				>
-					<stop stopColor="#1A88F8"></stop>
-					<stop offset="1" stopColor="#1A88F8" stopOpacity="0"></stop>
+					<stop stopColor="rgb(var(--color-26_136_248))"></stop>
+					<stop
+						offset="1"
+						stopColor="rgb(var(--color-26_136_248))"
+						stopOpacity="0"
+					></stop>
 				</linearGradient>
 			</defs>
 		</svg>

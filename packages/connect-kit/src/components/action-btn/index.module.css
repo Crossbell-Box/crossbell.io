@@ -24,21 +24,21 @@
 }
 
 .ghost {
-	color: #999;
+	color: rgb(var(--color-153_153_153));
 	background: transparent;
 }
 
 .gray {
-	color: #757f8d;
-	background: #fafafa;
+	color: rgb(var(--color-117_127_141));
+	background: rgb(var(--color-250_250_250));
 }
 
 .yellow {
-	color: #fff;
-	background: #f6c549;
+	color: rgb(var(--color-255_255_255));
+	background: rgb(var(--color-246_197_73));
 }
 
 .green {
-	color: #fff;
-	background: #6ad991;
+	color: rgb(var(--color-255_255_255));
+	background: rgb(var(--color-106_217_145));
 }

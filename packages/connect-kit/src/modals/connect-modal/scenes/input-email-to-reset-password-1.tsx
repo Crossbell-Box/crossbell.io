@@ -37,7 +37,11 @@ export function InputEmailToResetPassword1() {
 					title="Email Address"
 					icon={
 						<EmailIcon
-							style={{ color: store.emailErrorMsg ? "#E65040" : "#FFB74D" }}
+							style={{
+								color: store.emailErrorMsg
+									? "rgb(var(--color-230_80_64))"
+									: "rgb(var(--color-255_183_77))",
+							}}
 						/>
 					}
 					className={classNames(styles.field, styles.emailField)}
@@ -84,7 +88,11 @@ export function InputEmailToResetPassword1() {
 					title="Verification Code"
 					icon={
 						<PasswordIcon
-							style={{ color: store.codeErrorMsg ? "#E65040" : "#FFB74D" }}
+							style={{
+								color: store.codeErrorMsg
+									? "rgb(var(--color-230_80_64))"
+									: "rgb(var(--color-255_183_77))",
+							}}
 						/>
 					}
 					className={styles.field}

@@ -9,7 +9,7 @@
 }
 
 .name {
-	color: #082135;
+	color: rgb(var(--color-8_33_53));
 	font-weight: 500;
 	font-size: 14px;
 }

@@ -1,6 +1,6 @@
 .walletConnect {
-	background-color: #3b99fc;
-	color: #fff;
+	background-color: rgb(var(--color-59_153_252));
+	color: rgb(var(--color-255_255_255));
 }
 
 .row {

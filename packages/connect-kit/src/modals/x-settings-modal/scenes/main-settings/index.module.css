@@ -10,7 +10,7 @@
 	gap: 8px;
 	font-size: 22px;
 	font-weight: 500;
-	color: #373737;
+	color: rgb(var(--color-55_55_55));
 }
 
 .headerTitle svg {
@@ -18,7 +18,7 @@
 }
 
 .gearIcon {
-	color: #464646;
+	color: rgb(var(--color-70_70_70));
 }
 
 .icon {
@@ -27,7 +27,7 @@
 }
 
 .lockIcon {
-	color: #78909c;
+	color: rgb(var(--color-120_144_156));
 }
 
 .myCharacter {
@@ -45,7 +45,7 @@
 	overflow: hidden;
 	text-overflow: ellipsis;
 	white-space: nowrap;
-	color: #a9aaac;
+	color: rgb(var(--color-169_170_172));
 	font-size: 12px;
 	line-height: 16px;
 	margin-left: auto;

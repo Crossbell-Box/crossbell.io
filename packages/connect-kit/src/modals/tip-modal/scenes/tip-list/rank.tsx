@@ -15,8 +15,16 @@ export function Rank({ rank }: RankProps) {
 }
 
 function Flower({ rank, className }: { rank: number; className: string }) {
-	const color1 = ["#f24c64", "#718AC8", "#E4A080"][rank - 1];
-	const color2 = ["#f68293", "#9CADD9", "#ECBDA6"][rank - 1];
+	const color1 = [
+		"rgb(var(--color-242_76_100))",
+		"rgb(var(--color-113_138_200))",
+		"rgb(var(--color-228_160_128))",
+	][rank - 1];
+	const color2 = [
+		"rgb(var(--color-246_130_147))",
+		"rgb(var(--color-156_173_217))",
+		"rgb(var(--color-236_189_166))",
+	][rank - 1];
 
 	return (
 		<svg
@@ -37,15 +45,15 @@ function Flower({ rank, className }: { rank: number; className: string }) {
 			/>
 			<path
 				d="m27.825 27.1058s-3.18 3.18-5.31 1.065c-1.71-1.7115-2.805-4.0215-3.45-5.805 1.275-.3 2.325-1.14 2.925-2.2815 1.4685.8265 4.38 2.22 7.38 2.3865 1.035 2.055-1.545 4.635-1.545 4.635zm.39-18.64502s-3.1785-3.18-5.31-1.065c-.21.21-.4185.435-.5985.66-.435 2.47502-1.5315 4.72502-2.205 5.95502 1.3035.69 2.2335 2.01 2.37 3.54 1.815-.57 4.7385-1.74 6.7935-3.795 2.13-2.115-1.05-5.29502-1.05-5.29502zm-15.96-2.565c-2.115-2.115-5.295 1.065-5.295 1.065s-3.17999 3.18002-1.065 5.29502c2.55001 2.55 6.465 3.735 7.92 4.11.45-1.17 1.38-2.1 2.55-2.55-.375-1.455-1.56-5.37002-4.11-7.92002z"
-				fill="#fff"
+				fill="rgb(var(--color-255_255_255))"
 				opacity=".3"
 			/>
 			<path
 				d="m18 22.5c2.4853 0 4.5-2.0147 4.5-4.5s-2.0147-4.5-4.5-4.5-4.5 2.0147-4.5 4.5 2.0147 4.5 4.5 4.5z"
-				fill="#f6c549"
+				fill="rgb(var(--color-246_197_73))"
 			/>
 			<text
-				fill="#fff"
+				fill="rgb(var(--color-255_255_255))"
 				fontFamily="Roboto, sans-serif"
 				fontSize="16"
 				fontWeight="bold"
