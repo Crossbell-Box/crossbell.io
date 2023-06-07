@@ -17,8 +17,8 @@ import commonStyles from "../../styles.module.css";
 import { TextInput, ActionBtn } from "../../components";
 import {
 	SCOPE_KEY_ACCOUNT_BALANCE,
+	useAccountState,
 	useClaimCSBStatus,
-	useConnectedAccount,
 	useWalletClaimCsb,
 	WalletAccount,
 } from "@crossbell/react-account";
@@ -48,7 +48,7 @@ export function WalletClaimCSB({
 	onSkip,
 	claimBtnText,
 }: WalletClaimCSBProps) {
-	const account = useConnectedAccount("wallet");
+	const account = useAccountState((s) => s.wallet);
 	const reCaptcha = useReCAPTCHA();
 	const [tweetLink, setTweetLink] = React.useState("");
 	const {
@@ -207,7 +207,7 @@ function DiscordPendingOverlay({
 	onCancel: () => void;
 	onSuccess: () => void;
 }) {
-	const account = useConnectedAccount("wallet");
+	const account = useAccountState((s) => s.wallet);
 	const address = account?.address;
 	const { refetch: refreshBalance } = useBalance({
 		address: address as `0x${string}` | undefined,
