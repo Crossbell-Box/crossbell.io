@@ -27,6 +27,7 @@
 		"type": "separator",
 		"title": "Others"
 	},
+	"tip-modal": "Tip",
 	"csb-detail-modal": "CSB Detail",
 	"sentry-privacy-modal": "Sentry Privacy"
 }

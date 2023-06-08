@@ -1,0 +1,45 @@
+import { OptionTable } from "@/components";
+import { TipModalExample } from "@/examples";
+
+# Tip Modal
+
+<div className="my-8">
+	<TipModalExample />
+</div>
+
+## Usage
+
+```tsx copy
+import { useIsConnected, useTipModal } from "@crossbell/connect-kit";
+
+const characterId = 10;
+const noteId = 291;
+
+export function TipBtn() {
+	const isConnected = useIsConnected();
+	const { isActive, show, hide } = useTipModal();
+
+	if (!isConnected) return null;
+
+	return (
+		<>
+			<button onClick={() => show({ noteId, characterId })}>Tip Note</button>
+			<button onClick={() => show({ characterId })}>Tip Character</button>
+		</>
+	);
+}
+```
+
+## Return type
+
+<OptionTable
+	options={[
+		["isActive", "boolean", "Indicates whether the modal is activated or not"],
+		[
+			"show",
+			"(params: { noteId: number, characterId: number }) => void",
+			"Show modal",
+		],
+		["hide", "() => void", "Hide modal"],
+	]}
+/>
