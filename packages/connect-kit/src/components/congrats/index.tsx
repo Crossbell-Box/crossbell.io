@@ -87,13 +87,7 @@ function showConfetti() {
 		origin: { x: 0, y: 1 },
 		zIndex: 300,
 		gravity: 1.5,
-		colors: [
-			"rgb(var(--color-106_217_145))",
-			"rgb(var(--color-246_197_73))",
-			"rgb(var(--color-230_80_64))",
-			"rgb(var(--color-91_137_247))",
-			"rgb(var(--color-150_136_242))",
-		],
+		colors: ["#6AD991", "#F6C549", "#E65040", "#5B89F7", "#9688F2"],
 	};
 
 	(function frame() {
