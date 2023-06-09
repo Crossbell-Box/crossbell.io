@@ -10,7 +10,7 @@ export const linksGroup: {
 		list: [
 			{ text: "xSync", href: "https://xsync.app/" },
 			{ text: "Unidata", href: "https://unidata.app/" },
-			{ text: "xlog", href: "https://xlog.app/" },
+			{ text: "xLog", href: "https://xlog.app/" },
 		],
 	},
 	{
