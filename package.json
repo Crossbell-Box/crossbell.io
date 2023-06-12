@@ -105,7 +105,7 @@
 		"eslint-plugin-react": "^7.32.2",
 		"format-package": "^7.0.0",
 		"husky": "^8.0.3",
-		"lerna": "^7.0.0",
+		"lerna": "^6.6.2",
 		"lint-staged": "^13.2.2",
 		"msw": "^1.2.2",
 		"next-transpile-modules": "^10.0.0",
