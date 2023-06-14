@@ -11,22 +11,27 @@ import { useAccountState } from "./account-state";
 import { createAccountTypeBasedMutationHooks } from "./account-type-based-hooks";
 
 type EditFn = (draft: Draft<CharacterMetadata>) => void;
-type Variables = { edit: EditFn; characterId: number };
+type Variables =
+	| { edit: EditFn; characterId: number }
+	| { metadata: CharacterMetadata; characterId: number };
 
 export const useUpdateCharacterMetadata = createAccountTypeBasedMutationHooks<
 	void,
 	Variables
 >({ actionDesc: "setting character metadata", withParams: false }, () => {
-	async function prepareData({ edit, characterId }: Variables) {
+	async function prepareData(variable: Variables) {
 		// Make sure character metadata is up-to-date.
 		await useAccountState.getState().refresh();
 		const account = useAccountState.getState().computed.account;
-		const character = await indexer.character.get(characterId);
+		const character = await indexer.character.get(variable.characterId);
 
 		if (!account || !character) return null;
 
 		const oldMetadata = character.metadata?.content ?? {};
-		const newMetadata = produce(oldMetadata, edit);
+		const newMetadata =
+			"metadata" in variable
+				? variable.metadata
+				: produce(oldMetadata, variable.edit);
 
 		// Skips redundant requests and just return success status directly.
 		if (oldMetadata === newMetadata) return null;
