@@ -33,6 +33,6 @@
 		"dayjs": "^1.11.8",
 		"lodash.compact": "^3",
 		"lru-cache": "9.1.2",
-		"viem": "^1.0.5"
+		"viem": "^1.0.7"
 	}
 }
