@@ -12,21 +12,29 @@ import { siweUpdateNote, updateNote } from "../apis";
 import { createAccountTypeBasedMutationHooks } from "./account-type-based-hooks";
 
 type EditFn = (draft: Draft<NoteMetadata>) => void;
-type Variables = {
-	edit: EditFn;
-	note: Pick<NoteEntity, "characterId" | "noteId">;
-};
+type Variables =
+	| {
+			edit: EditFn;
+			note: Pick<NoteEntity, "characterId" | "noteId">;
+	  }
+	| {
+			metadata: NoteMetadata;
+			note: Pick<NoteEntity, "characterId" | "noteId">;
+	  };
 
-const getMetadata = async ({
-	note: { characterId, noteId },
-	edit,
-}: Variables) => {
-	const note = await indexer.note.get(characterId, noteId);
+const getMetadata = async (variables: Variables) => {
+	const note = await indexer.note.get(
+		variables.note.characterId,
+		variables.note.noteId
+	);
 	const oldMetadata = note?.metadata?.content;
 
 	if (!oldMetadata) return null;
 
-	const newMetadata = produce(oldMetadata, edit);
+	const newMetadata =
+		"metadata" in variables
+			? variables.metadata
+			: produce(oldMetadata, variables.edit);
 
 	// Skips redundant requests and just return success status directly.
 	return oldMetadata === newMetadata ? null : newMetadata;
@@ -37,7 +45,7 @@ export const useUpdateNote = createAccountTypeBasedMutationHooks<
 	Variables
 >(
 	{
-		actionDesc: "",
+		actionDesc: "useUpdateNote",
 		withParams: false,
 	},
 	() => {
