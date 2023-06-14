@@ -267,7 +267,7 @@ export async function putNote({
 	linkItemType?: LinkItemType;
 	linkItem?: LinkItemNote;
 	locked?: boolean;
-}): Promise<{ transactionHash: string; data: string }> {
+}): Promise<{ transactionHash: string; data: { noteId: number } }> {
 	return request(`/newbie/contract/notes`, {
 		method: "PUT",
 		token,

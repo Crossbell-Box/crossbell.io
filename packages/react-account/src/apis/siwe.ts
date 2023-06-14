@@ -175,7 +175,10 @@ export async function siwePutNote({
 	linkItemType?: LinkItemType;
 	linkItem?: LinkItemNote;
 	locked?: boolean;
-}): Promise<{ transactionHash: string; data: string }> {
+}): Promise<{
+	transactionHash: string;
+	data: { noteId: number };
+}> {
 	return request(`/siwe/contract/characters/${characterId}/notes`, {
 		method: "PUT",
 		token: siwe.token,

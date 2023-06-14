@@ -7,29 +7,51 @@ import { createAccountTypeBasedMutationHooks } from "./account-type-based-hooks"
 
 export const usePostNote = createAccountTypeBasedMutationHooks<
 	void,
-	{ metadata: NoteMetadata }
+	{ metadata: NoteMetadata; characterId?: number },
+	{ noteId: bigint }
 >(
 	{
-		actionDesc: "",
+		actionDesc: "usePostNote",
 		withParams: false,
 	},
 	() => ({
-		async email({ metadata }, { account }) {
-			await putNote({ token: account.token, metadata });
+		async email({ metadata, characterId }, { account }) {
+			if (characterId && account.characterId !== characterId) {
+				throw new Error(
+					"Email user cannot use any characterId other than their own."
+				);
+			}
+
+			const { data } = await putNote({ token: account.token, metadata });
+
+			return { noteId: BigInt(data.noteId) };
 		},
 
 		wallet: {
 			supportOPSign: true,
 
-			async action({ metadata }, { account, siwe, contract }) {
-				const characterId = account?.characterId;
+			async action(
+				{ metadata, characterId: specifiedCharacterId },
+				{ account, siwe, contract }
+			) {
+				const characterId = specifiedCharacterId ?? account.characterId!;
 
-				if (characterId) {
-					if (siwe) {
-						await siwePutNote({ siwe, characterId, metadata });
-					} else {
-						await contract.note.post({ characterId, metadataOrUri: metadata });
-					}
+				const canUseSiwe = specifiedCharacterId
+					? // TODO: Check if the specified characterId belongs to the current wallet, not just the one currently in use.
+					  specifiedCharacterId === account?.characterId
+					: true;
+
+				if (siwe && canUseSiwe) {
+					const { data } = await siwePutNote({ siwe, characterId, metadata });
+
+					return { noteId: BigInt(data.noteId) };
+				} else {
+					const { data } = await contract.note.post({
+						characterId,
+						metadataOrUri: metadata,
+					});
+
+					return { noteId: data.noteId };
 				}
 			},
 		},
