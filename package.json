@@ -20,7 +20,7 @@
 		"release:prod": "lerna version",
 		"test": "turbo run test"
 	},
-	"packageManager": "pnpm@8.6.0",
+	"packageManager": "pnpm@8.6.2",
 	"pnpm": {
 		"patchedDependencies": {
 			"@coinbase/wallet-sdk@3.6.6": "patches/@coinbase__wallet-sdk@3.6.6.patch"
