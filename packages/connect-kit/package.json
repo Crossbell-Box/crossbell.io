@@ -1,6 +1,6 @@
 {
 	"name": "@crossbell/connect-kit",
-	"version": "1.4.1",
+	"version": "1.4.2",
 	"license": "MIT",
 	"repository": "github:Crossbell-Box/crossbell-universe",
 	"bugs": "https://github.com/Crossbell-Box/crossbell-universe/issues",
@@ -34,7 +34,7 @@
 	"dependencies": {
 		"@crossbell/contract": "^1.4.1",
 		"@crossbell/indexer": "^1.4.1",
-		"@crossbell/react-account": "^1.4.1",
+		"@crossbell/react-account": "^1.4.2",
 		"@crossbell/ui": "^1.4.1",
 		"@crossbell/util-ethers": "^1.4.0",
 		"@crossbell/util-hooks": "^1.4.0",
