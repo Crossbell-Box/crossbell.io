@@ -26,19 +26,19 @@ jobs:
         with:
           run_install: false
 
-      - name: Get pnpm store directory
-        id: pnpm-cache
-        shell: bash
-        run: |
-          echo "STORE_PATH=$(pnpm store path)" >> $GITHUB_OUTPUT
+#      - name: Get pnpm store directory
+#        id: pnpm-cache
+#        shell: bash
+#        run: |
+#          echo "STORE_PATH=$(pnpm store path)" >> $GITHUB_OUTPUT
 
-      - uses: actions/cache@v3
-        name: Setup pnpm cache
-        with:
-          path: ${{ steps.pnpm-cache.outputs.STORE_PATH }}
-          key: ${{ runner.os }}-pnpm-store-v2-${{ hashFiles('**/pnpm-lock.yaml') }}
-          restore-keys: |
-            ${{ runner.os }}-pnpm-store-v2-
+#      - uses: actions/cache@v3
+#        name: Setup pnpm cache
+#        with:
+#          path: ${{ steps.pnpm-cache.outputs.STORE_PATH }}
+#          key: ${{ runner.os }}-pnpm-store-v2-${{ hashFiles('**/pnpm-lock.yaml') }}
+#          restore-keys: |
+#            ${{ runner.os }}-pnpm-store-v2-
 
       - name: Install dependencies
         run: pnpm install --frozen-lockfile
@@ -49,6 +49,7 @@ jobs:
         run: |
           npm config set '//registry.npmjs.org/:_authToken' "${NPM_AUTH_TOKEN}"
           npm whoami
+          lerna --version
 
       - name: Build packages
         run: pnpm run build
