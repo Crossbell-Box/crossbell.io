@@ -65,7 +65,12 @@ import { ConnectKitProvider, createWagmiConfig } from "@crossbell/connect-kit";
 import { Main } from "./main";
 
 const queryClient = new QueryClient();
-const wagmiConfig = createWagmiConfig({ appName: "Crossbell Dev" });
+const wagmiConfig = createWagmiConfig({
+	appName: "Crossbell Dev",
+	// WalletConnect Project ID.
+	// You can create or find it at https://cloud.walletconnect.com
+	walletConnectV2ProjectId: "YOUR_PROJECT_ID",
+});
 
 export default function App() {
 	return (
