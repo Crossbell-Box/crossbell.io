@@ -1,14 +1,14 @@
 import { useConnect } from "wagmi";
 import { showNotification } from "@mantine/notifications";
 
+import { checkIsWalletConnectConnector } from "../utils";
+
 export function useDefaultWalletConnect() {
 	const { connectAsync, connectors } = useConnect();
 
 	return {
 		async openDefaultWalletConnect() {
-			const connector =
-				connectors.find((c) => c.id === "walletConnect") ||
-				connectors.find((c) => c.id === "walletConnectLegacy");
+			const connector = connectors.find(checkIsWalletConnectConnector);
 
 			if (connector) {
 				try {

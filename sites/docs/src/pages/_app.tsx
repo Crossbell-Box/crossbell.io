@@ -13,7 +13,11 @@ import {
 } from "@crossbell/connect-kit";
 import { NotificationModal } from "@crossbell/notification";
 
-const wagmiConfig = createWagmiConfig({ appName: "Crossbell Dev" });
+const wagmiConfig = createWagmiConfig({
+	appName: "Crossbell Dev",
+	walletConnectV2ProjectId: "34f3719cffb8e8f578f137c91c01d235",
+});
+
 const queryClient = new QueryClient();
 const dsn =
 	"https://8e72f50cf3a04612ac5c544dabc3bcab@o4504811532517376.ingest.sentry.io/4504840965259264";

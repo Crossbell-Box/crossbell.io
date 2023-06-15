@@ -9,6 +9,7 @@ import { publicProvider } from "wagmi/providers/public";
 import { InjectedConnector } from "wagmi/connectors/injected";
 import { MetaMaskConnector } from "wagmi/connectors/metaMask";
 import { WalletConnectLegacyConnector } from "wagmi/connectors/walletConnectLegacy";
+import { WalletConnectConnector } from "wagmi/connectors/walletConnect";
 
 import { CoinbaseWalletConnector, OKXConnector } from "./wallets";
 
@@ -17,10 +18,12 @@ export type GetDefaultClientConfigOptions = Omit<
 	"connectors" | "publicClient" | "webSocketPublicClient"
 > & {
 	appName: string;
+	walletConnectV2ProjectId?: string;
 };
 
 export function createWagmiConfig({
 	appName,
+	walletConnectV2ProjectId,
 	...restConfig
 }: GetDefaultClientConfigOptions): Config {
 	const { chains, publicClient, webSocketPublicClient } = configureChains(
@@ -60,10 +63,14 @@ export function createWagmiConfig({
 				headlessMode: true,
 			},
 		}),
-		new WalletConnectLegacyConnector({
-			chains,
-			options: { qrcode: true, chainId: chains[0].id },
-		}),
+		walletConnectV2ProjectId
+			? new WalletConnectConnector({
+					options: { projectId: walletConnectV2ProjectId },
+			  })
+			: new WalletConnectLegacyConnector({
+					chains,
+					options: { qrcode: true, chainId: chains[0].id },
+			  }),
 	];
 
 	return createConfig({

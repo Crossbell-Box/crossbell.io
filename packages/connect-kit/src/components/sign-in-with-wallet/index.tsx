@@ -1,6 +1,9 @@
 import React from "react";
 import { LoadingOverlay } from "@crossbell/ui";
 import { useIsWalletSignedIn, useWalletSignIn } from "@crossbell/react-account";
+import { useAccount } from "wagmi";
+
+import { checkIsWalletConnectConnector } from "../../utils";
 
 import { BottomTips } from "../bottom-tips";
 import { OptionList, OptionListItem } from "../option-list";
@@ -20,10 +23,13 @@ export function SignInWithWallet({
 	onSkip,
 	signInText,
 	skipText,
-	autoSignIn,
+	autoSignIn: defaultAutoSignIn,
 }: SignInWithWalletProps) {
 	const signIn = useWalletSignIn();
 	const isWalletSignedIn = useIsWalletSignedIn();
+	const { connector = null } = useAccount();
+	const isWalletConnectConnector = checkIsWalletConnectConnector(connector);
+	const autoSignIn = defaultAutoSignIn || isWalletConnectConnector;
 
 	React.useEffect(() => {
 		if (isWalletSignedIn) {
@@ -53,10 +59,10 @@ export function SignInWithWallet({
 					color="green"
 					onClick={() => signIn.mutate()}
 				>
-					{signInText ?? "Sign In"}
+					{!isWalletConnectConnector && signInText ? signInText : "Sign In"}
 				</OptionListItem>
 
-				{onSkip && (
+				{onSkip && !isWalletConnectConnector && (
 					<OptionListItem className={styles.item} color="gray" onClick={onSkip}>
 						{skipText ?? "Skip"}
 					</OptionListItem>
