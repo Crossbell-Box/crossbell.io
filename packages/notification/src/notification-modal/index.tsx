@@ -16,7 +16,7 @@ import { Bell } from "./components/bell";
 import { Item } from "./components/item";
 import { Tabs } from "./components/tabs";
 
-export { useNotifications, NotificationFilter };
+export { useNotifications, type NotificationFilter };
 
 export function useShowNotificationModal() {
 	return useModalState((s) => s.showModal);
