@@ -8,10 +8,13 @@ import { crossbell } from "wagmi/chains";
 import { publicProvider } from "wagmi/providers/public";
 import { InjectedConnector } from "wagmi/connectors/injected";
 import { MetaMaskConnector } from "wagmi/connectors/metaMask";
-import { WalletConnectLegacyConnector } from "wagmi/connectors/walletConnectLegacy";
-import { WalletConnectConnector } from "wagmi/connectors/walletConnect";
 
-import { CoinbaseWalletConnector, OKXConnector } from "./wallets";
+import {
+	CoinbaseWalletConnector,
+	OKXConnector,
+	WalletConnectConnector,
+	WalletConnectLegacyConnector,
+} from "./wallets";
 
 export type GetDefaultClientConfigOptions = Omit<
 	CreateConfigParameters,
