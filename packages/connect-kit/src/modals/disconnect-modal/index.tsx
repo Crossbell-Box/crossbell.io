@@ -8,6 +8,7 @@ import { ModalHeader, BaseModal } from "../../components";
 
 import styles from "./index.module.css";
 import { useDisconnectModal } from "./stores";
+import { connectorStore } from "../../wallets/connectors/store";
 
 export { useDisconnectModal };
 
@@ -15,7 +16,10 @@ const buttonCls = classNames(styles.btn, commonStyles.uxOverlay);
 
 export function DisconnectModal() {
 	const { isActive, hide } = useDisconnectModal();
-	const disconnectAccount = useDisconnectAccount(hide);
+	const disconnectAccount = useDisconnectAccount(() => {
+		connectorStore.getState().setConnectedConnectorId("");
+		hide();
+	});
 
 	return (
 		<BaseModal isActive={isActive} onClose={hide}>

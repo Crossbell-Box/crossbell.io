@@ -7,6 +7,8 @@ import {
 	UserRejectedRequestError,
 } from "viem";
 
+import { connectorStore } from "../store";
+
 // When initializing `BaseConnector` with non-whitelisted chains,
 // the Coinbase Wallet extension becomes problematic, as it may throw
 // an error upon connecting or its transaction page may become completely blank.
@@ -28,6 +30,14 @@ export class CoinbaseWalletConnector extends BaseConnector {
 
 		this.__chains = chains ?? [];
 	}
+
+	isAuthorized = async (): Promise<boolean> => {
+		if (connectorStore.getState().connectedConnectorId !== this.id) {
+			return false;
+		}
+
+		return super.isAuthorized();
+	};
 
 	async getProvider() {
 		const provider = await super.getProvider();

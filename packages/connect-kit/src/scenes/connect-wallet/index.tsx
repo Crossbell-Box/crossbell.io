@@ -6,6 +6,7 @@ import { DynamicScenesHeader, ModalHeaderProps } from "../../components";
 import { Wallet } from "../../wallets";
 import { ConnectWithQRCode, isQRCodeWalletConnector } from "./qrCode";
 import { ConnectWithInjector } from "./injector";
+import { connectorStore } from "../../wallets/connectors/store";
 
 export type ConnectWalletProps = {
 	Header?: React.ComponentType<ModalHeaderProps>;
@@ -24,6 +25,7 @@ export function ConnectWallet({
 
 	React.useEffect(() => {
 		if (isConnected) {
+			connectorStore.getState().setConnectedConnectorId(connector.connector.id);
 			onConnect?.();
 		}
 	}, [isConnected]);
