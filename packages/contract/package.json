@@ -1,6 +1,6 @@
 {
 	"name": "@crossbell/contract",
-	"version": "1.4.1",
+	"version": "1.4.4",
 	"license": "MIT",
 	"repository": "github:Crossbell-Box/crossbell-universe",
 	"bugs": "https://github.com/Crossbell-Box/crossbell-universe/issues",
@@ -29,7 +29,7 @@
 	},
 	"dependencies": {
 		"@crossbell/indexer": "^1.4.1",
-		"@crossbell/util-hooks": "^1.4.0",
+		"@crossbell/util-hooks": "^1.4.4",
 		"crossbell": "^1.4.0",
 		"viem": "^1.0.7"
 	},
