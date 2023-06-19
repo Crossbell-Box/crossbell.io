@@ -9,14 +9,14 @@ import {
 } from "@crossbell/ui";
 import type { NotificationTypeKey } from "crossbell";
 
-import { useModalState, useNotifications } from "../hooks";
+import { NotificationFilter, useModalState, useNotifications } from "../hooks";
 
 import styles from "./index.module.css";
 import { Bell } from "./components/bell";
 import { Item } from "./components/item";
 import { Tabs } from "./components/tabs";
 
-export { useNotifications };
+export { useNotifications, NotificationFilter };
 
 export function useShowNotificationModal() {
 	return useModalState((s) => s.showModal);
@@ -36,6 +36,7 @@ export type NotificationModalColorScheme = {
 
 export type NotificationModalProps = {
 	colorScheme?: NotificationModalColorScheme;
+	filter?: NotificationFilter;
 };
 
 enum TabItem {
@@ -66,7 +67,10 @@ const itemTypesMap: Record<TabItem, NotificationTypeKey[]> = {
 	earnings: ["NOTE_MINTED", "TIPPED"],
 };
 
-export function NotificationModal({ colorScheme }: NotificationModalProps) {
+export function NotificationModal({
+	colorScheme,
+	filter,
+}: NotificationModalProps) {
 	const [currentTypeId, setCurrentTypeId] = React.useState(TabItem.all);
 
 	const {
@@ -79,7 +83,7 @@ export function NotificationModal({ colorScheme }: NotificationModalProps) {
 		fetchNextPage,
 		hasNextPage,
 		isFetchingNextPage,
-	} = useNotifications({ types: itemTypesMap[currentTypeId] });
+	} = useNotifications({ types: itemTypesMap[currentTypeId], filter });
 
 	const colorVariable = useColorVariable(colorScheme);
 

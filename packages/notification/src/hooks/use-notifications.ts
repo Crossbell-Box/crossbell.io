@@ -2,6 +2,7 @@ import React from "react";
 import { NotificationTypeKey } from "crossbell";
 import { useAccountCharacter } from "@crossbell/react-account";
 import {
+	ParsedNotification,
 	useCharacterNotification,
 	useCharacterNotificationUnreadCount,
 	useMarkCharacterNotificationAsRead,
@@ -19,7 +20,12 @@ const defaultTypes: NotificationTypeKey[] = [
 	"TIPPED",
 ];
 
-export function useNotifications(options?: { types?: NotificationTypeKey[] }) {
+export type NotificationFilter = (notification: ParsedNotification) => boolean;
+
+export function useNotifications(options?: {
+	types?: NotificationTypeKey[];
+	filter?: NotificationFilter;
+}) {
 	const characterId = useAccountCharacter()?.characterId;
 	const { data, ...queryResult } = useCharacterNotification(
 		characterId,
@@ -32,8 +38,11 @@ export function useNotifications(options?: { types?: NotificationTypeKey[] }) {
 		useCharacterNotificationUnreadCount(characterId);
 
 	const notifications = React.useMemo(
-		() => data?.pages.flatMap(({ list }) => list) ?? [],
-		[data]
+		() =>
+			data?.pages.flatMap(({ list }) =>
+				options?.filter ? list.filter(options?.filter) : list
+			) ?? [],
+		[data, options?.filter]
 	);
 
 	const total = data?.pages?.[0]?.count ?? 0;
