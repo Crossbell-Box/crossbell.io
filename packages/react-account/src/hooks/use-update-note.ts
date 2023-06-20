@@ -83,7 +83,9 @@ export const useUpdateNote = createAccountTypeBasedMutationHooks<
 						await contract.note.setMetadata({
 							characterId: variables.note.characterId,
 							noteId: variables.note.noteId,
-							metadata,
+							// crossbell.js will try to modify the object internally,
+							// here the immutable object is converted to mutable object to avoid errors.
+							metadata: JSON.parse(JSON.stringify(metadata)),
 						});
 					}
 				},
