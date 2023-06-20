@@ -1,6 +1,6 @@
 {
 	"name": "docs",
-	"version": "1.4.4",
+	"version": "1.4.5",
 	"private": true,
 	"scripts": {
 		"build": "rm -rf .next && next build",
@@ -9,11 +9,11 @@
 		"start": "next start"
 	},
 	"dependencies": {
-		"@crossbell/connect-kit": "^1.4.4",
-		"@crossbell/contract": "^1.4.4",
-		"@crossbell/indexer": "^1.4.1",
-		"@crossbell/notification": "^1.4.4",
-		"@crossbell/ui": "^1.4.4",
+		"@crossbell/connect-kit": "^1.4.5",
+		"@crossbell/contract": "^1.4.5",
+		"@crossbell/indexer": "^1.4.5",
+		"@crossbell/notification": "^1.4.5",
+		"@crossbell/ui": "^1.4.5",
 		"@crossbell/util-ethers": "^1.4.0",
 		"@crossbell/util-hooks": "^1.4.4",
 		"@crossbell/util-metadata": "^1.4.0",
