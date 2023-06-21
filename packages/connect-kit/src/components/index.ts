@@ -11,6 +11,7 @@ export * from "./field";
 export * from "./filed-tips";
 export * from "./icons";
 export * from "./lazy-modal";
+export * from "./lazy-dynamic-scene";
 export * from "./icon-btn";
 export * from "./mint-character-form-normal";
 export * from "./mint-character-form-slim";
