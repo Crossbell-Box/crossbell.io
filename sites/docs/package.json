@@ -3,8 +3,9 @@
 	"version": "1.4.5",
 	"private": true,
 	"scripts": {
-		"build": "rm -rf .next && next build",
-		"dev": "rm -rf .next && next dev -p 3002",
+		"build": "next build",
+		"build:analyze": "ANALYZE=true next build",
+		"dev": "next dev -p 3002",
 		"lint": "next lint",
 		"start": "next start"
 	},
@@ -25,6 +26,7 @@
 		"outdent": "^0.8.0"
 	},
 	"devDependencies": {
+		"@next/bundle-analyzer": "^13.4.6",
 		"autoprefixer": "^10.4.14",
 		"postcss": "^8.4.24",
 		"tailwindcss": "^3.3.2"
