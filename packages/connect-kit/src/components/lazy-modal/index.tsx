@@ -18,6 +18,7 @@ export function createLazyModal(
 		Modal?:
 			| React.ComponentType<Required<BaseModalProps>>
 			| React.ComponentType<BaseModalProps>;
+		noDynamicContainer?: boolean;
 	}
 ) {
 	const Modal = options?.Modal ?? BaseModal;
@@ -25,13 +26,19 @@ export function createLazyModal(
 	return function LazyModal() {
 		const { isActive, hide } = useStore();
 
+		const node = (
+			<React.Suspense fallback={<Placeholder />}>
+				<Component />
+			</React.Suspense>
+		);
+
 		return (
 			<Modal isActive={isActive} onClose={hide}>
-				<DynamicContainer>
-					<React.Suspense fallback={<Placeholder />}>
-						<Component />
-					</React.Suspense>
-				</DynamicContainer>
+				{options?.noDynamicContainer ? (
+					node
+				) : (
+					<DynamicContainer>{node}</DynamicContainer>
+				)}
 			</Modal>
 		);
 	};

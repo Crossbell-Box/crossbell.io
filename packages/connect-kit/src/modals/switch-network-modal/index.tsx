@@ -1,10 +1,9 @@
 import React from "react";
 import { Contract } from "crossbell";
-
-import { BaseModal } from "../../components";
-import { Main } from "./scenes/main";
-import { useSwitchNetworkModal } from "./stores";
 import { crossbell } from "wagmi/chains";
+
+import { createLazyModal } from "../../components";
+import { useSwitchNetworkModal } from "./stores";
 
 export * from "./use-auto-display-switch-network-modal";
 export { useSwitchNetworkModal };
@@ -28,12 +27,7 @@ export function showSwitchNetworkModal(contract: Contract) {
 	});
 }
 
-export function SwitchNetworkModal() {
-	const { isActive } = useSwitchNetworkModal();
-
-	return (
-		<BaseModal isActive={isActive}>
-			<Main />
-		</BaseModal>
-	);
-}
+export const SwitchNetworkModal = createLazyModal(
+	useSwitchNetworkModal,
+	React.lazy(() => import("./lazy"))
+);
