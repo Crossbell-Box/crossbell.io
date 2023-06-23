@@ -2,15 +2,13 @@ import React from "react";
 import { useRefCallback } from "@crossbell/util-hooks";
 import { useIsOpSignEnabled } from "@crossbell/react-account";
 
+import { DumbOpSignIcon } from "../../components";
 import { useOpSignSettingsModal } from "../../modals/op-sign-settings-modal";
-import { Icon } from "./icon";
 
 export type OpSignIconProps = React.SVGAttributes<SVGSVGElement> & {
 	characterId: number | null | undefined;
 	openSettingsOnClick?: boolean;
 };
-
-export { Icon as DumbOpSignIcon };
 
 export function OpSignIcon({
 	characterId,
@@ -27,5 +25,11 @@ export function OpSignIcon({
 		}
 	});
 
-	return <Icon isActive={isOpSignEnabled} onClick={handleClick} {...props} />;
+	return (
+		<DumbOpSignIcon
+			isActive={isOpSignEnabled}
+			onClick={handleClick}
+			{...props}
+		/>
+	);
 }

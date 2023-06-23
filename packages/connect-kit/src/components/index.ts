@@ -17,7 +17,7 @@ export * from "./mint-character-form-normal";
 export * from "./mint-character-form-slim";
 export * from "./modal-header";
 export * from "./option-list";
-export * from "./op-sign-icon";
+export * from "./dumb-op-sign-icon";
 export * from "./op-sign-settings";
 export * from "./other-wallets";
 export * from "./qr-code";

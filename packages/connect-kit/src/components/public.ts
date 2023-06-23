@@ -1,2 +1,2 @@
 export * from "./connect-button";
-export * from "./op-sign-icon";
+export * from "./dumb-op-sign-icon";

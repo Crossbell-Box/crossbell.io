@@ -2,7 +2,7 @@ import React from "react";
 import { Toggle, LoadingOverlay } from "@crossbell/ui";
 import { useToggleOpSignOperator } from "@crossbell/react-account";
 
-import { DumbOpSignIcon } from "../op-sign-icon";
+import { DumbOpSignIcon } from "../dumb-op-sign-icon";
 import { MainBtn } from "../main-btn";
 
 import styles from "./index.module.css";

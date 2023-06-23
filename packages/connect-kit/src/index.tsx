@@ -64,6 +64,7 @@ export {
 } from "./modals/x-settings-modal";
 export * from "./modals/edit-character-profile-modal";
 export * from "./hooks";
+export * from "./modules";
 export * from "./create-wagmi-config";
 export * from "./components/public";
 export type { XSettingsConfig } from "./x-settings-config";
