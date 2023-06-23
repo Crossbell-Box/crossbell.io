@@ -45,24 +45,7 @@ import { useColorScheme } from "@mantine/hooks";
 
 export * from "@crossbell/react-account";
 export * from "@crossbell/react-account/utils";
-export { useConnectModal } from "./modals/connect-modal";
-export { useDisconnectModal } from "./modals/disconnect-modal";
-export {
-	useUpgradeEmailAccountModal,
-	showUpgradeEmailAccountModal,
-} from "./modals/upgrade-account-modal";
-export { useCsbDetailModal } from "./modals/csb-detail-modal";
-export { useWalletClaimCSBModal } from "./modals/wallet-claim-csb-modal";
-export { useOpSignSettingsModal } from "./modals/op-sign-settings-modal";
-export { useWalletMintNewCharacterModal } from "./modals/wallet-mint-new-character";
-export { useSelectCharactersModal } from "./modals/select-characters-modal";
-export { useSentryPrivacyModal } from "./modals/sentry-privacy-modal";
-export { useTipModal } from "./modals/tip-modal";
-export {
-	useXSettingsModal,
-	showXSettingsModal,
-} from "./modals/x-settings-modal";
-export * from "./modals/edit-character-profile-modal";
+export * from "./modals/public";
 export * from "./hooks";
 export * from "./modules";
 export * from "./create-wagmi-config";
