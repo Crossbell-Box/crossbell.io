@@ -49,14 +49,16 @@
 		"crossbell": "^1.4.0",
 		"embla-carousel-react": "^7",
 		"immer": "^10",
-		"lodash.debounce": "4.0.8",
+		"lodash.compact": "^3",
+		"lodash.debounce": "^4",
+		"pretty-bytes": "^6",
 		"qrcode": "^1",
 		"react": "^18",
 		"react-dropzone": "^14.2.3",
 		"react-google-recaptcha": "^3.1.0",
 		"rxjs": "^7.8.1",
 		"ts-essentials": "^9.3.2",
-		"viem": "^1.0.7",
+		"viem": "^1.1.6",
 		"zustand": "^4"
 	},
 	"peerDependencies": {
@@ -64,6 +66,7 @@
 		"wagmi": "^1.0.0"
 	},
 	"devDependencies": {
+		"@types/lodash.compact": "^3.0.7",
 		"@types/lodash.debounce": "4.0.7",
 		"@types/react-google-recaptcha": "2.1.5"
 	}

@@ -35,6 +35,9 @@ function isCoinbaseWallet(): boolean {
 	return !!(
 		ethereum?.isCoinbaseWallet ||
 		(ethereum?.providers &&
-			ethereum?.providers.find((provider) => provider.isCoinbaseWallet))
+			ethereum?.providers.find(
+				(provider?: { isCoinbaseWallet?: boolean }) =>
+					provider?.isCoinbaseWallet
+			))
 	);
 }
