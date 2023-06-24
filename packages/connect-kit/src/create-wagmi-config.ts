@@ -8,6 +8,7 @@ import { crossbell } from "wagmi/chains";
 import { publicProvider } from "wagmi/providers/public";
 import { InjectedConnector } from "wagmi/connectors/injected";
 import { MetaMaskConnector } from "wagmi/connectors/metaMask";
+import { w3mProvider } from "@web3modal/ethereum";
 
 import {
 	CoinbaseWalletConnector,
@@ -31,7 +32,11 @@ export function createWagmiConfig({
 }: GetDefaultClientConfigOptions): Config {
 	const { chains, publicClient, webSocketPublicClient } = configureChains(
 		[crossbell],
-		[publicProvider()],
+		[
+			walletConnectV2ProjectId
+				? w3mProvider({ projectId: walletConnectV2ProjectId })
+				: publicProvider(),
+		],
 		{ pollingInterval: 1_000 }
 	);
 
