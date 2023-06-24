@@ -1,5 +1,5 @@
 import { Space, Text, Title } from "@mantine/core";
-import { CharacterEntity, NoteEntity } from "crossbell.js";
+import { CharacterEntity, NoteEntity } from "crossbell";
 import classNames from "classnames";
 
 import { useCharacter, useNote } from "@crossbell/indexer";

@@ -1,6 +1,6 @@
 import React from "react";
 import { HoverCard, Text, Group, Stack } from "@mantine/core";
-import { CharacterEntity } from "crossbell.js";
+import { CharacterEntity } from "crossbell";
 import { CharacterHandle, CharacterName } from ".";
 import { Avatar } from "~/shared/components/avatar";
 import { useCharacterFollowStats } from "@crossbell/indexer";

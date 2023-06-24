@@ -16,7 +16,7 @@ import {
 import { Text } from "@mantine/core";
 import { getServerSideProps as getServerSideProps_ } from "./index";
 import Head from "next/head";
-import { CharacterEntity } from "crossbell.js";
+import { CharacterEntity } from "crossbell";
 
 type PageProps = {
 	character: CharacterEntity | null;

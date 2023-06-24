@@ -6,11 +6,13 @@ import { useMintedNotesOfAddress } from "@crossbell/indexer";
 import Header from "@/components/layouts/Header";
 import { useAddressRouterQuery } from "~/shared/url";
 import { Fragment } from "react";
+import { Address } from "viem";
 
 const TreasuresList = () => {
 	const { address } = useAddressRouterQuery();
-	const { isLoading: mintedNotesLoading, data } =
-		useMintedNotesOfAddress(address);
+	const { isLoading: mintedNotesLoading, data } = useMintedNotesOfAddress(
+		address as Address
+	);
 
 	return (
 		<div className="grid grid-cols-3 gap-4">

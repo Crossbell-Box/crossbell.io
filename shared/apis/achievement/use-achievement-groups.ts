@@ -1,6 +1,6 @@
 import React from "react";
 import compact from "lodash.compact";
-import { AchievementItem, CharacterEntity, Indexer } from "crossbell.js";
+import { AchievementItem, CharacterEntity, Indexer } from "crossbell";
 import {
 	QueryStatus,
 	useMutation,
@@ -38,7 +38,7 @@ export function useMintAchievement(
 
 	return useMutation(
 		[...SCOPE_KEY, "note", characterId, levelId],
-		() => indexer.mintAchievement(characterId, levelId),
+		() => indexer.achievement.mint(characterId, levelId),
 		{
 			onSuccess: (data) => {
 				if (data) {
@@ -58,7 +58,7 @@ export function useAchievementGroups(
 
 	const { data, status } = useQuery(
 		SCOPE_KEY_ACHIEVEMENT_GROUP(characterId),
-		() => indexer.getAchievements(characterId!),
+		() => indexer.achievement.getMany(characterId!),
 		{ enabled: !!characterId }
 	);
 
@@ -71,7 +71,7 @@ export function useAchievementGroups(
 }
 
 function formatData(
-	data?: Awaited<ReturnType<Indexer["getAchievements"]>> | null,
+	data?: Awaited<ReturnType<Indexer["achievement"]["getMany"]>> | null,
 	character?: CharacterEntity | null
 ): AchievementGroup[] {
 	return (

@@ -1,5 +1,5 @@
 import React from "react";
-import { CharacterEntity, MintedNoteEntity } from "crossbell.js";
+import { CharacterEntity, MintedNoteEntity } from "crossbell";
 
 import { Avatar } from "~/shared/components/avatar";
 import classNames from "classnames";

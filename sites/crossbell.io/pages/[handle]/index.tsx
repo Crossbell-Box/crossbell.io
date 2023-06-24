@@ -22,7 +22,7 @@ import {
 	useCharacterRouterQuery,
 } from "~/shared/url";
 import { Space } from "@mantine/core";
-import { CharacterEntity } from "crossbell.js";
+import { CharacterEntity } from "crossbell";
 import { GetServerSideProps } from "next";
 import { NextSeo } from "next-seo";
 import { Fragment } from "react";

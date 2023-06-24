@@ -1,5 +1,5 @@
 import React from "react";
-import { MintedNoteEntity } from "crossbell.js";
+import { MintedNoteEntity } from "crossbell";
 
 import { extractCharacterName } from "@crossbell/util-metadata";
 import { usePrimaryCharacter } from "@crossbell/indexer";

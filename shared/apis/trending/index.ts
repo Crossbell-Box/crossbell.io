@@ -1,5 +1,5 @@
 import { useInfiniteQuery } from "@tanstack/react-query";
-import { CharacterEntity, NoteEntity } from "crossbell.js";
+import { CharacterEntity, NoteEntity } from "crossbell";
 
 const SCOPE_KEY = ["trending"];
 

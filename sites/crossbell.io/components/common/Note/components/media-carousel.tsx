@@ -1,4 +1,4 @@
-import { NoteMetadata } from "crossbell.js";
+import { NoteMetadata } from "crossbell";
 import { Carousel, Embla } from "@mantine/carousel";
 import { Image } from "~/shared/components/image";
 import { MouseEvent, useCallback, useEffect, useState } from "react";

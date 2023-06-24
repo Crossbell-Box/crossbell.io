@@ -1,5 +1,5 @@
 import { Button, Space, Text } from "@mantine/core";
-import type { CharacterEntity } from "crossbell.js";
+import type { CharacterEntity } from "crossbell";
 import { MouseEventHandler } from "react";
 import Link from "next/link";
 

@@ -1,6 +1,6 @@
 import React from "react";
 import { LRUCache } from "lru-cache";
-import { NoteEntity } from "crossbell.js";
+import { NoteEntity } from "crossbell";
 import { useRefCallback } from "@crossbell/util-hooks";
 import { Note, NoteSkeleton } from "@/components/common/Note";
 import { useNote } from "@crossbell/indexer";

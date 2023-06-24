@@ -1,7 +1,7 @@
 import React from "react";
 import dayjs from "dayjs";
 import { Text } from "@mantine/core";
-import { CharacterEntity } from "crossbell.js";
+import { CharacterEntity } from "crossbell";
 
 import { extractCharacterName } from "@crossbell/util-metadata";
 

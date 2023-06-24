@@ -1,4 +1,5 @@
 import "uno.css";
+import "@crossbell/connect-kit/colors.css";
 
 import "~/shared/styles/globals.css";
 import "~/shared/crossbell.js/setup-indexer";

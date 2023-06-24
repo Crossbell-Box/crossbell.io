@@ -1,7 +1,7 @@
 import { composeScanTxHref } from "~/shared/url";
 import { Badge, useMantineTheme } from "@mantine/core";
 import Link from "next/link";
-import { NoteEntity } from "crossbell.js";
+import { NoteEntity } from "crossbell";
 import { Tooltip } from "~/shared/components/tooltip";
 
 export default function NoteIdBadge({ note }: { note: NoteEntity }) {

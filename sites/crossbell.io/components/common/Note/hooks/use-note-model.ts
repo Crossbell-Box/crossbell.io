@@ -34,7 +34,7 @@ export type NoteModel = {
 };
 
 export function useNoteModel({ characterId, noteId }: UseNoteActionsConfig) {
-	const address = useAddress() ?? "";
+	const address = useAddress() ?? undefined;
 	const { data: status } = useNoteStatus({ characterId, noteId, address });
 	const [{ isLiked }] = useIsNoteLiked({
 		noteId,

@@ -1,7 +1,7 @@
 import { useTrending } from "~/shared/apis/trending";
 import { composeCharacterHref } from "~/shared/url";
 import { Group, Skeleton } from "@mantine/core";
-import { CharacterEntity } from "crossbell.js";
+import { CharacterEntity } from "crossbell";
 import { useRouter } from "next/router";
 import { Avatar } from "~/shared/components/avatar";
 import { CharacterHandle, CharacterName } from "~/shared/components/character";

@@ -3,7 +3,7 @@ import { useCharacter, useCharacterByHandle } from "@crossbell/indexer";
 import { extractCharacterName } from "@crossbell/util-metadata";
 import { composeCharacterHref } from "~/shared/url";
 import { Text, TextProps } from "@mantine/core";
-import { CharacterEntity } from "crossbell.js";
+import { CharacterEntity } from "crossbell";
 import classNames from "classnames";
 import CharacterHoverCard from "./character-hover-card";
 import Link from "next/link";

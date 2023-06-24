@@ -1,5 +1,5 @@
 import { Button, Space } from "@mantine/core";
-import { NoteEntity } from "crossbell.js";
+import { NoteEntity } from "crossbell";
 import { useState } from "react";
 
 import { getOrigin } from "~/shared/url";

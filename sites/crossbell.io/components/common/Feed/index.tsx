@@ -1,4 +1,4 @@
-import { FeedEntity } from "crossbell.js";
+import { FeedEntity } from "crossbell";
 import { GroupedFeedNote } from "@/components/grouped-note";
 
 import { NoteSkeleton } from "../Note";

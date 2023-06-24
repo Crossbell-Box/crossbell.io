@@ -1,5 +1,5 @@
 import { Badge } from "@mantine/core";
-import { NoteMetadata } from "crossbell.js";
+import { NoteMetadata } from "crossbell";
 import { TinyColor, random, mostReadable } from "@ctrl/tinycolor";
 import Link from "next/link";
 import { ReactNode } from "react";

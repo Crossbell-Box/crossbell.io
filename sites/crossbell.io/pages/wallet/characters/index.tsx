@@ -1,6 +1,6 @@
 import { Grid, Menu, Title, Text, ActionIcon } from "@mantine/core";
 import { showNotification } from "@mantine/notifications";
-import { CharacterEntity } from "crossbell.js";
+import { CharacterEntity } from "crossbell";
 import Link from "next/link";
 
 import { Avatar } from "~/shared/components/avatar";

@@ -5,7 +5,7 @@ import {
 } from "@crossbell/util-metadata";
 import { composeNoteHref } from "~/shared/url";
 import { Group, Skeleton, Space, Text } from "@mantine/core";
-import { NoteEntity } from "crossbell.js";
+import { NoteEntity } from "crossbell";
 import { useRouter } from "next/router";
 import { Avatar } from "~/shared/components/avatar";
 import { CharacterName } from "~/shared/components/character";

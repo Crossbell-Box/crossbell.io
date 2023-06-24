@@ -1,7 +1,7 @@
 import React from "react";
 import { Button, ButtonProps } from "@mantine/core";
 import { useModals } from "@mantine/modals";
-import { CharacterEntity } from "crossbell.js";
+import { CharacterEntity } from "crossbell";
 
 import { useCharacterFollowRelation } from "@crossbell/indexer";
 import {

@@ -1,4 +1,4 @@
-import type { CharacterEntity } from "crossbell.js";
+import type { CharacterEntity } from "crossbell";
 import {
 	Button,
 	ButtonProps,

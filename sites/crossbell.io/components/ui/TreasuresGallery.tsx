@@ -8,10 +8,11 @@ import {
 import { composeNoteHref, composeTreasuresWalletsHref } from "~/shared/url";
 import { Space, Text } from "@mantine/core";
 import Link from "next/link";
-import { NoteEntity } from "crossbell.js";
+import { NoteEntity } from "crossbell";
 import { Fragment } from "react";
+import { Address } from "viem";
 
-export default function TreasuresGallery({ address }: { address?: string }) {
+export default function TreasuresGallery({ address }: { address?: Address }) {
 	const { data, isLoading } = useMintedNotesOfAddress(address, { limit: 8 });
 
 	const hasResult = !isLoading && data?.pages.some((page) => page.count > 0);

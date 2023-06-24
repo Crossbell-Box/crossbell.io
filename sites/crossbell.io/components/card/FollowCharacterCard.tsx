@@ -1,5 +1,5 @@
 import { Skeleton, Text } from "@mantine/core";
-import type { CharacterEntity } from "crossbell.js";
+import type { CharacterEntity } from "crossbell";
 import { Avatar } from "~/shared/components/avatar";
 import { CharacterName } from "~/shared/components/character";
 import { composeCharacterHref } from "~/shared/url";

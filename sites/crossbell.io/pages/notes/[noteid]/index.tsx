@@ -19,7 +19,7 @@ import {
 	getOrigin,
 	useNoteRouterQuery,
 } from "~/shared/url";
-import { CharacterEntity, NoteEntity } from "crossbell.js";
+import { CharacterEntity, NoteEntity } from "crossbell";
 import type { GetServerSideProps } from "next";
 import { Divider } from "@mantine/core";
 import { NextSeo } from "next-seo";
