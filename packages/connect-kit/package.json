@@ -43,8 +43,8 @@
 		"@mantine/core": "^6",
 		"@mantine/hooks": "^6",
 		"@mantine/notifications": "^6",
-		"@wagmi/connectors": "^2.3.0",
-		"@web3modal/ethereum": "^2.4.7",
+		"@wagmi/connectors": "^2.5.0",
+		"@web3modal/ethereum": "^2.6.0",
 		"canvas-confetti": "^1",
 		"check-password-strength": "^2",
 		"classnames": "^2",
@@ -60,7 +60,7 @@
 		"react-google-recaptcha": "^3.1.0",
 		"rxjs": "^7.8.1",
 		"ts-essentials": "^9.3.2",
-		"viem": "^1.1.6",
+		"viem": "^1.1.7",
 		"zustand": "^4"
 	},
 	"peerDependencies": {
