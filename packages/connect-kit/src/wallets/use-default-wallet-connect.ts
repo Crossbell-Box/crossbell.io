@@ -2,6 +2,7 @@ import { useConnect } from "wagmi";
 import { showNotification } from "@mantine/notifications";
 
 import { checkIsWalletConnectConnector } from "../utils";
+import { connectorStore } from "./connectors/store";
 
 export function useDefaultWalletConnect() {
 	const { connectAsync, connectors } = useConnect();
@@ -17,6 +18,8 @@ export function useDefaultWalletConnect() {
 						chainId: preferredChainId,
 						connector: connector,
 					});
+
+					connectorStore.getState().setConnectedConnectorId(connector.id);
 
 					if (result.chain.id !== connector.chains[0]?.id) {
 						connector.switchChain?.(preferredChainId);
