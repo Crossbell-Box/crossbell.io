@@ -2,6 +2,7 @@ import { useCharacter } from "@crossbell/indexer";
 import { AttributesMetadata } from "crossbell";
 
 import { useUpdateCharacterMetadata } from "../use-update-character-metadata";
+import { extractCharacterAttribute } from "@crossbell/util-metadata";
 
 export type UseCharacterAttributeParams = {
 	characterId?: number;
@@ -21,10 +22,7 @@ export function useCharacterAttribute<T extends ValidType>(
 ) {
 	const query = useCharacter(characterId);
 	const mutation = useUpdateCharacterMetadata(options);
-	const data =
-		query.data?.metadata?.content?.attributes?.find(
-			(attribute) => attribute.trait_type === key
-		)?.value ?? null;
+	const data = key ? extractCharacterAttribute(query.data, key)?.value : null;
 
 	return {
 		data,

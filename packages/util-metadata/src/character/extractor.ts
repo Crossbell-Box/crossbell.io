@@ -1,4 +1,8 @@
-import { CharacterEntity, CharacterMetadata } from "crossbell";
+import {
+	AttributesMetadata,
+	CharacterEntity,
+	CharacterMetadata,
+} from "crossbell";
 import { truncateAddress } from "@crossbell/util-ethers";
 
 export function extractCharacterName(
@@ -49,4 +53,21 @@ export function extractCharacterBanners(
 	character: CharacterEntity | null | undefined
 ): Required<CharacterMetadata>["banners"] {
 	return character?.metadata?.content?.banners ?? [];
+}
+
+export function extractCharacterAttributes(
+	character: Pick<CharacterEntity, "metadata"> | null | undefined
+): Required<AttributesMetadata>["attributes"] {
+	return character?.metadata?.content?.attributes ?? [];
+}
+
+export function extractCharacterAttribute(
+	character: Pick<CharacterEntity, "metadata"> | null | undefined,
+	traitType: string
+): Required<AttributesMetadata>["attributes"][0] | null {
+	return (
+		extractCharacterAttributes(character).find(
+			(attr) => attr.trait_type === traitType
+		) ?? null
+	);
 }
