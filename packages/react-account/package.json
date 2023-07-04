@@ -1,6 +1,6 @@
 {
 	"name": "@crossbell/react-account",
-	"version": "1.4.8",
+	"version": "1.4.9",
 	"license": "MIT",
 	"repository": "github:Crossbell-Box/crossbell-universe",
 	"bugs": "https://github.com/Crossbell-Box/crossbell-universe/issues",
@@ -63,7 +63,7 @@
 		"@crossbell/indexer": "^1.4.8",
 		"@crossbell/util-ethers": "^1.4.0",
 		"@crossbell/util-hooks": "^1.4.4",
-		"@crossbell/util-metadata": "^1.4.0",
+		"@crossbell/util-metadata": "^1.4.9",
 		"check-password-strength": "^2",
 		"crossbell": "^1.4.0",
 		"immer": "^10",
