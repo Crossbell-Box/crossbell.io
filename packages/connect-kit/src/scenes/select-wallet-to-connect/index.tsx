@@ -33,7 +33,8 @@ export function SelectWalletToConnect({
 }: SelectWalletToConnectProps) {
 	const Header = Header_ ?? DynamicScenesHeader;
 	const walletConnectors = useWalletConnectors();
-	const { openDefaultWalletConnect } = useDefaultWalletConnect();
+	const { openDefaultWalletConnect, canOpenWalletConnect } =
+		useDefaultWalletConnect();
 	const { isConnected } = useAccount();
 	const account = useConnectedAccount("wallet");
 
@@ -65,16 +66,18 @@ export function SelectWalletToConnect({
 						</OptionListItem>
 					))}
 
-					<OptionListItem
-						id="other-wallets"
-						title="Other Wallets"
-						color="gray"
-						onClick={openDefaultWalletConnect}
-						className={styles.item}
-					>
-						Other Wallets
-						<OtherWallets className={styles.itemIcon} />
-					</OptionListItem>
+					{canOpenWalletConnect && (
+						<OptionListItem
+							id="other-wallets"
+							title="Other Wallets"
+							color="gray"
+							onClick={openDefaultWalletConnect}
+							className={styles.item}
+						>
+							Other Wallets
+							<OtherWallets className={styles.itemIcon} />
+						</OptionListItem>
+					)}
 				</OptionList>
 
 				<button

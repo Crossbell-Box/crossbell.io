@@ -9,12 +9,12 @@ import { publicProvider } from "wagmi/providers/public";
 import { InjectedConnector } from "wagmi/connectors/injected";
 import { MetaMaskConnector } from "wagmi/connectors/metaMask";
 import { w3mProvider } from "@web3modal/ethereum";
+import compact from "lodash.compact";
 
 import {
 	CoinbaseWalletConnector,
 	OKXConnector,
 	WalletConnectConnector,
-	WalletConnectLegacyConnector,
 } from "./wallets";
 
 export type GetDefaultClientConfigOptions = Omit<
@@ -37,10 +37,10 @@ export function createWagmiConfig({
 				? w3mProvider({ projectId: walletConnectV2ProjectId })
 				: publicProvider(),
 		],
-		{ pollingInterval: 1_000 }
+		{ pollingInterval: 1_000 },
 	);
 
-	const connectors = [
+	const connectors = compact([
 		new InjectedConnector({
 			chains,
 			options: {
@@ -75,11 +75,8 @@ export function createWagmiConfig({
 			? new WalletConnectConnector({
 					options: { projectId: walletConnectV2ProjectId },
 			  })
-			: new WalletConnectLegacyConnector({
-					chains,
-					options: { qrcode: true, chainId: chains[0].id },
-			  }),
-	];
+			: null,
+	]);
 
 	return createConfig({
 		autoConnect: true,
