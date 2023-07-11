@@ -27,6 +27,15 @@ export const [ScenesStoreProvider, useScenesStore] = createContextStore(() =>
 						],
 					});
 				},
+
+				noCharacterNeeded() {
+					set({
+						scenes: [
+							{ kind: SceneKind.selectConnectKind },
+							{ kind: SceneKind.selectWalletToConnect },
+						],
+					});
+				},
 			};
 
 			strategies[get().signInStrategy]();

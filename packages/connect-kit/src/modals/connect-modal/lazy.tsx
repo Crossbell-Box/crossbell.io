@@ -59,6 +59,9 @@ function Main() {
 					goTo({ kind: SceneKind.selectCharacters });
 
 				const nextStrategies: Record<SignInStrategy, () => void> = {
+					noCharacterNeeded() {
+						hide();
+					},
 					simple() {
 						if (account.character) {
 							hide();
@@ -118,7 +121,10 @@ function renderScene({
 			return (
 				<SignInWithWallet
 					Header={Header}
-					autoSignIn={signInStrategy === "simple"}
+					autoSignIn={
+						signInStrategy === "simple" ||
+						signInStrategy === "noCharacterNeeded"
+					}
 					{...scene}
 				/>
 			);

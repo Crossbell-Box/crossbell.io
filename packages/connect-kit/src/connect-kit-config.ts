@@ -1,6 +1,6 @@
 import React from "react";
 
-export type SignInStrategy = "complete" | "simple";
+export type SignInStrategy = "complete" | "simple" | "noCharacterNeeded";
 
 export type ConnectKitConfig = {
 	signInStrategy: SignInStrategy;
