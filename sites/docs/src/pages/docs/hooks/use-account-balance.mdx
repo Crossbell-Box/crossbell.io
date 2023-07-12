@@ -35,6 +35,6 @@ import { useAccountBalance } from "@crossbell/connect-kit";
 function App() {
 	const balance = useAccountBalance();
 
-	return <div>{balance ? balance.formatted : "No Balance Info"}</div>;
+	return <div>{balance ? balance.balance.formatted : "No Balance Info"}</div>;
 }
 ```
