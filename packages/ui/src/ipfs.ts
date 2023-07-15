@@ -22,6 +22,6 @@ export function useWeb2Urls(ipfsList: string[]): string[] {
 
 	return React.useMemo(
 		() => ipfsList.map((url) => getWeb2Url(url)),
-		[getWeb2Url, ...ipfsList]
+		[getWeb2Url, ...ipfsList],
 	);
 }

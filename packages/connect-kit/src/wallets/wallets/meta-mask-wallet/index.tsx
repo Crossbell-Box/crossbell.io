@@ -35,7 +35,7 @@ function isMetaMask(ethereum: NonNullable<(typeof window)["ethereum"]>) {
 
 export const metaMaskWallet = (
 	metaMask?: MetaMaskConnector,
-	walletConnectLegacy?: WalletConnectLegacyConnector
+	walletConnectLegacy?: WalletConnectLegacyConnector,
 ): Wallet | null => {
 	if (!metaMask) return null;
 

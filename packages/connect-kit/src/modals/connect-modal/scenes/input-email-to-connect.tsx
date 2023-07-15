@@ -171,6 +171,6 @@ function useTooltipState() {
 				}
 			},
 		}),
-		[isReady, markReady, isActive, open, close, needAutoDisplayTooltipRef]
+		[isReady, markReady, isActive, open, close, needAutoDisplayTooltipRef],
 	);
 }

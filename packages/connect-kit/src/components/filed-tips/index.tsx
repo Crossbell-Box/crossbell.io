@@ -24,8 +24,8 @@ export function FiledTips({
 			({
 				"--field-tips-color": color,
 				...style,
-			} as React.CSSProperties),
-		[style, color]
+			}) as React.CSSProperties,
+		[style, color],
 	);
 
 	return (

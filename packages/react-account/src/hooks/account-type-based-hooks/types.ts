@@ -10,11 +10,11 @@ export type Context<T> = {
 } & T;
 
 export type AccountTypeBasedHooksFactory<Params, Variables, Data> = (
-	params: Params
+	params: Params,
 ) => {
 	email?: (
 		v: Variables,
-		context: Context<{ account: EmailAccount }>
+		context: Context<{ account: EmailAccount }>,
 	) => Promise<Data>;
 
 	// TODO: separate wallet into `opSign` and `contract`
@@ -26,14 +26,14 @@ export type AccountTypeBasedHooksFactory<Params, Variables, Data> = (
 					context: Context<{
 						account: Omit<WalletAccount, "siwe">;
 						siwe: WalletAccount["siwe"];
-					}>
+					}>,
 				) => Promise<Data>;
 		  }
 		| {
 				supportOPSign: false;
 				action: (
 					v: Variables,
-					context: Context<{ account: Omit<WalletAccount, "siwe"> }>
+					context: Context<{ account: Omit<WalletAccount, "siwe"> }>,
 				) => Promise<Data>;
 		  };
 

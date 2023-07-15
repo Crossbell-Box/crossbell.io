@@ -26,5 +26,5 @@ export const LoadingOverlay = React.memo(
 			<Loading />
 			{children}
 		</div>
-	)
+	),
 );

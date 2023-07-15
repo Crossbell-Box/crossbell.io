@@ -26,7 +26,7 @@ export const useRemoveCharacterOperator = createAccountTypeBasedMutationHooks<
 			await asyncRetry(async (RETRY) => {
 				const op = await indexer.operator.getForCharacter(
 					characterId,
-					operator
+					operator,
 				);
 				return op?.permissions.length === 0 || RETRY;
 			});
@@ -38,7 +38,7 @@ export const useRemoveCharacterOperator = createAccountTypeBasedMutationHooks<
 			useAccountState.getState().refresh(),
 			queryClient.invalidateQueries(SCOPE_KEY_CHARACTER_OPERATOR(variables)),
 			queryClient.invalidateQueries(
-				GET_CHARACTER_OPERATORS_SCOPE_KEY(variables)
+				GET_CHARACTER_OPERATORS_SCOPE_KEY(variables),
 			),
 		]);
 	},

@@ -33,6 +33,6 @@ export function useIsNoteLinked(params: UseIsNoteLinkedParams) {
 		{
 			enabled:
 				!!params.fromCharacterId && !!params.characterId && !!params.noteId,
-		}
+		},
 	);
 }

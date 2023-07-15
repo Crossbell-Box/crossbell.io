@@ -6,7 +6,7 @@ import { NoteMetadata } from "crossbell";
  */
 export const composeNoteMetadata = (
 	metadata: NoteMetadata,
-	defaultOrigin: string
+	defaultOrigin: string,
 ): NoteMetadata => {
 	if (!metadata.tags) {
 		metadata.tags = ["crossbell.io"];

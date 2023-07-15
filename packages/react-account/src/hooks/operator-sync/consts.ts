@@ -64,7 +64,7 @@ export function isShowPlatform(platform: SupportedPlatform): boolean {
 }
 
 export function isSupportedPlatform(
-	platform: string
+	platform: string,
 ): platform is SupportedPlatform {
 	const p = platform.toLowerCase();
 	return SUPPORTED_PLATFORMS.includes(p as any);
@@ -83,7 +83,7 @@ export function getVeriHandle(handle: string) {
  */
 export function getPlatformUserProfileUrl(
 	platform: SupportedPlatform,
-	identity: string
+	identity: string,
 ): string {
 	switch (platform) {
 		case "medium":

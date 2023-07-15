@@ -25,12 +25,12 @@ export type UseConnectedActionOptions<P extends any[] = unknown[], V = void> = {
  * */
 export function useConnectedAction<P extends any[], V extends Promise<any>>(
 	action: (...params: P) => V,
-	options?: UseConnectedActionOptions<P, V>
+	options?: UseConnectedActionOptions<P, V>,
 ): (...params: P) => V;
 
 export function useConnectedAction<P extends any[], V>(
 	action: (...params: P) => V,
-	options?: UseConnectedActionOptions<P, V>
+	options?: UseConnectedActionOptions<P, V>,
 ): (...params: P) => Promise<V>;
 
 export function useConnectedAction<P extends any[], V>(
@@ -40,7 +40,7 @@ export function useConnectedAction<P extends any[], V>(
 		noAutoResume = false,
 		supportOPSign = false,
 		fallback,
-	}: UseConnectedActionOptions<P, V> = {}
+	}: UseConnectedActionOptions<P, V> = {},
 ): (...params: P) => Promise<V> {
 	const checkIsConnected = useCheckIsConnected({ connectType, supportOPSign });
 	const { autoResume, resetAutoResume } = useAutoResume({
@@ -173,7 +173,7 @@ function useAutoResume({
 
 					return from(params.signal).pipe(map(() => params.action));
 				}),
-				filter(() => (noAutoResume ? false : checkIsConnected()))
+				filter(() => (noAutoResume ? false : checkIsConnected())),
 			)
 			.subscribe((action) => action());
 

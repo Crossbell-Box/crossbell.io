@@ -8,5 +8,5 @@ export { useOpSignSettingsModal };
 
 export const OpSignSettingsModal = createLazyModal(
 	useOpSignSettingsModal,
-	React.lazy(() => import("./lazy"))
+	React.lazy(() => import("./lazy")),
 );

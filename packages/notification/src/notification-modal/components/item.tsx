@@ -69,7 +69,7 @@ export function Item({ notification, isRead }: ItemProps) {
 
 function renderTransactionHash(
 	transactionHash: string,
-	urlComposer: UrlComposer
+	urlComposer: UrlComposer,
 ) {
 	return (
 		<a
@@ -86,7 +86,7 @@ function renderTransactionHash(
 
 function actionDesc(
 	notification: ParsedNotification,
-	urlComposer: UrlComposer
+	urlComposer: UrlComposer,
 ) {
 	switch (notification.type) {
 		case "comment-note":
@@ -135,7 +135,7 @@ function actionDesc(
 
 function getTitleInfo(
 	notification: ParsedNotification,
-	urlComposer: UrlComposer
+	urlComposer: UrlComposer,
 ) {
 	switch (notification.type) {
 		case "comment-note":
@@ -183,7 +183,7 @@ function getCharacterName(notification: ParsedNotification) {
 
 function getCharacterUrl(
 	notification: ParsedNotification,
-	urlComposer: UrlComposer
+	urlComposer: UrlComposer,
 ): string | undefined {
 	switch (notification.type) {
 		case "mint-note":

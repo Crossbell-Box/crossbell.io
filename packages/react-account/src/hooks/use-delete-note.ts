@@ -39,17 +39,17 @@ export const useDeleteNote = createAccountTypeBasedMutationHooks<
 		onSuccess({ queryClient, account, variables }) {
 			return Promise.all([
 				queryClient.invalidateQueries(
-					SCOPE_KEY_FOLLOWING_FEEDS_OF_CHARACTER(account?.characterId)
+					SCOPE_KEY_FOLLOWING_FEEDS_OF_CHARACTER(account?.characterId),
 				),
 
 				queryClient.invalidateQueries(
-					SCOPE_KEY_NOTE(variables.characterId, variables.noteId)
+					SCOPE_KEY_NOTE(variables.characterId, variables.noteId),
 				),
 
 				queryClient.invalidateQueries(
-					SCOPE_KEY_NOTES_OF_CHARACTER(variables.characterId)
+					SCOPE_KEY_NOTES_OF_CHARACTER(variables.characterId),
 				),
 			]);
 		},
-	})
+	}),
 );

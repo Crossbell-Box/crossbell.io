@@ -13,7 +13,7 @@ export function OperatorCard({
 	description,
 }: ItemProps) {
 	const { data: primaryCharacter } = usePrimaryCharacter(
-		characterOperator.operator
+		characterOperator.operator,
 	);
 
 	const handle = primaryCharacter?.handle ? `@${primaryCharacter.handle}` : "";

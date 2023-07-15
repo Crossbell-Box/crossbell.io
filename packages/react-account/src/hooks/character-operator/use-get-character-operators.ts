@@ -22,6 +22,6 @@ export function useGetCharacterOperators({
 		{
 			enabled: Boolean(characterId),
 			getNextPageParam: (lastPage) => lastPage.cursor,
-		}
+		},
 	);
 }

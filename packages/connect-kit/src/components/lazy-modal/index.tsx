@@ -20,7 +20,7 @@ export function createLazyModal(
 			| React.ComponentType<BaseModalProps>;
 		noDynamicContainer?: boolean;
 		loadingClassName?: string;
-	}
+	},
 ) {
 	const Modal = options?.Modal ?? BaseModal;
 

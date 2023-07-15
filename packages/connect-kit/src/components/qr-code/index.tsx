@@ -3,11 +3,11 @@ import React, { ReactElement, useMemo } from "react";
 
 const generateMatrix = (
 	value: string,
-	errorCorrectionLevel: QRCodeUtil.QRCodeErrorCorrectionLevel
+	errorCorrectionLevel: QRCodeUtil.QRCodeErrorCorrectionLevel,
 ) => {
 	const arr = Array.prototype.slice.call(
 		QRCodeUtil.create(value, { errorCorrectionLevel }).modules.data,
-		0
+		0,
 	);
 	const sqrt = Math.sqrt(arr.length);
 	return arr.reduce(
@@ -15,7 +15,7 @@ const generateMatrix = (
 			(index % sqrt === 0
 				? rows.push([key])
 				: rows[rows.length - 1].push(key)) && rows,
-		[]
+		[],
 	);
 };
 
@@ -68,7 +68,7 @@ export function QRCode({
 						height={cellSize * (7 - i * 2)}
 						x={x1 + cellSize * i}
 						y={y1 + cellSize * i}
-					/>
+					/>,
 				);
 			}
 		});
@@ -97,7 +97,7 @@ export function QRCode({
 							{image}
 						</div>
 					</foreignObject>
-				</>
+				</>,
 			);
 		}
 
@@ -133,7 +133,7 @@ export function QRCode({
 									cy={j * cellSize + cellSize / 2}
 									fill={dotColor}
 									r={cellSize / 3}
-								/>
+								/>,
 							);
 						}
 					}

@@ -24,7 +24,7 @@ export function useAccountCharacters(): UseAccountCharactersResult {
 			account?.type === "email"
 				? [account.character]
 				: data?.pages.flatMap((page) => page.list) ?? [],
-		[data, account]
+		[data, account],
 	);
 
 	if (account?.type === "email") {

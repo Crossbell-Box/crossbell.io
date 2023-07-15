@@ -17,7 +17,7 @@ const ERROR_MSG_MAP: Record<ValidateHandleErrorKind, string> = {
 };
 
 export async function validateHandle(
-	handle: string
+	handle: string,
 ): Promise<ValidateHandleResult> {
 	if (handle.length >= 32 || handle.length <= 2) {
 		return invalid("lengthInvalid");

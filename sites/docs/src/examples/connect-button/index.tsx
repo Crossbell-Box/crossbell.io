@@ -12,7 +12,7 @@ export function ConnectButtonBasicUsage() {
 					const className = classNames(
 						"btn transition",
 						status.isConnected ? "btn-danger" : "btn-primary",
-						status.ssrReady ? "opacity-100" : "opacity-0"
+						status.ssrReady ? "opacity-100" : "opacity-0",
 					);
 
 					return (
@@ -37,7 +37,7 @@ export function ConnectButtonWithAccountInfo() {
 					const className = classNames(
 						"btn transition flex items-center gap-2 max-w-[90%]",
 						status.isConnected ? "btn-violet" : "btn-primary",
-						status.ssrReady ? "opacity-100" : "opacity-0"
+						status.ssrReady ? "opacity-100" : "opacity-0",
 					);
 
 					const characterName =

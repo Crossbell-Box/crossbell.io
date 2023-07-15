@@ -26,7 +26,7 @@ export function Tabs<Key extends string>({
 					onClick={() => onSelectTab(tab.id)}
 					className={classNames(
 						tab.id === currentTypeId ? styles.active : styles.inactive,
-						styles.item
+						styles.item,
 					)}
 				>
 					{tab.name}

@@ -42,7 +42,7 @@ export const ActionBtn = React.forwardRef<HTMLButtonElement, ActionBtnProps>(
 			noUxOverlay,
 			...props
 		},
-		ref
+		ref,
 	) => (
 		<button
 			{...props}
@@ -54,8 +54,8 @@ export const ActionBtn = React.forwardRef<HTMLButtonElement, ActionBtnProps>(
 				styles.btn,
 				className,
 				sizeMap[size ?? "sm"],
-				disabled ? colorMap.gray : colorMap[color ?? "gray"]
+				disabled ? colorMap.gray : colorMap[color ?? "gray"],
 			)}
 		/>
-	)
+	),
 );

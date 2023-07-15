@@ -8,5 +8,5 @@ export { useSelectCharactersModal };
 
 export const SelectCharactersModal = createLazyModal(
 	useSelectCharactersModal,
-	React.lazy(() => import("./lazy"))
+	React.lazy(() => import("./lazy")),
 );

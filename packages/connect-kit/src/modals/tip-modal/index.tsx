@@ -10,5 +10,5 @@ export { useTipModal };
 export const TipModal = createLazyModal(
 	useTipModal,
 	React.lazy(() => import("./lazy")),
-	{ Modal }
+	{ Modal },
 );

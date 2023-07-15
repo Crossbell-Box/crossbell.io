@@ -13,5 +13,5 @@ export const SentryPrivacyModal = createLazyModal(
 	{
 		Modal: Dialog,
 		loadingClassName: styles.container,
-	}
+	},
 );

@@ -3,7 +3,7 @@ import React, { DependencyList } from "react";
 export function useIntervalMemo<T>(
 	factory: () => T,
 	ms = 1000,
-	deps: DependencyList = []
+	deps: DependencyList = [],
 ): T {
 	const [times, setTimes] = React.useState(0);
 

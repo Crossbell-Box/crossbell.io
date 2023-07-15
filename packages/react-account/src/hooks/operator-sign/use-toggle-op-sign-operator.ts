@@ -10,7 +10,7 @@ export type UseToggleOpSignOperatorOptions = {
 };
 
 export function useToggleOpSignOperator(
-	options?: UseToggleOpSignOperatorOptions
+	options?: UseToggleOpSignOperatorOptions,
 ): ReturnType<typeof useToggleCharacterOperator> {
 	const [{ hasPermissions, toggleOperator }, mutation] =
 		useToggleCharacterOperator({

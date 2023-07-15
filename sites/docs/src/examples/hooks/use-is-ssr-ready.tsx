@@ -19,7 +19,7 @@ function ConnectBtn({ checkSsrStatus }: { checkSsrStatus: boolean }) {
 				className={classNames(
 					"btn",
 					checkSsrStatus && (isSsrReady ? "opacity-100" : "opacity-0"),
-					isConnected ? "btn-danger" : "btn-primary"
+					isConnected ? "btn-danger" : "btn-primary",
 				)}
 				onClick={isConnected ? disconnectModal.show : connectModal.show}
 			>

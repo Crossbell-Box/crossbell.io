@@ -46,7 +46,7 @@ export function EditCharacterProfileModalExample() {
 			<div
 				className={classNames(
 					"transition flex flex-col items-center justify-center gap-5 h-60",
-					isSsrReady ? "opacity-100" : "opacity-0"
+					isSsrReady ? "opacity-100" : "opacity-0",
 				)}
 			>
 				{account ? (

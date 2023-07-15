@@ -115,7 +115,7 @@ export function InputEmailToRegister2() {
 						onClick={() => {
 							setIsWaiting(true);
 							wait(2000).then(() =>
-								goTo({ kind: SceneKind.inputEmailToRegister3 })
+								goTo({ kind: SceneKind.inputEmailToRegister3 }),
 							);
 						}}
 					>

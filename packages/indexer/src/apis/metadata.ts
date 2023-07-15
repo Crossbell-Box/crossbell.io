@@ -19,6 +19,6 @@ export function useSyncMetadataOfNote(characterId: number, noteId: number) {
 					]);
 				}
 			},
-		}
+		},
 	);
 }

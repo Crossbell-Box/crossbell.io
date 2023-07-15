@@ -53,5 +53,5 @@ export const [ScenesStoreProvider, useScenesStore] = createContextStore(() =>
 				reset();
 			},
 		};
-	})
+	}),
 );

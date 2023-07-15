@@ -29,5 +29,5 @@ export function showSwitchNetworkModal(contract: Contract) {
 
 export const SwitchNetworkModal = createLazyModal(
 	useSwitchNetworkModal,
-	React.lazy(() => import("./lazy"))
+	React.lazy(() => import("./lazy")),
 );

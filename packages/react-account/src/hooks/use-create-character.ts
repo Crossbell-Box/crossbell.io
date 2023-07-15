@@ -62,6 +62,6 @@ export function useCreateCharacter() {
 					color: "red",
 				});
 			},
-		}
+		},
 	);
 }

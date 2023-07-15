@@ -29,7 +29,7 @@ export function useNotifications(options?: {
 	const characterId = useAccountCharacter()?.characterId;
 	const { data, ...queryResult } = useCharacterNotification(
 		characterId,
-		options?.types ?? defaultTypes
+		options?.types ?? defaultTypes,
 	);
 	const { mutate: markAsRead } =
 		useMarkCharacterNotificationAsRead(characterId);
@@ -40,9 +40,9 @@ export function useNotifications(options?: {
 	const notifications = React.useMemo(
 		() =>
 			data?.pages.flatMap(({ list }) =>
-				options?.filter ? list.filter(options?.filter) : list
+				options?.filter ? list.filter(options?.filter) : list,
 			) ?? [],
-		[data, options?.filter]
+		[data, options?.filter],
 	);
 
 	const total = data?.pages?.[0]?.count ?? 0;

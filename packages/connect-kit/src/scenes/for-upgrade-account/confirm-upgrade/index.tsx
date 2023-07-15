@@ -35,7 +35,7 @@ export function ConfirmUpgrade({ scene }: ConfirmUpgradeProps) {
 				kind: "congrats",
 				Component: () => <CongratsForUpgrade isCSBClaimed={isCSBClaimed} />,
 			});
-		}
+		},
 	);
 
 	const onSwitchScene = useRefCallback((scene: ConfirmUpgradeScene) => {

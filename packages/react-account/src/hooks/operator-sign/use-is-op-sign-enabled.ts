@@ -6,7 +6,7 @@ export type UseIsOpSignEnabledConfig = {
 };
 
 export function useIsOpSignEnabled(
-	config: UseIsOpSignEnabledConfig | null | undefined
+	config: UseIsOpSignEnabledConfig | null | undefined,
 ) {
 	const isSignedIn = useIsWalletSignedIn();
 	const hasPermissions = useOPSignOperatorHasPermissions({

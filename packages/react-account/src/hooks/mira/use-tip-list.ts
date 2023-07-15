@@ -33,6 +33,6 @@ export function useTipList(params: UseTipListParams) {
 		{
 			enabled: !!params.toCharacterId,
 			getNextPageParam: (lastPage) => lastPage.cursor,
-		}
+		},
 	);
 }

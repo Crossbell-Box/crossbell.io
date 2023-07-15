@@ -17,6 +17,6 @@ export const connectorStore = create(
 		}),
 		{
 			name: "crossbell/connect-kit/connector-store",
-		}
-	)
+		},
+	),
 );

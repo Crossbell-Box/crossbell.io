@@ -18,7 +18,7 @@ export const usePostNote = createAccountTypeBasedMutationHooks<
 		async email({ metadata, characterId }, { account }) {
 			if (characterId && account.characterId !== characterId) {
 				throw new Error(
-					"Email user cannot use any characterId other than their own."
+					"Email user cannot use any characterId other than their own.",
 				);
 			}
 
@@ -32,7 +32,7 @@ export const usePostNote = createAccountTypeBasedMutationHooks<
 
 			async action(
 				{ metadata, characterId: specifiedCharacterId },
-				{ account, siwe, contract }
+				{ account, siwe, contract },
 			) {
 				const characterId = specifiedCharacterId ?? account.characterId!;
 
@@ -59,9 +59,9 @@ export const usePostNote = createAccountTypeBasedMutationHooks<
 		onSuccess({ queryClient, account }) {
 			return Promise.all([
 				queryClient.invalidateQueries(
-					SCOPE_KEY_FOLLOWING_FEEDS_OF_CHARACTER(account?.characterId)
+					SCOPE_KEY_FOLLOWING_FEEDS_OF_CHARACTER(account?.characterId),
 				),
 			]);
 		},
-	})
+	}),
 );

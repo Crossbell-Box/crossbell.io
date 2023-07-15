@@ -14,16 +14,16 @@ export * from "./notification.types";
 
 const SCOPE_KEY_CHARACTER_NOTIFICATION = (
 	characterId: Numberish | undefined,
-	types?: NotificationTypeKey[]
+	types?: NotificationTypeKey[],
 ) => ["indexer", "character", "notification", characterId, types];
 
 const SCOPE_KEY_CHARACTER_NOTIFICATION_UNREAD_COUNT = (
-	characterId?: Numberish | undefined
+	characterId?: Numberish | undefined,
 ) => ["indexer", "character", "notification", "unread_count", characterId];
 
 export function useCharacterNotification(
 	characterId: Numberish | undefined,
-	types: NotificationTypeKey[]
+	types: NotificationTypeKey[],
 ) {
 	return useInfiniteQuery(
 		SCOPE_KEY_CHARACTER_NOTIFICATION(characterId, types),
@@ -35,7 +35,7 @@ export function useCharacterNotification(
 					limit: 20,
 					cursor: pageParam,
 					includeIsRead: true,
-				}
+				},
 			);
 
 			return {
@@ -46,12 +46,12 @@ export function useCharacterNotification(
 		{
 			enabled: Boolean(characterId),
 			getNextPageParam: (lastPage) => lastPage.cursor,
-		}
+		},
 	);
 }
 
 export function useCharacterNotificationUnreadCount(
-	characterId: Numberish | undefined
+	characterId: Numberish | undefined,
 ) {
 	return useQuery(
 		SCOPE_KEY_CHARACTER_NOTIFICATION_UNREAD_COUNT(characterId),
@@ -61,12 +61,12 @@ export function useCharacterNotificationUnreadCount(
 			const { count } = await indexer.notification.getUnreadCount(characterId);
 
 			return count;
-		}
+		},
 	);
 }
 
 export function useMarkCharacterNotificationAsRead(
-	characterId: Numberish | undefined
+	characterId: Numberish | undefined,
 ) {
 	const queryClient = useQueryClient();
 
@@ -80,14 +80,14 @@ export function useMarkCharacterNotificationAsRead(
 			onSuccess() {
 				return Promise.all([
 					queryClient.invalidateQueries(
-						SCOPE_KEY_CHARACTER_NOTIFICATION(characterId)
+						SCOPE_KEY_CHARACTER_NOTIFICATION(characterId),
 					),
 
 					queryClient.invalidateQueries(
-						SCOPE_KEY_CHARACTER_NOTIFICATION_UNREAD_COUNT(characterId)
+						SCOPE_KEY_CHARACTER_NOTIFICATION_UNREAD_COUNT(characterId),
 					),
 				]);
 			},
-		}
+		},
 	);
 }

@@ -79,7 +79,7 @@ export const updateLinkStatus = async ({
 
 export function revalidateQueries(
 	queryClient: ReturnType<typeof useQueryClient>,
-	{ fromCharacterId, characterId, noteId, linkType }: GetIsNoteLinkedConfig
+	{ fromCharacterId, characterId, noteId, linkType }: GetIsNoteLinkedConfig,
 ) {
 	return Promise.all([
 		queryClient.invalidateQueries(
@@ -87,7 +87,7 @@ export function revalidateQueries(
 				characterId,
 				noteId,
 				linkType,
-			})
+			}),
 		),
 
 		queryClient.invalidateQueries(
@@ -95,7 +95,7 @@ export function revalidateQueries(
 				characterId,
 				noteId,
 				linkType,
-			})
+			}),
 		),
 
 		queryClient.invalidateQueries(
@@ -104,20 +104,20 @@ export function revalidateQueries(
 				characterId,
 				noteId,
 				linkType,
-			})
+			}),
 		),
 
 		queryClient.invalidateQueries(SCOPE_KEY_NOTE_LIKES(characterId, noteId)),
 
 		queryClient.invalidateQueries(
-			SCOPE_KEY_NOTE_STATUS({ characterId, noteId })
+			SCOPE_KEY_NOTE_STATUS({ characterId, noteId }),
 		),
 	]);
 }
 
 export function waitUntilLinkStatusUpdated(
 	action: "link" | "unlink",
-	config: GetIsNoteLinkedConfig
+	config: GetIsNoteLinkedConfig,
 ) {
 	return asyncRetry(async (RETRY) => {
 		const { isLinked } = await getIsNoteLinked(config);

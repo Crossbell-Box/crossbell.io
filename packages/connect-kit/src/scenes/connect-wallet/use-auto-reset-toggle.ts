@@ -12,7 +12,7 @@ export function useAutoResetToggle() {
 
 	const activate = React.useCallback(
 		() => setIsActivated(true),
-		[setIsActivated]
+		[setIsActivated],
 	);
 
 	return { isActivated, activate };

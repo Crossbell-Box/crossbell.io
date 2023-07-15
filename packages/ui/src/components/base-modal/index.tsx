@@ -47,7 +47,7 @@ export function BaseModal({
 
 	const context = React.useMemo(
 		() => ({ onClose: handleClose, canClose, setCanClose }),
-		[handleClose, canClose, setCanClose]
+		[handleClose, canClose, setCanClose],
 	);
 
 	if (!needMount && isActive) {
@@ -76,7 +76,7 @@ export function BaseModal({
 						<div className={styles.bg} onClick={handleBgClick} />
 					</div>
 				</BaseModalContext.Provider>,
-				document.body
+				document.body,
 		  )
 		: null;
 }

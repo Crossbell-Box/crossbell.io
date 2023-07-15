@@ -22,7 +22,7 @@ import {
 export function useFollowCharacter(_options?: LinkCharacterOptions) {
 	const queryClient = useQueryClient();
 	const currentCharacterId = useAccountState(
-		(s) => s.computed.account?.characterId
+		(s) => s.computed.account?.characterId,
 	);
 
 	const options: LinkCharacterOptions = React.useMemo(
@@ -43,7 +43,7 @@ export function useFollowCharacter(_options?: LinkCharacterOptions) {
 				]);
 			},
 		}),
-		[_options, queryClient, currentCharacterId]
+		[_options, queryClient, currentCharacterId],
 	);
 
 	return useLinkCharacter(CharacterLinkType.follow, options);
@@ -52,7 +52,7 @@ export function useFollowCharacter(_options?: LinkCharacterOptions) {
 export function useFollowCharacters(_options?: LinkCharactersOptions) {
 	const queryClient = useQueryClient();
 	const currentCharacterId = useAccountState(
-		(s) => s.computed.account?.characterId
+		(s) => s.computed.account?.characterId,
 	);
 
 	const options: LinkCharactersOptions = React.useMemo(
@@ -70,12 +70,12 @@ export function useFollowCharacters(_options?: LinkCharactersOptions) {
 							queryClient,
 							characterId,
 							currentCharacterId,
-						})
+						}),
 					),
 				]);
 			},
 		}),
-		[_options, queryClient, currentCharacterId]
+		[_options, queryClient, currentCharacterId],
 	);
 
 	return useLinkCharacters(CharacterLinkType.follow, options);
@@ -84,7 +84,7 @@ export function useFollowCharacters(_options?: LinkCharactersOptions) {
 export function useUnfollowCharacter(_options?: UnlinkCharacterOptions) {
 	const queryClient = useQueryClient();
 	const currentCharacterId = useAccountState(
-		(s) => s.computed.account?.characterId
+		(s) => s.computed.account?.characterId,
 	);
 
 	const options: UnlinkCharacterOptions = React.useMemo(
@@ -105,7 +105,7 @@ export function useUnfollowCharacter(_options?: UnlinkCharacterOptions) {
 				]);
 			},
 		}),
-		[_options, queryClient, currentCharacterId]
+		[_options, queryClient, currentCharacterId],
 	);
 
 	return useUnlinkCharacter(CharacterLinkType.follow, options);
@@ -122,10 +122,10 @@ function invalidateQueries({
 }) {
 	return [
 		queryClient.invalidateQueries(
-			SCOPE_KEY_CHARACTER_FOLLOW_RELATION(currentCharacterId, characterId)
+			SCOPE_KEY_CHARACTER_FOLLOW_RELATION(currentCharacterId, characterId),
 		),
 		queryClient.invalidateQueries(
-			SCOPE_KEY_CHARACTER_FOLLOW_STATS(characterId)
+			SCOPE_KEY_CHARACTER_FOLLOW_STATS(characterId),
 		),
 	];
 }

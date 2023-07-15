@@ -28,7 +28,7 @@ export function MintCharacter(props: MintCharacterProps) {
 				kind: SceneKind.mintCharacter,
 				formMode: props.formMode,
 				sceneMode,
-			})
+			}),
 	);
 
 	const onSwitchFormMode = useRefCallback((formMode: MintCharacterFormMode) =>
@@ -36,7 +36,7 @@ export function MintCharacter(props: MintCharacterProps) {
 			kind: SceneKind.mintCharacter,
 			sceneMode: props.sceneMode,
 			formMode,
-		})
+		}),
 	);
 
 	return (

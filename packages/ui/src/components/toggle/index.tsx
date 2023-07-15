@@ -12,7 +12,7 @@ export type ToggleProps = {
 
 export function Toggle({ isActive, onToggle, className }: ToggleProps) {
 	const handleClick = useRefCallback((e: React.ChangeEvent<HTMLInputElement>) =>
-		onToggle(e.currentTarget.checked)
+		onToggle(e.currentTarget.checked),
 	);
 
 	return (

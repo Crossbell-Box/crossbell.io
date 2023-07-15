@@ -34,7 +34,7 @@ export function Indicator({
 			height: size,
 			opacity: disabled ? 0 : 1,
 		}),
-		[color, offset, size, disabled]
+		[color, offset, size, disabled],
 	);
 
 	return (

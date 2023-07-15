@@ -98,12 +98,12 @@ export const useCharacterProfileForm = create<CharacterProfileForm>(
 						return from(validateHandle(handle)).pipe(
 							map(
 								({ isValid, error, errorMsg }): HandleStatus =>
-									isValid ? { kind: "valid" } : { kind: error, msg: errorMsg }
+									isValid ? { kind: "valid" } : { kind: error, msg: errorMsg },
 							),
 							startWith({ kind: "checking" as const }),
-							takeUntil(cancel$)
+							takeUntil(cancel$),
 						);
-					})
+					}),
 				)
 				.subscribe((handleStatus) => {
 					set({ handleStatus });
@@ -144,12 +144,12 @@ export const useCharacterProfileForm = create<CharacterProfileForm>(
 										throw error;
 									}),
 									startWith(false),
-									map((isFinished) => ({ isFinished, handle }))
-								)
+									map((isFinished) => ({ isFinished, handle })),
+								),
 							),
-							takeUntil(cancel$)
+							takeUntil(cancel$),
 						);
-					})
+					}),
 				)
 				.subscribe(({ isFinished, handle }) => {
 					if (isFinished) {
@@ -222,7 +222,7 @@ export const useCharacterProfileForm = create<CharacterProfileForm>(
 				return isMetadataChanged();
 			},
 		};
-	}
+	},
 );
 
 export function useUploadAvatar() {

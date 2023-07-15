@@ -93,5 +93,5 @@ export const [EmailConnectStoreProvider, useEmailConnectStore] =
 					notify.error(e instanceof Error ? e.message : `${e}`);
 				}
 			},
-		}))
+		})),
 	);

@@ -86,7 +86,7 @@ export const useUpdateCharacterMetadata = createAccountTypeBasedMutationHooks<
 			return Promise.all([
 				useAccountState.getState().refresh(),
 				queryClient.invalidateQueries(
-					SCOPE_KEY_CHARACTER(variables.characterId)
+					SCOPE_KEY_CHARACTER(variables.characterId),
 				),
 			]);
 		},

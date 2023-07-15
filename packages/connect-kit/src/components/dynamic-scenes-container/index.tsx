@@ -25,8 +25,8 @@ export function DynamicScenesContainer({
 				...props.style,
 				"--dynamic-scenes-container__width": width,
 				"--dynamic-scenes-container__padding": padding,
-			} as React.CSSProperties),
-		[props.style, width, padding]
+			}) as React.CSSProperties,
+		[props.style, width, padding],
 	);
 
 	return (

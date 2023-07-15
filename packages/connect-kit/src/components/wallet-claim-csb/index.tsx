@@ -136,7 +136,7 @@ export function WalletClaimCSB({
 				<a
 					className={commonStyles.uxOverlay}
 					href={`https://twitter.com/intent/tweet?text=${encodeURIComponent(
-						tweetContent
+						tweetContent,
 					)}`}
 					target="_blank"
 				>
@@ -187,7 +187,7 @@ export function WalletClaimCSB({
 					noUxOverlay={!isAbleToClaim}
 					className={classNames(
 						styles.claimBtn,
-						!isAbleToClaim && styles.disabled
+						!isAbleToClaim && styles.disabled,
 					)}
 					onClick={handleClaim}
 				>
@@ -224,13 +224,13 @@ function DiscordPendingOverlay({
 							const threshold = parseEther("0.02");
 							return amount >= threshold ? amount : RETRY;
 						},
-						{ maxRetryTimes: 10, delayMs: 2000 }
+						{ maxRetryTimes: 10, delayMs: 2000 },
 					);
 
 					if (amount) {
 						await refreshBalance();
 						await queryClient.invalidateQueries(
-							SCOPE_KEY_ACCOUNT_BALANCE(account)
+							SCOPE_KEY_ACCOUNT_BALANCE(account),
 						);
 						onSuccess();
 					} else {
@@ -244,7 +244,7 @@ function DiscordPendingOverlay({
 					});
 				}
 			}
-		}
+		},
 	);
 
 	return (
@@ -253,7 +253,7 @@ function DiscordPendingOverlay({
 				<p
 					className={classNames(
 						styles.discordCheckingBalanceTips,
-						isCheckingBalance ? styles.visible : styles.invisible
+						isCheckingBalance ? styles.visible : styles.invisible,
 					)}
 				>
 					Checking $CSB balance...
@@ -262,7 +262,7 @@ function DiscordPendingOverlay({
 				<div
 					className={classNames(
 						styles.discordPendingTips,
-						isCheckingBalance ? styles.invisible : styles.visible
+						isCheckingBalance ? styles.invisible : styles.visible,
 					)}
 				>
 					<p>

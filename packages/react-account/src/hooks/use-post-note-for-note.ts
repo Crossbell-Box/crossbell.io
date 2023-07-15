@@ -72,10 +72,10 @@ export const usePostNoteForNote = createAccountTypeBasedMutationHooks<
 
 			return Promise.all([
 				queryClient.invalidateQueries(
-					SCOPE_KEY_NOTES_OF_NOTE(note.characterId, note.noteId)
+					SCOPE_KEY_NOTES_OF_NOTE(note.characterId, note.noteId),
 				),
 				queryClient.invalidateQueries(SCOPE_KEY_NOTE_STATUS(note)),
 			]);
 		},
-	})
+	}),
 );

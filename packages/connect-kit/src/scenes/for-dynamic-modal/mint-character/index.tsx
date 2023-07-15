@@ -34,7 +34,7 @@ export function MintCharacter({
 					/>
 				),
 			});
-		}
+		},
 	);
 
 	const onSwitchFormMode = useRefCallback((formMode: MintCharacterFormMode) => {

@@ -55,7 +55,7 @@ export function Main() {
 				<p
 					className={classNames(
 						styles.extraLoadingTips,
-						!displayExtraTips && styles.hidden
+						!displayExtraTips && styles.hidden,
 					)}
 				>
 					Please make sure you are using a wallet that supports custom networks.
@@ -65,7 +65,7 @@ export function Main() {
 					className={classNames(
 						styles.cancelBtn,
 						commonStyles.uxOverlay,
-						!displayExtraTips && styles.hidden
+						!displayExtraTips && styles.hidden,
 					)}
 					onClick={switchNetwork.reset}
 				>

@@ -30,13 +30,13 @@ export function List({ characterId }: ListProps) {
 						characterOperator: characterOperator,
 						tags: getTags(characterOperator),
 						description: getDescription(characterOperator),
-					}))
+					})),
 				)
 				.filter(
-					({ characterOperator }) => characterOperator.permissions.length > 0
+					({ characterOperator }) => characterOperator.permissions.length > 0,
 				)
 				.sort((a, b) => (a.description ? (b.description ? 0 : -1) : 1)) ?? [],
-		[data]
+		[data],
 	);
 
 	return (
@@ -119,7 +119,7 @@ function getTags(characterOperator: CharacterOperatorEntity): ItemTag[] | null {
 }
 
 function getDescription(
-	characterOperator: CharacterOperatorEntity
+	characterOperator: CharacterOperatorEntity,
 ): string | null {
 	if (isAddressEqual(characterOperator.operator, X_SYNC_OPERATOR_ADDRESS)) {
 		return "For syncing other platforms' content";

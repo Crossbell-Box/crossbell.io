@@ -23,7 +23,7 @@ export function useFollowingCharactersOfCharacter(characterId?: number) {
 		{
 			enabled: Boolean(characterId),
 			getNextPageParam: (lastPage) => lastPage.cursor,
-		}
+		},
 	);
 }
 
@@ -45,6 +45,6 @@ export function useFollowerCharactersOfCharacter(characterId?: number) {
 		{
 			enabled: Boolean(characterId),
 			getNextPageParam: (lastPage) => lastPage.cursor,
-		}
+		},
 	);
 }

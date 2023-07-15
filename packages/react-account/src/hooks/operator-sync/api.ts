@@ -5,7 +5,7 @@ export default class OperatorSyncApi {
 
 	async isCharacterActivated(characterId: number): Promise<boolean> {
 		const res = (await fetch(`${this.endpoint}/${characterId}`).then((res) =>
-			res.json()
+			res.json(),
 		)) as OperatorSyncServerResponse<OperatorSyncCharacter>;
 
 		const isActivate =
@@ -18,7 +18,7 @@ export default class OperatorSyncApi {
 		const res = (await fetch(`${this.endpoint}/${characterId}`, {
 			method: "POST",
 		}).then((res) =>
-			res.json()
+			res.json(),
 		)) as OperatorSyncServerResponse<OperatorSyncCharacter>;
 
 		const isActivate =
@@ -28,10 +28,10 @@ export default class OperatorSyncApi {
 	}
 
 	async getBoundAccounts(
-		characterId: number
+		characterId: number,
 	): Promise<OperatorSyncServerResponse<OperatorSyncAccount[] | null>> {
 		const res = await fetch(`${this.endpoint}/${characterId}/account`).then(
-			(res) => res.json()
+			(res) => res.json(),
 		);
 
 		return res;
@@ -41,10 +41,10 @@ export default class OperatorSyncApi {
 		characterId: number,
 		platform: SupportedPlatform,
 		username: string,
-		startTime?: string
+		startTime?: string,
 	): Promise<OperatorSyncServerResponse<boolean>> {
 		const url = new URL(
-			`${this.endpoint}/${characterId}/account/bind/${platform}/${username}`
+			`${this.endpoint}/${characterId}/account/bind/${platform}/${username}`,
 		);
 		if (startTime) {
 			// Should be in RFC3339 format
@@ -64,11 +64,11 @@ export default class OperatorSyncApi {
 	async unbindAccount(
 		characterId: number,
 		platform: SupportedPlatform,
-		username: string
+		username: string,
 	) {
 		const res = (await fetch(
 			`${this.endpoint}/${characterId}/account/unbind/${platform}/${username}`,
-			{ method: "DELETE" }
+			{ method: "DELETE" },
 		).then((res) => res.json())) as OperatorSyncServerResponse<boolean>;
 
 		if (!(res.ok && res.result)) {
@@ -94,13 +94,13 @@ export default class OperatorSyncApi {
 	async syncAccount(
 		characterId: number,
 		platform: SupportedPlatform,
-		username: string
+		username: string,
 	): Promise<OperatorSyncServerResponse<OperatorSyncAccount>> {
 		const res = (await fetch(
 			`${this.endpoint}/${characterId}/account/sync/${platform}/${username}`,
-			{ method: "POST" }
+			{ method: "POST" },
 		).then((res) =>
-			res.json()
+			res.json(),
 		)) as OperatorSyncServerResponse<OperatorSyncAccount>;
 
 		if (!(res.ok && res.result)) {

@@ -8,5 +8,5 @@ export { useCsbDetailModal };
 
 export const CsbDetailModal = createLazyModal(
 	useCsbDetailModal,
-	React.lazy(() => import("./lazy"))
+	React.lazy(() => import("./lazy")),
 );

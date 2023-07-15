@@ -44,7 +44,7 @@ export function injectContractChecker({
 				openConnectModal?.();
 				throw new BizError(
 					"Not connected. Please connect your wallet.",
-					ERROR_CODES.NOT_CONNECTED
+					ERROR_CODES.NOT_CONNECTED,
 				);
 			}
 
@@ -53,7 +53,7 @@ export function injectContractChecker({
 				openMintNewCharacterModel();
 				throw new BizError(
 					"You don't have a character yet",
-					ERROR_CODES.NO_CHARACTER
+					ERROR_CODES.NO_CHARACTER,
 				);
 			}
 		}
@@ -87,7 +87,7 @@ function hasEnoughCsb(amount: Numberish) {
 
 async function checkNetwork(
 	contract: Contract<true>,
-	showModal: InjectContractCheckerConfig["showSwitchNetworkModal"]
+	showModal: InjectContractCheckerConfig["showSwitchNetworkModal"],
 ) {
 	const isMainnet = await isCrossbellMainnet(contract.walletClient);
 

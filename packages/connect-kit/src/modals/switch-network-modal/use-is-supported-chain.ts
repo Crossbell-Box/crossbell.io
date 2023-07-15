@@ -6,6 +6,6 @@ export function useIsSupportedChain() {
 
 	return React.useMemo(
 		() => (chain ? chains.find((c) => c.id === chain?.id) : false),
-		[chain, chains]
+		[chain, chains],
 	);
 }

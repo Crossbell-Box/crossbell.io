@@ -13,7 +13,7 @@ export function IconBtn(props: IconBtnProps) {
 			className={classNames(
 				styles.btn,
 				props.className,
-				commonStyles.uxOverlay
+				commonStyles.uxOverlay,
 			)}
 		/>
 	);

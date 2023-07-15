@@ -8,10 +8,10 @@ import {
 export function useConnectedAccount(type: "email"): EmailAccount | null;
 export function useConnectedAccount(type: "wallet"): WalletAccount | null;
 export function useConnectedAccount(
-	type?: GeneralAccount["type"]
+	type?: GeneralAccount["type"],
 ): GeneralAccount | null;
 export function useConnectedAccount(
-	type?: GeneralAccount["type"]
+	type?: GeneralAccount["type"],
 ): GeneralAccount | null {
 	return useAccountState((s) => {
 		switch (type) {

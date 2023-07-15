@@ -6,7 +6,10 @@ export const ERROR_CODES = {
 export type ErrorCode = (typeof ERROR_CODES)[keyof typeof ERROR_CODES];
 
 export class BizError extends Error {
-	constructor(message: string, public code: ErrorCode) {
+	constructor(
+		message: string,
+		public code: ErrorCode,
+	) {
 		super(message);
 		this.code = code;
 	}

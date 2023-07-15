@@ -7,7 +7,7 @@ type RawAction = (...args: any[]) => any;
 
 export function handleActions<T extends object>(
 	obj: T,
-	callback: ActionHandler
+	callback: ActionHandler,
 ): T {
 	function createProxy<T extends object>(target: T, path: string[]): T {
 		return new Proxy<T>(target, {

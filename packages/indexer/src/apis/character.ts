@@ -22,7 +22,7 @@ export function useCharacters(address?: Address) {
 		{
 			enabled: Boolean(address),
 			getNextPageParam: (lastPage) => lastPage.cursor,
-		}
+		},
 	);
 }
 
@@ -41,7 +41,7 @@ export function useCharacter(characterId?: number | null, options?: any) {
 		{
 			enabled: Boolean(characterId),
 			...options,
-		}
+		},
 	);
 }
 
@@ -57,7 +57,7 @@ export function useCharacterByHandle(handle?: string, options?: any) {
 	return useQuery(
 		SCOPE_KEY_CHARACTER_BY_HANDLE(handle),
 		() => fetchCharacterByHandle(handle!),
-		{ enabled: Boolean(handle), ...options }
+		{ enabled: Boolean(handle), ...options },
 	);
 }
 
@@ -86,14 +86,14 @@ export function useCharacterHandleExists(handle?: string) {
 	return useQuery(
 		SCOPE_KEY_CHARACTER_HANDLE_EXISTS(handle),
 		() => fetchCharacterHandleExists(handle!),
-		{ enabled: Boolean(handle) }
+		{ enabled: Boolean(handle) },
 	);
 }
 
 // get the primary character of an address
 
 export const SCOPE_KEY_PRIMARY_CHARACTER = (
-	address: string | null | undefined
+	address: string | null | undefined,
 ) => {
 	return [...SCOPE_KEY, "primary", address];
 };
@@ -102,7 +102,7 @@ export function usePrimaryCharacter(address?: Address) {
 	return useQuery(
 		SCOPE_KEY_PRIMARY_CHARACTER(address),
 		() => indexer.character.getPrimary(address!),
-		{ enabled: Boolean(address) }
+		{ enabled: Boolean(address) },
 	);
 }
 
@@ -113,7 +113,7 @@ export const SCOPE_KEY_CHARACTER_FOLLOW_STATS = (characterId?: number) => {
 };
 export function useCharacterFollowStats(
 	characterId?: number,
-	options: any = {}
+	options: any = {},
 ) {
 	return useQuery(
 		SCOPE_KEY_CHARACTER_FOLLOW_STATS(characterId),
@@ -138,20 +138,20 @@ export function useCharacterFollowStats(
 				followersCount,
 			};
 		},
-		{ enabled: Boolean(characterId), ...options }
+		{ enabled: Boolean(characterId), ...options },
 	);
 }
 
 export const SCOPE_KEY_CHARACTER_FOLLOW_RELATION = (
 	fromCharacterId?: number,
-	toCharacterID?: number
+	toCharacterID?: number,
 ) => {
 	return [...SCOPE_KEY, "follow", "relation", fromCharacterId, toCharacterID];
 };
 export function useCharacterFollowRelation(
 	fromCharacterId?: number,
 	toCharacterID?: number,
-	options: any = {}
+	options: any = {},
 ) {
 	const data = useQuery(
 		SCOPE_KEY_CHARACTER_FOLLOW_RELATION(fromCharacterId, toCharacterID),
@@ -178,7 +178,7 @@ export function useCharacterFollowRelation(
 				isFollowed,
 			};
 		},
-		{ enabled: Boolean(fromCharacterId && toCharacterID), ...options }
+		{ enabled: Boolean(fromCharacterId && toCharacterID), ...options },
 	);
 
 	const isLoadingFollowRelation =

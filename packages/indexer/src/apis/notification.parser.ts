@@ -5,7 +5,7 @@ import { indexer } from "../indexer";
 import { ParsedNotification } from "./notification.types";
 
 export async function parseNotificationEntity(
-	entity: NotificationEntity
+	entity: NotificationEntity,
 ): Promise<ParsedNotification | null> {
 	const baseInfo = {
 		transactionHash: entity.transactionHash,

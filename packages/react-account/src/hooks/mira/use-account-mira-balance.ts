@@ -42,7 +42,7 @@ export function useAccountMiraBalance(): UseAccountMiraBalanceResult {
 						address: address!,
 				  })
 				: null,
-		{ enabled: !!address || !!account?.characterId }
+		{ enabled: !!address || !!account?.characterId },
 	);
 
 	return { balance: data ?? null, isLoading };

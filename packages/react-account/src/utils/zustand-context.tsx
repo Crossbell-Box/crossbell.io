@@ -4,7 +4,7 @@ import React from "react";
 import { createContext } from "./zustand-create-context";
 
 export function createContextStore<S extends StoreApi<unknown>>(
-	createStore: () => S
+	createStore: () => S,
 ) {
 	const { Provider: ZustandProvider, useStore } = createContext<S>();
 	const ResetContext = React.createContext(() => {});
@@ -39,7 +39,7 @@ export function withMultipleProviders(
 	}: Required<React.PropsWithChildren>) {
 		return Providers.reduce(
 			(node, Provider) => <Provider>{node}</Provider>,
-			children
+			children,
 		) as JSX.Element;
 	};
 }

@@ -7,10 +7,10 @@ export type UseResizerObserverOptions<T extends HTMLElement> = {
 };
 
 export function useResizerObserver<T extends HTMLElement>(
-	options: UseResizerObserverOptions<T>
+	options: UseResizerObserverOptions<T>,
 ) {
 	const cacheRef = React.useRef<{ elm: T; observer: ResizeObserver } | null>(
-		null
+		null,
 	);
 
 	const onResize = useRefCallback(() => {

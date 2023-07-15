@@ -30,6 +30,6 @@ export function useNoteLinkCount(params: UseNoteLinkCountParams) {
 			}),
 		{
 			enabled: !!params.characterId && !!params.noteId && !!params.linkType,
-		}
+		},
 	);
 }

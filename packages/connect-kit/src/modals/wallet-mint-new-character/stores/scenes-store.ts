@@ -14,5 +14,5 @@ export const [ScenesStoreProvider, useScenesStore] = createContextStore(() =>
 			sceneMode: "form",
 			formMode: "normal",
 		})(set, get),
-	}))
+	})),
 );

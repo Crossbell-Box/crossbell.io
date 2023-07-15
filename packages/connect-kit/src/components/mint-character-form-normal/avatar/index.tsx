@@ -34,7 +34,7 @@ export function Avatar({ file, onSelect }: AvatarProps) {
 			className={classNames(
 				styles.container,
 				isDragActive && styles.isActive,
-				!previewURL && commonStyles.uxOverlay
+				!previewURL && commonStyles.uxOverlay,
 			)}
 		>
 			<input {...getInputProps()} />
@@ -61,7 +61,7 @@ function usePreviewFile(file: string | File | null) {
 					? getWeb2Url(file)
 					: URL.createObjectURL(file)
 				: null,
-		[file, getWeb2Url]
+		[file, getWeb2Url],
 	);
 
 	React.useEffect(() => {

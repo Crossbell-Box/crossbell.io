@@ -14,7 +14,7 @@ function request<T = any>(
 		method: string;
 		body?: Record<string, unknown>;
 		reCAPTCHAToken?: string;
-	}
+	},
 ): Promise<T> {
 	const headers = new Headers({ "Content-Type": "application/json" });
 
@@ -45,7 +45,7 @@ export type FaucetGetAddressInfoResponse = {
 	error?: string;
 };
 export async function faucetGetAddressInfo(
-	address: string
+	address: string,
 ): Promise<FaucetGetAddressInfoResponse> {
 	return request(`/addresses/${address}`, { method: "GET" });
 }
@@ -81,7 +81,7 @@ type FaucetGetTransactionResponse = {
 	error?: string;
 };
 export async function faucetGetTransaction(
-	transactionHash: string
+	transactionHash: string,
 ): Promise<FaucetGetTransactionResponse> {
 	return await request(`/transactions/${transactionHash}`, {
 		method: "GET",

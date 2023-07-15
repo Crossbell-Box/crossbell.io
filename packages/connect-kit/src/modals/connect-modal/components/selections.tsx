@@ -26,7 +26,7 @@ export function Selections({ items }: SelectionsProps) {
 					className={classNames(
 						styles.item,
 						commonStyles.uxOverlay,
-						item.className
+						item.className,
 					)}
 					style={item.style}
 					onClick={item.onClick}

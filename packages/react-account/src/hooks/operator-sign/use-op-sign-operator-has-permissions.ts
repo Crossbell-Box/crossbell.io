@@ -10,7 +10,7 @@ export type UseOPSignOperatorHasPermissionsOptions = {
 };
 
 export function useOPSignOperatorHasPermissions(
-	options?: UseOPSignOperatorHasPermissionsOptions
+	options?: UseOPSignOperatorHasPermissionsOptions,
 ) {
 	return useCharacterOperatorHasPermissions({
 		operatorAddress: OP_SIGN_OPERATOR_ADDRESS,

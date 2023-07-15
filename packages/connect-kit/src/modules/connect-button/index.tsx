@@ -28,7 +28,7 @@ export type ConnectButtonActions = {
 export type ConnectButtonProps = {
 	children: (
 		params: ConnectButtonStatus,
-		actions: ConnectButtonActions
+		actions: ConnectButtonActions,
 	) => React.ReactNode;
 };
 
@@ -62,7 +62,7 @@ export function ConnectButton({ children }: ConnectButtonProps): JSX.Element {
 					connect: connectModal.show,
 					disconnect: disconnectModal.show,
 					selectCharacters: selectCharactersModal.show,
-				}
+				},
 			)}
 		</>
 	);

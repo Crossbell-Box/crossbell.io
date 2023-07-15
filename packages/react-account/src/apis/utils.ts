@@ -15,7 +15,7 @@ export function stringify(value: any) {
 
 export function request<T = any>(
 	url: `/${"newbie" | "siwe"}/${string}`,
-	{ body, method, token, handleResponse }: RequestConfig<T>
+	{ body, method, token, handleResponse }: RequestConfig<T>,
 ): Promise<T> {
 	const headers = new Headers({ "Content-Type": "application/json" });
 
@@ -37,6 +37,6 @@ export function request<T = any>(
 				}
 
 				return result;
-			})
+			}),
 	);
 }

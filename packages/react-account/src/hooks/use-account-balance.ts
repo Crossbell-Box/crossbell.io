@@ -73,7 +73,7 @@ export function useWalletAccountBalance(): UseAccountBalanceResult {
 			if (!wallet?.address) return null;
 
 			return (await contract.csb.getBalance({ owner: wallet.address })).data;
-		}
+		},
 	);
 
 	const balance = React.useMemo(() => {

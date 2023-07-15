@@ -11,7 +11,7 @@ import { type Address } from "viem";
 import { request } from "./utils";
 
 export async function registerSendCodeToEmail(
-	email: string
+	email: string,
 ): Promise<{ ok: boolean; msg: string }> {
 	const result = await request("/newbie/account/signup/email", {
 		method: "POST",
@@ -76,7 +76,7 @@ export async function connectByEmail(body: {
 }
 
 export async function resetPasswordSendCodeToEmail(
-	email: string
+	email: string,
 ): Promise<{ ok: boolean; msg: string }> {
 	const result = await request("/newbie/account/reset-password/email", {
 		method: "POST",
@@ -136,11 +136,11 @@ export type FetchAccountInfoResult =
 	  };
 
 export async function fetchAccountInfo(
-	token: string
+	token: string,
 ): Promise<FetchAccountInfoResult> {
 	const { email, characterId, message, csb } = await request(
 		"/newbie/account",
-		{ method: "GET", token }
+		{ method: "GET", token },
 	);
 
 	if (email && characterId) {
@@ -152,7 +152,7 @@ export async function fetchAccountInfo(
 
 export async function updateHandle(
 	token: string,
-	handle: string
+	handle: string,
 ): Promise<{ ok: boolean; msg: string }> {
 	return request("/newbie/contract/characters/me/handle", {
 		method: "POST",
@@ -185,7 +185,7 @@ export async function linkNote({
 }): Promise<{ transactionHash: string; data: string }> {
 	return request(
 		`/newbie/contract/links/notes/${characterId}/${noteId}/${linkType}`,
-		{ method: "PUT", token, body: { data } }
+		{ method: "PUT", token, body: { data } },
 	);
 }
 
@@ -202,7 +202,7 @@ export async function unlinkNote({
 }): Promise<{ transactionHash: string; data: string }> {
 	return request(
 		`/newbie/contract/links/notes/${characterId}/${noteId}/${linkType}`,
-		{ method: "DELETE", token }
+		{ method: "DELETE", token },
 	);
 }
 
@@ -219,7 +219,7 @@ export async function linkCharacter({
 }): Promise<{ transactionHash: string; data: string }> {
 	return request(
 		`/newbie/contract/links/characters/${toCharacterId}/${linkType}`,
-		{ method: "PUT", token, body: { data } }
+		{ method: "PUT", token, body: { data } },
 	);
 }
 
@@ -254,7 +254,7 @@ export async function unlinkCharacter({
 }): Promise<{ transactionHash: string; data: string }> {
 	return request(
 		`/newbie/contract/links/characters/${toCharacterId}/${linkType}`,
-		{ method: "DELETE", token }
+		{ method: "DELETE", token },
 	);
 }
 

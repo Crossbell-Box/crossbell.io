@@ -76,7 +76,7 @@ export function Item({
 	});
 
 	const { data: primaryCharacter } = usePrimaryCharacter(
-		characterOperator.operator
+		characterOperator.operator,
 	);
 
 	const handle = primaryCharacter?.handle ? `@${primaryCharacter.handle}` : "";
@@ -125,10 +125,10 @@ export function Item({
 }
 
 export function useOperatorAvatar(
-	characterOperator: CharacterOperatorEntity
+	characterOperator: CharacterOperatorEntity,
 ): string | undefined {
 	const administratorUrl = useWeb2Url(
-		"ipfs://bafkreib3yzt66fwyeegrinj6ljtjjwpjugcdscepu2iw6kopiaoqsbidtm"
+		"ipfs://bafkreib3yzt66fwyeegrinj6ljtjjwpjugcdscepu2iw6kopiaoqsbidtm",
 	);
 
 	if (

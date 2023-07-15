@@ -18,7 +18,7 @@ export function SelectCharacters() {
 		<Main
 			afterSelectCharacter={(
 				{ characterId },
-				{ opSignOperatorHasPermissions }
+				{ opSignOperatorHasPermissions },
 			) => {
 				if (isWalletSignedIn && !opSignOperatorHasPermissions) {
 					goTo({

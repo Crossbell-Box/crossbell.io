@@ -15,7 +15,7 @@ import {
 import { useNoteLinkList, UseNoteLinkListParams } from "./use-note-link-list";
 
 export function useIsNoteLiked(
-	params: Omit<UseIsNoteLinkedParams, "linkType">
+	params: Omit<UseIsNoteLinkedParams, "linkType">,
 ) {
 	const { characterId } = useAccountCharacterId();
 
@@ -35,7 +35,7 @@ export function useIsNoteLiked(
 }
 
 export function useNoteLikeCount(
-	params: MarkOptional<Omit<UseNoteLinkCountParams, "linkType">, "characterId">
+	params: MarkOptional<Omit<UseNoteLinkCountParams, "linkType">, "characterId">,
 ) {
 	const { characterId } = useAccountCharacterId();
 
@@ -48,7 +48,7 @@ export function useNoteLikeCount(
 
 export function useToggleLikeNote(options?: UseToggleLinkNoteOptions) {
 	const needInvokeContract = useAccountState(
-		(s) => !s.email && !s.wallet?.siwe
+		(s) => !s.email && !s.wallet?.siwe,
 	);
 	const mutation = useToggleLinkNote(NoteLinkType.like, options);
 
@@ -59,7 +59,7 @@ export function useToggleLikeNote(options?: UseToggleLinkNoteOptions) {
 }
 
 export function useNoteLikeList(
-	params: Omit<UseNoteLinkListParams, "linkType">
+	params: Omit<UseNoteLinkListParams, "linkType">,
 ) {
 	return useNoteLinkList({ ...params, linkType: NoteLinkType.like });
 }

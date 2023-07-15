@@ -24,6 +24,6 @@ export function useCharacterOperatorPermissions({
 					?.permissions ?? null
 			);
 		},
-		{ enabled: !!characterId }
+		{ enabled: !!characterId },
 	);
 }

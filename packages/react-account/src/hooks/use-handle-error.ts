@@ -8,7 +8,7 @@ const noEnoughCSB = "You do not have enough $CSB to perform this action";
 
 export function useHandleError(title: string) {
 	const isWallet = useAccountState(
-		(s) => s.computed.account?.type === "wallet"
+		(s) => s.computed.account?.type === "wallet",
 	);
 
 	return useRefCallback((err: unknown) => {

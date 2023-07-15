@@ -20,7 +20,7 @@ export function SelectCharacters() {
 			Header={Header}
 			afterSelectCharacter={(
 				{ characterId },
-				{ opSignOperatorHasPermissions }
+				{ opSignOperatorHasPermissions },
 			) => {
 				if (isWalletSignedIn && !opSignOperatorHasPermissions) {
 					goTo({

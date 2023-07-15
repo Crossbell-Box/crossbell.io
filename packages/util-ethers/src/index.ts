@@ -5,7 +5,7 @@ export type TruncateAddressOptions = {
 
 export const truncateAddress = (
 	address?: string,
-	options?: TruncateAddressOptions
+	options?: TruncateAddressOptions,
 ) => {
 	if (!address) {
 		return "0xUNKNOWN";

@@ -200,5 +200,5 @@ export const [EmailRegisterStoreProvider, useEmailRegisterStore] =
 
 				return false;
 			},
-		}))
+		})),
 	);

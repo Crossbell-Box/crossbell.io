@@ -9,7 +9,7 @@ export interface ModalSlice {
 
 export const modalSlice: SliceFn<ModalSlice, OmitActions<ModalSlice>> = (
 	set,
-	get
+	get,
 ) => ({
 	isActive: false,
 
@@ -31,17 +31,17 @@ export const modalSlice: SliceFn<ModalSlice, OmitActions<ModalSlice>> = (
 });
 
 export function waitUntilModalClosed<S extends Pick<ModalSlice, "isActive">>(
-	modal: UseBoundStore<StoreApi<S>>
+	modal: UseBoundStore<StoreApi<S>>,
 ): Promise<void>;
 
 export function waitUntilModalClosed<S>(
 	modal: UseBoundStore<StoreApi<S>>,
-	checkIsClosed: (state: S) => boolean
+	checkIsClosed: (state: S) => boolean,
 ): Promise<void>;
 
 export function waitUntilModalClosed<S extends Pick<ModalSlice, "isActive">>(
 	modal: UseBoundStore<StoreApi<S>>,
-	checkIsClosed: (state: S) => boolean = (s) => !s.isActive
+	checkIsClosed: (state: S) => boolean = (s) => !s.isActive,
 ) {
 	return new Promise<void>((resolve) => {
 		const isClosed = checkIsClosed(modal.getState());

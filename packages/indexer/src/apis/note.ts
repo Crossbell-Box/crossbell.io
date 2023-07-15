@@ -27,7 +27,7 @@ export function useNotesOfCharacter(characterId?: number) {
 		{
 			enabled: Boolean(characterId),
 			getNextPageParam: (lastPage) => lastPage.cursor,
-		}
+		},
 	);
 }
 
@@ -57,7 +57,7 @@ export function useNotes(config?: UseNotesConfig) {
 				}),
 		{
 			getNextPageParam: (lastPage) => lastPage.cursor,
-		}
+		},
 	);
 }
 
@@ -66,7 +66,7 @@ export function useNotes(config?: UseNotesConfig) {
 export function fetchNotesForNote(
 	characterId: number,
 	noteId: number,
-	cursor: string
+	cursor: string,
 ) {
 	return indexer.note
 		.getMany({
@@ -84,7 +84,7 @@ export function fetchNotesForNote(
 }
 export const SCOPE_KEY_NOTES_OF_NOTE = (
 	characterId: number,
-	noteId: number
+	noteId: number,
 ) => [...SCOPE_KEY, "list", characterId, noteId];
 export function useNotesForNote(characterId: number, noteId: number) {
 	return useInfiniteQuery(
@@ -93,7 +93,7 @@ export function useNotesForNote(characterId: number, noteId: number) {
 		{
 			enabled: Boolean(characterId && noteId),
 			getNextPageParam: (lastPage) => lastPage.cursor,
-		}
+		},
 	);
 }
 
@@ -110,7 +110,7 @@ export const SCOPE_KEY_NOTE = (characterId: number, noteId: number) => {
 export function useNote(
 	characterId: number,
 	noteId: number,
-	options: any = {}
+	options: any = {},
 ) {
 	return useQuery(
 		SCOPE_KEY_NOTE(characterId, noteId),
@@ -118,7 +118,7 @@ export function useNote(
 		{
 			enabled: Boolean(characterId && noteId),
 			...options,
-		}
+		},
 	);
 }
 
@@ -169,7 +169,7 @@ export function useNoteStatus({
 				isMinted,
 			};
 		},
-		{ enabled: Boolean(characterId && noteId) }
+		{ enabled: Boolean(characterId && noteId) },
 	);
 }
 
@@ -177,7 +177,7 @@ export function useNoteStatus({
 
 export const SCOPE_KEY_NOTE_MINTED_COUNT = (
 	characterId: number,
-	noteId: number
+	noteId: number,
 ) => {
 	return [...SCOPE_KEY, "minted_count", characterId, noteId];
 };
@@ -190,10 +190,10 @@ export function useNoteMintedCount(characterId: number, noteId: number) {
 				noteId,
 				{
 					limit: 0,
-				}
+				},
 			);
 			return count;
-		}
+		},
 	);
 }
 
@@ -212,7 +212,7 @@ export function useNoteLikes(characterId: number, noteId: number) {
 		{
 			enabled: Boolean(characterId && noteId),
 			getNextPageParam: (lastPage) => lastPage.cursor,
-		}
+		},
 	);
 }
 
@@ -231,6 +231,6 @@ export function useNoteMints(characterId: number, noteId: number) {
 		{
 			enabled: Boolean(characterId && noteId),
 			getNextPageParam: (lastPage) => lastPage.cursor,
-		}
+		},
 	);
 }

@@ -17,5 +17,5 @@ export const BottomTips = React.forwardRef<HTMLButtonElement, ActionBtnProps>(
 			<LightBulbIcon />
 			{children}
 		</ActionBtn>
-	)
+	),
 );

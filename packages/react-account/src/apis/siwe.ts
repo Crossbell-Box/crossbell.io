@@ -83,7 +83,7 @@ export async function siweLinkNote({
 }): Promise<{ transactionHash: string; data: string }> {
 	return request(
 		`/siwe/contract/characters/${fromCharacterId}/links/notes/${characterId}/${noteId}/${linkType}`,
-		{ method: "PUT", token: siwe.token, body: { data } }
+		{ method: "PUT", token: siwe.token, body: { data } },
 	);
 }
 
@@ -102,7 +102,7 @@ export async function siweUnlinkNote({
 }): Promise<{ transactionHash: string; data: string }> {
 	return request(
 		`/siwe/contract/characters/${fromCharacterId}/links/notes/${characterId}/${noteId}/${linkType}`,
-		{ method: "DELETE", token: siwe.token }
+		{ method: "DELETE", token: siwe.token },
 	);
 }
 
@@ -121,7 +121,7 @@ export async function siweLinkCharacter({
 }): Promise<{ transactionHash: string; data: string }> {
 	return request(
 		`/siwe/contract/characters/${characterId}/links/characters/${toCharacterId}/${linkType}`,
-		{ method: "PUT", token: siwe.token, body: { data } }
+		{ method: "PUT", token: siwe.token, body: { data } },
 	);
 }
 
@@ -160,7 +160,7 @@ export async function siweUnlinkCharacter({
 }): Promise<{ transactionHash: string; data: string }> {
 	return request(
 		`/siwe/contract/characters/${characterId}/links/characters/${toCharacterId}/${linkType}`,
-		{ method: "DELETE", token: siwe.token }
+		{ method: "DELETE", token: siwe.token },
 	);
 }
 
@@ -203,7 +203,7 @@ export async function siweUpdateNote({
 			method: "POST",
 			token: siwe.token,
 			body: { metadata },
-		}
+		},
 	);
 }
 
@@ -237,6 +237,6 @@ export function siweMintNote({
 			method: "PUT",
 			token: siwe.token,
 			body: {},
-		}
+		},
 	);
 }

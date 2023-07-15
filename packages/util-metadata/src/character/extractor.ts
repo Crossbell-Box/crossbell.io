@@ -7,15 +7,15 @@ import { truncateAddress } from "@crossbell/util-ethers";
 
 export function extractCharacterName(
 	character: CharacterEntity | null | undefined,
-	{ fallbackToHandle }?: { fallbackToHandle?: true }
+	{ fallbackToHandle }?: { fallbackToHandle?: true },
 ): string;
 export function extractCharacterName(
 	character: CharacterEntity | null | undefined,
-	{ fallbackToHandle }: { fallbackToHandle: false }
+	{ fallbackToHandle }: { fallbackToHandle: false },
 ): string | undefined;
 export function extractCharacterName(
 	character: CharacterEntity | null | undefined,
-	{ fallbackToHandle = true }: { fallbackToHandle?: boolean } = {}
+	{ fallbackToHandle = true }: { fallbackToHandle?: boolean } = {},
 ): string | undefined {
 	const name = character?.metadata?.content?.name;
 	if (name) {
@@ -35,14 +35,14 @@ export function extractCharacterName(
 }
 
 export function extractCharacterAvatars(
-	character: CharacterEntity | null | undefined
+	character: CharacterEntity | null | undefined,
 ): string[] {
 	const avatars = character?.metadata?.content?.avatars?.filter(Boolean);
 
 	return avatars ?? [];
 }
 export function extractCharacterAvatar(
-	character: CharacterEntity | null | undefined
+	character: CharacterEntity | null | undefined,
 ): string | undefined {
 	const avatars = extractCharacterAvatars(character);
 
@@ -50,24 +50,24 @@ export function extractCharacterAvatar(
 }
 
 export function extractCharacterBanners(
-	character: CharacterEntity | null | undefined
+	character: CharacterEntity | null | undefined,
 ): Required<CharacterMetadata>["banners"] {
 	return character?.metadata?.content?.banners ?? [];
 }
 
 export function extractCharacterAttributes(
-	character: Pick<CharacterEntity, "metadata"> | null | undefined
+	character: Pick<CharacterEntity, "metadata"> | null | undefined,
 ): Required<AttributesMetadata>["attributes"] {
 	return character?.metadata?.content?.attributes ?? [];
 }
 
 export function extractCharacterAttribute(
 	character: Pick<CharacterEntity, "metadata"> | null | undefined,
-	traitType: string
+	traitType: string,
 ): Required<AttributesMetadata>["attributes"][0] | null {
 	return (
 		extractCharacterAttributes(character).find(
-			(attr) => attr.trait_type === traitType
+			(attr) => attr.trait_type === traitType,
 		) ?? null
 	);
 }

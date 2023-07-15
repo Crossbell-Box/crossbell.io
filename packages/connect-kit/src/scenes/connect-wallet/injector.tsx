@@ -35,7 +35,7 @@ export function ConnectWithInjector({
 					<div
 						className={classNames(
 							styles.iconContainerLayout,
-							state.isErrorStatus && commonStyles.animateShake
+							state.isErrorStatus && commonStyles.animateShake,
 						)}
 					>
 						<div className={styles.walletIcon}>{wallet.icon}</div>
@@ -46,7 +46,7 @@ export function ConnectWithInjector({
 									key={state.status}
 									className={classNames(
 										styles.errorCircle,
-										commonStyles.errorCircle
+										commonStyles.errorCircle,
 									)}
 								/>
 							)}
@@ -54,7 +54,7 @@ export function ConnectWithInjector({
 							<Loading
 								className={classNames(
 									styles.loading,
-									state.status !== ConnectStatus.CONNECTING && styles.hidden
+									state.status !== ConnectStatus.CONNECTING && styles.hidden,
 								)}
 							/>
 						</div>
@@ -69,7 +69,7 @@ export function ConnectWithInjector({
 									className={classNames(
 										styles.tryAgainBtn,
 										!state.isShowTryAgain && styles.hidden,
-										commonStyles.retryBtn
+										commonStyles.retryBtn,
 									)}
 									onClick={state.connect}
 									disabled={!state.isShowTryAgain}

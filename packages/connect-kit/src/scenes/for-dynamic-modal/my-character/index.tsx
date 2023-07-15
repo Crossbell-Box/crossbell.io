@@ -115,7 +115,7 @@ export function MyCharacter() {
 					<button
 						className={classNames(
 							styles.deleteCharacter,
-							commonStyles.uxOverlay
+							commonStyles.uxOverlay,
 						)}
 						onClick={
 							account.email ? goToDeleteEmailAccount : goToDeleteCharacter

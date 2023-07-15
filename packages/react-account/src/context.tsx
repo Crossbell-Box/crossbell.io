@@ -23,13 +23,13 @@ const Context = React.createContext<ReactAccountContext>({
 });
 
 export function ReactAccountProvider(
-	props: ReactAccountContext & { children: React.ReactNode }
+	props: ReactAccountContext & { children: React.ReactNode },
 ) {
 	const onDisconnect = useRefCallback(props.onDisconnect);
 	const getSigner = useRefCallback(props.getSigner);
 	const value = React.useMemo(
 		() => ({ onDisconnect, getSigner }),
-		[onDisconnect, getSigner]
+		[onDisconnect, getSigner],
 	);
 
 	return <Context.Provider value={value}>{props.children}</Context.Provider>;

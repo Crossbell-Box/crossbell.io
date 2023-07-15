@@ -17,7 +17,7 @@ export function useDisclosure(initialState: boolean) {
 					setIsActive((isActive) => !isActive);
 				},
 			}),
-			[setIsActive]
+			[setIsActive],
 		),
 	] as const;
 }

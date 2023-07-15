@@ -25,7 +25,7 @@ export function useCharacterMediaUsage(characterId?: number) {
 		() => api.getCharacterMediaUsage(characterId!),
 		{
 			enabled: Boolean(characterId),
-		}
+		},
 	);
 }
 
@@ -40,7 +40,7 @@ export function useCharacterActivation(characterId?: number) {
 		() => api.isCharacterActivated(characterId!),
 		{
 			enabled: Boolean(characterId),
-		}
+		},
 	);
 }
 
@@ -68,7 +68,7 @@ export function useCharacterBoundAccounts(characterId?: number) {
 		() => api.getBoundAccounts(characterId!).then((res) => res.result ?? []),
 		{
 			enabled: Boolean(characterId),
-		}
+		},
 	);
 }
 
@@ -115,7 +115,7 @@ export function useBindAccount({
 			onSuccess: () => {
 				return Promise.all([
 					client.invalidateQueries(
-						SCOPE_KEY_CHARACTER_BOUND_ACCOUNTS(characterId!)
+						SCOPE_KEY_CHARACTER_BOUND_ACCOUNTS(characterId!),
 					),
 				]);
 			},
@@ -125,7 +125,7 @@ export function useBindAccount({
 					color: "red",
 				});
 			},
-		}
+		},
 	);
 }
 
@@ -163,7 +163,7 @@ export function useUnbindAccount(characterId?: number) {
 			onSuccess: () => {
 				return Promise.all([
 					client.invalidateQueries(
-						SCOPE_KEY_CHARACTER_BOUND_ACCOUNTS(characterId!)
+						SCOPE_KEY_CHARACTER_BOUND_ACCOUNTS(characterId!),
 					),
 				]);
 			},
@@ -173,7 +173,7 @@ export function useUnbindAccount(characterId?: number) {
 					color: "red",
 				});
 			},
-		}
+		},
 	);
 }
 
@@ -182,7 +182,7 @@ export function useUnbindAccount(characterId?: number) {
 export function useSyncAccount(
 	characterId: number | undefined,
 	platform: SupportedPlatform,
-	identity: string
+	identity: string,
 ) {
 	const client = useQueryClient();
 	return useMutation(
@@ -195,7 +195,7 @@ export function useSyncAccount(
 			onSuccess: () => {
 				return Promise.all([
 					client.invalidateQueries(
-						SCOPE_KEY_CHARACTER_BOUND_ACCOUNTS(characterId!)
+						SCOPE_KEY_CHARACTER_BOUND_ACCOUNTS(characterId!),
 					),
 				]);
 			},
@@ -205,6 +205,6 @@ export function useSyncAccount(
 					color: "red",
 				});
 			},
-		}
+		},
 	);
 }

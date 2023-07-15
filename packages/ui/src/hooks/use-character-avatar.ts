@@ -23,7 +23,7 @@ export function useCharacterAvatar({
 
 	const rawSrc = React.useMemo(
 		() => extractCharacterAvatar(data) ?? getDefaultAvatarIpfsUrl(data?.handle),
-		[data, isLoading]
+		[data, isLoading],
 	);
 
 	const src = useWeb2Url(rawSrc);

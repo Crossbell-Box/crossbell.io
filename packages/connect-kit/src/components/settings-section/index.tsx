@@ -30,7 +30,7 @@ export function SettingsSectionItem(props: SettingsSectionItemProps) {
 				props.className,
 				props.disabled
 					? styles.disabled
-					: !!props.onClick && commonStyles.uxOverlay
+					: !!props.onClick && commonStyles.uxOverlay,
 			)}
 		>
 			{props.icon && <div className={styles.itemIcon}>{props.icon}</div>}

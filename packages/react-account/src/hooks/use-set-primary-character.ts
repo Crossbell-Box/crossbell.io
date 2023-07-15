@@ -21,7 +21,7 @@ export type UseSetPrimaryCharacterOptions = UseMutationOptions<
 
 // TODO: refactor this to use account-type-based-hooks
 export function useSetPrimaryCharacter(
-	options?: UseSetPrimaryCharacterOptions
+	options?: UseSetPrimaryCharacterOptions,
 ) {
 	const address = useAddress();
 
@@ -53,6 +53,6 @@ export function useSetPrimaryCharacter(
 					color: "red",
 				});
 			},
-		}
+		},
 	);
 }

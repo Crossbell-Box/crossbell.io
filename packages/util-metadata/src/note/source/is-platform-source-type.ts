@@ -6,7 +6,7 @@ const map: Record<PlatformSourceType, true> = {
 };
 
 export function isPlatformSource(
-	source: SourceType
+	source: SourceType,
 ): source is PlatformSourceType {
 	return source in map;
 }

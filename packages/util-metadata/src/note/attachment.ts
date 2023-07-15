@@ -14,7 +14,7 @@ export function getValidAttachments(
 		allowedMediaTypes?: readonly MediaType[];
 		allowedContentTypes?: readonly ContentType[];
 		ipfsLinkToHttpLink: (url: string) => string;
-	}
+	},
 ) {
 	if (!attachments) {
 		return [];

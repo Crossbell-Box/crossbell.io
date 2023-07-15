@@ -14,5 +14,5 @@ export function showConnectModal() {
 
 export const ConnectModal = createLazyModal(
 	useConnectModal,
-	React.lazy(() => import("./lazy"))
+	React.lazy(() => import("./lazy")),
 );

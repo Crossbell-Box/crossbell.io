@@ -32,7 +32,7 @@ export function Dialog({
 					className={classNames(
 						styles.layout,
 						isActive && styles.isActive,
-						className
+						className,
 					)}
 					style={{ zIndex }}
 					onTransitionEnd={() => {
@@ -43,7 +43,7 @@ export function Dialog({
 				>
 					{children}
 				</div>,
-				document.body
+				document.body,
 		  )
 		: null;
 }

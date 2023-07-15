@@ -14,5 +14,5 @@ export const useOpSignSettingsModal = create<OpSignSettingsModal>(
 		show({ characterId }) {
 			set({ characterId, isActive: true });
 		},
-	})
+	}),
 );

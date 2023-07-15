@@ -14,5 +14,5 @@ export function showWalletMintNewCharacterModal() {
 
 export const WalletMintNewCharacter = createLazyModal(
 	useWalletMintNewCharacterModal,
-	React.lazy(() => import("./lazy"))
+	React.lazy(() => import("./lazy")),
 );

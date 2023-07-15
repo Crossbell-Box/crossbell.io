@@ -23,7 +23,7 @@ export function ContractProvider({
 }: ContractProviderProps) {
 	const value = React.useMemo(
 		() => ({ contract, address }),
-		[contract, address]
+		[contract, address],
 	);
 
 	return (
@@ -86,7 +86,7 @@ export function InitContractProvider({
 					openMintNewCharacterModel,
 					getCurrentAddress,
 					showSwitchNetworkModal,
-				})
+				}),
 			);
 		}
 	}, [provider, address, openConnectModal]);
@@ -103,7 +103,7 @@ export function useContract() {
 
 	if (!contract) {
 		throw new Error(
-			"No contract found. Please inject the contract through context."
+			"No contract found. Please inject the contract through context.",
 		);
 	}
 

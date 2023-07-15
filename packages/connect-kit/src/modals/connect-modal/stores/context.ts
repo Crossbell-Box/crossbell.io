@@ -9,5 +9,5 @@ export const StoresProvider = withMultipleProviders(
 	ResetPasswordStoreProvider,
 	EmailRegisterStoreProvider,
 	EmailConnectStoreProvider,
-	ScenesStoreProvider
+	ScenesStoreProvider,
 );

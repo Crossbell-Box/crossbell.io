@@ -20,5 +20,5 @@ export const NoEnoughCSBModal = createLazyModal(
 	{
 		Modal: Dialog,
 		loadingClassName: styles.container,
-	}
+	},
 );

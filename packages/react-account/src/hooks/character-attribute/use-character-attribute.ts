@@ -18,7 +18,7 @@ export type UseCharacterAttributeOptions = Exclude<
 
 export function useCharacterAttribute<T extends ValidType>(
 	{ characterId, key }: UseCharacterAttributeParams,
-	options?: UseCharacterAttributeOptions
+	options?: UseCharacterAttributeOptions,
 ) {
 	const query = useCharacter(characterId);
 	const mutation = useUpdateCharacterMetadata(options);

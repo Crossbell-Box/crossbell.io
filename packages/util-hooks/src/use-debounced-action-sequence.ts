@@ -28,7 +28,7 @@ export function useDebouncedActionSequence({
 	const add = useRefCallback(
 		(
 			action: () => Promise<unknown>,
-			options?: UseDebouncedActionSequenceConfigAddOptions
+			options?: UseDebouncedActionSequenceConfigAddOptions,
 		) => {
 			_setAction({
 				async run() {
@@ -46,7 +46,7 @@ export function useDebouncedActionSequence({
 					}
 				},
 			});
-		}
+		},
 	);
 
 	const clear = useRefCallback(() => _setAction(NOOP));

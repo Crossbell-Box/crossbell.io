@@ -9,7 +9,7 @@ export function stringToInteger(
 	}: {
 		min?: number;
 		max?: number;
-	} = {}
+	} = {},
 ) {
 	let total = 0;
 	for (let i = 0; i !== string.length; i++) {

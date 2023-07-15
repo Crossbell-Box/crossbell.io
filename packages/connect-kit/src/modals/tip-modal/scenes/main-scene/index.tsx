@@ -36,7 +36,7 @@ export function MainScene() {
 			<div
 				className={classNames(
 					styles.loadingOverlay,
-					isLoading && styles.isLoading
+					isLoading && styles.isLoading,
 				)}
 			>
 				<Loading />

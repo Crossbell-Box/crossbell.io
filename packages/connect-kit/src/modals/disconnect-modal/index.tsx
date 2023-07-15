@@ -7,5 +7,5 @@ export { useDisconnectModal };
 
 export const DisconnectModal = createLazyModal(
 	useDisconnectModal,
-	React.lazy(() => import("./lazy"))
+	React.lazy(() => import("./lazy")),
 );

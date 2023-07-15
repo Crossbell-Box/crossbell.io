@@ -34,7 +34,7 @@ export function useWalletClaimCsb(options?: UseWalletClaimCsbOptions) {
 
 						return true;
 					},
-					{ maxRetryTimes: Number.MAX_SAFE_INTEGER }
+					{ maxRetryTimes: Number.MAX_SAFE_INTEGER },
 				);
 			}
 
@@ -47,6 +47,6 @@ export function useWalletClaimCsb(options?: UseWalletClaimCsbOptions) {
 				options?.onError?.(...params);
 				handleError(params[0]);
 			},
-		}
+		},
 	);
 }

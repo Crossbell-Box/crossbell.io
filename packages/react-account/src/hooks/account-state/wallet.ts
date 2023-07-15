@@ -35,7 +35,7 @@ export type WalletAccountSlice = {
 
 export const createWalletAccountSlice: SliceFn<WalletAccountSlice> = (
 	set,
-	get
+	get,
 ) => {
 	const updateSiwe = (params: { address: string; siwe: SiweInfo | null }) => {
 		const { _siweCache, wallet } = get();

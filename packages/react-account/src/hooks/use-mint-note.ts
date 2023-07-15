@@ -40,7 +40,7 @@ export const useMintNote = createAccountTypeBasedMutationHooks<
 								noteId,
 								noteCharacterId: characterId,
 								byAddress: account.address,
-							})) || RETRY
+							})) || RETRY,
 					);
 				}
 			},
@@ -51,18 +51,18 @@ export const useMintNote = createAccountTypeBasedMutationHooks<
 
 			return Promise.all([
 				queryClient.invalidateQueries(
-					SCOPE_KEY_NOTE_MINTS(characterId, noteId)
+					SCOPE_KEY_NOTE_MINTS(characterId, noteId),
 				),
 				queryClient.invalidateQueries(
-					SCOPE_KEY_NOTE_STATUS({ characterId, noteId })
+					SCOPE_KEY_NOTE_STATUS({ characterId, noteId }),
 				),
 				queryClient.invalidateQueries(
-					SCOPE_KEY_MINTED_NOTE_OF_NOTE(characterId, noteId)
+					SCOPE_KEY_MINTED_NOTE_OF_NOTE(characterId, noteId),
 				),
 				queryClient.invalidateQueries(
-					SCOPE_KEY_MINTED_NOTE_OF_ADDRESS(account?.address ?? "")
+					SCOPE_KEY_MINTED_NOTE_OF_ADDRESS(account?.address ?? ""),
 				),
 			]);
 		},
-	})
+	}),
 );

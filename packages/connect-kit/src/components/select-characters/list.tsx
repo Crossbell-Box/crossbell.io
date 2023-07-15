@@ -21,7 +21,7 @@ export type ListProps = {
 	onSelectNew: () => void;
 	afterSelectCharacter: (
 		character: CharacterEntity,
-		extraInfo: { opSignOperatorHasPermissions: boolean }
+		extraInfo: { opSignOperatorHasPermissions: boolean },
 	) => void;
 	onLoadMore: () => void;
 	hasMore: boolean;

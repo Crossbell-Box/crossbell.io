@@ -41,7 +41,7 @@ export function PermissionList({
 									permission
 										.split("_")
 										.map((word) => word.toLowerCase())
-										.join(" ")
+										.join(" "),
 								)}
 								.
 							</div>

@@ -33,12 +33,12 @@ export function useFeedsOfCharacter(characterId: number) {
 		{
 			enabled: Boolean(characterId),
 			getNextPageParam: (lastPage) => lastPage.cursor,
-		}
+		},
 	);
 }
 
 export const SCOPE_KEY_FOLLOWING_FEEDS_OF_CHARACTER = (
-	characterId?: number
+	characterId?: number,
 ) => [...SCOPE_KEYS, "following", "list", characterId];
 
 export function useFollowingFeedsOfCharacter(characterId?: number) {
@@ -53,7 +53,7 @@ export function useFollowingFeedsOfCharacter(characterId?: number) {
 		{
 			enabled: Boolean(characterId),
 			getNextPageParam: (lastPage) => lastPage.cursor,
-		}
+		},
 	);
 }
 
@@ -61,6 +61,6 @@ export function useFeed(transactionHash: number, logIndex: number) {
 	return useQuery(
 		[...SCOPE_KEYS, "one", transactionHash, logIndex],
 		() => indexer.note.get(transactionHash, logIndex),
-		{ enabled: Boolean(transactionHash && typeof logIndex === "number") }
+		{ enabled: Boolean(transactionHash && typeof logIndex === "number") },
 	);
 }

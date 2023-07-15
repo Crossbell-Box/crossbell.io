@@ -28,7 +28,7 @@ export const CharacterAvatar = React.forwardRef<
 			className,
 			...props
 		},
-		ref
+		ref,
 	) => {
 		const avatar = useCharacterAvatar({
 			characterId,
@@ -46,5 +46,5 @@ export const CharacterAvatar = React.forwardRef<
 				{...props}
 			/>
 		);
-	}
+	},
 );

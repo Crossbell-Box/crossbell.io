@@ -2,7 +2,7 @@ import { CharacterPermissionKey } from "crossbell";
 
 export function haveSamePermissions(
 	a: CharacterPermissionKey[],
-	b: CharacterPermissionKey[] | null | undefined
+	b: CharacterPermissionKey[] | null | undefined,
 ) {
 	const map = getPermissionMap(b ?? []);
 

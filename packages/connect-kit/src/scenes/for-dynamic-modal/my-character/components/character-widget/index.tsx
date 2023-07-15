@@ -64,7 +64,7 @@ export function CharacterWidget({
 					accountAddress,
 					account.type === "email"
 						? { start: 15, end: 15 }
-						: { start: 8, end: 9 }
+						: { start: 8, end: 9 },
 				)}
 			</div>
 

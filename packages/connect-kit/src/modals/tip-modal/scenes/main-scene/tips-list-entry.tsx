@@ -26,7 +26,7 @@ export function TipsListEntry() {
 			className={classNames(
 				styles.container,
 				commonStyles.uxOverlay,
-				count === 0 && styles.hidden
+				count === 0 && styles.hidden,
 			)}
 			onClick={() => scenes.goTo({ kind: SceneKind.tipList })}
 		>

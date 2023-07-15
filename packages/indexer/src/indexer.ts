@@ -5,7 +5,7 @@ export { type Indexer };
 export const indexer = createIndexer();
 
 export function updateIndexerFetchOptions(
-	options: Omit<RequestInit, "method">
+	options: Omit<RequestInit, "method">,
 ) {
 	indexer.fetchOptions = options;
 }

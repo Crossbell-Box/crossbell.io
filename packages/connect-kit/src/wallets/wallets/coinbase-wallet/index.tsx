@@ -8,7 +8,7 @@ import { CoinbaseIcon } from "../../../components";
 import styles from "./index.module.css";
 
 export const coinbaseWallet = (
-	connector?: CoinbaseWalletConnector
+	connector?: CoinbaseWalletConnector,
 ): Wallet | null => {
 	if (!connector) return null;
 
@@ -37,7 +37,7 @@ function isCoinbaseWallet(): boolean {
 		(ethereum?.providers &&
 			ethereum?.providers.find(
 				(provider?: { isCoinbaseWallet?: boolean }) =>
-					provider?.isCoinbaseWallet
+					provider?.isCoinbaseWallet,
 			))
 	);
 }

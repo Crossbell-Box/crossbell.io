@@ -49,7 +49,7 @@ function Main() {
 
 	React.useEffect(
 		() => setSignInStrategy(signInStrategy),
-		[signInStrategy, setSignInStrategy]
+		[signInStrategy, setSignInStrategy],
 	);
 
 	React.useEffect(() => {

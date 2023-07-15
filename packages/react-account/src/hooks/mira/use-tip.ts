@@ -51,7 +51,7 @@ export const useTip = createAccountTypeBasedMutationHooks<
 
 		return Promise.all([
 			queryClient.invalidateQueries(
-				SCOPE_KEY_ACCOUNT_MIRA_BALANCE({ address: account!.address! })
+				SCOPE_KEY_ACCOUNT_MIRA_BALANCE({ address: account!.address! }),
 			),
 
 			queryClient.invalidateQueries(
@@ -59,7 +59,7 @@ export const useTip = createAccountTypeBasedMutationHooks<
 					toCharacterId: characterId,
 					toNoteId: noteId,
 					characterId: account?.characterId,
-				})
+				}),
 			),
 		]);
 	},

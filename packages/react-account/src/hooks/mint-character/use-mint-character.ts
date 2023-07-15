@@ -48,6 +48,6 @@ export function useMintCharacter(options?: UseMintCharacterParamsOptions) {
 				options?.onError?.(...params);
 				handleError(params[0]);
 			},
-		}
+		},
 	);
 }

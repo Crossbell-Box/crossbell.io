@@ -24,7 +24,7 @@ export function MintCharacter({ sceneMode, formMode }: MintCharacterProps) {
 					<MintCharacter formMode={formMode} sceneMode={sceneMode} />
 				),
 			});
-		}
+		},
 	);
 
 	const onSwitchFormMode = useRefCallback((formMode: MintCharacterFormMode) => {

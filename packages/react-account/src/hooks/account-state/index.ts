@@ -68,7 +68,7 @@ export const useAccountState = create(
 			_syncFromLocalStorage() {
 				try {
 					const { state } = JSON.parse(
-						localStorage.getItem(ACCOUNT_STATE_STORAGE_KEY) || "{}"
+						localStorage.getItem(ACCOUNT_STATE_STORAGE_KEY) || "{}",
 					);
 
 					if (state) {
@@ -83,6 +83,6 @@ export const useAccountState = create(
 			name: ACCOUNT_STATE_STORAGE_KEY,
 			partialize: ({ computed: _, ssrReady: __, ...state }) => state,
 			storage: createStorage(),
-		}
-	)
+		},
+	),
 );

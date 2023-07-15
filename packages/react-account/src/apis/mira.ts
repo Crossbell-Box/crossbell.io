@@ -3,7 +3,7 @@ import type { Contract, Numberish } from "crossbell";
 import { type Address, formatUnits } from "viem";
 
 export async function getMiraTokenDecimals(
-	contract: Contract
+	contract: Contract,
 ): Promise<number> {
 	try {
 		return (await contract.tips.getTokenDecimals()).data;
@@ -14,7 +14,7 @@ export async function getMiraTokenDecimals(
 }
 
 export async function getMiraTokenAddress(
-	contract: Contract
+	contract: Contract,
 ): Promise<Address> {
 	try {
 		return (await contract.tips.getTokenAddress())?.data;
@@ -30,7 +30,7 @@ export type GetMiraTipsParams = Omit<
 
 export async function getMiraTips(
 	contract: Contract,
-	params: GetMiraTipsParams
+	params: GetMiraTipsParams,
 ) {
 	const tokenAddress = await getMiraTokenAddress(contract);
 
@@ -41,7 +41,7 @@ export async function getMiraTips(
 
 		tips.list = tips.list
 			.filter(
-				(t) => BigInt(t.amount) >= BigInt(1) * BigInt(10) ** BigInt(decimal)
+				(t) => BigInt(t.amount) >= BigInt(1) * BigInt(10) ** BigInt(decimal),
 			)
 			.map((t) => {
 				return {

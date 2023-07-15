@@ -12,6 +12,6 @@ export function useFaucetAddressInfo(address?: string) {
 	return useQuery(
 		SCOPE_KEY_FAUCET_ADDRESS_INFO(address),
 		() => faucetGetAddressInfo(address!),
-		{ enabled: !!address }
+		{ enabled: !!address },
 	);
 }

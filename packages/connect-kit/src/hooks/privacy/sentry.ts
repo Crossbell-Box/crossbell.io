@@ -15,7 +15,7 @@ export function useSentryStatus(options?: UseCharacterAttributeOptions) {
 			characterId: character?.characterId,
 			key: sentry?.dsn,
 		},
-		options
+		options,
 	);
 	const isEnabled = !!data;
 

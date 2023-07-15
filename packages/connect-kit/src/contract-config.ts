@@ -45,6 +45,6 @@ export const useContractConfig = () => {
 
 			showSwitchNetworkModal,
 		}),
-		[address, provider]
+		[address, provider],
 	);
 };

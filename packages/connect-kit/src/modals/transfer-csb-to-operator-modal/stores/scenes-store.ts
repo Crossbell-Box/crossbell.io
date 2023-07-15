@@ -10,5 +10,5 @@ export type ScenesStore = ScenesSlice<Scene>;
 export const [ScenesStoreProvider, useScenesStore] = createContextStore(() =>
 	create<ScenesStore>((set, get) => ({
 		...scenesSlice<Scene>({ kind: SceneKind.transfer })(set, get),
-	}))
+	})),
 );

@@ -33,5 +33,5 @@ export const useDeleteCharacter = createAccountTypeBasedMutationHooks<
 				]);
 			},
 		};
-	}
+	},
 );

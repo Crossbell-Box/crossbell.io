@@ -89,7 +89,7 @@ export function ConnectKitProvider({
 					});
 				},
 			};
-		}
+		},
 	);
 
 	React.useEffect(() => {

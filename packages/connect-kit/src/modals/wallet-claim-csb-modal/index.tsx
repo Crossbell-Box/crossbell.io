@@ -8,5 +8,5 @@ export { useWalletClaimCSBModal };
 
 export const WalletClaimCSBModal = createLazyModal(
 	useWalletClaimCSBModal,
-	React.lazy(() => import("./lazy"))
+	React.lazy(() => import("./lazy")),
 );

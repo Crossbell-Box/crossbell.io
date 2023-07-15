@@ -5,7 +5,7 @@ import { getKnownSource } from "./get-known-source";
 
 export function getSourceLink(
 	source: string,
-	noteMetadata?: NoteMetadata | null
+	noteMetadata?: NoteMetadata | null,
 ): string | null {
 	const knownSource = getKnownSource(source);
 	const external_urls = noteMetadata?.external_urls ?? [];

@@ -23,6 +23,6 @@ export function useCharacterOperatorHasPermissions({
 
 	return React.useMemo(
 		() => haveSamePermissions(permissions, data),
-		[permissions, data]
+		[permissions, data],
 	);
 }

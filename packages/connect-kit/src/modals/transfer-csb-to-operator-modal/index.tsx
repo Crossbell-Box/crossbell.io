@@ -8,5 +8,5 @@ export { useTransferCSBToOperatorModal };
 
 export const TransferCSBToOperatorModal = createLazyModal(
 	useTransferCSBToOperatorModal,
-	React.lazy(() => import("./lazy"))
+	React.lazy(() => import("./lazy")),
 );

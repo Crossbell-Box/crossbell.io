@@ -31,7 +31,7 @@ export function WalletClaimCSBExample() {
 			<div
 				className={classNames(
 					"transition flex flex-col items-center justify-center gap-5 h-60 relative",
-					isSsrReady ? "opacity-100" : "opacity-0"
+					isSsrReady ? "opacity-100" : "opacity-0",
 				)}
 			>
 				{account ? (

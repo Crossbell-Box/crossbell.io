@@ -43,7 +43,7 @@ export const useDynamicScenesModal = create<UseDynamicScenesModal>(
 				modal.show();
 			},
 		};
-	}
+	},
 );
 
 export function createDynamicScenesModal(id: string, scene: Scene) {
@@ -52,7 +52,7 @@ export function createDynamicScenesModal(id: string, scene: Scene) {
 
 		return waitUntilModalClosed(
 			useDynamicScenesModal,
-			(s) => s.id === id && !s.isActive
+			(s) => s.id === id && !s.isActive,
 		);
 	}
 

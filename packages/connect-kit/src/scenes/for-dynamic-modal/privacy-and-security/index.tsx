@@ -89,6 +89,6 @@ function useAppName() {
 		() =>
 			connectors.find((connector) => !!connector.options.appName)?.options
 				.appName ?? "Current app",
-		[connectors]
+		[connectors],
 	);
 }

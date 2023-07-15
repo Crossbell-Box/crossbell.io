@@ -65,7 +65,7 @@ export function DeleteCharacter({
 					className={classNames(
 						styles.item,
 						styles.delete,
-						isLoading && styles.deleting
+						isLoading && styles.deleting,
 					)}
 					color="red"
 				>

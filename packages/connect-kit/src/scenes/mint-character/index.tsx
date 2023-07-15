@@ -33,7 +33,7 @@ export type MintCharacterProps = {
 export function MintCharacter(props: MintCharacterProps) {
 	const isNormalForm = props.formMode === "normal";
 	const switchFormMode = useRefCallback(() =>
-		props.onSwitchFormMode(isNormalForm ? "slim" : "normal")
+		props.onSwitchFormMode(isNormalForm ? "slim" : "normal"),
 	);
 	const Form = isNormalForm ? NormalForm : SlimForm;
 
@@ -107,7 +107,7 @@ function useMintModel({
 						avatar: null,
 						handle: form.handle,
 						username: form.username,
-				  }
+				  },
 		);
 	});
 
@@ -137,6 +137,6 @@ function useHasEnoughCSB() {
 
 	return React.useMemo(
 		() => !!balance && balance.value >= parseEther("0.001"),
-		[balance]
+		[balance],
 	);
 }

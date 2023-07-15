@@ -31,8 +31,8 @@ export const MainBtn = React.memo(
 				!disabled && commonStyles.uxOverlay,
 				styles.btn,
 				className,
-				disabled ? colorMap.gray : colorMap[color]
+				disabled ? colorMap.gray : colorMap[color],
 			)}
 		/>
-	)
+	),
 );

@@ -118,7 +118,7 @@ function getMaxAmount(balance: UseAccountBalanceResult["balance"]) {
 
 function normalizeNumber(
 	input: string | undefined,
-	balance: UseAccountBalanceResult["balance"]
+	balance: UseAccountBalanceResult["balance"],
 ): bigint | NormalizeError {
 	try {
 		if (!input || !balance) return 0n;

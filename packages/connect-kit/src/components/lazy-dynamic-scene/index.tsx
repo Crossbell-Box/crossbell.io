@@ -5,7 +5,7 @@ import styles from "./index.module.css";
 import { DynamicScenesContainer } from "../dynamic-scenes-container";
 
 export function createLazyDynamicScene<T extends object>(
-	Component: React.ComponentType<T>
+	Component: React.ComponentType<T>,
 ) {
 	return function LazyModal(props: T) {
 		return (

@@ -12,14 +12,16 @@ import { useAutoResetToggle } from "./use-auto-reset-toggle";
 export function useConnectState(connector: WalletConnector) {
 	const { isConnected } = useAccount();
 	const [status, setStatus] = React.useState(
-		isConnected ? ConnectStatus.CONNECTED : ConnectStatus.REJECTED
+		isConnected ? ConnectStatus.CONNECTED : ConnectStatus.REJECTED,
 	);
 	const tryAgainTooltip = useAutoResetToggle();
 
 	const { connect: connect_ } = useConnect({
 		onMutate: (params?: { connector: any }) => {
 			setStatus(
-				params?.connector ? ConnectStatus.CONNECTING : ConnectStatus.UNAVAILABLE
+				params?.connector
+					? ConnectStatus.CONNECTING
+					: ConnectStatus.UNAVAILABLE,
 			);
 		},
 		onError(err?: any) {
@@ -85,7 +87,7 @@ export function useConnectState(connector: WalletConnector) {
 		].includes(status),
 		isShowTryAgainTooltip: tryAgainTooltip.isActivated,
 		isErrorStatus: [ConnectStatus.FAILED, ConnectStatus.REJECTED].includes(
-			status
+			status,
 		),
 	};
 }

@@ -81,7 +81,7 @@ export function ConnectWithQRCode({
 }
 
 export function isQRCodeWalletConnector(
-	connector: WalletConnector
+	connector: WalletConnector,
 ): connector is QRCodeWalletConnector {
 	return !!connector.qrCode;
 }

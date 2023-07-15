@@ -65,7 +65,7 @@ export function DynamicContainerContent({
 						ref={ref}
 						className={classNames(
 							styles.content,
-							skipMountAnimation && styles.noAnimation
+							skipMountAnimation && styles.noAnimation,
 						)}
 						style={{ ...defaultStyle, ...transitionStyles[state] }}
 					>

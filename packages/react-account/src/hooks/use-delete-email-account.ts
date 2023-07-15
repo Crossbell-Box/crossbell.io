@@ -18,5 +18,5 @@ export const useDeleteEmailAccount = createAccountTypeBasedMutationHooks(
 
 			onSuccess: async () => disconnectEmail(),
 		};
-	}
+	},
 );

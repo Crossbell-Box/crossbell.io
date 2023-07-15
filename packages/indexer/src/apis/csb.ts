@@ -15,7 +15,7 @@ export type GetCsbBalanceOptions = {
  */
 export async function getCsbBalance(
 	address: Address,
-	options?: GetCsbBalanceOptions
+	options?: GetCsbBalanceOptions,
 ) {
 	const cached = cache.get(`csb:${address}`);
 
@@ -24,7 +24,7 @@ export async function getCsbBalance(
 	}
 
 	const data: { result?: string | null } = await fetch(
-		`https://scan.crossbell.io/api?module=account&action=balance&address=${address}`
+		`https://scan.crossbell.io/api?module=account&action=balance&address=${address}`,
 	)
 		.then((res) => res.json())
 		.catch(() => ({ result: "0" }));

@@ -25,7 +25,7 @@ type Variables =
 const getMetadata = async (variables: Variables) => {
 	const note = await indexer.note.get(
 		variables.note.characterId,
-		variables.note.noteId
+		variables.note.noteId,
 	);
 	const oldMetadata = note?.metadata?.content;
 
@@ -94,18 +94,18 @@ export const useUpdateNote = createAccountTypeBasedMutationHooks<
 			onSuccess({ queryClient, variables, account }) {
 				return Promise.all([
 					queryClient.invalidateQueries(
-						SCOPE_KEY_FOLLOWING_FEEDS_OF_CHARACTER(account?.characterId)
+						SCOPE_KEY_FOLLOWING_FEEDS_OF_CHARACTER(account?.characterId),
 					),
 
 					queryClient.invalidateQueries(
-						SCOPE_KEY_NOTE(variables.note.characterId, variables.note.noteId)
+						SCOPE_KEY_NOTE(variables.note.characterId, variables.note.noteId),
 					),
 
 					queryClient.invalidateQueries(
-						SCOPE_KEY_NOTES_OF_CHARACTER(variables.note.characterId)
+						SCOPE_KEY_NOTES_OF_CHARACTER(variables.note.characterId),
 					),
 				]);
 			},
 		};
-	}
+	},
 );

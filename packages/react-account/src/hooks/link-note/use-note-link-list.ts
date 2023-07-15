@@ -39,7 +39,7 @@ export function useNoteLinkList(params: UseNoteLinkListParams) {
 		{
 			enabled: !!(params.characterId && params.noteId && params.linkType),
 			getNextPageParam: (lastPage) => lastPage.cursor,
-		}
+		},
 	);
 	const currentCharacter = useAccountCharacter();
 	const { data } = useIsNoteLinked({
@@ -62,7 +62,7 @@ export function useNoteLinkList(params: UseNoteLinkListParams) {
 		if (data?.transactionHash === null) {
 			const filteredList = list_.filter(
 				({ character }) =>
-					character?.characterId !== currentCharacter?.characterId
+					character?.characterId !== currentCharacter?.characterId,
 			);
 
 			if (data.isLinked) {

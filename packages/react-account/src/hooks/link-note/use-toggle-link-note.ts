@@ -27,7 +27,7 @@ export type UseToggleLinkNoteVariable = {
 
 const emailActionFn = (
 	action: Action,
-	params: Parameters<typeof linkNote>[0]
+	params: Parameters<typeof linkNote>[0],
 ) => {
 	switch (action) {
 		case "link":
@@ -39,7 +39,7 @@ const emailActionFn = (
 
 const siweActionFn = (
 	action: Action,
-	params: Parameters<typeof siweLinkNote>[0]
+	params: Parameters<typeof siweLinkNote>[0],
 ) => {
 	switch (action) {
 		case "link":
@@ -57,7 +57,7 @@ const contractActionFn = (
 		toCharacterId: NoteEntity["characterId"];
 		toNoteId: NoteEntity["noteId"];
 		linkType: NoteLinkType;
-	}
+	},
 ) => {
 	switch (action) {
 		case "link":
@@ -82,7 +82,7 @@ const actionDesc = "toggle like note";
 const getLinkActionParams = (
 	fromCharacterId: number,
 	linkType: NoteLinkType,
-	variable: UseToggleLinkNoteVariable
+	variable: UseToggleLinkNoteVariable,
 ) => ({
 	linkType,
 	fromCharacterId,
@@ -115,7 +115,7 @@ export const useToggleLinkNote = createAccountTypeBasedMutationHooks<
 						await emailActionFn(status.action, { token, ...params });
 						await waitUntilLinkStatusUpdated(status.action, params);
 					},
-					{ onSettled: () => revalidateQueries(queryClient, params) }
+					{ onSettled: () => revalidateQueries(queryClient, params) },
 				);
 			}
 		},
@@ -145,7 +145,7 @@ export const useToggleLinkNote = createAccountTypeBasedMutationHooks<
 									await siweActionFn(status.action, { siwe, ...params });
 									await waitUntilLinkStatusUpdated(status.action, params);
 								},
-								{ onSettled: () => revalidateQueries(queryClient, params) }
+								{ onSettled: () => revalidateQueries(queryClient, params) },
 							);
 						} else {
 							await contractActionFn(status.action, contract, {

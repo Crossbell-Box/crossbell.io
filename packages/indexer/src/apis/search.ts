@@ -8,7 +8,7 @@ const SCOPE_KEY = ["indexer", "search"];
 export function useSearchingCharacters(
 	query: string,
 	{ limit = 20 }: { limit?: number } = {},
-	options?: { enabled: boolean }
+	options?: { enabled: boolean },
 ) {
 	return useInfiniteQuery(
 		[...SCOPE_KEY, "characters", "list", query, { limit }],
@@ -21,7 +21,7 @@ export function useSearchingCharacters(
 			enabled: Boolean(query),
 			getNextPageParam: (lastPage) => lastPage.cursor,
 			...options,
-		}
+		},
 	);
 }
 
@@ -30,7 +30,7 @@ export function useSearchingCharacters(
 export function useSearchingNotes(
 	query: string,
 	{ limit = 20 }: { limit?: number } = {},
-	options?: { enabled: boolean }
+	options?: { enabled: boolean },
 ) {
 	return useInfiniteQuery(
 		[...SCOPE_KEY, "notes", "list", query, { limit }],
@@ -43,6 +43,6 @@ export function useSearchingNotes(
 			enabled: Boolean(query),
 			getNextPageParam: (lastPage) => lastPage.cursor,
 			...options,
-		}
+		},
 	);
 }

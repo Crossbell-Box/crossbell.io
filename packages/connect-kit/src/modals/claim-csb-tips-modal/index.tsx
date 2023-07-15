@@ -14,5 +14,5 @@ export function showClaimCSBTipsModal(msg: string) {
 
 export const ClaimCSBTipsModal = createLazyModal(
 	useClaimCSBTipsModal,
-	React.lazy(() => import("./lazy"))
+	React.lazy(() => import("./lazy")),
 );

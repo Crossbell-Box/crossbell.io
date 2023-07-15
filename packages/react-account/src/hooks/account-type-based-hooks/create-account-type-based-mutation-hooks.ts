@@ -28,29 +28,29 @@ type Options<Data, Variables> = UseMutationOptions<
 export type AccountTypeBasedMutationHooksWithParams<
 	Params = void,
 	Variables = void,
-	Data = unknown
+	Data = unknown,
 > = (
 	params: Params,
-	options?: Options<Data, Variables>
+	options?: Options<Data, Variables>,
 ) => UseMutationResult<Data, unknown, Variables>;
 
 export type AccountTypeBasedMutationHooksWithoutParams<
 	Variables = void,
-	Data = unknown
+	Data = unknown,
 > = (
-	options?: Options<Data, Variables>
+	options?: Options<Data, Variables>,
 ) => UseMutationResult<Data, unknown, Variables>;
 
 export type AccountTypeBasedMutationHooks<
 	Params = void,
 	Variables = void,
-	Data = unknown
+	Data = unknown,
 > = Params extends void
 	? AccountTypeBasedMutationHooksWithoutParams<Variables, Data>
 	: AccountTypeBasedMutationHooksWithParams<Params, Variables, Data>;
 
 export type AccountTypeBasedMutationOptions<
-	T extends AccountTypeBasedMutationHooks<any, any, any>
+	T extends AccountTypeBasedMutationHooks<any, any, any>,
 > = T extends AccountTypeBasedMutationHooks<any, infer Variables, infer Data>
 	? Options<Data, Variables>
 	: never;
@@ -58,7 +58,7 @@ export type AccountTypeBasedMutationOptions<
 export function createAccountTypeBasedMutationHooks<
 	Params = void,
 	Variables = void,
-	Data = unknown
+	Data = unknown,
 >(
 	{
 		actionDesc,
@@ -69,7 +69,7 @@ export function createAccountTypeBasedMutationHooks<
 		withParams: Params extends void ? false : true;
 		connectType?: UseConnectedActionOptions["connectType"];
 	},
-	useFactory: AccountTypeBasedHooksFactory<Params, Variables, Data>
+	useFactory: AccountTypeBasedHooksFactory<Params, Variables, Data>,
 ): AccountTypeBasedMutationHooks<Params, Variables, Data> {
 	const fnName = `use(${actionDesc})`;
 
@@ -133,7 +133,7 @@ export function createAccountTypeBasedMutationHooks<
 
 					return options?.onSettled?.(...params);
 				},
-			}
+			},
 		);
 
 		const mutate = useConnectedAction(mutation.mutate, {

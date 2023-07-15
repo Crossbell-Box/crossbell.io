@@ -3,7 +3,7 @@ import { getValidAttachments } from "./attachment";
 
 export function extractCoverImageFromNote(
 	ipfsLinkToHttpLink: (url: string) => string,
-	note?: NoteMetadata | null
+	note?: NoteMetadata | null,
 ): string | undefined {
 	if (!note) {
 		return undefined;
@@ -55,7 +55,7 @@ export function extractPlainTextFromNote(
 		excludeTitle?: boolean;
 		length?: number;
 		noLineBreaks?: boolean;
-	} = {}
+	} = {},
 ): string | undefined {
 	if (!note) {
 		return undefined;
@@ -107,7 +107,7 @@ function removeMd(
 		stripFrontMatter?: boolean;
 		gfm?: boolean;
 		keepImgAltText?: boolean;
-	} = {}
+	} = {},
 ) {
 	let output = md;
 
@@ -123,7 +123,7 @@ function removeMd(
 			if (listUnicodeChar)
 				output = output.replace(
 					/^([\s\t]*)([\*\-\+]|\d+\.)\s+/gm,
-					listUnicodeChar + " $1"
+					listUnicodeChar + " $1",
 				);
 			else output = output.replace(/^([\s\t]*)([\*\-\+]|\d+\.)\s+/gm, "$1");
 		}

@@ -2,7 +2,7 @@ import { KnownSource } from "./types";
 
 const sourceMap = Object.values(KnownSource).reduce(
 	(map, source) => map.set(source.toLowerCase(), source),
-	new Map<string, KnownSource>()
+	new Map<string, KnownSource>(),
 );
 
 export function getKnownSource(source: string): KnownSource | null {

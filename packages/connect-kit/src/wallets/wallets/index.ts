@@ -33,7 +33,7 @@ export function useWalletConnectors() {
 	const { connectors } = useConfig();
 	const connectorMap = React.useMemo(
 		() => getConnectorMap(connectors),
-		[connectors]
+		[connectors],
 	);
 
 	return React.useMemo(
@@ -44,7 +44,7 @@ export function useWalletConnectors() {
 				coinbaseWallet(connectorMap.coinbaseWallet),
 				braveWallet(connectorMap.injected),
 			]),
-		[connectors]
+		[connectors],
 	);
 }
 

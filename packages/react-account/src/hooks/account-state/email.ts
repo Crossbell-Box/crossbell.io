@@ -53,7 +53,7 @@ export type EmailAccountSlice = {
 
 export const createEmailAccountSlice: SliceFn<EmailAccountSlice> = (
 	set,
-	get
+	get,
 ) => ({
 	email: null,
 
@@ -175,7 +175,7 @@ export const createEmailAccountSlice: SliceFn<EmailAccountSlice> = (
 });
 
 function isMoreThanADaySinceLastClaim(
-	lastCSBRefillTimestamp: EmailAccount["lastCSBRefillTimestamp"]
+	lastCSBRefillTimestamp: EmailAccount["lastCSBRefillTimestamp"],
 ): boolean {
 	if (!lastCSBRefillTimestamp) {
 		return true;
