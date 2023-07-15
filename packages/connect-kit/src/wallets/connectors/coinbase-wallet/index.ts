@@ -8,6 +8,7 @@ import {
 } from "viem";
 
 import { connectorStore } from "../store";
+import { isCoinbaseBrowser } from "../../../utils";
 
 // When initializing `BaseConnector` with non-whitelisted chains,
 // the Coinbase Wallet extension becomes problematic, as it may throw
@@ -32,7 +33,10 @@ export class CoinbaseWalletConnector extends BaseConnector {
 	}
 
 	isAuthorized = async (): Promise<boolean> => {
-		if (connectorStore.getState().connectedConnectorId !== this.id) {
+		if (
+			!isCoinbaseBrowser() &&
+			connectorStore.getState().connectedConnectorId !== this.id
+		) {
 			return false;
 		}
 
