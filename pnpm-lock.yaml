@@ -277,16 +277,16 @@ importers:
   packages/connect-kit:
     dependencies:
       '@crossbell/contract':
-        specifier: ^1.5.2
+        specifier: ^1.5.3
         version: link:../contract
       '@crossbell/indexer':
-        specifier: ^1.5.2
+        specifier: ^1.5.3
         version: link:../indexer
       '@crossbell/react-account':
-        specifier: ^1.5.2
+        specifier: ^1.5.3
         version: link:../react-account
       '@crossbell/ui':
-        specifier: ^1.5.2
+        specifier: ^1.5.3
         version: link:../ui
       '@crossbell/util-ethers':
         specifier: ^1.5.2
@@ -386,7 +386,7 @@ importers:
   packages/contract:
     dependencies:
       '@crossbell/indexer':
-        specifier: ^1.5.2
+        specifier: ^1.5.3
         version: link:../indexer
       '@crossbell/util-hooks':
         specifier: ^1.5.2
@@ -429,13 +429,13 @@ importers:
   packages/notification:
     dependencies:
       '@crossbell/indexer':
-        specifier: ^1.5.2
+        specifier: ^1.5.3
         version: link:../indexer
       '@crossbell/react-account':
-        specifier: ^1.5.2
+        specifier: ^1.5.3
         version: link:../react-account
       '@crossbell/ui':
-        specifier: ^1.5.2
+        specifier: ^1.5.3
         version: link:../ui
       '@crossbell/util-hooks':
         specifier: ^1.5.2
@@ -471,10 +471,10 @@ importers:
   packages/react-account:
     dependencies:
       '@crossbell/contract':
-        specifier: ^1.5.2
+        specifier: ^1.5.3
         version: link:../contract
       '@crossbell/indexer':
-        specifier: ^1.5.2
+        specifier: ^1.5.3
         version: link:../indexer
       '@crossbell/util-ethers':
         specifier: ^1.5.2
@@ -523,7 +523,7 @@ importers:
   packages/ui:
     dependencies:
       '@crossbell/indexer':
-        specifier: ^1.5.2
+        specifier: ^1.5.3
         version: link:../indexer
       '@crossbell/util-hooks':
         specifier: ^1.5.2
@@ -598,19 +598,19 @@ importers:
   sites/docs:
     dependencies:
       '@crossbell/connect-kit':
-        specifier: ^1.5.2
+        specifier: ^1.5.3
         version: link:../../packages/connect-kit
       '@crossbell/contract':
-        specifier: ^1.5.2
+        specifier: ^1.5.3
         version: link:../../packages/contract
       '@crossbell/indexer':
-        specifier: ^1.5.2
+        specifier: ^1.5.3
         version: link:../../packages/indexer
       '@crossbell/notification':
-        specifier: ^1.5.2
+        specifier: ^1.5.3
         version: link:../../packages/notification
       '@crossbell/ui':
-        specifier: ^1.5.2
+        specifier: ^1.5.3
         version: link:../../packages/ui
       '@crossbell/util-ethers':
         specifier: ^1.5.2
