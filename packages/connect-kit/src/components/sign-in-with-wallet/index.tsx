@@ -28,8 +28,11 @@ export function SignInWithWallet({
 	const signIn = useWalletSignIn();
 	const isWalletSignedIn = useIsWalletSignedIn();
 	const { connector = null } = useAccount();
+	const [isConnectedBefore, setIsConnectedBefore] = React.useState(false);
 	const isWalletConnectConnector = checkIsWalletConnectConnector(connector);
 	const autoSignIn = defaultAutoSignIn || isWalletConnectConnector;
+	const showLoadingIndicator =
+		signIn.isLoading || (autoSignIn && !isConnectedBefore);
 
 	React.useEffect(() => {
 		if (isWalletSignedIn) {
@@ -39,10 +42,17 @@ export function SignInWithWallet({
 
 	React.useEffect(() => {
 		if (autoSignIn && !signIn.isLoading) {
-			const timeout = setTimeout(() => signIn.mutate(), 500);
+			const timeout = setTimeout(
+				() => signIn.mutate(),
+				isWalletConnectConnector ? 1000 : 500,
+			);
 			return () => clearTimeout(timeout);
 		}
 	}, [autoSignIn]);
+
+	if (signIn.isLoading && !isConnectedBefore) {
+		setIsConnectedBefore(true);
+	}
 
 	return (
 		<div>
@@ -51,7 +61,7 @@ export function SignInWithWallet({
 				private key.
 			</div>
 
-			<LoadingOverlay visible={signIn.isLoading} />
+			<LoadingOverlay visible={showLoadingIndicator} />
 
 			<OptionList>
 				<OptionListItem
