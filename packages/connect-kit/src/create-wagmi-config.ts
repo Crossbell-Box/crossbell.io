@@ -73,7 +73,10 @@ export function createWagmiConfig({
 		}),
 		walletConnectV2ProjectId
 			? new WalletConnectConnector({
-					options: { projectId: walletConnectV2ProjectId },
+					options: {
+						showQrModal: false,
+						projectId: walletConnectV2ProjectId,
+					},
 			  })
 			: null,
 	]);

@@ -5,7 +5,7 @@ import compact from "lodash.compact";
 import type { MetaMaskConnector } from "wagmi/connectors/metaMask";
 import type { CoinbaseWalletConnector } from "wagmi/connectors/coinbaseWallet";
 import type { InjectedConnector } from "wagmi/connectors/injected";
-import type { WalletConnectLegacyConnector } from "wagmi/connectors/walletConnectLegacy";
+import type { WalletConnectConnector } from "wagmi/connectors/walletConnect";
 
 import type { OKXConnector } from "../connectors";
 import { metaMaskWallet } from "./meta-mask-wallet";
@@ -18,7 +18,7 @@ enum KnownConnector {
 	okx = "okx",
 	coinbaseWallet = "coinbaseWallet",
 	injected = "injected",
-	walletConnectLegacy = "walletConnectLegacy",
+	walletConnect = "walletConnect",
 }
 
 type ConnectorMap = Partial<{
@@ -26,7 +26,7 @@ type ConnectorMap = Partial<{
 	[KnownConnector.metaMask]: MetaMaskConnector;
 	[KnownConnector.coinbaseWallet]: CoinbaseWalletConnector;
 	[KnownConnector.injected]: InjectedConnector;
-	[KnownConnector.walletConnectLegacy]: WalletConnectLegacyConnector;
+	[KnownConnector.walletConnect]: WalletConnectConnector;
 }>;
 
 export function useWalletConnectors() {
@@ -40,7 +40,7 @@ export function useWalletConnectors() {
 		() =>
 			compact([
 				okxWallet(connectorMap.okx),
-				metaMaskWallet(connectorMap.metaMask, connectorMap.walletConnectLegacy),
+				metaMaskWallet(connectorMap.metaMask, connectorMap.walletConnect),
 				coinbaseWallet(connectorMap.coinbaseWallet),
 				braveWallet(connectorMap.injected),
 			]),

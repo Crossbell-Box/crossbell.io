@@ -1,9 +1,14 @@
 import type { MetaMaskConnector } from "wagmi/connectors/metaMask";
-import type { WalletConnectLegacyConnector } from "wagmi/connectors/walletConnectLegacy";
+import type { WalletConnectConnector } from "wagmi/connectors/walletConnect";
 import React from "react";
 
 import { MetamaskIcon } from "../../../components";
-import { isAndroid, isMobile } from "../../../utils";
+import {
+	isAndroid,
+	isMobile,
+	isIOS,
+	getWalletConnectUri,
+} from "../../../utils";
 import { Wallet } from "../../types";
 import styles from "../coinbase-wallet/index.module.css";
 
@@ -35,7 +40,7 @@ function isMetaMask(ethereum: NonNullable<(typeof window)["ethereum"]>) {
 
 export const metaMaskWallet = (
 	metaMask?: MetaMaskConnector,
-	walletConnectLegacy?: WalletConnectLegacyConnector,
+	walletConnect?: WalletConnectConnector,
 ): Wallet | null => {
 	if (!metaMask) return null;
 
@@ -61,15 +66,16 @@ export const metaMaskWallet = (
 			</span>
 		),
 		createConnector: () => {
-			if (shouldUseWalletConnect && walletConnectLegacy) {
+			if (shouldUseWalletConnect && walletConnect) {
 				return {
-					connector: walletConnectLegacy,
+					connector: walletConnect,
 					async qrCode() {
-						const { uri } = ((await walletConnectLegacy.getProvider()) as any)
-							?.connector;
+						const uri = await getWalletConnectUri(walletConnect);
 
 						return isAndroid()
 							? uri
+							: isIOS()
+							? `metamask://wc?uri=${encodeURIComponent(uri)}`
 							: `https://metamask.app.link/wc?uri=${encodeURIComponent(uri)}`;
 					},
 				};

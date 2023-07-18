@@ -5,17 +5,21 @@ import { useRefCallback } from "@crossbell/util-hooks";
 
 import { checkIsWalletConnectConnector } from "../utils";
 import { connectorStore } from "./connectors/store";
+import { WalletConnectConnector } from "./connectors";
 
 export function useDefaultWalletConnect() {
 	const { connectAsync, connectors } = useConnect();
-	const connector = React.useMemo(
+	const _connector = React.useMemo(
 		() => connectors.find(checkIsWalletConnectConnector),
 		[connectors],
 	);
 
 	const openDefaultWalletConnect = useRefCallback(async () => {
-		if (connector) {
+		if (_connector) {
 			try {
+				const connector = new WalletConnectConnector({
+					options: { ..._connector.options, showQrModal: true },
+				});
 				const preferredChainId = connector?.chains[0]?.id;
 				const result = await connectAsync({
 					chainId: preferredChainId,
@@ -44,7 +48,7 @@ export function useDefaultWalletConnect() {
 	});
 
 	return {
-		canOpenWalletConnect: !!connector,
+		canOpenWalletConnect: !!_connector,
 		openDefaultWalletConnect,
 	};
 }
