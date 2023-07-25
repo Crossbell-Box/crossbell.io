@@ -8,7 +8,7 @@ import { createAccountTypeBasedMutationHooks } from "./account-type-based-hooks"
 export const usePostNote = createAccountTypeBasedMutationHooks<
 	void,
 	{ metadata: NoteMetadata; characterId?: number },
-	{ noteId: bigint }
+	{ noteId: bigint; transactionHash: string }
 >(
 	{
 		actionDesc: "usePostNote",
@@ -22,9 +22,12 @@ export const usePostNote = createAccountTypeBasedMutationHooks<
 				);
 			}
 
-			const { data } = await putNote({ token: account.token, metadata });
+			const { data, transactionHash } = await putNote({
+				token: account.token,
+				metadata,
+			});
 
-			return { noteId: BigInt(data.noteId) };
+			return { noteId: BigInt(data.noteId), transactionHash };
 		},
 
 		wallet: {
@@ -42,16 +45,20 @@ export const usePostNote = createAccountTypeBasedMutationHooks<
 					: true;
 
 				if (siwe && canUseSiwe) {
-					const { data } = await siwePutNote({ siwe, characterId, metadata });
+					const { data, transactionHash } = await siwePutNote({
+						siwe,
+						characterId,
+						metadata,
+					});
 
-					return { noteId: BigInt(data.noteId) };
+					return { noteId: BigInt(data.noteId), transactionHash };
 				} else {
-					const { data } = await contract.note.post({
+					const { data, transactionHash } = await contract.note.post({
 						characterId,
 						metadataOrUri: metadata,
 					});
 
-					return { noteId: data.noteId };
+					return { noteId: data.noteId, transactionHash };
 				}
 			},
 		},

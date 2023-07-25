@@ -9,9 +9,12 @@ import { deleteNote, siweDeleteNote } from "../apis";
 
 import { createAccountTypeBasedMutationHooks } from "./account-type-based-hooks";
 
+type Result = { transactionHash: string } | null;
+
 export const useDeleteNote = createAccountTypeBasedMutationHooks<
 	void,
-	Pick<NoteEntity, "noteId" | "characterId">
+	Pick<NoteEntity, "noteId" | "characterId">,
+	Result
 >(
 	{
 		actionDesc: "Delete Note",
@@ -20,7 +23,9 @@ export const useDeleteNote = createAccountTypeBasedMutationHooks<
 	() => ({
 		async email({ noteId, characterId }, { account }) {
 			if (characterId === account.characterId) {
-				await deleteNote({ token: account.token, noteId });
+				return deleteNote({ token: account.token, noteId });
+			} else {
+				return null;
 			}
 		},
 
@@ -29,9 +34,9 @@ export const useDeleteNote = createAccountTypeBasedMutationHooks<
 
 			async action({ characterId, noteId }, { account, siwe, contract }) {
 				if (siwe && account.characterId === characterId) {
-					await siweDeleteNote({ siwe, characterId, noteId });
+					return siweDeleteNote({ siwe, characterId, noteId });
 				} else {
-					await contract.note.delete({ characterId, noteId });
+					return contract.note.delete({ characterId, noteId });
 				}
 			},
 		},

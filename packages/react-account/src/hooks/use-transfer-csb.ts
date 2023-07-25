@@ -10,9 +10,12 @@ export type UseTransferCSBParams = {
 	amount: bigint;
 };
 
+type Result = { transactionHash: string };
+
 export const useTransferCsb = createAccountTypeBasedMutationHooks<
 	void,
-	UseTransferCSBParams
+	UseTransferCSBParams,
+	Result
 >({ actionDesc: "transfer CSB", withParams: false }, () => ({
 	wallet: {
 		supportOPSign: false,

@@ -8,13 +8,16 @@ import { putNote, siwePutNote } from "../apis";
 
 import { createAccountTypeBasedMutationHooks } from "./account-type-based-hooks";
 
+type Result = { transactionHash: string } | null;
+type Variables = {
+	note: Pick<NoteEntity, "characterId" | "noteId">;
+	metadata: NoteMetadata;
+};
+
 export const usePostNoteForNote = createAccountTypeBasedMutationHooks<
 	void,
-	{
-		note: Pick<NoteEntity, "characterId" | "noteId">;
-		metadata: NoteMetadata;
-	},
-	boolean
+	Variables,
+	Result
 >(
 	{
 		actionDesc: "",
@@ -22,7 +25,7 @@ export const usePostNoteForNote = createAccountTypeBasedMutationHooks<
 	},
 	() => ({
 		async email({ metadata, note }, { account }) {
-			await putNote({
+			return putNote({
 				token: account.token,
 				metadata,
 				linkItemType: "Note",
@@ -31,8 +34,6 @@ export const usePostNoteForNote = createAccountTypeBasedMutationHooks<
 					noteId: BigInt(note.noteId),
 				},
 			});
-
-			return true;
 		},
 
 		wallet: {
@@ -41,7 +42,7 @@ export const usePostNoteForNote = createAccountTypeBasedMutationHooks<
 			async action({ metadata, note }, { account, siwe, contract }) {
 				if (account?.characterId) {
 					if (siwe) {
-						await siwePutNote({
+						return siwePutNote({
 							characterId: account.characterId,
 							siwe,
 							metadata,
@@ -52,17 +53,15 @@ export const usePostNoteForNote = createAccountTypeBasedMutationHooks<
 							},
 						});
 					} else {
-						await contract.note.postForNote({
+						return contract.note.postForNote({
 							characterId: account.characterId,
 							metadataOrUri: metadata,
 							targetCharacterId: note.characterId,
 							targetNoteId: note.noteId,
 						});
 					}
-
-					return true;
 				} else {
-					return false;
+					return null;
 				}
 			},
 		},

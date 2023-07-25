@@ -21,6 +21,7 @@ type Variables =
 			metadata: NoteMetadata;
 			note: Pick<NoteEntity, "characterId" | "noteId">;
 	  };
+type Result = { transactionHash: string } | null;
 
 const getMetadata = async (variables: Variables) => {
 	const note = await indexer.note.get(
@@ -42,7 +43,8 @@ const getMetadata = async (variables: Variables) => {
 
 export const useUpdateNote = createAccountTypeBasedMutationHooks<
 	void,
-	Variables
+	Variables,
+	Result
 >(
 	{
 		actionDesc: "useUpdateNote",
@@ -50,37 +52,37 @@ export const useUpdateNote = createAccountTypeBasedMutationHooks<
 	},
 	() => {
 		return {
-			async email(variables, { account }) {
-				if (variables.note.characterId !== account.characterId) return;
+			async email(variables, { account }): Promise<Result> {
+				if (variables.note.characterId !== account.characterId) return null;
 
 				const metadata = await getMetadata(variables);
 
-				if (metadata) {
-					await updateNote({
-						token: account.token,
-						metadata: metadata,
-						noteId: variables.note.noteId,
-					});
-				}
+				if (!metadata) return null;
+
+				return updateNote({
+					token: account.token,
+					metadata: metadata,
+					noteId: variables.note.noteId,
+				});
 			},
 
 			wallet: {
 				supportOPSign: true,
 
-				async action(variables, { account, siwe, contract }) {
+				async action(variables, { account, siwe, contract }): Promise<Result> {
 					const metadata = await getMetadata(variables);
 
-					if (!metadata) return;
+					if (!metadata) return null;
 
 					if (siwe && variables.note.characterId === account.characterId) {
-						await siweUpdateNote({
+						return siweUpdateNote({
 							siwe,
 							characterId: variables.note.characterId,
 							noteId: variables.note.noteId,
 							metadata,
 						});
 					} else {
-						await contract.note.setMetadata({
+						return contract.note.setMetadata({
 							characterId: variables.note.characterId,
 							noteId: variables.note.noteId,
 							// crossbell.js will try to modify the object internally,
