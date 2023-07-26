@@ -62,6 +62,7 @@ export function useCharacterNotificationUnreadCount(
 
 			return count;
 		},
+		{ initialData: 0 },
 	);
 }
 
