@@ -1,9 +1,9 @@
-import { Text } from "@mantine/core";
-import React, { PropsWithChildren, useEffect, useState } from "react";
-import { useRouter } from "next/router";
-import classNames from "classnames";
-import { useElementSize, useWindowScroll } from "@mantine/hooks";
 import { ArrowBackIcon } from "@crossbell/ui";
+import { Text } from "@mantine/core";
+import { useElementSize, useWindowScroll } from "@mantine/hooks";
+import classNames from "classnames";
+import { useRouter } from "next/router";
+import React, { PropsWithChildren, useEffect, useState } from "react";
 
 let _height = 72;
 
@@ -32,7 +32,7 @@ export default function Header({
 	const router = useRouter();
 
 	const handleCLickBack = () => {
-		if (history.length === 1) {
+		if (history.length / 2 === 1) {
 			router.push("/feed");
 		} else {
 			// TODO: this would be a bug if the previous page was not the app
