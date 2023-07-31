@@ -14,14 +14,17 @@ export type UseDebouncedActionSequenceConfigAddOptions = {
 };
 
 export function useDebouncedActionSequence({
-	delay = 1000,
+	delay = 600,
 	onError,
 }: UseDebouncedActionSequenceConfig) {
 	const actionIdRef = React.useRef(0);
 	const [action, _setAction] = React.useState(NOOP);
 
 	React.useEffect(() => {
-		const timeout = window.setTimeout(action.run, delay);
+		const timeout = window.setTimeout(
+			action.run,
+			actionIdRef.current === 0 ? 0 : delay,
+		);
 		return () => window.clearTimeout(timeout);
 	}, [action]);
 
