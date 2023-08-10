@@ -283,7 +283,7 @@ importers:
         specifier: ^1.5.6
         version: link:../indexer
       '@crossbell/react-account':
-        specifier: ^1.5.6
+        specifier: ^1.5.7
         version: link:../react-account
       '@crossbell/ui':
         specifier: ^1.5.6
@@ -432,7 +432,7 @@ importers:
         specifier: ^1.5.6
         version: link:../indexer
       '@crossbell/react-account':
-        specifier: ^1.5.6
+        specifier: ^1.5.7
         version: link:../react-account
       '@crossbell/ui':
         specifier: ^1.5.6
@@ -598,7 +598,7 @@ importers:
   sites/docs:
     dependencies:
       '@crossbell/connect-kit':
-        specifier: ^1.5.6
+        specifier: ^1.5.7
         version: link:../../packages/connect-kit
       '@crossbell/contract':
         specifier: ^1.5.6
@@ -607,7 +607,7 @@ importers:
         specifier: ^1.5.6
         version: link:../../packages/indexer
       '@crossbell/notification':
-        specifier: ^1.5.6
+        specifier: ^1.5.7
         version: link:../../packages/notification
       '@crossbell/ui':
         specifier: ^1.5.6
@@ -1018,6 +1018,7 @@ packages:
 
   /@emotion/memoize@0.7.4:
     resolution: {integrity: sha512-Ja/Vfqe3HpuzRsG1oBtWTHk2PGZ7GR+2Vz5iYGelAw8dx32K0y7PjVuxK6z1nMpZOqAFsRUPCkK1YjJ56qJlgw==}
+    requiresBuild: true
     dev: false
     optional: true
 
