@@ -8,6 +8,7 @@ export type BaseSigner = {
 };
 
 export type ReactAccountContext = {
+	disableOPSign?: boolean;
 	onDisconnect: () => void;
 	getSigner: () => Promise<BaseSigner | undefined>;
 };
@@ -25,11 +26,12 @@ const Context = React.createContext<ReactAccountContext>({
 export function ReactAccountProvider(
 	props: ReactAccountContext & { children: React.ReactNode },
 ) {
+	const { disableOPSign = false } = props;
 	const onDisconnect = useRefCallback(props.onDisconnect);
 	const getSigner = useRefCallback(props.getSigner);
 	const value = React.useMemo(
-		() => ({ onDisconnect, getSigner }),
-		[onDisconnect, getSigner],
+		() => ({ onDisconnect, getSigner, disableOPSign }),
+		[onDisconnect, getSigner, disableOPSign],
 	);
 
 	return <Context.Provider value={value}>{props.children}</Context.Provider>;
