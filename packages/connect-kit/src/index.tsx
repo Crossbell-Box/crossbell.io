@@ -58,6 +58,7 @@ export type ConnectKitProviderProps = {
 	withoutNotificationsProvider?: boolean;
 	urlComposer?: UrlComposerContextValue;
 	xSettings?: Partial<XSettingsConfig>;
+	disableOPSign?: boolean;
 	// Used for the case when we want to keep the user logged in even if the user disconnects from the wallet
 	ignoreWalletDisconnectEvent?: boolean;
 } & Partial<ConnectKitConfig>;
@@ -71,6 +72,7 @@ export function ConnectKitProvider({
 	urlComposer,
 	xSettings,
 	ignoreWalletDisconnectEvent,
+	disableOPSign,
 	...connectKitConfig
 }: ConnectKitProviderProps) {
 	const accountState = useAccountState();
@@ -118,7 +120,11 @@ export function ConnectKitProvider({
 		<InitContractProvider {...contractConfig}>
 			<UseWeb2UrlContext.Provider value={ipfsLinkToHttpLink ?? null}>
 				<UrlComposerContext.Provider value={urlComposer ?? null}>
-					<ReactAccountProvider getSigner={getSigner} onDisconnect={disconnect}>
+					<ReactAccountProvider
+						disableOPSign={disableOPSign}
+						getSigner={getSigner}
+						onDisconnect={disconnect}
+					>
 						<ConnectKitConfigContext.Provider value={connectKitConfig}>
 							<XSettingsConfigContext.Provider value={xSettings ?? null}>
 								<MantineProvider theme={{ colorScheme }}>

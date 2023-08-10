@@ -47,6 +47,7 @@ export default function App({ Component, pageProps }: AppProps) {
 				<ConnectKitProvider
 					xSettings={xSettings}
 					ignoreWalletDisconnectEvent={true}
+					disableOPSign={true}
 				>
 					<NotificationModal />
 					<Component {...pageProps} />
