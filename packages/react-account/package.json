@@ -65,13 +65,13 @@
 		"@crossbell/util-hooks": "^1.5.6",
 		"@crossbell/util-metadata": "^1.5.6",
 		"check-password-strength": "^2",
-		"crossbell": "^1.5.3",
+		"crossbell": "^1.5.9",
 		"immer": "^10",
 		"lodash.debounce": "4.0.8",
 		"react": "^18",
 		"rxjs": "^7.8.1",
 		"ts-essentials": "^9.3.2",
-		"viem": "^1.4.2",
+		"viem": "^1.6.0",
 		"zustand": "^4"
 	},
 	"peerDependencies": {
