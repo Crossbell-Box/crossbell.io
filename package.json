@@ -13,6 +13,7 @@
 		"format:code": "prettier '@(packages|examples)/**/*.@(ts|tsx|html|json)' --write",
 		"format:package": "format-package 'package.json' -w -c format-package.json",
 		"lint": "eslint . --ext .ts,.tsx --fix --max-warnings 0",
+		"meme": "pnpm --filter consistent.io run dev",
 		"prepare": "husky install",
 		"start": "pnpm --filter crossbell.io run start"
 	},
