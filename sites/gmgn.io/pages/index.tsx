@@ -7,11 +7,8 @@ const Home: NextPage = () => (
 
 	<>
 		<Head>
-			<title>Consistent.io</title>
-			<meta
-				name="description"
-				content="Consistent.io - Own Your Social Activities"
-			/>
+			<title>GMGN</title>
+			<meta name="description" content="GMGN - Have A Nice Day" />
 			<link rel="icon" href="/favicon.ico" />
 		</Head>
 	</>

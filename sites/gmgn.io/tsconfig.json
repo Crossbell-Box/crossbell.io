@@ -21,7 +21,6 @@
 			"@/styles/*": ["styles/*"],
 			"@/utils/*": ["utils/*"],
 			"@/public/*": ["public/*"],
-			"@crossbell/*": ["../../packages/*/src"],
 			"~/shared/*": ["../../shared/*"],
 			"~/scripts/*": ["../../scripts/*"]
 		}
