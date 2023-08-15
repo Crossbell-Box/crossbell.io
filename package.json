@@ -12,7 +12,8 @@
 		"format": "run-p format:code format:package",
 		"format:code": "prettier '@(packages|examples)/**/*.@(ts|tsx|html|json)' --write",
 		"format:package": "format-package 'package.json' -w -c format-package.json",
-		"gmgn": "pnpm --filter gmgn.io run dev",
+		"gmgnb": "pnpm --filter gmgn.io run build",
+		"gmgnd": "pnpm --filter gmgn.io run dev",
 		"lint": "eslint . --ext .ts,.tsx --fix --max-warnings 0",
 		"prepare": "husky install",
 		"start": "pnpm --filter crossbell.io run start"
