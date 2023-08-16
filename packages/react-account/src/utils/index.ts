@@ -5,3 +5,4 @@ export * from "./zustand-slice";
 export * from "./zustand-context";
 export * from "./zustand-create-context";
 export * from "./validate-handle";
+export * from "./optional-bigint";

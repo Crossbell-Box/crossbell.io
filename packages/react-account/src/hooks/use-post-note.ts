@@ -2,13 +2,14 @@ import { NoteMetadata } from "crossbell";
 import { SCOPE_KEY_FOLLOWING_FEEDS_OF_CHARACTER } from "@crossbell/indexer";
 
 import { putNote, siwePutNote } from "../apis";
+import { optionalBigint, OptionalBigint } from "../utils";
 
 import { createAccountTypeBasedMutationHooks } from "./account-type-based-hooks";
 
 export const usePostNote = createAccountTypeBasedMutationHooks<
 	void,
 	{ metadata: NoteMetadata; characterId?: number },
-	{ noteId: bigint; transactionHash: string }
+	{ noteId: OptionalBigint; transactionHash: string }
 >(
 	{
 		actionDesc: "usePostNote",
@@ -27,7 +28,7 @@ export const usePostNote = createAccountTypeBasedMutationHooks<
 				metadata,
 			});
 
-			return { noteId: BigInt(data.noteId), transactionHash };
+			return { noteId: optionalBigint(data.noteId), transactionHash };
 		},
 
 		wallet: {
@@ -51,7 +52,7 @@ export const usePostNote = createAccountTypeBasedMutationHooks<
 						metadata,
 					});
 
-					return { noteId: BigInt(data.noteId), transactionHash };
+					return { noteId: optionalBigint(data.noteId), transactionHash };
 				} else {
 					const { data, transactionHash } = await contract.note.post({
 						characterId,
