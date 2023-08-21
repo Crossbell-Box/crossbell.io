@@ -48,7 +48,7 @@
 		"canvas-confetti": "^1",
 		"check-password-strength": "^2",
 		"classnames": "^2",
-		"crossbell": "^1.5.9",
+		"crossbell": "^1.5.10",
 		"embla-carousel-react": "^7",
 		"immer": "^10",
 		"lodash.compact": "^3",
@@ -60,7 +60,7 @@
 		"react-google-recaptcha": "^3.1.0",
 		"rxjs": "^7.8.1",
 		"ts-essentials": "^9.3.2",
-		"viem": "^1.6.0",
+		"viem": "^1.6.4",
 		"zustand": "^4"
 	},
 	"peerDependencies": {

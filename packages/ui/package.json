@@ -35,7 +35,7 @@
 		"@crossbell/util-metadata": "^1.5.8",
 		"@tanstack/react-query": "^4",
 		"classnames": "^2",
-		"crossbell": "^1.5.9",
+		"crossbell": "^1.5.10",
 		"facepaint": "^1.2.1",
 		"react-intersection-observer": "^9.5.2",
 		"react-remove-scroll": "^2.5.6",
