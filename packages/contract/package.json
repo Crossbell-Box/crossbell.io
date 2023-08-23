@@ -28,7 +28,6 @@
 		"./package.json": "./package.json"
 	},
 	"dependencies": {
-		"@crossbell/indexer": "^1.5.10",
 		"@crossbell/util-hooks": "^1.5.10",
 		"crossbell": "^1.5.10",
 		"viem": "^1.6.4"

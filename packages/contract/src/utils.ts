@@ -1,7 +1,6 @@
 import { Contract, Numberish } from "crossbell";
 import { isCrossbellMainnet } from "crossbell/network";
 import { parseEther } from "viem";
-import { getCsbBalance } from "@crossbell/indexer";
 import { handleActions } from "@crossbell/util-hooks";
 import { type Address } from "viem";
 
@@ -34,7 +33,10 @@ export function injectContractChecker({
 
 			if (address) {
 				// check if $CSB is enough to pay for the transaction
-				const balance = await getCsbBalance(address);
+				const { data: balance } = await contract.csb.getBalance({
+					owner: address,
+				});
+
 				if (!hasEnoughCsb(balance)) {
 					openFaucetHintModel();
 					throw new BizError("Not enough $CSB.", ERROR_CODES.NO_CHARACTER);
