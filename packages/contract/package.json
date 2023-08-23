@@ -29,8 +29,8 @@
 	},
 	"dependencies": {
 		"@crossbell/util-hooks": "^1.5.10",
-		"crossbell": "^1.5.10",
-		"viem": "^1.6.4"
+		"crossbell": "^1.6.1",
+		"viem": "^1.6.7"
 	},
 	"peerDependencies": {
 		"react": "^18"
