@@ -14,6 +14,7 @@ type ConnectType = "wallet" | "email" | "any";
 export type UseConnectedActionOptions<P extends any[] = unknown[], V = void> = {
 	noAutoResume?: boolean;
 	supportOPSign?: boolean;
+	mustHaveCharacter?: boolean;
 	connectType?: ConnectType;
 	fallback?: (...params: P) => V;
 };
@@ -39,10 +40,15 @@ export function useConnectedAction<P extends any[], V>(
 		connectType = "any",
 		noAutoResume = false,
 		supportOPSign = false,
+		mustHaveCharacter = true,
 		fallback,
 	}: UseConnectedActionOptions<P, V> = {},
 ): (...params: P) => Promise<V> {
-	const checkIsConnected = useCheckIsConnected({ connectType, supportOPSign });
+	const checkIsConnected = useCheckIsConnected({
+		connectType,
+		supportOPSign,
+		mustHaveCharacter,
+	});
 	const { autoResume, resetAutoResume } = useAutoResume({
 		noAutoResume,
 		checkIsConnected,
@@ -113,9 +119,11 @@ export function useConnectedAction<P extends any[], V>(
 function useCheckIsConnected({
 	connectType: type,
 	supportOPSign,
+	mustHaveCharacter,
 }: {
 	connectType: ConnectType;
 	supportOPSign: boolean;
+	mustHaveCharacter: boolean;
 }) {
 	const isWalletConnected = !!useAddress();
 	const character = useAccountCharacter();
@@ -125,7 +133,8 @@ function useCheckIsConnected({
 		const state = useAccountState.getState();
 		const isEmailAccountConnected = !!state.email;
 		const isWalletAccountConnected = ((): boolean => {
-			if (state.email || !state.wallet?.characterId) return false;
+			if (state.email) return false;
+			if (mustHaveCharacter && !state.wallet?.characterId) return false;
 
 			if (supportOPSign && isOpSignEnabled) {
 				return true;

@@ -64,10 +64,12 @@ export function createAccountTypeBasedMutationHooks<
 		actionDesc,
 		withParams,
 		connectType,
+		mustHaveCharacter,
 	}: {
 		actionDesc: string;
 		withParams: Params extends void ? false : true;
 		connectType?: UseConnectedActionOptions["connectType"];
+		mustHaveCharacter?: false;
 	},
 	useFactory: AccountTypeBasedHooksFactory<Params, Variables, Data>,
 ): AccountTypeBasedMutationHooks<Params, Variables, Data> {
@@ -140,12 +142,14 @@ export function createAccountTypeBasedMutationHooks<
 			connectType,
 			noAutoResume: options?.noAutoResume,
 			supportOPSign: factory.wallet?.supportOPSign,
+			mustHaveCharacter,
 		});
 
 		const mutateAsync = useConnectedAction(mutation.mutateAsync, {
 			connectType,
 			noAutoResume: options?.noAutoResume,
 			supportOPSign: factory.wallet?.supportOPSign,
+			mustHaveCharacter,
 		});
 
 		return { ...mutation, mutate, mutateAsync } as typeof mutation;

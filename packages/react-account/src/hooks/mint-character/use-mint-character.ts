@@ -17,6 +17,7 @@ export const useMintCharacter = createAccountTypeBasedMutationHooks<
 		actionDesc: "mint-character",
 		withParams: false,
 		connectType: "wallet",
+		mustHaveCharacter: false,
 	},
 	() => {
 		const createCharacter = useCreateCharacter();
