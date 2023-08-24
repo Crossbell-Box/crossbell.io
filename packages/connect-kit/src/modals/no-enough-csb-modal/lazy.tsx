@@ -70,8 +70,16 @@ function TransferCSBToOperator() {
 				<img className={styles.img} src={coinsIcon} alt="Coins" />
 
 				<p className={styles.msg}>
-					Your current $CSB balance is not enough to send this transaction.
-					Please transfer to your operator.
+					{"Your current $CSB balance of "}
+					<a
+						href="https://crossbell-io-updates.xlog.app/Weekly-Updates-2023%2F02%2F06#operator-sign"
+						target="_blank"
+					>
+						Operator Sign
+					</a>
+					{
+						" is not enough to send this transaction. Please transfer more to your operator."
+					}
 				</p>
 
 				<MainBtn

@@ -24,3 +24,8 @@
 	text-align: center;
 	margin-bottom: 48px;
 }
+
+.msg a {
+	text-decoration: underline;
+	opacity: 0.9;
+}
