@@ -57,7 +57,6 @@ export function createWagmiConfig({
 			chains,
 			options: {
 				shimDisconnect: true,
-				UNSTABLE_shimOnConnectSelectAccount: true,
 			},
 		}),
 		new OKXConnector({
