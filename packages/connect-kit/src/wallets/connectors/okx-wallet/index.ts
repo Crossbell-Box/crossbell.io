@@ -1,7 +1,6 @@
 import type { WindowProvider } from "wagmi/window";
 import { InjectedConnector } from "wagmi/connectors/injected";
-import { Chain } from "@wagmi/chains";
-import { InjectedConnectorOptions } from "@wagmi/connectors/injected";
+import { Chain } from "wagmi/chains";
 
 const delay = (timeout: number) =>
 	new Promise((resolve) => setTimeout(resolve, timeout));
@@ -12,13 +11,18 @@ declare global {
 	}
 }
 
+type ConnectorOptions = Exclude<
+	Exclude<
+		ConstructorParameters<typeof InjectedConnector>[0],
+		undefined
+	>["options"],
+	undefined
+>;
+
 export class OKXConnector extends InjectedConnector {
 	readonly id = "okx";
 
-	constructor(params?: {
-		chains?: Chain[];
-		options?: InjectedConnectorOptions;
-	}) {
+	constructor(params?: { chains?: Chain[]; options?: ConnectorOptions }) {
 		super({
 			chains: params?.chains,
 			options: {

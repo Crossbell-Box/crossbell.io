@@ -18,17 +18,17 @@
 		"@crossbell/util-ethers": "^1.5.2",
 		"@crossbell/util-hooks": "^1.5.11",
 		"@crossbell/util-metadata": "^1.5.11",
-		"@sentry/react": "^7.64.0",
-		"@sentry/tracing": "^7.64.0",
+		"@sentry/react": "^7.66.0",
+		"@sentry/tracing": "^7.66.0",
 		"next": "13.4.19",
-		"nextra": "^2.11.1",
-		"nextra-theme-docs": "^2.11.1",
+		"nextra": "^2.12.3",
+		"nextra-theme-docs": "^2.12.3",
 		"outdent": "^0.8.0"
 	},
 	"devDependencies": {
 		"@next/bundle-analyzer": "^13.4.19",
 		"autoprefixer": "^10.4.15",
-		"postcss": "^8.4.28",
+		"postcss": "^8.4.29",
 		"tailwindcss": "^3.3.3"
 	}
 }
