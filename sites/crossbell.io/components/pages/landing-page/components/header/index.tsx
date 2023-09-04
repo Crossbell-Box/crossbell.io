@@ -11,6 +11,7 @@ import {
 	XSyncLogo,
 	XLogLogo,
 	breakpoints,
+	CrossbellChainLogo,
 } from "@crossbell/ui";
 import { useMediaQuery } from "@mantine/hooks";
 import { useDisclosure } from "@crossbell/util-hooks";
@@ -37,7 +38,7 @@ function AppsBtn() {
 
 	const apps = (
 		<div className="p-24px flex flex-col gap-[20px] items-center">
-			<div className="flex items-center justify-between w-full">
+			<div className="grid grid-cols-4 gap-4 w-full">
 				<a
 					className="flex flex-col items-center gap-[4px]"
 					href="https://xfeed.app"
@@ -73,6 +74,15 @@ function AppsBtn() {
 					<XLogLogo className="w-[36px] h-[36px] text-[#000]" />
 					<div className="text-[#000]">xLog</div>
 				</a>
+
+				<a
+					className="flex flex-col items-center justify-center gap-[4px]"
+					href="https://ecoboost.crossbell.io"
+					target="_blank"
+				>
+					<CrossbellChainLogo className="w-[36px] h-[36px] text-[#E6B65B]" />
+					<div className="text-[#000]">EcoBoost</div>
+				</a>
 			</div>
 		</div>
 	);
@@ -88,7 +98,7 @@ function AppsBtn() {
 
 	if (isSM) {
 		return (
-			<Popover width={320} radius={24} offset={24} position="bottom-end">
+			<Popover width={340} radius={24} offset={24} position="bottom-end">
 				<Popover.Target>{btn}</Popover.Target>
 
 				<Popover.Dropdown p={0} className="border-[#E1E8F7]">
@@ -105,7 +115,7 @@ function AppsBtn() {
 					onClose={modal.close}
 					zIndex={11}
 				>
-					<div className="w-[100vw] px-[24px] max-w-[320px]">
+					<div className="w-[100vw] px-[24px] max-w-[340px]">
 						<div className="bg-[#fff] rounded-[24px]">{apps}</div>
 					</div>
 				</BaseModal>
