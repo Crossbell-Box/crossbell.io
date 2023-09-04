@@ -1,6 +1,6 @@
 {
 	"name": "@crossbell/notification",
-	"version": "1.5.12",
+	"version": "1.5.13",
 	"license": "MIT",
 	"repository": "github:Crossbell-Box/crossbell-universe",
 	"bugs": "https://github.com/Crossbell-Box/crossbell-universe/issues",
@@ -28,11 +28,11 @@
 		"./package.json": "./package.json"
 	},
 	"dependencies": {
-		"@crossbell/indexer": "^1.5.12",
-		"@crossbell/react-account": "^1.5.12",
-		"@crossbell/ui": "^1.5.12",
-		"@crossbell/util-hooks": "^1.5.12",
-		"@crossbell/util-metadata": "^1.5.12",
+		"@crossbell/indexer": "^1.5.13",
+		"@crossbell/react-account": "^1.5.13",
+		"@crossbell/ui": "^1.5.13",
+		"@crossbell/util-hooks": "^1.5.13",
+		"@crossbell/util-metadata": "^1.5.13",
 		"classnames": "^2",
 		"dayjs": "^1.11.9",
 		"react-intersection-observer": "^9",

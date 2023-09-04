@@ -1,6 +1,6 @@
 {
 	"name": "@crossbell/util-metadata",
-	"version": "1.5.12",
+	"version": "1.5.13",
 	"license": "MIT",
 	"repository": "github:Crossbell-Box/crossbell-universe",
 	"bugs": "https://github.com/Crossbell-Box/crossbell-universe/issues",
@@ -28,7 +28,7 @@
 		"./package.json": "./package.json"
 	},
 	"dependencies": {
-		"@crossbell/util-ethers": "^1.5.2",
+		"@crossbell/util-ethers": "^1.5.13",
 		"@fastify/deepmerge": "^1.3.0",
 		"crossbell": "^1.6.4"
 	}
