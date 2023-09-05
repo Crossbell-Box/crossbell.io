@@ -11,7 +11,6 @@ import {
 	XSyncLogo,
 	XLogLogo,
 	breakpoints,
-	CrossbellChainLogo,
 } from "@crossbell/ui";
 import { useMediaQuery } from "@mantine/hooks";
 import { useDisclosure } from "@crossbell/util-hooks";
@@ -73,15 +72,6 @@ function AppsBtn() {
 				>
 					<XLogLogo className="w-[36px] h-[36px] text-[#000]" />
 					<div className="text-[#000]">xLog</div>
-				</a>
-
-				<a
-					className="flex flex-col items-center justify-center gap-[4px]"
-					href="https://ecoboost.crossbell.io"
-					target="_blank"
-				>
-					<CrossbellChainLogo className="w-[36px] h-[36px] text-[#E6B65B]" />
-					<div className="text-[#000]">EcoBoost</div>
 				</a>
 			</div>
 		</div>

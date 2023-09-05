@@ -18,6 +18,7 @@ import { useMediaQuery } from "@mantine/hooks";
 import { breakpoints } from "~/scripts/unocss/breakpoints";
 
 import styles from "./index.module.css";
+import { EcoBoostCard } from "@/components/pages/landing-page/components/ecoboost-card";
 
 export function LandingPage() {
 	const isMD = useMediaQuery(`(min-width: ${breakpoints.md}px)`);
@@ -35,6 +36,7 @@ export function LandingPage() {
 				ref={containerRef}
 			>
 				<Header />
+				<EcoBoostCard />
 
 				<Scroll.Section className="max-w-[1920px] mx-auto">
 					<IntroSection

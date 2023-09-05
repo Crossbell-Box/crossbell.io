@@ -28,7 +28,7 @@ export function IntroSection({ onClickNext }: IntroSectionProps) {
 	);
 
 	return (
-		<div className="min-h-[100vh] flex flex-col px-24px md:flex-row md:items-end md:gap-2 md:justify-between md:px-6 lg:px-[85px] mx-auto relative z-0">
+		<div className="min-h-[100vh] flex flex-col px-24px md:flex-row md:items-end md:gap-2 md:justify-between md:px-6 lg:px-[85px] mx-auto relative z-0 pt-[12rem]">
 			<div className="absolute -z-10 w-[84%] h-[95%] left-1/2 top-1/2 -translate-x-1/2 -translate-y-1/2 pointer-events-none blur-[125px]">
 				<Image src={bgImg} alt="Background" fill className="object-contain" />
 			</div>
