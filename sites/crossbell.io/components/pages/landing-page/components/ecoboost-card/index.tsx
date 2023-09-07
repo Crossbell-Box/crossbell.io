@@ -37,7 +37,7 @@ export function EcoBoostCard() {
 						<Image
 							src={logoGIF}
 							alt="Crossbell Logo"
-							className="w-[80px] h-[80px] object-fit"
+							className="w-[80px] h-[80px] object-fit rounded-3"
 						/>
 
 						<div>
