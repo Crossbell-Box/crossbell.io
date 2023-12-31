@@ -63,7 +63,7 @@ jobs:
       tag: sha-${{ github.sha }}
       cluster: dev
       namespace: crossbell
-      releaseName: xfeed
+      releaseName: crossbell-io
       revision: main
       dir: deploy/dev
     secrets:
@@ -78,7 +78,7 @@ jobs:
       tag: sha-${{ github.sha }}
       cluster: prod
       namespace: crossbell
-      releaseName: xfeed
+      releaseName: crossbell-io
       revision: main
       dir: deploy/prod
     secrets:
