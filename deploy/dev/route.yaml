@@ -9,7 +9,7 @@ spec:
     - websecure
   routes:
     - kind: Rule
-      match: Host(`crossbell.kindjeff.com`)
+      match: Host(`dev.crossbell.io`)
       services:
         - name: crossbell-io
           port: 3000
