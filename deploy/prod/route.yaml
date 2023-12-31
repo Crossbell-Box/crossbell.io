@@ -5,10 +5,11 @@ metadata:
   namespace: crossbell
 spec:
   entryPoints:
-  - web
+    - web
+    - websecure
   routes:
-  - kind: Rule
-    match: Host(`crossbell.io`) || Host(`www.crossbell.io`)
-    services:
-    - name: crossbell-io
-      port: 3000
+    - kind: Rule
+      match: Host(`crossbell.io`) || Host(`www.crossbell.io`)
+      services:
+        - name: crossbell-io
+          port: 3000
